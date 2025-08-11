@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Resolving Airflow Lineage Backend Performance Bottlenecks With Large DAG Histories</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Resolving Airflow Lineage Backend Performance Bottlenecks With Large DAG Histories...">
+    <link rel="canonical" href="https://catatansoal.github.io/blog/resolving-airflow-lineage-backend-performance">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Resolving Airflow Lineage Backend Performance Bottlenecks With Large DAG Histories">
+	<meta property="og:description" content="Resolving Airflow Lineage Backend Performance Bottlenecks With Large DAG Histories...">
+	<meta property="og:url" content="https://catatansoal.github.io/blog/resolving-airflow-lineage-backend-performance">
+	<meta property="og:site_name" content="ANABEL">
+	<meta property="article:published_time" content="2025-07-14T18:05:23+00:00">
+	<meta property="article:author" content="ADMIN">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+    <link rel="preload" fetchpriority="high" as="image" href="https://tse4.mm.bing.net/th?q=Resolving%20Performance%20Bottlenecks%20in%20Airflow%20Lineage%20Backend%20with%20Large%20DAG%20Histories">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style type="text/css">
+    	:root{--primary-color:#3740ff;--text-color:#202124;--background-color:#ffffff;--gray-100:#f8f9fa;--gray-200:#e9ecef}*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;line-height:1.6;color:var(--text-color);background-color:var(--background-color)}.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}.header{background-color:var(--background-color);border-bottom:1px solid var(--gray-200);position:sticky;top:0;z-index:100}.nav{padding:.5rem 0}.nav-container{display:flex;justify-content:space-between;align-items:center;gap:1rem}.nav-left{display:flex;align-items:center;flex-shrink:0}.logo{font-weight:700;color:var(--primary-color)}.blog-tag{margin-left:1rem;padding:.25rem .5rem;background-color:var(--gray-100);border-radius:4px;font-size:.875rem}.nav-search{flex-grow:1;max-width:300px}.search-form{position:relative;width:100%}.search-input{width:100%;padding:.5rem 2.5rem .5rem 1rem;border:1px solid var(--gray-200);border-radius:24px;font-size:.875rem;transition:all 0.2s}.search-input:focus{outline:none;border-color:var(--primary-color);box-shadow:0 0 0 2px rgb(55 64 255 / .1)}.search-button{position:absolute;right:.5rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#5f6368;cursor:pointer;padding:.25rem;display:flex;align-items:center;justify-content:center}.search-button:hover{color:var(--primary-color)}.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:.5rem}.hamburger{display:block;position:relative;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before,.hamburger::after{content:'';position:absolute;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before{top:-6px}.hamburger::after{bottom:-6px}.nav-toggle-active .hamburger{background:#fff0}.nav-toggle-active .hamburger::before{transform:rotate(45deg);top:0}.nav-toggle-active .hamburger::after{transform:rotate(-45deg);bottom:0}.nav-list{display:flex;list-style:none;gap:2rem}.nav-link{color:var(--text-color);text-decoration:none;font-size:.9rem;transition:color 0.2s}.nav-link:hover{color:var(--primary-color)}.article-header{padding:2rem 0;background-color:var(--gray-100)}.article-layout{display:grid;grid-template-columns:1fr 350px;gap:3rem;padding:1rem 0;align-items: start}h1,h2,h3,h4,h5,h6{font-family:"Crimson Text","Times New Roman",Times,serif}h1{font-size:2.5rem;line-height:1.2;margin-bottom:1rem}.meta{color:#5f6368;font-size:.875rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}.view-count{display:inline-flex;align-items:center;gap:.25rem}.view-count svg{color:#5f6368}.content{min-width:0;border-bottom:1px solid #dddddd5e;margin-top:1rem;white-space:pre-line !important;overflow-wrap:break-word;overflow-x:auto;word-break:break-word}.lead{font-size:1.25rem;color:#5f6368;margin-bottom:2rem}h2,h3,h4,h5,h6{font-size:1.75rem;margin:1rem 0 1rem}p,pre,ol,ul>li{margin-bottom:1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;font-size:1.3rem;text-align: justify;}p>code{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px}hr{margin:1rem 0 1rem 0}.code-example{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;margin:1.5rem 0;overflow-x:auto}code{font-family:'Roboto Mono',monospace;font-size:.875rem}ul{margin:.2rem 0;padding-left:1.5rem}.related-posts{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;position:sticky;top:5rem}.related-posts-title,.newpost-posts-list{font-size:1.75rem;margin:0 0 1rem}.related-posts-list{display:flex;flex-direction:column;gap:.5rem}.related-post,.newpost-post{border-bottom:1px solid #ddd;padding-bottom:10px;margin-bottom:10px}.related-post:last-child,.newpost-post:last-child{padding-bottom:0;border-bottom:none}.related-post-title,.newpost-post-title{font-size:1.2rem;margin:0 0 .1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;}.related-post-title a,.newpost-post-title a{color:var(--text-color);text-decoration:none;transition:color 0.2s}.related-post-title a:hover,.newpost-post-title a:hover{color:var(--primary-color)}.related-post time{font-size:.875rem;color:#5f6368}.footer{background-color:var(--gray-100);padding:2rem 0;margin-top:4rem;color:#5f6368;font-size:.875rem}.nav-menu>ul>li{margin-bottom:0}@media (max-width:1024px){.container{max-width:800px}.article-layout{grid-template-columns:1fr;gap:2rem}.related-posts{position:static}}@media (max-width:768px){.nav-container{flex-wrap:wrap}.nav-search{order:3;max-width:none;width:100%;margin-top:.1rem}.nav-toggle{display:block}.nav-menu{display:none;position:absolute;top:100%;left:0;right:0;background:var(--background-color);padding:1rem 0;border-bottom:1px solid var(--gray-200)}.nav-menu-active{display:block}.nav-list{flex-direction:column;gap:.1rem;padding:0 1.5rem}.nav-link{display:block;padding:.2rem 0}h1{font-size:2rem}.article-header{padding:2rem 0}.content{padding:.1rem 0}}table{width:100%;border-collapse:collapse;margin:20px 0;font-family:'Arial',sans-serif}th,td{padding:12px 15px;text-align:left;border:1px solid #ddd}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9}tr:nth-child(even) td{background-color:#f2f2f2}@media screen and (max-width:768px){table{border:0;display:block;overflow-x:auto;white-space:nowrap}th,td{padding:10px;text-align:right}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9;border-bottom:1px solid #ddd}tr:nth-child(even) td{background-color:#f2f2f2}}a{text-decoration:none;color:#540707}.katex-html{padding: .2rem;color: #000;font-weight: 700;font-size: 1.3rem;overflow-wrap: break-word;max-width: 100%;white-space: normal !important}.category{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin:1rem 0 1rem 0}.tag{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px;font-family:"Newsreader",serif}.tag>a{text-decoration:none;color:#000}img{margin:auto;display:block;max-width:100%;height:auto;margin-bottom:1rem}.katex{white-space: pre-line !important;display: inline-block;max-width: 100%;overflow-x: auto;overflow-y: hidden;scrollbar-width: thin;overflow-wrap: break-word;word-break: break-word;vertical-align: -7px}.content > p {overflow-wrap: break-word;word-break: break-word}
+    </style>
+    <style type="text/css">
+    	pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}
+		.hljs{color:#c9d1d9;background:#0d1117}.hljs-doctag,.hljs-keyword,.hljs-meta .hljs-keyword,.hljs-template-tag,.hljs-template-variable,.hljs-type,.hljs-variable.language_{color:#ff7b72}.hljs-title,.hljs-title.class_,.hljs-title.class_.inherited__,.hljs-title.function_{color:#d2a8ff}.hljs-attr,.hljs-attribute,.hljs-literal,.hljs-meta,.hljs-number,.hljs-operator,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-variable{color:#79c0ff}.hljs-meta .hljs-string,.hljs-regexp,.hljs-string{color:#a5d6ff}.hljs-built_in,.hljs-symbol{color:#ffa657}.hljs-code,.hljs-comment,.hljs-formula{color:#8b949e}.hljs-name,.hljs-quote,.hljs-selector-pseudo,.hljs-selector-tag{color:#7ee787}.hljs-subst{color:#c9d1d9}.hljs-section{color:#1f6feb;font-weight:700}.hljs-bullet{color:#f2cc60}.hljs-emphasis{color:#c9d1d9;font-style:italic}.hljs-strong{color:#c9d1d9;font-weight:700}.hljs-addition{color:#aff5b4;background-color:#033a16}.hljs-deletion{color:#ffdcd7;background-color:#67060c}
+    	pre{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;font-weight:400;word-break:break-word;word-wrap:break-word;box-sizing:inherit;border-radius:4px;overflow-x:auto;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}code{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;word-wrap:break-word;word-break:break-word;font-style:normal;line-height:20px;letter-spacing:-.003em;box-sizing:inherit;font-weight:400;font-size:75%;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}
+    </style>
+    <style type="text/css">
+    	.back-to-top{position:fixed;bottom:20px;right:20px;background-color:#a73f3f;color:#fff;padding:8px 10px;border-radius:50%;box-shadow:0 4px 6px rgb(0 0 0 / .2);font-size:10px;font-weight:700;text-decoration:none;text-align:center;transition:opacity 0.3s ease,visibility 0.3s ease;z-index:99999;opacity:1;visibility:visible}.back-to-top:hover{background-color:#0056b3}
+    </style>
+    <style type="text/css">
+        .ad-header {margin: 1rem auto 1rem;background-color: #fdfdfd;text-align: center;display: block;}.ad-header .ad-wrapper {min-height: 90px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #555;font-weight: 500;padding: 3rem;border: 1px dashed #ccc;border-radius: 6px;}@media (max-width: 768px) {.ad-header {padding: 0.75rem;}}.ad-sidebar {margin: 0 0 1rem;background-color: #fefefe;text-align: center;padding: 0px;width: 100%;max-width: 100%;display: block;}.ad-sidebar .ad-wrapper {min-height: 250px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #444;font-weight: 500;border: 1px dashed #aaa;border-radius: 6px;padding: 0rem;}@media (max-width: 1024px) {.ad-sidebar {padding: 0.75rem;}}
+    </style>
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://catatansoal.github.io/blog/resolving-airflow-lineage-backend-performance"
+          },
+          "headline": "Resolving Airflow Lineage Backend Performance Bottlenecks With Large DAG Histories",
+          "description": "Resolving Airflow Lineage Backend Performance Bottlenecks With Large DAG Histories...",
+          "image": [
+            "https://tse4.mm.bing.net/th?q=Resolving%20Performance%20Bottlenecks%20in%20Airflow%20Lineage%20Backend%20with%20Large%20DAG%20Histories"
+          ],
+          "author": {
+            "@type": "Person",
+            "name": "ADMIN",
+            "jobTitle": "Editor web"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "ANABEL",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://tse4.mm.bing.net/th?q=ANABEL%20WEB"
+            }
+          },
+          "datePublished": "2025-07-14T18:05:23+00:00",
+          "dateModified": "2025-07-14T18:05:23+00:00"
+        }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="container nav-container">
+                <div class="nav-left">
+                    <span class="logo">ANABEL</span>
+                    <span class="blog-tag">Article</span>
+                </div>
+                <div class="nav-search">
+                    <form class="search-form" role="search">
+                        <input 
+                            type="search" 
+                            class="search-input"
+                            placeholder="Search articles..."
+                            aria-label="Search articles"
+                        >
+                        <button type="submit" class="search-button" aria-label="Submit search">🔎</button>
+                    </form>
+                </div>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+                <div class="nav-menu">
+                    <ul class="nav-list">
+                    	<li><a href="/" class="nav-link">HOME</a></li>
+                        <li><a href="/pages/About" class="nav-link">About</a></li>
+                        <li><a href="/pages/Contact" class="nav-link">Contact</a></li>
+                        <li><a href="/pages/Disclaimer" class="nav-link">Disclaimer</a></li>
+                        <li><a href="/pages/Privacy" class="nav-link">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="main">
+        <article class="article">
+            <header class="article-header">
+                <div class="container">
+                    <h1>Resolving Airflow Lineage Backend Performance Bottlenecks With Large DAG Histories</h1>
+                    <div class="meta">
+                        <time datetime="2025-07-14T18:05:23+00:00">Jul 14, 2025</time>
+                        <span class="author">by ADMIN</span>
+                        <span class="view-count">
+                            <span id="viewCount">83</span> views
+                        </span>
+                    </div>
+                </div>
+            </header>
+            <div class="ad-header container">
+                <div class="ad-wrapper">
+    Iklan Headers
+</div>
+            </div>
+            <div class="container">
+                <div class="article-layout">
+                    <div class="content">
+                        <img src="https://tse4.mm.bing.net/th?q=Resolving%20Performance%20Bottlenecks%20in%20Airflow%20Lineage%20Backend%20with%20Large%20DAG%20Histories" title="Resolving Performance Bottlenecks in Airflow Lineage Backend with Large DAG Histories" width="300" height="200"/><p>Hey guys! Let's dive into a tricky situation many of us face when working with Airflow and OpenMetadata – performance bottlenecks in the Airflow Lineage Backend, especially when dealing with large DAG histories. This article breaks down the issue, its causes, and how we can tackle it head-on.</p>
+<h2>Understanding the Problem</h2>
+<p>So, what’s the deal? The Airflow Lineage Backend is designed to send lineage information to OpenMetadata. This is super helpful for tracking data dependencies and ensuring data quality. However, the backend sometimes tries to send lineage info for the <em>entire</em> DAG, regardless of whether the current task has lineage metadata configured. Yep, you heard that right! Even if your DAG has no inlets or outlets configured, it still goes through the motions. This inefficient process becomes a major headache when you're dealing with DAGs that have a large number of runs and task instances. Imagine the delay – we're talking potentially <em>more than 10 minutes per task</em>! That's a serious drag on performance.</p>
+<p><strong>The root cause</strong> lies in how the backend fetches task instances. It tries to grab <em>all</em> task instances without any filtering. This is like trying to find a needle in a haystack, especially in production environments where DAG histories can be massive. Even setting <code>max_status</code> to <code>0</code> doesn't prevent it from attempting to retrieve all these instances. The core issue traces back to the <code>add_all_pipeline_status(pipeline)</code> function in the <code>runner.py</code> file within the <code>airflow_provider_openmetadata</code> ingestion package. This function is responsible for adding the status of all pipelines, and it's where the bottleneck primarily occurs. The <strong>key problem</strong> is that the system is not optimized to handle the scale of data it encounters in production environments. It lacks the necessary filters and constraints to efficiently retrieve only the relevant task instances, leading to excessive processing time and delays. This is where we need to focus our attention to make significant improvements.</p>
+<p>To put it simply, the <strong>Airflow Lineage Backend</strong> is doing too much work. It's like a diligent student who tries to solve every single problem in the textbook, even the ones that aren't assigned. This overzealous approach leads to unnecessary overhead and delays. We need to teach it to be more selective, to focus on the tasks and instances that are actually relevant to the current operation. This will not only improve performance but also reduce the strain on the system's resources, making it more efficient and scalable. The goal is to streamline the process of sending lineage information by eliminating unnecessary operations and optimizing the retrieval of task instances. This way, we can maintain the benefits of lineage tracking without sacrificing performance.</p>
+<h2>Reproducing the Bug</h2>
+<p>Want to see this in action? It's pretty straightforward. Just enable Airflow to send lineage information to OpenMetadata in an Airflow cluster with DAGs that have a significant number of DAG runs and task instances. You'll quickly notice the slowdown. This <strong>reproduction process</strong> is crucial for understanding the severity and impact of the bug. By simulating the production environment, we can observe the issue firsthand and gather valuable data for diagnosis and resolution. The ability to consistently reproduce the bug also allows us to test the effectiveness of different solutions and ensure that the fix addresses the underlying problem without introducing new issues. It's a fundamental step in the software development lifecycle, ensuring that we're not just guessing but actually solving the problem.</p>
+<p>This isn't some theoretical problem; it's a real-world issue that many teams encounter. The <strong>impact of the bug</strong> extends beyond just slow performance. It can lead to increased resource consumption, delayed pipeline executions, and even system instability. In a production environment, these issues can have significant consequences, affecting data quality, delivery timelines, and overall operational efficiency. Therefore, it's essential to address this bottleneck to maintain a healthy and reliable data pipeline. Reproducing the bug is the first step towards finding a solution that can scale with the growing complexity of our data environments. It's about ensuring that our tools can handle the workload and continue to provide accurate and timely lineage information.</p>
+<h2>Expected Behavior: A Wishlist for Improvement</h2>
+<p>Okay, so how should it work? Here's our wishlist:</p>
+<ul>
+<li><strong>Disable status emission entirely:</strong> When <code>max_status=0</code>, the backend should <em>completely</em> skip status emission. No questions asked.</li>
+<li><strong>Skip unnecessary processing:</strong> If a task doesn't have any lineage information (no inlets or outlets), the backend should just move on. No need to waste time generating lineage for tasks that don't have it.</li>
+<li><strong>Scope task instance retrieval:</strong> Instead of grabbing <em>all</em> task instances, the backend should fetch them by execution date. For example, it could retrieve instances from the last N days. This would drastically reduce the amount of data it needs to process.</li>
+</ul>
+<p>These improvements are <strong>essential for optimizing</strong> the performance of the Airflow Lineage Backend. Disabling status emission when <code>max_status=0</code> will prevent unnecessary processing and reduce the load on the system. Skipping tasks without lineage information will further streamline the process and focus resources on relevant tasks. The most significant improvement, however, is scoping task instance retrieval by execution date. This will dramatically reduce the amount of data the backend needs to process, leading to a substantial reduction in processing time and improved overall performance. Imagine the difference – instead of searching through a massive haystack, we're only looking at a small pile of hay. That's the kind of efficiency we're aiming for.</p>
+<p>These changes are not just about making things faster; they're about making the system more sustainable and scalable. As our data pipelines grow and become more complex, the <strong>Airflow Lineage Backend</strong> needs to be able to keep up. By implementing these improvements, we can ensure that lineage tracking remains a valuable tool without becoming a performance bottleneck. It's about finding the right balance between functionality and efficiency, ensuring that the system works for us, not against us. The goal is to create a robust and reliable solution that can handle the demands of a modern data environment.</p>
+<h2>Version Information</h2>
+<p>For context, this issue was observed with:</p>
+<ul>
+<li>Airflow: 2.10.5</li>
+<li>OpenMetadata version: 1.8.0</li>
+<li>OpenMetadata Ingestion package version: 1.8.0</li>
+</ul>
+<p><strong>Version information</strong> is crucial for troubleshooting and ensuring that the proposed solutions are compatible with the specific environment. Different versions of software may have different behaviors, and a fix that works for one version may not work for another. By providing the version numbers of Airflow, OpenMetadata, and the OpenMetadata Ingestion package, we can narrow down the potential causes of the issue and identify the most appropriate solutions. It also helps to track whether the bug has been fixed in later versions or if a specific version is known to have this issue. This information is essential for users who are experiencing the problem and need to determine if they should upgrade or apply a specific patch.</p>
+<p>In addition to identifying the affected versions, <strong>version information</strong> also helps developers understand the context in which the bug was reported. It allows them to reproduce the issue in a similar environment and test the fix thoroughly. This ensures that the solution is not only effective but also does not introduce any new issues or regressions. The version information serves as a valuable reference point for future investigations and ensures that the resolution is targeted and efficient. It's a critical piece of the puzzle when it comes to resolving complex software issues and maintaining the stability of the system.</p>
+<h2>Diving into the Code: Where the Delay Happens</h2>
+<p>Digging into the code, I pinpointed the delay happening between the logs &quot;DAG has not changed since last run&quot; and &quot;Processing XLet data.&quot; This points directly to the <code>self.add_all_pipeline_status(pipeline)</code> function in <code>runner.py</code>. This function seems to be the main culprit behind the performance issues. This <strong>code-level analysis</strong> is essential for understanding the root cause of the performance bottleneck. By tracing the execution flow and identifying the specific function that is causing the delay, we can focus our efforts on optimizing that particular area of the code. This targeted approach is much more efficient than trying to optimize the entire system blindly. It allows us to make the most significant impact with the least amount of effort.</p>
+<p>The <code>add_all_pipeline_status(pipeline)</code> function is responsible for adding the status of all pipelines, which involves retrieving task instances and processing their lineage information. The issue arises because this function attempts to retrieve all task instances without any filtering, as we discussed earlier. This means that for DAGs with a large number of runs and task instances, the function spends a significant amount of time querying the database and processing the results. By <strong>identifying this specific function</strong>, we can now focus on implementing the improvements we discussed earlier, such as scoping task instance retrieval by execution date and skipping tasks without lineage information. This will help to reduce the amount of data the function needs to process and improve its overall performance.</p>
+<h2>Proposed Solutions and Next Steps</h2>
+<p>So, what's the plan of attack? Based on our analysis, here are some key areas to focus on:</p>
+<ol>
+<li><strong>Implement the <code>max_status=0</code> bypass:</strong> Ensure that when <code>max_status</code> is set to <code>0</code>, <em>no</em> status emission occurs.</li>
+<li><strong>Add a check for lineage metadata:</strong> Before processing a task, verify if it has inlets or outlets. If not, skip it.</li>
+<li><strong>Scope task instance retrieval:</strong> Modify the code to fetch task instances based on execution date (e.g., the last N days).</li>
+</ol>
+<p>These <strong>proposed solutions</strong> are designed to address the specific performance bottlenecks we've identified in the Airflow Lineage Backend. Implementing the <code>max_status=0</code> bypass will prevent unnecessary processing when status emission is disabled. Adding a check for lineage metadata will ensure that only tasks with relevant information are processed, reducing the overall workload. The most significant improvement, however, will come from scoping task instance retrieval by execution date. This will dramatically reduce the amount of data the system needs to process, leading to a substantial improvement in performance.</p>
+<p>These solutions are not just theoretical; they are practical steps that can be implemented to address the issue. The <strong>next steps</strong> involve developing and testing these solutions in a controlled environment before deploying them to production. This will ensure that the fixes are effective and do not introduce any new issues. Collaboration between developers and operations teams is crucial to ensure a smooth and successful implementation. By working together, we can create a more robust and efficient Airflow Lineage Backend that can handle the demands of our growing data pipelines.</p>
+<p>By tackling these issues, we can significantly improve the performance of the Airflow Lineage Backend and ensure it remains a valuable tool for data governance. Let's keep the data flowing smoothly, guys! This is a <strong>collaborative effort</strong>, and by sharing our experiences and solutions, we can build a more resilient and efficient data ecosystem. The key is to continuously monitor performance, identify bottlenecks, and implement targeted solutions. This iterative approach will help us to stay ahead of the curve and ensure that our data pipelines can scale with our evolving needs.</p>
+
+                    </div>
+                    <aside class="related-posts">
+                        <div class="ad-sidebar container">
+                            <div class="ad-wrapper">
+    <span>Iklan Related</span>
+</div>
+                        </div>
+                        <h2 class="related-posts-title">Related Posts</h2><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/adding-polynomials-a-step-by-1754402901509">Adding Polynomials: A Step-by-Step Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-05T14:08:21+00:00">Aug 5, 2025</time>
+		                        <span class="view-count">
+									40 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/solving-20000-5002-1-1">Solving 20000 = 5002 [(1-(1+δ)e^γ)/γ] A Mathematical Exploration</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-17T11:42:15+00:00">Jul 17, 2025</time>
+		                        <span class="view-count">
+									64 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/decoding-diodes-is-it-a">Decoding Diodes Is It A Stud Mount And How To Identify It</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-26T03:23:56+00:00">Jul 26, 2025</time>
+		                        <span class="view-count">
+									57 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/softball-pitch-quadratic-equation-explained">Softball Pitch Quadratic Equation Explained</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-14T15:58:10+00:00">Jul 14, 2025</time>
+		                        <span class="view-count">
+									43 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/hatching-turkey-eggs-a-step">Hatching Turkey Eggs: A Step-by-Step Incubator Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-06T09:08:43+00:00">Aug 6, 2025</time>
+		                        <span class="view-count">
+									52 views
+		                        </span>
+                            </div>
+                        </article>
+                    </aside>
+                    <aside class="related-posts"></aside>
+                </div>
+            </div>
+        </article>
+        <a href="#" class="back-to-top" id="backToTop" title="Back to top">
+        	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-bar-up" viewBox="0 0 16 16">
+			  <path fill-rule="evenodd" d="M3.646 11.854a.5.5 0 0 0 .708 0L8 8.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708M2.4 5.2c0 .22.18.4.4.4h10.4a.4.4 0 0 0 0-.8H2.8a.4.4 0 0 0-.4.4"/>
+			</svg>
+		</a>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 ANABEL</p>
+        </div>
+    </footer>
+    <script>
+    	(() => {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            const toggleMenu = () => {
+                navMenu.classList.toggle('nav-menu-active');
+                navToggle.classList.toggle('nav-toggle-active');
+            };
+            const backToTopHandler = (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            navToggle.addEventListener('click', toggleMenu);
+            document.getElementById('backToTop').addEventListener('click', backToTopHandler);
+            window.addEventListener('pagehide', () => {
+                navToggle.removeEventListener('click', toggleMenu);
+                document.getElementById('backToTop').removeEventListener('click', backToTopHandler);
+            });
+        })();
+		(() => {
+            window.addEventListener("DOMContentLoaded", (event) => {
+                const ellHljs = document.createElement("script");
+                ellHljs.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js");
+                ellHljs.onload = () => {
+                    hljs.highlightAll();
+                };
+                document.querySelector("body").append(ellHljs);
+                const ellFont = document.createElement("link");
+                ellFont.setAttribute("href", "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css");
+                ellFont.setAttribute("rel", "stylesheet");
+                document.querySelector("head").append(ellFont);
+                window.addEventListener('pagehide', () => {
+                    // ellHljs.remove();
+                    ellFont.remove();
+                });
+
+            });
+        })();
+    </script>
+    
+    
+    
+</body>
+</html>

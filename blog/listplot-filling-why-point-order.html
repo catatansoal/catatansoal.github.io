@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>ListPlot Filling: Why Point Order Matters?</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ListPlot Filling: Why Point Order Matters?...">
+    <link rel="canonical" href="https://catatansoal.github.io/blog/listplot-filling-why-point-order">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="ListPlot Filling: Why Point Order Matters?">
+	<meta property="og:description" content="ListPlot Filling: Why Point Order Matters?...">
+	<meta property="og:url" content="https://catatansoal.github.io/blog/listplot-filling-why-point-order">
+	<meta property="og:site_name" content="ANABEL">
+	<meta property="article:published_time" content="2025-08-10T00:13:00+00:00">
+	<meta property="article:author" content="ADMIN">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+    <link rel="preload" fetchpriority="high" as="image" href="https://tse4.mm.bing.net/th?q=ListPlot%20Filling%20Issue%3A%20Order%20Matters!">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style type="text/css">
+    	:root{--primary-color:#3740ff;--text-color:#202124;--background-color:#ffffff;--gray-100:#f8f9fa;--gray-200:#e9ecef}*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;line-height:1.6;color:var(--text-color);background-color:var(--background-color)}.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}.header{background-color:var(--background-color);border-bottom:1px solid var(--gray-200);position:sticky;top:0;z-index:100}.nav{padding:.5rem 0}.nav-container{display:flex;justify-content:space-between;align-items:center;gap:1rem}.nav-left{display:flex;align-items:center;flex-shrink:0}.logo{font-weight:700;color:var(--primary-color)}.blog-tag{margin-left:1rem;padding:.25rem .5rem;background-color:var(--gray-100);border-radius:4px;font-size:.875rem}.nav-search{flex-grow:1;max-width:300px}.search-form{position:relative;width:100%}.search-input{width:100%;padding:.5rem 2.5rem .5rem 1rem;border:1px solid var(--gray-200);border-radius:24px;font-size:.875rem;transition:all 0.2s}.search-input:focus{outline:none;border-color:var(--primary-color);box-shadow:0 0 0 2px rgb(55 64 255 / .1)}.search-button{position:absolute;right:.5rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#5f6368;cursor:pointer;padding:.25rem;display:flex;align-items:center;justify-content:center}.search-button:hover{color:var(--primary-color)}.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:.5rem}.hamburger{display:block;position:relative;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before,.hamburger::after{content:'';position:absolute;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before{top:-6px}.hamburger::after{bottom:-6px}.nav-toggle-active .hamburger{background:#fff0}.nav-toggle-active .hamburger::before{transform:rotate(45deg);top:0}.nav-toggle-active .hamburger::after{transform:rotate(-45deg);bottom:0}.nav-list{display:flex;list-style:none;gap:2rem}.nav-link{color:var(--text-color);text-decoration:none;font-size:.9rem;transition:color 0.2s}.nav-link:hover{color:var(--primary-color)}.article-header{padding:2rem 0;background-color:var(--gray-100)}.article-layout{display:grid;grid-template-columns:1fr 350px;gap:3rem;padding:1rem 0;align-items: start}h1,h2,h3,h4,h5,h6{font-family:"Crimson Text","Times New Roman",Times,serif}h1{font-size:2.5rem;line-height:1.2;margin-bottom:1rem}.meta{color:#5f6368;font-size:.875rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}.view-count{display:inline-flex;align-items:center;gap:.25rem}.view-count svg{color:#5f6368}.content{min-width:0;border-bottom:1px solid #dddddd5e;margin-top:1rem;white-space:pre-line !important;overflow-wrap:break-word;overflow-x:auto;word-break:break-word}.lead{font-size:1.25rem;color:#5f6368;margin-bottom:2rem}h2,h3,h4,h5,h6{font-size:1.75rem;margin:1rem 0 1rem}p,pre,ol,ul>li{margin-bottom:1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;font-size:1.3rem;text-align: justify;}p>code{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px}hr{margin:1rem 0 1rem 0}.code-example{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;margin:1.5rem 0;overflow-x:auto}code{font-family:'Roboto Mono',monospace;font-size:.875rem}ul{margin:.2rem 0;padding-left:1.5rem}.related-posts{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;position:sticky;top:5rem}.related-posts-title,.newpost-posts-list{font-size:1.75rem;margin:0 0 1rem}.related-posts-list{display:flex;flex-direction:column;gap:.5rem}.related-post,.newpost-post{border-bottom:1px solid #ddd;padding-bottom:10px;margin-bottom:10px}.related-post:last-child,.newpost-post:last-child{padding-bottom:0;border-bottom:none}.related-post-title,.newpost-post-title{font-size:1.2rem;margin:0 0 .1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;}.related-post-title a,.newpost-post-title a{color:var(--text-color);text-decoration:none;transition:color 0.2s}.related-post-title a:hover,.newpost-post-title a:hover{color:var(--primary-color)}.related-post time{font-size:.875rem;color:#5f6368}.footer{background-color:var(--gray-100);padding:2rem 0;margin-top:4rem;color:#5f6368;font-size:.875rem}.nav-menu>ul>li{margin-bottom:0}@media (max-width:1024px){.container{max-width:800px}.article-layout{grid-template-columns:1fr;gap:2rem}.related-posts{position:static}}@media (max-width:768px){.nav-container{flex-wrap:wrap}.nav-search{order:3;max-width:none;width:100%;margin-top:.1rem}.nav-toggle{display:block}.nav-menu{display:none;position:absolute;top:100%;left:0;right:0;background:var(--background-color);padding:1rem 0;border-bottom:1px solid var(--gray-200)}.nav-menu-active{display:block}.nav-list{flex-direction:column;gap:.1rem;padding:0 1.5rem}.nav-link{display:block;padding:.2rem 0}h1{font-size:2rem}.article-header{padding:2rem 0}.content{padding:.1rem 0}}table{width:100%;border-collapse:collapse;margin:20px 0;font-family:'Arial',sans-serif}th,td{padding:12px 15px;text-align:left;border:1px solid #ddd}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9}tr:nth-child(even) td{background-color:#f2f2f2}@media screen and (max-width:768px){table{border:0;display:block;overflow-x:auto;white-space:nowrap}th,td{padding:10px;text-align:right}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9;border-bottom:1px solid #ddd}tr:nth-child(even) td{background-color:#f2f2f2}}a{text-decoration:none;color:#540707}.katex-html{padding: .2rem;color: #000;font-weight: 700;font-size: 1.3rem;overflow-wrap: break-word;max-width: 100%;white-space: normal !important}.category{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin:1rem 0 1rem 0}.tag{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px;font-family:"Newsreader",serif}.tag>a{text-decoration:none;color:#000}img{margin:auto;display:block;max-width:100%;height:auto;margin-bottom:1rem}.katex{white-space: pre-line !important;display: inline-block;max-width: 100%;overflow-x: auto;overflow-y: hidden;scrollbar-width: thin;overflow-wrap: break-word;word-break: break-word;vertical-align: -7px}.content > p {overflow-wrap: break-word;word-break: break-word}
+    </style>
+    <style type="text/css">
+    	pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}
+		.hljs{color:#c9d1d9;background:#0d1117}.hljs-doctag,.hljs-keyword,.hljs-meta .hljs-keyword,.hljs-template-tag,.hljs-template-variable,.hljs-type,.hljs-variable.language_{color:#ff7b72}.hljs-title,.hljs-title.class_,.hljs-title.class_.inherited__,.hljs-title.function_{color:#d2a8ff}.hljs-attr,.hljs-attribute,.hljs-literal,.hljs-meta,.hljs-number,.hljs-operator,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-variable{color:#79c0ff}.hljs-meta .hljs-string,.hljs-regexp,.hljs-string{color:#a5d6ff}.hljs-built_in,.hljs-symbol{color:#ffa657}.hljs-code,.hljs-comment,.hljs-formula{color:#8b949e}.hljs-name,.hljs-quote,.hljs-selector-pseudo,.hljs-selector-tag{color:#7ee787}.hljs-subst{color:#c9d1d9}.hljs-section{color:#1f6feb;font-weight:700}.hljs-bullet{color:#f2cc60}.hljs-emphasis{color:#c9d1d9;font-style:italic}.hljs-strong{color:#c9d1d9;font-weight:700}.hljs-addition{color:#aff5b4;background-color:#033a16}.hljs-deletion{color:#ffdcd7;background-color:#67060c}
+    	pre{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;font-weight:400;word-break:break-word;word-wrap:break-word;box-sizing:inherit;border-radius:4px;overflow-x:auto;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}code{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;word-wrap:break-word;word-break:break-word;font-style:normal;line-height:20px;letter-spacing:-.003em;box-sizing:inherit;font-weight:400;font-size:75%;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}
+    </style>
+    <style type="text/css">
+    	.back-to-top{position:fixed;bottom:20px;right:20px;background-color:#a73f3f;color:#fff;padding:8px 10px;border-radius:50%;box-shadow:0 4px 6px rgb(0 0 0 / .2);font-size:10px;font-weight:700;text-decoration:none;text-align:center;transition:opacity 0.3s ease,visibility 0.3s ease;z-index:99999;opacity:1;visibility:visible}.back-to-top:hover{background-color:#0056b3}
+    </style>
+    <style type="text/css">
+        .ad-header {margin: 1rem auto 1rem;background-color: #fdfdfd;text-align: center;display: block;}.ad-header .ad-wrapper {min-height: 90px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #555;font-weight: 500;padding: 3rem;border: 1px dashed #ccc;border-radius: 6px;}@media (max-width: 768px) {.ad-header {padding: 0.75rem;}}.ad-sidebar {margin: 0 0 1rem;background-color: #fefefe;text-align: center;padding: 0px;width: 100%;max-width: 100%;display: block;}.ad-sidebar .ad-wrapper {min-height: 250px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #444;font-weight: 500;border: 1px dashed #aaa;border-radius: 6px;padding: 0rem;}@media (max-width: 1024px) {.ad-sidebar {padding: 0.75rem;}}
+    </style>
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://catatansoal.github.io/blog/listplot-filling-why-point-order"
+          },
+          "headline": "ListPlot Filling: Why Point Order Matters?",
+          "description": "ListPlot Filling: Why Point Order Matters?...",
+          "image": [
+            "https://tse4.mm.bing.net/th?q=ListPlot%20Filling%20Issue%3A%20Order%20Matters!"
+          ],
+          "author": {
+            "@type": "Person",
+            "name": "ADMIN",
+            "jobTitle": "Editor web"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "ANABEL",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://tse4.mm.bing.net/th?q=ANABEL%20WEB"
+            }
+          },
+          "datePublished": "2025-08-10T00:13:00+00:00",
+          "dateModified": "2025-08-10T00:13:00+00:00"
+        }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="container nav-container">
+                <div class="nav-left">
+                    <span class="logo">ANABEL</span>
+                    <span class="blog-tag">Article</span>
+                </div>
+                <div class="nav-search">
+                    <form class="search-form" role="search">
+                        <input 
+                            type="search" 
+                            class="search-input"
+                            placeholder="Search articles..."
+                            aria-label="Search articles"
+                        >
+                        <button type="submit" class="search-button" aria-label="Submit search">🔎</button>
+                    </form>
+                </div>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+                <div class="nav-menu">
+                    <ul class="nav-list">
+                    	<li><a href="/" class="nav-link">HOME</a></li>
+                        <li><a href="/pages/About" class="nav-link">About</a></li>
+                        <li><a href="/pages/Contact" class="nav-link">Contact</a></li>
+                        <li><a href="/pages/Disclaimer" class="nav-link">Disclaimer</a></li>
+                        <li><a href="/pages/Privacy" class="nav-link">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="main">
+        <article class="article">
+            <header class="article-header">
+                <div class="container">
+                    <h1>ListPlot Filling: Why Point Order Matters?</h1>
+                    <div class="meta">
+                        <time datetime="2025-08-10T00:13:00+00:00">Aug 10, 2025</time>
+                        <span class="author">by ADMIN</span>
+                        <span class="view-count">
+                            <span id="viewCount">43</span> views
+                        </span>
+                    </div>
+                </div>
+            </header>
+            <div class="ad-header container">
+                <div class="ad-wrapper">
+    Iklan Headers
+</div>
+            </div>
+            <div class="container">
+                <div class="article-layout">
+                    <div class="content">
+                        <img src="https://tse4.mm.bing.net/th?q=ListPlot%20Filling%20Issue%3A%20Order%20Matters!" title="ListPlot Filling Issue: Order Matters!" width="300" height="200"/>
+<p>Hey everyone! Have you ever run into a weird issue with <code>ListPlot</code> in Mathematica where the filling doesn't quite work as expected? It can be super frustrating, especially when you're trying to create visually appealing and informative plots. Today, we're diving deep into a peculiar behavior related to filling in <code>ListPlot</code> and how the order of points can significantly impact the outcome. Let's unravel this mystery together and learn how to create those perfect filled plots!</p>
+<h2>The Curious Case of Disappearing Filling</h2>
+<p>So, what's the fuss all about? Imagine you're plotting two sets of data points using <code>ListPlot</code>, and you want to fill the region between them. Seems straightforward, right? You use the <code>Filling</code> option, specify which plots to fill between, and choose a <code>FillingStyle</code>. But sometimes, the filling just… vanishes! This perplexing issue often arises due to the order in which the points are specified within the <code>ListPlot</code> command. When dealing with plots, <em>order matters</em>, especially when it comes to filling between datasets. The crux of the issue lies in how Mathematica interprets the connections between points to create filled regions. If the points aren't ordered in a way that logically defines a closed region, the filling algorithm might get confused and simply not fill anything. Let's illustrate this with an example. Consider two sets of points: one tracing a path and another tracing a different path, but the filling between them doesn't appear. This typically occurs when the points in each set are not ordered in a way that creates a clear, enclosed shape for Mathematica to fill. Think of it like trying to draw a shape without lifting your pen – if the points are jumbled, you won't get a clean outline, and Mathematica's filling algorithm faces a similar challenge. To ensure proper filling, the points need to be arranged so that they form a continuous boundary. This often means carefully ordering the points within each dataset and ensuring that the datasets themselves are presented in a logical sequence within the <code>ListPlot</code> command. Understanding this nuance is crucial for creating accurate and visually appealing plots, especially when dealing with complex datasets or intricate filling patterns. So, the next time your filling mysteriously disappears, remember to check the order of your points – it might just be the key to solving the puzzle!</p>
+<h2>Example: When Filling Fails</h2>
+<p>Let's look at a specific example that highlights this issue. Suppose we have the following <code>ListPlot</code> command:</p>
+<pre><code class="hljs">ListPlot[{{{1, 0}, {0, 0.5}}, {{1, 1}, {0, 1}}}, Filling -&gt; {1 -&gt; {2}}, FillingStyle -&gt; LightGray, Joined -&gt; True, Frame -&gt; True]
+</code></pre>
+<p>If you run this, you'll notice that there's <em>no filling</em> between the two plotted lines. The goal here is to fill the area between the lines formed by the points <code>{{1, 0}, {0, 0.5}}</code> and <code>{{1, 1}, {0, 1}}</code>. We've specified <code>Filling -&gt; {1 -&gt; {2}}</code>, which tells Mathematica to fill the region between the first plot (1) and the second plot (2). We've also set the <code>FillingStyle</code> to <code>LightGray</code> to make the filled region visible, and <code>Joined -&gt; True</code> ensures that the points are connected by lines, creating a continuous plot. The <code>Frame -&gt; True</code> option simply adds a frame around the plot for better clarity. Despite all these settings, the filling doesn't appear. Why? The issue lies in the order of the points within each dataset. Mathematica connects the points in the order they are provided. In the first dataset, it connects <code>(1, 0)</code> to <code>(0, 0.5)</code>, and in the second dataset, it connects <code>(1, 1)</code> to <code>(0, 1)</code>. However, these connections don't create a closed region that Mathematica can easily fill. The filling algorithm needs a clear, continuous boundary to work effectively. In this case, the lines cross each other in a way that doesn't define a simple, fillable area. The algorithm struggles to determine which region should be filled because the lines intersect and don't form a closed loop in the order they are presented. This example serves as a classic illustration of how point order can impact the filling behavior in <code>ListPlot</code>. It's a common pitfall that can lead to unexpected results, especially when dealing with more complex datasets. Understanding this behavior is crucial for effectively using the <code>Filling</code> option and creating the plots you envision. So, what's the solution? Let's explore how reordering the points can bring our filling back to life!</p>
+<h2>The Solution: Reordering Points</h2>
+<p>Okay, so we've seen how the order of points can cause filling to fail in <code>ListPlot</code>. The good news is that the solution is often quite simple: <strong>reordering the points</strong>. By carefully arranging the points in a way that creates a logical, closed region, we can get the filling to work as expected. Let's revisit our previous example and see how this works in practice. Remember the problematic plot? It looked like this:</p>
+<pre><code class="hljs">ListPlot[{{{1, 0}, {0, 0.5}}, {{1, 1}, {0, 1}}}, Filling -&gt; {1 -&gt; {2}}, FillingStyle -&gt; LightGray, Joined -&gt; True, Frame -&gt; True]
+</code></pre>
+<p>The issue, as we discussed, was that the points were ordered in a way that didn't form a clear, enclosed area. To fix this, we need to reorder the points in one or both datasets so that they create a continuous boundary. In this case, a simple change can do the trick. Let's swap the order of points in the first dataset:</p>
+<pre><code class="hljs">ListPlot[{{{0, 0.5}, {1, 0}}, {{1, 1}, {0, 1}}}, Filling -&gt; {1 -&gt; {2}}, FillingStyle -&gt; LightGray, Joined -&gt; True, Frame -&gt; True]
+</code></pre>
+<p>Notice that we've changed <code>{{1, 0}, {0, 0.5}}</code> to <code>{{0, 0.5}, {1, 0}}</code>. By reversing the order of these two points, we're essentially telling Mathematica to draw the first line segment in the opposite direction. This seemingly small change makes a big difference. Now, when you run this modified code, you should see the filling appear beautifully between the two lines! The magic happens because the reordered points, along with the points in the second dataset, now form a closed shape that the filling algorithm can easily recognize and fill. The key takeaway here is that the order in which you provide points matters significantly when using the <code>Filling</code> option in <code>ListPlot</code>. By ensuring that your points are arranged in a logical sequence that defines a closed region, you can avoid the frustration of disappearing filling and create visually appealing plots. So, next time you encounter filling issues, remember to check your point order – it might just be the secret ingredient to a perfect plot!</p>
+<h2>A More Complex Scenario</h2>
+<p>Let's take it up a notch and explore a more complex scenario where reordering points becomes even more crucial. Imagine you're plotting data that forms a non-convex shape, perhaps something with curves or indentations. In such cases, simply reordering points within a single dataset might not be enough. You might need to strategically divide your data into multiple segments and order the points within each segment to achieve the desired filling. Consider a situation where you want to fill the area enclosed by a curve that loops back on itself. If you plot the points in a simple sequential order, the filling might not work correctly, especially if the curve has significant overlaps or self-intersections. To handle this, you could break the curve into smaller sections, each of which forms a more manageable shape. Within each section, you would order the points to create a continuous boundary. Then, you can use the <code>Filling</code> option in <code>ListPlot</code> to fill between these segments, effectively filling the entire enclosed area. This technique is particularly useful when dealing with complex datasets or shapes that don't lend themselves to a straightforward point ordering. For example, if you have a dataset representing a complex polygon with multiple vertices and edges, you might need to divide it into smaller, simpler polygons (like triangles or quadrilaterals) and order the points within each sub-polygon. This approach allows you to control the filling behavior more precisely and avoid unexpected gaps or overlaps. Moreover, in some cases, you might need to use additional options like <code>MeshFunctions</code> and <code>Mesh</code> to guide the filling algorithm, especially when dealing with intricate shapes or surfaces. These options allow you to specify additional lines or curves within the plot that help define the boundaries of the filled regions. The key to success in these complex scenarios is careful planning and a good understanding of how Mathematica's filling algorithm works. By breaking down your data into manageable segments and strategically ordering the points, you can tackle even the most challenging filling tasks and create stunning visualizations.</p>
+<h2>Alternative Approaches and Further Tips</h2>
+<p>While reordering points is often the key to fixing filling issues in <code>ListPlot</code>, it's worth exploring some alternative approaches and additional tips that can help you create even more robust and visually appealing plots. One handy technique is to use the <code>BSplineCurve</code> function. This function creates a smooth curve that passes near your data points, rather than connecting them directly with straight lines. When used in conjunction with <code>Filling</code>, <code>BSplineCurve</code> can produce smoother and more aesthetically pleasing filled regions, especially when dealing with noisy or sparse data. Instead of directly plotting the raw data points, you can use <code>BSplineCurve</code> to generate a smooth curve that approximates the shape of your data. This curve can then be used as the boundary for filling. Another useful tip is to explicitly close the shape you want to fill. If your data doesn't naturally form a closed loop, you can add an extra point that connects the end of your data back to the beginning. This ensures that the filling algorithm has a clear, enclosed region to work with. For instance, if you're plotting a curve that should form a closed shape, but the last point doesn't quite meet the first point, you can simply append the first point to the end of your data. This creates a seamless loop and makes the filling process much more reliable. Additionally, remember that the order in which you specify the plots in <code>ListPlot</code> can also affect the filling. The <code>Filling</code> option refers to plots by their order of appearance in the <code>ListPlot</code> command. So, if you're filling between plot 1 and plot 2, make sure they are indeed the first and second plots in your command. It's also worth noting that the <code>FillingStyle</code> option offers a wide range of customization possibilities. You can use colors, patterns, and even gradients to create visually interesting filled regions. Experimenting with different <code>FillingStyle</code> settings can add a lot of depth and clarity to your plots. Finally, if you're dealing with extremely complex filling scenarios, consider using more advanced plotting functions like <code>RegionPlot</code> or <code>ContourPlot</code>. These functions offer more sophisticated control over filling and can handle intricate shapes and regions that <code>ListPlot</code> might struggle with. By combining these alternative approaches and tips with the fundamental technique of reordering points, you'll be well-equipped to tackle any filling challenge in Mathematica and create stunning visualizations of your data.</p>
+<h2>Conclusion: Mastering ListPlot Filling</h2>
+<p>Alright, guys, we've journeyed through the ins and outs of filling in <code>ListPlot</code>, and hopefully, you've gained some valuable insights into how to make those fills work like a charm! The key takeaway is that <em><strong>point order matters</strong></em>. When you're struggling with disappearing fills, the first thing you should do is examine the order of your points. Are they creating a logical, closed region? If not, a simple reordering can often be the magic bullet. We've seen how reordering points, even in a seemingly simple scenario, can transform a plot from unfilled frustration to filled satisfaction. By swapping the order of points in one of our datasets, we were able to create a clear, enclosed shape that Mathematica's filling algorithm could easily handle. But we didn't stop there. We delved into more complex scenarios, like plotting non-convex shapes, where strategic data segmentation and careful point ordering become essential. We explored how to break down complex curves into smaller sections, order the points within each section, and use the <code>Filling</code> option to fill the entire enclosed area. And, of course, we touched on alternative approaches like using <code>BSplineCurve</code> for smoother fills, explicitly closing shapes, and leveraging the power of <code>FillingStyle</code> for visual customization. We even peeked at more advanced plotting functions like <code>RegionPlot</code> and <code>ContourPlot</code> for those truly intricate filling challenges. Mastering <code>ListPlot</code> filling is a crucial skill for anyone working with data visualization in Mathematica. It allows you to create plots that are not only accurate but also visually compelling and informative. So, the next time you're plotting data and need to fill the space between curves, remember the lessons we've learned today. Pay attention to point order, experiment with different techniques, and don't be afraid to dive into the documentation and explore the full range of options available to you. With a little practice and a solid understanding of the principles we've discussed, you'll be creating stunning filled plots in no time! Happy plotting, everyone!</p>
+
+                    </div>
+                    <aside class="related-posts">
+                        <div class="ad-sidebar container">
+                            <div class="ad-wrapper">
+    <span>Iklan Related</span>
+</div>
+                        </div>
+                        <h2 class="related-posts-title">Related Posts</h2><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/the-origins-of-msheloimstvo-vescheliubiye">The Origins Of Msheloimstvo, Vescheliubiye, And Serebroliubiye</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-13T19:37:46+00:00">Jul 13, 2025</time>
+		                        <span class="view-count">
+									62 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/gazebo-garden-using-openni-kinect">Gazebo Garden: Using OpenNI Kinect Plugin For Depth Cameras</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-06T22:06:04+00:00">Aug 6, 2025</time>
+		                        <span class="view-count">
+									59 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/calculating-reading-rate-how-many">Calculating Reading Rate How Many Pages Per Hour</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-24T01:41:22+00:00">Jul 24, 2025</time>
+		                        <span class="view-count">
+									48 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/public-sector-unions-and-political">Public Sector Unions And Political Influence Explained</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-25T12:42:20+00:00">Jul 25, 2025</time>
+		                        <span class="view-count">
+									54 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/vibronic-spectra-calculation-via-gaussian">Vibronic Spectra Calculation Via Gaussian Boson Sampling</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-07T19:06:42+00:00">Aug 7, 2025</time>
+		                        <span class="view-count">
+									56 views
+		                        </span>
+                            </div>
+                        </article>
+                    </aside>
+                    <aside class="related-posts"></aside>
+                </div>
+            </div>
+        </article>
+        <a href="#" class="back-to-top" id="backToTop" title="Back to top">
+        	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-bar-up" viewBox="0 0 16 16">
+			  <path fill-rule="evenodd" d="M3.646 11.854a.5.5 0 0 0 .708 0L8 8.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708M2.4 5.2c0 .22.18.4.4.4h10.4a.4.4 0 0 0 0-.8H2.8a.4.4 0 0 0-.4.4"/>
+			</svg>
+		</a>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 ANABEL</p>
+        </div>
+    </footer>
+    <script>
+    	(() => {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            const toggleMenu = () => {
+                navMenu.classList.toggle('nav-menu-active');
+                navToggle.classList.toggle('nav-toggle-active');
+            };
+            const backToTopHandler = (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            navToggle.addEventListener('click', toggleMenu);
+            document.getElementById('backToTop').addEventListener('click', backToTopHandler);
+            window.addEventListener('pagehide', () => {
+                navToggle.removeEventListener('click', toggleMenu);
+                document.getElementById('backToTop').removeEventListener('click', backToTopHandler);
+            });
+        })();
+		(() => {
+            window.addEventListener("DOMContentLoaded", (event) => {
+                const ellHljs = document.createElement("script");
+                ellHljs.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js");
+                ellHljs.onload = () => {
+                    hljs.highlightAll();
+                };
+                document.querySelector("body").append(ellHljs);
+                const ellFont = document.createElement("link");
+                ellFont.setAttribute("href", "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css");
+                ellFont.setAttribute("rel", "stylesheet");
+                document.querySelector("head").append(ellFont);
+                window.addEventListener('pagehide', () => {
+                    // ellHljs.remove();
+                    ellFont.remove();
+                });
+
+            });
+        })();
+    </script>
+    
+    
+    
+</body>
+</html>

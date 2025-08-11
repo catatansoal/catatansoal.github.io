@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Measure Bluetooth Latency With Btmon: A Step-by-Step Guide</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Measure Bluetooth Latency With Btmon: A Step-by-Step Guide...">
+    <link rel="canonical" href="https://catatansoal.github.io/blog/measure-bluetooth-latency-with-btmon">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Measure Bluetooth Latency With Btmon: A Step-by-Step Guide">
+	<meta property="og:description" content="Measure Bluetooth Latency With Btmon: A Step-by-Step Guide...">
+	<meta property="og:url" content="https://catatansoal.github.io/blog/measure-bluetooth-latency-with-btmon">
+	<meta property="og:site_name" content="ANABEL">
+	<meta property="article:published_time" content="2025-08-08T06:51:19+00:00">
+	<meta property="article:author" content="ADMIN">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+    <link rel="preload" fetchpriority="high" as="image" href="https://tse4.mm.bing.net/th?q=Measuring%20Peer%20Response%20Latency%20with%20btmon%20ACL%20Data%20TX%2FRX%20Timestamps">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style type="text/css">
+    	:root{--primary-color:#3740ff;--text-color:#202124;--background-color:#ffffff;--gray-100:#f8f9fa;--gray-200:#e9ecef}*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;line-height:1.6;color:var(--text-color);background-color:var(--background-color)}.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}.header{background-color:var(--background-color);border-bottom:1px solid var(--gray-200);position:sticky;top:0;z-index:100}.nav{padding:.5rem 0}.nav-container{display:flex;justify-content:space-between;align-items:center;gap:1rem}.nav-left{display:flex;align-items:center;flex-shrink:0}.logo{font-weight:700;color:var(--primary-color)}.blog-tag{margin-left:1rem;padding:.25rem .5rem;background-color:var(--gray-100);border-radius:4px;font-size:.875rem}.nav-search{flex-grow:1;max-width:300px}.search-form{position:relative;width:100%}.search-input{width:100%;padding:.5rem 2.5rem .5rem 1rem;border:1px solid var(--gray-200);border-radius:24px;font-size:.875rem;transition:all 0.2s}.search-input:focus{outline:none;border-color:var(--primary-color);box-shadow:0 0 0 2px rgb(55 64 255 / .1)}.search-button{position:absolute;right:.5rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#5f6368;cursor:pointer;padding:.25rem;display:flex;align-items:center;justify-content:center}.search-button:hover{color:var(--primary-color)}.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:.5rem}.hamburger{display:block;position:relative;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before,.hamburger::after{content:'';position:absolute;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before{top:-6px}.hamburger::after{bottom:-6px}.nav-toggle-active .hamburger{background:#fff0}.nav-toggle-active .hamburger::before{transform:rotate(45deg);top:0}.nav-toggle-active .hamburger::after{transform:rotate(-45deg);bottom:0}.nav-list{display:flex;list-style:none;gap:2rem}.nav-link{color:var(--text-color);text-decoration:none;font-size:.9rem;transition:color 0.2s}.nav-link:hover{color:var(--primary-color)}.article-header{padding:2rem 0;background-color:var(--gray-100)}.article-layout{display:grid;grid-template-columns:1fr 350px;gap:3rem;padding:1rem 0;align-items: start}h1,h2,h3,h4,h5,h6{font-family:"Crimson Text","Times New Roman",Times,serif}h1{font-size:2.5rem;line-height:1.2;margin-bottom:1rem}.meta{color:#5f6368;font-size:.875rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}.view-count{display:inline-flex;align-items:center;gap:.25rem}.view-count svg{color:#5f6368}.content{min-width:0;border-bottom:1px solid #dddddd5e;margin-top:1rem;white-space:pre-line !important;overflow-wrap:break-word;overflow-x:auto;word-break:break-word}.lead{font-size:1.25rem;color:#5f6368;margin-bottom:2rem}h2,h3,h4,h5,h6{font-size:1.75rem;margin:1rem 0 1rem}p,pre,ol,ul>li{margin-bottom:1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;font-size:1.3rem;text-align: justify;}p>code{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px}hr{margin:1rem 0 1rem 0}.code-example{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;margin:1.5rem 0;overflow-x:auto}code{font-family:'Roboto Mono',monospace;font-size:.875rem}ul{margin:.2rem 0;padding-left:1.5rem}.related-posts{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;position:sticky;top:5rem}.related-posts-title,.newpost-posts-list{font-size:1.75rem;margin:0 0 1rem}.related-posts-list{display:flex;flex-direction:column;gap:.5rem}.related-post,.newpost-post{border-bottom:1px solid #ddd;padding-bottom:10px;margin-bottom:10px}.related-post:last-child,.newpost-post:last-child{padding-bottom:0;border-bottom:none}.related-post-title,.newpost-post-title{font-size:1.2rem;margin:0 0 .1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;}.related-post-title a,.newpost-post-title a{color:var(--text-color);text-decoration:none;transition:color 0.2s}.related-post-title a:hover,.newpost-post-title a:hover{color:var(--primary-color)}.related-post time{font-size:.875rem;color:#5f6368}.footer{background-color:var(--gray-100);padding:2rem 0;margin-top:4rem;color:#5f6368;font-size:.875rem}.nav-menu>ul>li{margin-bottom:0}@media (max-width:1024px){.container{max-width:800px}.article-layout{grid-template-columns:1fr;gap:2rem}.related-posts{position:static}}@media (max-width:768px){.nav-container{flex-wrap:wrap}.nav-search{order:3;max-width:none;width:100%;margin-top:.1rem}.nav-toggle{display:block}.nav-menu{display:none;position:absolute;top:100%;left:0;right:0;background:var(--background-color);padding:1rem 0;border-bottom:1px solid var(--gray-200)}.nav-menu-active{display:block}.nav-list{flex-direction:column;gap:.1rem;padding:0 1.5rem}.nav-link{display:block;padding:.2rem 0}h1{font-size:2rem}.article-header{padding:2rem 0}.content{padding:.1rem 0}}table{width:100%;border-collapse:collapse;margin:20px 0;font-family:'Arial',sans-serif}th,td{padding:12px 15px;text-align:left;border:1px solid #ddd}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9}tr:nth-child(even) td{background-color:#f2f2f2}@media screen and (max-width:768px){table{border:0;display:block;overflow-x:auto;white-space:nowrap}th,td{padding:10px;text-align:right}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9;border-bottom:1px solid #ddd}tr:nth-child(even) td{background-color:#f2f2f2}}a{text-decoration:none;color:#540707}.katex-html{padding: .2rem;color: #000;font-weight: 700;font-size: 1.3rem;overflow-wrap: break-word;max-width: 100%;white-space: normal !important}.category{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin:1rem 0 1rem 0}.tag{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px;font-family:"Newsreader",serif}.tag>a{text-decoration:none;color:#000}img{margin:auto;display:block;max-width:100%;height:auto;margin-bottom:1rem}.katex{white-space: pre-line !important;display: inline-block;max-width: 100%;overflow-x: auto;overflow-y: hidden;scrollbar-width: thin;overflow-wrap: break-word;word-break: break-word;vertical-align: -7px}.content > p {overflow-wrap: break-word;word-break: break-word}
+    </style>
+    <style type="text/css">
+    	pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}
+		.hljs{color:#c9d1d9;background:#0d1117}.hljs-doctag,.hljs-keyword,.hljs-meta .hljs-keyword,.hljs-template-tag,.hljs-template-variable,.hljs-type,.hljs-variable.language_{color:#ff7b72}.hljs-title,.hljs-title.class_,.hljs-title.class_.inherited__,.hljs-title.function_{color:#d2a8ff}.hljs-attr,.hljs-attribute,.hljs-literal,.hljs-meta,.hljs-number,.hljs-operator,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-variable{color:#79c0ff}.hljs-meta .hljs-string,.hljs-regexp,.hljs-string{color:#a5d6ff}.hljs-built_in,.hljs-symbol{color:#ffa657}.hljs-code,.hljs-comment,.hljs-formula{color:#8b949e}.hljs-name,.hljs-quote,.hljs-selector-pseudo,.hljs-selector-tag{color:#7ee787}.hljs-subst{color:#c9d1d9}.hljs-section{color:#1f6feb;font-weight:700}.hljs-bullet{color:#f2cc60}.hljs-emphasis{color:#c9d1d9;font-style:italic}.hljs-strong{color:#c9d1d9;font-weight:700}.hljs-addition{color:#aff5b4;background-color:#033a16}.hljs-deletion{color:#ffdcd7;background-color:#67060c}
+    	pre{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;font-weight:400;word-break:break-word;word-wrap:break-word;box-sizing:inherit;border-radius:4px;overflow-x:auto;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}code{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;word-wrap:break-word;word-break:break-word;font-style:normal;line-height:20px;letter-spacing:-.003em;box-sizing:inherit;font-weight:400;font-size:75%;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}
+    </style>
+    <style type="text/css">
+    	.back-to-top{position:fixed;bottom:20px;right:20px;background-color:#a73f3f;color:#fff;padding:8px 10px;border-radius:50%;box-shadow:0 4px 6px rgb(0 0 0 / .2);font-size:10px;font-weight:700;text-decoration:none;text-align:center;transition:opacity 0.3s ease,visibility 0.3s ease;z-index:99999;opacity:1;visibility:visible}.back-to-top:hover{background-color:#0056b3}
+    </style>
+    <style type="text/css">
+        .ad-header {margin: 1rem auto 1rem;background-color: #fdfdfd;text-align: center;display: block;}.ad-header .ad-wrapper {min-height: 90px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #555;font-weight: 500;padding: 3rem;border: 1px dashed #ccc;border-radius: 6px;}@media (max-width: 768px) {.ad-header {padding: 0.75rem;}}.ad-sidebar {margin: 0 0 1rem;background-color: #fefefe;text-align: center;padding: 0px;width: 100%;max-width: 100%;display: block;}.ad-sidebar .ad-wrapper {min-height: 250px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #444;font-weight: 500;border: 1px dashed #aaa;border-radius: 6px;padding: 0rem;}@media (max-width: 1024px) {.ad-sidebar {padding: 0.75rem;}}
+    </style>
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://catatansoal.github.io/blog/measure-bluetooth-latency-with-btmon"
+          },
+          "headline": "Measure Bluetooth Latency With Btmon: A Step-by-Step Guide",
+          "description": "Measure Bluetooth Latency With Btmon: A Step-by-Step Guide...",
+          "image": [
+            "https://tse4.mm.bing.net/th?q=Measuring%20Peer%20Response%20Latency%20with%20btmon%20ACL%20Data%20TX%2FRX%20Timestamps"
+          ],
+          "author": {
+            "@type": "Person",
+            "name": "ADMIN",
+            "jobTitle": "Editor web"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "ANABEL",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://tse4.mm.bing.net/th?q=ANABEL%20WEB"
+            }
+          },
+          "datePublished": "2025-08-08T06:51:19+00:00",
+          "dateModified": "2025-08-08T06:51:19+00:00"
+        }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="container nav-container">
+                <div class="nav-left">
+                    <span class="logo">ANABEL</span>
+                    <span class="blog-tag">Article</span>
+                </div>
+                <div class="nav-search">
+                    <form class="search-form" role="search">
+                        <input 
+                            type="search" 
+                            class="search-input"
+                            placeholder="Search articles..."
+                            aria-label="Search articles"
+                        >
+                        <button type="submit" class="search-button" aria-label="Submit search">🔎</button>
+                    </form>
+                </div>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+                <div class="nav-menu">
+                    <ul class="nav-list">
+                    	<li><a href="/" class="nav-link">HOME</a></li>
+                        <li><a href="/pages/About" class="nav-link">About</a></li>
+                        <li><a href="/pages/Contact" class="nav-link">Contact</a></li>
+                        <li><a href="/pages/Disclaimer" class="nav-link">Disclaimer</a></li>
+                        <li><a href="/pages/Privacy" class="nav-link">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="main">
+        <article class="article">
+            <header class="article-header">
+                <div class="container">
+                    <h1>Measure Bluetooth Latency With Btmon: A Step-by-Step Guide</h1>
+                    <div class="meta">
+                        <time datetime="2025-08-08T06:51:19+00:00">Aug 8, 2025</time>
+                        <span class="author">by ADMIN</span>
+                        <span class="view-count">
+                            <span id="viewCount">59</span> views
+                        </span>
+                    </div>
+                </div>
+            </header>
+            <div class="ad-header container">
+                <div class="ad-wrapper">
+    Iklan Headers
+</div>
+            </div>
+            <div class="container">
+                <div class="article-layout">
+                    <div class="content">
+                        <img src="https://tse4.mm.bing.net/th?q=Measuring%20Peer%20Response%20Latency%20with%20btmon%20ACL%20Data%20TX%2FRX%20Timestamps" title="Measuring Peer Response Latency with btmon ACL Data TX/RX Timestamps" width="300" height="200"/><p>Hey guys! Today, we're diving deep into the fascinating world of Bluetooth monitoring, specifically how to measure peer response latency using <code>btmon</code> and ACL Data TX/RX timestamps. If you've ever wondered how to dissect Bluetooth communication timings, you're in the right place! Let's get started!</p>
+<h2>Understanding <code>btmon</code> and Bluetooth Packet Monitoring</h2>
+<p>So, what exactly is <code>btmon</code>? <strong><code>btmon</code> is a powerful tool</strong> used for monitoring Bluetooth packets sent and received by your device. Think of it as a Bluetooth packet sniffer. It captures all the juicy details of Bluetooth communication, allowing you to analyze and troubleshoot connections, measure performance, and even debug complex issues. When you run <code>btmon</code> on your Ubuntu machine, it starts capturing Bluetooth traffic and presents it in a human-readable format. This log data is invaluable for understanding the flow of information between Bluetooth devices.</p>
+<p>When we talk about <strong>Bluetooth communication</strong>, it’s essential to understand the concept of ACL (Asynchronous Connection-Oriented Logical Link) data. ACL is one of the primary transport methods for data in Bluetooth, particularly for things like audio streaming and data transfer. When data is sent over an ACL link, it's broken down into packets. These packets have timestamps associated with them, indicating when they were transmitted (TX) and received (RX). These timestamps are critical for measuring latency, which, in our case, is the time it takes for a peer device to respond to a sent packet. To effectively <strong>measure peer response latency</strong>, you need to look at the ACL Data TX (transmit) and RX (receive) timestamps. The TX timestamp tells you when your device sent a packet, and the RX timestamp tells you when a response to that packet was received. The difference between these two timestamps gives you the round-trip time, which is a key metric for latency. By analyzing these timestamps, you can identify bottlenecks, diagnose performance issues, and optimize your Bluetooth communication.</p>
+<p>But why is measuring peer response latency so important? Well, latency can significantly impact the user experience. High latency can lead to delays in audio streaming, slow data transfer speeds, and lag in interactive applications. Imagine trying to play a game over Bluetooth with high latency – it would be a frustrating experience! By accurately measuring latency, you can identify areas for improvement and ensure your Bluetooth devices are communicating efficiently. For example, if you're developing a Bluetooth-based IoT device, understanding latency can help you optimize the device's performance and ensure it meets the required response times. Similarly, if you're troubleshooting a Bluetooth audio connection with noticeable delays, latency measurements can help you pinpoint the cause of the issue. In essence, <strong>measuring latency with btmon</strong> provides valuable insights into the performance and responsiveness of your Bluetooth connections.</p>
+<h2>Interpreting <code>btmon</code> Logs for Latency Measurement</h2>
+<p>Okay, so you've got your <code>btmon</code> logs, now what? The key to <strong>interpreting <code>btmon</code> logs for latency measurement</strong> lies in understanding the structure of the log entries and identifying the relevant timestamps. Let's break it down. Each log entry in <code>btmon</code> typically contains several pieces of information, including the timestamp, the type of event (e.g., ACL Data TX, ACL Data RX), the Bluetooth address of the devices involved, and the data being transmitted. The timestamps are usually in microseconds, providing high-resolution timing information. When analyzing logs, you'll primarily focus on ACL Data TX and ACL Data RX events. These events indicate when data packets are sent and received over the ACL link. Each TX event will have a corresponding RX event (assuming the packet is successfully delivered and a response is sent), and the time difference between these events is what we're interested in.</p>
+<p>To <strong>calculate the peer response latency</strong>, you'll need to identify pairs of TX and RX events that correspond to the same communication exchange. This can be a bit tricky, as the logs can be quite verbose, especially under heavy traffic. Look for patterns or identifiers in the data payload that can help you match a TX packet with its corresponding RX packet. For example, if your application uses a request-response protocol, you might have a unique ID in the request and response packets. You can use this ID to correlate the TX and RX events. Once you've identified a pair of TX and RX events, subtract the TX timestamp from the RX timestamp. The result is the round-trip time for that packet exchange. Keep in mind that this round-trip time includes the time it takes for the peer device to process the request and generate a response, as well as the transmission time in both directions. To get a more accurate measure of peer response latency, you might want to perform multiple measurements and calculate an average. This helps to smooth out any variations due to network congestion or other factors. Furthermore, it’s crucial to consider the context of your measurements. Latency can vary depending on factors such as the distance between devices, the presence of interference, and the load on the Bluetooth controller.</p>
+<p>To make <strong>interpreting <code>btmon</code> logs</strong> easier, consider using scripting or specialized tools to automate the process. Parsing the logs manually can be tedious and error-prone, especially for large log files. There are several scripting languages, such as Python, that can be used to parse <code>btmon</code> logs, extract the relevant timestamps, and calculate latency. You can write a script that reads the log file, identifies TX and RX events, matches them based on some criteria (e.g., packet ID), and computes the time difference. This can significantly speed up the analysis process and reduce the chances of errors. Additionally, some commercial Bluetooth analysis tools provide built-in support for <code>btmon</code> logs and can automatically calculate latency and other performance metrics. These tools often have graphical interfaces that make it easier to visualize and analyze the data. By leveraging scripting or specialized tools, you can efficiently extract valuable insights from <code>btmon</code> logs and gain a deeper understanding of your Bluetooth communication performance.</p>
+<h2>Practical Steps to Measure Latency</h2>
+<p>Alright, let's get practical! Here are some <strong>steps to measure latency</strong> effectively using <code>btmon</code>:</p>
+<ol>
+<li><strong>Start <code>btmon</code></strong>: Open your terminal and run the command <code>btmon</code>. This will start capturing Bluetooth packets. You might want to save the output to a file for later analysis. For example, you can use <code>btmon &gt; btmon.log</code> to save the logs to a file named <code>btmon.log</code>.</li>
+<li><strong>Reproduce the Scenario</strong>: Perform the Bluetooth operation you want to measure the latency for. This could be anything from sending data between two devices to streaming audio. Make sure you're capturing enough data to get a representative sample of latency measurements.</li>
+<li><strong>Stop <code>btmon</code></strong>: Once you've captured enough data, stop <code>btmon</code> by pressing <code>Ctrl+C</code> in the terminal. If you saved the output to a file, you're ready to analyze the logs.</li>
+<li><strong>Analyze the Logs</strong>: This is where the real work begins. Open the log file in a text editor or use a scripting language to parse the logs. Look for ACL Data TX and ACL Data RX events. Identify pairs of events that correspond to the same communication exchange. Use the timestamps to calculate the time difference between the TX and RX events. Remember to consider using a script or a tool to automate this process if you have a large log file.</li>
+<li><strong>Calculate Average Latency</strong>: To get a more accurate measure of latency, calculate the average latency over multiple packet exchanges. This will help smooth out any variations due to transient factors. You can use a spreadsheet or a scripting language to calculate the average. For example, you can sum up the latencies for all the measured packet exchanges and divide by the number of exchanges.</li>
+<li><strong>Interpret the Results</strong>: Once you have the average latency, interpret the results in the context of your application. Is the latency within acceptable limits? If not, what could be the causes? Are there any patterns or anomalies in the latency measurements? Consider factors such as distance, interference, and device load. If the latency is higher than expected, you might need to investigate further and optimize your Bluetooth communication.</li>
+</ol>
+<p>To enhance your latency measurements, it's <strong>essential to consider the environment and conditions</strong> under which you're testing. Environmental factors like interference from other wireless devices or physical obstructions can significantly impact Bluetooth performance. To minimize these effects, try to conduct your tests in a controlled environment with minimal interference. Ensure that the devices are within the specified range and that there are no major obstacles between them. Additionally, the load on the Bluetooth controller and the devices themselves can affect latency. If the devices are busy with other tasks, it can increase the time it takes to process and respond to Bluetooth packets. Try to minimize the load on the devices during testing to get more accurate latency measurements. Furthermore, it’s beneficial to repeat your measurements multiple times under different conditions to get a comprehensive understanding of the latency characteristics. This can help you identify any inconsistencies or variations in performance. By carefully controlling the environment and conditions, you can ensure that your latency measurements are as accurate and reliable as possible.</p>
+<h2>Advanced Tips and Troubleshooting</h2>
+<p>Now, let's talk about some <strong>advanced tips and troubleshooting</strong>. One common issue you might encounter is matching TX and RX events in the logs. As mentioned earlier, <code>btmon</code> logs can be verbose, and it can be challenging to identify corresponding events, especially under heavy traffic. One way to make this easier is to add custom identifiers to your Bluetooth communication protocol. For example, you can include a unique sequence number in each packet that you send. This sequence number can then be used to match the TX and RX events in the logs. Another tip is to filter the <code>btmon</code> logs to focus on the specific communication you're interested in. <code>btmon</code> supports various filters that allow you to narrow down the log output based on criteria such as Bluetooth address, packet type, and data payload. Using filters can significantly reduce the amount of data you need to analyze and make it easier to identify the relevant events. For example, you can filter the logs to show only ACL Data TX and ACL Data RX events for a specific Bluetooth address.</p>
+<p>Another aspect to consider is the <strong>impact of Bluetooth connection parameters</strong> on latency. Bluetooth connections have various parameters that can affect performance, such as the connection interval and the number of packets that can be sent in each interval. A shorter connection interval can reduce latency but may also increase power consumption. The optimal connection parameters depend on the specific requirements of your application. If you're experiencing high latency, you might want to experiment with different connection parameters to see if it improves performance. You can use Bluetooth configuration tools or APIs to adjust these parameters. However, be aware that changing the connection parameters can have other side effects, such as increased power consumption, so it's essential to test thoroughly after making any changes.</p>
+<p>In cases where you are seeing unexpected latency, consider using other <strong>Bluetooth debugging tools</strong> in conjunction with <code>btmon</code>. Tools like <code>hciconfig</code> and <code>bluetoothctl</code> can provide additional information about the Bluetooth adapter and connections. <code>hciconfig</code> allows you to view and configure the Bluetooth adapter, while <code>bluetoothctl</code> is a command-line tool for managing Bluetooth connections. These tools can help you diagnose issues such as connection failures, incorrect configurations, and driver problems. For example, you can use <code>hciconfig</code> to check the status of the Bluetooth adapter and see if it's running correctly. You can also use <code>bluetoothctl</code> to scan for nearby devices and connect to them. By combining the insights from these tools with the <code>btmon</code> logs, you can gain a more comprehensive understanding of the Bluetooth communication and troubleshoot latency issues more effectively. Remember, debugging Bluetooth issues often requires a multifaceted approach, and using a combination of tools and techniques can lead to faster and more accurate results.</p>
+<h2>Conclusion</h2>
+<p>So there you have it! <strong>Measuring peer response latency using <code>btmon</code> ACL Data TX/RX timestamps</strong> is a powerful technique for understanding and optimizing Bluetooth communication. By mastering this technique, you can diagnose performance issues, improve user experience, and ensure your Bluetooth devices are performing at their best. Whether you're developing a new Bluetooth application or troubleshooting an existing one, <code>btmon</code> is your friend. Keep experimenting, keep analyzing, and you'll become a Bluetooth latency master in no time! Happy monitoring!</p>
+
+                    </div>
+                    <aside class="related-posts">
+                        <div class="ad-sidebar container">
+                            <div class="ad-wrapper">
+    <span>Iklan Related</span>
+</div>
+                        </div>
+                        <h2 class="related-posts-title">Related Posts</h2><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/roblox-studio-a-beginners-guide">Roblox Studio: A Beginner&#39;s Guide To Game Creation</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-04T08:24:14+00:00">Aug 4, 2025</time>
+		                        <span class="view-count">
+									50 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/what-is-a-memetic-proxy">What Is A Memetic Proxy In AI Prompt Engineering?</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-13T19:38:59+00:00">Jul 13, 2025</time>
+		                        <span class="view-count">
+									49 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/dynamic-equilibrium-in-chemical-reactions">Dynamic Equilibrium In Chemical Reactions Understanding The $SO_2$, $O_2$, And $SO_3$ System</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-17T00:16:53+00:00">Jul 17, 2025</time>
+		                        <span class="view-count">
+									92 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/solving-the-equation-if-x">Solving The Equation If (x-1)/x=20 Find X</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-16T21:41:58+00:00">Jul 16, 2025</time>
+		                        <span class="view-count">
+									41 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/understanding-price-markups-original-cost">Understanding Price Markups Original Cost, Percent Markup, Markup Amount, And New Price</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-01T01:35:11+00:00">Aug 1, 2025</time>
+		                        <span class="view-count">
+									87 views
+		                        </span>
+                            </div>
+                        </article>
+                    </aside>
+                    <aside class="related-posts"></aside>
+                </div>
+            </div>
+        </article>
+        <a href="#" class="back-to-top" id="backToTop" title="Back to top">
+        	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-bar-up" viewBox="0 0 16 16">
+			  <path fill-rule="evenodd" d="M3.646 11.854a.5.5 0 0 0 .708 0L8 8.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708M2.4 5.2c0 .22.18.4.4.4h10.4a.4.4 0 0 0 0-.8H2.8a.4.4 0 0 0-.4.4"/>
+			</svg>
+		</a>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 ANABEL</p>
+        </div>
+    </footer>
+    <script>
+    	(() => {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            const toggleMenu = () => {
+                navMenu.classList.toggle('nav-menu-active');
+                navToggle.classList.toggle('nav-toggle-active');
+            };
+            const backToTopHandler = (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            navToggle.addEventListener('click', toggleMenu);
+            document.getElementById('backToTop').addEventListener('click', backToTopHandler);
+            window.addEventListener('pagehide', () => {
+                navToggle.removeEventListener('click', toggleMenu);
+                document.getElementById('backToTop').removeEventListener('click', backToTopHandler);
+            });
+        })();
+		(() => {
+            window.addEventListener("DOMContentLoaded", (event) => {
+                const ellHljs = document.createElement("script");
+                ellHljs.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js");
+                ellHljs.onload = () => {
+                    hljs.highlightAll();
+                };
+                document.querySelector("body").append(ellHljs);
+                const ellFont = document.createElement("link");
+                ellFont.setAttribute("href", "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css");
+                ellFont.setAttribute("rel", "stylesheet");
+                document.querySelector("head").append(ellFont);
+                window.addEventListener('pagehide', () => {
+                    // ellHljs.remove();
+                    ellFont.remove();
+                });
+
+            });
+        })();
+    </script>
+    
+    
+    
+</body>
+</html>

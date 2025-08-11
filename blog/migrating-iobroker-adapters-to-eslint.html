@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Migrating IoBroker Adapters To ESLint 9 And @iobroker/eslint-config</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Migrating IoBroker Adapters To ESLint 9 And @iobroker/eslint-config...">
+    <link rel="canonical" href="https://catatansoal.github.io/blog/migrating-iobroker-adapters-to-eslint">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Migrating IoBroker Adapters To ESLint 9 And @iobroker/eslint-config">
+	<meta property="og:description" content="Migrating IoBroker Adapters To ESLint 9 And @iobroker/eslint-config...">
+	<meta property="og:url" content="https://catatansoal.github.io/blog/migrating-iobroker-adapters-to-eslint">
+	<meta property="og:site_name" content="ANABEL">
+	<meta property="article:published_time" content="2025-07-27T22:11:25+00:00">
+	<meta property="article:author" content="ADMIN">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+    <link rel="preload" fetchpriority="high" as="image" href="https://tse4.mm.bing.net/th?q=Migrating%20to%20ESLint%209%20and%20%40iobroker%2Feslint-config%20for%20ioBroker%20Adapters">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style type="text/css">
+    	:root{--primary-color:#3740ff;--text-color:#202124;--background-color:#ffffff;--gray-100:#f8f9fa;--gray-200:#e9ecef}*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;line-height:1.6;color:var(--text-color);background-color:var(--background-color)}.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}.header{background-color:var(--background-color);border-bottom:1px solid var(--gray-200);position:sticky;top:0;z-index:100}.nav{padding:.5rem 0}.nav-container{display:flex;justify-content:space-between;align-items:center;gap:1rem}.nav-left{display:flex;align-items:center;flex-shrink:0}.logo{font-weight:700;color:var(--primary-color)}.blog-tag{margin-left:1rem;padding:.25rem .5rem;background-color:var(--gray-100);border-radius:4px;font-size:.875rem}.nav-search{flex-grow:1;max-width:300px}.search-form{position:relative;width:100%}.search-input{width:100%;padding:.5rem 2.5rem .5rem 1rem;border:1px solid var(--gray-200);border-radius:24px;font-size:.875rem;transition:all 0.2s}.search-input:focus{outline:none;border-color:var(--primary-color);box-shadow:0 0 0 2px rgb(55 64 255 / .1)}.search-button{position:absolute;right:.5rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#5f6368;cursor:pointer;padding:.25rem;display:flex;align-items:center;justify-content:center}.search-button:hover{color:var(--primary-color)}.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:.5rem}.hamburger{display:block;position:relative;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before,.hamburger::after{content:'';position:absolute;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before{top:-6px}.hamburger::after{bottom:-6px}.nav-toggle-active .hamburger{background:#fff0}.nav-toggle-active .hamburger::before{transform:rotate(45deg);top:0}.nav-toggle-active .hamburger::after{transform:rotate(-45deg);bottom:0}.nav-list{display:flex;list-style:none;gap:2rem}.nav-link{color:var(--text-color);text-decoration:none;font-size:.9rem;transition:color 0.2s}.nav-link:hover{color:var(--primary-color)}.article-header{padding:2rem 0;background-color:var(--gray-100)}.article-layout{display:grid;grid-template-columns:1fr 350px;gap:3rem;padding:1rem 0;align-items: start}h1,h2,h3,h4,h5,h6{font-family:"Crimson Text","Times New Roman",Times,serif}h1{font-size:2.5rem;line-height:1.2;margin-bottom:1rem}.meta{color:#5f6368;font-size:.875rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}.view-count{display:inline-flex;align-items:center;gap:.25rem}.view-count svg{color:#5f6368}.content{min-width:0;border-bottom:1px solid #dddddd5e;margin-top:1rem;white-space:pre-line !important;overflow-wrap:break-word;overflow-x:auto;word-break:break-word}.lead{font-size:1.25rem;color:#5f6368;margin-bottom:2rem}h2,h3,h4,h5,h6{font-size:1.75rem;margin:1rem 0 1rem}p,pre,ol,ul>li{margin-bottom:1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;font-size:1.3rem;text-align: justify;}p>code{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px}hr{margin:1rem 0 1rem 0}.code-example{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;margin:1.5rem 0;overflow-x:auto}code{font-family:'Roboto Mono',monospace;font-size:.875rem}ul{margin:.2rem 0;padding-left:1.5rem}.related-posts{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;position:sticky;top:5rem}.related-posts-title,.newpost-posts-list{font-size:1.75rem;margin:0 0 1rem}.related-posts-list{display:flex;flex-direction:column;gap:.5rem}.related-post,.newpost-post{border-bottom:1px solid #ddd;padding-bottom:10px;margin-bottom:10px}.related-post:last-child,.newpost-post:last-child{padding-bottom:0;border-bottom:none}.related-post-title,.newpost-post-title{font-size:1.2rem;margin:0 0 .1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;}.related-post-title a,.newpost-post-title a{color:var(--text-color);text-decoration:none;transition:color 0.2s}.related-post-title a:hover,.newpost-post-title a:hover{color:var(--primary-color)}.related-post time{font-size:.875rem;color:#5f6368}.footer{background-color:var(--gray-100);padding:2rem 0;margin-top:4rem;color:#5f6368;font-size:.875rem}.nav-menu>ul>li{margin-bottom:0}@media (max-width:1024px){.container{max-width:800px}.article-layout{grid-template-columns:1fr;gap:2rem}.related-posts{position:static}}@media (max-width:768px){.nav-container{flex-wrap:wrap}.nav-search{order:3;max-width:none;width:100%;margin-top:.1rem}.nav-toggle{display:block}.nav-menu{display:none;position:absolute;top:100%;left:0;right:0;background:var(--background-color);padding:1rem 0;border-bottom:1px solid var(--gray-200)}.nav-menu-active{display:block}.nav-list{flex-direction:column;gap:.1rem;padding:0 1.5rem}.nav-link{display:block;padding:.2rem 0}h1{font-size:2rem}.article-header{padding:2rem 0}.content{padding:.1rem 0}}table{width:100%;border-collapse:collapse;margin:20px 0;font-family:'Arial',sans-serif}th,td{padding:12px 15px;text-align:left;border:1px solid #ddd}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9}tr:nth-child(even) td{background-color:#f2f2f2}@media screen and (max-width:768px){table{border:0;display:block;overflow-x:auto;white-space:nowrap}th,td{padding:10px;text-align:right}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9;border-bottom:1px solid #ddd}tr:nth-child(even) td{background-color:#f2f2f2}}a{text-decoration:none;color:#540707}.katex-html{padding: .2rem;color: #000;font-weight: 700;font-size: 1.3rem;overflow-wrap: break-word;max-width: 100%;white-space: normal !important}.category{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin:1rem 0 1rem 0}.tag{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px;font-family:"Newsreader",serif}.tag>a{text-decoration:none;color:#000}img{margin:auto;display:block;max-width:100%;height:auto;margin-bottom:1rem}.katex{white-space: pre-line !important;display: inline-block;max-width: 100%;overflow-x: auto;overflow-y: hidden;scrollbar-width: thin;overflow-wrap: break-word;word-break: break-word;vertical-align: -7px}.content > p {overflow-wrap: break-word;word-break: break-word}
+    </style>
+    <style type="text/css">
+    	pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}
+		.hljs{color:#c9d1d9;background:#0d1117}.hljs-doctag,.hljs-keyword,.hljs-meta .hljs-keyword,.hljs-template-tag,.hljs-template-variable,.hljs-type,.hljs-variable.language_{color:#ff7b72}.hljs-title,.hljs-title.class_,.hljs-title.class_.inherited__,.hljs-title.function_{color:#d2a8ff}.hljs-attr,.hljs-attribute,.hljs-literal,.hljs-meta,.hljs-number,.hljs-operator,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-variable{color:#79c0ff}.hljs-meta .hljs-string,.hljs-regexp,.hljs-string{color:#a5d6ff}.hljs-built_in,.hljs-symbol{color:#ffa657}.hljs-code,.hljs-comment,.hljs-formula{color:#8b949e}.hljs-name,.hljs-quote,.hljs-selector-pseudo,.hljs-selector-tag{color:#7ee787}.hljs-subst{color:#c9d1d9}.hljs-section{color:#1f6feb;font-weight:700}.hljs-bullet{color:#f2cc60}.hljs-emphasis{color:#c9d1d9;font-style:italic}.hljs-strong{color:#c9d1d9;font-weight:700}.hljs-addition{color:#aff5b4;background-color:#033a16}.hljs-deletion{color:#ffdcd7;background-color:#67060c}
+    	pre{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;font-weight:400;word-break:break-word;word-wrap:break-word;box-sizing:inherit;border-radius:4px;overflow-x:auto;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}code{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;word-wrap:break-word;word-break:break-word;font-style:normal;line-height:20px;letter-spacing:-.003em;box-sizing:inherit;font-weight:400;font-size:75%;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}
+    </style>
+    <style type="text/css">
+    	.back-to-top{position:fixed;bottom:20px;right:20px;background-color:#a73f3f;color:#fff;padding:8px 10px;border-radius:50%;box-shadow:0 4px 6px rgb(0 0 0 / .2);font-size:10px;font-weight:700;text-decoration:none;text-align:center;transition:opacity 0.3s ease,visibility 0.3s ease;z-index:99999;opacity:1;visibility:visible}.back-to-top:hover{background-color:#0056b3}
+    </style>
+    <style type="text/css">
+        .ad-header {margin: 1rem auto 1rem;background-color: #fdfdfd;text-align: center;display: block;}.ad-header .ad-wrapper {min-height: 90px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #555;font-weight: 500;padding: 3rem;border: 1px dashed #ccc;border-radius: 6px;}@media (max-width: 768px) {.ad-header {padding: 0.75rem;}}.ad-sidebar {margin: 0 0 1rem;background-color: #fefefe;text-align: center;padding: 0px;width: 100%;max-width: 100%;display: block;}.ad-sidebar .ad-wrapper {min-height: 250px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #444;font-weight: 500;border: 1px dashed #aaa;border-radius: 6px;padding: 0rem;}@media (max-width: 1024px) {.ad-sidebar {padding: 0.75rem;}}
+    </style>
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://catatansoal.github.io/blog/migrating-iobroker-adapters-to-eslint"
+          },
+          "headline": "Migrating IoBroker Adapters To ESLint 9 And @iobroker/eslint-config",
+          "description": "Migrating IoBroker Adapters To ESLint 9 And @iobroker/eslint-config...",
+          "image": [
+            "https://tse4.mm.bing.net/th?q=Migrating%20to%20ESLint%209%20and%20%40iobroker%2Feslint-config%20for%20ioBroker%20Adapters"
+          ],
+          "author": {
+            "@type": "Person",
+            "name": "ADMIN",
+            "jobTitle": "Editor web"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "ANABEL",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://tse4.mm.bing.net/th?q=ANABEL%20WEB"
+            }
+          },
+          "datePublished": "2025-07-27T22:11:25+00:00",
+          "dateModified": "2025-07-27T22:11:25+00:00"
+        }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="container nav-container">
+                <div class="nav-left">
+                    <span class="logo">ANABEL</span>
+                    <span class="blog-tag">Article</span>
+                </div>
+                <div class="nav-search">
+                    <form class="search-form" role="search">
+                        <input 
+                            type="search" 
+                            class="search-input"
+                            placeholder="Search articles..."
+                            aria-label="Search articles"
+                        >
+                        <button type="submit" class="search-button" aria-label="Submit search">🔎</button>
+                    </form>
+                </div>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+                <div class="nav-menu">
+                    <ul class="nav-list">
+                    	<li><a href="/" class="nav-link">HOME</a></li>
+                        <li><a href="/pages/About" class="nav-link">About</a></li>
+                        <li><a href="/pages/Contact" class="nav-link">Contact</a></li>
+                        <li><a href="/pages/Disclaimer" class="nav-link">Disclaimer</a></li>
+                        <li><a href="/pages/Privacy" class="nav-link">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="main">
+        <article class="article">
+            <header class="article-header">
+                <div class="container">
+                    <h1>Migrating IoBroker Adapters To ESLint 9 And @iobroker/eslint-config</h1>
+                    <div class="meta">
+                        <time datetime="2025-07-27T22:11:25+00:00">Jul 27, 2025</time>
+                        <span class="author">by ADMIN</span>
+                        <span class="view-count">
+                            <span id="viewCount">68</span> views
+                        </span>
+                    </div>
+                </div>
+            </header>
+            <div class="ad-header container">
+                <div class="ad-wrapper">
+    Iklan Headers
+</div>
+            </div>
+            <div class="container">
+                <div class="article-layout">
+                    <div class="content">
+                        <img src="https://tse4.mm.bing.net/th?q=Migrating%20to%20ESLint%209%20and%20%40iobroker%2Feslint-config%20for%20ioBroker%20Adapters" title="Migrating to ESLint 9 and @iobroker/eslint-config for ioBroker Adapters" width="300" height="200"/><p>Hey guys! 👋 Exciting news for all ioBroker adapter developers! It's time to talk about migrating to ESLint 9 and adopting the <code>@iobroker/eslint-config</code>. This is a <em>fantastic</em> opportunity to level up your code quality and ensure consistency across the ioBroker ecosystem. Let's dive into what this means for you and how you can make the transition smoothly.</p>
+<h2>Why Migrate to ESLint 9 and Use @iobroker/eslint-config?</h2>
+<p>In this section, we'll explore the <strong>key reasons</strong> why migrating to ESLint 9 and adopting <code>@iobroker/eslint-config</code> is a smart move for ioBroker adapter developers. We'll delve into the benefits of using the new ESLint version, the advantages of the standardized configuration, and how it all contributes to a better development experience and higher code quality.</p>
+<p>First off, ESLint 9 is the latest and greatest version of the popular JavaScript linting tool. It comes packed with performance improvements, new features, and updated rule sets that can help you catch potential issues in your code earlier and more efficiently. Think of it as giving your code a thorough health check to ensure it's in tip-top shape. Embracing the latest version means you're taking advantage of the most up-to-date tooling and best practices in the JavaScript world.</p>
+<p>Now, let's talk about <code>@iobroker/eslint-config</code>. This is where things get really interesting for ioBroker developers. The ioBroker core team has put together a standardized ESLint configuration that's designed specifically for ioBroker adapters. What does this mean for you? It means you can say goodbye to wrestling with complex ESLint setups and configurations. Instead, you can simply plug in <code>@iobroker/eslint-config</code> and instantly benefit from a well-reviewed and consistent set of linting rules. This standardization promotes code consistency across all ioBroker adapters, making it easier for developers to collaborate and contribute to the ecosystem.</p>
+<p>One of the most significant benefits of using <code>@iobroker/eslint-config</code> is that it's maintained by the core team. This means you can rest assured that the configuration is aligned with the latest ioBroker development standards and best practices. The core team actively reviews and updates the configuration, ensuring it remains relevant and effective. You're essentially leveraging the expertise of the core team to enhance the quality of your code. Furthermore, this standardized configuration is used (or will be used in the future) for all adapters maintained by the core team. This guarantees that the configuration is not only well-reviewed but also battle-tested in real-world scenarios.</p>
+<p>Migrating to ESLint 9 and using <code>@iobroker/eslint-config</code> can significantly streamline your development workflow. With a consistent and well-defined linting setup, you'll spend less time debugging and more time building awesome features. The standardized configuration also promotes code readability and maintainability, making it easier for you (and others) to understand and work with your code in the long run. This is crucial for long-term adapter maintenance and evolution.</p>
+<p><strong>In a nutshell:</strong></p>
+<ul>
+<li><strong>Stay up-to-date:</strong> ESLint 9 brings the latest linting capabilities and performance improvements.</li>
+<li><strong>Standardize your code:</strong> <code>@iobroker/eslint-config</code> ensures consistency across ioBroker adapters.</li>
+<li><strong>Leverage core team expertise:</strong> Benefit from a well-reviewed and maintained configuration.</li>
+<li><strong>Streamline your workflow:</strong> Reduce debugging time and focus on building features.</li>
+<li><strong>Improve code quality:</strong> Enhance readability, maintainability, and overall code health.</li>
+</ul>
+<h2>How to Migrate: A Step-by-Step Guide</h2>
+<p>Alright, so you're convinced about the benefits of migrating to ESLint 9 and using <code>@iobroker/eslint-config</code>. Now, let's get down to the nitty-gritty of <strong>how to actually do it</strong>. This section will walk you through the migration process step by step, making it as painless as possible. Don't worry, it's not as daunting as it might seem! We'll break it down into manageable chunks.</p>
+<p>The ioBroker core team has already created a comprehensive migration guide that you can find here: <a href="https://github.com/ioBroker/ioBroker.eslint-config/blob/main/MIGRATION.md">https://github.com/ioBroker/ioBroker.eslint-config/blob/main/MIGRATION.md</a>. This guide is your best friend during the migration process, so make sure to keep it handy. However, to give you a quick overview and some extra tips, here's a summarized version of the key steps:</p>
+<ol>
+<li><strong>Update your dependencies:</strong></li>
+</ol>
+<p>The first thing you'll want to do is update your project's dependencies. This involves installing ESLint 9 and the <code>@iobroker/eslint-config</code> package. You can do this using npm or yarn. Open your terminal, navigate to your adapter's directory, and run the following command:</p>
+<pre><code class="hljs">npm install eslint@latest @iobroker/eslint-config@latest --save-dev
+</code></pre>
+<p>Or, if you're using yarn:</p>
+<pre><code class="hljs">yarn add eslint@latest @iobroker/eslint-config@latest --dev
+</code></pre>
+<p>This command installs the latest versions of ESLint and the ioBroker ESLint configuration as development dependencies in your project. The <code>--save-dev</code> flag ensures that these packages are added to your <code>devDependencies</code> in your <code>package.json</code> file.</p>
+<ol start="2">
+<li><strong>Configure ESLint:</strong></li>
+</ol>
+<p>Next up, you'll need to configure ESLint to use the <code>@iobroker/eslint-config</code>. This involves creating or modifying your ESLint configuration file. If you already have an <code>.eslintrc.js</code> or <code>.eslintrc.json</code> file, you'll need to update it. If you don't have one, create a new file named <code>.eslintrc.js</code> in the root of your adapter's directory.</p>
+<p>Open your <code>.eslintrc.js</code> file (or create one) and add the following:</p>
+<pre><code class="hljs">module.exports = {
+  extends: [&#39;@iobroker/eslint-config&#39;],
+  parserOptions: {
+    ecmaVersion: &#39;latest&#39;,
+    sourceType: &#39;module&#39;,
+  },
+  env: {
+    node: true,
+    es2021: true,
+  },
+};
+</code></pre>
+<p>This configuration tells ESLint to extend the <code>@iobroker/eslint-config</code>, which means it will use the rules defined in that configuration as a starting point. We're also specifying the <code>ecmaVersion</code>, <code>sourceType</code>, and <code>env</code> options to ensure that ESLint is configured correctly for modern JavaScript and Node.js environments.</p>
+<ol start="3">
+<li><strong>Run ESLint and Fix Issues:</strong></li>
+</ol>
+<p>Now that you've updated your dependencies and configured ESLint, it's time to run the linter and see what it finds. Open your terminal and run the following command:</p>
+<pre><code class="hljs">npm run lint
+</code></pre>
+<p>This command will run ESLint on your project and report any linting issues it finds. You'll likely see a bunch of warnings and errors at this point. Don't panic! This is perfectly normal. The goal now is to fix these issues.</p>
+<p>Many of the issues can be automatically fixed by ESLint using the <code>--fix</code> flag. Try running the following command:</p>
+<pre><code class="hljs">npm run lint -- --fix
+</code></pre>
+<p>This command tells ESLint to automatically fix any issues it can. This will take care of a lot of the low-hanging fruit, such as formatting issues and simple rule violations.</p>
+<ol start="4">
+<li><strong>Address Remaining Issues:</strong></li>
+</ol>
+<p>After running the <code>--fix</code> command, you'll likely still have some issues to address manually. Go through the remaining warnings and errors one by one, and fix them according to the ESLint rules and best practices. This might involve refactoring your code, updating variable names, or adding missing semicolons.</p>
+<ol start="5">
+<li><strong>Prettier Considerations:</strong></li>
+</ol>
+<p>One thing to keep in mind during the migration process is that Prettier might report several issues. Prettier is a code formatter that ensures consistent code style across your project. If you're using Prettier, you might see formatting issues after migrating to ESLint 9 and <code>@iobroker/eslint-config</code>.</p>
+<p>The good news is that most of these issues can be automatically fixed by running the <code>npm run lint -- --fix</code> command. This command not only fixes ESLint issues but also runs Prettier to format your code according to the configured rules.</p>
+<ol start="6">
+<li><strong>Customize (If Needed):</strong></li>
+</ol>
+<p>While <code>@iobroker/eslint-config</code> provides a solid foundation, you might find that you need to customize the rules for your specific adapter. The ioBroker core team understands this and allows for some flexibility. You can adapt rules or exclude certain files from checking if you have a strong need to do so.</p>
+<p>To customize the rules, you can override them in your <code>.eslintrc.js</code> file. For example, if you want to disable a specific rule, you can add it to the <code>rules</code> section of your configuration:</p>
+<pre><code class="hljs">module.exports = {
+  extends: [&#39;@iobroker/eslint-config&#39;],
+  parserOptions: {
+    ecmaVersion: &#39;latest&#39;,
+    sourceType: &#39;module&#39;,
+  },
+  env: {
+    node: true,
+    es2021: true,
+  },
+  rules: {
+    &#39;no-console&#39;: &#39;off&#39;, // Disable the no-console rule
+  },
+};
+</code></pre>
+<p>To exclude files from checking, you can use the <code>ignorePatterns</code> option in your <code>.eslintrc.js</code> file:</p>
+<pre><code class="hljs">module.exports = {
+  extends: [&#39;@iobroker/eslint-config&#39;],
+  parserOptions: {
+    ecmaVersion: &#39;latest&#39;,
+    sourceType: &#39;module&#39;,
+  },
+  env: {
+    node: true,
+    es2021: true,
+  },
+  ignorePatterns: [&#39;/path/to/old/file.js&#39;], // Exclude this file from checking
+};
+</code></pre>
+<p><strong>Key Takeaways:</strong></p>
+<ul>
+<li><strong>Follow the migration guide:</strong> The official guide is your best resource.</li>
+<li><strong>Update dependencies:</strong> Install ESLint 9 and <code>@iobroker/eslint-config</code>.</li>
+<li><strong>Configure ESLint:</strong> Extend the <code>@iobroker/eslint-config</code> in your <code>.eslintrc.js</code> file.</li>
+<li><strong>Run ESLint and fix issues:</strong> Use <code>npm run lint -- --fix</code> to automatically fix many issues.</li>
+<li><strong>Address remaining issues manually:</strong> Refactor your code as needed.</li>
+<li><strong>Consider Prettier:</strong> Be prepared for potential formatting issues and use the <code>--fix</code> flag.</li>
+<li><strong>Customize if needed:</strong> Override rules or exclude files if necessary.</li>
+</ul>
+<h2>Best Practices and Tips for a Smooth Transition</h2>
+<p>Now that you've got a handle on the <em>migration process</em>, let's chat about some <strong>best practices and tips</strong> to ensure a super smooth transition. We're talking about the little things you can do to avoid headaches and make the whole experience more enjoyable. Trust me, a little preparation goes a long way!</p>
+<ol>
+<li><strong>Commit Your Code Before Starting:</strong></li>
+</ol>
+<p>This is a golden rule for any major code change, not just ESLint migrations. Before you start tinkering with your ESLint configuration, make sure you commit your current code to your Git repository. This gives you a safe rollback point if anything goes wrong. You can always revert to the previous commit if you accidentally break something or decide you want to go back to your old setup. It's like having a safety net – you might not need it, but it's great to know it's there.</p>
+<ol start="2">
+<li><strong>Tackle Issues in Small Chunks:</strong></li>
+</ol>
+<p>When you run ESLint for the first time after migrating, you might be overwhelmed by the number of warnings and errors. It's tempting to try to fix everything at once, but that can quickly become chaotic. A much better approach is to tackle the issues in small, manageable chunks. Focus on one type of issue at a time, or work on a specific file or module. This makes the process less daunting and reduces the risk of introducing new errors.</p>
+<ol start="3">
+<li><strong>Understand the Rules:</strong></li>
+</ol>
+<p>ESLint rules can sometimes seem cryptic, especially if you're not familiar with them. When you encounter a rule violation, take a moment to understand what the rule is trying to enforce and why. This will not only help you fix the issue correctly but also improve your overall understanding of JavaScript best practices. The ESLint documentation is your friend here – it provides detailed explanations of each rule and how to configure it.</p>
+<ol start="4">
+<li><strong>Use Auto-Fixing When Possible:</strong></li>
+</ol>
+<p>We've already mentioned the <code>--fix</code> flag, but it's worth emphasizing again. ESLint's auto-fixing capabilities are a lifesaver. They can automatically correct many common issues, such as formatting problems and simple rule violations. Always try running <code>npm run lint -- --fix</code> before you start manually fixing issues. You'll be surprised at how much time it can save you.</p>
+<ol start="5">
+<li><strong>Don't Be Afraid to Customize:</strong></li>
+</ol>
+<p>While <code>@iobroker/eslint-config</code> provides a great starting point, it's not a one-size-fits-all solution. You might encounter situations where you need to customize the rules to fit your specific adapter's needs. Remember, the ioBroker core team allows for this flexibility. You can override rules or exclude files if necessary. Just make sure you have a good reason for doing so and that you document your changes.</p>
+<ol start="6">
+<li><strong>Test Thoroughly:</strong></li>
+</ol>
+<p>After you've migrated to ESLint 9 and <code>@iobroker/eslint-config</code>, it's crucial to test your adapter thoroughly. Run your unit tests, integration tests, and manual tests to ensure that everything is still working as expected. Linting is a great way to catch potential issues, but it's not a substitute for proper testing. Testing will help you catch any unexpected side effects of your changes.</p>
+<ol start="7">
+<li><strong>Seek Help When Needed:</strong></li>
+</ol>
+<p>If you get stuck during the migration process, don't hesitate to seek help. The ioBroker community is full of knowledgeable and helpful developers who are willing to lend a hand. You can ask questions in the ioBroker forums, on the ioBroker Discord server, or in the GitHub repository for <code>@iobroker/eslint-config</code>. There's no shame in asking for help – we've all been there!</p>
+<p><strong>Quick Tips:</strong></p>
+<ul>
+<li><strong>Commit code before:</strong> Always commit your code before making major changes.</li>
+<li><strong>Small chunks:</strong> Tackle issues in small, manageable pieces.</li>
+<li><strong>Understand rules:</strong> Learn what the ESLint rules mean and why they exist.</li>
+<li><strong>Auto-fix:</strong> Use the <code>--fix</code> flag to automatically correct issues.</li>
+<li><strong>Customize wisely:</strong> Override rules only when necessary and document your changes.</li>
+<li><strong>Test thoroughly:</strong> Run tests to ensure everything is working correctly.</li>
+<li><strong>Seek help:</strong> Don't hesitate to ask for help from the ioBroker community.</li>
+</ul>
+<h2>Conclusion: Embracing Modern Code Quality</h2>
+<p>So there you have it, folks! Migrating to ESLint 9 and embracing <code>@iobroker/eslint-config</code> is a <em>significant step</em> towards <strong>modernizing your ioBroker adapter development workflow</strong>. It's all about writing cleaner, more consistent, and more maintainable code. By adopting these tools and practices, you're not just improving your own code quality – you're contributing to a healthier and more collaborative ioBroker ecosystem.</p>
+<p>We've covered the benefits of migrating, walked through the step-by-step process, and shared some best practices and tips for a smooth transition. Now it's your turn to take the plunge! Remember, the ioBroker core team and the community are here to support you along the way. So, go forth, lint your code, and build awesome ioBroker adapters!</p>
+<p><strong>Key Takeaways of the Article:</strong></p>
+<ul>
+<li>Migrating to ESLint 9 and <code>@iobroker/eslint-config</code> improves code quality and consistency.</li>
+<li>The migration process involves updating dependencies, configuring ESLint, and fixing issues.</li>
+<li>Best practices include committing code before starting, tackling issues in small chunks, and testing thoroughly.</li>
+<li>Customization is allowed when necessary, but it's important to understand the rules and document changes.</li>
+<li>The ioBroker community is a valuable resource for support and assistance.</li>
+</ul>
+<p>By embracing these modern code quality practices, you're setting yourself up for success in the ioBroker development world. Happy coding, and remember, clean code is happy code! 🎉</p>
+
+                    </div>
+                    <aside class="related-posts">
+                        <div class="ad-sidebar container">
+                            <div class="ad-wrapper">
+    <span>Iklan Related</span>
+</div>
+                        </div>
+                        <h2 class="related-posts-title">Related Posts</h2><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/novel-id-wall-dwellers-and">Novel ID: Wall Dwellers &amp; Floating &#39;Angels&#39; - Dystopian Mystery</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-09T21:34:49+00:00">Aug 9, 2025</time>
+		                        <span class="view-count">
+									63 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/lunch-budget-survey-insights-from">Lunch Budget Survey: Insights From 12 Teachers</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-03T23:33:37+00:00">Aug 3, 2025</time>
+		                        <span class="view-count">
+									46 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/troubleshooting-data-disappearance-in-web">Troubleshooting Data Disappearance In Web Forms With Blue Prism</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-26T16:36:55+00:00">Jul 26, 2025</time>
+		                        <span class="view-count">
+									63 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/drawing-dashed-lines-below-planes">Drawing Dashed Lines Below Planes A Luadraw Tutorial</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-26T09:12:11+00:00">Jul 26, 2025</time>
+		                        <span class="view-count">
+									52 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/troubleshoot-game-crashing-and-server">Troubleshoot Game Crashing &amp; Server Closed Errors</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-03T12:33:08+00:00">Aug 3, 2025</time>
+		                        <span class="view-count">
+									49 views
+		                        </span>
+                            </div>
+                        </article>
+                    </aside>
+                    <aside class="related-posts"></aside>
+                </div>
+            </div>
+        </article>
+        <a href="#" class="back-to-top" id="backToTop" title="Back to top">
+        	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-bar-up" viewBox="0 0 16 16">
+			  <path fill-rule="evenodd" d="M3.646 11.854a.5.5 0 0 0 .708 0L8 8.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708M2.4 5.2c0 .22.18.4.4.4h10.4a.4.4 0 0 0 0-.8H2.8a.4.4 0 0 0-.4.4"/>
+			</svg>
+		</a>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 ANABEL</p>
+        </div>
+    </footer>
+    <script>
+    	(() => {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            const toggleMenu = () => {
+                navMenu.classList.toggle('nav-menu-active');
+                navToggle.classList.toggle('nav-toggle-active');
+            };
+            const backToTopHandler = (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            navToggle.addEventListener('click', toggleMenu);
+            document.getElementById('backToTop').addEventListener('click', backToTopHandler);
+            window.addEventListener('pagehide', () => {
+                navToggle.removeEventListener('click', toggleMenu);
+                document.getElementById('backToTop').removeEventListener('click', backToTopHandler);
+            });
+        })();
+		(() => {
+            window.addEventListener("DOMContentLoaded", (event) => {
+                const ellHljs = document.createElement("script");
+                ellHljs.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js");
+                ellHljs.onload = () => {
+                    hljs.highlightAll();
+                };
+                document.querySelector("body").append(ellHljs);
+                const ellFont = document.createElement("link");
+                ellFont.setAttribute("href", "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css");
+                ellFont.setAttribute("rel", "stylesheet");
+                document.querySelector("head").append(ellFont);
+                window.addEventListener('pagehide', () => {
+                    // ellHljs.remove();
+                    ellFont.remove();
+                });
+
+            });
+        })();
+    </script>
+    
+    
+    
+</body>
+</html>

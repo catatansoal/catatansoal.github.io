@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Upgrade Zod: Prefer Z.ZodType Over Z.Schema</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Upgrade Zod: Prefer Z.ZodType Over Z.Schema...">
+    <link rel="canonical" href="https://catatansoal.github.io/blog/upgrade-zod-prefer-z-zodtype">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Upgrade Zod: Prefer Z.ZodType Over Z.Schema">
+	<meta property="og:description" content="Upgrade Zod: Prefer Z.ZodType Over Z.Schema...">
+	<meta property="og:url" content="https://catatansoal.github.io/blog/upgrade-zod-prefer-z-zodtype">
+	<meta property="og:site_name" content="ANABEL">
+	<meta property="article:published_time" content="2025-08-05T01:04:54+00:00">
+	<meta property="article:author" content="ADMIN">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+    <link rel="preload" fetchpriority="high" as="image" href="https://tse4.mm.bing.net/th?q=Prefer%20z.ZodType%20Over%20z.Schema%3A%20A%20Simple%20Upgrade">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style type="text/css">
+    	:root{--primary-color:#3740ff;--text-color:#202124;--background-color:#ffffff;--gray-100:#f8f9fa;--gray-200:#e9ecef}*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;line-height:1.6;color:var(--text-color);background-color:var(--background-color)}.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}.header{background-color:var(--background-color);border-bottom:1px solid var(--gray-200);position:sticky;top:0;z-index:100}.nav{padding:.5rem 0}.nav-container{display:flex;justify-content:space-between;align-items:center;gap:1rem}.nav-left{display:flex;align-items:center;flex-shrink:0}.logo{font-weight:700;color:var(--primary-color)}.blog-tag{margin-left:1rem;padding:.25rem .5rem;background-color:var(--gray-100);border-radius:4px;font-size:.875rem}.nav-search{flex-grow:1;max-width:300px}.search-form{position:relative;width:100%}.search-input{width:100%;padding:.5rem 2.5rem .5rem 1rem;border:1px solid var(--gray-200);border-radius:24px;font-size:.875rem;transition:all 0.2s}.search-input:focus{outline:none;border-color:var(--primary-color);box-shadow:0 0 0 2px rgb(55 64 255 / .1)}.search-button{position:absolute;right:.5rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#5f6368;cursor:pointer;padding:.25rem;display:flex;align-items:center;justify-content:center}.search-button:hover{color:var(--primary-color)}.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:.5rem}.hamburger{display:block;position:relative;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before,.hamburger::after{content:'';position:absolute;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before{top:-6px}.hamburger::after{bottom:-6px}.nav-toggle-active .hamburger{background:#fff0}.nav-toggle-active .hamburger::before{transform:rotate(45deg);top:0}.nav-toggle-active .hamburger::after{transform:rotate(-45deg);bottom:0}.nav-list{display:flex;list-style:none;gap:2rem}.nav-link{color:var(--text-color);text-decoration:none;font-size:.9rem;transition:color 0.2s}.nav-link:hover{color:var(--primary-color)}.article-header{padding:2rem 0;background-color:var(--gray-100)}.article-layout{display:grid;grid-template-columns:1fr 350px;gap:3rem;padding:1rem 0;align-items: start}h1,h2,h3,h4,h5,h6{font-family:"Crimson Text","Times New Roman",Times,serif}h1{font-size:2.5rem;line-height:1.2;margin-bottom:1rem}.meta{color:#5f6368;font-size:.875rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}.view-count{display:inline-flex;align-items:center;gap:.25rem}.view-count svg{color:#5f6368}.content{min-width:0;border-bottom:1px solid #dddddd5e;margin-top:1rem;white-space:pre-line !important;overflow-wrap:break-word;overflow-x:auto;word-break:break-word}.lead{font-size:1.25rem;color:#5f6368;margin-bottom:2rem}h2,h3,h4,h5,h6{font-size:1.75rem;margin:1rem 0 1rem}p,pre,ol,ul>li{margin-bottom:1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;font-size:1.3rem;text-align: justify;}p>code{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px}hr{margin:1rem 0 1rem 0}.code-example{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;margin:1.5rem 0;overflow-x:auto}code{font-family:'Roboto Mono',monospace;font-size:.875rem}ul{margin:.2rem 0;padding-left:1.5rem}.related-posts{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;position:sticky;top:5rem}.related-posts-title,.newpost-posts-list{font-size:1.75rem;margin:0 0 1rem}.related-posts-list{display:flex;flex-direction:column;gap:.5rem}.related-post,.newpost-post{border-bottom:1px solid #ddd;padding-bottom:10px;margin-bottom:10px}.related-post:last-child,.newpost-post:last-child{padding-bottom:0;border-bottom:none}.related-post-title,.newpost-post-title{font-size:1.2rem;margin:0 0 .1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;}.related-post-title a,.newpost-post-title a{color:var(--text-color);text-decoration:none;transition:color 0.2s}.related-post-title a:hover,.newpost-post-title a:hover{color:var(--primary-color)}.related-post time{font-size:.875rem;color:#5f6368}.footer{background-color:var(--gray-100);padding:2rem 0;margin-top:4rem;color:#5f6368;font-size:.875rem}.nav-menu>ul>li{margin-bottom:0}@media (max-width:1024px){.container{max-width:800px}.article-layout{grid-template-columns:1fr;gap:2rem}.related-posts{position:static}}@media (max-width:768px){.nav-container{flex-wrap:wrap}.nav-search{order:3;max-width:none;width:100%;margin-top:.1rem}.nav-toggle{display:block}.nav-menu{display:none;position:absolute;top:100%;left:0;right:0;background:var(--background-color);padding:1rem 0;border-bottom:1px solid var(--gray-200)}.nav-menu-active{display:block}.nav-list{flex-direction:column;gap:.1rem;padding:0 1.5rem}.nav-link{display:block;padding:.2rem 0}h1{font-size:2rem}.article-header{padding:2rem 0}.content{padding:.1rem 0}}table{width:100%;border-collapse:collapse;margin:20px 0;font-family:'Arial',sans-serif}th,td{padding:12px 15px;text-align:left;border:1px solid #ddd}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9}tr:nth-child(even) td{background-color:#f2f2f2}@media screen and (max-width:768px){table{border:0;display:block;overflow-x:auto;white-space:nowrap}th,td{padding:10px;text-align:right}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9;border-bottom:1px solid #ddd}tr:nth-child(even) td{background-color:#f2f2f2}}a{text-decoration:none;color:#540707}.katex-html{padding: .2rem;color: #000;font-weight: 700;font-size: 1.3rem;overflow-wrap: break-word;max-width: 100%;white-space: normal !important}.category{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin:1rem 0 1rem 0}.tag{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px;font-family:"Newsreader",serif}.tag>a{text-decoration:none;color:#000}img{margin:auto;display:block;max-width:100%;height:auto;margin-bottom:1rem}.katex{white-space: pre-line !important;display: inline-block;max-width: 100%;overflow-x: auto;overflow-y: hidden;scrollbar-width: thin;overflow-wrap: break-word;word-break: break-word;vertical-align: -7px}.content > p {overflow-wrap: break-word;word-break: break-word}
+    </style>
+    <style type="text/css">
+    	pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}
+		.hljs{color:#c9d1d9;background:#0d1117}.hljs-doctag,.hljs-keyword,.hljs-meta .hljs-keyword,.hljs-template-tag,.hljs-template-variable,.hljs-type,.hljs-variable.language_{color:#ff7b72}.hljs-title,.hljs-title.class_,.hljs-title.class_.inherited__,.hljs-title.function_{color:#d2a8ff}.hljs-attr,.hljs-attribute,.hljs-literal,.hljs-meta,.hljs-number,.hljs-operator,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-variable{color:#79c0ff}.hljs-meta .hljs-string,.hljs-regexp,.hljs-string{color:#a5d6ff}.hljs-built_in,.hljs-symbol{color:#ffa657}.hljs-code,.hljs-comment,.hljs-formula{color:#8b949e}.hljs-name,.hljs-quote,.hljs-selector-pseudo,.hljs-selector-tag{color:#7ee787}.hljs-subst{color:#c9d1d9}.hljs-section{color:#1f6feb;font-weight:700}.hljs-bullet{color:#f2cc60}.hljs-emphasis{color:#c9d1d9;font-style:italic}.hljs-strong{color:#c9d1d9;font-weight:700}.hljs-addition{color:#aff5b4;background-color:#033a16}.hljs-deletion{color:#ffdcd7;background-color:#67060c}
+    	pre{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;font-weight:400;word-break:break-word;word-wrap:break-word;box-sizing:inherit;border-radius:4px;overflow-x:auto;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}code{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;word-wrap:break-word;word-break:break-word;font-style:normal;line-height:20px;letter-spacing:-.003em;box-sizing:inherit;font-weight:400;font-size:75%;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}
+    </style>
+    <style type="text/css">
+    	.back-to-top{position:fixed;bottom:20px;right:20px;background-color:#a73f3f;color:#fff;padding:8px 10px;border-radius:50%;box-shadow:0 4px 6px rgb(0 0 0 / .2);font-size:10px;font-weight:700;text-decoration:none;text-align:center;transition:opacity 0.3s ease,visibility 0.3s ease;z-index:99999;opacity:1;visibility:visible}.back-to-top:hover{background-color:#0056b3}
+    </style>
+    <style type="text/css">
+        .ad-header {margin: 1rem auto 1rem;background-color: #fdfdfd;text-align: center;display: block;}.ad-header .ad-wrapper {min-height: 90px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #555;font-weight: 500;padding: 3rem;border: 1px dashed #ccc;border-radius: 6px;}@media (max-width: 768px) {.ad-header {padding: 0.75rem;}}.ad-sidebar {margin: 0 0 1rem;background-color: #fefefe;text-align: center;padding: 0px;width: 100%;max-width: 100%;display: block;}.ad-sidebar .ad-wrapper {min-height: 250px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #444;font-weight: 500;border: 1px dashed #aaa;border-radius: 6px;padding: 0rem;}@media (max-width: 1024px) {.ad-sidebar {padding: 0.75rem;}}
+    </style>
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://catatansoal.github.io/blog/upgrade-zod-prefer-z-zodtype"
+          },
+          "headline": "Upgrade Zod: Prefer Z.ZodType Over Z.Schema",
+          "description": "Upgrade Zod: Prefer Z.ZodType Over Z.Schema...",
+          "image": [
+            "https://tse4.mm.bing.net/th?q=Prefer%20z.ZodType%20Over%20z.Schema%3A%20A%20Simple%20Upgrade"
+          ],
+          "author": {
+            "@type": "Person",
+            "name": "ADMIN",
+            "jobTitle": "Editor web"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "ANABEL",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://tse4.mm.bing.net/th?q=ANABEL%20WEB"
+            }
+          },
+          "datePublished": "2025-08-05T01:04:54+00:00",
+          "dateModified": "2025-08-05T01:04:54+00:00"
+        }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="container nav-container">
+                <div class="nav-left">
+                    <span class="logo">ANABEL</span>
+                    <span class="blog-tag">Article</span>
+                </div>
+                <div class="nav-search">
+                    <form class="search-form" role="search">
+                        <input 
+                            type="search" 
+                            class="search-input"
+                            placeholder="Search articles..."
+                            aria-label="Search articles"
+                        >
+                        <button type="submit" class="search-button" aria-label="Submit search">🔎</button>
+                    </form>
+                </div>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+                <div class="nav-menu">
+                    <ul class="nav-list">
+                    	<li><a href="/" class="nav-link">HOME</a></li>
+                        <li><a href="/pages/About" class="nav-link">About</a></li>
+                        <li><a href="/pages/Contact" class="nav-link">Contact</a></li>
+                        <li><a href="/pages/Disclaimer" class="nav-link">Disclaimer</a></li>
+                        <li><a href="/pages/Privacy" class="nav-link">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="main">
+        <article class="article">
+            <header class="article-header">
+                <div class="container">
+                    <h1>Upgrade Zod: Prefer Z.ZodType Over Z.Schema</h1>
+                    <div class="meta">
+                        <time datetime="2025-08-05T01:04:54+00:00">Aug 5, 2025</time>
+                        <span class="author">by ADMIN</span>
+                        <span class="view-count">
+                            <span id="viewCount">44</span> views
+                        </span>
+                    </div>
+                </div>
+            </header>
+            <div class="ad-header container">
+                <div class="ad-wrapper">
+    Iklan Headers
+</div>
+            </div>
+            <div class="container">
+                <div class="article-layout">
+                    <div class="content">
+                        <img src="https://tse4.mm.bing.net/th?q=Prefer%20z.ZodType%20Over%20z.Schema%3A%20A%20Simple%20Upgrade" title="Prefer z.ZodType Over z.Schema: A Simple Upgrade" width="300" height="200"/><p>Hey guys! Today, we're diving into a straightforward yet essential update in the Zod library. If you've been working with Zod for a while, you might have come across <code>z.Schema</code>. Well, it's time for a little change! The Zod team has deprecated <code>z.Schema</code>, and the recommended replacement is <code>z.ZodType</code>. Let’s explore why this shift is happening and how you can seamlessly transition your code.</p>
+<h2>Understanding the Deprecation</h2>
+<p>So, what's the deal with deprecating <code>z.Schema</code>? Deprecation, in the world of software development, means that a particular feature or component is no longer recommended for use. While it still works, it's essentially on its way out. The reason for deprecating <code>z.Schema</code> is to encourage the use of <code>z.ZodType</code>, which is considered the more modern and robust way to define schemas in Zod. This change aligns with the library's evolution and aims to provide a more consistent and maintainable API for developers. By moving to <code>z.ZodType</code>, you're future-proofing your code and ensuring compatibility with the latest updates and improvements in the Zod library. Plus, it helps keep your codebase clean and avoids any potential issues that might arise from using deprecated features. Think of it as upgrading from an old, reliable car to a newer model with all the latest features and safety enhancements – it's all about progress and improvement! Making this switch also helps in adhering to best practices and ensuring that your code remains maintainable and up-to-date.</p>
+<h2>Why z.ZodType?</h2>
+<p>Now, let’s delve into why <code>z.ZodType</code> is the preferred choice. <code>z.ZodType</code> offers several advantages over its deprecated predecessor. First and foremost, it provides a more streamlined and consistent API for defining schemas. This means that you can expect a more predictable and intuitive experience when working with Zod. Additionally, <code>z.ZodType</code> is designed to be more flexible and extensible, allowing you to create complex and customized schemas with greater ease. It also benefits from ongoing updates and improvements from the Zod team, ensuring that you always have access to the latest features and bug fixes. Furthermore, <code>z.ZodType</code> is better integrated with TypeScript, providing enhanced type safety and autocompletion, which can significantly improve your development workflow. When you use <code>z.ZodType</code>, you're not just using the recommended approach; you're also leveraging a more powerful and developer-friendly tool that can help you build robust and reliable applications. Embracing <code>z.ZodType</code> means embracing the future of Zod and taking advantage of the best the library has to offer. So, it’s not just a simple swap; it’s an upgrade to a better, more efficient way of doing things. Using <code>z.ZodType</code> ensures that your code is modern, maintainable, and aligned with the best practices in the Zod ecosystem.</p>
+<h2>Making the Switch: How to Upgrade</h2>
+<p>Alright, so how do you actually make the switch from <code>z.Schema</code> to <code>z.ZodType</code>? The good news is that it's usually a pretty straightforward swap! In most cases, you can simply replace <code>z.Schema</code> with <code>z.ZodType</code> in your code. Here’s a basic example to illustrate:</p>
+<pre><code class="hljs">// Old way (deprecated)
+import { z } from &#39;zod&#39;;
+
+const mySchema = z.Schema.object({
+  name: z.string(),
+  age: z.number(),
+});
+
+// New way (recommended)
+import { z } from &#39;zod&#39;;
+
+const mySchema = z.object({
+  name: z.string(),
+  age: z.number(),
+});
+</code></pre>
+<p>As you can see, the change is minimal. The key is to ensure that you're using the correct method for defining your schema, such as <code>z.object</code>, <code>z.string</code>, <code>z.number</code>, and so on, directly from the <code>z</code> object. In some cases, you might need to adjust your import statements or update your type definitions to reflect the change. However, for the majority of use cases, it's a simple find and replace operation. It's also a good idea to run your tests after making the switch to ensure that everything is still working as expected. If you encounter any issues, double-check your schema definitions and make sure you're using the correct Zod methods. And remember, the Zod community is always there to help if you get stuck! Switching to <code>z.ZodType</code> is a small change that can make a big difference in the long run, so don't hesitate to make the upgrade.</p>
+<h2>Addressing Potential Objections</h2>
+<p>Now, you might be wondering if there are any potential downsides or objections to making this switch. One common concern is the effort involved in updating existing codebases. While it's true that you'll need to go through your code and replace <code>z.Schema</code> with <code>z.ZodType</code>, the change is typically quite simple and can be automated using find and replace tools in your IDE. Another potential concern is compatibility with older versions of Zod. However, the Zod team has provided a smooth transition path, and <code>z.Schema</code> will likely remain available for some time to ensure backward compatibility. Nevertheless, it's always a good idea to stay up-to-date with the latest versions of Zod to take advantage of the latest features and improvements. Additionally, some developers might be hesitant to change code that is already working. However, using deprecated features can lead to issues down the road, such as compatibility problems or lack of support. By switching to <code>z.ZodType</code>, you're ensuring that your code remains maintainable and aligned with the best practices in the Zod ecosystem. Ultimately, the benefits of using <code>z.ZodType</code> outweigh any potential drawbacks, making it a worthwhile upgrade for any Zod user. So, don't let inertia hold you back – embrace the change and enjoy the benefits of a more modern and robust schema definition.</p>
+<h2>Conclusion</h2>
+<p>So, there you have it! Switching from <code>z.Schema</code> to <code>z.ZodType</code> is a simple yet important upgrade that can improve the consistency, maintainability, and future-proofing of your Zod code. While it might seem like a minor change, it reflects the ongoing evolution of the Zod library and its commitment to providing developers with the best possible tools. By making this switch, you're not just following the recommended practice; you're also investing in the long-term health and stability of your codebase. So, go ahead and make the change – you won't regret it! And remember, the Zod community is always there to support you along the way. Happy coding!</p>
+
+                    </div>
+                    <aside class="related-posts">
+                        <div class="ad-sidebar container">
+                            <div class="ad-wrapper">
+    <span>Iklan Related</span>
+</div>
+                        </div>
+                        <h2 class="related-posts-title">Related Posts</h2><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/consulting-contract-how-to-write">Consulting Contract: How To Write A Solid Agreement</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-04T03:37:45+00:00">Aug 4, 2025</time>
+		                        <span class="view-count">
+									51 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/digital-marketing-a-comprehensive-guide">Digital Marketing: A Comprehensive Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-02T17:13:46+00:00">Aug 2, 2025</time>
+		                        <span class="view-count">
+									40 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/understanding-the-exponential-function-f">Understanding The Exponential Function F(x) = 3(5/4)^x Initial Value Base Domain And Range</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-17T02:40:06+00:00">Jul 17, 2025</time>
+		                        <span class="view-count">
+									90 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/composite-functions-find-f-g">Composite Functions: Find F(g(x)) And G(f(x))</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-03T20:53:42+00:00">Aug 3, 2025</time>
+		                        <span class="view-count">
+									45 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/troubleshooting-kobotoolbox-select-multiple-from">Troubleshooting KoboToolbox Select Multiple From File Export Issues</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-20T06:48:51+00:00">Jul 20, 2025</time>
+		                        <span class="view-count">
+									67 views
+		                        </span>
+                            </div>
+                        </article>
+                    </aside>
+                    <aside class="related-posts"></aside>
+                </div>
+            </div>
+        </article>
+        <a href="#" class="back-to-top" id="backToTop" title="Back to top">
+        	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-bar-up" viewBox="0 0 16 16">
+			  <path fill-rule="evenodd" d="M3.646 11.854a.5.5 0 0 0 .708 0L8 8.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708M2.4 5.2c0 .22.18.4.4.4h10.4a.4.4 0 0 0 0-.8H2.8a.4.4 0 0 0-.4.4"/>
+			</svg>
+		</a>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 ANABEL</p>
+        </div>
+    </footer>
+    <script>
+    	(() => {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            const toggleMenu = () => {
+                navMenu.classList.toggle('nav-menu-active');
+                navToggle.classList.toggle('nav-toggle-active');
+            };
+            const backToTopHandler = (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            navToggle.addEventListener('click', toggleMenu);
+            document.getElementById('backToTop').addEventListener('click', backToTopHandler);
+            window.addEventListener('pagehide', () => {
+                navToggle.removeEventListener('click', toggleMenu);
+                document.getElementById('backToTop').removeEventListener('click', backToTopHandler);
+            });
+        })();
+		(() => {
+            window.addEventListener("DOMContentLoaded", (event) => {
+                const ellHljs = document.createElement("script");
+                ellHljs.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js");
+                ellHljs.onload = () => {
+                    hljs.highlightAll();
+                };
+                document.querySelector("body").append(ellHljs);
+                const ellFont = document.createElement("link");
+                ellFont.setAttribute("href", "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css");
+                ellFont.setAttribute("rel", "stylesheet");
+                document.querySelector("head").append(ellFont);
+                window.addEventListener('pagehide', () => {
+                    // ellHljs.remove();
+                    ellFont.remove();
+                });
+
+            });
+        })();
+    </script>
+    
+    
+    
+</body>
+</html>

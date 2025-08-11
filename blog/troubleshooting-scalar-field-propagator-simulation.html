@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Troubleshooting Scalar Field Propagator Simulation With Complex Langevin Method</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Troubleshooting Scalar Field Propagator Simulation With Complex Langevin Method...">
+    <link rel="canonical" href="https://catatansoal.github.io/blog/troubleshooting-scalar-field-propagator-simulation">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Troubleshooting Scalar Field Propagator Simulation With Complex Langevin Method">
+	<meta property="og:description" content="Troubleshooting Scalar Field Propagator Simulation With Complex Langevin Method...">
+	<meta property="og:url" content="https://catatansoal.github.io/blog/troubleshooting-scalar-field-propagator-simulation">
+	<meta property="og:site_name" content="ANABEL">
+	<meta property="article:published_time" content="2025-07-16T17:10:46+00:00">
+	<meta property="article:author" content="ADMIN">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+    <link rel="preload" fetchpriority="high" as="image" href="https://tse4.mm.bing.net/th?q=Troubleshooting%20Scalar%20Field%20Propagator%20Simulation%20with%20Complex%20Langevin%20Method">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style type="text/css">
+    	:root{--primary-color:#3740ff;--text-color:#202124;--background-color:#ffffff;--gray-100:#f8f9fa;--gray-200:#e9ecef}*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;line-height:1.6;color:var(--text-color);background-color:var(--background-color)}.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}.header{background-color:var(--background-color);border-bottom:1px solid var(--gray-200);position:sticky;top:0;z-index:100}.nav{padding:.5rem 0}.nav-container{display:flex;justify-content:space-between;align-items:center;gap:1rem}.nav-left{display:flex;align-items:center;flex-shrink:0}.logo{font-weight:700;color:var(--primary-color)}.blog-tag{margin-left:1rem;padding:.25rem .5rem;background-color:var(--gray-100);border-radius:4px;font-size:.875rem}.nav-search{flex-grow:1;max-width:300px}.search-form{position:relative;width:100%}.search-input{width:100%;padding:.5rem 2.5rem .5rem 1rem;border:1px solid var(--gray-200);border-radius:24px;font-size:.875rem;transition:all 0.2s}.search-input:focus{outline:none;border-color:var(--primary-color);box-shadow:0 0 0 2px rgb(55 64 255 / .1)}.search-button{position:absolute;right:.5rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#5f6368;cursor:pointer;padding:.25rem;display:flex;align-items:center;justify-content:center}.search-button:hover{color:var(--primary-color)}.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:.5rem}.hamburger{display:block;position:relative;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before,.hamburger::after{content:'';position:absolute;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before{top:-6px}.hamburger::after{bottom:-6px}.nav-toggle-active .hamburger{background:#fff0}.nav-toggle-active .hamburger::before{transform:rotate(45deg);top:0}.nav-toggle-active .hamburger::after{transform:rotate(-45deg);bottom:0}.nav-list{display:flex;list-style:none;gap:2rem}.nav-link{color:var(--text-color);text-decoration:none;font-size:.9rem;transition:color 0.2s}.nav-link:hover{color:var(--primary-color)}.article-header{padding:2rem 0;background-color:var(--gray-100)}.article-layout{display:grid;grid-template-columns:1fr 350px;gap:3rem;padding:1rem 0;align-items: start}h1,h2,h3,h4,h5,h6{font-family:"Crimson Text","Times New Roman",Times,serif}h1{font-size:2.5rem;line-height:1.2;margin-bottom:1rem}.meta{color:#5f6368;font-size:.875rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}.view-count{display:inline-flex;align-items:center;gap:.25rem}.view-count svg{color:#5f6368}.content{min-width:0;border-bottom:1px solid #dddddd5e;margin-top:1rem;white-space:pre-line !important;overflow-wrap:break-word;overflow-x:auto;word-break:break-word}.lead{font-size:1.25rem;color:#5f6368;margin-bottom:2rem}h2,h3,h4,h5,h6{font-size:1.75rem;margin:1rem 0 1rem}p,pre,ol,ul>li{margin-bottom:1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;font-size:1.3rem;text-align: justify;}p>code{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px}hr{margin:1rem 0 1rem 0}.code-example{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;margin:1.5rem 0;overflow-x:auto}code{font-family:'Roboto Mono',monospace;font-size:.875rem}ul{margin:.2rem 0;padding-left:1.5rem}.related-posts{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;position:sticky;top:5rem}.related-posts-title,.newpost-posts-list{font-size:1.75rem;margin:0 0 1rem}.related-posts-list{display:flex;flex-direction:column;gap:.5rem}.related-post,.newpost-post{border-bottom:1px solid #ddd;padding-bottom:10px;margin-bottom:10px}.related-post:last-child,.newpost-post:last-child{padding-bottom:0;border-bottom:none}.related-post-title,.newpost-post-title{font-size:1.2rem;margin:0 0 .1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;}.related-post-title a,.newpost-post-title a{color:var(--text-color);text-decoration:none;transition:color 0.2s}.related-post-title a:hover,.newpost-post-title a:hover{color:var(--primary-color)}.related-post time{font-size:.875rem;color:#5f6368}.footer{background-color:var(--gray-100);padding:2rem 0;margin-top:4rem;color:#5f6368;font-size:.875rem}.nav-menu>ul>li{margin-bottom:0}@media (max-width:1024px){.container{max-width:800px}.article-layout{grid-template-columns:1fr;gap:2rem}.related-posts{position:static}}@media (max-width:768px){.nav-container{flex-wrap:wrap}.nav-search{order:3;max-width:none;width:100%;margin-top:.1rem}.nav-toggle{display:block}.nav-menu{display:none;position:absolute;top:100%;left:0;right:0;background:var(--background-color);padding:1rem 0;border-bottom:1px solid var(--gray-200)}.nav-menu-active{display:block}.nav-list{flex-direction:column;gap:.1rem;padding:0 1.5rem}.nav-link{display:block;padding:.2rem 0}h1{font-size:2rem}.article-header{padding:2rem 0}.content{padding:.1rem 0}}table{width:100%;border-collapse:collapse;margin:20px 0;font-family:'Arial',sans-serif}th,td{padding:12px 15px;text-align:left;border:1px solid #ddd}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9}tr:nth-child(even) td{background-color:#f2f2f2}@media screen and (max-width:768px){table{border:0;display:block;overflow-x:auto;white-space:nowrap}th,td{padding:10px;text-align:right}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9;border-bottom:1px solid #ddd}tr:nth-child(even) td{background-color:#f2f2f2}}a{text-decoration:none;color:#540707}.katex-html{padding: .2rem;color: #000;font-weight: 700;font-size: 1.3rem;overflow-wrap: break-word;max-width: 100%;white-space: normal !important}.category{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin:1rem 0 1rem 0}.tag{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px;font-family:"Newsreader",serif}.tag>a{text-decoration:none;color:#000}img{margin:auto;display:block;max-width:100%;height:auto;margin-bottom:1rem}.katex{white-space: pre-line !important;display: inline-block;max-width: 100%;overflow-x: auto;overflow-y: hidden;scrollbar-width: thin;overflow-wrap: break-word;word-break: break-word;vertical-align: -7px}.content > p {overflow-wrap: break-word;word-break: break-word}
+    </style>
+    <style type="text/css">
+    	pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}
+		.hljs{color:#c9d1d9;background:#0d1117}.hljs-doctag,.hljs-keyword,.hljs-meta .hljs-keyword,.hljs-template-tag,.hljs-template-variable,.hljs-type,.hljs-variable.language_{color:#ff7b72}.hljs-title,.hljs-title.class_,.hljs-title.class_.inherited__,.hljs-title.function_{color:#d2a8ff}.hljs-attr,.hljs-attribute,.hljs-literal,.hljs-meta,.hljs-number,.hljs-operator,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-variable{color:#79c0ff}.hljs-meta .hljs-string,.hljs-regexp,.hljs-string{color:#a5d6ff}.hljs-built_in,.hljs-symbol{color:#ffa657}.hljs-code,.hljs-comment,.hljs-formula{color:#8b949e}.hljs-name,.hljs-quote,.hljs-selector-pseudo,.hljs-selector-tag{color:#7ee787}.hljs-subst{color:#c9d1d9}.hljs-section{color:#1f6feb;font-weight:700}.hljs-bullet{color:#f2cc60}.hljs-emphasis{color:#c9d1d9;font-style:italic}.hljs-strong{color:#c9d1d9;font-weight:700}.hljs-addition{color:#aff5b4;background-color:#033a16}.hljs-deletion{color:#ffdcd7;background-color:#67060c}
+    	pre{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;font-weight:400;word-break:break-word;word-wrap:break-word;box-sizing:inherit;border-radius:4px;overflow-x:auto;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}code{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;word-wrap:break-word;word-break:break-word;font-style:normal;line-height:20px;letter-spacing:-.003em;box-sizing:inherit;font-weight:400;font-size:75%;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}
+    </style>
+    <style type="text/css">
+    	.back-to-top{position:fixed;bottom:20px;right:20px;background-color:#a73f3f;color:#fff;padding:8px 10px;border-radius:50%;box-shadow:0 4px 6px rgb(0 0 0 / .2);font-size:10px;font-weight:700;text-decoration:none;text-align:center;transition:opacity 0.3s ease,visibility 0.3s ease;z-index:99999;opacity:1;visibility:visible}.back-to-top:hover{background-color:#0056b3}
+    </style>
+    <style type="text/css">
+        .ad-header {margin: 1rem auto 1rem;background-color: #fdfdfd;text-align: center;display: block;}.ad-header .ad-wrapper {min-height: 90px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #555;font-weight: 500;padding: 3rem;border: 1px dashed #ccc;border-radius: 6px;}@media (max-width: 768px) {.ad-header {padding: 0.75rem;}}.ad-sidebar {margin: 0 0 1rem;background-color: #fefefe;text-align: center;padding: 0px;width: 100%;max-width: 100%;display: block;}.ad-sidebar .ad-wrapper {min-height: 250px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #444;font-weight: 500;border: 1px dashed #aaa;border-radius: 6px;padding: 0rem;}@media (max-width: 1024px) {.ad-sidebar {padding: 0.75rem;}}
+    </style>
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://catatansoal.github.io/blog/troubleshooting-scalar-field-propagator-simulation"
+          },
+          "headline": "Troubleshooting Scalar Field Propagator Simulation With Complex Langevin Method",
+          "description": "Troubleshooting Scalar Field Propagator Simulation With Complex Langevin Method...",
+          "image": [
+            "https://tse4.mm.bing.net/th?q=Troubleshooting%20Scalar%20Field%20Propagator%20Simulation%20with%20Complex%20Langevin%20Method"
+          ],
+          "author": {
+            "@type": "Person",
+            "name": "ADMIN",
+            "jobTitle": "Editor web"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "ANABEL",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://tse4.mm.bing.net/th?q=ANABEL%20WEB"
+            }
+          },
+          "datePublished": "2025-07-16T17:10:46+00:00",
+          "dateModified": "2025-07-16T17:10:46+00:00"
+        }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="container nav-container">
+                <div class="nav-left">
+                    <span class="logo">ANABEL</span>
+                    <span class="blog-tag">Article</span>
+                </div>
+                <div class="nav-search">
+                    <form class="search-form" role="search">
+                        <input 
+                            type="search" 
+                            class="search-input"
+                            placeholder="Search articles..."
+                            aria-label="Search articles"
+                        >
+                        <button type="submit" class="search-button" aria-label="Submit search">🔎</button>
+                    </form>
+                </div>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+                <div class="nav-menu">
+                    <ul class="nav-list">
+                    	<li><a href="/" class="nav-link">HOME</a></li>
+                        <li><a href="/pages/About" class="nav-link">About</a></li>
+                        <li><a href="/pages/Contact" class="nav-link">Contact</a></li>
+                        <li><a href="/pages/Disclaimer" class="nav-link">Disclaimer</a></li>
+                        <li><a href="/pages/Privacy" class="nav-link">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="main">
+        <article class="article">
+            <header class="article-header">
+                <div class="container">
+                    <h1>Troubleshooting Scalar Field Propagator Simulation With Complex Langevin Method</h1>
+                    <div class="meta">
+                        <time datetime="2025-07-16T17:10:46+00:00">Jul 16, 2025</time>
+                        <span class="author">by ADMIN</span>
+                        <span class="view-count">
+                            <span id="viewCount">80</span> views
+                        </span>
+                    </div>
+                </div>
+            </header>
+            <div class="ad-header container">
+                <div class="ad-wrapper">
+    Iklan Headers
+</div>
+            </div>
+            <div class="container">
+                <div class="article-layout">
+                    <div class="content">
+                        <img src="https://tse4.mm.bing.net/th?q=Troubleshooting%20Scalar%20Field%20Propagator%20Simulation%20with%20Complex%20Langevin%20Method" title="Troubleshooting Scalar Field Propagator Simulation with Complex Langevin Method" width="300" height="200"/>
+<p>Hey guys! I'm diving deep into simulating a free scalar field in real time, and it's been quite the adventure. I'm using a discretized complex Langevin equation, specifically the Euler–Maruyama method, but I've hit a bit of a snag. I'm not getting the correct form of the scalar field propagator, and it's driving me a little crazy. Let's break down what I'm doing and see if we can figure this out together.</p>
+<h2>Understanding the Challenge</h2>
+<p>The heart of my simulation lies in this equation:</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>φ</mi><mo stretchy="false">(</mo><mi>t</mi><mo separator="true">,</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo separator="true">,</mo><mi>z</mi><msup><mo stretchy="false">)</mo><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><mo>=</mo><mi>φ</mi><mo stretchy="false">(</mo><mi>t</mi><mo separator="true">,</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo separator="true">,</mo><mi>z</mi><mo stretchy="false">)</mo><mo>+</mo><mi>i</mi><mi>d</mi><mi>τ</mi><mfrac><mrow><mi>δ</mi><mi>S</mi><mo stretchy="false">[</mo><mi>φ</mi><mo stretchy="false">(</mo><mi>t</mi><mo separator="true">,</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo separator="true">,</mo><mi>z</mi><mo stretchy="false">)</mo><mo stretchy="false">]</mo></mrow><mrow><mi>δ</mi><mi>φ</mi><mo stretchy="false">(</mo><mi>t</mi><mo separator="true">,</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo separator="true">,</mo><mi>z</mi><mo stretchy="false">)</mo></mrow></mfrac><mo>+</mo><msqrt><mrow><mi>d</mi><mi>τ</mi></mrow></msqrt><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">φ(t,x,y,z)&#x27;=φ(t,x,y,z)+idτ\frac{δS[φ(t,x,y,z)]}{δφ(t,x,y,z)}+\sqrt{dτ}...
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0519em;vertical-align:-0.25em;"></span><span class="mord mathnormal">φ</span><span class="mopen">(</span><span class="mord mathnormal">t</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.04398em;">z</span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8019em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">φ</span><span class="mopen">(</span><span class="mord mathnormal">t</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.04398em;">z</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:2.363em;vertical-align:-0.936em;"></span><span class="mord mathnormal">i</span><span class="mord mathnormal">d</span><span class="mord mathnormal" style="margin-right:0.1132em;">τ</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.427em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03785em;">δ</span><span class="mord mathnormal">φ</span><span class="mopen">(</span><span class="mord mathnormal">t</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.04398em;">z</span><span class="mclose">)</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03785em;">δ</span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mopen">[</span><span class="mord mathnormal">φ</span><span class="mopen">(</span><span class="mord mathnormal">t</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.04398em;">z</span><span class="mclose">)]</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.936em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1.04em;vertical-align:-0.0589em;"></span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9811em;"><span class="svg-align" style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord" style="padding-left:0.833em;"><span class="mord mathnormal">d</span><span class="mord mathnormal" style="margin-right:0.1132em;">τ</span></span></span><span style="top:-2.9411em;"><span class="pstrut" style="height:3em;"></span><span class="hide-tail" style="min-width:0.853em;height:1.08em;"><svg xmlns="http://www.w3.org/2000/svg" width="400em" height="1.08em" viewBox="0 0 400000 1080" preserveAspectRatio="xMinYMin slice"><path d="M95,702
+c-2.7,0,-7.17,-2.7,-13.5,-8c-5.8,-5.3,-9.5,-10,-9.5,-14
+c0,-2,0.3,-3.3,1,-4c1.3,-2.7,23.83,-20.7,67.5,-54
+c44.2,-33.3,65.8,-50.3,66.5,-51c1.3,-1.3,3,-2,5,-2c4.7,0,8.7,3.3,12,10
+s173,378,173,378c0.7,0,35.3,-71,104,-213c68.7,-142,137.5,-285,206.5,-429
+c69,-144,104.5,-217.7,106.5,-221
+l0 -0
+c5.3,-9.3,12,-14,20,-14
+H400000v40H845.2724
+s-225.272,467,-225.272,467s-235,486,-235,486c-2.7,4.7,-9,7,-19,7
+c-6,0,-10,-1,-12,-3s-194,-422,-194,-422s-65,47,-65,47z
+M834 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.0589em;"><span></span></span></span></span></span><span class="mord">...</span></span></span></span></span></p>
+<p>This equation essentially describes how the scalar field φ evolves over time. The first term, φ(t,x,y,z), is the field at the current time. The second term involves the functional derivative of the action S with respect to the field, scaled by the imaginary time step idτ. This term is crucial because it governs the deterministic evolution of the field. Finally, the “√dτ...” represents the stochastic part, which introduces random fluctuations into the system, mimicking the effects of thermal noise. This stochastic element is what makes the Langevin equation so powerful for simulating systems at finite temperatures.</p>
+<p>My goal is to simulate this equation on a computer, which means I need to discretize both space and time. I'm using a lattice to represent space, where each point (x, y, z) corresponds to a node on the lattice. Time is discretized into small steps of size dτ. The challenge is to ensure that this discretization doesn't introduce significant errors and that the simulation accurately captures the behavior of the continuous scalar field. One of the key issues I'm facing is ensuring that my numerical methods are stable and don't lead to runaway solutions. The complex Langevin method, while powerful, can be sensitive to the choice of time step and the form of the action S. If the time step is too large or the discretization of the action is not done carefully, the simulation can become unstable and produce unphysical results. This is why I'm meticulously checking my code and the parameters I'm using.</p>
+<h3>Discretization Details and the Euler-Maruyama Method</h3>
+<p>Specifically, I'm employing the <em>Euler-Maruyama</em> method to handle the time evolution. This method is a workhorse for stochastic differential equations, but it's a first-order method, meaning its accuracy is limited, especially for larger time steps. The Euler-Maruyama method is a cornerstone in computational physics for simulating stochastic processes, offering a straightforward approach to discretizing stochastic differential equations. However, its first-order nature implies that the accuracy of the simulation is directly tied to the size of the time step used. While a larger time step accelerates the computation, it can introduce significant errors, especially in systems with rapid fluctuations or complex dynamics. Therefore, selecting an appropriate time step is a crucial balancing act between computational efficiency and accuracy. To ensure the reliability of the simulation, it's often necessary to perform convergence tests, systematically reducing the time step and observing the changes in the results. If the results stabilize as the time step decreases, it provides confidence that the simulation is converging to the true solution. In the context of scalar field simulations, where the dynamics can be intricate and sensitive to small perturbations, careful consideration of the time step is paramount for obtaining meaningful and physically relevant results. Furthermore, the Euler-Maruyama method's simplicity comes with a trade-off: its stability is not guaranteed for all types of stochastic differential equations. In some cases, the method can lead to numerical instabilities, causing the simulation to diverge or produce unphysical results. This is particularly relevant in the complex Langevin method, where the introduction of complex variables can exacerbate stability issues. To mitigate these risks, it's essential to monitor the simulation for signs of instability, such as erratic fluctuations or unbounded growth of the field variables. If instability is detected, reducing the time step or exploring alternative numerical methods, such as higher-order schemes or implicit methods, may be necessary to ensure the simulation's reliability and accuracy. Choosing the right numerical method and carefully tuning its parameters are therefore critical steps in successfully simulating stochastic systems.</p>
+<h2>Diving Deeper: The Propagator Problem</h2>
+<p>The propagator, in essence, tells you how a field disturbance at one point in space and time influences the field at another point. It's a fundamental object in quantum field theory, encapsulating the dynamics of the field. The <em>propagator</em>, in the context of quantum field theory, serves as a linchpin for understanding how disturbances in a field propagate through spacetime. It quantifies the influence of a field excitation at one spacetime point on the field at another, providing a fundamental description of particle propagation and interactions. Mathematically, the propagator is the Green's function of the field's equation of motion, representing the response of the field to a localized source. Its form is intimately linked to the field's mass and interactions, encoding the essential dynamics of the quantum system. In practical terms, the propagator is a crucial ingredient in calculating scattering amplitudes and other observables in particle physics. By piecing together the propagators of various particles, physicists can construct Feynman diagrams, which visually represent the interactions between particles and allow for precise predictions of experimental outcomes. The accuracy of these predictions hinges on the correct determination of the propagator, making it a cornerstone of theoretical calculations and a vital tool for bridging the gap between theory and experiment. Moreover, the propagator's structure reveals deep insights into the nature of the field itself. Its poles, for example, correspond to the masses of the particles associated with the field, while its behavior at different energy scales provides clues about the field's interactions and renormalization properties. In condensed matter physics, analogous propagators describe the behavior of quasiparticles, such as electrons and phonons, in materials. These propagators are essential for understanding phenomena like superconductivity and magnetism, demonstrating the propagator's broad applicability across various domains of physics. Thus, the propagator is not merely a mathematical object; it's a window into the fundamental workings of quantum fields and their interactions, playing a central role in our understanding of the universe at its most basic level. Therefore, getting the propagator right is crucial for validating my simulation.</p>
+<h3>The Expected Form and My Discrepancy</h3>
+<p>For a free scalar field, I expect the propagator to have a specific form, typically involving a <em>decaying exponential or an oscillating function</em>, depending on the specific details of the theory and the chosen representation. However, what I'm seeing in my simulation doesn't quite match this expectation. The propagator, a cornerstone of quantum field theory, embodies the fundamental principles governing the propagation of particles and interactions. For a free scalar field, this propagation is characterized by a specific mathematical form, typically involving a decaying exponential or an oscillating function, depending on the chosen representation and the spacetime metric. The expected form of the propagator reflects the inherent properties of the field, such as its mass and energy, and dictates how disturbances in the field spread through space and time. In Euclidean spacetime, the propagator often takes the form of a decaying exponential, reflecting the attenuation of field disturbances over distance. In Minkowski spacetime, on the other hand, the propagator exhibits oscillatory behavior, corresponding to the propagation of particles with definite energy and momentum. Deviations from this expected form can signal a variety of issues, ranging from numerical artifacts in simulations to more profound theoretical discrepancies. In the context of a simulation, inaccuracies in the propagator can arise from discretization errors, insufficient sampling, or instabilities in the numerical methods used. These errors can distort the propagator's shape and lead to incorrect predictions about the field's behavior. Therefore, validating the propagator against its expected form is a critical step in ensuring the reliability and accuracy of any simulation. Furthermore, discrepancies between the simulated propagator and the theoretical prediction can also point to more fundamental issues with the underlying theory. For example, interactions between fields, not accounted for in the free field approximation, can significantly alter the propagator's form. Similarly, modifications to the spacetime structure or the presence of non-trivial boundary conditions can lead to deviations from the standard propagator. In such cases, a careful analysis of the discrepancies can provide valuable insights into the underlying physics and guide the development of more accurate theoretical models. Thus, the propagator serves as a powerful diagnostic tool, allowing physicists to probe the intricacies of quantum fields and their interactions and to refine our understanding of the fundamental laws of nature.</p>
+<h2>Key Areas I'm Focusing On</h2>
+<p>To tackle this issue, I'm currently focusing on a few key areas. First and foremost, I'm <strong>double-checking my code</strong> for any logical errors or bugs that might be creeping in. Even a small mistake in the implementation can lead to significant deviations in the results. The process of debugging complex simulations is often likened to searching for a needle in a haystack, requiring meticulous attention to detail and a systematic approach. A single misplaced sign, an incorrect array index, or a subtle misunderstanding of a numerical algorithm can introduce errors that propagate through the simulation and distort the results. Therefore, a thorough code review is an essential step in validating the simulation and ensuring its accuracy. This review often involves stepping through the code line by line, examining the flow of data, and verifying that each calculation is performed correctly. Unit tests, which isolate and test individual components of the code, can be particularly helpful in identifying bugs early in the development process. Additionally, comparing the simulation results to known analytical solutions or to results obtained from other simulation methods can provide valuable insights into potential errors. The use of debugging tools, such as profilers and memory checkers, can also aid in identifying performance bottlenecks and memory leaks, which can indirectly affect the simulation's accuracy. Furthermore, the complexity of modern simulation codes often necessitates collaboration among multiple developers, making code reviews a crucial aspect of team-based software development. By having other eyes examine the code, potential errors can be identified more quickly and efficiently. The iterative process of coding, testing, and debugging is fundamental to scientific computing, ensuring that simulations accurately reflect the underlying physical phenomena and provide reliable predictions. Therefore, a rigorous approach to code verification is paramount for building confidence in the simulation results and advancing scientific understanding.</p>
+<h3>Code Verification and Boundary Conditions</h3>
+<p>Second, I'm paying close attention to my <strong>discretization scheme and boundary conditions</strong>. The way I discretize the equations and handle the boundaries of my simulation space can have a significant impact on the results. The process of discretizing continuous equations and implementing boundary conditions is a critical step in transforming theoretical models into computationally tractable simulations. Discretization involves approximating continuous functions and derivatives with discrete values and finite differences, introducing inherent errors that must be carefully managed. The choice of discretization scheme, such as finite difference, finite element, or spectral methods, can significantly influence the accuracy and stability of the simulation. Higher-order schemes generally offer better accuracy but may also require more computational resources. The grid spacing or time step used in the discretization must be chosen judiciously to balance accuracy and computational cost. Too coarse a discretization can lead to significant errors, while too fine a discretization can make the simulation computationally infeasible. Boundary conditions, which specify the behavior of the field at the edges of the simulation domain, are equally important. The choice of boundary conditions must be consistent with the physical system being modeled and can significantly affect the simulation results. Common boundary conditions include Dirichlet (fixed value), Neumann (fixed derivative), and periodic boundary conditions. Incorrectly implemented boundary conditions can lead to spurious reflections or other artifacts that distort the simulation results. The interplay between discretization and boundary conditions is crucial for ensuring the stability and accuracy of the simulation. For example, certain discretization schemes may be unstable with particular boundary conditions, requiring careful consideration of the overall simulation setup. To validate the discretization and boundary condition implementation, it is often useful to perform convergence tests, systematically refining the discretization and comparing the results to analytical solutions or other simulations. This process helps to identify and quantify discretization errors and ensures that the simulation is converging to the correct solution. Furthermore, the choice of discretization and boundary conditions can impact the computational efficiency of the simulation. Some schemes may be more computationally intensive than others, while certain boundary conditions may require more complex calculations. Therefore, a careful analysis of the trade-offs between accuracy, stability, and computational cost is essential for designing an effective and reliable simulation.</p>
+<h3>Parameter Tuning and Stochastic Noise</h3>
+<p>Third, I'm carefully <strong>tuning the parameters</strong> of my simulation, such as the time step dτ and the strength of the stochastic noise. These parameters can significantly affect the stability and accuracy of the simulation. The process of tuning parameters in a simulation is a critical step in ensuring that the simulation accurately reflects the underlying physical system and produces meaningful results. Parameters such as the time step, grid spacing, and the strength of stochastic noise can significantly influence the stability, accuracy, and computational efficiency of the simulation. The time step, for example, determines the temporal resolution of the simulation and must be chosen carefully to balance accuracy and computational cost. A smaller time step generally leads to more accurate results but also increases the computational time required to simulate a given duration. The grid spacing, similarly, determines the spatial resolution of the simulation and must be fine enough to capture the relevant physical phenomena. However, a finer grid spacing also increases the number of grid points and the computational resources needed. The strength of stochastic noise, which represents random fluctuations in the system, is another crucial parameter. Too little noise may cause the simulation to get stuck in local minima, while too much noise can obscure the underlying dynamics. Tuning these parameters often involves a delicate balancing act, requiring a deep understanding of the physical system being simulated and the numerical methods being used. To guide the parameter tuning process, it is often useful to perform sensitivity analysis, systematically varying each parameter and observing its impact on the simulation results. This allows for the identification of the most influential parameters and the determination of appropriate ranges for their values. Furthermore, comparing the simulation results to known analytical solutions or experimental data can provide valuable feedback on the parameter tuning process. If the simulation results deviate significantly from expectations, it may indicate that the parameters are not properly tuned or that there are other issues with the simulation setup. The iterative process of parameter tuning, simulation, and validation is essential for building confidence in the simulation results and ensuring that they accurately reflect the physical system being modeled. Moreover, the optimal parameter values may depend on the specific problem being addressed and the desired level of accuracy. Therefore, parameter tuning is often an ongoing process, requiring careful monitoring and adjustment as the simulation evolves and new insights are gained.</p>
+<h2>Seeking Community Wisdom</h2>
+<p>I'm really hoping someone out there has encountered a similar issue and can offer some guidance. Have you guys run into problems with scalar field propagators in your simulations? What were the common pitfalls you encountered, and how did you overcome them? Any tips or suggestions would be greatly appreciated!</p>
+<h2>Specific Questions I Have</h2>
+<p>To make things a bit more concrete, here are some specific questions I have:</p>
+<ol>
+<li>Are there any common mistakes when discretizing the action or implementing the Euler-Maruyama method that could lead to an incorrect propagator?</li>
+<li>How sensitive is the complex Langevin method to the choice of time step dτ in this context? What are some good strategies for choosing an appropriate time step?</li>
+<li>Are there specific boundary conditions that are known to work well for free scalar field simulations?</li>
+<li>What diagnostics, beyond just looking at the propagator, can I use to check the validity of my simulation?</li>
+</ol>
+<p>Thanks in advance for any help you can provide! I'm really eager to get this simulation working correctly and gain a deeper understanding of scalar field dynamics.</p>
+
+                    </div>
+                    <aside class="related-posts">
+                        <div class="ad-sidebar container">
+                            <div class="ad-wrapper">
+    <span>Iklan Related</span>
+</div>
+                        </div>
+                        <h2 class="related-posts-title">Related Posts</h2><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/narrative-poetry-a-step-by">Narrative Poetry: A Step-by-Step Writing Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-04T11:16:54+00:00">Aug 4, 2025</time>
+		                        <span class="view-count">
+									46 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/hamster-dehydration-how-to-spot">Hamster Dehydration: How To Spot &amp; Treat It</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-08T09:10:51+00:00">Aug 8, 2025</time>
+		                        <span class="view-count">
+									43 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/cockatoo-care-a-guide-to">Cockatoo Care: A Guide To Happy, Healthy Birds</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-05T00:26:11+00:00">Aug 5, 2025</time>
+		                        <span class="view-count">
+									46 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/how-to-report-cybercrime-a">How To Report Cybercrime: A Comprehensive Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-02T23:12:48+00:00">Aug 2, 2025</time>
+		                        <span class="view-count">
+									47 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/solving-quadratic-equations-2x2-6x">Solving Quadratic Equations $2x^2 + 6x + 13 = 0$ Using The Quadratic Formula A Step-by-Step Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-14T05:07:53+00:00">Jul 14, 2025</time>
+		                        <span class="view-count">
+									97 views
+		                        </span>
+                            </div>
+                        </article>
+                    </aside>
+                    <aside class="related-posts"></aside>
+                </div>
+            </div>
+        </article>
+        <a href="#" class="back-to-top" id="backToTop" title="Back to top">
+        	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-bar-up" viewBox="0 0 16 16">
+			  <path fill-rule="evenodd" d="M3.646 11.854a.5.5 0 0 0 .708 0L8 8.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708M2.4 5.2c0 .22.18.4.4.4h10.4a.4.4 0 0 0 0-.8H2.8a.4.4 0 0 0-.4.4"/>
+			</svg>
+		</a>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 ANABEL</p>
+        </div>
+    </footer>
+    <script>
+    	(() => {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            const toggleMenu = () => {
+                navMenu.classList.toggle('nav-menu-active');
+                navToggle.classList.toggle('nav-toggle-active');
+            };
+            const backToTopHandler = (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            navToggle.addEventListener('click', toggleMenu);
+            document.getElementById('backToTop').addEventListener('click', backToTopHandler);
+            window.addEventListener('pagehide', () => {
+                navToggle.removeEventListener('click', toggleMenu);
+                document.getElementById('backToTop').removeEventListener('click', backToTopHandler);
+            });
+        })();
+		(() => {
+            window.addEventListener("DOMContentLoaded", (event) => {
+                const ellHljs = document.createElement("script");
+                ellHljs.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js");
+                ellHljs.onload = () => {
+                    hljs.highlightAll();
+                };
+                document.querySelector("body").append(ellHljs);
+                const ellFont = document.createElement("link");
+                ellFont.setAttribute("href", "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css");
+                ellFont.setAttribute("rel", "stylesheet");
+                document.querySelector("head").append(ellFont);
+                window.addEventListener('pagehide', () => {
+                    // ellHljs.remove();
+                    ellFont.remove();
+                });
+
+            });
+        })();
+    </script>
+    
+    
+    
+</body>
+</html>

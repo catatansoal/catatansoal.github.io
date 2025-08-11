@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>R2DBC Resource Leak After Spring Boot Upgrade: A Fix</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="R2DBC Resource Leak After Spring Boot Upgrade: A Fix...">
+    <link rel="canonical" href="https://catatansoal.github.io/blog/r2dbc-resource-leak-after-spring">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="R2DBC Resource Leak After Spring Boot Upgrade: A Fix">
+	<meta property="og:description" content="R2DBC Resource Leak After Spring Boot Upgrade: A Fix...">
+	<meta property="og:url" content="https://catatansoal.github.io/blog/r2dbc-resource-leak-after-spring">
+	<meta property="og:site_name" content="ANABEL">
+	<meta property="article:published_time" content="2025-08-08T13:56:57+00:00">
+	<meta property="article:author" content="ADMIN">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+    <link rel="preload" fetchpriority="high" as="image" href="https://tse4.mm.bing.net/th?q=Resource%20Leak%20in%20R2DBC%20After%20Spring%20Boot%20Upgrade">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style type="text/css">
+    	:root{--primary-color:#3740ff;--text-color:#202124;--background-color:#ffffff;--gray-100:#f8f9fa;--gray-200:#e9ecef}*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;line-height:1.6;color:var(--text-color);background-color:var(--background-color)}.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}.header{background-color:var(--background-color);border-bottom:1px solid var(--gray-200);position:sticky;top:0;z-index:100}.nav{padding:.5rem 0}.nav-container{display:flex;justify-content:space-between;align-items:center;gap:1rem}.nav-left{display:flex;align-items:center;flex-shrink:0}.logo{font-weight:700;color:var(--primary-color)}.blog-tag{margin-left:1rem;padding:.25rem .5rem;background-color:var(--gray-100);border-radius:4px;font-size:.875rem}.nav-search{flex-grow:1;max-width:300px}.search-form{position:relative;width:100%}.search-input{width:100%;padding:.5rem 2.5rem .5rem 1rem;border:1px solid var(--gray-200);border-radius:24px;font-size:.875rem;transition:all 0.2s}.search-input:focus{outline:none;border-color:var(--primary-color);box-shadow:0 0 0 2px rgb(55 64 255 / .1)}.search-button{position:absolute;right:.5rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#5f6368;cursor:pointer;padding:.25rem;display:flex;align-items:center;justify-content:center}.search-button:hover{color:var(--primary-color)}.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:.5rem}.hamburger{display:block;position:relative;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before,.hamburger::after{content:'';position:absolute;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before{top:-6px}.hamburger::after{bottom:-6px}.nav-toggle-active .hamburger{background:#fff0}.nav-toggle-active .hamburger::before{transform:rotate(45deg);top:0}.nav-toggle-active .hamburger::after{transform:rotate(-45deg);bottom:0}.nav-list{display:flex;list-style:none;gap:2rem}.nav-link{color:var(--text-color);text-decoration:none;font-size:.9rem;transition:color 0.2s}.nav-link:hover{color:var(--primary-color)}.article-header{padding:2rem 0;background-color:var(--gray-100)}.article-layout{display:grid;grid-template-columns:1fr 350px;gap:3rem;padding:1rem 0;align-items: start}h1,h2,h3,h4,h5,h6{font-family:"Crimson Text","Times New Roman",Times,serif}h1{font-size:2.5rem;line-height:1.2;margin-bottom:1rem}.meta{color:#5f6368;font-size:.875rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}.view-count{display:inline-flex;align-items:center;gap:.25rem}.view-count svg{color:#5f6368}.content{min-width:0;border-bottom:1px solid #dddddd5e;margin-top:1rem;white-space:pre-line !important;overflow-wrap:break-word;overflow-x:auto;word-break:break-word}.lead{font-size:1.25rem;color:#5f6368;margin-bottom:2rem}h2,h3,h4,h5,h6{font-size:1.75rem;margin:1rem 0 1rem}p,pre,ol,ul>li{margin-bottom:1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;font-size:1.3rem;text-align: justify;}p>code{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px}hr{margin:1rem 0 1rem 0}.code-example{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;margin:1.5rem 0;overflow-x:auto}code{font-family:'Roboto Mono',monospace;font-size:.875rem}ul{margin:.2rem 0;padding-left:1.5rem}.related-posts{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;position:sticky;top:5rem}.related-posts-title,.newpost-posts-list{font-size:1.75rem;margin:0 0 1rem}.related-posts-list{display:flex;flex-direction:column;gap:.5rem}.related-post,.newpost-post{border-bottom:1px solid #ddd;padding-bottom:10px;margin-bottom:10px}.related-post:last-child,.newpost-post:last-child{padding-bottom:0;border-bottom:none}.related-post-title,.newpost-post-title{font-size:1.2rem;margin:0 0 .1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;}.related-post-title a,.newpost-post-title a{color:var(--text-color);text-decoration:none;transition:color 0.2s}.related-post-title a:hover,.newpost-post-title a:hover{color:var(--primary-color)}.related-post time{font-size:.875rem;color:#5f6368}.footer{background-color:var(--gray-100);padding:2rem 0;margin-top:4rem;color:#5f6368;font-size:.875rem}.nav-menu>ul>li{margin-bottom:0}@media (max-width:1024px){.container{max-width:800px}.article-layout{grid-template-columns:1fr;gap:2rem}.related-posts{position:static}}@media (max-width:768px){.nav-container{flex-wrap:wrap}.nav-search{order:3;max-width:none;width:100%;margin-top:.1rem}.nav-toggle{display:block}.nav-menu{display:none;position:absolute;top:100%;left:0;right:0;background:var(--background-color);padding:1rem 0;border-bottom:1px solid var(--gray-200)}.nav-menu-active{display:block}.nav-list{flex-direction:column;gap:.1rem;padding:0 1.5rem}.nav-link{display:block;padding:.2rem 0}h1{font-size:2rem}.article-header{padding:2rem 0}.content{padding:.1rem 0}}table{width:100%;border-collapse:collapse;margin:20px 0;font-family:'Arial',sans-serif}th,td{padding:12px 15px;text-align:left;border:1px solid #ddd}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9}tr:nth-child(even) td{background-color:#f2f2f2}@media screen and (max-width:768px){table{border:0;display:block;overflow-x:auto;white-space:nowrap}th,td{padding:10px;text-align:right}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9;border-bottom:1px solid #ddd}tr:nth-child(even) td{background-color:#f2f2f2}}a{text-decoration:none;color:#540707}.katex-html{padding: .2rem;color: #000;font-weight: 700;font-size: 1.3rem;overflow-wrap: break-word;max-width: 100%;white-space: normal !important}.category{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin:1rem 0 1rem 0}.tag{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px;font-family:"Newsreader",serif}.tag>a{text-decoration:none;color:#000}img{margin:auto;display:block;max-width:100%;height:auto;margin-bottom:1rem}.katex{white-space: pre-line !important;display: inline-block;max-width: 100%;overflow-x: auto;overflow-y: hidden;scrollbar-width: thin;overflow-wrap: break-word;word-break: break-word;vertical-align: -7px}.content > p {overflow-wrap: break-word;word-break: break-word}
+    </style>
+    <style type="text/css">
+    	pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}
+		.hljs{color:#c9d1d9;background:#0d1117}.hljs-doctag,.hljs-keyword,.hljs-meta .hljs-keyword,.hljs-template-tag,.hljs-template-variable,.hljs-type,.hljs-variable.language_{color:#ff7b72}.hljs-title,.hljs-title.class_,.hljs-title.class_.inherited__,.hljs-title.function_{color:#d2a8ff}.hljs-attr,.hljs-attribute,.hljs-literal,.hljs-meta,.hljs-number,.hljs-operator,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-variable{color:#79c0ff}.hljs-meta .hljs-string,.hljs-regexp,.hljs-string{color:#a5d6ff}.hljs-built_in,.hljs-symbol{color:#ffa657}.hljs-code,.hljs-comment,.hljs-formula{color:#8b949e}.hljs-name,.hljs-quote,.hljs-selector-pseudo,.hljs-selector-tag{color:#7ee787}.hljs-subst{color:#c9d1d9}.hljs-section{color:#1f6feb;font-weight:700}.hljs-bullet{color:#f2cc60}.hljs-emphasis{color:#c9d1d9;font-style:italic}.hljs-strong{color:#c9d1d9;font-weight:700}.hljs-addition{color:#aff5b4;background-color:#033a16}.hljs-deletion{color:#ffdcd7;background-color:#67060c}
+    	pre{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;font-weight:400;word-break:break-word;word-wrap:break-word;box-sizing:inherit;border-radius:4px;overflow-x:auto;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}code{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;word-wrap:break-word;word-break:break-word;font-style:normal;line-height:20px;letter-spacing:-.003em;box-sizing:inherit;font-weight:400;font-size:75%;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}
+    </style>
+    <style type="text/css">
+    	.back-to-top{position:fixed;bottom:20px;right:20px;background-color:#a73f3f;color:#fff;padding:8px 10px;border-radius:50%;box-shadow:0 4px 6px rgb(0 0 0 / .2);font-size:10px;font-weight:700;text-decoration:none;text-align:center;transition:opacity 0.3s ease,visibility 0.3s ease;z-index:99999;opacity:1;visibility:visible}.back-to-top:hover{background-color:#0056b3}
+    </style>
+    <style type="text/css">
+        .ad-header {margin: 1rem auto 1rem;background-color: #fdfdfd;text-align: center;display: block;}.ad-header .ad-wrapper {min-height: 90px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #555;font-weight: 500;padding: 3rem;border: 1px dashed #ccc;border-radius: 6px;}@media (max-width: 768px) {.ad-header {padding: 0.75rem;}}.ad-sidebar {margin: 0 0 1rem;background-color: #fefefe;text-align: center;padding: 0px;width: 100%;max-width: 100%;display: block;}.ad-sidebar .ad-wrapper {min-height: 250px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #444;font-weight: 500;border: 1px dashed #aaa;border-radius: 6px;padding: 0rem;}@media (max-width: 1024px) {.ad-sidebar {padding: 0.75rem;}}
+    </style>
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://catatansoal.github.io/blog/r2dbc-resource-leak-after-spring"
+          },
+          "headline": "R2DBC Resource Leak After Spring Boot Upgrade: A Fix",
+          "description": "R2DBC Resource Leak After Spring Boot Upgrade: A Fix...",
+          "image": [
+            "https://tse4.mm.bing.net/th?q=Resource%20Leak%20in%20R2DBC%20After%20Spring%20Boot%20Upgrade"
+          ],
+          "author": {
+            "@type": "Person",
+            "name": "ADMIN",
+            "jobTitle": "Editor web"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "ANABEL",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://tse4.mm.bing.net/th?q=ANABEL%20WEB"
+            }
+          },
+          "datePublished": "2025-08-08T13:56:57+00:00",
+          "dateModified": "2025-08-08T13:56:57+00:00"
+        }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="container nav-container">
+                <div class="nav-left">
+                    <span class="logo">ANABEL</span>
+                    <span class="blog-tag">Article</span>
+                </div>
+                <div class="nav-search">
+                    <form class="search-form" role="search">
+                        <input 
+                            type="search" 
+                            class="search-input"
+                            placeholder="Search articles..."
+                            aria-label="Search articles"
+                        >
+                        <button type="submit" class="search-button" aria-label="Submit search">🔎</button>
+                    </form>
+                </div>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+                <div class="nav-menu">
+                    <ul class="nav-list">
+                    	<li><a href="/" class="nav-link">HOME</a></li>
+                        <li><a href="/pages/About" class="nav-link">About</a></li>
+                        <li><a href="/pages/Contact" class="nav-link">Contact</a></li>
+                        <li><a href="/pages/Disclaimer" class="nav-link">Disclaimer</a></li>
+                        <li><a href="/pages/Privacy" class="nav-link">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="main">
+        <article class="article">
+            <header class="article-header">
+                <div class="container">
+                    <h1>R2DBC Resource Leak After Spring Boot Upgrade: A Fix</h1>
+                    <div class="meta">
+                        <time datetime="2025-08-08T13:56:57+00:00">Aug 8, 2025</time>
+                        <span class="author">by ADMIN</span>
+                        <span class="view-count">
+                            <span id="viewCount">53</span> views
+                        </span>
+                    </div>
+                </div>
+            </header>
+            <div class="ad-header container">
+                <div class="ad-wrapper">
+    Iklan Headers
+</div>
+            </div>
+            <div class="container">
+                <div class="article-layout">
+                    <div class="content">
+                        <img src="https://tse4.mm.bing.net/th?q=Resource%20Leak%20in%20R2DBC%20After%20Spring%20Boot%20Upgrade" title="Resource Leak in R2DBC After Spring Boot Upgrade" width="300" height="200"/><h2>Introduction</h2>
+<p>Hey guys! We recently ran into a tricky situation after upgrading our Spring Boot project. We moved from Spring Boot 3.1.3 to 3.4.3 and suddenly started seeing resource leaks in our R2DBC (Reactive Relational Database Connectivity) setup. This was something completely new to us, and we spent quite a bit of time digging into it. So, I thought I’d share our experience, the problem we faced, how we troubleshooted it, and the solution we found. Hopefully, this will help anyone else encountering similar issues after a Spring Boot upgrade.</p>
+<p>In this article, we’ll dive deep into the specifics of the resource leak we encountered, focusing on our <code>findAll()</code> method, which returns a <code>Flux</code> of a custom type called <code>Platz</code>. We'll explore the nuances of R2DBC, Netty (which R2DBC often uses under the hood), and how Spring Boot’s upgrades might influence these interactions. The goal is to equip you with the knowledge to identify, troubleshoot, and resolve similar resource leaks in your own reactive applications. We’ll cover practical debugging steps, potential configuration adjustments, and best practices for managing resources in reactive systems. Let's get started!</p>
+<h2>The Problem: Resource Leaks After Upgrade</h2>
+<p>So, the main issue we faced was a resource leak that surfaced immediately after upgrading our Spring Boot project. Everything seemed fine before the upgrade, but after moving to version 3.4.3, our application started exhibiting some strange behavior. The <strong><code>resource leak</code></strong> was specifically tied to our R2DBC interactions, and we quickly realized something was up when our application's performance started to degrade over time. Resource leaks, if left unaddressed, can lead to serious issues, including memory exhaustion and eventually application crashes. For those new to the term, a resource leak happens when a program fails to release resources it has acquired, such as database connections, memory, or file handles. In our case, the leak was related to database connections managed by R2DBC.</p>
+<p>We have a method, <code>findAll()</code>, which is crucial for retrieving data from our database. This method returns a <code>Flux</code> of type <code>Platz</code>. If you're not familiar with <code>Flux</code>, it's a reactive type from Project Reactor, used to represent an asynchronous sequence of zero or more items. Think of it as a stream of data flowing over time. The <code>findAll()</code> method is central to many parts of our application, so any issue with it would have widespread impact. The fact that it returned a <code>Flux</code> meant we were dealing with a potentially unbounded stream of data, which could exacerbate any resource management issues. We initially suspected that the problem was related to how these streams were being handled after the upgrade.</p>
+<p>What made this issue particularly challenging was that it didn't manifest as an immediate error. Instead, the leak gradually accumulated, making it harder to pinpoint the exact cause. We noticed the application’s memory usage slowly climbing, and the number of open database connections steadily increasing. This slow burn made it difficult to trace the root cause, and we had to employ some detective work to figure out what was going on. The upgrade to Spring Boot 3.4.3 brought in several updates and dependency changes, which meant there were many potential culprits. We knew we had to systematically investigate each possibility to isolate the problem.</p>
+<h2>Digging Deeper: Understanding the findAll() Method and Flux</h2>
+<p>To really get to the bottom of this, we needed to dissect our <code>findAll()</code> method and the way it interacts with R2DBC and <code>Flux</code>. The <strong><code>findAll()</code> method</strong> is designed to fetch all instances of <code>Platz</code> from our database. As mentioned earlier, it returns a <code>Flux&lt;Platz&gt;</code>, which means it emits a stream of <code>Platz</code> objects asynchronously. This is a common pattern in reactive programming, allowing us to handle large datasets efficiently without blocking the main thread. However, it also introduces some complexity in terms of resource management.</p>
+<p>The beauty of using <code>Flux</code> is that it allows us to process data as it becomes available, rather than loading everything into memory at once. This is particularly useful when dealing with large datasets or streaming data. However, the responsibility falls on us to ensure that these streams are properly managed. Each subscription to a <code>Flux</code> can potentially open up a new connection or resource, and if these subscriptions aren't properly closed or cancelled, we end up with a resource leak. Think of it like leaving a tap running – eventually, the water will overflow.</p>
+<p>In our case, the <strong><code>Flux&lt;Platz&gt;</code></strong> was being generated by R2DBC, which uses a reactive database driver to interact with the database. R2DBC itself relies on non-blocking I/O and connection pooling to manage database resources efficiently. This means that behind the scenes, R2DBC is managing a pool of connections and distributing them as needed. However, if our application doesn’t properly consume and close the streams returned by R2DBC, connections can be left open, leading to the resource leak we observed. We had to carefully examine how we were subscribing to the <code>Flux</code> and whether we were handling the completion and error signals correctly. Were we cancelling subscriptions when they were no longer needed? Were we ensuring that all resources were released when the stream completed or errored out? These were the questions we needed to answer.</p>
+<h2>Troubleshooting Steps: Identifying the Leak</h2>
+<p>When we realized we had a <strong><code>resource leak</code></strong>, the first step was to pinpoint where it was occurring. We approached this systematically, using a combination of monitoring tools and debugging techniques. It's kind of like being a detective, piecing together clues to solve the mystery. The initial symptoms were high memory usage and an increasing number of open database connections, but we needed more granular information to isolate the problem.</p>
+<p>We started by setting up monitoring for our application. We used tools like Prometheus and Grafana to track metrics such as memory usage, CPU utilization, and the number of active database connections. These tools gave us a bird's-eye view of the application's health and allowed us to see the gradual increase in resource consumption over time. This confirmed that the leak was indeed happening and gave us a baseline to measure our progress as we tried different solutions.</p>
+<p>Next, we delved into debugging. We used the debugger in our IDE to step through the code in the <code>findAll()</code> method and the surrounding areas. We paid close attention to how the <code>Flux&lt;Platz&gt;</code> was being created, subscribed to, and consumed. We wanted to see if there were any obvious places where resources were being acquired but not released. We also used logging extensively, adding log statements at various points in the code to track the lifecycle of the <code>Flux</code>. This helped us understand when the stream was being subscribed to, when data was being emitted, and when the stream was being completed or cancelled.</p>
+<p>One particularly useful technique was to enable Netty's resource leak detection. Netty is a network application framework that R2DBC often uses under the hood for handling network connections. Netty has built-in capabilities to detect resource leaks, which can provide valuable insights into where resources are not being properly released. By enabling this feature, we were able to get more detailed information about the types of resources being leaked and the stack traces associated with their allocation. This helped us narrow down the search and focus on specific areas of the code.</p>
+<h2>The Culprit: Unclosed Resources in Reactive Streams</h2>
+<p>After thorough investigation, we finally identified the culprit behind the resource leak. The <strong><code>unclosed resources</code></strong> were in our reactive streams. Specifically, we found that in certain scenarios, the subscriptions to our <code>Flux&lt;Platz&gt;</code> were not being properly closed or cancelled. This meant that the underlying database connections were being held open, even after the data had been processed. It was like leaving the door open after you’ve left the room, letting the heat escape.</p>
+<p>The problem wasn't immediately obvious because reactive streams are designed to handle asynchronous data in a non-blocking manner. This means that operations happen in the background, and it's easy to lose track of the lifecycle of a stream. In our case, we had several components subscribing to the <code>Flux&lt;Platz&gt;</code>, and in some code paths, the subscription was not being disposed of when it was no longer needed. This typically happened when error conditions occurred or when the stream was prematurely terminated.</p>
+<p>To understand this better, let's delve into how reactive streams work. When you subscribe to a <code>Flux</code>, you're essentially creating a pipeline for data to flow through. This pipeline includes the source of the data (in our case, the R2DBC query), any intermediate operations (like filtering or mapping), and the final consumer of the data. Each step in this pipeline can allocate resources, such as database connections or memory buffers. If any of these steps fail to release their resources, a leak occurs. The key to preventing leaks is to ensure that the entire pipeline is properly cleaned up when the stream is completed, errors out, or is cancelled.</p>
+<p>We discovered that we were missing proper error handling and cancellation logic in some parts of our code. For example, if an exception occurred while processing the data in the <code>Flux</code>, the subscription would not be cancelled, and the database connection would remain open. Similarly, if a component unsubscribed from the <code>Flux</code> before it had completed, the resources might not be released. These seemingly small omissions added up over time, leading to the resource leak we observed. We needed to revise our code to ensure that all subscriptions were properly managed, with appropriate error handling and cancellation mechanisms in place.</p>
+<h2>The Solution: Proper Subscription Management and Error Handling</h2>
+<p>Once we identified that the <strong><code>solution</code></strong> revolved around properly managing subscriptions and handling errors in our reactive streams, we set about implementing the necessary changes. It was like tightening up the plumbing in our application to prevent any further leaks. The core of the solution involved ensuring that every subscription to a <code>Flux&lt;Platz&gt;</code> was correctly disposed of when it was no longer needed, regardless of whether the stream completed successfully, errored out, or was cancelled.</p>
+<p>We started by revisiting our code and adding explicit cancellation logic. In Project Reactor, subscriptions can be cancelled using the <code>Disposable</code> interface. When you subscribe to a <code>Flux</code>, you get a <code>Disposable</code> object that represents the subscription. You can call the <code>dispose()</code> method on this object to cancel the subscription and release any associated resources. We made sure that in every place where we subscribed to the <code>Flux&lt;Platz&gt;</code>, we kept a reference to the <code>Disposable</code> and called <code>dispose()</code> when the subscription was no longer needed. This was particularly important in components that had a lifecycle, such as Spring beans. We used lifecycle callbacks (like <code>@PreDestroy</code> in Spring) to ensure that subscriptions were cancelled when the component was being destroyed.</p>
+<p>Error handling was another critical aspect of our solution. We added more robust error handling to our reactive streams using operators like <code>onErrorResume</code> and <code>doOnError</code>. These operators allow you to handle errors gracefully without breaking the stream. For example, <code>onErrorResume</code> allows you to catch an exception and return a fallback <code>Flux</code>, while <code>doOnError</code> allows you to perform side effects (like logging) when an error occurs. By using these operators, we were able to ensure that errors were properly handled and that subscriptions were always cancelled, even in the face of exceptions. We also added more comprehensive logging to our error handling paths, so we could quickly identify and diagnose any future issues.</p>
+<p>In addition to these changes, we reviewed our use of backpressure. Backpressure is a mechanism in reactive streams that allows consumers to signal to producers how much data they are willing to receive. If a consumer is overwhelmed with data, it can signal to the producer to slow down or buffer the data. By properly managing backpressure, we could prevent situations where the consumer was overwhelmed and resources were being held open indefinitely. We used operators like <code>limitRate</code> and <code>onBackpressureBuffer</code> to control the flow of data in our streams and ensure that resources were being used efficiently. This comprehensive approach to subscription management and error handling effectively plugged the resource leak in our application.</p>
+<h2>Conclusion</h2>
+<p>So, that’s the story of how we tackled a resource leak in our R2DBC setup after upgrading to Spring Boot 3.4.3. It was a challenging issue, but by systematically investigating the problem, understanding the intricacies of reactive streams, and implementing proper subscription management and error handling, we were able to resolve it. The key takeaways here are to always be mindful of resource management in reactive applications, to ensure that subscriptions are properly disposed of, and to handle errors gracefully. Monitoring your application and enabling resource leak detection can also be invaluable tools in identifying and addressing these kinds of issues.</p>
+<p>I hope this experience helps anyone else facing similar problems. Upgrading can sometimes bring unexpected challenges, but with a methodical approach and a good understanding of the underlying technologies, you can overcome them. Happy coding, guys!</p>
+
+                    </div>
+                    <aside class="related-posts">
+                        <div class="ad-sidebar container">
+                            <div class="ad-wrapper">
+    <span>Iklan Related</span>
+</div>
+                        </div>
+                        <h2 class="related-posts-title">Related Posts</h2><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/multicharacter-search-aliases-a-surfingkeys">Multicharacter Search Aliases A Surfingkeys Feature Request</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-13T19:50:27+00:00">Jul 13, 2025</time>
+		                        <span class="view-count">
+									59 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/brewing-authentic-turkish-tea-a">Brewing Authentic Turkish Tea: A Complete Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-07T17:59:37+00:00">Aug 7, 2025</time>
+		                        <span class="view-count">
+									47 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/add-admin-template-to-todolist">Add Admin Template To Todolist-FastAPI: A Step-by-Step Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-02T14:22:44+00:00">Aug 2, 2025</time>
+		                        <span class="view-count">
+									60 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/erdos-straus-conjecture-uncovering-hidden">Erdős–Straus Conjecture: Uncovering Hidden Patterns In Unit Fractions</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-11T08:08:50+00:00">Aug 11, 2025</time>
+		                        <span class="view-count">
+									69 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/unlocking-the-mystery-of-series">Unlocking The Mystery Of Series The $3r^2$, Fth Term, And 1st Lems Sum</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-13T20:08:31+00:00">Jul 13, 2025</time>
+		                        <span class="view-count">
+									70 views
+		                        </span>
+                            </div>
+                        </article>
+                    </aside>
+                    <aside class="related-posts"></aside>
+                </div>
+            </div>
+        </article>
+        <a href="#" class="back-to-top" id="backToTop" title="Back to top">
+        	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-bar-up" viewBox="0 0 16 16">
+			  <path fill-rule="evenodd" d="M3.646 11.854a.5.5 0 0 0 .708 0L8 8.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708M2.4 5.2c0 .22.18.4.4.4h10.4a.4.4 0 0 0 0-.8H2.8a.4.4 0 0 0-.4.4"/>
+			</svg>
+		</a>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 ANABEL</p>
+        </div>
+    </footer>
+    <script>
+    	(() => {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            const toggleMenu = () => {
+                navMenu.classList.toggle('nav-menu-active');
+                navToggle.classList.toggle('nav-toggle-active');
+            };
+            const backToTopHandler = (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            navToggle.addEventListener('click', toggleMenu);
+            document.getElementById('backToTop').addEventListener('click', backToTopHandler);
+            window.addEventListener('pagehide', () => {
+                navToggle.removeEventListener('click', toggleMenu);
+                document.getElementById('backToTop').removeEventListener('click', backToTopHandler);
+            });
+        })();
+		(() => {
+            window.addEventListener("DOMContentLoaded", (event) => {
+                const ellHljs = document.createElement("script");
+                ellHljs.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js");
+                ellHljs.onload = () => {
+                    hljs.highlightAll();
+                };
+                document.querySelector("body").append(ellHljs);
+                const ellFont = document.createElement("link");
+                ellFont.setAttribute("href", "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css");
+                ellFont.setAttribute("rel", "stylesheet");
+                document.querySelector("head").append(ellFont);
+                window.addEventListener('pagehide', () => {
+                    // ellHljs.remove();
+                    ellFont.remove();
+                });
+
+            });
+        })();
+    </script>
+    
+    
+    
+</body>
+</html>

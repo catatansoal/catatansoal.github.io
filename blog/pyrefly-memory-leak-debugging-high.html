@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>PyreFly Memory Leak: Debugging High Usage In VS Code</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="PyreFly Memory Leak: Debugging High Usage In VS Code...">
+    <link rel="canonical" href="https://catatansoal.github.io/blog/pyrefly-memory-leak-debugging-high">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="PyreFly Memory Leak: Debugging High Usage In VS Code">
+	<meta property="og:description" content="PyreFly Memory Leak: Debugging High Usage In VS Code...">
+	<meta property="og:url" content="https://catatansoal.github.io/blog/pyrefly-memory-leak-debugging-high">
+	<meta property="og:site_name" content="ANABEL">
+	<meta property="article:published_time" content="2025-08-05T20:01:14+00:00">
+	<meta property="article:author" content="ADMIN">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+    <link rel="preload" fetchpriority="high" as="image" href="https://tse4.mm.bing.net/th?q=PyreFly%20Memory%20Hog%3A%20Debugging%20Excessive%20Memory%20Usage%20in%20VS%20Code">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style type="text/css">
+    	:root{--primary-color:#3740ff;--text-color:#202124;--background-color:#ffffff;--gray-100:#f8f9fa;--gray-200:#e9ecef}*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;line-height:1.6;color:var(--text-color);background-color:var(--background-color)}.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}.header{background-color:var(--background-color);border-bottom:1px solid var(--gray-200);position:sticky;top:0;z-index:100}.nav{padding:.5rem 0}.nav-container{display:flex;justify-content:space-between;align-items:center;gap:1rem}.nav-left{display:flex;align-items:center;flex-shrink:0}.logo{font-weight:700;color:var(--primary-color)}.blog-tag{margin-left:1rem;padding:.25rem .5rem;background-color:var(--gray-100);border-radius:4px;font-size:.875rem}.nav-search{flex-grow:1;max-width:300px}.search-form{position:relative;width:100%}.search-input{width:100%;padding:.5rem 2.5rem .5rem 1rem;border:1px solid var(--gray-200);border-radius:24px;font-size:.875rem;transition:all 0.2s}.search-input:focus{outline:none;border-color:var(--primary-color);box-shadow:0 0 0 2px rgb(55 64 255 / .1)}.search-button{position:absolute;right:.5rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#5f6368;cursor:pointer;padding:.25rem;display:flex;align-items:center;justify-content:center}.search-button:hover{color:var(--primary-color)}.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:.5rem}.hamburger{display:block;position:relative;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before,.hamburger::after{content:'';position:absolute;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before{top:-6px}.hamburger::after{bottom:-6px}.nav-toggle-active .hamburger{background:#fff0}.nav-toggle-active .hamburger::before{transform:rotate(45deg);top:0}.nav-toggle-active .hamburger::after{transform:rotate(-45deg);bottom:0}.nav-list{display:flex;list-style:none;gap:2rem}.nav-link{color:var(--text-color);text-decoration:none;font-size:.9rem;transition:color 0.2s}.nav-link:hover{color:var(--primary-color)}.article-header{padding:2rem 0;background-color:var(--gray-100)}.article-layout{display:grid;grid-template-columns:1fr 350px;gap:3rem;padding:1rem 0;align-items: start}h1,h2,h3,h4,h5,h6{font-family:"Crimson Text","Times New Roman",Times,serif}h1{font-size:2.5rem;line-height:1.2;margin-bottom:1rem}.meta{color:#5f6368;font-size:.875rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}.view-count{display:inline-flex;align-items:center;gap:.25rem}.view-count svg{color:#5f6368}.content{min-width:0;border-bottom:1px solid #dddddd5e;margin-top:1rem;white-space:pre-line !important;overflow-wrap:break-word;overflow-x:auto;word-break:break-word}.lead{font-size:1.25rem;color:#5f6368;margin-bottom:2rem}h2,h3,h4,h5,h6{font-size:1.75rem;margin:1rem 0 1rem}p,pre,ol,ul>li{margin-bottom:1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;font-size:1.3rem;text-align: justify;}p>code{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px}hr{margin:1rem 0 1rem 0}.code-example{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;margin:1.5rem 0;overflow-x:auto}code{font-family:'Roboto Mono',monospace;font-size:.875rem}ul{margin:.2rem 0;padding-left:1.5rem}.related-posts{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;position:sticky;top:5rem}.related-posts-title,.newpost-posts-list{font-size:1.75rem;margin:0 0 1rem}.related-posts-list{display:flex;flex-direction:column;gap:.5rem}.related-post,.newpost-post{border-bottom:1px solid #ddd;padding-bottom:10px;margin-bottom:10px}.related-post:last-child,.newpost-post:last-child{padding-bottom:0;border-bottom:none}.related-post-title,.newpost-post-title{font-size:1.2rem;margin:0 0 .1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;}.related-post-title a,.newpost-post-title a{color:var(--text-color);text-decoration:none;transition:color 0.2s}.related-post-title a:hover,.newpost-post-title a:hover{color:var(--primary-color)}.related-post time{font-size:.875rem;color:#5f6368}.footer{background-color:var(--gray-100);padding:2rem 0;margin-top:4rem;color:#5f6368;font-size:.875rem}.nav-menu>ul>li{margin-bottom:0}@media (max-width:1024px){.container{max-width:800px}.article-layout{grid-template-columns:1fr;gap:2rem}.related-posts{position:static}}@media (max-width:768px){.nav-container{flex-wrap:wrap}.nav-search{order:3;max-width:none;width:100%;margin-top:.1rem}.nav-toggle{display:block}.nav-menu{display:none;position:absolute;top:100%;left:0;right:0;background:var(--background-color);padding:1rem 0;border-bottom:1px solid var(--gray-200)}.nav-menu-active{display:block}.nav-list{flex-direction:column;gap:.1rem;padding:0 1.5rem}.nav-link{display:block;padding:.2rem 0}h1{font-size:2rem}.article-header{padding:2rem 0}.content{padding:.1rem 0}}table{width:100%;border-collapse:collapse;margin:20px 0;font-family:'Arial',sans-serif}th,td{padding:12px 15px;text-align:left;border:1px solid #ddd}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9}tr:nth-child(even) td{background-color:#f2f2f2}@media screen and (max-width:768px){table{border:0;display:block;overflow-x:auto;white-space:nowrap}th,td{padding:10px;text-align:right}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9;border-bottom:1px solid #ddd}tr:nth-child(even) td{background-color:#f2f2f2}}a{text-decoration:none;color:#540707}.katex-html{padding: .2rem;color: #000;font-weight: 700;font-size: 1.3rem;overflow-wrap: break-word;max-width: 100%;white-space: normal !important}.category{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin:1rem 0 1rem 0}.tag{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px;font-family:"Newsreader",serif}.tag>a{text-decoration:none;color:#000}img{margin:auto;display:block;max-width:100%;height:auto;margin-bottom:1rem}.katex{white-space: pre-line !important;display: inline-block;max-width: 100%;overflow-x: auto;overflow-y: hidden;scrollbar-width: thin;overflow-wrap: break-word;word-break: break-word;vertical-align: -7px}.content > p {overflow-wrap: break-word;word-break: break-word}
+    </style>
+    <style type="text/css">
+    	pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}
+		.hljs{color:#c9d1d9;background:#0d1117}.hljs-doctag,.hljs-keyword,.hljs-meta .hljs-keyword,.hljs-template-tag,.hljs-template-variable,.hljs-type,.hljs-variable.language_{color:#ff7b72}.hljs-title,.hljs-title.class_,.hljs-title.class_.inherited__,.hljs-title.function_{color:#d2a8ff}.hljs-attr,.hljs-attribute,.hljs-literal,.hljs-meta,.hljs-number,.hljs-operator,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-variable{color:#79c0ff}.hljs-meta .hljs-string,.hljs-regexp,.hljs-string{color:#a5d6ff}.hljs-built_in,.hljs-symbol{color:#ffa657}.hljs-code,.hljs-comment,.hljs-formula{color:#8b949e}.hljs-name,.hljs-quote,.hljs-selector-pseudo,.hljs-selector-tag{color:#7ee787}.hljs-subst{color:#c9d1d9}.hljs-section{color:#1f6feb;font-weight:700}.hljs-bullet{color:#f2cc60}.hljs-emphasis{color:#c9d1d9;font-style:italic}.hljs-strong{color:#c9d1d9;font-weight:700}.hljs-addition{color:#aff5b4;background-color:#033a16}.hljs-deletion{color:#ffdcd7;background-color:#67060c}
+    	pre{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;font-weight:400;word-break:break-word;word-wrap:break-word;box-sizing:inherit;border-radius:4px;overflow-x:auto;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}code{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;word-wrap:break-word;word-break:break-word;font-style:normal;line-height:20px;letter-spacing:-.003em;box-sizing:inherit;font-weight:400;font-size:75%;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}
+    </style>
+    <style type="text/css">
+    	.back-to-top{position:fixed;bottom:20px;right:20px;background-color:#a73f3f;color:#fff;padding:8px 10px;border-radius:50%;box-shadow:0 4px 6px rgb(0 0 0 / .2);font-size:10px;font-weight:700;text-decoration:none;text-align:center;transition:opacity 0.3s ease,visibility 0.3s ease;z-index:99999;opacity:1;visibility:visible}.back-to-top:hover{background-color:#0056b3}
+    </style>
+    <style type="text/css">
+        .ad-header {margin: 1rem auto 1rem;background-color: #fdfdfd;text-align: center;display: block;}.ad-header .ad-wrapper {min-height: 90px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #555;font-weight: 500;padding: 3rem;border: 1px dashed #ccc;border-radius: 6px;}@media (max-width: 768px) {.ad-header {padding: 0.75rem;}}.ad-sidebar {margin: 0 0 1rem;background-color: #fefefe;text-align: center;padding: 0px;width: 100%;max-width: 100%;display: block;}.ad-sidebar .ad-wrapper {min-height: 250px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #444;font-weight: 500;border: 1px dashed #aaa;border-radius: 6px;padding: 0rem;}@media (max-width: 1024px) {.ad-sidebar {padding: 0.75rem;}}
+    </style>
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://catatansoal.github.io/blog/pyrefly-memory-leak-debugging-high"
+          },
+          "headline": "PyreFly Memory Leak: Debugging High Usage In VS Code",
+          "description": "PyreFly Memory Leak: Debugging High Usage In VS Code...",
+          "image": [
+            "https://tse4.mm.bing.net/th?q=PyreFly%20Memory%20Hog%3A%20Debugging%20Excessive%20Memory%20Usage%20in%20VS%20Code"
+          ],
+          "author": {
+            "@type": "Person",
+            "name": "ADMIN",
+            "jobTitle": "Editor web"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "ANABEL",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://tse4.mm.bing.net/th?q=ANABEL%20WEB"
+            }
+          },
+          "datePublished": "2025-08-05T20:01:14+00:00",
+          "dateModified": "2025-08-05T20:01:14+00:00"
+        }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="container nav-container">
+                <div class="nav-left">
+                    <span class="logo">ANABEL</span>
+                    <span class="blog-tag">Article</span>
+                </div>
+                <div class="nav-search">
+                    <form class="search-form" role="search">
+                        <input 
+                            type="search" 
+                            class="search-input"
+                            placeholder="Search articles..."
+                            aria-label="Search articles"
+                        >
+                        <button type="submit" class="search-button" aria-label="Submit search">🔎</button>
+                    </form>
+                </div>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+                <div class="nav-menu">
+                    <ul class="nav-list">
+                    	<li><a href="/" class="nav-link">HOME</a></li>
+                        <li><a href="/pages/About" class="nav-link">About</a></li>
+                        <li><a href="/pages/Contact" class="nav-link">Contact</a></li>
+                        <li><a href="/pages/Disclaimer" class="nav-link">Disclaimer</a></li>
+                        <li><a href="/pages/Privacy" class="nav-link">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="main">
+        <article class="article">
+            <header class="article-header">
+                <div class="container">
+                    <h1>PyreFly Memory Leak: Debugging High Usage In VS Code</h1>
+                    <div class="meta">
+                        <time datetime="2025-08-05T20:01:14+00:00">Aug 5, 2025</time>
+                        <span class="author">by ADMIN</span>
+                        <span class="view-count">
+                            <span id="viewCount">53</span> views
+                        </span>
+                    </div>
+                </div>
+            </header>
+            <div class="ad-header container">
+                <div class="ad-wrapper">
+    Iklan Headers
+</div>
+            </div>
+            <div class="container">
+                <div class="article-layout">
+                    <div class="content">
+                        <img src="https://tse4.mm.bing.net/th?q=PyreFly%20Memory%20Hog%3A%20Debugging%20Excessive%20Memory%20Usage%20in%20VS%20Code" title="PyreFly Memory Hog: Debugging Excessive Memory Usage in VS Code" width="300" height="200"/><p>Hey guys, ever faced a situation where your system slows to a crawl because some process is gobbling up all your memory? It's super frustrating, right? Well, let's dive into a specific case: <strong>excessive memory usage</strong> with <code>pyrefly</code> in VS Code. We’ll break down the issue, explore potential causes, and figure out some ways to tackle it.</p>
+<h2>The Mystery of the Two PyreFly Processes</h2>
+<p>So, the main problem here is that when someone opens a project in VS Code, they're seeing not one, but <em>two</em> <code>pyrefly</code> processes spring to life. And these aren't exactly lightweight processes – they're <strong>hogging a significant chunk of memory</strong>. This behavior, as pointed out, is similar to a previous issue, so it seems like there might be a recurring pattern here. The big question is: <strong>is this expected?</strong> Or is there a bug lurking in the shadows?</p>
+<p>The user has provided a helpful screenshot showing these two processes in action, clearly demonstrating the <em>high memory consumption</em>. This visual evidence is crucial in understanding the severity of the problem. It immediately tells us that this isn't just a minor blip; it's a noticeable drain on system resources. We need to figure out why these processes are so hungry and how we can put them on a diet!</p>
+<p>To really understand what's going on, we need to dig deeper into what <code>pyrefly</code> is actually doing. Is it constantly indexing files? Is it performing some kind of heavy computation in the background? Knowing the <em>purpose and function</em> of <code>pyrefly</code> will give us clues about why it might be behaving this way. Maybe it's related to specific project configurations or file types. The more we know about its inner workings, the better equipped we'll be to diagnose the issue.</p>
+<h3>Diving into VS Code and Extension Details</h3>
+<p>To get a clearer picture, let's look at the VS Code environment where this is happening. The user is running Version 1.102.3, which gives us a baseline to work with. Knowing the specific version can help us check for known issues or bug fixes related to memory usage in that particular release. Think of it like checking the model number of your car when you're trying to diagnose a problem – it narrows down the possibilities.</p>
+<p>The provided commit hash (488a1f239235055e34e673291fb8d8c810886f81) is like a <em>fingerprint</em> for this specific build of VS Code. It allows developers to pinpoint the exact code state, which is super helpful for tracking down the source of a bug. The date (2025-07-29T03:00:23.339Z) gives us a sense of when this version was released, which might correlate with other reported issues.</p>
+<p>Furthermore, the details about Electron (35.6.0), Chromium (134.0.6998.205), Node.js (22.15.1), and V8 (13.4.114.21-electron.0) are all pieces of the puzzle. VS Code is built on these technologies, and <em>knowing their versions</em> can be important because bugs can sometimes be traced back to specific versions of these underlying components. It’s like knowing the engine, transmission, and other major components of your car – if one of them is known to have issues, it becomes a prime suspect.</p>
+<p>Finally, the OS information (Darwin arm64 24.6.0) tells us that the user is on a macOS system with an ARM64 architecture. This is significant because <em>platform-specific issues</em> can sometimes arise. What works perfectly on one operating system might have problems on another. So, knowing the OS and architecture is essential for troubleshooting.</p>
+<h2>Possible Culprits and Troubleshooting Steps</h2>
+<p>Okay, so we've established the problem and gathered some key information. Now, let's brainstorm some potential causes and how we can investigate further:</p>
+<ul>
+<li><strong>Extension Conflicts:</strong> Could there be a conflict between <code>pyrefly</code> and other VS Code extensions? Sometimes, extensions can interfere with each other, leading to unexpected behavior. To test this, you could try disabling other extensions one by one to see if the memory usage drops. Think of it as isolating a faulty wire in an electrical circuit.</li>
+<li><strong>Indexing Issues:</strong> Is <code>pyrefly</code> trying to index a massive number of files? If it's constantly re-indexing or getting stuck in a loop, it could explain the high memory consumption. We might need to look into ways to exclude certain folders or file types from indexing.</li>
+<li><strong>Memory Leaks:</strong> Is there a memory leak within <code>pyrefly</code> itself? This is a classic programming problem where memory is allocated but never released, leading to a gradual increase in memory usage over time. Debugging memory leaks can be tricky, but there are tools and techniques we can use.</li>
+<li><strong>Configuration Problems:</strong> Are there specific settings or configurations within <code>pyrefly</code> that might be contributing to the issue? Perhaps there's a setting that's causing it to load more data than necessary. Reviewing the extension's settings and documentation could reveal some clues.</li>
+<li><strong>Bug in PyreFly:</strong> It's entirely possible that there's a bug in <code>pyrefly</code> itself. Software is complex, and bugs happen! If we can't find any other explanation, we might need to report the issue to the <code>pyrefly</code> developers and provide them with as much information as possible.</li>
+</ul>
+<p>To start troubleshooting, here are some steps we could take:</p>
+<ol>
+<li><strong>Disable other extensions:</strong> As mentioned earlier, this helps rule out extension conflicts. It’s like trying to start your car with different accessories turned off to see if one of them is draining the battery.</li>
+<li><strong>Check PyreFly settings:</strong> Look for any settings related to memory usage, indexing, or background processes. Maybe there's a way to limit its resource consumption.</li>
+<li><strong>Monitor memory usage over time:</strong> Use system monitoring tools to see how the memory usage of the <code>pyrefly</code> processes changes over time. Does it gradually increase, or does it spike suddenly? This can give us clues about the nature of the problem.</li>
+<li><strong>Examine PyreFly logs:</strong> If <code>pyrefly</code> has logging capabilities, check the logs for any error messages or unusual activity. Logs are like the black box recorder of a software application – they can provide valuable insights into what’s going on behind the scenes.</li>
+<li><strong>Try a different project:</strong> Does the issue occur with all projects, or only specific ones? If it's project-specific, there might be something about that project's configuration or file structure that's triggering the problem.</li>
+</ol>
+<p>By systematically investigating these possibilities, we can hopefully narrow down the cause of the <em>excessive memory usage</em> and find a solution. Remember, debugging is like detective work – it requires patience, attention to detail, and a willingness to explore different leads.</p>
+<h2>Next Steps: Community Collaboration and Developer Input</h2>
+<p>Okay, so we've explored the problem, gathered information, and brainstormed some potential solutions. But what if we're still stumped? That's where community collaboration and developer input come in!</p>
+<p>Sharing this issue with the <code>pyrefly</code> community or directly with the developers can be incredibly valuable. Other users might have encountered the same problem and found a workaround, or the developers might have insights into the issue that we haven't considered. Think of it as tapping into a collective intelligence – the more brains working on the problem, the better.</p>
+<p>When reporting the issue, it's crucial to provide as much detail as possible. This includes:</p>
+<ul>
+<li><strong>A clear description of the problem:</strong> Explain the excessive memory usage and the fact that two <code>pyrefly</code> processes are being spawned.</li>
+<li><strong>Steps to reproduce the issue:</strong> Can you consistently reproduce the problem by opening a specific project or performing a certain action? The more reproducible the issue, the easier it will be for developers to diagnose.</li>
+<li><strong>VS Code version and extension version:</strong> We already have this information, but it's worth including it in the report.</li>
+<li><strong>Operating system and architecture:</strong> Again, this is crucial for identifying platform-specific issues.</li>
+<li><strong>Any error messages or log entries:</strong> If there are any relevant error messages in the <code>pyrefly</code> logs or VS Code's developer console, include them in the report.</li>
+<li><strong>Any troubleshooting steps you've already taken:</strong> This helps developers avoid suggesting solutions you've already tried.</li>
+</ul>
+<p>By providing a detailed and informative bug report, we increase the chances of getting a helpful response from the community or the developers. It's like giving a doctor a complete medical history – the more information they have, the better they can diagnose and treat the problem.</p>
+<p>In the meantime, keep an eye on the <code>pyrefly</code> issue tracker or forums for any updates or discussions related to this problem. You might find that someone else has already reported the issue and a fix is in the works. Or, you might be able to contribute to the discussion and help find a solution.</p>
+<h2>Conclusion: Taming the Memory Hog</h2>
+<p>Dealing with <strong>excessive memory usage</strong> can be a real headache, but by systematically investigating the problem and collaborating with the community, we can often find a solution. In this case, we've explored the issue of <code>pyrefly</code> consuming a large amount of memory in VS Code, identified potential causes, and outlined some troubleshooting steps.</p>
+<p>Remember, debugging is a process of elimination. By ruling out different possibilities one by one, we can gradually narrow down the source of the problem. And don't be afraid to ask for help! The developer community is a valuable resource, and there are often people who have faced similar issues and can offer guidance.</p>
+<p>Hopefully, by following the steps outlined in this article, you can tame the memory hog and get <code>pyrefly</code> running smoothly in your VS Code environment. Happy coding, guys!</p>
+
+                    </div>
+                    <aside class="related-posts">
+                        <div class="ad-sidebar container">
+                            <div class="ad-wrapper">
+    <span>Iklan Related</span>
+</div>
+                        </div>
+                        <h2 class="related-posts-title">Related Posts</h2><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/seeking-alternative-download-links-for">Seeking Alternative Download Links For Puddle-1000 Dataset A Discussion On Road Ponding Detection</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-14T12:03:51+00:00">Jul 14, 2025</time>
+		                        <span class="view-count">
+									97 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/troubleshooting-lightdm-default-user-session">Troubleshooting LightDM Default User Session Issues</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-03T20:06:34+00:00">Aug 3, 2025</time>
+		                        <span class="view-count">
+									51 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/simplifying-trigonometric-expressions-a-comprehensive">Simplifying Trigonometric Expressions A Comprehensive Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-14T18:19:47+00:00">Jul 14, 2025</time>
+		                        <span class="view-count">
+									59 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/tex-filename-encoding-on-windows">TeX Filename Encoding On Windows: A Comprehensive Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-08T20:23:36+00:00">Aug 8, 2025</time>
+		                        <span class="view-count">
+									55 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/indemnity-plan-medical-cost-reimbursement">Indemnity Plan: Medical Cost Reimbursement Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-02T22:26:02+00:00">Aug 2, 2025</time>
+		                        <span class="view-count">
+									48 views
+		                        </span>
+                            </div>
+                        </article>
+                    </aside>
+                    <aside class="related-posts"></aside>
+                </div>
+            </div>
+        </article>
+        <a href="#" class="back-to-top" id="backToTop" title="Back to top">
+        	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-bar-up" viewBox="0 0 16 16">
+			  <path fill-rule="evenodd" d="M3.646 11.854a.5.5 0 0 0 .708 0L8 8.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708M2.4 5.2c0 .22.18.4.4.4h10.4a.4.4 0 0 0 0-.8H2.8a.4.4 0 0 0-.4.4"/>
+			</svg>
+		</a>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 ANABEL</p>
+        </div>
+    </footer>
+    <script>
+    	(() => {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            const toggleMenu = () => {
+                navMenu.classList.toggle('nav-menu-active');
+                navToggle.classList.toggle('nav-toggle-active');
+            };
+            const backToTopHandler = (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            navToggle.addEventListener('click', toggleMenu);
+            document.getElementById('backToTop').addEventListener('click', backToTopHandler);
+            window.addEventListener('pagehide', () => {
+                navToggle.removeEventListener('click', toggleMenu);
+                document.getElementById('backToTop').removeEventListener('click', backToTopHandler);
+            });
+        })();
+		(() => {
+            window.addEventListener("DOMContentLoaded", (event) => {
+                const ellHljs = document.createElement("script");
+                ellHljs.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js");
+                ellHljs.onload = () => {
+                    hljs.highlightAll();
+                };
+                document.querySelector("body").append(ellHljs);
+                const ellFont = document.createElement("link");
+                ellFont.setAttribute("href", "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css");
+                ellFont.setAttribute("rel", "stylesheet");
+                document.querySelector("head").append(ellFont);
+                window.addEventListener('pagehide', () => {
+                    // ellHljs.remove();
+                    ellFont.remove();
+                });
+
+            });
+        })();
+    </script>
+    
+    
+    
+</body>
+</html>

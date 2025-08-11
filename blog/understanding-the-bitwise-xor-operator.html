@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Understanding The Bitwise XOR Operator In Civet And Its Compilation</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Understanding The Bitwise XOR Operator In Civet And Its Compilation...">
+    <link rel="canonical" href="https://catatansoal.github.io/blog/understanding-the-bitwise-xor-operator">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Understanding The Bitwise XOR Operator In Civet And Its Compilation">
+	<meta property="og:description" content="Understanding The Bitwise XOR Operator In Civet And Its Compilation...">
+	<meta property="og:url" content="https://catatansoal.github.io/blog/understanding-the-bitwise-xor-operator">
+	<meta property="og:site_name" content="ANABEL">
+	<meta property="article:published_time" content="2025-07-24T21:18:35+00:00">
+	<meta property="article:author" content="ADMIN">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+    <link rel="preload" fetchpriority="high" as="image" href="https://tse4.mm.bing.net/th?q=Understanding%20the%20Bitwise%20XOR%20Operator%20in%20Civet%20and%20Its%20Compilation%20Process">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style type="text/css">
+    	:root{--primary-color:#3740ff;--text-color:#202124;--background-color:#ffffff;--gray-100:#f8f9fa;--gray-200:#e9ecef}*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;line-height:1.6;color:var(--text-color);background-color:var(--background-color)}.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}.header{background-color:var(--background-color);border-bottom:1px solid var(--gray-200);position:sticky;top:0;z-index:100}.nav{padding:.5rem 0}.nav-container{display:flex;justify-content:space-between;align-items:center;gap:1rem}.nav-left{display:flex;align-items:center;flex-shrink:0}.logo{font-weight:700;color:var(--primary-color)}.blog-tag{margin-left:1rem;padding:.25rem .5rem;background-color:var(--gray-100);border-radius:4px;font-size:.875rem}.nav-search{flex-grow:1;max-width:300px}.search-form{position:relative;width:100%}.search-input{width:100%;padding:.5rem 2.5rem .5rem 1rem;border:1px solid var(--gray-200);border-radius:24px;font-size:.875rem;transition:all 0.2s}.search-input:focus{outline:none;border-color:var(--primary-color);box-shadow:0 0 0 2px rgb(55 64 255 / .1)}.search-button{position:absolute;right:.5rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#5f6368;cursor:pointer;padding:.25rem;display:flex;align-items:center;justify-content:center}.search-button:hover{color:var(--primary-color)}.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:.5rem}.hamburger{display:block;position:relative;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before,.hamburger::after{content:'';position:absolute;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before{top:-6px}.hamburger::after{bottom:-6px}.nav-toggle-active .hamburger{background:#fff0}.nav-toggle-active .hamburger::before{transform:rotate(45deg);top:0}.nav-toggle-active .hamburger::after{transform:rotate(-45deg);bottom:0}.nav-list{display:flex;list-style:none;gap:2rem}.nav-link{color:var(--text-color);text-decoration:none;font-size:.9rem;transition:color 0.2s}.nav-link:hover{color:var(--primary-color)}.article-header{padding:2rem 0;background-color:var(--gray-100)}.article-layout{display:grid;grid-template-columns:1fr 350px;gap:3rem;padding:1rem 0;align-items: start}h1,h2,h3,h4,h5,h6{font-family:"Crimson Text","Times New Roman",Times,serif}h1{font-size:2.5rem;line-height:1.2;margin-bottom:1rem}.meta{color:#5f6368;font-size:.875rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}.view-count{display:inline-flex;align-items:center;gap:.25rem}.view-count svg{color:#5f6368}.content{min-width:0;border-bottom:1px solid #dddddd5e;margin-top:1rem;white-space:pre-line !important;overflow-wrap:break-word;overflow-x:auto;word-break:break-word}.lead{font-size:1.25rem;color:#5f6368;margin-bottom:2rem}h2,h3,h4,h5,h6{font-size:1.75rem;margin:1rem 0 1rem}p,pre,ol,ul>li{margin-bottom:1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;font-size:1.3rem;text-align: justify;}p>code{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px}hr{margin:1rem 0 1rem 0}.code-example{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;margin:1.5rem 0;overflow-x:auto}code{font-family:'Roboto Mono',monospace;font-size:.875rem}ul{margin:.2rem 0;padding-left:1.5rem}.related-posts{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;position:sticky;top:5rem}.related-posts-title,.newpost-posts-list{font-size:1.75rem;margin:0 0 1rem}.related-posts-list{display:flex;flex-direction:column;gap:.5rem}.related-post,.newpost-post{border-bottom:1px solid #ddd;padding-bottom:10px;margin-bottom:10px}.related-post:last-child,.newpost-post:last-child{padding-bottom:0;border-bottom:none}.related-post-title,.newpost-post-title{font-size:1.2rem;margin:0 0 .1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;}.related-post-title a,.newpost-post-title a{color:var(--text-color);text-decoration:none;transition:color 0.2s}.related-post-title a:hover,.newpost-post-title a:hover{color:var(--primary-color)}.related-post time{font-size:.875rem;color:#5f6368}.footer{background-color:var(--gray-100);padding:2rem 0;margin-top:4rem;color:#5f6368;font-size:.875rem}.nav-menu>ul>li{margin-bottom:0}@media (max-width:1024px){.container{max-width:800px}.article-layout{grid-template-columns:1fr;gap:2rem}.related-posts{position:static}}@media (max-width:768px){.nav-container{flex-wrap:wrap}.nav-search{order:3;max-width:none;width:100%;margin-top:.1rem}.nav-toggle{display:block}.nav-menu{display:none;position:absolute;top:100%;left:0;right:0;background:var(--background-color);padding:1rem 0;border-bottom:1px solid var(--gray-200)}.nav-menu-active{display:block}.nav-list{flex-direction:column;gap:.1rem;padding:0 1.5rem}.nav-link{display:block;padding:.2rem 0}h1{font-size:2rem}.article-header{padding:2rem 0}.content{padding:.1rem 0}}table{width:100%;border-collapse:collapse;margin:20px 0;font-family:'Arial',sans-serif}th,td{padding:12px 15px;text-align:left;border:1px solid #ddd}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9}tr:nth-child(even) td{background-color:#f2f2f2}@media screen and (max-width:768px){table{border:0;display:block;overflow-x:auto;white-space:nowrap}th,td{padding:10px;text-align:right}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9;border-bottom:1px solid #ddd}tr:nth-child(even) td{background-color:#f2f2f2}}a{text-decoration:none;color:#540707}.katex-html{padding: .2rem;color: #000;font-weight: 700;font-size: 1.3rem;overflow-wrap: break-word;max-width: 100%;white-space: normal !important}.category{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin:1rem 0 1rem 0}.tag{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px;font-family:"Newsreader",serif}.tag>a{text-decoration:none;color:#000}img{margin:auto;display:block;max-width:100%;height:auto;margin-bottom:1rem}.katex{white-space: pre-line !important;display: inline-block;max-width: 100%;overflow-x: auto;overflow-y: hidden;scrollbar-width: thin;overflow-wrap: break-word;word-break: break-word;vertical-align: -7px}.content > p {overflow-wrap: break-word;word-break: break-word}
+    </style>
+    <style type="text/css">
+    	pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}
+		.hljs{color:#c9d1d9;background:#0d1117}.hljs-doctag,.hljs-keyword,.hljs-meta .hljs-keyword,.hljs-template-tag,.hljs-template-variable,.hljs-type,.hljs-variable.language_{color:#ff7b72}.hljs-title,.hljs-title.class_,.hljs-title.class_.inherited__,.hljs-title.function_{color:#d2a8ff}.hljs-attr,.hljs-attribute,.hljs-literal,.hljs-meta,.hljs-number,.hljs-operator,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-variable{color:#79c0ff}.hljs-meta .hljs-string,.hljs-regexp,.hljs-string{color:#a5d6ff}.hljs-built_in,.hljs-symbol{color:#ffa657}.hljs-code,.hljs-comment,.hljs-formula{color:#8b949e}.hljs-name,.hljs-quote,.hljs-selector-pseudo,.hljs-selector-tag{color:#7ee787}.hljs-subst{color:#c9d1d9}.hljs-section{color:#1f6feb;font-weight:700}.hljs-bullet{color:#f2cc60}.hljs-emphasis{color:#c9d1d9;font-style:italic}.hljs-strong{color:#c9d1d9;font-weight:700}.hljs-addition{color:#aff5b4;background-color:#033a16}.hljs-deletion{color:#ffdcd7;background-color:#67060c}
+    	pre{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;font-weight:400;word-break:break-word;word-wrap:break-word;box-sizing:inherit;border-radius:4px;overflow-x:auto;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}code{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;word-wrap:break-word;word-break:break-word;font-style:normal;line-height:20px;letter-spacing:-.003em;box-sizing:inherit;font-weight:400;font-size:75%;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}
+    </style>
+    <style type="text/css">
+    	.back-to-top{position:fixed;bottom:20px;right:20px;background-color:#a73f3f;color:#fff;padding:8px 10px;border-radius:50%;box-shadow:0 4px 6px rgb(0 0 0 / .2);font-size:10px;font-weight:700;text-decoration:none;text-align:center;transition:opacity 0.3s ease,visibility 0.3s ease;z-index:99999;opacity:1;visibility:visible}.back-to-top:hover{background-color:#0056b3}
+    </style>
+    <style type="text/css">
+        .ad-header {margin: 1rem auto 1rem;background-color: #fdfdfd;text-align: center;display: block;}.ad-header .ad-wrapper {min-height: 90px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #555;font-weight: 500;padding: 3rem;border: 1px dashed #ccc;border-radius: 6px;}@media (max-width: 768px) {.ad-header {padding: 0.75rem;}}.ad-sidebar {margin: 0 0 1rem;background-color: #fefefe;text-align: center;padding: 0px;width: 100%;max-width: 100%;display: block;}.ad-sidebar .ad-wrapper {min-height: 250px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #444;font-weight: 500;border: 1px dashed #aaa;border-radius: 6px;padding: 0rem;}@media (max-width: 1024px) {.ad-sidebar {padding: 0.75rem;}}
+    </style>
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://catatansoal.github.io/blog/understanding-the-bitwise-xor-operator"
+          },
+          "headline": "Understanding The Bitwise XOR Operator In Civet And Its Compilation",
+          "description": "Understanding The Bitwise XOR Operator In Civet And Its Compilation...",
+          "image": [
+            "https://tse4.mm.bing.net/th?q=Understanding%20the%20Bitwise%20XOR%20Operator%20in%20Civet%20and%20Its%20Compilation%20Process"
+          ],
+          "author": {
+            "@type": "Person",
+            "name": "ADMIN",
+            "jobTitle": "Editor web"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "ANABEL",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://tse4.mm.bing.net/th?q=ANABEL%20WEB"
+            }
+          },
+          "datePublished": "2025-07-24T21:18:35+00:00",
+          "dateModified": "2025-07-24T21:18:35+00:00"
+        }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="container nav-container">
+                <div class="nav-left">
+                    <span class="logo">ANABEL</span>
+                    <span class="blog-tag">Article</span>
+                </div>
+                <div class="nav-search">
+                    <form class="search-form" role="search">
+                        <input 
+                            type="search" 
+                            class="search-input"
+                            placeholder="Search articles..."
+                            aria-label="Search articles"
+                        >
+                        <button type="submit" class="search-button" aria-label="Submit search">🔎</button>
+                    </form>
+                </div>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+                <div class="nav-menu">
+                    <ul class="nav-list">
+                    	<li><a href="/" class="nav-link">HOME</a></li>
+                        <li><a href="/pages/About" class="nav-link">About</a></li>
+                        <li><a href="/pages/Contact" class="nav-link">Contact</a></li>
+                        <li><a href="/pages/Disclaimer" class="nav-link">Disclaimer</a></li>
+                        <li><a href="/pages/Privacy" class="nav-link">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="main">
+        <article class="article">
+            <header class="article-header">
+                <div class="container">
+                    <h1>Understanding The Bitwise XOR Operator In Civet And Its Compilation</h1>
+                    <div class="meta">
+                        <time datetime="2025-07-24T21:18:35+00:00">Jul 24, 2025</time>
+                        <span class="author">by ADMIN</span>
+                        <span class="view-count">
+                            <span id="viewCount">68</span> views
+                        </span>
+                    </div>
+                </div>
+            </header>
+            <div class="ad-header container">
+                <div class="ad-wrapper">
+    Iklan Headers
+</div>
+            </div>
+            <div class="container">
+                <div class="article-layout">
+                    <div class="content">
+                        <img src="https://tse4.mm.bing.net/th?q=Understanding%20the%20Bitwise%20XOR%20Operator%20in%20Civet%20and%20Its%20Compilation%20Process" title="Understanding the Bitwise XOR Operator in Civet and Its Compilation Process" width="300" height="200"/><p>Hey everyone! Let's dive into a peculiar behavior in Civet concerning the <code>^</code> operator. You might be scratching your head if you've seen the following code snippet and its output:</p>
+<pre><code class="hljs">a = 0
+console.log a ^ 1
+</code></pre>
+<p>Prints <code>0</code>? What's going on here? Is Civet playing tricks on us? Is it destructuring? Well, the answer is more interesting than you might think. In this comprehensive guide, we're going to explore the real reason behind this output, the underlying compilation process, and how Civet handles the <code>^</code> operator. So buckle up, and let's get started!</p>
+<h2>The Curious Case of <code>a ^ 1</code></h2>
+<p>To truly understand this, we need to delve into the world of bitwise operations. <strong>Bitwise XOR</strong>, represented by the <code>^</code> operator in many programming languages, including JavaScript (which Civet compiles to), is our key to unlocking this mystery. In Civet, the <code>^</code> operator isn't for exponentiation like you might expect from languages like Python. Instead, it performs a bitwise exclusive OR operation. Let's break this down:</p>
+<p>When we see <code>a ^ 1</code>, where <code>a = 0</code>, we're not raising 0 to the power of 1. We're taking the binary representation of 0 and performing a bitwise XOR with the binary representation of 1.</p>
+<ul>
+<li>0 in binary is <code>0000</code> (assuming 4 bits for simplicity).</li>
+<li>1 in binary is <code>0001</code>.</li>
+</ul>
+<p>The XOR operation compares each bit. If the bits are different, the result is 1. If they're the same, the result is 0. So:</p>
+<pre><code class="hljs">0000
+^
+0001
+----
+0001
+</code></pre>
+<p>The result, <code>0001</code>, is the binary representation of 1. So why does <code>console.log a ^ 1</code> print 0? This is where the compilation process and JavaScript's behavior come into play.</p>
+<h2>Diving into the Compilation Process</h2>
+<p>Civet is a language that compiles to JavaScript. This means that the Civet code you write is transformed into JavaScript code that browsers (or Node.js) can understand and execute. When Civet encounters <code>a ^ 1</code>, it translates this directly into the equivalent JavaScript bitwise XOR operation. Let's see how this works:</p>
+<p>If you were to write the equivalent JavaScript code directly, it would look like this:</p>
+<pre><code class="hljs">var a = 0;
+console.log(a ^ 1);
+</code></pre>
+<p>Now, when JavaScript executes this code, it performs the bitwise XOR operation as we described above. However, the crucial point here is that while the <em>operation</em> is correct, the <em>precedence</em> might lead to unexpected results if not handled carefully.</p>
+<h3>Operator Precedence: The Silent Culprit</h3>
+<p>Operator precedence is the order in which operations are performed in an expression. In JavaScript (and Civet, which inherits JavaScript's precedence rules), the bitwise XOR operator (<code>^</code>) has lower precedence than the <code>console.log</code> function call. This means that the expression <code>console.log a ^ 1</code> is evaluated as <code>(console.log a) ^ 1</code>, <em>not</em> as <code>console.log(a ^ 1)</code>. This is the <strong>crucial</strong> point.</p>
+<p>Let's break it down step by step:</p>
+<ol>
+<li><code>console.log a</code> is executed first. This prints the value of <code>a</code> (which is 0) to the console. <code>console.log</code> in JavaScript (and therefore in Civet's compiled output) returns <code>undefined</code>. This is a key detail. Most console functions return undefined.</li>
+<li>The expression then becomes <code>undefined ^ 1</code>. Now we're performing a bitwise XOR between <code>undefined</code> and the number <code>1</code>.</li>
+</ol>
+<h3>JavaScript's Type Coercion: Adding Fuel to the Fire</h3>
+<p>JavaScript is notorious for its type coercion, which means it automatically converts values from one type to another when necessary. When you perform a bitwise operation on a non-numeric value, JavaScript tries to convert that value to a number. In the case of <code>undefined</code>, JavaScript coerces it to <code>NaN</code> (Not-a-Number).</p>
+<p>Now our expression is effectively <code>NaN ^ 1</code>. Bitwise operations with <code>NaN</code> always result in <code>0</code>. This is a specific rule in JavaScript's bitwise operation specification.</p>
+<p>So, <code>NaN ^ 1</code> evaluates to <code>0</code>, which is why you see <code>0</code> printed in the console. Mystery solved!</p>
+<h2>Why It's Not Destructuring</h2>
+<p>You might have initially suspected destructuring, but that's not the case here. Destructuring is a feature in JavaScript (and Civet) that allows you to extract values from objects or arrays into distinct variables. It doesn't involve the <code>^</code> operator in this context. The behavior we're seeing is purely due to bitwise XOR operation and operator precedence.</p>
+<h2>How to Get the Intended Result</h2>
+<p>If your intention was to perform the bitwise XOR operation and then log the result, you need to use parentheses to enforce the correct order of operations. The correct code would be:</p>
+<pre><code class="hljs">a = 0
+console.log(a ^ 1)
+</code></pre>
+<p>This will first evaluate <code>a ^ 1</code> (which, as we established, is <code>0000 XOR 0001 = 0001</code>, or 1 in decimal), and then <code>console.log</code> will print the result, which is <code>1</code>. This is the output you'd expect if you were intending to use the bitwise XOR operator.</p>
+<h2>Key Takeaways for Civet Developers</h2>
+<p>So, what are the main lessons we've learned from this deep dive?</p>
+<ol>
+<li><em><strong>The <code>^</code> operator in Civet is for bitwise XOR, not exponentiation.</strong></em> If you're coming from a language like Python, this is a crucial difference to remember.</li>
+<li><em><strong>Operator precedence matters!</strong></em> Always be mindful of the order in which operations are performed. When in doubt, use parentheses to explicitly define the order.</li>
+<li><em><strong>JavaScript's type coercion can lead to unexpected results.</strong></em> Be aware of how JavaScript converts values between types, especially when using bitwise operators.</li>
+<li><em><strong>Understanding the compilation process is vital.</strong></em> Knowing that Civet compiles to JavaScript helps you understand why certain behaviors occur.</li>
+</ol>
+<h2>Best Practices and Recommendations</h2>
+<p>To avoid similar confusion and potential bugs in your Civet code, here are some best practices to keep in mind:</p>
+<ol>
+<li><strong>Always use parentheses</strong> to clarify the order of operations, especially when dealing with bitwise operators or other operators with lower precedence.</li>
+<li><strong>Double-check your assumptions</strong> about operator behavior, especially if you're coming from a different programming language.</li>
+<li><strong>Test your code thoroughly</strong> to catch any unexpected behavior early on.</li>
+<li><strong>Consult the Civet documentation</strong> and JavaScript documentation for operator precedence rules and type coercion behavior.</li>
+</ol>
+<h2>Exploring Further: Real-World Applications of Bitwise XOR</h2>
+<p>Now that we've demystified the bitwise XOR operator in Civet, let's briefly explore some of its real-world applications. Bitwise XOR isn't just a quirky operator; it has practical uses in various areas of computer science and software development.</p>
+<h3>1. Cryptography</h3>
+<p>Bitwise XOR is a fundamental operation in many encryption algorithms. Its reversibility makes it ideal for simple encryption schemes. XORing a plaintext with a key produces ciphertext, and XORing the ciphertext with the same key recovers the plaintext. While simple XOR encryption is not secure against sophisticated attacks, it forms the basis for more complex cryptographic techniques.</p>
+<h3>2. Data Manipulation</h3>
+<p>Bitwise XOR can be used for various data manipulation tasks, such as toggling bits (flipping 0s to 1s and vice versa) and efficiently swapping values without using a temporary variable. For example, the classic XOR swap algorithm looks like this:</p>
+<pre><code class="hljs">let a = 5;
+let b = 10;
+a = a ^ b;
+b = a ^ b;
+a = a ^ b;
+console.log(&quot;a =&quot;, a); // Output: a = 10
+console.log(&quot;b =&quot;, b); // Output: b = 5
+</code></pre>
+<h3>3. Error Detection</h3>
+<p>Bitwise XOR is used in parity checking, a simple error detection technique. By XORing all the bits in a data packet, you can generate a parity bit. If the parity bit doesn't match the expected value upon reception, it indicates that an error occurred during transmission.</p>
+<h3>4. Graphics and Image Processing</h3>
+<p>In graphics programming, bitwise XOR can be used for drawing and manipulating images. For example, XORing a shape onto an existing image and then XORing it again at the same location erases the shape, which can be useful for simple animation techniques.</p>
+<h2>Conclusion: Mastering the Nuances of Civet</h2>
+<p>Understanding the intricacies of operators, precedence, and type coercion is crucial for becoming a proficient Civet developer. By unraveling the mystery of <code>a ^ 1</code>, we've not only gained insights into Civet's behavior but also reinforced our knowledge of JavaScript's underlying mechanisms.</p>
+<p>Remember, the key to mastering any programming language lies in continuous learning, experimentation, and a willingness to dive deep into the details. So keep exploring, keep coding, and never stop asking questions! Happy coding, everyone!</p>
+
+                    </div>
+                    <aside class="related-posts">
+                        <div class="ad-sidebar container">
+                            <div class="ad-wrapper">
+    <span>Iklan Related</span>
+</div>
+                        </div>
+                        <h2 class="related-posts-title">Related Posts</h2><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/pruning-thyme-your-ultimate-guide">Pruning Thyme: Your Ultimate Guide For Thriving Herbs</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-05T10:38:08+00:00">Aug 5, 2025</time>
+		                        <span class="view-count">
+									53 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/parallel-lines-solving-systems-of">Parallel Lines? Solving Systems Of Equations Graphically</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-03T18:33:17+00:00">Aug 3, 2025</time>
+		                        <span class="view-count">
+									56 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/lighten-hair-naturally-your-ultimate">Lighten Hair Naturally: Your Ultimate Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-09T20:53:02+00:00">Aug 9, 2025</time>
+		                        <span class="view-count">
+									43 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/frog-hibernation-care-a-complete">Frog Hibernation Care: A Complete Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-04T22:29:52+00:00">Aug 4, 2025</time>
+		                        <span class="view-count">
+									39 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/yaml-ci-quality-gate-code">YAML CI Quality Gate: Code Coverage And Artifacts</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-09T03:45:26+00:00">Aug 9, 2025</time>
+		                        <span class="view-count">
+									49 views
+		                        </span>
+                            </div>
+                        </article>
+                    </aside>
+                    <aside class="related-posts"></aside>
+                </div>
+            </div>
+        </article>
+        <a href="#" class="back-to-top" id="backToTop" title="Back to top">
+        	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-bar-up" viewBox="0 0 16 16">
+			  <path fill-rule="evenodd" d="M3.646 11.854a.5.5 0 0 0 .708 0L8 8.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708M2.4 5.2c0 .22.18.4.4.4h10.4a.4.4 0 0 0 0-.8H2.8a.4.4 0 0 0-.4.4"/>
+			</svg>
+		</a>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 ANABEL</p>
+        </div>
+    </footer>
+    <script>
+    	(() => {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            const toggleMenu = () => {
+                navMenu.classList.toggle('nav-menu-active');
+                navToggle.classList.toggle('nav-toggle-active');
+            };
+            const backToTopHandler = (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            navToggle.addEventListener('click', toggleMenu);
+            document.getElementById('backToTop').addEventListener('click', backToTopHandler);
+            window.addEventListener('pagehide', () => {
+                navToggle.removeEventListener('click', toggleMenu);
+                document.getElementById('backToTop').removeEventListener('click', backToTopHandler);
+            });
+        })();
+		(() => {
+            window.addEventListener("DOMContentLoaded", (event) => {
+                const ellHljs = document.createElement("script");
+                ellHljs.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js");
+                ellHljs.onload = () => {
+                    hljs.highlightAll();
+                };
+                document.querySelector("body").append(ellHljs);
+                const ellFont = document.createElement("link");
+                ellFont.setAttribute("href", "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css");
+                ellFont.setAttribute("rel", "stylesheet");
+                document.querySelector("head").append(ellFont);
+                window.addEventListener('pagehide', () => {
+                    // ellHljs.remove();
+                    ellFont.remove();
+                });
+
+            });
+        })();
+    </script>
+    
+    
+    
+</body>
+</html>

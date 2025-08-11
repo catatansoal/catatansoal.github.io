@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Troubleshooting OptimizationProblemResults With Hourly Horizon In PowerSimulations.jl</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Troubleshooting OptimizationProblemResults With Hourly Horizon In PowerSimulations.jl...">
+    <link rel="canonical" href="https://catatansoal.github.io/blog/troubleshooting-optimizationproblemresults-with-hourly-horizon">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Troubleshooting OptimizationProblemResults With Hourly Horizon In PowerSimulations.jl">
+	<meta property="og:description" content="Troubleshooting OptimizationProblemResults With Hourly Horizon In PowerSimulations.jl...">
+	<meta property="og:url" content="https://catatansoal.github.io/blog/troubleshooting-optimizationproblemresults-with-hourly-horizon">
+	<meta property="og:site_name" content="ANABEL">
+	<meta property="article:published_time" content="2025-07-27T07:10:22+00:00">
+	<meta property="article:author" content="ADMIN">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+    <link rel="preload" fetchpriority="high" as="image" href="https://tse4.mm.bing.net/th?q=Troubleshooting%20%60OptimizationProblemResults%60%20with%20Hourly%20Horizon%20in%20PowerSimulations.jl">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style type="text/css">
+    	:root{--primary-color:#3740ff;--text-color:#202124;--background-color:#ffffff;--gray-100:#f8f9fa;--gray-200:#e9ecef}*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;line-height:1.6;color:var(--text-color);background-color:var(--background-color)}.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}.header{background-color:var(--background-color);border-bottom:1px solid var(--gray-200);position:sticky;top:0;z-index:100}.nav{padding:.5rem 0}.nav-container{display:flex;justify-content:space-between;align-items:center;gap:1rem}.nav-left{display:flex;align-items:center;flex-shrink:0}.logo{font-weight:700;color:var(--primary-color)}.blog-tag{margin-left:1rem;padding:.25rem .5rem;background-color:var(--gray-100);border-radius:4px;font-size:.875rem}.nav-search{flex-grow:1;max-width:300px}.search-form{position:relative;width:100%}.search-input{width:100%;padding:.5rem 2.5rem .5rem 1rem;border:1px solid var(--gray-200);border-radius:24px;font-size:.875rem;transition:all 0.2s}.search-input:focus{outline:none;border-color:var(--primary-color);box-shadow:0 0 0 2px rgb(55 64 255 / .1)}.search-button{position:absolute;right:.5rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#5f6368;cursor:pointer;padding:.25rem;display:flex;align-items:center;justify-content:center}.search-button:hover{color:var(--primary-color)}.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:.5rem}.hamburger{display:block;position:relative;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before,.hamburger::after{content:'';position:absolute;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before{top:-6px}.hamburger::after{bottom:-6px}.nav-toggle-active .hamburger{background:#fff0}.nav-toggle-active .hamburger::before{transform:rotate(45deg);top:0}.nav-toggle-active .hamburger::after{transform:rotate(-45deg);bottom:0}.nav-list{display:flex;list-style:none;gap:2rem}.nav-link{color:var(--text-color);text-decoration:none;font-size:.9rem;transition:color 0.2s}.nav-link:hover{color:var(--primary-color)}.article-header{padding:2rem 0;background-color:var(--gray-100)}.article-layout{display:grid;grid-template-columns:1fr 350px;gap:3rem;padding:1rem 0;align-items: start}h1,h2,h3,h4,h5,h6{font-family:"Crimson Text","Times New Roman",Times,serif}h1{font-size:2.5rem;line-height:1.2;margin-bottom:1rem}.meta{color:#5f6368;font-size:.875rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}.view-count{display:inline-flex;align-items:center;gap:.25rem}.view-count svg{color:#5f6368}.content{min-width:0;border-bottom:1px solid #dddddd5e;margin-top:1rem;white-space:pre-line !important;overflow-wrap:break-word;overflow-x:auto;word-break:break-word}.lead{font-size:1.25rem;color:#5f6368;margin-bottom:2rem}h2,h3,h4,h5,h6{font-size:1.75rem;margin:1rem 0 1rem}p,pre,ol,ul>li{margin-bottom:1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;font-size:1.3rem;text-align: justify;}p>code{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px}hr{margin:1rem 0 1rem 0}.code-example{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;margin:1.5rem 0;overflow-x:auto}code{font-family:'Roboto Mono',monospace;font-size:.875rem}ul{margin:.2rem 0;padding-left:1.5rem}.related-posts{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;position:sticky;top:5rem}.related-posts-title,.newpost-posts-list{font-size:1.75rem;margin:0 0 1rem}.related-posts-list{display:flex;flex-direction:column;gap:.5rem}.related-post,.newpost-post{border-bottom:1px solid #ddd;padding-bottom:10px;margin-bottom:10px}.related-post:last-child,.newpost-post:last-child{padding-bottom:0;border-bottom:none}.related-post-title,.newpost-post-title{font-size:1.2rem;margin:0 0 .1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;}.related-post-title a,.newpost-post-title a{color:var(--text-color);text-decoration:none;transition:color 0.2s}.related-post-title a:hover,.newpost-post-title a:hover{color:var(--primary-color)}.related-post time{font-size:.875rem;color:#5f6368}.footer{background-color:var(--gray-100);padding:2rem 0;margin-top:4rem;color:#5f6368;font-size:.875rem}.nav-menu>ul>li{margin-bottom:0}@media (max-width:1024px){.container{max-width:800px}.article-layout{grid-template-columns:1fr;gap:2rem}.related-posts{position:static}}@media (max-width:768px){.nav-container{flex-wrap:wrap}.nav-search{order:3;max-width:none;width:100%;margin-top:.1rem}.nav-toggle{display:block}.nav-menu{display:none;position:absolute;top:100%;left:0;right:0;background:var(--background-color);padding:1rem 0;border-bottom:1px solid var(--gray-200)}.nav-menu-active{display:block}.nav-list{flex-direction:column;gap:.1rem;padding:0 1.5rem}.nav-link{display:block;padding:.2rem 0}h1{font-size:2rem}.article-header{padding:2rem 0}.content{padding:.1rem 0}}table{width:100%;border-collapse:collapse;margin:20px 0;font-family:'Arial',sans-serif}th,td{padding:12px 15px;text-align:left;border:1px solid #ddd}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9}tr:nth-child(even) td{background-color:#f2f2f2}@media screen and (max-width:768px){table{border:0;display:block;overflow-x:auto;white-space:nowrap}th,td{padding:10px;text-align:right}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9;border-bottom:1px solid #ddd}tr:nth-child(even) td{background-color:#f2f2f2}}a{text-decoration:none;color:#540707}.katex-html{padding: .2rem;color: #000;font-weight: 700;font-size: 1.3rem;overflow-wrap: break-word;max-width: 100%;white-space: normal !important}.category{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin:1rem 0 1rem 0}.tag{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px;font-family:"Newsreader",serif}.tag>a{text-decoration:none;color:#000}img{margin:auto;display:block;max-width:100%;height:auto;margin-bottom:1rem}.katex{white-space: pre-line !important;display: inline-block;max-width: 100%;overflow-x: auto;overflow-y: hidden;scrollbar-width: thin;overflow-wrap: break-word;word-break: break-word;vertical-align: -7px}.content > p {overflow-wrap: break-word;word-break: break-word}
+    </style>
+    <style type="text/css">
+    	pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}
+		.hljs{color:#c9d1d9;background:#0d1117}.hljs-doctag,.hljs-keyword,.hljs-meta .hljs-keyword,.hljs-template-tag,.hljs-template-variable,.hljs-type,.hljs-variable.language_{color:#ff7b72}.hljs-title,.hljs-title.class_,.hljs-title.class_.inherited__,.hljs-title.function_{color:#d2a8ff}.hljs-attr,.hljs-attribute,.hljs-literal,.hljs-meta,.hljs-number,.hljs-operator,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-variable{color:#79c0ff}.hljs-meta .hljs-string,.hljs-regexp,.hljs-string{color:#a5d6ff}.hljs-built_in,.hljs-symbol{color:#ffa657}.hljs-code,.hljs-comment,.hljs-formula{color:#8b949e}.hljs-name,.hljs-quote,.hljs-selector-pseudo,.hljs-selector-tag{color:#7ee787}.hljs-subst{color:#c9d1d9}.hljs-section{color:#1f6feb;font-weight:700}.hljs-bullet{color:#f2cc60}.hljs-emphasis{color:#c9d1d9;font-style:italic}.hljs-strong{color:#c9d1d9;font-weight:700}.hljs-addition{color:#aff5b4;background-color:#033a16}.hljs-deletion{color:#ffdcd7;background-color:#67060c}
+    	pre{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;font-weight:400;word-break:break-word;word-wrap:break-word;box-sizing:inherit;border-radius:4px;overflow-x:auto;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}code{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;word-wrap:break-word;word-break:break-word;font-style:normal;line-height:20px;letter-spacing:-.003em;box-sizing:inherit;font-weight:400;font-size:75%;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}
+    </style>
+    <style type="text/css">
+    	.back-to-top{position:fixed;bottom:20px;right:20px;background-color:#a73f3f;color:#fff;padding:8px 10px;border-radius:50%;box-shadow:0 4px 6px rgb(0 0 0 / .2);font-size:10px;font-weight:700;text-decoration:none;text-align:center;transition:opacity 0.3s ease,visibility 0.3s ease;z-index:99999;opacity:1;visibility:visible}.back-to-top:hover{background-color:#0056b3}
+    </style>
+    <style type="text/css">
+        .ad-header {margin: 1rem auto 1rem;background-color: #fdfdfd;text-align: center;display: block;}.ad-header .ad-wrapper {min-height: 90px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #555;font-weight: 500;padding: 3rem;border: 1px dashed #ccc;border-radius: 6px;}@media (max-width: 768px) {.ad-header {padding: 0.75rem;}}.ad-sidebar {margin: 0 0 1rem;background-color: #fefefe;text-align: center;padding: 0px;width: 100%;max-width: 100%;display: block;}.ad-sidebar .ad-wrapper {min-height: 250px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #444;font-weight: 500;border: 1px dashed #aaa;border-radius: 6px;padding: 0rem;}@media (max-width: 1024px) {.ad-sidebar {padding: 0.75rem;}}
+    </style>
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://catatansoal.github.io/blog/troubleshooting-optimizationproblemresults-with-hourly-horizon"
+          },
+          "headline": "Troubleshooting OptimizationProblemResults With Hourly Horizon In PowerSimulations.jl",
+          "description": "Troubleshooting OptimizationProblemResults With Hourly Horizon In PowerSimulations.jl...",
+          "image": [
+            "https://tse4.mm.bing.net/th?q=Troubleshooting%20%60OptimizationProblemResults%60%20with%20Hourly%20Horizon%20in%20PowerSimulations.jl"
+          ],
+          "author": {
+            "@type": "Person",
+            "name": "ADMIN",
+            "jobTitle": "Editor web"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "ANABEL",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://tse4.mm.bing.net/th?q=ANABEL%20WEB"
+            }
+          },
+          "datePublished": "2025-07-27T07:10:22+00:00",
+          "dateModified": "2025-07-27T07:10:22+00:00"
+        }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="container nav-container">
+                <div class="nav-left">
+                    <span class="logo">ANABEL</span>
+                    <span class="blog-tag">Article</span>
+                </div>
+                <div class="nav-search">
+                    <form class="search-form" role="search">
+                        <input 
+                            type="search" 
+                            class="search-input"
+                            placeholder="Search articles..."
+                            aria-label="Search articles"
+                        >
+                        <button type="submit" class="search-button" aria-label="Submit search">🔎</button>
+                    </form>
+                </div>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+                <div class="nav-menu">
+                    <ul class="nav-list">
+                    	<li><a href="/" class="nav-link">HOME</a></li>
+                        <li><a href="/pages/About" class="nav-link">About</a></li>
+                        <li><a href="/pages/Contact" class="nav-link">Contact</a></li>
+                        <li><a href="/pages/Disclaimer" class="nav-link">Disclaimer</a></li>
+                        <li><a href="/pages/Privacy" class="nav-link">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="main">
+        <article class="article">
+            <header class="article-header">
+                <div class="container">
+                    <h1>Troubleshooting OptimizationProblemResults With Hourly Horizon In PowerSimulations.jl</h1>
+                    <div class="meta">
+                        <time datetime="2025-07-27T07:10:22+00:00">Jul 27, 2025</time>
+                        <span class="author">by ADMIN</span>
+                        <span class="view-count">
+                            <span id="viewCount">86</span> views
+                        </span>
+                    </div>
+                </div>
+            </header>
+            <div class="ad-header container">
+                <div class="ad-wrapper">
+    Iklan Headers
+</div>
+            </div>
+            <div class="container">
+                <div class="article-layout">
+                    <div class="content">
+                        <code></code><img src="https://tse4.mm.bing.net/th?q=Troubleshooting%20%60OptimizationProblemResults%60%20with%20Hourly%20Horizon%20in%20PowerSimulations.jl" title="Troubleshooting `OptimizationProblemResults` with Hourly Horizon in PowerSimulations.jl" width="300" height="200"/>
+<p>Hey guys! Let's dive into a common hiccup some of you might encounter while using PowerSimulations.jl, specifically when dealing with <code>OptimizationProblemResults</code> and setting your horizon to just one hour (<code>Hour(1)</code>). This guide is all about diagnosing the issue, understanding why it happens, and getting you back on track.</p>
+<h2>The Issue: <code>OptimizationProblemResults</code> Not Playing Nice with <code>horizon = Hour(1)</code></h2>
+<p>So, you've been working on a cool power system model, using <code>PowerSimulations.jl</code> to simulate its operation. You've set your simulation horizon to a single hour, thinking it's a straightforward scenario. But when you try to access the results using <code>OptimizationProblemResults</code>, things go south. What's the deal?</p>
+<p>The error usually pops up when you try to create <code>OptimizationProblemResults</code> after solving a <code>DecisionModel</code> with a horizon of <code>Hour(1)</code>. You might be scratching your head, thinking, &quot;A single point in time should be a valid simulation, right?&quot; Absolutely! But there are some nuances we need to explore.</p>
+<p>Let's break down why this might be happening and, more importantly, how to fix it.</p>
+<h3>Understanding the Problem</h3>
+<p>First off, let's look at the core of the problem. In the realm of power system simulations, time series data is king. We're often dealing with how things change over time – load fluctuations, renewable energy output, and so on. When you set <code>horizon = Hour(1)</code>, you're essentially telling the simulation to consider only a single time period. While this seems simple, it can expose some underlying assumptions in how the results are processed.</p>
+<p>Specifically, the <code>OptimizationProblemResults</code> structure in <code>PowerSimulations.jl</code> is designed to handle scenarios where there are multiple time points. It expects time series data so that it can effectively extract and present the results over the simulation horizon. When you only have one time point, some of the internal mechanisms might not align perfectly, leading to errors.</p>
+<h3>Diving Deeper: Why Does This Happen?</h3>
+<p>The issue often arises from the way <code>OptimizationProblemResults</code> handles time series data extraction. It anticipates a time series, even if it's short. When it encounters a single time period, certain operations, such as iterating over time steps or interpolating between them, might fail because they're not designed for a single-point scenario. It’s like trying to find a trend in a dataset with only one entry – there’s nothing to compare it to!</p>
+<p>Furthermore, some of the post-processing steps assume that there is a time dimension to the data. For example, calculating ramping rates or tracking state transitions requires comparing values across different time points. With a single time point, these calculations become meaningless, and the system might throw an error rather than produce nonsensical results.</p>
+<h3>The Importance of Data</h3>
+<p>Another key factor here is the data you're feeding into the simulation. If your data consists of hourly time series data, the simulation engine expects to see a series of values, one for each hour in the horizon. When the horizon is one hour, it expects to see a single set of values. However, the way this data is processed and accessed might still be geared towards a time series approach, which can lead to conflicts.</p>
+<p>For instance, if you’re loading data that’s indexed by time but only providing data for a single hour, the system might try to access data beyond the available time range, resulting in an error. It’s crucial to ensure that your data aligns perfectly with the simulation horizon, both in terms of the values and the way they are indexed.</p>
+<h2>Reproducing the Bug: The Code Snippet</h2>
+<p>Let's look at the code snippet that triggers this issue. It's a classic setup for solving a decision model in <code>PowerSimulations.jl</code>:</p>
+<pre><code class="hljs">problem = DecisionModel(
+    template_uc,
+    sys;
+    optimizer = solver,
+    horizon = Hour(1)  # one hour
+)
+build!(problem; output_dir = mktempdir())
+solve!(problem)
+res = OptimizationProblemResults(problem)
+</code></pre>
+<p>In this code:</p>
+<ol>
+<li>We create a <code>DecisionModel</code> using a template (<code>template_uc</code>) and a system (<code>sys</code>).</li>
+<li>We specify the optimizer (<code>solver</code>) and set the horizon to <code>Hour(1)</code>. This is where the potential problem lies.</li>
+<li>We build and solve the problem, which should execute without issues.</li>
+<li>The trouble starts when we try to create <code>OptimizationProblemResults(problem)</code>. This is the step that can fail when the horizon is just one hour.</li>
+</ol>
+<p>The key line to focus on is <code>horizon = Hour(1)</code>. This seemingly innocuous setting can cause headaches if the rest of your setup isn't perfectly aligned for a single-time-point simulation.</p>
+<h2>Expected Behavior: What Should Happen?</h2>
+<p>Ideally, a single-point-in-time simulation should be a valid problem. We should be able to set <code>horizon = Hour(1)</code>, solve the model, and access the results without any errors. The expectation is that <code>OptimizationProblemResults</code> should gracefully handle this scenario and provide the results for that single time period.</p>
+<p>After solving the optimization problem, we expect <code>OptimizationProblemResults</code> to provide a snapshot of the system state at that specific hour. This includes things like generator dispatch, line flows, and storage levels – all the variables you'd typically want to inspect after a simulation.</p>
+<p>In short, the system should recognize that even a single time point is a valid simulation and provide a way to access the results without crashing. This is crucial for use cases where you might be interested in a specific moment in time, rather than a sequence of events.</p>
+<h2>Solutions and Workarounds</h2>
+<p>Okay, so we've identified the problem and understood why it happens. Now, let's talk solutions. There are a few ways to tackle this, depending on your specific needs and the structure of your simulation.</p>
+<h3>1. Extending the Horizon (Even Slightly)</h3>
+<p>The simplest workaround is often to extend the horizon, even by a tiny amount. Instead of <code>Hour(1)</code>, try <code>Hour(1) + Minute(1)</code>. This gives the simulation a minimal time series to work with, which can be enough to avoid the issues within <code>OptimizationProblemResults</code>.</p>
+<p>This approach works because it introduces a small time dimension that satisfies the expectations of the post-processing tools. It's a bit like giving the system a tiny nudge in the right direction.</p>
+<pre><code class="hljs">problem = DecisionModel(
+    template_uc,
+    sys;
+    optimizer = solver,
+    horizon = Hour(1) + Minute(1)
+)
+build!(problem; output_dir = mktempdir())
+solve!(problem)
+res = OptimizationProblemResults(problem)
+</code></pre>
+<h3>2. Data Alignment and Validation</h3>
+<p>Make sure your data is perfectly aligned with the simulation horizon. If you're providing time series data, ensure that it includes data for at least the entire simulation period. For <code>horizon = Hour(1)</code>, this means you need data for that one hour. Validate that your data doesn't have any gaps or inconsistencies.</p>
+<p>This involves carefully checking the time indices in your data and ensuring they match the simulation time steps. If there’s a mismatch, you might need to resample or interpolate your data to fit the required format. Tools for time series manipulation in Julia, such as the <code>TimeSeries</code> package, can be incredibly helpful here.</p>
+<h3>3. Custom Result Extraction</h3>
+<p>If you need to stick with <code>horizon = Hour(1)</code> and don't want to extend the horizon, you might need to extract the results manually. This means bypassing <code>OptimizationProblemResults</code> and directly accessing the solution data from the solved problem. While this requires a bit more work, it gives you full control over the process.</p>
+<p>Here’s the general idea:</p>
+<ol>
+<li>After solving the problem, access the solution variables directly from the JuMP model.</li>
+<li>Extract the values you need for each variable.</li>
+<li>Organize the data in a format that suits your needs.</li>
+</ol>
+<p>This approach can be more involved, but it ensures you get exactly the data you need without relying on the potentially problematic <code>OptimizationProblemResults</code> structure. It also gives you a deeper understanding of how the solution data is structured within <code>PowerSimulations.jl</code>.</p>
+<h3>4. Check for Updates and Bug Fixes</h3>
+<p><code>PowerSimulations.jl</code> is an actively developed package. The issue you're encountering might be a known bug that has already been fixed in a newer version. Always check the package's release notes and consider updating to the latest version. The developers are usually quick to address these kinds of issues, so updating can often resolve the problem.</p>
+<h3>5. Simplify the Template</h3>
+<p>Sometimes, the issue might stem from the complexity of your template. A highly complex template with numerous constraints and variables might expose edge cases that aren't well-handled by the post-processing tools. Try simplifying your template to isolate the issue. This can help you determine whether the problem is in the core simulation setup or in some specific aspect of your model.</p>
+<h2>Real-World Scenarios and Examples</h2>
+<p>Let's think about some real-world scenarios where you might encounter this issue and how the solutions apply.</p>
+<h3>Scenario 1: Studying a Specific Hour of Peak Demand</h3>
+<p>Imagine you're interested in analyzing the system state during the hour of peak demand. You set <code>horizon = Hour(1)</code> to focus on that specific time. If you encounter the <code>OptimizationProblemResults</code> issue, extending the horizon by a minute or two can be a quick fix.</p>
+<h3>Scenario 2: Validating a Single-Point Solution</h3>
+<p>Suppose you've developed a simplified model for a particular operating condition and want to validate its solution at a single point in time. If extending the horizon isn't feasible, extracting the results manually might be the best approach.</p>
+<h3>Scenario 3: Debugging a Larger Simulation</h3>
+<p>You're working on a large-scale simulation with a long horizon, but you suspect there's an issue at a specific hour. Setting <code>horizon = Hour(1)</code> for debugging purposes can be useful, but you'll need to be mindful of the <code>OptimizationProblemResults</code> issue and consider alternative extraction methods.</p>
+<h2>Conclusion: Getting Back to Simulating</h2>
+<p>Encountering issues with <code>OptimizationProblemResults</code> and <code>horizon = Hour(1)</code> can be frustrating, but it's a solvable problem. By understanding why it happens and exploring the solutions outlined above, you can get back to simulating your power systems with confidence.</p>
+<p>Remember, the key takeaways are:</p>
+<ul>
+<li><code>OptimizationProblemResults</code> is designed for time series data and can struggle with single-point simulations.</li>
+<li>Extending the horizon slightly is often the simplest workaround.</li>
+<li>Data alignment and validation are crucial for any simulation.</li>
+<li>Manual result extraction gives you full control but requires more work.</li>
+<li>Keeping your packages updated ensures you benefit from the latest bug fixes.</li>
+</ul>
+<p>Happy simulating, and don't let a little hiccup slow you down! If you found this helpful, give it a thumbs up, and let’s keep the power flowing smoothly in our simulations!</p>
+
+                    </div>
+                    <aside class="related-posts">
+                        <div class="ad-sidebar container">
+                            <div class="ad-wrapper">
+    <span>Iklan Related</span>
+</div>
+                        </div>
+                        <h2 class="related-posts-title">Related Posts</h2><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/writing-letters-to-inmates-a">Writing Letters To Inmates: A Heartfelt Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-06T12:00:36+00:00">Aug 6, 2025</time>
+		                        <span class="view-count">
+									45 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/finding-top-n-and-bottom">Finding Top N And Bottom N Values In Pandas After Grouping</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-13T22:23:55+00:00">Jul 13, 2025</time>
+		                        <span class="view-count">
+									58 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/apa-citation-online-news-articles">APA Citation: Online News Articles Made Easy</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-05T13:53:47+00:00">Aug 5, 2025</time>
+		                        <span class="view-count">
+									44 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/fix-redirect-after-add-to">Fix Redirect After Add To Cart In Magento 2 Custom Controller</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-20T14:08:57+00:00">Jul 20, 2025</time>
+		                        <span class="view-count">
+									61 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/solve-6k-2-2k-10">Solve $6k - 2 &lt; 2k - 10$: A Step-by-Step Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-07T00:24:11+00:00">Aug 7, 2025</time>
+		                        <span class="view-count">
+									46 views
+		                        </span>
+                            </div>
+                        </article>
+                    </aside>
+                    <aside class="related-posts"></aside>
+                </div>
+            </div>
+        </article>
+        <a href="#" class="back-to-top" id="backToTop" title="Back to top">
+        	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-bar-up" viewBox="0 0 16 16">
+			  <path fill-rule="evenodd" d="M3.646 11.854a.5.5 0 0 0 .708 0L8 8.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708M2.4 5.2c0 .22.18.4.4.4h10.4a.4.4 0 0 0 0-.8H2.8a.4.4 0 0 0-.4.4"/>
+			</svg>
+		</a>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 ANABEL</p>
+        </div>
+    </footer>
+    <script>
+    	(() => {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            const toggleMenu = () => {
+                navMenu.classList.toggle('nav-menu-active');
+                navToggle.classList.toggle('nav-toggle-active');
+            };
+            const backToTopHandler = (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            navToggle.addEventListener('click', toggleMenu);
+            document.getElementById('backToTop').addEventListener('click', backToTopHandler);
+            window.addEventListener('pagehide', () => {
+                navToggle.removeEventListener('click', toggleMenu);
+                document.getElementById('backToTop').removeEventListener('click', backToTopHandler);
+            });
+        })();
+		(() => {
+            window.addEventListener("DOMContentLoaded", (event) => {
+                const ellHljs = document.createElement("script");
+                ellHljs.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js");
+                ellHljs.onload = () => {
+                    hljs.highlightAll();
+                };
+                document.querySelector("body").append(ellHljs);
+                const ellFont = document.createElement("link");
+                ellFont.setAttribute("href", "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css");
+                ellFont.setAttribute("rel", "stylesheet");
+                document.querySelector("head").append(ellFont);
+                window.addEventListener('pagehide', () => {
+                    // ellHljs.remove();
+                    ellFont.remove();
+                });
+
+            });
+        })();
+    </script>
+    
+    
+    
+</body>
+</html>

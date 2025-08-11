@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Testing Strategy: Calculator App Quality Guide</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Testing Strategy: Calculator App Quality Guide...">
+    <link rel="canonical" href="https://catatansoal.github.io/blog/testing-strategy-calculator-app-quality">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Testing Strategy: Calculator App Quality Guide">
+	<meta property="og:description" content="Testing Strategy: Calculator App Quality Guide...">
+	<meta property="og:url" content="https://catatansoal.github.io/blog/testing-strategy-calculator-app-quality">
+	<meta property="og:site_name" content="ANABEL">
+	<meta property="article:published_time" content="2025-08-08T06:23:03+00:00">
+	<meta property="article:author" content="ADMIN">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+    <link rel="preload" fetchpriority="high" as="image" href="https://tse4.mm.bing.net/th?q=%F0%9F%A7%AA%20Comprehensive%20Testing%20Strategy%20Implementation">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style type="text/css">
+    	:root{--primary-color:#3740ff;--text-color:#202124;--background-color:#ffffff;--gray-100:#f8f9fa;--gray-200:#e9ecef}*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;line-height:1.6;color:var(--text-color);background-color:var(--background-color)}.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}.header{background-color:var(--background-color);border-bottom:1px solid var(--gray-200);position:sticky;top:0;z-index:100}.nav{padding:.5rem 0}.nav-container{display:flex;justify-content:space-between;align-items:center;gap:1rem}.nav-left{display:flex;align-items:center;flex-shrink:0}.logo{font-weight:700;color:var(--primary-color)}.blog-tag{margin-left:1rem;padding:.25rem .5rem;background-color:var(--gray-100);border-radius:4px;font-size:.875rem}.nav-search{flex-grow:1;max-width:300px}.search-form{position:relative;width:100%}.search-input{width:100%;padding:.5rem 2.5rem .5rem 1rem;border:1px solid var(--gray-200);border-radius:24px;font-size:.875rem;transition:all 0.2s}.search-input:focus{outline:none;border-color:var(--primary-color);box-shadow:0 0 0 2px rgb(55 64 255 / .1)}.search-button{position:absolute;right:.5rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#5f6368;cursor:pointer;padding:.25rem;display:flex;align-items:center;justify-content:center}.search-button:hover{color:var(--primary-color)}.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:.5rem}.hamburger{display:block;position:relative;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before,.hamburger::after{content:'';position:absolute;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before{top:-6px}.hamburger::after{bottom:-6px}.nav-toggle-active .hamburger{background:#fff0}.nav-toggle-active .hamburger::before{transform:rotate(45deg);top:0}.nav-toggle-active .hamburger::after{transform:rotate(-45deg);bottom:0}.nav-list{display:flex;list-style:none;gap:2rem}.nav-link{color:var(--text-color);text-decoration:none;font-size:.9rem;transition:color 0.2s}.nav-link:hover{color:var(--primary-color)}.article-header{padding:2rem 0;background-color:var(--gray-100)}.article-layout{display:grid;grid-template-columns:1fr 350px;gap:3rem;padding:1rem 0;align-items: start}h1,h2,h3,h4,h5,h6{font-family:"Crimson Text","Times New Roman",Times,serif}h1{font-size:2.5rem;line-height:1.2;margin-bottom:1rem}.meta{color:#5f6368;font-size:.875rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}.view-count{display:inline-flex;align-items:center;gap:.25rem}.view-count svg{color:#5f6368}.content{min-width:0;border-bottom:1px solid #dddddd5e;margin-top:1rem;white-space:pre-line !important;overflow-wrap:break-word;overflow-x:auto;word-break:break-word}.lead{font-size:1.25rem;color:#5f6368;margin-bottom:2rem}h2,h3,h4,h5,h6{font-size:1.75rem;margin:1rem 0 1rem}p,pre,ol,ul>li{margin-bottom:1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;font-size:1.3rem;text-align: justify;}p>code{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px}hr{margin:1rem 0 1rem 0}.code-example{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;margin:1.5rem 0;overflow-x:auto}code{font-family:'Roboto Mono',monospace;font-size:.875rem}ul{margin:.2rem 0;padding-left:1.5rem}.related-posts{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;position:sticky;top:5rem}.related-posts-title,.newpost-posts-list{font-size:1.75rem;margin:0 0 1rem}.related-posts-list{display:flex;flex-direction:column;gap:.5rem}.related-post,.newpost-post{border-bottom:1px solid #ddd;padding-bottom:10px;margin-bottom:10px}.related-post:last-child,.newpost-post:last-child{padding-bottom:0;border-bottom:none}.related-post-title,.newpost-post-title{font-size:1.2rem;margin:0 0 .1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;}.related-post-title a,.newpost-post-title a{color:var(--text-color);text-decoration:none;transition:color 0.2s}.related-post-title a:hover,.newpost-post-title a:hover{color:var(--primary-color)}.related-post time{font-size:.875rem;color:#5f6368}.footer{background-color:var(--gray-100);padding:2rem 0;margin-top:4rem;color:#5f6368;font-size:.875rem}.nav-menu>ul>li{margin-bottom:0}@media (max-width:1024px){.container{max-width:800px}.article-layout{grid-template-columns:1fr;gap:2rem}.related-posts{position:static}}@media (max-width:768px){.nav-container{flex-wrap:wrap}.nav-search{order:3;max-width:none;width:100%;margin-top:.1rem}.nav-toggle{display:block}.nav-menu{display:none;position:absolute;top:100%;left:0;right:0;background:var(--background-color);padding:1rem 0;border-bottom:1px solid var(--gray-200)}.nav-menu-active{display:block}.nav-list{flex-direction:column;gap:.1rem;padding:0 1.5rem}.nav-link{display:block;padding:.2rem 0}h1{font-size:2rem}.article-header{padding:2rem 0}.content{padding:.1rem 0}}table{width:100%;border-collapse:collapse;margin:20px 0;font-family:'Arial',sans-serif}th,td{padding:12px 15px;text-align:left;border:1px solid #ddd}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9}tr:nth-child(even) td{background-color:#f2f2f2}@media screen and (max-width:768px){table{border:0;display:block;overflow-x:auto;white-space:nowrap}th,td{padding:10px;text-align:right}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9;border-bottom:1px solid #ddd}tr:nth-child(even) td{background-color:#f2f2f2}}a{text-decoration:none;color:#540707}.katex-html{padding: .2rem;color: #000;font-weight: 700;font-size: 1.3rem;overflow-wrap: break-word;max-width: 100%;white-space: normal !important}.category{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin:1rem 0 1rem 0}.tag{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px;font-family:"Newsreader",serif}.tag>a{text-decoration:none;color:#000}img{margin:auto;display:block;max-width:100%;height:auto;margin-bottom:1rem}.katex{white-space: pre-line !important;display: inline-block;max-width: 100%;overflow-x: auto;overflow-y: hidden;scrollbar-width: thin;overflow-wrap: break-word;word-break: break-word;vertical-align: -7px}.content > p {overflow-wrap: break-word;word-break: break-word}
+    </style>
+    <style type="text/css">
+    	pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}
+		.hljs{color:#c9d1d9;background:#0d1117}.hljs-doctag,.hljs-keyword,.hljs-meta .hljs-keyword,.hljs-template-tag,.hljs-template-variable,.hljs-type,.hljs-variable.language_{color:#ff7b72}.hljs-title,.hljs-title.class_,.hljs-title.class_.inherited__,.hljs-title.function_{color:#d2a8ff}.hljs-attr,.hljs-attribute,.hljs-literal,.hljs-meta,.hljs-number,.hljs-operator,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-variable{color:#79c0ff}.hljs-meta .hljs-string,.hljs-regexp,.hljs-string{color:#a5d6ff}.hljs-built_in,.hljs-symbol{color:#ffa657}.hljs-code,.hljs-comment,.hljs-formula{color:#8b949e}.hljs-name,.hljs-quote,.hljs-selector-pseudo,.hljs-selector-tag{color:#7ee787}.hljs-subst{color:#c9d1d9}.hljs-section{color:#1f6feb;font-weight:700}.hljs-bullet{color:#f2cc60}.hljs-emphasis{color:#c9d1d9;font-style:italic}.hljs-strong{color:#c9d1d9;font-weight:700}.hljs-addition{color:#aff5b4;background-color:#033a16}.hljs-deletion{color:#ffdcd7;background-color:#67060c}
+    	pre{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;font-weight:400;word-break:break-word;word-wrap:break-word;box-sizing:inherit;border-radius:4px;overflow-x:auto;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}code{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;word-wrap:break-word;word-break:break-word;font-style:normal;line-height:20px;letter-spacing:-.003em;box-sizing:inherit;font-weight:400;font-size:75%;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}
+    </style>
+    <style type="text/css">
+    	.back-to-top{position:fixed;bottom:20px;right:20px;background-color:#a73f3f;color:#fff;padding:8px 10px;border-radius:50%;box-shadow:0 4px 6px rgb(0 0 0 / .2);font-size:10px;font-weight:700;text-decoration:none;text-align:center;transition:opacity 0.3s ease,visibility 0.3s ease;z-index:99999;opacity:1;visibility:visible}.back-to-top:hover{background-color:#0056b3}
+    </style>
+    <style type="text/css">
+        .ad-header {margin: 1rem auto 1rem;background-color: #fdfdfd;text-align: center;display: block;}.ad-header .ad-wrapper {min-height: 90px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #555;font-weight: 500;padding: 3rem;border: 1px dashed #ccc;border-radius: 6px;}@media (max-width: 768px) {.ad-header {padding: 0.75rem;}}.ad-sidebar {margin: 0 0 1rem;background-color: #fefefe;text-align: center;padding: 0px;width: 100%;max-width: 100%;display: block;}.ad-sidebar .ad-wrapper {min-height: 250px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #444;font-weight: 500;border: 1px dashed #aaa;border-radius: 6px;padding: 0rem;}@media (max-width: 1024px) {.ad-sidebar {padding: 0.75rem;}}
+    </style>
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://catatansoal.github.io/blog/testing-strategy-calculator-app-quality"
+          },
+          "headline": "Testing Strategy: Calculator App Quality Guide",
+          "description": "Testing Strategy: Calculator App Quality Guide...",
+          "image": [
+            "https://tse4.mm.bing.net/th?q=%F0%9F%A7%AA%20Comprehensive%20Testing%20Strategy%20Implementation"
+          ],
+          "author": {
+            "@type": "Person",
+            "name": "ADMIN",
+            "jobTitle": "Editor web"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "ANABEL",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://tse4.mm.bing.net/th?q=ANABEL%20WEB"
+            }
+          },
+          "datePublished": "2025-08-08T06:23:03+00:00",
+          "dateModified": "2025-08-08T06:23:03+00:00"
+        }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="container nav-container">
+                <div class="nav-left">
+                    <span class="logo">ANABEL</span>
+                    <span class="blog-tag">Article</span>
+                </div>
+                <div class="nav-search">
+                    <form class="search-form" role="search">
+                        <input 
+                            type="search" 
+                            class="search-input"
+                            placeholder="Search articles..."
+                            aria-label="Search articles"
+                        >
+                        <button type="submit" class="search-button" aria-label="Submit search">🔎</button>
+                    </form>
+                </div>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+                <div class="nav-menu">
+                    <ul class="nav-list">
+                    	<li><a href="/" class="nav-link">HOME</a></li>
+                        <li><a href="/pages/About" class="nav-link">About</a></li>
+                        <li><a href="/pages/Contact" class="nav-link">Contact</a></li>
+                        <li><a href="/pages/Disclaimer" class="nav-link">Disclaimer</a></li>
+                        <li><a href="/pages/Privacy" class="nav-link">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="main">
+        <article class="article">
+            <header class="article-header">
+                <div class="container">
+                    <h1>Testing Strategy: Calculator App Quality Guide</h1>
+                    <div class="meta">
+                        <time datetime="2025-08-08T06:23:03+00:00">Aug 8, 2025</time>
+                        <span class="author">by ADMIN</span>
+                        <span class="view-count">
+                            <span id="viewCount">47</span> views
+                        </span>
+                    </div>
+                </div>
+            </header>
+            <div class="ad-header container">
+                <div class="ad-wrapper">
+    Iklan Headers
+</div>
+            </div>
+            <div class="container">
+                <div class="article-layout">
+                    <div class="content">
+                        <img src="https://tse4.mm.bing.net/th?q=%F0%9F%A7%AA%20Comprehensive%20Testing%20Strategy%20Implementation" title="🧪 Comprehensive Testing Strategy Implementation" width="300" height="200"/>
+<p>Hey guys! Let's talk about how we're going to make our Calculator Application super robust and bug-free. We've got a plan to implement a comprehensive testing strategy, and this article is your guide to understanding it all. We've identified some significant testing gaps and over 28 bugs, so it's time to roll up our sleeves and get serious about quality. This is not just about fixing things; it's about building a solid foundation for future development and ensuring our app is top-notch. Think of this as our roadmap to creating a bulletproof application. So, buckle up, and let’s dive into the details of our comprehensive testing strategy implementation!</p>
+<h2>📋 Overview</h2>
+<p>This issue outlines the implementation of a comprehensive testing strategy for the Calculator Application. The current codebase has significant testing gaps and 28+ identified bugs that need to be addressed through systematic testing implementation. We aim to transform our calculator application from a bug-prone prototype into a production-ready, well-tested application with robust quality assurance processes. This involves not just fixing the existing issues but also setting up a framework that prevents future problems. By implementing this strategy, we're investing in the long-term health and reliability of our application. This overhaul will ensure that every feature works as expected and that the app remains stable even with new updates and changes. We're talking about a complete quality transformation here! The goal is to create an application that users can rely on, and developers can confidently build upon.</p>
+<h2>🎯 Objectives</h2>
+<p>Our main objectives are clear and ambitious. First, we want to <strong>achieve 85%+ test coverage</strong> across the application. This means we'll have tests covering almost every part of our code, ensuring that most potential issues are caught early. Next, we aim to <strong>implement all levels of the testing pyramid</strong>, from Unit tests at the base, to Integration tests in the middle, and End-to-End (E2E) tests at the top. This layered approach ensures that we test individual components, how they interact, and the overall user experience. We also need to <strong>address security vulnerabilities and edge cases</strong>, which are critical for maintaining the integrity and reliability of our app. This includes handling unusual inputs, unexpected scenarios, and potential security threats. Finally, we want to <strong>establish quality gates and a continuous testing pipeline</strong>, which will automate our testing process and ensure that every code change is thoroughly vetted. This continuous feedback loop is essential for maintaining high quality in a fast-paced development environment. By achieving these objectives, we'll create a robust, reliable, and secure calculator application.</p>
+<h2>🏗️ Testing Pyramid Structure</h2>
+<pre><code class="hljs">                    /\
+                   /  \
+                  /E2E \     ← End-to-End Tests (5-10%)
+                 /______\
+                /        \
+               /Integration\ ← Integration Tests (20-30%)
+              /____________\
+             /              \
+            /  Unit Tests    \ ← Unit Tests (60-70%)
+           /________________\
+</code></pre>
+<p>The testing pyramid is our guiding principle for structuring our testing efforts. At the base, we have <strong>Unit Tests (60-70%)</strong>. These tests are fast, focused, and cover individual components in isolation. Think of them as the foundation of our quality assurance, ensuring that each building block of our application works perfectly on its own. Moving up, we have <strong>Integration Tests (20-30%)</strong>. These tests check how different parts of our system work together, ensuring that the interfaces between components are functioning correctly. They’re crucial for verifying that our building blocks can form a cohesive structure. At the peak, we have <strong>End-to-End (E2E) Tests (5-10%)</strong>. These tests simulate real user scenarios, ensuring that the entire application works as expected from start to finish. E2E tests are like the final walkthrough, confirming that the whole building is functional and user-friendly. By following this pyramid structure, we ensure a balanced and effective testing strategy, with the right mix of speed, coverage, and realism. This approach helps us catch bugs early and maintain a high level of quality throughout the development lifecycle.</p>
+<h2>📊 Current State Analysis</h2>
+<h3>✅ Existing Coverage</h3>
+<p>Currently, we have some basic testing in place, which is a good starting point. We have <strong>basic backend unit tests</strong> for the <code>POST /api/calculate</code> endpoint, which means we’re at least checking the core functionality of our calculation logic. We also have <strong>basic frontend component tests</strong> for the Calculator and History components, ensuring that the main UI elements are somewhat covered. This existing coverage gives us a foundation to build upon, but there’s a lot more work to do. While these initial tests are valuable, they only scratch the surface of what's needed for a truly robust application. We need to expand our testing efforts to cover more scenarios, integrate different components, and ensure the overall reliability of the system. Think of it as having the blueprints and some of the materials, but we still need to construct the entire building. Our goal is to build on this foundation and create a comprehensive testing strategy that covers all aspects of our application.</p>
+<h3>❌ Critical Gaps</h3>
+<p>Despite our initial efforts, we have some <strong>critical gaps</strong> in our testing strategy that need immediate attention. We're missing integration tests, which means we haven't thoroughly verified how different parts of our application work together. This is a significant risk because components might work fine on their own but fail when integrated. We also have <strong>no end-to-end tests</strong>, leaving us blind to how the application performs in real-world scenarios. Without E2E tests, we can't be sure that the entire user journey is smooth and error-free. Additionally, our coverage of <strong>edge cases</strong> is incomplete, meaning we might miss unusual or unexpected inputs that could cause the application to break. There's also <strong>no error scenario testing</strong>, so we don't know how the application handles failures or exceptions. Finally, and critically, <strong>security vulnerability testing is missing</strong>, which leaves us exposed to potential security threats. These gaps are like holes in a safety net – we need to address them urgently to ensure the stability, reliability, and security of our application. Filling these gaps is a top priority in our testing strategy implementation.</p>
+<h2>🔍 Identified Issues (28+ Bugs Found)</h2>
+<p>We've identified over 28 bugs, which highlights the urgent need for a comprehensive testing strategy. These bugs span across both the frontend and backend, indicating systemic issues that need to be addressed. Let's break down the key areas where these bugs are found:</p>
+<h3>Backend Issues</h3>
+<ul>
+<li><strong>BUG 1-6: Server.js</strong>: We've found issues related to <strong>input validation</strong>, meaning we're not properly checking the data being sent to our server, which could lead to errors or security vulnerabilities. There are also concerns about <strong>unsafe eval</strong>, which is a risky practice that can allow malicious code to be executed. <strong>Division by zero</strong> errors are present, which can crash our application if not handled correctly. We're also <strong>missing endpoints</strong>, meaning certain functionalities are not accessible through our API. These backend issues are critical because they directly affect the core functionality and security of our application.</li>
+<li><strong>BUG 7-10: Tests</strong>: Our current tests have <strong>incomplete API coverage</strong>, meaning we're not thoroughly testing all the functionalities of our backend. We're also <strong>missing edge cases</strong> in our tests, which means we might not be catching unusual inputs or scenarios that could cause problems. These testing issues highlight the need to improve our test suite to ensure comprehensive coverage of the backend.</li>
+</ul>
+<h3>Frontend Issues</h3>
+<ul>
+<li><strong>BUG 11-23: App.js, Calculator.js, History.js</strong>: We have issues with <strong>error handling</strong>, meaning our application might not gracefully handle errors or display informative messages to the user. There are also <strong>UI/UX gaps</strong>, indicating that our user interface might not be intuitive or user-friendly. We're also <strong>missing features</strong>, which means our application doesn't yet offer all the functionalities it should. These frontend issues impact the user experience and overall usability of our application.</li>
+<li><strong>BUG 24-28: Tests</strong>: Our frontend tests are <strong>missing functionality tests</strong>, meaning we're not thoroughly testing all the features of our UI. We also have gaps in <strong>error scenarios</strong> testing, so we're not sure how our application behaves when things go wrong. These testing issues highlight the need to enhance our frontend test suite to ensure comprehensive coverage of the user interface and its functionalities. Addressing these bugs and enhancing our testing strategy will significantly improve the quality and reliability of our calculator application.</li>
+</ul>
+<h2>📝 Implementation Tasks</h2>
+<p>Now, let's break down the tasks we need to tackle in our comprehensive testing strategy implementation. We've divided the work into four phases, each with its own priority level. This phased approach allows us to focus on the most critical issues first and systematically improve our testing coverage.</p>
+<h3>Phase 1: Critical Unit Tests (Week 1) 🔴 HIGH PRIORITY</h3>
+<p>In Phase 1, our top priority is enhancing our unit tests, which form the foundation of our testing pyramid. We're focusing on both backend and frontend components to ensure thorough coverage of individual units of code.</p>
+<h4>Backend Unit Tests Enhancement</h4>
+<ul>
+<li>[ ] <strong>Task 1.1</strong>: Complete <code>POST /api/calculate</code> test coverage
+<ul>
+<li>[ ] Division by zero scenarios: We need to ensure our application handles division by zero gracefully, preventing crashes and displaying appropriate error messages.</li>
+<li>[ ] Invalid input types (null, undefined, non-string): We must validate that our API correctly handles invalid input types, such as null, undefined, or non-string values, preventing unexpected behavior.</li>
+<li>[ ] Empty operation strings: We need to test how our application behaves when it receives an empty operation string, ensuring it doesn't crash or produce incorrect results.</li>
+<li>[ ] Large number calculations: We should verify that our application can handle large number calculations without errors or precision loss.</li>
+<li>[ ] Scientific notation handling: We need to ensure our application correctly interprets and calculates expressions in scientific notation.</li>
+<li>[ ] Malicious input (code injection attempts): We must test for malicious input, such as code injection attempts, to ensure our application is secure and doesn't execute arbitrary code.</li>
+</ul>
+</li>
+<li>[ ] <strong>Task 1.2</strong>: Implement <code>GET /api/history</code> tests
+<ul>
+<li>[ ] Successful data retrieval: We need to verify that our API correctly retrieves calculation history data when requested.</li>
+<li>[ ] Empty history scenarios: We should test how our application behaves when there's no calculation history available, ensuring it displays an appropriate message or state.</li>
+<li>[ ] Database error handling: We must ensure our application handles database errors gracefully, preventing crashes and displaying informative error messages.</li>
+<li>[ ] Pagination testing: We need to verify that pagination works correctly for the history endpoint, ensuring large datasets are handled efficiently.</li>
+</ul>
+</li>
+<li>[ ] <strong>Task 1.3</strong>: Database integration tests
+<ul>
+<li>[ ] CRUD operations validation: We need to validate that our database CRUD (Create, Read, Update, Delete) operations work as expected, ensuring data integrity.</li>
+<li>[ ] Connection failure scenarios: We must test how our application behaves when there are database connection failures, ensuring it can recover or display appropriate error messages.</li>
+<li>[ ] Data persistence verification: We need to verify that data is correctly persisted in the database and can be retrieved accurately.</li>
+</ul>
+</li>
+</ul>
+<h4>Frontend Unit Tests Enhancement</h4>
+<ul>
+<li>[ ] <strong>Task 1.4</strong>: Calculator component comprehensive testing
+<ul>
+<li>[ ] Complex operation flows (“2 + 3 * 4”): We need to ensure our calculator component correctly handles complex operation flows, following the correct order of operations.</li>
+<li>[ ] Decimal point handling: We should verify that decimal point inputs and calculations are handled accurately.</li>
+<li>[ ] Operator precedence validation: We must validate that operator precedence (e.g., multiplication before addition) is correctly implemented.</li>
+<li>[ ] Error state management: We need to ensure our calculator component displays appropriate error messages and states when errors occur (e.g., division by zero).</li>
+<li>[ ] Multiple operations sequence: We should test how the calculator handles sequences of multiple operations, ensuring accurate results.</li>
+</ul>
+</li>
+<li>[ ] <strong>Task 1.5</strong>: App component integration testing
+<ul>
+<li>[ ] API communication with mocked responses: We need to test the communication between our App component and the API using mocked responses, ensuring data is correctly sent and received.</li>
+<li>[ ] Error state propagation: We must ensure that errors from the API are correctly propagated and displayed in the UI.</li>
+<li>[ ] Loading state management: We need to verify that loading states are correctly managed while waiting for API responses, providing a smooth user experience.</li>
+<li>[ ] History refresh functionality: We should test the functionality to refresh the calculation history, ensuring it updates correctly.</li>
+</ul>
+</li>
+<li>[ ] <strong>Task 1.6</strong>: History component edge cases
+<ul>
+<li>[ ] Empty history display: We need to ensure the History component displays an appropriate message or state when the history is empty.</li>
+<li>[ ] Large dataset handling: We should verify that the History component can efficiently handle and display large datasets of calculation history.</li>
+<li>[ ] Timestamp formatting: We must ensure timestamps are correctly formatted and displayed in the history entries.</li>
+<li>[ ] Error state rendering: We need to verify that the History component correctly renders error states if there are issues retrieving history data.</li>
+</ul>
+</li>
+</ul>
+<h4>Security Testing</h4>
+<ul>
+<li>[ ] <strong>Task 1.7</strong>: Security vulnerability tests
+<ul>
+<li>[ ] <code>eval()</code> injection attempts: We need to specifically test for vulnerabilities related to the use of <code>eval()</code>, ensuring it cannot be exploited for code injection.</li>
+<li>[ ] SQL injection testing: We must test for SQL injection vulnerabilities, which could allow attackers to access or modify our database.</li>
+<li>[ ] XSS prevention validation: We need to validate that our application is protected against Cross-Site Scripting (XSS) attacks, which could allow attackers to inject malicious scripts into our pages.</li>
+<li>[ ] Input sanitization verification: We should verify that all user inputs are properly sanitized to prevent any security vulnerabilities.</li>
+</ul>
+</li>
+</ul>
+<h3>Phase 2: Integration Testing (Week 2) 🟡 MEDIUM PRIORITY</h3>
+<p>In Phase 2, we'll focus on integration testing to ensure that different parts of our application work together seamlessly. This phase is crucial for verifying the interactions between components and systems.</p>
+<h4>API Integration Tests</h4>
+<ul>
+<li>[ ] <strong>Task 2.1</strong>: Full workflow testing
+<ul>
+<li>[ ] Calculate → Save → Retrieve flow: We need to test the full workflow of a calculation, from input to saving in the history and retrieving it, ensuring all steps work correctly.</li>
+<li>[ ] Multiple calculations history ordering: We should verify that multiple calculations are saved and retrieved in the correct order in the history.</li>
+<li>[ ] Concurrent request handling: We must test how our API handles concurrent requests, ensuring it remains stable and performs well under load.</li>
+<li>[ ] Database transaction integrity: We need to ensure that database transactions are handled correctly, maintaining data integrity even in complex scenarios.</li>
+</ul>
+</li>
+<li>[ ] <strong>Task 2.2</strong>: Frontend-Backend integration
+<ul>
+<li>[ ] API communication testing with MSW: We need to use Mock Service Worker (MSW) to mock API responses and test the communication between the frontend and backend.</li>
+<li>[ ] Network error simulation: We should simulate network errors to test how our application handles connectivity issues.</li>
+<li>[ ] Timeout scenario handling: We must test how our application behaves when API requests time out, ensuring a smooth user experience.</li>
+<li>[ ] Invalid response management: We need to verify that our application correctly handles invalid responses from the API.</li>
+</ul>
+</li>
+</ul>
+<h4>Database Integration</h4>
+<ul>
+<li>[ ] <strong>Task 2.3</strong>: Database reliability testing
+<ul>
+<li>[ ] Connection pool management: We need to test how our application manages database connections, ensuring efficient use of resources.</li>
+<li>[ ] Transaction rollback scenarios: We should test scenarios where transactions need to be rolled back, ensuring data consistency.</li>
+<li>[ ] Schema migration testing: We must test database schema migrations to ensure they are applied correctly without data loss.</li>
+<li>[ ] Data consistency validation: We need to validate that data remains consistent across different operations and scenarios.</li>
+</ul>
+</li>
+</ul>
+<h3>Phase 3: End-to-End Testing (Week 3) 🟡 MEDIUM PRIORITY</h3>
+<p>Phase 3 is dedicated to end-to-end (E2E) testing, where we simulate real user scenarios to ensure the entire application works as expected. This phase is crucial for verifying the overall user experience.</p>
+<h4>Critical User Journeys</h4>
+<ul>
+<li>[ ] <strong>Task 3.1</strong>: Basic calculator workflows
+<ul>
+<li>[ ] Number input → operation → result display: We need to test the basic workflow of inputting numbers, selecting an operation, and displaying the result.</li>
+<li>[ ] History viewing and navigation: We should verify that users can view and navigate through the calculation history.</li>
+<li>[ ] Calculator reset functionality: We must test the functionality to reset the calculator, ensuring it clears the display and any stored values.</li>
+<li>[ ] Error message display: We need to ensure that appropriate error messages are displayed for invalid operations or inputs.</li>
+</ul>
+</li>
+<li>[ ] <strong>Task 3.2</strong>: Error scenario testing
+<ul>
+<li>[ ] Backend server offline: We need to test how our application behaves when the backend server is offline, ensuring graceful error handling.</li>
+<li>[ ] Network connectivity issues: We should simulate network connectivity issues to test how the application responds.</li>
+<li>[ ] Invalid calculation handling: We must test how the application handles invalid calculations, such as division by zero or invalid inputs.</li>
+<li>[ ] UI error state management: We need to verify that the UI correctly displays error states and messages.</li>
+</ul>
+</li>
+</ul>
+<h4>Cross-Browser Testing</h4>
+<ul>
+<li>[ ] <strong>Task 3.3</strong>: Browser compatibility
+<ul>
+<li>[ ] Chrome, Firefox, Safari, Edge testing: We need to test our application on different browsers (Chrome, Firefox, Safari, Edge) to ensure compatibility.</li>
+<li>[ ] Mobile responsive testing: We should verify that our application is responsive and works well on mobile devices.</li>
+<li>[ ] Accessibility compliance (A11y): We must test for accessibility compliance, ensuring our application is usable by people with disabilities.</li>
+<li>[ ] Performance across devices: We need to evaluate the performance of our application across different devices and browsers.</li>
+</ul>
+</li>
+</ul>
+<h3>Phase 4: Performance &amp; Advanced Testing (Week 4) 🟢 LOW PRIORITY</h3>
+<p>In Phase 4, we'll focus on performance testing and additional quality assurance measures to ensure our application is robust and user-friendly. This phase covers load testing, accessibility testing, and other advanced quality checks.</p>
+<h4>Performance Testing</h4>
+<ul>
+<li>[ ] <strong>Task 4.1</strong>: Load testing implementation
+<ul>
+<li>[ ] Concurrent API request handling: We need to test how our API handles a large number of concurrent requests.</li>
+<li>[ ] Database performance under load: We should evaluate the performance of our database under heavy load.</li>
+<li>[ ] Memory usage monitoring: We must monitor memory usage to prevent memory leaks and ensure efficient resource utilization.</li>
+<li>[ ] Response time benchmarking: We need to benchmark response times to identify performance bottlenecks.</li>
+</ul>
+</li>
+</ul>
+<h4>Additional Quality Assurance</h4>
+<ul>
+<li>[ ] <strong>Task 4.2</strong>: Accessibility testing
+<ul>
+<li>[ ] Keyboard navigation support: We need to ensure our application can be navigated using a keyboard.</li>
+<li>[ ] Screen reader compatibility: We should verify that our application is compatible with screen readers for visually impaired users.</li>
+<li>[ ] Color contrast validation: We must validate that color contrast meets accessibility standards for users with visual impairments.</li>
+<li>[ ] Focus management testing: We need to ensure focus is managed correctly for keyboard navigation.</li>
+</ul>
+</li>
+</ul>
+<p>By completing these implementation tasks across all four phases, we'll establish a comprehensive testing strategy that ensures the quality, reliability, and security of our calculator application. Each phase builds upon the previous one, creating a robust testing framework that supports continuous improvement and high-quality software delivery.</p>
+<h2>🛠️ Technical Implementation Details</h2>
+<p>Let's get into the nitty-gritty of how we'll technically implement our testing strategy. This involves selecting the right tools and frameworks, managing test data, and integrating our tests into the CI/CD pipeline. This section is like our tech manual, detailing the specific tools and techniques we'll use to build our testing fortress. Understanding these details is key to ensuring our testing process is efficient, effective, and maintainable.</p>
+<h3>Testing Tools &amp; Frameworks</h3>
+<p>Choosing the right tools and frameworks is crucial for an effective testing strategy. Here's a breakdown of what we'll use:</p>
+<pre><code class="hljs">{
+  &quot;backend&quot;: {
+    &quot;unit&quot;: [&quot;Jest&quot;, &quot;Supertest&quot;],
+    &quot;integration&quot;: [&quot;Jest&quot;, &quot;sqlite3&quot;],
+    &quot;database&quot;: [&quot;:memory:&quot;, &quot;test fixtures&quot;]
+  },
+  &quot;frontend&quot;: {
+    &quot;unit&quot;: [&quot;Jest&quot;, &quot;React Testing Library&quot;],
+    &quot;integration&quot;: [&quot;MSW&quot;, &quot;axios-mock-adapter&quot;],
+    &quot;e2e&quot;: [&quot;Playwright&quot;, &quot;Cypress&quot;]
+  },
+  &quot;security&quot;: [&quot;OWASP ZAP&quot;, &quot;Snyk&quot;],
+  &quot;performance&quot;: [&quot;Artillery.js&quot;, &quot;Lighthouse CI&quot;]
+}
+</code></pre>
+<ul>
+<li><strong>Backend</strong>:
+<ul>
+<li><strong>Unit Tests</strong>: We'll use <strong>Jest</strong> as our primary testing framework because it's fast, easy to set up, and provides excellent features like mocking and code coverage. <strong>Supertest</strong> will help us make HTTP requests to our API endpoints for testing.</li>
+<li><strong>Integration Tests</strong>: Again, <strong>Jest</strong> will be our main framework. We'll use <strong>sqlite3</strong> with an in-memory database for integration tests to ensure our database interactions are working correctly.</li>
+<li><strong>Database</strong>: We'll use an <strong>in-memory SQLite database (:memory:)</strong> for faster and isolated testing. Additionally, we'll use <strong>test fixtures</strong> to populate our database with predefined data for consistent test results.</li>
+</ul>
+</li>
+<li><strong>Frontend</strong>:
+<ul>
+<li><strong>Unit Tests</strong>: We'll use <strong>Jest</strong> along with <strong>React Testing Library</strong>. React Testing Library encourages testing components from a user's perspective, making our tests more robust and realistic.</li>
+<li><strong>Integration Tests</strong>: For integration tests, we'll use <strong>MSW (Mock Service Worker)</strong> to mock API responses, allowing us to test our components' behavior without making actual network requests. <strong>axios-mock-adapter</strong> will help us mock Axios HTTP client requests.</li>
+<li><strong>E2E Tests</strong>: We'll use both <strong>Playwright</strong> and <strong>Cypress</strong> for end-to-end testing. Playwright is great for cross-browser testing and offers excellent performance, while Cypress provides a fantastic developer experience with features like time travel debugging.</li>
+</ul>
+</li>
+<li><strong>Security</strong>:
+<ul>
+<li>For security testing, we'll use <strong>OWASP ZAP (Zed Attack Proxy)</strong>, a powerful tool for finding web application vulnerabilities. We'll also leverage <strong>Snyk</strong> for vulnerability scanning in our dependencies.</li>
+</ul>
+</li>
+<li><strong>Performance</strong>:
+<ul>
+<li><strong>Artillery.js</strong> will be our tool of choice for load testing, allowing us to simulate high traffic and measure our application's performance. <strong>Lighthouse CI</strong> will help us monitor and improve our application's performance, accessibility, and SEO.</li>
+</ul>
+</li>
+</ul>
+<h3>Test Data Management</h3>
+<p>Effective test data management is key to reliable and repeatable tests. Here’s how we’ll handle it:</p>
+<ul>
+<li>We'll use an <strong>in-memory SQLite database</strong> for unit tests. This allows us to run tests quickly and in isolation without affecting our main database.</li>
+<li>We'll implement <strong>test data fixtures</strong>, which are predefined datasets used to populate our database with consistent data for testing.</li>
+<li>We'll set up <strong>setup/teardown database state</strong> methods. Before each test, we'll set up the necessary data, and after each test, we'll tear down the database to ensure a clean state for the next test.</li>
+<li>We'll <strong>mock external dependencies</strong> to isolate our tests and avoid relying on external services during testing.</li>
+</ul>
+<h3>CI/CD Integration</h3>
+<p>Integrating our tests into our CI/CD pipeline is crucial for continuous quality assurance. We'll set up quality gates to ensure that only code meeting our standards is deployed. Here's an example of how we might configure our quality gates:</p>
+<pre><code class="hljs">quality_gates:
+  - unit_test_coverage: &quot;&gt; 85%&quot;
+  - integration_tests: &quot;all_passing&quot;
+  - security_scan: &quot;no_high_vulnerabilities&quot;
+  - e2e_tests: &quot;critical_paths_passing&quot;
+</code></pre>
+<ul>
+<li><strong>Unit Test Coverage</strong>: We require a minimum of 85% unit test coverage.</li>
+<li><strong>Integration Tests</strong>: All integration tests must pass.</li>
+<li><strong>Security Scan</strong>: There should be no high-severity vulnerabilities detected in the security scan.</li>
+<li><strong>E2E Tests</strong>: Critical paths in our end-to-end tests must pass.</li>
+</ul>
+<p>By implementing these technical details, we're setting ourselves up for a robust and efficient testing process. This comprehensive approach ensures that our tests are reliable, our data is managed effectively, and our CI/CD pipeline enforces our quality standards. With these tools and techniques in place, we'll be well-equipped to build and maintain a high-quality calculator application. So, let’s get this tech party started and build a fortress of quality!</p>
+<h2>📏 Success Metrics</h2>
+<p>To ensure our comprehensive testing strategy is effective, we need clear success metrics. These metrics will help us track our progress and identify areas for improvement. Think of this section as our scoreboard, showing us how well we're playing the quality game. By setting specific targets and monitoring our performance, we can ensure we're on track to deliver a high-quality application.</p>
+<h3>Coverage Targets</h3>
+<p>Coverage targets are crucial for ensuring we have sufficient test coverage across different parts of our application. Here's what we're aiming for:</p>
+<ul>
+<li><strong>Unit Tests</strong>: We're targeting <strong>90%+ coverage</strong> for unit tests. This high coverage ensures that individual components are thoroughly tested and that most potential issues are caught early.</li>
+<li><strong>Integration Tests</strong>: For integration tests, our goal is to have <strong>critical paths covered</strong>. This means we focus on testing the most important interactions between different components to ensure they work seamlessly together.</li>
+<li><strong>E2E Tests</strong>: We aim to have <strong>all user journeys tested</strong> with end-to-end tests. This ensures that the entire application works as expected from start to finish, providing a smooth user experience.</li>
+<li><strong>Security Tests</strong>: Our target is to cover <strong>all OWASP top 10 scenarios</strong> in our security tests. This ensures we're addressing the most common web application vulnerabilities and keeping our application secure.</li>
+</ul>
+<h3>Quality Metrics</h3>
+<p>In addition to coverage, we also need to track specific quality metrics to ensure our testing process is effective and efficient. Here are the key metrics we'll be monitoring:</p>
+<ul>
+<li><strong>Zero critical security vulnerabilities</strong>: This is a top priority. We want to ensure that our application has no critical security flaws that could be exploited.</li>
+<li><strong>&lt; 2% flaky test rate</strong>: Flaky tests are tests that sometimes pass and sometimes fail for no apparent reason. Keeping the flaky test rate low ensures our test suite is reliable and provides consistent results.</li>
+<li><strong>&lt; 30 second test suite execution</strong>: We want our test suite to run quickly so that we can get fast feedback on code changes. A test suite execution time of less than 30 seconds helps maintain developer productivity.</li>
+<li><strong>100% critical path E2E coverage</strong>: This ensures that all critical user journeys are thoroughly tested, providing confidence in the core functionality of our application.</li>
+</ul>
+<p>By tracking these success metrics, we can objectively measure the effectiveness of our testing strategy. If we fall short of our targets, we'll know where to focus our efforts to improve. This data-driven approach helps us continuously improve our testing process and deliver a high-quality calculator application. So, let’s keep our eyes on the scoreboard and strive for excellence!</p>
+<h2>🔄 Continuous Improvement</h2>
+<p>Testing isn't a one-time task; it's an ongoing process. To ensure our testing strategy remains effective, we need to focus on continuous improvement. This means regularly monitoring our testing efforts, identifying areas for improvement, and adapting our strategy as needed. Think of this section as our continuous learning and adaptation plan, ensuring we stay ahead of the game and keep our application in top shape. By embracing a culture of continuous improvement, we can ensure our testing strategy remains effective and our application remains high-quality.</p>
+<h3>Monitoring &amp; Reporting</h3>
+<p>Regular monitoring and reporting are essential for tracking our progress and identifying areas for improvement. Here's what we'll be doing:</p>
+<ul>
+<li><strong>Daily test execution reports</strong>: We'll generate daily reports on test execution results. This helps us quickly identify any failures or issues that need attention.</li>
+<li><strong>Coverage trend analysis</strong>: We'll track coverage trends over time. This allows us to see if our test coverage is improving and identify areas where we may need to add more tests.</li>
+<li><strong>Performance regression tracking</strong>: We'll monitor performance metrics to identify any regressions. This ensures that new code changes don't negatively impact the performance of our application.</li>
+<li><strong>Bug detection rate monitoring</strong>: We'll track the rate at which we're detecting bugs. This helps us assess the effectiveness of our testing efforts and identify areas where we may need to improve our testing techniques.</li>
+</ul>
+<h3>Maintenance Strategy</h3>
+<p>Maintaining our testing strategy is just as important as implementing it. Here's our plan for keeping our tests up-to-date and effective:</p>
+<ul>
+<li><strong>Weekly test review sessions</strong>: We'll hold weekly sessions to review our tests. This ensures that our tests are still relevant and effective.</li>
+<li><strong>Monthly strategy assessment</strong>: We'll conduct monthly assessments of our testing strategy. This allows us to identify any areas where we need to make adjustments or improvements.</li>
+<li><strong>Quarterly tool evaluation</strong>: We'll evaluate our testing tools on a quarterly basis. This ensures we're using the best tools for our needs and that we're taking advantage of any new features or capabilities.</li>
+<li><strong>Annual framework updates</strong>: We'll update our testing frameworks annually. This helps us stay up-to-date with the latest best practices and ensure our tests remain compatible with our codebase.</li>
+</ul>
+<p>By implementing these continuous improvement measures, we're creating a testing process that's not only effective but also adaptable. This ensures that our testing strategy remains relevant and continues to deliver value over time. So, let’s make continuous improvement our mantra and keep our testing game strong!</p>
+<h2>🏷️ Labels</h2>
+<p><code>enhancement</code> <code>testing</code> <code>quality-assurance</code> <code>documentation</code> <code>good-first-issue</code> <code>help-wanted</code></p>
+<h2>👥 Assignees</h2>
+<ul>
+<li>QA Engineer Lead</li>
+<li>Frontend Developer</li>
+<li>Backend Developer</li>
+<li>DevOps Engineer</li>
+</ul>
+<h2>🔗 Related Issues</h2>
+<ul>
+<li>Security Audit Results</li>
+<li>Performance Baseline Establishment</li>
+<li>Accessibility Compliance Review</li>
+<li>CI/CD Pipeline Enhancement</li>
+</ul>
+<hr>
+<p><strong>Estimated Timeline</strong>: 4 weeks
+<strong>Priority</strong>: High
+<strong>Effort</strong>: Large
+<strong>Impact</strong>: High</p>
+<p>This comprehensive testing strategy will transform the calculator application from a bug-prone prototype into a production-ready, well-tested application with robust quality assurance processes. Implementing a comprehensive testing strategy is a significant undertaking, but the payoff is immense. By following this plan, we'll transform our calculator application from a bug-prone prototype into a robust, reliable, and secure tool that users can depend on. So, let's get to work and make this happen! Remember, quality is not an act, it is a habit. Let’s make testing a habit and build an amazing application together!</p>
+
+                    </div>
+                    <aside class="related-posts">
+                        <div class="ad-sidebar container">
+                            <div class="ad-wrapper">
+    <span>Iklan Related</span>
+</div>
+                        </div>
+                        <h2 class="related-posts-title">Related Posts</h2><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/diy-electrolyte-water-hydrate-naturally">DIY Electrolyte Water: Hydrate Naturally</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-07T17:16:18+00:00">Aug 7, 2025</time>
+		                        <span class="view-count">
+									40 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/codecell-c3-integration-with-platformio">CodeCell C3 Integration With PlatformIO: A Step-by-Step Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-05T15:47:49+00:00">Aug 5, 2025</time>
+		                        <span class="view-count">
+									61 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/fix-el-capitan-usb-installer">Fix: El Capitan USB Installer Not Working</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-07T23:07:25+00:00">Aug 7, 2025</time>
+		                        <span class="view-count">
+									41 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/finding-sets-a-and-c">Finding Sets A And C Within Universal Set U = {p, Q, R, X, Y, Z}</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-14T00:46:02+00:00">Jul 14, 2025</time>
+		                        <span class="view-count">
+									64 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/verify-trigonometric-identity-a-step">Verify Trigonometric Identity: A Step-by-Step Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-02T23:58:24+00:00">Aug 2, 2025</time>
+		                        <span class="view-count">
+									51 views
+		                        </span>
+                            </div>
+                        </article>
+                    </aside>
+                    <aside class="related-posts"></aside>
+                </div>
+            </div>
+        </article>
+        <a href="#" class="back-to-top" id="backToTop" title="Back to top">
+        	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-bar-up" viewBox="0 0 16 16">
+			  <path fill-rule="evenodd" d="M3.646 11.854a.5.5 0 0 0 .708 0L8 8.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708M2.4 5.2c0 .22.18.4.4.4h10.4a.4.4 0 0 0 0-.8H2.8a.4.4 0 0 0-.4.4"/>
+			</svg>
+		</a>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 ANABEL</p>
+        </div>
+    </footer>
+    <script>
+    	(() => {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            const toggleMenu = () => {
+                navMenu.classList.toggle('nav-menu-active');
+                navToggle.classList.toggle('nav-toggle-active');
+            };
+            const backToTopHandler = (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            navToggle.addEventListener('click', toggleMenu);
+            document.getElementById('backToTop').addEventListener('click', backToTopHandler);
+            window.addEventListener('pagehide', () => {
+                navToggle.removeEventListener('click', toggleMenu);
+                document.getElementById('backToTop').removeEventListener('click', backToTopHandler);
+            });
+        })();
+		(() => {
+            window.addEventListener("DOMContentLoaded", (event) => {
+                const ellHljs = document.createElement("script");
+                ellHljs.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js");
+                ellHljs.onload = () => {
+                    hljs.highlightAll();
+                };
+                document.querySelector("body").append(ellHljs);
+                const ellFont = document.createElement("link");
+                ellFont.setAttribute("href", "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css");
+                ellFont.setAttribute("rel", "stylesheet");
+                document.querySelector("head").append(ellFont);
+                window.addEventListener('pagehide', () => {
+                    // ellHljs.remove();
+                    ellFont.remove();
+                });
+
+            });
+        })();
+    </script>
+    
+    
+    
+</body>
+</html>

@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>SQLx: Fixing Option Type Inference For Primary Keys</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SQLx: Fixing Option Type Inference For Primary Keys...">
+    <link rel="canonical" href="https://catatansoal.github.io/blog/sqlx-fixing-option-type-inference">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="SQLx: Fixing Option Type Inference For Primary Keys">
+	<meta property="og:description" content="SQLx: Fixing Option Type Inference For Primary Keys...">
+	<meta property="og:url" content="https://catatansoal.github.io/blog/sqlx-fixing-option-type-inference">
+	<meta property="og:site_name" content="ANABEL">
+	<meta property="article:published_time" content="2025-08-10T10:28:15+00:00">
+	<meta property="article:author" content="ADMIN">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+    <link rel="preload" fetchpriority="high" as="image" href="https://tse4.mm.bing.net/th?q=Query!%20Macro%20Infers%20Option%20Type%20for%20Primary%20Key%20in%20SQLx">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style type="text/css">
+    	:root{--primary-color:#3740ff;--text-color:#202124;--background-color:#ffffff;--gray-100:#f8f9fa;--gray-200:#e9ecef}*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;line-height:1.6;color:var(--text-color);background-color:var(--background-color)}.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}.header{background-color:var(--background-color);border-bottom:1px solid var(--gray-200);position:sticky;top:0;z-index:100}.nav{padding:.5rem 0}.nav-container{display:flex;justify-content:space-between;align-items:center;gap:1rem}.nav-left{display:flex;align-items:center;flex-shrink:0}.logo{font-weight:700;color:var(--primary-color)}.blog-tag{margin-left:1rem;padding:.25rem .5rem;background-color:var(--gray-100);border-radius:4px;font-size:.875rem}.nav-search{flex-grow:1;max-width:300px}.search-form{position:relative;width:100%}.search-input{width:100%;padding:.5rem 2.5rem .5rem 1rem;border:1px solid var(--gray-200);border-radius:24px;font-size:.875rem;transition:all 0.2s}.search-input:focus{outline:none;border-color:var(--primary-color);box-shadow:0 0 0 2px rgb(55 64 255 / .1)}.search-button{position:absolute;right:.5rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#5f6368;cursor:pointer;padding:.25rem;display:flex;align-items:center;justify-content:center}.search-button:hover{color:var(--primary-color)}.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:.5rem}.hamburger{display:block;position:relative;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before,.hamburger::after{content:'';position:absolute;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before{top:-6px}.hamburger::after{bottom:-6px}.nav-toggle-active .hamburger{background:#fff0}.nav-toggle-active .hamburger::before{transform:rotate(45deg);top:0}.nav-toggle-active .hamburger::after{transform:rotate(-45deg);bottom:0}.nav-list{display:flex;list-style:none;gap:2rem}.nav-link{color:var(--text-color);text-decoration:none;font-size:.9rem;transition:color 0.2s}.nav-link:hover{color:var(--primary-color)}.article-header{padding:2rem 0;background-color:var(--gray-100)}.article-layout{display:grid;grid-template-columns:1fr 350px;gap:3rem;padding:1rem 0;align-items: start}h1,h2,h3,h4,h5,h6{font-family:"Crimson Text","Times New Roman",Times,serif}h1{font-size:2.5rem;line-height:1.2;margin-bottom:1rem}.meta{color:#5f6368;font-size:.875rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}.view-count{display:inline-flex;align-items:center;gap:.25rem}.view-count svg{color:#5f6368}.content{min-width:0;border-bottom:1px solid #dddddd5e;margin-top:1rem;white-space:pre-line !important;overflow-wrap:break-word;overflow-x:auto;word-break:break-word}.lead{font-size:1.25rem;color:#5f6368;margin-bottom:2rem}h2,h3,h4,h5,h6{font-size:1.75rem;margin:1rem 0 1rem}p,pre,ol,ul>li{margin-bottom:1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;font-size:1.3rem;text-align: justify;}p>code{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px}hr{margin:1rem 0 1rem 0}.code-example{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;margin:1.5rem 0;overflow-x:auto}code{font-family:'Roboto Mono',monospace;font-size:.875rem}ul{margin:.2rem 0;padding-left:1.5rem}.related-posts{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;position:sticky;top:5rem}.related-posts-title,.newpost-posts-list{font-size:1.75rem;margin:0 0 1rem}.related-posts-list{display:flex;flex-direction:column;gap:.5rem}.related-post,.newpost-post{border-bottom:1px solid #ddd;padding-bottom:10px;margin-bottom:10px}.related-post:last-child,.newpost-post:last-child{padding-bottom:0;border-bottom:none}.related-post-title,.newpost-post-title{font-size:1.2rem;margin:0 0 .1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;}.related-post-title a,.newpost-post-title a{color:var(--text-color);text-decoration:none;transition:color 0.2s}.related-post-title a:hover,.newpost-post-title a:hover{color:var(--primary-color)}.related-post time{font-size:.875rem;color:#5f6368}.footer{background-color:var(--gray-100);padding:2rem 0;margin-top:4rem;color:#5f6368;font-size:.875rem}.nav-menu>ul>li{margin-bottom:0}@media (max-width:1024px){.container{max-width:800px}.article-layout{grid-template-columns:1fr;gap:2rem}.related-posts{position:static}}@media (max-width:768px){.nav-container{flex-wrap:wrap}.nav-search{order:3;max-width:none;width:100%;margin-top:.1rem}.nav-toggle{display:block}.nav-menu{display:none;position:absolute;top:100%;left:0;right:0;background:var(--background-color);padding:1rem 0;border-bottom:1px solid var(--gray-200)}.nav-menu-active{display:block}.nav-list{flex-direction:column;gap:.1rem;padding:0 1.5rem}.nav-link{display:block;padding:.2rem 0}h1{font-size:2rem}.article-header{padding:2rem 0}.content{padding:.1rem 0}}table{width:100%;border-collapse:collapse;margin:20px 0;font-family:'Arial',sans-serif}th,td{padding:12px 15px;text-align:left;border:1px solid #ddd}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9}tr:nth-child(even) td{background-color:#f2f2f2}@media screen and (max-width:768px){table{border:0;display:block;overflow-x:auto;white-space:nowrap}th,td{padding:10px;text-align:right}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9;border-bottom:1px solid #ddd}tr:nth-child(even) td{background-color:#f2f2f2}}a{text-decoration:none;color:#540707}.katex-html{padding: .2rem;color: #000;font-weight: 700;font-size: 1.3rem;overflow-wrap: break-word;max-width: 100%;white-space: normal !important}.category{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin:1rem 0 1rem 0}.tag{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px;font-family:"Newsreader",serif}.tag>a{text-decoration:none;color:#000}img{margin:auto;display:block;max-width:100%;height:auto;margin-bottom:1rem}.katex{white-space: pre-line !important;display: inline-block;max-width: 100%;overflow-x: auto;overflow-y: hidden;scrollbar-width: thin;overflow-wrap: break-word;word-break: break-word;vertical-align: -7px}.content > p {overflow-wrap: break-word;word-break: break-word}
+    </style>
+    <style type="text/css">
+    	pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}
+		.hljs{color:#c9d1d9;background:#0d1117}.hljs-doctag,.hljs-keyword,.hljs-meta .hljs-keyword,.hljs-template-tag,.hljs-template-variable,.hljs-type,.hljs-variable.language_{color:#ff7b72}.hljs-title,.hljs-title.class_,.hljs-title.class_.inherited__,.hljs-title.function_{color:#d2a8ff}.hljs-attr,.hljs-attribute,.hljs-literal,.hljs-meta,.hljs-number,.hljs-operator,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-variable{color:#79c0ff}.hljs-meta .hljs-string,.hljs-regexp,.hljs-string{color:#a5d6ff}.hljs-built_in,.hljs-symbol{color:#ffa657}.hljs-code,.hljs-comment,.hljs-formula{color:#8b949e}.hljs-name,.hljs-quote,.hljs-selector-pseudo,.hljs-selector-tag{color:#7ee787}.hljs-subst{color:#c9d1d9}.hljs-section{color:#1f6feb;font-weight:700}.hljs-bullet{color:#f2cc60}.hljs-emphasis{color:#c9d1d9;font-style:italic}.hljs-strong{color:#c9d1d9;font-weight:700}.hljs-addition{color:#aff5b4;background-color:#033a16}.hljs-deletion{color:#ffdcd7;background-color:#67060c}
+    	pre{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;font-weight:400;word-break:break-word;word-wrap:break-word;box-sizing:inherit;border-radius:4px;overflow-x:auto;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}code{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;word-wrap:break-word;word-break:break-word;font-style:normal;line-height:20px;letter-spacing:-.003em;box-sizing:inherit;font-weight:400;font-size:75%;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}
+    </style>
+    <style type="text/css">
+    	.back-to-top{position:fixed;bottom:20px;right:20px;background-color:#a73f3f;color:#fff;padding:8px 10px;border-radius:50%;box-shadow:0 4px 6px rgb(0 0 0 / .2);font-size:10px;font-weight:700;text-decoration:none;text-align:center;transition:opacity 0.3s ease,visibility 0.3s ease;z-index:99999;opacity:1;visibility:visible}.back-to-top:hover{background-color:#0056b3}
+    </style>
+    <style type="text/css">
+        .ad-header {margin: 1rem auto 1rem;background-color: #fdfdfd;text-align: center;display: block;}.ad-header .ad-wrapper {min-height: 90px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #555;font-weight: 500;padding: 3rem;border: 1px dashed #ccc;border-radius: 6px;}@media (max-width: 768px) {.ad-header {padding: 0.75rem;}}.ad-sidebar {margin: 0 0 1rem;background-color: #fefefe;text-align: center;padding: 0px;width: 100%;max-width: 100%;display: block;}.ad-sidebar .ad-wrapper {min-height: 250px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #444;font-weight: 500;border: 1px dashed #aaa;border-radius: 6px;padding: 0rem;}@media (max-width: 1024px) {.ad-sidebar {padding: 0.75rem;}}
+    </style>
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://catatansoal.github.io/blog/sqlx-fixing-option-type-inference"
+          },
+          "headline": "SQLx: Fixing Option Type Inference For Primary Keys",
+          "description": "SQLx: Fixing Option Type Inference For Primary Keys...",
+          "image": [
+            "https://tse4.mm.bing.net/th?q=Query!%20Macro%20Infers%20Option%20Type%20for%20Primary%20Key%20in%20SQLx"
+          ],
+          "author": {
+            "@type": "Person",
+            "name": "ADMIN",
+            "jobTitle": "Editor web"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "ANABEL",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://tse4.mm.bing.net/th?q=ANABEL%20WEB"
+            }
+          },
+          "datePublished": "2025-08-10T10:28:15+00:00",
+          "dateModified": "2025-08-10T10:28:15+00:00"
+        }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="container nav-container">
+                <div class="nav-left">
+                    <span class="logo">ANABEL</span>
+                    <span class="blog-tag">Article</span>
+                </div>
+                <div class="nav-search">
+                    <form class="search-form" role="search">
+                        <input 
+                            type="search" 
+                            class="search-input"
+                            placeholder="Search articles..."
+                            aria-label="Search articles"
+                        >
+                        <button type="submit" class="search-button" aria-label="Submit search">🔎</button>
+                    </form>
+                </div>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+                <div class="nav-menu">
+                    <ul class="nav-list">
+                    	<li><a href="/" class="nav-link">HOME</a></li>
+                        <li><a href="/pages/About" class="nav-link">About</a></li>
+                        <li><a href="/pages/Contact" class="nav-link">Contact</a></li>
+                        <li><a href="/pages/Disclaimer" class="nav-link">Disclaimer</a></li>
+                        <li><a href="/pages/Privacy" class="nav-link">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="main">
+        <article class="article">
+            <header class="article-header">
+                <div class="container">
+                    <h1>SQLx: Fixing Option Type Inference For Primary Keys</h1>
+                    <div class="meta">
+                        <time datetime="2025-08-10T10:28:15+00:00">Aug 10, 2025</time>
+                        <span class="author">by ADMIN</span>
+                        <span class="view-count">
+                            <span id="viewCount">52</span> views
+                        </span>
+                    </div>
+                </div>
+            </header>
+            <div class="ad-header container">
+                <div class="ad-wrapper">
+    Iklan Headers
+</div>
+            </div>
+            <div class="container">
+                <div class="article-layout">
+                    <div class="content">
+                        <img src="https://tse4.mm.bing.net/th?q=Query!%20Macro%20Infers%20Option%20Type%20for%20Primary%20Key%20in%20SQLx" title="Query! Macro Infers Option Type for Primary Key in SQLx" width="300" height="200"/><p>Hey guys! Ever encountered a situation where your SQLx query macro surprisingly infers an <code>Option</code> type for your primary key, even when it's clearly not optional in your database schema? Let's dive deep into this interesting issue, explore why it happens, and figure out how to tackle it like pros. This article aims to provide a comprehensive understanding, ensuring you're well-equipped to handle such scenarios in your projects. So, buckle up and let’s get started!</p>
+<h2>Understanding the Issue</h2>
+<p>In SQLx, the <strong><code>query!</code> macro's type inference</strong> might sometimes label primary keys as <code>Option&lt;T&gt;</code>, where <code>T</code> is the underlying data type (like <code>i64</code> for integers). This can be a bit unexpected since primary keys, by definition, should never be null. This behavior typically surfaces when using databases like SQLite, where the schema isn't strictly enforced at compile time as it might be in other database systems. This section will extensively cover the unexpected behavior of SQLx's query macro when inferring types for primary keys, especially in SQLite, and explain why it's crucial to understand this behavior.</p>
+<h3>The Unexpected <code>Option</code> Type</h3>
+<p>The core issue arises when you use the <strong><code>query!</code> macro</strong> in SQLx to fetch data from a table where a column is designated as the primary key. For instance, consider a <code>users</code> table with an <code>id</code> column defined as <code>INTEGER PRIMARY KEY</code> in SQLite. When you run a query like <code>SELECT id FROM users</code>, SQLx might infer the type of <code>row.id</code> as <code>Option&lt;i64&gt;</code>. This is surprising because primary keys are designed to be non-nullable, meaning they should always have a value. The expectation is that the type should simply be <code>i64</code>, not <code>Option&lt;i64&gt;</code>. This discrepancy can lead to unnecessary <code>unwrap()</code> calls or more complex logic to handle a potential <code>None</code> value that should never occur.</p>
+<h3>Why Does This Happen?</h3>
+<p>The primary reason for this behavior lies in how SQLx handles type inference and how SQLite's schema is interpreted. SQLx, being a powerful and safe Rust library for database interactions, errs on the side of caution. It tries to accommodate various database behaviors, including those where a column might, in practice, return null values despite being part of a primary key. SQLite, in particular, is known for its flexible schema handling. While you can define a column as <code>INTEGER PRIMARY KEY</code>, SQLite doesn't strictly enforce the non-null constraint at the schema level in the same way that PostgreSQL or MySQL might. This flexibility means that, under certain circumstances, SQLite might allow null values in a primary key column, even though it's not recommended or standard practice.</p>
+<h3>The Role of SQLite's Flexible Schema</h3>
+<p>SQLite's flexibility stems from its design as an embedded database that prioritizes ease of use and flexibility over strict enforcement of database constraints. This design choice has implications for how SQLx interacts with SQLite. Because SQLx aims to provide a consistent and safe interface across different databases, it must account for the least common denominator in terms of schema enforcement. In the case of SQLite, this means that SQLx's type inference must consider the possibility of null values, even in primary key columns.</p>
+<h3>Implications and Best Practices</h3>
+<p>The inference of <code>Option&lt;T&gt;</code> for primary keys has several implications for your code. First, it means you need to handle the possibility of a <code>None</code> value, even though it should theoretically never occur. This can lead to more verbose and potentially less readable code, as you might find yourself adding <code>.unwrap()</code> calls or <code>match</code> statements to handle the <code>Option</code>. Second, it can mask potential issues in your database schema or data. If your application logic assumes that primary keys are always present and you're not handling the <code>Option</code> correctly, you might encounter unexpected runtime errors if a null value does slip into the primary key column.</p>
+<p>To mitigate these issues, it's essential to adopt best practices for database design and data validation. Ensure that your database schema explicitly enforces non-null constraints on primary key columns. While SQLite might not enforce this at the schema level as strictly as other databases, you can still define <code>NOT NULL</code> constraints on your primary key columns. Additionally, consider adding data validation logic in your application to ensure that any data inserted into your primary key columns is non-null. By combining careful schema design with robust data validation, you can reduce the likelihood of encountering null values in your primary keys and simplify your SQLx code.</p>
+<h3>Why Understanding This Behavior is Crucial</h3>
+<p>Understanding why SQLx infers <code>Option&lt;T&gt;</code> for primary keys is crucial for writing robust and maintainable applications. It helps you avoid common pitfalls, such as blindly unwrapping <code>Option</code> values and potentially crashing your application. It also encourages you to think critically about your database schema and data validation practices. By being aware of this behavior, you can write code that is both safe and efficient, leveraging the full power of SQLx while avoiding potential surprises.</p>
+<h2>Reproduction Steps</h2>
+<p>To really nail down this issue, let's go through the <strong>reproduction steps</strong> that highlight how this <code>Option</code> type inference manifests. By replicating the scenario, you'll gain a firsthand understanding of the problem, making it easier to grasp and address. We will explore the specific steps to reproduce the issue where SQLx infers an <code>Option</code> type for a primary key when querying an SQLite database. This hands-on approach will solidify your understanding and equip you to identify and address similar issues in your own projects.</p>
+<h3>Setting Up the Environment</h3>
+<p>Before diving into the code, it's essential to set up your environment correctly. Ensure you have Rust installed and a project initialized. You'll need to add the <code>sqlx</code> crate to your <code>Cargo.toml</code> file with the necessary features enabled. For this particular scenario, we'll be using the <code>runtime-tokio</code> and <code>sqlite</code> features. Here’s a snippet of what your <code>Cargo.toml</code> might look like:</p>
+<pre><code class="hljs">[dependencies]
+sqlx = { version = &quot;0.8.6&quot;, features = [&quot;runtime-tokio&quot;, &quot;sqlite&quot;] }
+tokio = { version = &quot;1&quot;, features = [&quot;full&quot;] }
+</code></pre>
+<p>Make sure to run <code>cargo build</code> to fetch and build the dependencies. With the environment set up, you're ready to start writing the code that reproduces the issue.</p>
+<h3>Creating the SQLite Database and Table</h3>
+<p>The next step is to create an SQLite database and define a table with a primary key. You can do this using any SQLite client or directly within your Rust code using SQLx. For simplicity, let’s create the database and table using SQLx. Here’s the code snippet:</p>
+<pre><code class="hljs">use sqlx::sqlite::SqlitePoolOptions;
+use sqlx::Executor;
+
+#[tokio::main]
+async fn main() -&gt; Result&lt;(), sqlx::Error&gt; {
+ let pool = SqlitePoolOptions::new()
+ .max_connections(5)
+ .connect(&quot;sqlite::memory:&quot;)
+ .await?;
+
+ sqlx::query(
+ &quot;CREATE TABLE IF NOT EXISTS users (
+ id INTEGER PRIMARY KEY
+ )&quot;
+ )
+ .execute(&amp;pool)
+ .await?;
+
+ Ok(())
+}
+</code></pre>
+<p>This code establishes a connection to an in-memory SQLite database and creates a <code>users</code> table with an <code>id</code> column defined as <code>INTEGER PRIMARY KEY</code>. This setup mirrors the scenario described in the original issue, setting the stage for reproducing the unexpected type inference.</p>
+<h3>The Code Snippet That Triggers the Issue</h3>
+<p>Now, let's introduce the code snippet that triggers the issue. We'll use the <code>query!</code> macro to select the <code>id</code> column from the <code>users</code> table and observe the inferred type. Here’s the code:</p>
+<pre><code class="hljs">use sqlx::{query, sqlite::SqlitePoolOptions};
+
+#[tokio::main]
+async fn main() -&gt; Result&lt;(), sqlx::Error&gt; {
+ let pool = SqlitePoolOptions::new()
+ .max_connections(5)
+ .connect(&quot;sqlite::memory:&quot;)
+ .await?;
+
+ sqlx::query(
+ &quot;CREATE TABLE IF NOT EXISTS users (
+ id INTEGER PRIMARY KEY
+ )&quot;
+ )
+ .execute(&amp;pool)
+ .await?;
+
+ let row = query!(&quot;SELECT id FROM users&quot;).fetch_one(&amp;pool).await?;
+ // The type of row.id is inferred as Option&lt;i64&gt;
+ println!(&quot;id: {:?}&quot;, row.id);
+
+ Ok(())
+}
+</code></pre>
+<p>In this snippet, the <code>query!</code> macro is used to execute the <code>SELECT id FROM users</code> query. The <code>fetch_one</code> method retrieves a single row from the result set. The crucial part is the type inference for <code>row.id</code>. As you’ll observe, the inferred type is <code>Option&lt;i64&gt;</code>, which is the unexpected behavior we’re investigating.</p>
+<h3>Verifying the Inferred Type</h3>
+<p>To verify the inferred type, you can use a technique called “type ascription” in Rust. This involves explicitly specifying the type of a variable and letting the compiler check if it matches the inferred type. If you try to ascribe the type <code>i64</code> to <code>row.id</code>, the compiler will throw an error, confirming that the inferred type is indeed <code>Option&lt;i64&gt;</code>. This verification step is essential to ensure that you’re actually observing the issue and not a misunderstanding of the code.</p>
+<h3>Running the Code and Observing the Output</h3>
+<p>Finally, run the code using <code>cargo run</code>. You’ll see that the program compiles and runs without errors. The output will display the value of <code>row.id</code>, which will be <code>None</code> if the table is empty or <code>Some(value)</code> if there are rows in the table. This confirms that the type of <code>row.id</code> is <code>Option&lt;i64&gt;</code>. By going through these reproduction steps, you’ve experienced firsthand how SQLx infers an <code>Option</code> type for a primary key in SQLite, setting the stage for exploring solutions and best practices.</p>
+<h2>SQLx Version and Enabled Features</h2>
+<p>The specific version of SQLx and the features you've enabled play a <strong>significant role</strong> in how it behaves. Understanding this context is crucial for debugging and ensuring consistent behavior across your projects. This section delves into the importance of SQLx version and enabled features in the context of the primary key type inference issue. We will examine how different versions of SQLx and the enabled features can influence the behavior of the <code>query!</code> macro and the resulting type inference.</p>
+<h3>SQLx Version: A Key Factor</h3>
+<p>The version of SQLx you're using can significantly impact its behavior, including how it infers types for primary keys. SQLx is a rapidly evolving library, with new versions introducing bug fixes, performance improvements, and changes to the type system. In the context of the <code>Option</code> type inference issue, it's essential to be aware of the specific version you're using and whether any known issues or fixes relate to your scenario.</p>
+<p>For instance, if you're using an older version of SQLx, such as 0.8.6 (as mentioned in the original issue), you might be encountering a behavior that has been addressed in a newer release. SQLx developers actively work on improving type inference and addressing edge cases, so upgrading to the latest version can often resolve unexpected type inference issues.</p>
+<h3>Staying Updated: Best Practices</h3>
+<p>Staying updated with the latest version of SQLx is generally a good practice. Newer versions often include performance enhancements, bug fixes, and new features that can improve your application's reliability and efficiency. However, it's also crucial to review the release notes and changelogs when upgrading to understand any breaking changes or potential compatibility issues. Thorough testing after an upgrade is essential to ensure that your application continues to function as expected.</p>
+<h3>Enabled SQLx Features: Tailoring Functionality</h3>
+<p>SQLx uses a feature system to allow you to include only the functionality you need in your project. This helps to reduce compile times and the size of your application. However, the features you enable can also influence the behavior of SQLx, including its type inference capabilities.</p>
+<p>In the context of the primary key type inference issue, the <code>runtime-tokio</code> and <code>sqlite</code> features are particularly relevant. The <code>runtime-tokio</code> feature enables support for the Tokio asynchronous runtime, which is commonly used in modern Rust applications. The <code>sqlite</code> feature enables support for SQLite databases. These features are essential for reproducing the issue described earlier, as they provide the necessary infrastructure for interacting with SQLite in an asynchronous environment.</p>
+<h3>Feature Combinations and Their Impact</h3>
+<p>The combination of enabled features can sometimes lead to unexpected interactions or behaviors. For example, certain features might introduce new type inference rules or modify existing ones. It's crucial to understand how the features you've enabled interact with each other and how they might affect SQLx's behavior.</p>
+<p>When encountering type inference issues, it's helpful to review the enabled features and consider whether any of them might be contributing to the problem. Disabling certain features (if possible) and testing the code can help isolate the cause of the issue. This process of elimination can provide valuable insights and guide you towards a solution.</p>
+<h3>Best Practices for Feature Management</h3>
+<p>To manage SQLx features effectively, follow these best practices: Be explicit about the features you enable in your <code>Cargo.toml</code> file. This makes it clear which features your project depends on and helps to avoid confusion. Only enable the features you need. This reduces the complexity of your project and can improve compile times. Review the SQLx documentation for detailed information about each feature and its implications. This ensures that you understand the purpose and behavior of each feature you enable. Test your code thoroughly when changing feature configurations. This helps to identify any unexpected interactions or issues that might arise.</p>
+<h2>Database Server and Version</h2>
+<p>The <strong>database server</strong> you're using, along with its specific version, has a huge influence on how SQLx behaves. Different databases have varying levels of schema enforcement and type handling, which directly impacts SQLx's type inference. Let's explore this critical aspect in detail. This section emphasizes the significance of the database server and its version in the context of SQLx's type inference, especially concerning the <code>Option</code> type issue. We will examine how different database systems and their versions handle schema enforcement and type handling, and how these differences impact SQLx's behavior.</p>
+<h3>Database Systems and Schema Enforcement</h3>
+<p>Different database systems, such as SQLite, PostgreSQL, MySQL, and others, have varying degrees of schema enforcement. Schema enforcement refers to how strictly a database system enforces the constraints and rules defined in the database schema. These constraints and rules include data types, nullability, primary keys, foreign keys, and other schema elements.</p>
+<p>SQLite, as an embedded database, is known for its flexible schema handling. While you can define constraints such as <code>NOT NULL</code> and <code>PRIMARY KEY</code>, SQLite doesn't always enforce these constraints as strictly as other database systems like PostgreSQL or MySQL. This flexibility can be both an advantage and a disadvantage. It allows for more rapid prototyping and development but can also lead to unexpected data inconsistencies if not handled carefully.</p>
+<h3>SQLite's Flexible Schema Handling</h3>
+<p>In SQLite, even if you define a column as <code>INTEGER PRIMARY KEY</code>, it's possible to insert a null value into that column under certain circumstances. This is because SQLite's type affinity system allows for some type conversions and doesn't always strictly enforce the declared data type. This behavior is a key reason why SQLx might infer <code>Option&lt;T&gt;</code> for primary key columns in SQLite, as it needs to account for the possibility of null values.</p>
+<h3>PostgreSQL and MySQL: Stronger Schema Enforcement</h3>
+<p>In contrast, database systems like PostgreSQL and MySQL have stronger schema enforcement. They typically enforce constraints more strictly and are less likely to allow null values in primary key columns. This means that SQLx might be more likely to infer the correct non-nullable type for primary keys when working with these databases.</p>
+<h3>Database Version Matters</h3>
+<p>The version of the database server also plays a significant role. Different versions of the same database system might have variations in their schema enforcement, type handling, and SQL dialect support. These variations can impact how SQLx interacts with the database and how it infers types. For example, newer versions of a database system might have improved support for certain data types or stricter enforcement of constraints, which can affect SQLx's behavior.</p>
+<h3>Best Practices for Database Version Management</h3>
+<p>To manage database versions effectively, follow these best practices: Use a consistent database version across your development, testing, and production environments. This helps to ensure that your application behaves consistently in all environments. Be aware of the specific features and behaviors of the database version you're using. Review the database documentation for detailed information about schema enforcement, type handling, and other relevant aspects. Test your application thoroughly when upgrading to a new database version. This helps to identify any compatibility issues or unexpected behaviors that might arise. Use database migrations to manage schema changes. This ensures that your database schema is consistent and up-to-date.</p>
+<h3>How Database Server Impacts SQLx</h3>
+<p>The choice of database server directly impacts SQLx's type inference and overall behavior. SQLx aims to provide a consistent and safe interface across different databases, but it must also account for the unique characteristics of each database system. This means that SQLx's type inference might be more conservative when working with databases that have flexible schemas, like SQLite, to avoid potential runtime errors.</p>
+<p>By understanding the schema enforcement and type handling characteristics of your database server, you can better anticipate how SQLx will behave and write code that is both safe and efficient. This knowledge is essential for building robust and maintainable applications that interact with databases.</p>
+<h2>Rust Version</h2>
+<p>The version of the <strong>Rust compiler</strong> you're using can also affect how SQLx behaves, particularly in terms of type inference and macro expansion. Rust is a rapidly evolving language, and each new version brings improvements to the compiler and the standard library. Let's discuss how the Rust version can play a role in this scenario. This section highlights the importance of the Rust compiler version in the context of SQLx's behavior, especially concerning type inference and macro expansion. We will examine how different Rust versions can influence the way SQLx's <code>query!</code> macro works and the resulting type inference.</p>
+<h3>Compiler Improvements and Type Inference</h3>
+<p>Rust's type inference system is a powerful feature that allows the compiler to automatically deduce the types of variables and expressions. Each new version of the Rust compiler often includes improvements to the type inference algorithm, making it more accurate and efficient. These improvements can directly impact how SQLx's <code>query!</code> macro infers types, including the type of primary key columns.</p>
+<p>If you're using an older version of Rust, you might encounter type inference issues that have been resolved in newer versions. Upgrading to the latest stable Rust version can sometimes fix unexpected type inference behavior and improve the overall performance of your code.</p>
+<h3>Macro Expansion and Compiler Versions</h3>
+<p>SQLx's <code>query!</code> macro relies heavily on Rust's macro system. Macros are a powerful way to generate code at compile time, but they can also be complex and sensitive to compiler changes. Different Rust versions might have variations in how macros are expanded, which can affect the behavior of SQLx's <code>query!</code> macro.</p>
+<p>If you're encountering issues with SQLx's macro expansion, it's essential to consider the Rust version you're using. Upgrading to a newer Rust version might resolve macro-related issues, as newer compilers often include bug fixes and improvements to the macro system.</p>
+<h3>Rust's Stability Guarantees</h3>
+<p>Rust has strong stability guarantees, meaning that most code written for an older Rust version will continue to compile and run on newer versions. However, there are exceptions, particularly in the area of macro expansion and type inference. It's always a good practice to test your code thoroughly when upgrading to a new Rust version to ensure that it continues to function as expected.</p>
+<h3>Best Practices for Rust Version Management</h3>
+<p>To manage Rust versions effectively, follow these best practices: Use a recent stable Rust version. This ensures that you benefit from the latest compiler improvements and bug fixes. Use a tool like <code>rustup</code> to manage your Rust toolchains. <code>rustup</code> makes it easy to install and switch between different Rust versions. Specify the Rust version in your <code>Cargo.toml</code> file using the <code>rust-version</code> field. This helps to ensure that everyone working on your project is using the same Rust version. Test your code thoroughly when upgrading to a new Rust version. This helps to identify any compatibility issues or unexpected behaviors that might arise.</p>
+<h3>How Rust Version Impacts SQLx</h3>
+<p>The Rust version you're using can directly impact SQLx's type inference and macro expansion, which can affect the behavior of the <code>query!</code> macro. By staying up-to-date with the latest Rust version and following best practices for Rust version management, you can ensure that your SQLx code is robust and maintainable. Understanding how the Rust version interacts with SQLx is essential for building reliable applications that interact with databases.</p>
+<h2>Solutions and Workarounds</h2>
+<p>Alright, guys, now that we've dissected the problem, let's talk solutions! There are a few ways to tackle this <code>Option</code> type inference hiccup. We can look at explicit type annotations, leveraging <code>NOT NULL</code> constraints, and even considering alternative query-building methods. This section will provide practical solutions and workarounds for the <code>Option</code> type inference issue in SQLx. We will explore various strategies, including using explicit type annotations, leveraging <code>NOT NULL</code> constraints in the database schema, and considering alternative query-building methods. Each solution will be explained with clear examples and best practices.</p>
+<h3>Explicit Type Annotations</h3>
+<p>One of the simplest and most direct ways to address the <code>Option</code> type inference issue is to use explicit type annotations. By explicitly specifying the type of the primary key column, you can override SQLx's default inference and ensure that the correct non-nullable type is used. This approach provides a clear and unambiguous way to tell SQLx what type you expect, avoiding any potential misinterpretations.</p>
+<p>Here’s how you can use explicit type annotations in your SQLx code:</p>
+<pre><code class="hljs">use sqlx::{query, sqlite::SqlitePoolOptions};
+
+#[tokio::main]
+async fn main() -&gt; Result&lt;(), sqlx::Error&gt; {
+ let pool = SqlitePoolOptions::new()
+ .max_connections(5)
+ .connect(&quot;sqlite::memory:&quot;)
+ .await?;
+
+ sqlx::query(
+ &quot;CREATE TABLE IF NOT EXISTS users (
+ id INTEGER PRIMARY KEY
+ )&quot;
+ )
+ .execute(&amp;pool)
+ .await?;
+
+ let row = query!(&quot;SELECT id FROM users&quot;)
+ .fetch_one(&amp;pool)
+ .await?;
+
+ // Explicit type annotation
+ let id: i64 = row.id.unwrap();
+ println!(&quot;id: {}&quot;, id);
+
+ Ok(())
+}
+</code></pre>
+<p>In this example, we explicitly annotate the type of the <code>id</code> variable as <code>i64</code>. This tells the compiler that we expect <code>id</code> to be a non-nullable integer. We then use the <code>.unwrap()</code> method to extract the value from the <code>Option&lt;i64&gt;</code>. This approach works well when you're confident that the primary key column will never be null.</p>
+<h3>Benefits and Drawbacks</h3>
+<p>Explicit type annotations offer several benefits. They provide clarity and prevent SQLx from inferring the wrong type. They also allow you to handle the <code>Option</code> type explicitly, which can be useful in cases where you want to perform additional checks or transformations. However, there are also drawbacks. Explicit type annotations can make your code more verbose, and they require you to manually handle the <code>Option</code> type, which can be error-prone if not done carefully.</p>
+<h3>Leveraging <code>NOT NULL</code> Constraints</h3>
+<p>Another effective solution is to leverage the <code>NOT NULL</code> constraint in your database schema. By explicitly specifying that a column cannot be null, you provide SQLx with more information about the column's type. This can help SQLx to infer the correct non-nullable type and avoid the <code>Option</code> type inference issue. This approach relies on the database schema to enforce the non-null constraint, providing an additional layer of data integrity.</p>
+<p>Here’s how you can use <code>NOT NULL</code> constraints in your database schema:</p>
+<pre><code class="hljs">CREATE TABLE IF NOT EXISTS users (
+ id INTEGER PRIMARY KEY NOT NULL
+);
+</code></pre>
+<p>In this SQL snippet, we've added the <code>NOT NULL</code> constraint to the <code>id</code> column definition. This tells the database that the <code>id</code> column cannot contain null values. When SQLx queries this table, it's more likely to infer the correct non-nullable type for the <code>id</code> column.</p>
+<h3>Benefits and Drawbacks</h3>
+<p>Using <code>NOT NULL</code> constraints has several advantages. It provides a clear and enforceable way to ensure that primary key columns never contain null values. It also helps SQLx to infer the correct types, reducing the need for explicit type annotations. However, there are also drawbacks. Not all database systems enforce <code>NOT NULL</code> constraints as strictly as others, so it's essential to be aware of the specific behavior of your database. Additionally, adding <code>NOT NULL</code> constraints can make your schema more rigid, which might not be desirable in all cases.</p>
+<h3>Alternative Query-Building Methods</h3>
+<p>In addition to explicit type annotations and <code>NOT NULL</code> constraints, you can also consider alternative query-building methods. SQLx provides several ways to build queries, including the <code>query!</code> macro, the <code>query_as!</code> macro, and the fluent query builder API. Each method has its own strengths and weaknesses, and choosing the right method can help you to avoid type inference issues.</p>
+<h3>The <code>query_as!</code> Macro</h3>
+<p>The <code>query_as!</code> macro is a powerful alternative to the <code>query!</code> macro. It allows you to specify the output type of your query explicitly, which can help to ensure that SQLx infers the correct types. This macro is particularly useful when you're working with complex queries or when you want to have more control over the output type.</p>
+<p>Here’s how you can use the <code>query_as!</code> macro:</p>
+<pre><code class="hljs">use sqlx::{query_as, sqlite::SqlitePoolOptions, FromRow};
+
+#[derive(FromRow, Debug)]
+struct User {
+ id: i64,
+}
+
+#[tokio::main]
+async fn main() -&gt; Result&lt;(), sqlx::Error&gt; {
+ let pool = SqlitePoolOptions::new()
+ .max_connections(5)
+ .connect(&quot;sqlite::memory:&quot;)
+ .await?;
+
+ sqlx::query(
+ &quot;CREATE TABLE IF NOT EXISTS users (
+ id INTEGER PRIMARY KEY
+ )&quot;
+ )
+ .execute(&amp;pool)
+ .await?;
+
+ let user: User = query_as!(&quot;SELECT id FROM users&quot;)
+ .fetch_one(&amp;pool)
+ .await?;
+
+ println!(&quot;id: {}&quot;, user.id);
+
+ Ok(())
+}
+</code></pre>
+<p>In this example, we define a <code>User</code> struct with an <code>id</code> field of type <code>i64</code>. We then use the <code>query_as!</code> macro to specify that we want the query to return a <code>User</code> struct. This tells SQLx to infer the types based on the <code>User</code> struct, which ensures that the <code>id</code> field is treated as a non-nullable integer.</p>
+<h3>Benefits and Drawbacks</h3>
+<p>The <code>query_as!</code> macro offers several benefits. It provides a clear and explicit way to specify the output type of your query. It also allows you to map query results directly to Rust structs, which can simplify your code. However, there are also drawbacks. Using the <code>query_as!</code> macro requires you to define a struct for each query, which can be time-consuming. Additionally, the macro might not be as flexible as the <code>query!</code> macro in some cases.</p>
+<p>By exploring these solutions and workarounds, you can effectively address the <code>Option</code> type inference issue in SQLx and write code that is both safe and efficient. Each approach has its own strengths and weaknesses, so it's essential to choose the solution that best fits your specific needs and project requirements.</p>
+<h2>Conclusion</h2>
+<p>So, there you have it! We've journeyed through the ins and outs of the SQLx <code>Option</code> type inference issue for primary keys, especially in the context of SQLite. From understanding the problem and reproducing it, to exploring solutions like explicit type annotations and <code>NOT NULL</code> constraints, you're now equipped to handle this like a total boss. This article has provided a comprehensive exploration of the SQLx <code>Option</code> type inference issue for primary keys, focusing on SQLite. We've covered the underlying causes, reproduction steps, and various solutions and workarounds. By understanding the nuances of this issue, you can write more robust and maintainable SQLx code.</p>
+<h3>Key Takeaways</h3>
+<p>Let's recap the key takeaways from our deep dive: SQLx might infer <code>Option&lt;T&gt;</code> for primary keys due to SQLite's flexible schema handling. Reproducing the issue involves setting up an SQLite database with a primary key and using the <code>query!</code> macro. Solutions include explicit type annotations, <code>NOT NULL</code> constraints, and alternative query-building methods like the <code>query_as!</code> macro. The SQLx version, enabled features, database server, and Rust version all play a role in this behavior. By keeping these points in mind, you'll be well-prepared to tackle similar challenges in your SQLx projects.</p>
+<h3>Best Practices for SQLx Development</h3>
+<p>To ensure a smooth SQLx development experience, consider these best practices: Stay updated with the latest SQLx version to benefit from bug fixes and improvements. Use explicit type annotations when necessary to avoid type inference issues. Leverage <code>NOT NULL</code> constraints in your database schema to enforce data integrity. Choose the appropriate query-building method based on your specific needs. Understand the behavior of your database server and its impact on SQLx. By following these guidelines, you can write efficient, safe, and maintainable SQLx code.</p>
+<h3>Final Thoughts</h3>
+<p>The world of asynchronous Rust and database interactions can be complex, but with a solid understanding of tools like SQLx, you're well on your way to building amazing applications. Keep experimenting, keep learning, and don't hesitate to dive deep into the documentation when you encounter a snag. Happy coding, and may your primary keys always be non-nullable in spirit!</p>
+<p>By mastering the intricacies of SQLx and understanding its interactions with different database systems and Rust versions, you can confidently tackle any database-related challenge that comes your way. Remember, the key is to stay curious, keep learning, and embrace the power of asynchronous Rust for building high-performance applications.</p>
+
+                    </div>
+                    <aside class="related-posts">
+                        <div class="ad-sidebar container">
+                            <div class="ad-wrapper">
+    <span>Iklan Related</span>
+</div>
+                        </div>
+                        <h2 class="related-posts-title">Related Posts</h2><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/master-reflexology-at-home-your">Master Reflexology At Home: Your Step-by-Step Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-06T08:22:09+00:00">Aug 6, 2025</time>
+		                        <span class="view-count">
+									51 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/master-your-mornings-a-guide">Master Your Mornings: A Guide To Building A Routine</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-04T07:11:40+00:00">Aug 4, 2025</time>
+		                        <span class="view-count">
+									51 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/responding-to-verbal-abuse">Responding To Verbal Abuse</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-03T00:44:34+00:00">Aug 3, 2025</time>
+		                        <span class="view-count">
+									26 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/how-to-get-rid-of-1754365318166">How To Get Rid Of Flying Termites: A Complete Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-05T03:41:58+00:00">Aug 5, 2025</time>
+		                        <span class="view-count">
+									51 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/altitude-and-air-pressure-how">Altitude And Air Pressure: How Does Altitude Affect Pressure?</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-06T17:21:10+00:00">Aug 6, 2025</time>
+		                        <span class="view-count">
+									61 views
+		                        </span>
+                            </div>
+                        </article>
+                    </aside>
+                    <aside class="related-posts"></aside>
+                </div>
+            </div>
+        </article>
+        <a href="#" class="back-to-top" id="backToTop" title="Back to top">
+        	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-bar-up" viewBox="0 0 16 16">
+			  <path fill-rule="evenodd" d="M3.646 11.854a.5.5 0 0 0 .708 0L8 8.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708M2.4 5.2c0 .22.18.4.4.4h10.4a.4.4 0 0 0 0-.8H2.8a.4.4 0 0 0-.4.4"/>
+			</svg>
+		</a>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 ANABEL</p>
+        </div>
+    </footer>
+    <script>
+    	(() => {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            const toggleMenu = () => {
+                navMenu.classList.toggle('nav-menu-active');
+                navToggle.classList.toggle('nav-toggle-active');
+            };
+            const backToTopHandler = (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            navToggle.addEventListener('click', toggleMenu);
+            document.getElementById('backToTop').addEventListener('click', backToTopHandler);
+            window.addEventListener('pagehide', () => {
+                navToggle.removeEventListener('click', toggleMenu);
+                document.getElementById('backToTop').removeEventListener('click', backToTopHandler);
+            });
+        })();
+		(() => {
+            window.addEventListener("DOMContentLoaded", (event) => {
+                const ellHljs = document.createElement("script");
+                ellHljs.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js");
+                ellHljs.onload = () => {
+                    hljs.highlightAll();
+                };
+                document.querySelector("body").append(ellHljs);
+                const ellFont = document.createElement("link");
+                ellFont.setAttribute("href", "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css");
+                ellFont.setAttribute("rel", "stylesheet");
+                document.querySelector("head").append(ellFont);
+                window.addEventListener('pagehide', () => {
+                    // ellHljs.remove();
+                    ellFont.remove();
+                });
+
+            });
+        })();
+    </script>
+    
+    
+    
+</body>
+</html>

@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Securely Connect Salesforce To Google Cloud APIs With Named Credentials And JWT</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Securely Connect Salesforce To Google Cloud APIs With Named Credentials And JWT...">
+    <link rel="canonical" href="https://catatansoal.github.io/blog/securely-connect-salesforce-to-google">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Securely Connect Salesforce To Google Cloud APIs With Named Credentials And JWT">
+	<meta property="og:description" content="Securely Connect Salesforce To Google Cloud APIs With Named Credentials And JWT...">
+	<meta property="og:url" content="https://catatansoal.github.io/blog/securely-connect-salesforce-to-google">
+	<meta property="og:site_name" content="ANABEL">
+	<meta property="article:published_time" content="2025-07-16T15:12:45+00:00">
+	<meta property="article:author" content="ADMIN">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+    <link rel="preload" fetchpriority="high" as="image" href="https://tse4.mm.bing.net/th?q=How%20to%20Use%20Named%20Credentials%20with%20Google%20Cloud%20APIs%20Requiring%20JWT%20for%20Token%20Authentication">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style type="text/css">
+    	:root{--primary-color:#3740ff;--text-color:#202124;--background-color:#ffffff;--gray-100:#f8f9fa;--gray-200:#e9ecef}*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;line-height:1.6;color:var(--text-color);background-color:var(--background-color)}.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}.header{background-color:var(--background-color);border-bottom:1px solid var(--gray-200);position:sticky;top:0;z-index:100}.nav{padding:.5rem 0}.nav-container{display:flex;justify-content:space-between;align-items:center;gap:1rem}.nav-left{display:flex;align-items:center;flex-shrink:0}.logo{font-weight:700;color:var(--primary-color)}.blog-tag{margin-left:1rem;padding:.25rem .5rem;background-color:var(--gray-100);border-radius:4px;font-size:.875rem}.nav-search{flex-grow:1;max-width:300px}.search-form{position:relative;width:100%}.search-input{width:100%;padding:.5rem 2.5rem .5rem 1rem;border:1px solid var(--gray-200);border-radius:24px;font-size:.875rem;transition:all 0.2s}.search-input:focus{outline:none;border-color:var(--primary-color);box-shadow:0 0 0 2px rgb(55 64 255 / .1)}.search-button{position:absolute;right:.5rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#5f6368;cursor:pointer;padding:.25rem;display:flex;align-items:center;justify-content:center}.search-button:hover{color:var(--primary-color)}.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:.5rem}.hamburger{display:block;position:relative;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before,.hamburger::after{content:'';position:absolute;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before{top:-6px}.hamburger::after{bottom:-6px}.nav-toggle-active .hamburger{background:#fff0}.nav-toggle-active .hamburger::before{transform:rotate(45deg);top:0}.nav-toggle-active .hamburger::after{transform:rotate(-45deg);bottom:0}.nav-list{display:flex;list-style:none;gap:2rem}.nav-link{color:var(--text-color);text-decoration:none;font-size:.9rem;transition:color 0.2s}.nav-link:hover{color:var(--primary-color)}.article-header{padding:2rem 0;background-color:var(--gray-100)}.article-layout{display:grid;grid-template-columns:1fr 350px;gap:3rem;padding:1rem 0;align-items: start}h1,h2,h3,h4,h5,h6{font-family:"Crimson Text","Times New Roman",Times,serif}h1{font-size:2.5rem;line-height:1.2;margin-bottom:1rem}.meta{color:#5f6368;font-size:.875rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}.view-count{display:inline-flex;align-items:center;gap:.25rem}.view-count svg{color:#5f6368}.content{min-width:0;border-bottom:1px solid #dddddd5e;margin-top:1rem;white-space:pre-line !important;overflow-wrap:break-word;overflow-x:auto;word-break:break-word}.lead{font-size:1.25rem;color:#5f6368;margin-bottom:2rem}h2,h3,h4,h5,h6{font-size:1.75rem;margin:1rem 0 1rem}p,pre,ol,ul>li{margin-bottom:1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;font-size:1.3rem;text-align: justify;}p>code{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px}hr{margin:1rem 0 1rem 0}.code-example{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;margin:1.5rem 0;overflow-x:auto}code{font-family:'Roboto Mono',monospace;font-size:.875rem}ul{margin:.2rem 0;padding-left:1.5rem}.related-posts{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;position:sticky;top:5rem}.related-posts-title,.newpost-posts-list{font-size:1.75rem;margin:0 0 1rem}.related-posts-list{display:flex;flex-direction:column;gap:.5rem}.related-post,.newpost-post{border-bottom:1px solid #ddd;padding-bottom:10px;margin-bottom:10px}.related-post:last-child,.newpost-post:last-child{padding-bottom:0;border-bottom:none}.related-post-title,.newpost-post-title{font-size:1.2rem;margin:0 0 .1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;}.related-post-title a,.newpost-post-title a{color:var(--text-color);text-decoration:none;transition:color 0.2s}.related-post-title a:hover,.newpost-post-title a:hover{color:var(--primary-color)}.related-post time{font-size:.875rem;color:#5f6368}.footer{background-color:var(--gray-100);padding:2rem 0;margin-top:4rem;color:#5f6368;font-size:.875rem}.nav-menu>ul>li{margin-bottom:0}@media (max-width:1024px){.container{max-width:800px}.article-layout{grid-template-columns:1fr;gap:2rem}.related-posts{position:static}}@media (max-width:768px){.nav-container{flex-wrap:wrap}.nav-search{order:3;max-width:none;width:100%;margin-top:.1rem}.nav-toggle{display:block}.nav-menu{display:none;position:absolute;top:100%;left:0;right:0;background:var(--background-color);padding:1rem 0;border-bottom:1px solid var(--gray-200)}.nav-menu-active{display:block}.nav-list{flex-direction:column;gap:.1rem;padding:0 1.5rem}.nav-link{display:block;padding:.2rem 0}h1{font-size:2rem}.article-header{padding:2rem 0}.content{padding:.1rem 0}}table{width:100%;border-collapse:collapse;margin:20px 0;font-family:'Arial',sans-serif}th,td{padding:12px 15px;text-align:left;border:1px solid #ddd}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9}tr:nth-child(even) td{background-color:#f2f2f2}@media screen and (max-width:768px){table{border:0;display:block;overflow-x:auto;white-space:nowrap}th,td{padding:10px;text-align:right}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9;border-bottom:1px solid #ddd}tr:nth-child(even) td{background-color:#f2f2f2}}a{text-decoration:none;color:#540707}.katex-html{padding: .2rem;color: #000;font-weight: 700;font-size: 1.3rem;overflow-wrap: break-word;max-width: 100%;white-space: normal !important}.category{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin:1rem 0 1rem 0}.tag{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px;font-family:"Newsreader",serif}.tag>a{text-decoration:none;color:#000}img{margin:auto;display:block;max-width:100%;height:auto;margin-bottom:1rem}.katex{white-space: pre-line !important;display: inline-block;max-width: 100%;overflow-x: auto;overflow-y: hidden;scrollbar-width: thin;overflow-wrap: break-word;word-break: break-word;vertical-align: -7px}.content > p {overflow-wrap: break-word;word-break: break-word}
+    </style>
+    <style type="text/css">
+    	pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}
+		.hljs{color:#c9d1d9;background:#0d1117}.hljs-doctag,.hljs-keyword,.hljs-meta .hljs-keyword,.hljs-template-tag,.hljs-template-variable,.hljs-type,.hljs-variable.language_{color:#ff7b72}.hljs-title,.hljs-title.class_,.hljs-title.class_.inherited__,.hljs-title.function_{color:#d2a8ff}.hljs-attr,.hljs-attribute,.hljs-literal,.hljs-meta,.hljs-number,.hljs-operator,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-variable{color:#79c0ff}.hljs-meta .hljs-string,.hljs-regexp,.hljs-string{color:#a5d6ff}.hljs-built_in,.hljs-symbol{color:#ffa657}.hljs-code,.hljs-comment,.hljs-formula{color:#8b949e}.hljs-name,.hljs-quote,.hljs-selector-pseudo,.hljs-selector-tag{color:#7ee787}.hljs-subst{color:#c9d1d9}.hljs-section{color:#1f6feb;font-weight:700}.hljs-bullet{color:#f2cc60}.hljs-emphasis{color:#c9d1d9;font-style:italic}.hljs-strong{color:#c9d1d9;font-weight:700}.hljs-addition{color:#aff5b4;background-color:#033a16}.hljs-deletion{color:#ffdcd7;background-color:#67060c}
+    	pre{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;font-weight:400;word-break:break-word;word-wrap:break-word;box-sizing:inherit;border-radius:4px;overflow-x:auto;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}code{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;word-wrap:break-word;word-break:break-word;font-style:normal;line-height:20px;letter-spacing:-.003em;box-sizing:inherit;font-weight:400;font-size:75%;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}
+    </style>
+    <style type="text/css">
+    	.back-to-top{position:fixed;bottom:20px;right:20px;background-color:#a73f3f;color:#fff;padding:8px 10px;border-radius:50%;box-shadow:0 4px 6px rgb(0 0 0 / .2);font-size:10px;font-weight:700;text-decoration:none;text-align:center;transition:opacity 0.3s ease,visibility 0.3s ease;z-index:99999;opacity:1;visibility:visible}.back-to-top:hover{background-color:#0056b3}
+    </style>
+    <style type="text/css">
+        .ad-header {margin: 1rem auto 1rem;background-color: #fdfdfd;text-align: center;display: block;}.ad-header .ad-wrapper {min-height: 90px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #555;font-weight: 500;padding: 3rem;border: 1px dashed #ccc;border-radius: 6px;}@media (max-width: 768px) {.ad-header {padding: 0.75rem;}}.ad-sidebar {margin: 0 0 1rem;background-color: #fefefe;text-align: center;padding: 0px;width: 100%;max-width: 100%;display: block;}.ad-sidebar .ad-wrapper {min-height: 250px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #444;font-weight: 500;border: 1px dashed #aaa;border-radius: 6px;padding: 0rem;}@media (max-width: 1024px) {.ad-sidebar {padding: 0.75rem;}}
+    </style>
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://catatansoal.github.io/blog/securely-connect-salesforce-to-google"
+          },
+          "headline": "Securely Connect Salesforce To Google Cloud APIs With Named Credentials And JWT",
+          "description": "Securely Connect Salesforce To Google Cloud APIs With Named Credentials And JWT...",
+          "image": [
+            "https://tse4.mm.bing.net/th?q=How%20to%20Use%20Named%20Credentials%20with%20Google%20Cloud%20APIs%20Requiring%20JWT%20for%20Token%20Authentication"
+          ],
+          "author": {
+            "@type": "Person",
+            "name": "ADMIN",
+            "jobTitle": "Editor web"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "ANABEL",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://tse4.mm.bing.net/th?q=ANABEL%20WEB"
+            }
+          },
+          "datePublished": "2025-07-16T15:12:45+00:00",
+          "dateModified": "2025-07-16T15:12:45+00:00"
+        }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="container nav-container">
+                <div class="nav-left">
+                    <span class="logo">ANABEL</span>
+                    <span class="blog-tag">Article</span>
+                </div>
+                <div class="nav-search">
+                    <form class="search-form" role="search">
+                        <input 
+                            type="search" 
+                            class="search-input"
+                            placeholder="Search articles..."
+                            aria-label="Search articles"
+                        >
+                        <button type="submit" class="search-button" aria-label="Submit search">🔎</button>
+                    </form>
+                </div>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+                <div class="nav-menu">
+                    <ul class="nav-list">
+                    	<li><a href="/" class="nav-link">HOME</a></li>
+                        <li><a href="/pages/About" class="nav-link">About</a></li>
+                        <li><a href="/pages/Contact" class="nav-link">Contact</a></li>
+                        <li><a href="/pages/Disclaimer" class="nav-link">Disclaimer</a></li>
+                        <li><a href="/pages/Privacy" class="nav-link">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="main">
+        <article class="article">
+            <header class="article-header">
+                <div class="container">
+                    <h1>Securely Connect Salesforce To Google Cloud APIs With Named Credentials And JWT</h1>
+                    <div class="meta">
+                        <time datetime="2025-07-16T15:12:45+00:00">Jul 16, 2025</time>
+                        <span class="author">by ADMIN</span>
+                        <span class="view-count">
+                            <span id="viewCount">80</span> views
+                        </span>
+                    </div>
+                </div>
+            </header>
+            <div class="ad-header container">
+                <div class="ad-wrapper">
+    Iklan Headers
+</div>
+            </div>
+            <div class="container">
+                <div class="article-layout">
+                    <div class="content">
+                        <img src="https://tse4.mm.bing.net/th?q=How%20to%20Use%20Named%20Credentials%20with%20Google%20Cloud%20APIs%20Requiring%20JWT%20for%20Token%20Authentication" title="How to Use Named Credentials with Google Cloud APIs Requiring JWT for Token Authentication" width="300" height="200"/><h2>Introduction</h2>
+<p>Hey guys! Ever wondered how to securely connect your Salesforce org to Google Cloud Platform (GCP) using Named Credentials, especially when you need a JSON Web Token (JWT) to get an access token? Well, you're in the right place! This article dives deep into using Named Credentials with a Google Cloud API, which requires a JWT to get a token. We'll walk through the process step-by-step, ensuring you can seamlessly send Pub/Sub messages or interact with any other GCP service from your Apex code. Let's unravel this together and make your Salesforce-GCP integration a breeze!</p>
+<h3>Understanding the Challenge: JWT and Google Cloud APIs</h3>
+<p>Integrating Salesforce with Google Cloud APIs often involves authenticating using a service account. Google Cloud APIs frequently use <strong>JWT (JSON Web Tokens)</strong> for authentication, a standard for securely transmitting information between parties as a JSON object. To interact with these APIs, you typically need to obtain an access token by exchanging a JWT. This process adds a layer of complexity compared to simpler authentication methods. So, how do you manage this within Salesforce, leveraging the Named Credentials framework? The key lies in understanding how to configure Named Credentials to handle the JWT exchange and then use it effectively in your Apex code. This article will guide you through each step, from setting up your service account in Google Cloud to crafting the necessary Apex code to make the API calls. By the end, you'll have a solid grasp of how to securely and efficiently connect your Salesforce org with Google Cloud services.</p>
+<h3>What are Named Credentials?</h3>
+<p>Before diving into the specifics, let’s quickly recap <strong>what Named Credentials</strong> are. In Salesforce, Named Credentials securely store authentication details, like URLs and authentication parameters, making it easier to call external services from Apex code. They abstract away the complexities of authentication, allowing developers to focus on the business logic rather than the nitty-gritty of handling tokens and credentials directly in the code. Named Credentials support various authentication protocols, including passwords, OAuth 2.0, and custom authentication schemes. When dealing with Google Cloud APIs requiring JWT, you'll typically use a custom authentication provider to handle the JWT exchange process. This involves generating a JWT, sending it to Google's OAuth 2.0 token endpoint, and receiving an access token in return. The Named Credential then uses this access token to authenticate subsequent API calls. This approach not only enhances security by keeping sensitive information out of your code but also simplifies the process of managing and updating authentication credentials over time.</p>
+<h3>Why Use Named Credentials for Google Cloud Integration?</h3>
+<p>Using Named Credentials offers several advantages when integrating Salesforce with Google Cloud APIs. First and foremost, <strong>security is paramount</strong>. Named Credentials store authentication details securely, preventing sensitive information from being hardcoded in your Apex classes or triggers. This reduces the risk of accidental exposure and simplifies compliance with security best practices. Secondly, Named Credentials streamline the authentication process. By encapsulating the authentication logic, they make your code cleaner and easier to maintain. You don't have to worry about generating JWTs, handling token refreshes, or managing API keys directly in your code. Instead, you can focus on the core functionality of your integration. Additionally, Named Credentials provide a centralized place to manage and update authentication settings. If your Google Cloud service account credentials change, you can update them in one place, without having to modify multiple Apex classes or triggers. This centralized management simplifies maintenance and reduces the risk of errors. Finally, Named Credentials support a variety of authentication mechanisms, making them a versatile tool for integrating with different types of external services. Whether you're using JWT, OAuth 2.0, or a custom authentication scheme, Named Credentials provide a consistent and secure way to manage your integrations.</p>
+<h2>Step-by-Step Guide: Setting Up Named Credentials for Google Cloud with JWT</h2>
+<p>Okay, let's get down to the nitty-gritty! Here’s a step-by-step guide on how to set up Named Credentials in Salesforce to connect to Google Cloud APIs using JWT for token authentication.</p>
+<h3>1. Create a Google Cloud Service Account</h3>
+<p>First things first, you need a <strong>Google Cloud service account</strong>. A service account is a special type of Google account intended for non-human users that need to authenticate in a Google Cloud environment. To create one, head over to the Google Cloud Console. In the IAM &amp; Admin section, navigate to Service Accounts and click on &quot;Create Service Account.&quot; Provide a name and description for your service account, and then grant it the necessary permissions to access the Google Cloud resources you need (e.g., Pub/Sub Publisher). Next, create a <strong>JSON key</strong> for the service account. This key will be used to generate the JWT. Download this JSON key file and keep it safe, as it contains sensitive credentials. Remember, treat this file like a password! Store it securely and don't share it publicly. With your service account set up and the JSON key in hand, you're ready to move on to configuring Salesforce.</p>
+<h3>2. Install the JWT Library for Apex</h3>
+<p>To generate JWTs in Apex, you'll need a <strong>JWT library</strong>. Luckily, there are a few options available. One popular choice is the <code>jwt-apex</code> library, which you can find on GitHub. This library provides the necessary classes and methods to create and sign JWTs within your Salesforce environment. To install the library, you can either use the Salesforce CLI to deploy the metadata or manually create the Apex classes and metadata files in your org. Once the library is installed, you'll be able to use its classes to construct the JWT payload, set the header, and sign the token using the private key from your Google Cloud service account JSON key file. This step is crucial, as the JWT is the credential you'll use to request an access token from Google Cloud. Without a properly generated and signed JWT, your authentication attempts will fail. Make sure to follow the library's installation instructions carefully to ensure everything is set up correctly.</p>
+<h3>3. Create an Apex Class to Generate the JWT</h3>
+<p>Now, let’s create an <strong>Apex class to generate the JWT</strong>. This class will take the service account email, the private key from the JSON key file, and other necessary information to construct the JWT. You'll need to extract the private key from the JSON file, which is typically in PEM format. The JWT payload should include claims like the issuer (<code>iss</code>), the audience (<code>aud</code>), the issued at time (<code>iat</code>), and the expiration time (<code>exp</code>). The audience should be set to the Google OAuth 2.0 token endpoint (<code>https://oauth2.googleapis.com/token</code>). Once the payload is constructed, you'll use the JWT library you installed in the previous step to sign the token using the private key. The resulting JWT will be a string that you can then use in your authentication request. This class will serve as a central component in your integration, responsible for creating the JWT whenever you need to authenticate with Google Cloud. By encapsulating the JWT generation logic in a dedicated class, you can keep your code clean, maintainable, and secure.</p>
+<pre><code class="hljs">public class JWTGenerator {
+  public static String generateJWT(String serviceAccountEmail, String privateKey) {
+    // Implement JWT generation logic here
+    return &#39;your_jwt_string&#39;;
+  }
+}
+</code></pre>
+<h3>4. Create a Named Credential with a Custom Authentication Provider</h3>
+<p>This is where the magic happens! In Salesforce Setup, navigate to <strong>Named Credentials</strong> and create a new one. Set the URL to the Google Cloud API endpoint you want to access (e.g., <code>https://pubsub.googleapis.com/v1/projects/{your_project_id}/topics/{your_topic_name}:publish</code>). For the authentication protocol, choose &quot;Custom.&quot; You’ll then need to create a custom authentication provider. In the custom authentication provider settings, specify the token endpoint (<code>https://oauth2.googleapis.com/token</code>) and the parameters required to exchange the JWT for an access token. These parameters typically include <code>grant_type</code> (set to <code>urn:ietf:params:oauth:grant-type:jwt-bearer</code>) and <code>assertion</code> (the JWT you generated in the previous step). You'll also need to define Apex classes for the Authentication Provider, which handles the request and response. This class will use the <strong>JWTGenerator</strong> class you created earlier to generate the JWT and include it in the token request. Once the access token is received from Google, it will be stored securely by the Named Credential and used for subsequent API calls. This setup ensures that your Salesforce org can securely authenticate with Google Cloud APIs using JWT-based authentication.</p>
+<h3>5. Implement the Custom Authentication Provider Apex Class</h3>
+<p>Now, let's dive into implementing the <strong>Custom Authentication Provider Apex class</strong>. This class is the heart of the authentication process, responsible for generating the JWT, sending it to Google's token endpoint, and handling the response. Your Apex class needs to implement the <code>Auth.AuthProviderPluginClass</code> interface. Within this class, you'll have methods to handle the token request and response. In the <code>getToken</code> method, you'll use the <strong>JWTGenerator</strong> class to create the JWT. Then, you'll construct an HTTP request to Google's token endpoint, including the JWT as the <code>assertion</code> parameter and the <code>grant_type</code> as <code>urn:ietf:params:oauth:grant-type:jwt-bearer</code>. When you receive the response from Google, you'll parse the JSON to extract the access token and any other relevant information, such as the token expiration time. This information is then stored in the <strong>Auth.AuthProviderTokenResponse</strong> object, which Salesforce uses to manage the token. Make sure to handle any potential errors, such as invalid credentials or network issues, gracefully. By implementing this class correctly, you ensure that your Named Credential can automatically obtain and refresh access tokens from Google Cloud, allowing your Salesforce org to interact seamlessly with Google Cloud APIs.</p>
+<pre><code class="hljs">global class GoogleAuthProvider implements Auth.AuthProviderPluginClass {
+  global Auth.AuthProviderTokenResponse getToken(Auth.AuthProviderTokenRequestContext requestContext) {
+    // Implement the logic to generate JWT, exchange it for an access token,
+    // and return Auth.AuthProviderTokenResponse
+    return null;
+  }
+
+  global Auth.AuthProviderRefreshTokenResponse refreshToken(Auth.AuthProviderRefreshTokenRequestContext requestContext) {
+    // Implement refresh token logic if needed
+    return null;
+  }
+}
+</code></pre>
+<h3>6. Use the Named Credential in Your Apex Code</h3>
+<p>With your Named Credential configured, you can now use it in your Apex code to make calls to Google Cloud APIs. To do this, you'll create an HTTP request and set the endpoint URL to the URL defined in your Named Credential. Salesforce automatically handles the authentication, including adding the access token to the request headers. You don't need to worry about manually adding the token or managing the authentication process. Simply create the HTTP request, set the Named Credential as the endpoint, and send the request. The response from the Google Cloud API will be returned, and you can then process it as needed. This approach greatly simplifies the process of integrating with external services, as it abstracts away the complexities of authentication. By using Named Credentials, you can focus on the business logic of your integration rather than the technical details of token management. This makes your code cleaner, more maintainable, and more secure. Remember to handle any potential errors, such as network issues or API rate limits, gracefully in your code.</p>
+<pre><code class="hljs">Http http = new Http();
+HttpRequest request = new HttpRequest();
+request.setEndpoint(&#39;callout:YourNamedCredentialName/your/api/endpoint&#39;);
+request.setMethod(&#39;GET&#39;);
+HttpResponse response = http.send(request);
+
+if (response.getStatusCode() == 200) {
+  // Process the response
+}
+</code></pre>
+<h2>Troubleshooting Common Issues</h2>
+<p>Integrating with external APIs can sometimes be tricky. Here are a few common issues you might encounter and how to troubleshoot them.</p>
+<h3>JWT Generation Errors</h3>
+<p>One common issue is <strong>errors during JWT generation</strong>. This could be due to incorrect formatting of the JWT payload, an invalid private key, or issues with the JWT library itself. Double-check that your JWT payload includes all the required claims (issuer, subject, audience, issued at, and expiration time) and that they are correctly formatted. Verify that the private key you're using is the correct one for your service account and that it's in the correct format (PEM). If you're using a JWT library, make sure it's properly installed and configured. Look at the debug logs in Salesforce and Google Cloud for any error messages that might provide more information about the issue. Additionally, try using a JWT debugger tool to validate your JWT before sending it to Google Cloud. These tools can help you identify any structural or formatting issues with your token. If you're still encountering problems, consider reaching out to the JWT library's support community or consulting the documentation for troubleshooting tips.</p>
+<h3>Authentication Failures</h3>
+<p><strong>Authentication failures</strong> can stem from various reasons. It could be an invalid JWT, incorrect Named Credential settings, or insufficient permissions on the Google Cloud service account. First, ensure your JWT is correctly generated and signed. You can use online JWT validators to check its structure and signature. Next, verify that your Named Credential is configured correctly, including the token endpoint and custom authentication provider settings. Double-check that the client ID and client secret in your Named Credential match the credentials of your Google Cloud service account. Also, make sure the service account has the necessary permissions to access the Google Cloud resources you're trying to use. In the Google Cloud Console, review the IAM roles assigned to your service account and ensure they include the required permissions. If you're still experiencing authentication failures, examine the error messages returned by the Google Cloud API. These messages often provide valuable clues about the cause of the issue, such as invalid credentials or missing permissions. By systematically checking each of these potential causes, you can usually pinpoint the source of the problem and resolve it.</p>
+<h3>Rate Limiting</h3>
+<p><strong>Rate limiting</strong> is another common issue when integrating with APIs. Google Cloud APIs, like many others, impose limits on the number of requests you can make within a certain time period. If you exceed these limits, you'll receive an error. To avoid rate limiting, it's essential to implement strategies to manage the number of API calls your Salesforce org makes to Google Cloud. One approach is to batch requests whenever possible, reducing the number of individual API calls. For example, if you're sending multiple Pub/Sub messages, try to send them in a single batch request rather than making separate calls for each message. Another strategy is to implement a retry mechanism with exponential backoff. If you receive a rate limit error, wait for a short period, then retry the request. If the retry fails, wait for a longer period before trying again. This helps to avoid overwhelming the API with repeated requests. Additionally, you can monitor your API usage and track the number of requests you're making over time. If you're consistently hitting rate limits, you may need to request an increase in your limits from Google Cloud or optimize your integration to reduce the number of API calls. By proactively managing your API usage, you can minimize the risk of rate limiting and ensure the smooth operation of your integration.</p>
+<h2>Conclusion</h2>
+<p>So, there you have it! Setting up Named Credentials with a Google Cloud API that requires a JWT for token authentication might seem daunting initially, but breaking it down step by step makes it totally manageable. From creating a service account and generating a JWT to configuring Named Credentials and writing Apex code, you've got the knowledge to securely connect Salesforce to Google Cloud. Remember, <strong>security and efficiency are key</strong>, and Named Credentials help you achieve both. Happy integrating, folks!</p>
+
+                    </div>
+                    <aside class="related-posts">
+                        <div class="ad-sidebar container">
+                            <div class="ad-wrapper">
+    <span>Iklan Related</span>
+</div>
+                        </div>
+                        <h2 class="related-posts-title">Related Posts</h2><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/chat-with-girls-on-omegle">Chat With Girls On Omegle: A Complete Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-01T16:40:29+00:00">Aug 1, 2025</time>
+		                        <span class="view-count">
+									43 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/mastering-radical-equations-a-step">Mastering Radical Equations A Step-by-Step Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-14T15:32:02+00:00">Jul 14, 2025</time>
+		                        <span class="view-count">
+									48 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/gopher-control-how-to-get">Gopher Control: How To Get Rid Of Gophers Effectively</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-06T08:45:27+00:00">Aug 6, 2025</time>
+		                        <span class="view-count">
+									53 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/african-independence-movements-unveiling-the">African Independence Movements: Unveiling The Truth</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-05T01:30:24+00:00">Aug 5, 2025</time>
+		                        <span class="view-count">
+									51 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/philosopher-match-tolerance-economics-and">Philosopher Match: Tolerance, Economics &amp; Freedom</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-06T13:53:46+00:00">Aug 6, 2025</time>
+		                        <span class="view-count">
+									49 views
+		                        </span>
+                            </div>
+                        </article>
+                    </aside>
+                    <aside class="related-posts"></aside>
+                </div>
+            </div>
+        </article>
+        <a href="#" class="back-to-top" id="backToTop" title="Back to top">
+        	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-bar-up" viewBox="0 0 16 16">
+			  <path fill-rule="evenodd" d="M3.646 11.854a.5.5 0 0 0 .708 0L8 8.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708M2.4 5.2c0 .22.18.4.4.4h10.4a.4.4 0 0 0 0-.8H2.8a.4.4 0 0 0-.4.4"/>
+			</svg>
+		</a>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 ANABEL</p>
+        </div>
+    </footer>
+    <script>
+    	(() => {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            const toggleMenu = () => {
+                navMenu.classList.toggle('nav-menu-active');
+                navToggle.classList.toggle('nav-toggle-active');
+            };
+            const backToTopHandler = (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            navToggle.addEventListener('click', toggleMenu);
+            document.getElementById('backToTop').addEventListener('click', backToTopHandler);
+            window.addEventListener('pagehide', () => {
+                navToggle.removeEventListener('click', toggleMenu);
+                document.getElementById('backToTop').removeEventListener('click', backToTopHandler);
+            });
+        })();
+		(() => {
+            window.addEventListener("DOMContentLoaded", (event) => {
+                const ellHljs = document.createElement("script");
+                ellHljs.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js");
+                ellHljs.onload = () => {
+                    hljs.highlightAll();
+                };
+                document.querySelector("body").append(ellHljs);
+                const ellFont = document.createElement("link");
+                ellFont.setAttribute("href", "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css");
+                ellFont.setAttribute("rel", "stylesheet");
+                document.querySelector("head").append(ellFont);
+                window.addEventListener('pagehide', () => {
+                    // ellHljs.remove();
+                    ellFont.remove();
+                });
+
+            });
+        })();
+    </script>
+    
+    
+    
+</body>
+</html>

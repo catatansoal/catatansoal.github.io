@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>JWT Token Generation Discussion Access And Refresh Tokens</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="JWT Token Generation Discussion Access And Refresh Tokens...">
+    <link rel="canonical" href="https://catatansoal.github.io/blog/jwt-token-generation-discussion-access">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="JWT Token Generation Discussion Access And Refresh Tokens">
+	<meta property="og:description" content="JWT Token Generation Discussion Access And Refresh Tokens...">
+	<meta property="og:url" content="https://catatansoal.github.io/blog/jwt-token-generation-discussion-access">
+	<meta property="og:site_name" content="ANABEL">
+	<meta property="article:published_time" content="2025-07-18T13:42:41+00:00">
+	<meta property="article:author" content="ADMIN">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+    <link rel="preload" fetchpriority="high" as="image" href="https://tse4.mm.bing.net/th?q=A%20Deep%20Dive%20into%20JWT%20Token%20Generation%20and%20Management">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style type="text/css">
+    	:root{--primary-color:#3740ff;--text-color:#202124;--background-color:#ffffff;--gray-100:#f8f9fa;--gray-200:#e9ecef}*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;line-height:1.6;color:var(--text-color);background-color:var(--background-color)}.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}.header{background-color:var(--background-color);border-bottom:1px solid var(--gray-200);position:sticky;top:0;z-index:100}.nav{padding:.5rem 0}.nav-container{display:flex;justify-content:space-between;align-items:center;gap:1rem}.nav-left{display:flex;align-items:center;flex-shrink:0}.logo{font-weight:700;color:var(--primary-color)}.blog-tag{margin-left:1rem;padding:.25rem .5rem;background-color:var(--gray-100);border-radius:4px;font-size:.875rem}.nav-search{flex-grow:1;max-width:300px}.search-form{position:relative;width:100%}.search-input{width:100%;padding:.5rem 2.5rem .5rem 1rem;border:1px solid var(--gray-200);border-radius:24px;font-size:.875rem;transition:all 0.2s}.search-input:focus{outline:none;border-color:var(--primary-color);box-shadow:0 0 0 2px rgb(55 64 255 / .1)}.search-button{position:absolute;right:.5rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#5f6368;cursor:pointer;padding:.25rem;display:flex;align-items:center;justify-content:center}.search-button:hover{color:var(--primary-color)}.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:.5rem}.hamburger{display:block;position:relative;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before,.hamburger::after{content:'';position:absolute;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before{top:-6px}.hamburger::after{bottom:-6px}.nav-toggle-active .hamburger{background:#fff0}.nav-toggle-active .hamburger::before{transform:rotate(45deg);top:0}.nav-toggle-active .hamburger::after{transform:rotate(-45deg);bottom:0}.nav-list{display:flex;list-style:none;gap:2rem}.nav-link{color:var(--text-color);text-decoration:none;font-size:.9rem;transition:color 0.2s}.nav-link:hover{color:var(--primary-color)}.article-header{padding:2rem 0;background-color:var(--gray-100)}.article-layout{display:grid;grid-template-columns:1fr 350px;gap:3rem;padding:1rem 0;align-items: start}h1,h2,h3,h4,h5,h6{font-family:"Crimson Text","Times New Roman",Times,serif}h1{font-size:2.5rem;line-height:1.2;margin-bottom:1rem}.meta{color:#5f6368;font-size:.875rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}.view-count{display:inline-flex;align-items:center;gap:.25rem}.view-count svg{color:#5f6368}.content{min-width:0;border-bottom:1px solid #dddddd5e;margin-top:1rem;white-space:pre-line !important;overflow-wrap:break-word;overflow-x:auto;word-break:break-word}.lead{font-size:1.25rem;color:#5f6368;margin-bottom:2rem}h2,h3,h4,h5,h6{font-size:1.75rem;margin:1rem 0 1rem}p,pre,ol,ul>li{margin-bottom:1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;font-size:1.3rem;text-align: justify;}p>code{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px}hr{margin:1rem 0 1rem 0}.code-example{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;margin:1.5rem 0;overflow-x:auto}code{font-family:'Roboto Mono',monospace;font-size:.875rem}ul{margin:.2rem 0;padding-left:1.5rem}.related-posts{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;position:sticky;top:5rem}.related-posts-title,.newpost-posts-list{font-size:1.75rem;margin:0 0 1rem}.related-posts-list{display:flex;flex-direction:column;gap:.5rem}.related-post,.newpost-post{border-bottom:1px solid #ddd;padding-bottom:10px;margin-bottom:10px}.related-post:last-child,.newpost-post:last-child{padding-bottom:0;border-bottom:none}.related-post-title,.newpost-post-title{font-size:1.2rem;margin:0 0 .1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;}.related-post-title a,.newpost-post-title a{color:var(--text-color);text-decoration:none;transition:color 0.2s}.related-post-title a:hover,.newpost-post-title a:hover{color:var(--primary-color)}.related-post time{font-size:.875rem;color:#5f6368}.footer{background-color:var(--gray-100);padding:2rem 0;margin-top:4rem;color:#5f6368;font-size:.875rem}.nav-menu>ul>li{margin-bottom:0}@media (max-width:1024px){.container{max-width:800px}.article-layout{grid-template-columns:1fr;gap:2rem}.related-posts{position:static}}@media (max-width:768px){.nav-container{flex-wrap:wrap}.nav-search{order:3;max-width:none;width:100%;margin-top:.1rem}.nav-toggle{display:block}.nav-menu{display:none;position:absolute;top:100%;left:0;right:0;background:var(--background-color);padding:1rem 0;border-bottom:1px solid var(--gray-200)}.nav-menu-active{display:block}.nav-list{flex-direction:column;gap:.1rem;padding:0 1.5rem}.nav-link{display:block;padding:.2rem 0}h1{font-size:2rem}.article-header{padding:2rem 0}.content{padding:.1rem 0}}table{width:100%;border-collapse:collapse;margin:20px 0;font-family:'Arial',sans-serif}th,td{padding:12px 15px;text-align:left;border:1px solid #ddd}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9}tr:nth-child(even) td{background-color:#f2f2f2}@media screen and (max-width:768px){table{border:0;display:block;overflow-x:auto;white-space:nowrap}th,td{padding:10px;text-align:right}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9;border-bottom:1px solid #ddd}tr:nth-child(even) td{background-color:#f2f2f2}}a{text-decoration:none;color:#540707}.katex-html{padding: .2rem;color: #000;font-weight: 700;font-size: 1.3rem;overflow-wrap: break-word;max-width: 100%;white-space: normal !important}.category{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin:1rem 0 1rem 0}.tag{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px;font-family:"Newsreader",serif}.tag>a{text-decoration:none;color:#000}img{margin:auto;display:block;max-width:100%;height:auto;margin-bottom:1rem}.katex{white-space: pre-line !important;display: inline-block;max-width: 100%;overflow-x: auto;overflow-y: hidden;scrollbar-width: thin;overflow-wrap: break-word;word-break: break-word;vertical-align: -7px}.content > p {overflow-wrap: break-word;word-break: break-word}
+    </style>
+    <style type="text/css">
+    	pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}
+		.hljs{color:#c9d1d9;background:#0d1117}.hljs-doctag,.hljs-keyword,.hljs-meta .hljs-keyword,.hljs-template-tag,.hljs-template-variable,.hljs-type,.hljs-variable.language_{color:#ff7b72}.hljs-title,.hljs-title.class_,.hljs-title.class_.inherited__,.hljs-title.function_{color:#d2a8ff}.hljs-attr,.hljs-attribute,.hljs-literal,.hljs-meta,.hljs-number,.hljs-operator,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-variable{color:#79c0ff}.hljs-meta .hljs-string,.hljs-regexp,.hljs-string{color:#a5d6ff}.hljs-built_in,.hljs-symbol{color:#ffa657}.hljs-code,.hljs-comment,.hljs-formula{color:#8b949e}.hljs-name,.hljs-quote,.hljs-selector-pseudo,.hljs-selector-tag{color:#7ee787}.hljs-subst{color:#c9d1d9}.hljs-section{color:#1f6feb;font-weight:700}.hljs-bullet{color:#f2cc60}.hljs-emphasis{color:#c9d1d9;font-style:italic}.hljs-strong{color:#c9d1d9;font-weight:700}.hljs-addition{color:#aff5b4;background-color:#033a16}.hljs-deletion{color:#ffdcd7;background-color:#67060c}
+    	pre{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;font-weight:400;word-break:break-word;word-wrap:break-word;box-sizing:inherit;border-radius:4px;overflow-x:auto;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}code{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;word-wrap:break-word;word-break:break-word;font-style:normal;line-height:20px;letter-spacing:-.003em;box-sizing:inherit;font-weight:400;font-size:75%;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}
+    </style>
+    <style type="text/css">
+    	.back-to-top{position:fixed;bottom:20px;right:20px;background-color:#a73f3f;color:#fff;padding:8px 10px;border-radius:50%;box-shadow:0 4px 6px rgb(0 0 0 / .2);font-size:10px;font-weight:700;text-decoration:none;text-align:center;transition:opacity 0.3s ease,visibility 0.3s ease;z-index:99999;opacity:1;visibility:visible}.back-to-top:hover{background-color:#0056b3}
+    </style>
+    <style type="text/css">
+        .ad-header {margin: 1rem auto 1rem;background-color: #fdfdfd;text-align: center;display: block;}.ad-header .ad-wrapper {min-height: 90px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #555;font-weight: 500;padding: 3rem;border: 1px dashed #ccc;border-radius: 6px;}@media (max-width: 768px) {.ad-header {padding: 0.75rem;}}.ad-sidebar {margin: 0 0 1rem;background-color: #fefefe;text-align: center;padding: 0px;width: 100%;max-width: 100%;display: block;}.ad-sidebar .ad-wrapper {min-height: 250px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #444;font-weight: 500;border: 1px dashed #aaa;border-radius: 6px;padding: 0rem;}@media (max-width: 1024px) {.ad-sidebar {padding: 0.75rem;}}
+    </style>
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://catatansoal.github.io/blog/jwt-token-generation-discussion-access"
+          },
+          "headline": "JWT Token Generation Discussion Access And Refresh Tokens",
+          "description": "JWT Token Generation Discussion Access And Refresh Tokens...",
+          "image": [
+            "https://tse4.mm.bing.net/th?q=A%20Deep%20Dive%20into%20JWT%20Token%20Generation%20and%20Management"
+          ],
+          "author": {
+            "@type": "Person",
+            "name": "ADMIN",
+            "jobTitle": "Editor web"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "ANABEL",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://tse4.mm.bing.net/th?q=ANABEL%20WEB"
+            }
+          },
+          "datePublished": "2025-07-18T13:42:41+00:00",
+          "dateModified": "2025-07-18T13:42:41+00:00"
+        }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="container nav-container">
+                <div class="nav-left">
+                    <span class="logo">ANABEL</span>
+                    <span class="blog-tag">Article</span>
+                </div>
+                <div class="nav-search">
+                    <form class="search-form" role="search">
+                        <input 
+                            type="search" 
+                            class="search-input"
+                            placeholder="Search articles..."
+                            aria-label="Search articles"
+                        >
+                        <button type="submit" class="search-button" aria-label="Submit search">🔎</button>
+                    </form>
+                </div>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+                <div class="nav-menu">
+                    <ul class="nav-list">
+                    	<li><a href="/" class="nav-link">HOME</a></li>
+                        <li><a href="/pages/About" class="nav-link">About</a></li>
+                        <li><a href="/pages/Contact" class="nav-link">Contact</a></li>
+                        <li><a href="/pages/Disclaimer" class="nav-link">Disclaimer</a></li>
+                        <li><a href="/pages/Privacy" class="nav-link">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="main">
+        <article class="article">
+            <header class="article-header">
+                <div class="container">
+                    <h1>JWT Token Generation Discussion Access And Refresh Tokens</h1>
+                    <div class="meta">
+                        <time datetime="2025-07-18T13:42:41+00:00">Jul 18, 2025</time>
+                        <span class="author">by ADMIN</span>
+                        <span class="view-count">
+                            <span id="viewCount">58</span> views
+                        </span>
+                    </div>
+                </div>
+            </header>
+            <div class="ad-header container">
+                <div class="ad-wrapper">
+    Iklan Headers
+</div>
+            </div>
+            <div class="container">
+                <div class="article-layout">
+                    <div class="content">
+                        <img src="https://tse4.mm.bing.net/th?q=A%20Deep%20Dive%20into%20JWT%20Token%20Generation%20and%20Management" title="A Deep Dive into JWT Token Generation and Management" width="300" height="200"/><p>Hey everyone! Let's dive into the fascinating world of <strong>JWT (JSON Web Token)</strong> generation and management. In today's digital landscape, securing your applications and APIs is more critical than ever. One of the most effective methods for achieving this security is through the use of JWTs. This comprehensive guide will explore the ins and outs of generating and signing JWT access and refresh tokens, as well as the importance of securely persisting refresh tokens. We’ll cover everything from the basic concepts to advanced techniques, ensuring you have a solid understanding of this essential security mechanism. So, buckle up and let's get started!</p>
+<h2>Understanding JWTs: A Quick Overview</h2>
+<p>Before we jump into the specifics of generating and managing JWTs, let's take a moment to understand what they are and why they’re so widely used. <strong>JSON Web Tokens</strong> are an open, industry-standard RFC 7519 method for representing claims securely between two parties. Think of them as digital passports that verify the identity of a user or application. They are compact, URL-safe, and can be used in various contexts, including authentication and authorization.</p>
+<p>A JWT consists of three main parts, each separated by a dot (.):</p>
+<ol>
+<li><strong>Header:</strong> This section typically includes the type of token (JWT) and the hashing algorithm used to sign the token, such as HMAC SHA256 or RSA.</li>
+<li><strong>Payload:</strong> The payload contains the claims, which are statements about the user or entity. These claims can be registered claims (like issuer, subject, and expiration time), public claims (defined in the IANA JSON Web Token Registry), or private claims (custom claims to share information between parties).</li>
+<li><strong>Signature:</strong> The signature is calculated by taking the encoded header, the encoded payload, a secret key, and the algorithm specified in the header, and signing them. This signature ensures that the token hasn't been tampered with and verifies the sender's identity.</li>
+</ol>
+<p>JWTs are particularly useful in modern web applications and APIs because they are stateless. This means the server doesn't need to maintain session information, making JWTs highly scalable and efficient. When a user logs in, the server generates a JWT and sends it back to the client. The client then includes the JWT in the headers of subsequent requests. The server verifies the JWT's signature to authenticate the user, without needing to query a database or session store. This stateless nature makes JWTs a cornerstone of microservices architectures and distributed systems.</p>
+<h2>Generating JWT Access Tokens</h2>
+<p>Now, let’s get to the heart of the matter: generating JWT access tokens. Access tokens are short-lived tokens that grant access to protected resources. They are the keys that unlock the doors to your application’s functionalities. Generating these tokens securely and efficiently is paramount to maintaining the integrity of your system. So, how do we do it?</p>
+<p>The process typically involves several key steps:</p>
+<ol>
+<li><strong>Authentication:</strong> The user provides their credentials (e.g., username and password). The server verifies these credentials against a database or authentication service. This is the first and most crucial step, as it ensures that only legitimate users are granted access.</li>
+<li><strong>Payload Creation:</strong> Once the user is authenticated, the server creates a payload. The payload includes claims about the user, such as their user ID, roles, and any other relevant information. It's important to include only necessary information in the payload to keep the token size manageable and avoid exposing sensitive data. Remember, anyone with the token can decode the payload.</li>
+<li><strong>Header Configuration:</strong> The server sets the header, specifying the token type (JWT) and the signing algorithm (e.g., HS256 or RS256). The choice of algorithm is critical for security. HS256 (HMAC with SHA256) is a symmetric algorithm, meaning the same key is used for both signing and verification. RS256 (RSA with SHA256) is an asymmetric algorithm, where a private key is used for signing and a public key for verification. Asymmetric algorithms are generally more secure, especially in distributed systems, as the private key can be kept secret while the public key is shared.</li>
+<li><strong>Signing:</strong> The server signs the token using the chosen algorithm and a secret key (for symmetric algorithms) or a private key (for asymmetric algorithms). The signature is what makes the token tamper-proof. If the token is altered in any way after it's signed, the signature will no longer be valid, and the token will be rejected.</li>
+<li><strong>Token Issuance:</strong> The server issues the JWT to the client. The client then stores this token and includes it in the headers of subsequent requests to protected resources. This token acts as a proof of the user’s identity and authorization.</li>
+</ol>
+<p>Let's look at a simple example using Node.js and the <code>jsonwebtoken</code> library:</p>
+<pre><code class="hljs">const jwt = require(&#39;jsonwebtoken&#39;);
+
+// User authentication logic (e.g., checking username and password)
+const user = { id: &#39;123&#39;, username: &#39;johndoe&#39;, roles: [&#39;user&#39;, &#39;admin&#39;] };
+
+// Payload
+const payload = {
+  sub: user.id, // Subject (user ID)
+  name: user.username,
+  roles: user.roles
+};
+
+// Secret key (keep this secure!)
+const secretKey = &#39;your-secret-key&#39;;
+
+// Options (e.g., expiration time)
+const options = {
+  expiresIn: &#39;1h&#39; // Token expires in 1 hour
+};
+
+// Generate the JWT
+const token = jwt.sign(payload, secretKey, options);
+
+console.log(&#39;Generated JWT:&#39;, token);
+</code></pre>
+<p>In this example, we create a payload with the user's ID, username, and roles. We then use the <code>jsonwebtoken</code> library to sign the token with a secret key and specify an expiration time. The resulting token is a long string that the client can use to authenticate with the server.</p>
+<h3>Best Practices for Generating Access Tokens</h3>
+<ul>
+<li><strong>Use Strong Secrets:</strong> Always use strong, randomly generated secrets for signing your tokens. Avoid using easily guessable keys or hardcoding secrets in your application.</li>
+<li><strong>Implement Token Expiration:</strong> Access tokens should have a limited lifespan to minimize the impact of compromised tokens. A common practice is to set the expiration time to 15 minutes, 30 minutes, or an hour.</li>
+<li><strong>Include Necessary Claims:</strong> Only include the claims that are necessary for authorization and authentication. Avoid including sensitive information that is not required.</li>
+<li><strong>Choose the Right Algorithm:</strong> Select an appropriate signing algorithm based on your security requirements. Asymmetric algorithms (like RS256) are generally more secure than symmetric algorithms (like HS256), especially in distributed systems.</li>
+</ul>
+<h2>Generating and Managing Refresh Tokens</h2>
+<p>While access tokens provide short-term access to resources, refresh tokens are used to obtain new access tokens without requiring the user to re-authenticate. This mechanism enhances the user experience by allowing them to stay logged in for longer periods without constant interruptions. Let’s explore how to generate and manage refresh tokens effectively.</p>
+<h3>What are Refresh Tokens?</h3>
+<p>Refresh tokens are long-lived tokens that are stored securely on the server. When an access token expires, the client can use the refresh token to request a new access token. This process avoids the need for the user to re-enter their credentials every time the access token expires. The refresh token effectively acts as a long-term credential, while the access token provides short-term access.</p>
+<h3>Generating Refresh Tokens</h3>
+<p>The process of generating refresh tokens is similar to that of access tokens, but with a few key differences:</p>
+<ol>
+<li><strong>Storage:</strong> Refresh tokens are typically stored in a database or a secure storage mechanism on the server. This is crucial because refresh tokens are long-lived and their compromise could lead to unauthorized access.</li>
+<li><strong>Generation:</strong> Refresh tokens are generated when the user initially authenticates or when an access token is refreshed. They are often generated with a higher level of entropy (randomness) than access tokens to make them harder to guess or crack.</li>
+<li><strong>Expiration:</strong> Refresh tokens usually have a longer expiration time than access tokens, ranging from days to months. However, it’s important to implement a revocation mechanism to invalidate refresh tokens if necessary (e.g., if a user logs out or their account is compromised).</li>
+</ol>
+<p>Here’s an example of how you might generate and store a refresh token in Node.js:</p>
+<pre><code class="hljs">const jwt = require(&#39;jsonwebtoken&#39;);
+const crypto = require(&#39;crypto&#39;);
+
+// Function to generate a cryptographically secure random token
+function generateRefreshToken() {
+  return crypto.randomBytes(64).toString(&#39;hex&#39;);
+}
+
+// User authentication logic
+const user = { id: &#39;123&#39;, username: &#39;johndoe&#39; };
+
+// Generate a refresh token
+const refreshToken = generateRefreshToken();
+
+// Store the refresh token in the database (replace with your actual database logic)
+const refreshTokenData = {
+  token: refreshToken,
+  userId: user.id,
+  expiryDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) // Expires in 7 days
+};
+
+// Placeholder for database storage (e.g., using Sequelize or Mongoose)
+// await refreshTokenModel.create(refreshTokenData);
+
+console.log(&#39;Generated Refresh Token:&#39;, refreshToken);
+
+// Generate an access token
+const accessToken = jwt.sign({ sub: user.id, username: user.username }, &#39;your-secret-key&#39;, { expiresIn: &#39;1h&#39; });
+
+console.log(&#39;Generated Access Token:&#39;, accessToken);
+</code></pre>
+<p>In this example, we use the <code>crypto</code> module to generate a cryptographically secure random token for the refresh token. We then store the refresh token in a database along with the user ID and an expiration date. The access token is generated as before, but now we have a mechanism for refreshing it using the refresh token.</p>
+<h3>Persisting Refresh Tokens</h3>
+<p>Persisting refresh tokens securely is crucial for maintaining the integrity of your authentication system. Here are some best practices for storing refresh tokens:</p>
+<ul>
+<li><strong>Database Storage:</strong> Store refresh tokens in a database or a secure storage mechanism. This allows you to track and manage refresh tokens effectively.</li>
+<li><strong>Encryption:</strong> Encrypt the refresh tokens in the database to protect them from unauthorized access. Even if the database is compromised, the encrypted tokens will be difficult to use.</li>
+<li><strong>Token Rotation:</strong> Implement token rotation, where a new refresh token is issued each time an access token is refreshed. This limits the lifespan of each refresh token and reduces the risk of compromise.</li>
+<li><strong>Revocation Mechanism:</strong> Provide a mechanism to revoke refresh tokens, such as when a user logs out or their account is compromised. This allows you to invalidate refresh tokens that are no longer valid.</li>
+<li><strong>Secure Transmission:</strong> Transmit refresh tokens over HTTPS to prevent interception.</li>
+</ul>
+<h3>Refresh Token Rotation: An Advanced Technique</h3>
+<p>Token rotation is a security best practice that enhances the protection of your refresh tokens. Instead of using the same refresh token indefinitely, a new refresh token is issued each time an access token is refreshed. The old refresh token is invalidated, preventing its reuse. This approach significantly reduces the risk of a compromised refresh token being used to obtain unauthorized access.</p>
+<p>Here’s how refresh token rotation works:</p>
+<ol>
+<li><strong>Initial Authentication:</strong> When a user logs in, both an access token and a refresh token are issued.</li>
+<li><strong>Access Token Expiry:</strong> When the access token expires, the client uses the refresh token to request a new access token.</li>
+<li><strong>Token Refresh:</strong> The server verifies the refresh token and, if valid, issues a new access token and a new refresh token.</li>
+<li><strong>Invalidation:</strong> The old refresh token is invalidated and removed from the database.</li>
+<li><strong>Client Update:</strong> The client stores the new access token and the new refresh token.</li>
+</ol>
+<p>This process ensures that even if a refresh token is compromised, it can only be used once before it is invalidated. This limits the window of opportunity for an attacker to gain unauthorized access.</p>
+<h3>Revoking Refresh Tokens</h3>
+<p>Revoking refresh tokens is an essential part of a robust authentication system. There are several scenarios where you might need to revoke a refresh token:</p>
+<ul>
+<li><strong>User Logout:</strong> When a user logs out, their refresh tokens should be revoked to prevent further access.</li>
+<li><strong>Account Compromise:</strong> If an account is compromised, all associated refresh tokens should be revoked.</li>
+<li><strong>Security Events:</strong> In response to security events, such as suspicious activity or a data breach, you may need to revoke refresh tokens as a precautionary measure.</li>
+</ul>
+<p>To implement refresh token revocation, you need to maintain a list of valid refresh tokens in your database. When a refresh token is revoked, it is removed from the list or marked as invalid. Any subsequent attempts to use the revoked token will be rejected.</p>
+<p>Here’s an example of how you might implement refresh token revocation in Node.js:</p>
+<pre><code class="hljs">// Function to revoke a refresh token
+async function revokeRefreshToken(refreshToken) {
+  // Find the refresh token in the database
+  const refreshTokenData = await refreshTokenModel.findOne({ where: { token: refreshToken } });
+
+  // If the token exists, delete it from the database
+  if (refreshTokenData) {
+    await refreshTokenModel.destroy({ where: { token: refreshToken } });
+    console.log(&#39;Refresh token revoked:&#39;, refreshToken);
+  }
+}
+
+// Example usage: revoke a refresh token
+// await revokeRefreshToken(&#39;revoked-refresh-token&#39;);
+</code></pre>
+<p>In this example, we define a function <code>revokeRefreshToken</code> that finds a refresh token in the database and deletes it. This effectively revokes the token, preventing it from being used to obtain new access tokens.</p>
+<h2>Conclusion</h2>
+<p>Generating and managing JWT access and refresh tokens is a critical aspect of modern application security. By understanding the principles and best practices outlined in this guide, you can build a secure and efficient authentication system. Remember to use strong secrets, implement token expiration and rotation, persist refresh tokens securely, and provide a mechanism for revocation. By following these guidelines, you can protect your applications and users from unauthorized access and ensure a seamless user experience. Keep exploring and stay secure!</p>
+
+                    </div>
+                    <aside class="related-posts">
+                        <div class="ad-sidebar container">
+                            <div class="ad-wrapper">
+    <span>Iklan Related</span>
+</div>
+                        </div>
+                        <h2 class="related-posts-title">Related Posts</h2><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/marriage-license-guide-usa-requirements">Marriage License Guide: USA Requirements</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-03T01:10:02+00:00">Aug 3, 2025</time>
+		                        <span class="view-count">
+									40 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/overworked-bug-increases-overslime-consumption">Overworked Bug Increases Overslime Consumption In Tinkers Construct 1.20.1</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-29T04:15:33+00:00">Jul 29, 2025</time>
+		                        <span class="view-count">
+									74 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/simplifying-1-cos-2x-sin">Simplifying (1 - Cos 2x - Sin X) / (sin 2x - Cos X) A Trigonometric Journey</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-13T18:41:31+00:00">Jul 13, 2025</time>
+		                        <span class="view-count">
+									75 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/securely-connect-salesforce-to-google">Securely Connect Salesforce To Google Cloud APIs With Named Credentials And JWT</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-16T15:12:45+00:00">Jul 16, 2025</time>
+		                        <span class="view-count">
+									79 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/labor-union-decline-2-key">Labor Union Decline: 2 Key Factors In 50 Years</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-05T23:25:50+00:00">Aug 5, 2025</time>
+		                        <span class="view-count">
+									46 views
+		                        </span>
+                            </div>
+                        </article>
+                    </aside>
+                    <aside class="related-posts"></aside>
+                </div>
+            </div>
+        </article>
+        <a href="#" class="back-to-top" id="backToTop" title="Back to top">
+        	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-bar-up" viewBox="0 0 16 16">
+			  <path fill-rule="evenodd" d="M3.646 11.854a.5.5 0 0 0 .708 0L8 8.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708M2.4 5.2c0 .22.18.4.4.4h10.4a.4.4 0 0 0 0-.8H2.8a.4.4 0 0 0-.4.4"/>
+			</svg>
+		</a>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 ANABEL</p>
+        </div>
+    </footer>
+    <script>
+    	(() => {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            const toggleMenu = () => {
+                navMenu.classList.toggle('nav-menu-active');
+                navToggle.classList.toggle('nav-toggle-active');
+            };
+            const backToTopHandler = (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            navToggle.addEventListener('click', toggleMenu);
+            document.getElementById('backToTop').addEventListener('click', backToTopHandler);
+            window.addEventListener('pagehide', () => {
+                navToggle.removeEventListener('click', toggleMenu);
+                document.getElementById('backToTop').removeEventListener('click', backToTopHandler);
+            });
+        })();
+		(() => {
+            window.addEventListener("DOMContentLoaded", (event) => {
+                const ellHljs = document.createElement("script");
+                ellHljs.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js");
+                ellHljs.onload = () => {
+                    hljs.highlightAll();
+                };
+                document.querySelector("body").append(ellHljs);
+                const ellFont = document.createElement("link");
+                ellFont.setAttribute("href", "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css");
+                ellFont.setAttribute("rel", "stylesheet");
+                document.querySelector("head").append(ellFont);
+                window.addEventListener('pagehide', () => {
+                    // ellHljs.remove();
+                    ellFont.remove();
+                });
+
+            });
+        })();
+    </script>
+    
+    
+    
+</body>
+</html>

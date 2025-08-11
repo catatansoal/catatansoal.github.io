@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Troubleshooting ESP32 GPIO Interrupt Tasks Not Running Correctly</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Troubleshooting ESP32 GPIO Interrupt Tasks Not Running Correctly...">
+    <link rel="canonical" href="https://catatansoal.github.io/blog/troubleshooting-esp32-gpio-interrupt-tasks">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Troubleshooting ESP32 GPIO Interrupt Tasks Not Running Correctly">
+	<meta property="og:description" content="Troubleshooting ESP32 GPIO Interrupt Tasks Not Running Correctly...">
+	<meta property="og:url" content="https://catatansoal.github.io/blog/troubleshooting-esp32-gpio-interrupt-tasks">
+	<meta property="og:site_name" content="ANABEL">
+	<meta property="article:published_time" content="2025-07-13T16:40:13+00:00">
+	<meta property="article:author" content="ADMIN">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+    <link rel="preload" fetchpriority="high" as="image" href="https://tse4.mm.bing.net/th?q=ESP32%20GPIO%20Interrupt%20Task%20Troubleshooting%3A%20A%20Comprehensive%20Guide">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style type="text/css">
+    	:root{--primary-color:#3740ff;--text-color:#202124;--background-color:#ffffff;--gray-100:#f8f9fa;--gray-200:#e9ecef}*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;line-height:1.6;color:var(--text-color);background-color:var(--background-color)}.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}.header{background-color:var(--background-color);border-bottom:1px solid var(--gray-200);position:sticky;top:0;z-index:100}.nav{padding:.5rem 0}.nav-container{display:flex;justify-content:space-between;align-items:center;gap:1rem}.nav-left{display:flex;align-items:center;flex-shrink:0}.logo{font-weight:700;color:var(--primary-color)}.blog-tag{margin-left:1rem;padding:.25rem .5rem;background-color:var(--gray-100);border-radius:4px;font-size:.875rem}.nav-search{flex-grow:1;max-width:300px}.search-form{position:relative;width:100%}.search-input{width:100%;padding:.5rem 2.5rem .5rem 1rem;border:1px solid var(--gray-200);border-radius:24px;font-size:.875rem;transition:all 0.2s}.search-input:focus{outline:none;border-color:var(--primary-color);box-shadow:0 0 0 2px rgb(55 64 255 / .1)}.search-button{position:absolute;right:.5rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#5f6368;cursor:pointer;padding:.25rem;display:flex;align-items:center;justify-content:center}.search-button:hover{color:var(--primary-color)}.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:.5rem}.hamburger{display:block;position:relative;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before,.hamburger::after{content:'';position:absolute;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before{top:-6px}.hamburger::after{bottom:-6px}.nav-toggle-active .hamburger{background:#fff0}.nav-toggle-active .hamburger::before{transform:rotate(45deg);top:0}.nav-toggle-active .hamburger::after{transform:rotate(-45deg);bottom:0}.nav-list{display:flex;list-style:none;gap:2rem}.nav-link{color:var(--text-color);text-decoration:none;font-size:.9rem;transition:color 0.2s}.nav-link:hover{color:var(--primary-color)}.article-header{padding:2rem 0;background-color:var(--gray-100)}.article-layout{display:grid;grid-template-columns:1fr 350px;gap:3rem;padding:1rem 0;align-items: start}h1,h2,h3,h4,h5,h6{font-family:"Crimson Text","Times New Roman",Times,serif}h1{font-size:2.5rem;line-height:1.2;margin-bottom:1rem}.meta{color:#5f6368;font-size:.875rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}.view-count{display:inline-flex;align-items:center;gap:.25rem}.view-count svg{color:#5f6368}.content{min-width:0;border-bottom:1px solid #dddddd5e;margin-top:1rem;white-space:pre-line !important;overflow-wrap:break-word;overflow-x:auto;word-break:break-word}.lead{font-size:1.25rem;color:#5f6368;margin-bottom:2rem}h2,h3,h4,h5,h6{font-size:1.75rem;margin:1rem 0 1rem}p,pre,ol,ul>li{margin-bottom:1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;font-size:1.3rem;text-align: justify;}p>code{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px}hr{margin:1rem 0 1rem 0}.code-example{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;margin:1.5rem 0;overflow-x:auto}code{font-family:'Roboto Mono',monospace;font-size:.875rem}ul{margin:.2rem 0;padding-left:1.5rem}.related-posts{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;position:sticky;top:5rem}.related-posts-title,.newpost-posts-list{font-size:1.75rem;margin:0 0 1rem}.related-posts-list{display:flex;flex-direction:column;gap:.5rem}.related-post,.newpost-post{border-bottom:1px solid #ddd;padding-bottom:10px;margin-bottom:10px}.related-post:last-child,.newpost-post:last-child{padding-bottom:0;border-bottom:none}.related-post-title,.newpost-post-title{font-size:1.2rem;margin:0 0 .1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;}.related-post-title a,.newpost-post-title a{color:var(--text-color);text-decoration:none;transition:color 0.2s}.related-post-title a:hover,.newpost-post-title a:hover{color:var(--primary-color)}.related-post time{font-size:.875rem;color:#5f6368}.footer{background-color:var(--gray-100);padding:2rem 0;margin-top:4rem;color:#5f6368;font-size:.875rem}.nav-menu>ul>li{margin-bottom:0}@media (max-width:1024px){.container{max-width:800px}.article-layout{grid-template-columns:1fr;gap:2rem}.related-posts{position:static}}@media (max-width:768px){.nav-container{flex-wrap:wrap}.nav-search{order:3;max-width:none;width:100%;margin-top:.1rem}.nav-toggle{display:block}.nav-menu{display:none;position:absolute;top:100%;left:0;right:0;background:var(--background-color);padding:1rem 0;border-bottom:1px solid var(--gray-200)}.nav-menu-active{display:block}.nav-list{flex-direction:column;gap:.1rem;padding:0 1.5rem}.nav-link{display:block;padding:.2rem 0}h1{font-size:2rem}.article-header{padding:2rem 0}.content{padding:.1rem 0}}table{width:100%;border-collapse:collapse;margin:20px 0;font-family:'Arial',sans-serif}th,td{padding:12px 15px;text-align:left;border:1px solid #ddd}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9}tr:nth-child(even) td{background-color:#f2f2f2}@media screen and (max-width:768px){table{border:0;display:block;overflow-x:auto;white-space:nowrap}th,td{padding:10px;text-align:right}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9;border-bottom:1px solid #ddd}tr:nth-child(even) td{background-color:#f2f2f2}}a{text-decoration:none;color:#540707}.katex-html{padding: .2rem;color: #000;font-weight: 700;font-size: 1.3rem;overflow-wrap: break-word;max-width: 100%;white-space: normal !important}.category{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin:1rem 0 1rem 0}.tag{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px;font-family:"Newsreader",serif}.tag>a{text-decoration:none;color:#000}img{margin:auto;display:block;max-width:100%;height:auto;margin-bottom:1rem}.katex{white-space: pre-line !important;display: inline-block;max-width: 100%;overflow-x: auto;overflow-y: hidden;scrollbar-width: thin;overflow-wrap: break-word;word-break: break-word;vertical-align: -7px}.content > p {overflow-wrap: break-word;word-break: break-word}
+    </style>
+    <style type="text/css">
+    	pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}
+		.hljs{color:#c9d1d9;background:#0d1117}.hljs-doctag,.hljs-keyword,.hljs-meta .hljs-keyword,.hljs-template-tag,.hljs-template-variable,.hljs-type,.hljs-variable.language_{color:#ff7b72}.hljs-title,.hljs-title.class_,.hljs-title.class_.inherited__,.hljs-title.function_{color:#d2a8ff}.hljs-attr,.hljs-attribute,.hljs-literal,.hljs-meta,.hljs-number,.hljs-operator,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-variable{color:#79c0ff}.hljs-meta .hljs-string,.hljs-regexp,.hljs-string{color:#a5d6ff}.hljs-built_in,.hljs-symbol{color:#ffa657}.hljs-code,.hljs-comment,.hljs-formula{color:#8b949e}.hljs-name,.hljs-quote,.hljs-selector-pseudo,.hljs-selector-tag{color:#7ee787}.hljs-subst{color:#c9d1d9}.hljs-section{color:#1f6feb;font-weight:700}.hljs-bullet{color:#f2cc60}.hljs-emphasis{color:#c9d1d9;font-style:italic}.hljs-strong{color:#c9d1d9;font-weight:700}.hljs-addition{color:#aff5b4;background-color:#033a16}.hljs-deletion{color:#ffdcd7;background-color:#67060c}
+    	pre{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;font-weight:400;word-break:break-word;word-wrap:break-word;box-sizing:inherit;border-radius:4px;overflow-x:auto;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}code{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;word-wrap:break-word;word-break:break-word;font-style:normal;line-height:20px;letter-spacing:-.003em;box-sizing:inherit;font-weight:400;font-size:75%;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}
+    </style>
+    <style type="text/css">
+    	.back-to-top{position:fixed;bottom:20px;right:20px;background-color:#a73f3f;color:#fff;padding:8px 10px;border-radius:50%;box-shadow:0 4px 6px rgb(0 0 0 / .2);font-size:10px;font-weight:700;text-decoration:none;text-align:center;transition:opacity 0.3s ease,visibility 0.3s ease;z-index:99999;opacity:1;visibility:visible}.back-to-top:hover{background-color:#0056b3}
+    </style>
+    <style type="text/css">
+        .ad-header {margin: 1rem auto 1rem;background-color: #fdfdfd;text-align: center;display: block;}.ad-header .ad-wrapper {min-height: 90px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #555;font-weight: 500;padding: 3rem;border: 1px dashed #ccc;border-radius: 6px;}@media (max-width: 768px) {.ad-header {padding: 0.75rem;}}.ad-sidebar {margin: 0 0 1rem;background-color: #fefefe;text-align: center;padding: 0px;width: 100%;max-width: 100%;display: block;}.ad-sidebar .ad-wrapper {min-height: 250px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #444;font-weight: 500;border: 1px dashed #aaa;border-radius: 6px;padding: 0rem;}@media (max-width: 1024px) {.ad-sidebar {padding: 0.75rem;}}
+    </style>
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://catatansoal.github.io/blog/troubleshooting-esp32-gpio-interrupt-tasks"
+          },
+          "headline": "Troubleshooting ESP32 GPIO Interrupt Tasks Not Running Correctly",
+          "description": "Troubleshooting ESP32 GPIO Interrupt Tasks Not Running Correctly...",
+          "image": [
+            "https://tse4.mm.bing.net/th?q=ESP32%20GPIO%20Interrupt%20Task%20Troubleshooting%3A%20A%20Comprehensive%20Guide"
+          ],
+          "author": {
+            "@type": "Person",
+            "name": "ADMIN",
+            "jobTitle": "Editor web"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "ANABEL",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://tse4.mm.bing.net/th?q=ANABEL%20WEB"
+            }
+          },
+          "datePublished": "2025-07-13T16:40:13+00:00",
+          "dateModified": "2025-07-13T16:40:13+00:00"
+        }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="container nav-container">
+                <div class="nav-left">
+                    <span class="logo">ANABEL</span>
+                    <span class="blog-tag">Article</span>
+                </div>
+                <div class="nav-search">
+                    <form class="search-form" role="search">
+                        <input 
+                            type="search" 
+                            class="search-input"
+                            placeholder="Search articles..."
+                            aria-label="Search articles"
+                        >
+                        <button type="submit" class="search-button" aria-label="Submit search">🔎</button>
+                    </form>
+                </div>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+                <div class="nav-menu">
+                    <ul class="nav-list">
+                    	<li><a href="/" class="nav-link">HOME</a></li>
+                        <li><a href="/pages/About" class="nav-link">About</a></li>
+                        <li><a href="/pages/Contact" class="nav-link">Contact</a></li>
+                        <li><a href="/pages/Disclaimer" class="nav-link">Disclaimer</a></li>
+                        <li><a href="/pages/Privacy" class="nav-link">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="main">
+        <article class="article">
+            <header class="article-header">
+                <div class="container">
+                    <h1>Troubleshooting ESP32 GPIO Interrupt Tasks Not Running Correctly</h1>
+                    <div class="meta">
+                        <time datetime="2025-07-13T16:40:13+00:00">Jul 13, 2025</time>
+                        <span class="author">by ADMIN</span>
+                        <span class="view-count">
+                            <span id="viewCount">65</span> views
+                        </span>
+                    </div>
+                </div>
+            </header>
+            <div class="ad-header container">
+                <div class="ad-wrapper">
+    Iklan Headers
+</div>
+            </div>
+            <div class="container">
+                <div class="article-layout">
+                    <div class="content">
+                        <img src="https://tse4.mm.bing.net/th?q=ESP32%20GPIO%20Interrupt%20Task%20Troubleshooting%3A%20A%20Comprehensive%20Guide" title="ESP32 GPIO Interrupt Task Troubleshooting: A Comprehensive Guide" width="300" height="200"/><p>Hey everyone! If you're diving into the world of ESP32 programming, especially when it comes to using GPIO pins for input and interrupts, you might be scratching your head over some common issues. One frequent head-scratcher is when your GPIO interrupt task isn't running correctly. Trust me, you're not alone! This guide is designed to help you navigate the intricacies of ESP32 interrupts, specifically focusing on troubleshooting those pesky scenarios where your interrupt task seems to be MIA.</p>
+<h2>Understanding ESP32 GPIO Interrupts</h2>
+<p>First, let's get down to the basics. <strong>ESP32 GPIO interrupts</strong> are crucial for real-time applications where you need your microcontroller to react instantly to external events. Think about it: you have an IR sensor that needs to trigger an action as soon as it detects something. Instead of constantly polling the sensor (which is super inefficient), you set up an interrupt. When the sensor's state changes, it triggers the interrupt, and your ESP32 springs into action. <em>Interrupts</em> allow the microcontroller to focus on other tasks and only jump into action when something important happens. This <strong>efficiency</strong> is key in embedded systems where power consumption and processing speed matter.</p>
+<p>The magic behind GPIO interrupts lies in their ability to signal the ESP32's core to execute a specific Interrupt Service Routine (ISR). An ISR is like a mini-program designed to handle the interrupt quickly and efficiently. It's important to keep ISRs short and sweet because they temporarily halt the main program execution. The ESP32 has a sophisticated interrupt management system that allows you to configure interrupts on various GPIO pins, choosing between different triggering conditions like rising edge, falling edge, or both. The <strong>versatility</strong> of ESP32 interrupts makes them ideal for a wide range of applications, from button presses to sensor data acquisition.</p>
+<p>However, with great power comes great responsibility, or in this case, complexity. Setting up interrupts correctly involves several steps, including configuring the GPIO pin, defining the interrupt service routine, and enabling the interrupt in the system. Each step presents an opportunity for errors, which can lead to your interrupt task not running as expected. This is where the troubleshooting begins. Common pitfalls include incorrect pin assignments, improperly configured interrupt types, and issues within the ISR itself. But don't worry, we'll dive into these issues and how to fix them. Let's make sure your ESP32 is reacting to those external events like a champ!</p>
+<h2>Common Issues Preventing Interrupt Tasks from Running</h2>
+<p>Alright, let's dive into the nitty-gritty of why your <strong>ESP32 GPIO interrupt task</strong> might not be running as expected. There's a whole bunch of potential culprits, but don't fret! We're going to break down the most common issues and how to tackle them. Think of this as your interrupt debugging toolkit.</p>
+<h3>1. Incorrect GPIO Pin Configuration</h3>
+<p>The first thing to double-check is your GPIO pin configuration. It sounds basic, but it's super easy to mix up pin numbers or set the wrong mode. You need to make sure the pin you're using for the interrupt is correctly configured as an input. If the pin is set as an output, it won't be listening for those external signals. Also, pay attention to pull-up or pull-down resistors. If your sensor signal is floating, you might get spurious interrupts or no interrupts at all. <em>Using internal pull-up or pull-down resistors</em> can help stabilize the signal and ensure your interrupts are triggered reliably. For example, if your sensor output is normally high and goes low when triggered, you might want to use an internal pull-up resistor. This keeps the pin high until the sensor pulls it low, triggering the interrupt.</p>
+<h3>2. Improper Interrupt Type Configuration</h3>
+<p>Next up is the interrupt type. The ESP32 lets you trigger interrupts on rising edges, falling edges, or both. If you've chosen the wrong trigger type, your interrupt won't fire when you expect it to. For example, if your sensor triggers on a falling edge but you've configured the interrupt for a rising edge, nothing will happen. <strong>Understanding the signal characteristics</strong> of your sensor or input device is crucial here. Grab a multimeter or logic analyzer if you're unsure about the signal's behavior. It's also worth noting that some sensors might produce a noisy signal with multiple transitions. In such cases, you might need to implement debouncing techniques in your ISR or use hardware debouncing circuits to avoid multiple interrupts for a single event.</p>
+<h3>3. Issues Within the Interrupt Service Routine (ISR)</h3>
+<p>Now, let's talk about the heart of your interrupt handling: the Interrupt Service Routine (ISR). This is the function that gets called when the interrupt is triggered. If there's a problem in your ISR, it can prevent your task from running correctly, or even worse, cause system crashes. The golden rule for ISRs is to keep them short and sweet. Long, complex ISRs hog the CPU and can cause other issues. If you need to do heavy lifting, like processing data or updating a display, defer that work to a separate task. Your ISR should focus on the bare minimum: acknowledging the interrupt, setting a flag, or sending a message to another task. <em>Avoid using functions with long execution times</em>, like <code>delay()</code> or <code>printf()</code>, within your ISR. These can block other interrupts and lead to missed events. Debugging ISRs can be tricky because you can't use the usual debugging tools like breakpoints. Instead, use techniques like setting global variables and checking their values in your main program, or using a hardware debugger if you have one.</p>
+<h3>4. Interrupt Priority Conflicts</h3>
+<p>The ESP32 uses a priority-based interrupt system. If you have multiple interrupts, the one with the higher priority gets executed first. If your GPIO interrupt has a lower priority than another interrupt that's constantly firing, it might never get a chance to run. <em>Carefully plan your interrupt priorities</em> to ensure that critical interrupts get the attention they need. You can use the <code>esp_intr_alloc()</code> function to set the priority of your interrupt. If you're using the FreeRTOS scheduler, you can also create tasks with different priorities and use interrupt notifications or queues to signal these tasks from your ISR. This allows you to offload processing from the ISR to a task with an appropriate priority.</p>
+<h3>5. Stack Overflow</h3>
+<p>Finally, a classic problem in embedded systems: stack overflow. Each interrupt has its own stack, and if your ISR uses too much stack space, it can overwrite other data and cause all sorts of mayhem. Stack overflows can be difficult to diagnose because they often lead to unpredictable behavior. <em>Monitor your stack usage</em> and increase the stack size if necessary. You can use the <code>uxHighWaterMark</code> feature in FreeRTOS to track the minimum amount of free stack space your task has had. If the high water mark gets too low, it's a sign that you might be running out of stack. Another way to avoid stack overflows is to minimize the use of local variables in your ISR and avoid deep recursion.</p>
+<p>By systematically checking these common issues, you'll be well on your way to getting your ESP32 GPIO interrupts working like a charm. Remember, debugging is a skill, and every problem you solve makes you a better embedded programmer!</p>
+<h2>Debugging Techniques for ESP32 Interrupts</h2>
+<p>Okay, so you've checked the usual suspects, but your <strong>ESP32 interrupt task</strong> is still playing hide-and-seek. Don't lose heart! It's time to pull out some more advanced debugging techniques. Debugging interrupts can feel like searching for a needle in a haystack, but with the right tools and strategies, you can track down even the most elusive bugs.</p>
+<h3>1. Serial Print Statements (Use Sparingly in ISRs)</h3>
+<p>The classic debugging method: sprinkle <code>Serial.print()</code> statements throughout your code to see what's happening. However, a word of caution: using <code>Serial.print()</code> inside your ISR can be risky. As we discussed earlier, ISRs should be short and fast, and <code>Serial.print()</code> can take a relatively long time to execute, potentially blocking other interrupts. <em>Use serial prints sparingly in ISRs</em>, and only for critical debugging information. A better approach is to set a global variable in your ISR and then print the value of that variable in your main loop. This way, you avoid blocking the interrupt system. For example, you could set a flag in your ISR and then check the flag in your main loop, printing a message if the flag is set. Remember to clear the flag after printing to avoid printing the same message repeatedly.</p>
+<h3>2. Logic Analyzer</h3>
+<p>A logic analyzer is your best friend when it comes to debugging hardware-related issues, including interrupts. It allows you to <em>visualize the signals on your GPIO pins</em> and see exactly when the interrupt is triggered. You can use a logic analyzer to verify that your sensor is sending the correct signals, that the ESP32 is receiving those signals, and that the interrupt is firing at the right time. A logic analyzer can also help you identify timing issues, such as bouncing signals or glitches, that might be causing spurious interrupts. Connect the logic analyzer probes to your GPIO pin and the ground, and set the trigger condition to the interrupt signal. You can then capture the signal waveform and analyze it to see if the interrupt is being triggered as expected. Some logic analyzers also have features like protocol decoding, which can be useful if you're using serial communication protocols like I2C or SPI.</p>
+<h3>3. JTAG Debugging</h3>
+<p>For more in-depth debugging, especially when dealing with complex interrupt scenarios or crashes, JTAG debugging is the way to go. JTAG allows you to <em>step through your code, set breakpoints, and inspect memory</em> in real-time. This can be invaluable for understanding what's happening inside your ISR and identifying the root cause of the problem. Setting up JTAG debugging can be a bit involved, but it's well worth the effort if you're working on a complex project. You'll need a JTAG debugger and a JTAG adapter that's compatible with your ESP32 board. Once you've set up the hardware, you can use a debugging tool like GDB or the ESP-IDF debugger to connect to your ESP32 and start debugging. JTAG debugging is particularly useful for tracking down stack overflows, memory corruption, and other low-level issues that can be difficult to diagnose with other methods.</p>
+<h3>4. ESP-IDF Interrupt Handling Functions</h3>
+<p>The ESP-IDF provides a rich set of functions for managing interrupts. <em>Familiarize yourself with these functions</em>, as they can help you diagnose and fix interrupt-related issues. For example, the <code>esp_intr_dump()</code> function can be used to print information about the interrupt status, including the number of times the interrupt has been triggered, the priority of the interrupt, and the handler address. This information can be useful for verifying that your interrupt is configured correctly and that the handler is being called. The <code>esp_intr_disable()</code> and <code>esp_intr_enable()</code> functions can be used to temporarily disable and re-enable interrupts, which can be helpful for isolating interrupt-related issues. For example, if you suspect that an interrupt is causing a crash, you can disable the interrupt and see if the crash goes away.</p>
+<h3>5. Rubber Duck Debugging</h3>
+<p>Okay, this one might sound a little silly, but trust me, it works! Rubber duck debugging involves explaining your code, line by line, to an inanimate object (like a rubber duck). The act of verbalizing your code and explaining your logic can often help you <em>identify errors or misunderstandings</em>. Sometimes, just hearing yourself describe the problem is enough to trigger an</p>
+
+                    </div>
+                    <aside class="related-posts">
+                        <div class="ad-sidebar container">
+                            <div class="ad-wrapper">
+    <span>Iklan Related</span>
+</div>
+                        </div>
+                        <h2 class="related-posts-title">Related Posts</h2><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/troubleshooting-esp32-gpio-interrupt-issues">Troubleshooting ESP32 GPIO Interrupt Issues A Comprehensive Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-13T17:34:07+00:00">Jul 13, 2025</time>
+		                        <span class="view-count">
+									65 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/docker-in-devuan-lxc-on">Docker In Devuan LXC On Proxmox: A Setup Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-08T15:28:21+00:00">Aug 8, 2025</time>
+		                        <span class="view-count">
+									46 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/bash-templating-a-comprehensive-guide">Bash Templating A Comprehensive Guide To Building Configuration Files With Bash</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-13T18:23:33+00:00">Jul 13, 2025</time>
+		                        <span class="view-count">
+									79 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/debunking-the-myth-how-to">Debunking The Myth How To Prove Mirrors Aren&#39;t Parallel Universes</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-14T11:26:30+00:00">Jul 14, 2025</time>
+		                        <span class="view-count">
+									65 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/stop-cavities-how-to-prevent">Stop Cavities: How To Prevent Tooth Decay From Worsening</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-08T05:10:45+00:00">Aug 8, 2025</time>
+		                        <span class="view-count">
+									56 views
+		                        </span>
+                            </div>
+                        </article>
+                    </aside>
+                    <aside class="related-posts"></aside>
+                </div>
+            </div>
+        </article>
+        <a href="#" class="back-to-top" id="backToTop" title="Back to top">
+        	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-bar-up" viewBox="0 0 16 16">
+			  <path fill-rule="evenodd" d="M3.646 11.854a.5.5 0 0 0 .708 0L8 8.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708M2.4 5.2c0 .22.18.4.4.4h10.4a.4.4 0 0 0 0-.8H2.8a.4.4 0 0 0-.4.4"/>
+			</svg>
+		</a>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 ANABEL</p>
+        </div>
+    </footer>
+    <script>
+    	(() => {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            const toggleMenu = () => {
+                navMenu.classList.toggle('nav-menu-active');
+                navToggle.classList.toggle('nav-toggle-active');
+            };
+            const backToTopHandler = (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            navToggle.addEventListener('click', toggleMenu);
+            document.getElementById('backToTop').addEventListener('click', backToTopHandler);
+            window.addEventListener('pagehide', () => {
+                navToggle.removeEventListener('click', toggleMenu);
+                document.getElementById('backToTop').removeEventListener('click', backToTopHandler);
+            });
+        })();
+		(() => {
+            window.addEventListener("DOMContentLoaded", (event) => {
+                const ellHljs = document.createElement("script");
+                ellHljs.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js");
+                ellHljs.onload = () => {
+                    hljs.highlightAll();
+                };
+                document.querySelector("body").append(ellHljs);
+                const ellFont = document.createElement("link");
+                ellFont.setAttribute("href", "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css");
+                ellFont.setAttribute("rel", "stylesheet");
+                document.querySelector("head").append(ellFont);
+                window.addEventListener('pagehide', () => {
+                    // ellHljs.remove();
+                    ellFont.remove();
+                });
+
+            });
+        })();
+    </script>
+    
+    
+    
+</body>
+</html>

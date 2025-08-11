@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>OpenTitan KDI Access: Secure Key Derivation &amp; OTP Secrets</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="OpenTitan KDI Access: Secure Key Derivation & OTP Secrets...">
+    <link rel="canonical" href="https://catatansoal.github.io/blog/opentitan-kdi-access-secure-key">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="OpenTitan KDI Access: Secure Key Derivation &amp; OTP Secrets">
+	<meta property="og:description" content="OpenTitan KDI Access: Secure Key Derivation & OTP Secrets...">
+	<meta property="og:url" content="https://catatansoal.github.io/blog/opentitan-kdi-access-secure-key">
+	<meta property="og:site_name" content="ANABEL">
+	<meta property="article:published_time" content="2025-08-09T01:42:22+00:00">
+	<meta property="article:author" content="ADMIN">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+    <link rel="preload" fetchpriority="high" as="image" href="https://tse4.mm.bing.net/th?q=Unlocking%20the%20Key%20Derivation%20Interface%20(KDI)%20in%20OpenTitan%3A%20A%20Deep%20Dive%20into%20Secure%20Key%20Management">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style type="text/css">
+    	:root{--primary-color:#3740ff;--text-color:#202124;--background-color:#ffffff;--gray-100:#f8f9fa;--gray-200:#e9ecef}*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;line-height:1.6;color:var(--text-color);background-color:var(--background-color)}.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}.header{background-color:var(--background-color);border-bottom:1px solid var(--gray-200);position:sticky;top:0;z-index:100}.nav{padding:.5rem 0}.nav-container{display:flex;justify-content:space-between;align-items:center;gap:1rem}.nav-left{display:flex;align-items:center;flex-shrink:0}.logo{font-weight:700;color:var(--primary-color)}.blog-tag{margin-left:1rem;padding:.25rem .5rem;background-color:var(--gray-100);border-radius:4px;font-size:.875rem}.nav-search{flex-grow:1;max-width:300px}.search-form{position:relative;width:100%}.search-input{width:100%;padding:.5rem 2.5rem .5rem 1rem;border:1px solid var(--gray-200);border-radius:24px;font-size:.875rem;transition:all 0.2s}.search-input:focus{outline:none;border-color:var(--primary-color);box-shadow:0 0 0 2px rgb(55 64 255 / .1)}.search-button{position:absolute;right:.5rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#5f6368;cursor:pointer;padding:.25rem;display:flex;align-items:center;justify-content:center}.search-button:hover{color:var(--primary-color)}.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:.5rem}.hamburger{display:block;position:relative;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before,.hamburger::after{content:'';position:absolute;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before{top:-6px}.hamburger::after{bottom:-6px}.nav-toggle-active .hamburger{background:#fff0}.nav-toggle-active .hamburger::before{transform:rotate(45deg);top:0}.nav-toggle-active .hamburger::after{transform:rotate(-45deg);bottom:0}.nav-list{display:flex;list-style:none;gap:2rem}.nav-link{color:var(--text-color);text-decoration:none;font-size:.9rem;transition:color 0.2s}.nav-link:hover{color:var(--primary-color)}.article-header{padding:2rem 0;background-color:var(--gray-100)}.article-layout{display:grid;grid-template-columns:1fr 350px;gap:3rem;padding:1rem 0;align-items: start}h1,h2,h3,h4,h5,h6{font-family:"Crimson Text","Times New Roman",Times,serif}h1{font-size:2.5rem;line-height:1.2;margin-bottom:1rem}.meta{color:#5f6368;font-size:.875rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}.view-count{display:inline-flex;align-items:center;gap:.25rem}.view-count svg{color:#5f6368}.content{min-width:0;border-bottom:1px solid #dddddd5e;margin-top:1rem;white-space:pre-line !important;overflow-wrap:break-word;overflow-x:auto;word-break:break-word}.lead{font-size:1.25rem;color:#5f6368;margin-bottom:2rem}h2,h3,h4,h5,h6{font-size:1.75rem;margin:1rem 0 1rem}p,pre,ol,ul>li{margin-bottom:1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;font-size:1.3rem;text-align: justify;}p>code{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px}hr{margin:1rem 0 1rem 0}.code-example{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;margin:1.5rem 0;overflow-x:auto}code{font-family:'Roboto Mono',monospace;font-size:.875rem}ul{margin:.2rem 0;padding-left:1.5rem}.related-posts{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;position:sticky;top:5rem}.related-posts-title,.newpost-posts-list{font-size:1.75rem;margin:0 0 1rem}.related-posts-list{display:flex;flex-direction:column;gap:.5rem}.related-post,.newpost-post{border-bottom:1px solid #ddd;padding-bottom:10px;margin-bottom:10px}.related-post:last-child,.newpost-post:last-child{padding-bottom:0;border-bottom:none}.related-post-title,.newpost-post-title{font-size:1.2rem;margin:0 0 .1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;}.related-post-title a,.newpost-post-title a{color:var(--text-color);text-decoration:none;transition:color 0.2s}.related-post-title a:hover,.newpost-post-title a:hover{color:var(--primary-color)}.related-post time{font-size:.875rem;color:#5f6368}.footer{background-color:var(--gray-100);padding:2rem 0;margin-top:4rem;color:#5f6368;font-size:.875rem}.nav-menu>ul>li{margin-bottom:0}@media (max-width:1024px){.container{max-width:800px}.article-layout{grid-template-columns:1fr;gap:2rem}.related-posts{position:static}}@media (max-width:768px){.nav-container{flex-wrap:wrap}.nav-search{order:3;max-width:none;width:100%;margin-top:.1rem}.nav-toggle{display:block}.nav-menu{display:none;position:absolute;top:100%;left:0;right:0;background:var(--background-color);padding:1rem 0;border-bottom:1px solid var(--gray-200)}.nav-menu-active{display:block}.nav-list{flex-direction:column;gap:.1rem;padding:0 1.5rem}.nav-link{display:block;padding:.2rem 0}h1{font-size:2rem}.article-header{padding:2rem 0}.content{padding:.1rem 0}}table{width:100%;border-collapse:collapse;margin:20px 0;font-family:'Arial',sans-serif}th,td{padding:12px 15px;text-align:left;border:1px solid #ddd}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9}tr:nth-child(even) td{background-color:#f2f2f2}@media screen and (max-width:768px){table{border:0;display:block;overflow-x:auto;white-space:nowrap}th,td{padding:10px;text-align:right}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9;border-bottom:1px solid #ddd}tr:nth-child(even) td{background-color:#f2f2f2}}a{text-decoration:none;color:#540707}.katex-html{padding: .2rem;color: #000;font-weight: 700;font-size: 1.3rem;overflow-wrap: break-word;max-width: 100%;white-space: normal !important}.category{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin:1rem 0 1rem 0}.tag{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px;font-family:"Newsreader",serif}.tag>a{text-decoration:none;color:#000}img{margin:auto;display:block;max-width:100%;height:auto;margin-bottom:1rem}.katex{white-space: pre-line !important;display: inline-block;max-width: 100%;overflow-x: auto;overflow-y: hidden;scrollbar-width: thin;overflow-wrap: break-word;word-break: break-word;vertical-align: -7px}.content > p {overflow-wrap: break-word;word-break: break-word}
+    </style>
+    <style type="text/css">
+    	pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}
+		.hljs{color:#c9d1d9;background:#0d1117}.hljs-doctag,.hljs-keyword,.hljs-meta .hljs-keyword,.hljs-template-tag,.hljs-template-variable,.hljs-type,.hljs-variable.language_{color:#ff7b72}.hljs-title,.hljs-title.class_,.hljs-title.class_.inherited__,.hljs-title.function_{color:#d2a8ff}.hljs-attr,.hljs-attribute,.hljs-literal,.hljs-meta,.hljs-number,.hljs-operator,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-variable{color:#79c0ff}.hljs-meta .hljs-string,.hljs-regexp,.hljs-string{color:#a5d6ff}.hljs-built_in,.hljs-symbol{color:#ffa657}.hljs-code,.hljs-comment,.hljs-formula{color:#8b949e}.hljs-name,.hljs-quote,.hljs-selector-pseudo,.hljs-selector-tag{color:#7ee787}.hljs-subst{color:#c9d1d9}.hljs-section{color:#1f6feb;font-weight:700}.hljs-bullet{color:#f2cc60}.hljs-emphasis{color:#c9d1d9;font-style:italic}.hljs-strong{color:#c9d1d9;font-weight:700}.hljs-addition{color:#aff5b4;background-color:#033a16}.hljs-deletion{color:#ffdcd7;background-color:#67060c}
+    	pre{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;font-weight:400;word-break:break-word;word-wrap:break-word;box-sizing:inherit;border-radius:4px;overflow-x:auto;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}code{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;word-wrap:break-word;word-break:break-word;font-style:normal;line-height:20px;letter-spacing:-.003em;box-sizing:inherit;font-weight:400;font-size:75%;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}
+    </style>
+    <style type="text/css">
+    	.back-to-top{position:fixed;bottom:20px;right:20px;background-color:#a73f3f;color:#fff;padding:8px 10px;border-radius:50%;box-shadow:0 4px 6px rgb(0 0 0 / .2);font-size:10px;font-weight:700;text-decoration:none;text-align:center;transition:opacity 0.3s ease,visibility 0.3s ease;z-index:99999;opacity:1;visibility:visible}.back-to-top:hover{background-color:#0056b3}
+    </style>
+    <style type="text/css">
+        .ad-header {margin: 1rem auto 1rem;background-color: #fdfdfd;text-align: center;display: block;}.ad-header .ad-wrapper {min-height: 90px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #555;font-weight: 500;padding: 3rem;border: 1px dashed #ccc;border-radius: 6px;}@media (max-width: 768px) {.ad-header {padding: 0.75rem;}}.ad-sidebar {margin: 0 0 1rem;background-color: #fefefe;text-align: center;padding: 0px;width: 100%;max-width: 100%;display: block;}.ad-sidebar .ad-wrapper {min-height: 250px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #444;font-weight: 500;border: 1px dashed #aaa;border-radius: 6px;padding: 0rem;}@media (max-width: 1024px) {.ad-sidebar {padding: 0.75rem;}}
+    </style>
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://catatansoal.github.io/blog/opentitan-kdi-access-secure-key"
+          },
+          "headline": "OpenTitan KDI Access: Secure Key Derivation &amp; OTP Secrets",
+          "description": "OpenTitan KDI Access: Secure Key Derivation & OTP Secrets...",
+          "image": [
+            "https://tse4.mm.bing.net/th?q=Unlocking%20the%20Key%20Derivation%20Interface%20(KDI)%20in%20OpenTitan%3A%20A%20Deep%20Dive%20into%20Secure%20Key%20Management"
+          ],
+          "author": {
+            "@type": "Person",
+            "name": "ADMIN",
+            "jobTitle": "Editor web"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "ANABEL",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://tse4.mm.bing.net/th?q=ANABEL%20WEB"
+            }
+          },
+          "datePublished": "2025-08-09T01:42:22+00:00",
+          "dateModified": "2025-08-09T01:42:22+00:00"
+        }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="container nav-container">
+                <div class="nav-left">
+                    <span class="logo">ANABEL</span>
+                    <span class="blog-tag">Article</span>
+                </div>
+                <div class="nav-search">
+                    <form class="search-form" role="search">
+                        <input 
+                            type="search" 
+                            class="search-input"
+                            placeholder="Search articles..."
+                            aria-label="Search articles"
+                        >
+                        <button type="submit" class="search-button" aria-label="Submit search">🔎</button>
+                    </form>
+                </div>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+                <div class="nav-menu">
+                    <ul class="nav-list">
+                    	<li><a href="/" class="nav-link">HOME</a></li>
+                        <li><a href="/pages/About" class="nav-link">About</a></li>
+                        <li><a href="/pages/Contact" class="nav-link">Contact</a></li>
+                        <li><a href="/pages/Disclaimer" class="nav-link">Disclaimer</a></li>
+                        <li><a href="/pages/Privacy" class="nav-link">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="main">
+        <article class="article">
+            <header class="article-header">
+                <div class="container">
+                    <h1>OpenTitan KDI Access: Secure Key Derivation &amp; OTP Secrets</h1>
+                    <div class="meta">
+                        <time datetime="2025-08-09T01:42:22+00:00">Aug 9, 2025</time>
+                        <span class="author">by ADMIN</span>
+                        <span class="view-count">
+                            <span id="viewCount">58</span> views
+                        </span>
+                    </div>
+                </div>
+            </header>
+            <div class="ad-header container">
+                <div class="ad-wrapper">
+    Iklan Headers
+</div>
+            </div>
+            <div class="container">
+                <div class="article-layout">
+                    <div class="content">
+                        <img src="https://tse4.mm.bing.net/th?q=Unlocking%20the%20Key%20Derivation%20Interface%20(KDI)%20in%20OpenTitan%3A%20A%20Deep%20Dive%20into%20Secure%20Key%20Management" title="Unlocking the Key Derivation Interface (KDI) in OpenTitan: A Deep Dive into Secure Key Management" width="300" height="200"/><p>Hey everyone! Today, we're diving deep into a crucial aspect of OpenTitan's security architecture: the <strong>Key Derivation Interface (KDI)</strong>. This interface plays a vital role in deriving static and ephemeral scrambling keys for FLASH and SRAM, ensuring the confidentiality and integrity of your data. However, a key question arises: how can we, as software developers, access this powerful interface, especially when dealing with external SPI flash devices and the need for secure key storage?</p>
+<h2>Understanding the Key Derivation Interface (KDI)</h2>
+<p>The <strong>Key Derivation Interface (KDI)</strong>, as highlighted in the otp_ctrl Theory of Operation documentation, acts as a central hub for key management within OpenTitan. It interacts with several critical components, including the scrambling datapath, the EDN (Entropy Distribution Network), and the secure partitions within OTP (One-Time Programmable) memory. These partitions hold the root keys essential for scrambling operations. The primary function of the KDI is to derive both static and ephemeral scrambling keys, which are then used to protect data stored in FLASH and SRAM. This process ensures that sensitive information remains confidential and resistant to unauthorized access.</p>
+<p>The KDI's role extends beyond simply generating keys; it also ensures the secure and controlled derivation of these keys. By leveraging the EDN, the KDI incorporates randomness into the key generation process, making it significantly harder for attackers to predict or compromise the keys. Furthermore, the interaction with secure OTP partitions ensures that the root keys themselves are protected from unauthorized access or modification. This multi-layered approach to key management is a cornerstone of OpenTitan's security architecture, providing a robust defense against various attack vectors.</p>
+<p>The importance of the KDI becomes even more apparent when considering scenarios involving external storage, such as SPI flash devices. In these cases, the KDI can be used to derive encryption keys that protect the data stored on the external device. This ensures that even if the external storage is compromised, the data remains secure. However, the challenge lies in accessing the KDI from software, which is where the current limitations and potential solutions come into play. Understanding the KDI's functionality and its place within the broader security architecture is crucial for developers looking to leverage its capabilities for secure key management.</p>
+<h2>The Challenge: Software Access to the KDI</h2>
+<p>The main challenge we're tackling today is the apparent lack of direct software access to the <strong>Key Derivation Interface (KDI)</strong>. While the documentation clearly outlines the KDI's crucial role in key derivation, there's a noticeable absence of documented APIs or DIF (Device Interface Functions) calls that would allow software to interact with it directly. This raises a significant question: how can we leverage the KDI's capabilities, particularly when dealing with scenarios that require encrypting data on external devices like SPI flash?</p>
+<p>Imagine a scenario where you have an external SPI flash device connected to your OpenTitan system via the SPI Host peripheral. You want to encrypt the data stored on this flash device using a key derived from OTP (One-Time Programmable) memory. This is a common security requirement, especially when dealing with sensitive data. The ideal solution would be to use the KDI to derive an encryption key from material stored in one of the OTP's secret partitions. These partitions are specifically designed to hold sensitive information like root keys, and their contents are scrambled to prevent unauthorized access. However, without a clear path to access the KDI from software, this approach seems to be blocked.</p>
+<p>This limitation poses a significant hurdle for developers who need to implement robust security measures in their OpenTitan-based systems. Without direct access to the KDI, it becomes challenging to securely manage keys for external storage or other peripherals. This, in turn, can impact the overall security posture of the system. Therefore, exploring potential solutions and understanding the rationale behind the current limitations is crucial for advancing the security capabilities of OpenTitan. The lack of software access to the KDI highlights a critical gap in the current implementation, and addressing this gap is essential for unlocking the full potential of OpenTitan's security features.</p>
+<h2>Exploring Solutions and Future Directions for KDI Access</h2>
+<p>So, what are the possible solutions, guys? While direct software access to the <strong>Key Derivation Interface (KDI)</strong> might not be readily available right now, let's explore some potential avenues and future directions for addressing this challenge. We need to think creatively about how we can securely derive keys from OTP material for use with external devices and other peripherals.</p>
+<p>One potential approach could involve implementing a dedicated hardware module or coprocessor that handles key derivation on behalf of the software. This module could act as an intermediary between the software and the KDI, providing a secure and controlled interface for key derivation operations. The software would send a request to the module, specifying the desired key type and the source OTP partition. The module would then interact with the KDI to derive the key and return it to the software in a secure manner. This approach would isolate the sensitive key derivation process from the main software execution environment, reducing the risk of compromise.</p>
+<p>Another possibility is to develop a set of secure APIs or DIF calls that provide limited access to the KDI's key derivation functionality. These APIs could be carefully designed to prevent misuse and ensure that keys are only derived under specific, authorized conditions. For example, the APIs might require authentication or authorization before allowing key derivation, or they might limit the types of keys that can be derived. This approach would provide a more direct path for software to access the KDI, but it would also require careful consideration of the security implications.</p>
+<p>Looking further into the future, it's possible that OpenTitan's architecture could evolve to include a more comprehensive key management framework. This framework could provide a standardized way to manage keys across the entire system, including both internal and external storage. It might include features like key rotation, key revocation, and secure key storage. Such a framework would greatly simplify the process of managing keys in OpenTitan and would make it easier to implement robust security measures. These are just a few ideas, and the actual solution may involve a combination of these approaches or other innovative techniques. The key is to continue exploring the possibilities and working towards a secure and flexible key management solution for OpenTitan.</p>
+<h2>Securely Storing and Deriving Keys from OTP: Addressing Concerns</h2>
+<p>Beyond accessing the <strong>Key Derivation Interface (KDI)</strong>, another critical aspect of secure key management is the ability to store and derive keys from OTP (One-Time Programmable) memory itself. A key concern arises around the ownership and control of the secret partitions within OTP, particularly in the context of the Creator-Owner model employed by OpenTitan. Let's delve into this issue and explore potential solutions to ensure that Owners have the necessary control over their key material.</p>
+<p>According to the Direct Access Memory Map table in the otp_ctrl Programmer's Guide, the secret partitions are typically written to by the time the chips are sold by the Creator to the Owner. This raises a significant question: how can Owners ensure that their key material is the only material stored in these partitions, and that the Creator does not retain any copies of the keys? Even if the Creator is willing to flash the Owner's key material in the factory, there are still concerns about the Creator's internal key handling processes and the potential for key retention.</p>
+<p>To address this concern, a crucial requirement is the ability for Owners to flash their own key material into the secret OTP partitions, without relying on the Creator. This would provide Owners with full control over their keys and eliminate the risk of key compromise during the manufacturing process. One way to achieve this is for chip manufacturers to offer chips with the <code>CREATOR_ROOT_KEY</code> partition unprogrammed. This would allow Owners to program their own root keys into the OTP, ensuring that they are the sole holders of these critical secrets.</p>
+<p>Another approach could involve implementing a secure key exchange mechanism between the Creator and the Owner. This mechanism would allow the Owner to securely provision their keys to the Creator for flashing, without revealing the actual key material. This could be achieved using cryptographic techniques such as key wrapping or secure multi-party computation. However, this approach would still require trust in the Creator's implementation of the key exchange mechanism.</p>
+<p>Ultimately, the most secure solution is to provide Owners with the ability to program their own keys into the OTP, without any involvement from the Creator. This ensures the highest level of control and transparency over key management. By offering chips with unprogrammed secret partitions, manufacturers can empower Owners to take full ownership of their security and mitigate the risks associated with key handling during the manufacturing process. This is a critical step towards building truly secure systems with OpenTitan.</p>
+<h2>Questions About Secret Partitions: Ensuring Ownership and Control</h2>
+<p>Following up on the discussion about secret partitions in OTP, a key question remains: will Earlgrey chip producers sell chips with unprogrammed <code>CREATOR_ROOT_KEY</code> partitions? This is crucial for ensuring that Owners have full control over their key material and can confidently manage their security posture. Let's break down why this question is so important and what the implications are.</p>
+<p>If the <code>CREATOR_ROOT_KEY</code> partition is pre-programmed by the Creator, it introduces a potential vulnerability. Even if the Creator flashes the Owner's key material later, the fact that the Creator had access to the OTP and potentially programmed their own root key raises concerns about key retention and potential backdoors. Owners need assurance that their keys are the only keys present in the secret partitions, and that no other entity has access to them.</p>
+<p>Selling chips with unprogrammed <code>CREATOR_ROOT_KEY</code> partitions allows Owners to take complete ownership of their security. They can program their own root keys into the OTP, ensuring that these keys are never exposed to the Creator or any other third party. This provides a strong foundation for building secure systems, as it eliminates the risk of key compromise during the manufacturing process.</p>
+<p>Furthermore, this approach aligns with the principles of transparency and accountability, which are central to OpenTitan's mission. By giving Owners control over their key material, OpenTitan empowers them to build trust in their systems and demonstrate their security posture to their customers and stakeholders. This is particularly important in security-sensitive applications where the integrity and confidentiality of data are paramount.</p>
+<p>The availability of chips with unprogrammed <code>CREATOR_ROOT_KEY</code> partitions is not just a technical detail; it's a fundamental requirement for building truly secure systems with OpenTitan. It's a question of trust, control, and accountability. Therefore, it's crucial for chip producers to address this need and provide Owners with the tools they need to manage their security effectively. This will enable the widespread adoption of OpenTitan in a variety of applications, from embedded systems to cloud infrastructure.</p>
+<h2>Conclusion: Towards Secure and Flexible Key Management in OpenTitan</h2>
+<p>In conclusion, guys, we've explored some critical aspects of key management in OpenTitan, focusing on access to the <strong>Key Derivation Interface (KDI)</strong> and the secure handling of secret partitions in OTP. While challenges exist, particularly regarding direct software access to the KDI and ensuring Owner control over key material, the OpenTitan community is actively working towards solutions.</p>
+<p>The ability to securely derive keys from OTP and use them for encrypting external storage, like SPI flash devices, is paramount for building robust security into OpenTitan-based systems. Exploring alternative approaches like dedicated hardware modules or secure APIs can pave the way for unlocking the KDI's potential. Furthermore, addressing concerns about key ownership by offering chips with unprogrammed <code>CREATOR_ROOT_KEY</code> partitions is a crucial step in empowering Owners to manage their security effectively.</p>
+<p>The ongoing discussions and efforts within the OpenTitan community highlight the commitment to building a truly secure and transparent platform. By addressing these challenges and fostering collaboration, we can unlock the full potential of OpenTitan and create a secure foundation for a wide range of applications. The future of secure key management in OpenTitan looks promising, and we can all contribute to shaping it by actively participating in the community and sharing our insights and ideas. Let's continue to push the boundaries of security and build a more trustworthy technological landscape together!</p>
+
+                    </div>
+                    <aside class="related-posts">
+                        <div class="ad-sidebar container">
+                            <div class="ad-wrapper">
+    <span>Iklan Related</span>
+</div>
+                        </div>
+                        <h2 class="related-posts-title">Related Posts</h2><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/evaluating-h-x-x4-2x2">Evaluating H(x) = X^4 + 2x^2 + 3 At Various Values: A Step-by-Step Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-13T19:24:04+00:00">Jul 13, 2025</time>
+		                        <span class="view-count">
+									72 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/buy-a-car-under-llc">Buy A Car Under LLC: Tax &amp; Liability Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-02T05:07:26+00:00">Aug 2, 2025</time>
+		                        <span class="view-count">
+									42 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/fish-oil-for-dogs-benefits-1754644883644">Fish Oil For Dogs: Benefits, Dosage, And Choosing The Right One</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-08T09:21:23+00:00">Aug 8, 2025</time>
+		                        <span class="view-count">
+									63 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/solving-matched-asymptotic-expansion-problems">Solving Matched Asymptotic Expansion Problems In ODEs</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-14T16:32:07+00:00">Jul 14, 2025</time>
+		                        <span class="view-count">
+									53 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/fundamental-group-of-preimages-under-1752507437729">Fundamental Group Of Preimages Under Holomorphic Projections To Complex Projective Space</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-14T15:37:17+00:00">Jul 14, 2025</time>
+		                        <span class="view-count">
+									88 views
+		                        </span>
+                            </div>
+                        </article>
+                    </aside>
+                    <aside class="related-posts"></aside>
+                </div>
+            </div>
+        </article>
+        <a href="#" class="back-to-top" id="backToTop" title="Back to top">
+        	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-bar-up" viewBox="0 0 16 16">
+			  <path fill-rule="evenodd" d="M3.646 11.854a.5.5 0 0 0 .708 0L8 8.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708M2.4 5.2c0 .22.18.4.4.4h10.4a.4.4 0 0 0 0-.8H2.8a.4.4 0 0 0-.4.4"/>
+			</svg>
+		</a>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 ANABEL</p>
+        </div>
+    </footer>
+    <script>
+    	(() => {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            const toggleMenu = () => {
+                navMenu.classList.toggle('nav-menu-active');
+                navToggle.classList.toggle('nav-toggle-active');
+            };
+            const backToTopHandler = (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            navToggle.addEventListener('click', toggleMenu);
+            document.getElementById('backToTop').addEventListener('click', backToTopHandler);
+            window.addEventListener('pagehide', () => {
+                navToggle.removeEventListener('click', toggleMenu);
+                document.getElementById('backToTop').removeEventListener('click', backToTopHandler);
+            });
+        })();
+		(() => {
+            window.addEventListener("DOMContentLoaded", (event) => {
+                const ellHljs = document.createElement("script");
+                ellHljs.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js");
+                ellHljs.onload = () => {
+                    hljs.highlightAll();
+                };
+                document.querySelector("body").append(ellHljs);
+                const ellFont = document.createElement("link");
+                ellFont.setAttribute("href", "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css");
+                ellFont.setAttribute("rel", "stylesheet");
+                document.querySelector("head").append(ellFont);
+                window.addEventListener('pagehide', () => {
+                    // ellHljs.remove();
+                    ellFont.remove();
+                });
+
+            });
+        })();
+    </script>
+    
+    
+    
+</body>
+</html>

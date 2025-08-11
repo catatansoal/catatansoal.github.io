@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Electron &amp; React: Access SQLite And File System</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Electron & React: Access SQLite And File System...">
+    <link rel="canonical" href="https://catatansoal.github.io/blog/electron-and-react-access-sqlite">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Electron &amp; React: Access SQLite And File System">
+	<meta property="og:description" content="Electron & React: Access SQLite And File System...">
+	<meta property="og:url" content="https://catatansoal.github.io/blog/electron-and-react-access-sqlite">
+	<meta property="og:site_name" content="ANABEL">
+	<meta property="article:published_time" content="2025-08-06T19:20:14+00:00">
+	<meta property="article:author" content="ADMIN">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+    <link rel="preload" fetchpriority="high" as="image" href="https://tse4.mm.bing.net/th?q=How%20to%20Access%20SQLite%20and%20File%20System%20Operations%20from%20React%20Frontend%20in%20Electron%20App">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style type="text/css">
+    	:root{--primary-color:#3740ff;--text-color:#202124;--background-color:#ffffff;--gray-100:#f8f9fa;--gray-200:#e9ecef}*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;line-height:1.6;color:var(--text-color);background-color:var(--background-color)}.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}.header{background-color:var(--background-color);border-bottom:1px solid var(--gray-200);position:sticky;top:0;z-index:100}.nav{padding:.5rem 0}.nav-container{display:flex;justify-content:space-between;align-items:center;gap:1rem}.nav-left{display:flex;align-items:center;flex-shrink:0}.logo{font-weight:700;color:var(--primary-color)}.blog-tag{margin-left:1rem;padding:.25rem .5rem;background-color:var(--gray-100);border-radius:4px;font-size:.875rem}.nav-search{flex-grow:1;max-width:300px}.search-form{position:relative;width:100%}.search-input{width:100%;padding:.5rem 2.5rem .5rem 1rem;border:1px solid var(--gray-200);border-radius:24px;font-size:.875rem;transition:all 0.2s}.search-input:focus{outline:none;border-color:var(--primary-color);box-shadow:0 0 0 2px rgb(55 64 255 / .1)}.search-button{position:absolute;right:.5rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#5f6368;cursor:pointer;padding:.25rem;display:flex;align-items:center;justify-content:center}.search-button:hover{color:var(--primary-color)}.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:.5rem}.hamburger{display:block;position:relative;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before,.hamburger::after{content:'';position:absolute;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before{top:-6px}.hamburger::after{bottom:-6px}.nav-toggle-active .hamburger{background:#fff0}.nav-toggle-active .hamburger::before{transform:rotate(45deg);top:0}.nav-toggle-active .hamburger::after{transform:rotate(-45deg);bottom:0}.nav-list{display:flex;list-style:none;gap:2rem}.nav-link{color:var(--text-color);text-decoration:none;font-size:.9rem;transition:color 0.2s}.nav-link:hover{color:var(--primary-color)}.article-header{padding:2rem 0;background-color:var(--gray-100)}.article-layout{display:grid;grid-template-columns:1fr 350px;gap:3rem;padding:1rem 0;align-items: start}h1,h2,h3,h4,h5,h6{font-family:"Crimson Text","Times New Roman",Times,serif}h1{font-size:2.5rem;line-height:1.2;margin-bottom:1rem}.meta{color:#5f6368;font-size:.875rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}.view-count{display:inline-flex;align-items:center;gap:.25rem}.view-count svg{color:#5f6368}.content{min-width:0;border-bottom:1px solid #dddddd5e;margin-top:1rem;white-space:pre-line !important;overflow-wrap:break-word;overflow-x:auto;word-break:break-word}.lead{font-size:1.25rem;color:#5f6368;margin-bottom:2rem}h2,h3,h4,h5,h6{font-size:1.75rem;margin:1rem 0 1rem}p,pre,ol,ul>li{margin-bottom:1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;font-size:1.3rem;text-align: justify;}p>code{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px}hr{margin:1rem 0 1rem 0}.code-example{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;margin:1.5rem 0;overflow-x:auto}code{font-family:'Roboto Mono',monospace;font-size:.875rem}ul{margin:.2rem 0;padding-left:1.5rem}.related-posts{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;position:sticky;top:5rem}.related-posts-title,.newpost-posts-list{font-size:1.75rem;margin:0 0 1rem}.related-posts-list{display:flex;flex-direction:column;gap:.5rem}.related-post,.newpost-post{border-bottom:1px solid #ddd;padding-bottom:10px;margin-bottom:10px}.related-post:last-child,.newpost-post:last-child{padding-bottom:0;border-bottom:none}.related-post-title,.newpost-post-title{font-size:1.2rem;margin:0 0 .1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;}.related-post-title a,.newpost-post-title a{color:var(--text-color);text-decoration:none;transition:color 0.2s}.related-post-title a:hover,.newpost-post-title a:hover{color:var(--primary-color)}.related-post time{font-size:.875rem;color:#5f6368}.footer{background-color:var(--gray-100);padding:2rem 0;margin-top:4rem;color:#5f6368;font-size:.875rem}.nav-menu>ul>li{margin-bottom:0}@media (max-width:1024px){.container{max-width:800px}.article-layout{grid-template-columns:1fr;gap:2rem}.related-posts{position:static}}@media (max-width:768px){.nav-container{flex-wrap:wrap}.nav-search{order:3;max-width:none;width:100%;margin-top:.1rem}.nav-toggle{display:block}.nav-menu{display:none;position:absolute;top:100%;left:0;right:0;background:var(--background-color);padding:1rem 0;border-bottom:1px solid var(--gray-200)}.nav-menu-active{display:block}.nav-list{flex-direction:column;gap:.1rem;padding:0 1.5rem}.nav-link{display:block;padding:.2rem 0}h1{font-size:2rem}.article-header{padding:2rem 0}.content{padding:.1rem 0}}table{width:100%;border-collapse:collapse;margin:20px 0;font-family:'Arial',sans-serif}th,td{padding:12px 15px;text-align:left;border:1px solid #ddd}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9}tr:nth-child(even) td{background-color:#f2f2f2}@media screen and (max-width:768px){table{border:0;display:block;overflow-x:auto;white-space:nowrap}th,td{padding:10px;text-align:right}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9;border-bottom:1px solid #ddd}tr:nth-child(even) td{background-color:#f2f2f2}}a{text-decoration:none;color:#540707}.katex-html{padding: .2rem;color: #000;font-weight: 700;font-size: 1.3rem;overflow-wrap: break-word;max-width: 100%;white-space: normal !important}.category{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin:1rem 0 1rem 0}.tag{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px;font-family:"Newsreader",serif}.tag>a{text-decoration:none;color:#000}img{margin:auto;display:block;max-width:100%;height:auto;margin-bottom:1rem}.katex{white-space: pre-line !important;display: inline-block;max-width: 100%;overflow-x: auto;overflow-y: hidden;scrollbar-width: thin;overflow-wrap: break-word;word-break: break-word;vertical-align: -7px}.content > p {overflow-wrap: break-word;word-break: break-word}
+    </style>
+    <style type="text/css">
+    	pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}
+		.hljs{color:#c9d1d9;background:#0d1117}.hljs-doctag,.hljs-keyword,.hljs-meta .hljs-keyword,.hljs-template-tag,.hljs-template-variable,.hljs-type,.hljs-variable.language_{color:#ff7b72}.hljs-title,.hljs-title.class_,.hljs-title.class_.inherited__,.hljs-title.function_{color:#d2a8ff}.hljs-attr,.hljs-attribute,.hljs-literal,.hljs-meta,.hljs-number,.hljs-operator,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-variable{color:#79c0ff}.hljs-meta .hljs-string,.hljs-regexp,.hljs-string{color:#a5d6ff}.hljs-built_in,.hljs-symbol{color:#ffa657}.hljs-code,.hljs-comment,.hljs-formula{color:#8b949e}.hljs-name,.hljs-quote,.hljs-selector-pseudo,.hljs-selector-tag{color:#7ee787}.hljs-subst{color:#c9d1d9}.hljs-section{color:#1f6feb;font-weight:700}.hljs-bullet{color:#f2cc60}.hljs-emphasis{color:#c9d1d9;font-style:italic}.hljs-strong{color:#c9d1d9;font-weight:700}.hljs-addition{color:#aff5b4;background-color:#033a16}.hljs-deletion{color:#ffdcd7;background-color:#67060c}
+    	pre{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;font-weight:400;word-break:break-word;word-wrap:break-word;box-sizing:inherit;border-radius:4px;overflow-x:auto;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}code{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;word-wrap:break-word;word-break:break-word;font-style:normal;line-height:20px;letter-spacing:-.003em;box-sizing:inherit;font-weight:400;font-size:75%;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}
+    </style>
+    <style type="text/css">
+    	.back-to-top{position:fixed;bottom:20px;right:20px;background-color:#a73f3f;color:#fff;padding:8px 10px;border-radius:50%;box-shadow:0 4px 6px rgb(0 0 0 / .2);font-size:10px;font-weight:700;text-decoration:none;text-align:center;transition:opacity 0.3s ease,visibility 0.3s ease;z-index:99999;opacity:1;visibility:visible}.back-to-top:hover{background-color:#0056b3}
+    </style>
+    <style type="text/css">
+        .ad-header {margin: 1rem auto 1rem;background-color: #fdfdfd;text-align: center;display: block;}.ad-header .ad-wrapper {min-height: 90px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #555;font-weight: 500;padding: 3rem;border: 1px dashed #ccc;border-radius: 6px;}@media (max-width: 768px) {.ad-header {padding: 0.75rem;}}.ad-sidebar {margin: 0 0 1rem;background-color: #fefefe;text-align: center;padding: 0px;width: 100%;max-width: 100%;display: block;}.ad-sidebar .ad-wrapper {min-height: 250px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #444;font-weight: 500;border: 1px dashed #aaa;border-radius: 6px;padding: 0rem;}@media (max-width: 1024px) {.ad-sidebar {padding: 0.75rem;}}
+    </style>
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://catatansoal.github.io/blog/electron-and-react-access-sqlite"
+          },
+          "headline": "Electron &amp; React: Access SQLite And File System",
+          "description": "Electron & React: Access SQLite And File System...",
+          "image": [
+            "https://tse4.mm.bing.net/th?q=How%20to%20Access%20SQLite%20and%20File%20System%20Operations%20from%20React%20Frontend%20in%20Electron%20App"
+          ],
+          "author": {
+            "@type": "Person",
+            "name": "ADMIN",
+            "jobTitle": "Editor web"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "ANABEL",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://tse4.mm.bing.net/th?q=ANABEL%20WEB"
+            }
+          },
+          "datePublished": "2025-08-06T19:20:14+00:00",
+          "dateModified": "2025-08-06T19:20:14+00:00"
+        }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="container nav-container">
+                <div class="nav-left">
+                    <span class="logo">ANABEL</span>
+                    <span class="blog-tag">Article</span>
+                </div>
+                <div class="nav-search">
+                    <form class="search-form" role="search">
+                        <input 
+                            type="search" 
+                            class="search-input"
+                            placeholder="Search articles..."
+                            aria-label="Search articles"
+                        >
+                        <button type="submit" class="search-button" aria-label="Submit search">🔎</button>
+                    </form>
+                </div>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+                <div class="nav-menu">
+                    <ul class="nav-list">
+                    	<li><a href="/" class="nav-link">HOME</a></li>
+                        <li><a href="/pages/About" class="nav-link">About</a></li>
+                        <li><a href="/pages/Contact" class="nav-link">Contact</a></li>
+                        <li><a href="/pages/Disclaimer" class="nav-link">Disclaimer</a></li>
+                        <li><a href="/pages/Privacy" class="nav-link">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="main">
+        <article class="article">
+            <header class="article-header">
+                <div class="container">
+                    <h1>Electron &amp; React: Access SQLite And File System</h1>
+                    <div class="meta">
+                        <time datetime="2025-08-06T19:20:14+00:00">Aug 6, 2025</time>
+                        <span class="author">by ADMIN</span>
+                        <span class="view-count">
+                            <span id="viewCount">48</span> views
+                        </span>
+                    </div>
+                </div>
+            </header>
+            <div class="ad-header container">
+                <div class="ad-wrapper">
+    Iklan Headers
+</div>
+            </div>
+            <div class="container">
+                <div class="article-layout">
+                    <div class="content">
+                        <img src="https://tse4.mm.bing.net/th?q=How%20to%20Access%20SQLite%20and%20File%20System%20Operations%20from%20React%20Frontend%20in%20Electron%20App" title="How to Access SQLite and File System Operations from React Frontend in Electron App" width="300" height="200"/><p>Hey guys! Building cross-platform apps with Electron and React can be super powerful. But sometimes, diving into the nitty-gritty of accessing local databases like SQLite and handling file system operations from your React frontend can feel like navigating a maze. So, let's break it down, make it crystal clear, and get you coding!</p>
+<h2>Introduction</h2>
+<p>If you're like me, you're probably building some awesome apps with <strong>Electron and React</strong>. Electron gives you the power to create cross-platform desktop applications using web technologies, and React helps you build dynamic user interfaces. But when your app needs to interact with local resources like a <strong>SQLite database or the file system</strong>, things can get a bit tricky. Especially when you're aiming for a smooth and secure experience for your users. Imagine building a music player, a note-taking app, or even a project management tool – all of these often require local data storage and file handling capabilities. That's where understanding how to bridge the gap between your React frontend and Electron's backend becomes essential. This guide will walk you through the best practices and techniques for securely accessing <strong>SQLite databases and performing file system operations</strong> in your Electron app, ensuring your users have a seamless experience no matter the platform they're on.</p>
+<h3>Understanding the Challenge</h3>
+<p>The main challenge we face is the separation between the <strong>React frontend</strong>, which runs in a renderer process, and the <strong>Electron backend</strong>, which runs in the main process. Direct access to Node.js APIs (like those for SQLite and file system operations) is restricted in the renderer process for security reasons. This is where the concept of inter-process communication (IPC) comes into play. IPC allows these separate processes to communicate with each other safely and efficiently. So, how do we make this happen? We'll explore using <strong>Electron's IPC</strong> mechanisms to create a secure bridge between your React components and the backend functionalities. This bridge will enable you to perform database queries, save user preferences, read and write files, and much more – all while maintaining the security and integrity of your application.</p>
+<h3>Why This Matters</h3>
+<p>Accessing SQLite and file system operations might sound like a niche topic, but it's actually a cornerstone of many powerful desktop applications. Think about apps that need to store user data locally, like settings, preferences, or even entire databases. Or consider apps that work with files, such as image editors, text editors, or media players. All of these rely on the ability to interact with the file system. By mastering these techniques, you'll be able to build richer, more capable Electron applications that provide a true desktop-like experience. Plus, understanding <strong>secure IPC</strong> patterns is crucial for building robust and maintainable apps. You'll avoid potential security vulnerabilities and ensure your app behaves predictably across different platforms. So, let's dive in and unlock the full potential of Electron and React!</p>
+<h2>Setting Up Your Electron Project</h2>
+<p>Alright, let's get our hands dirty! First things first, you'll need to have a basic <strong>Electron project</strong> set up with a <strong>React frontend</strong>. I'm assuming you've already got Node.js and npm (or yarn) installed on your machine. If not, go ahead and install those – they're essential for any JavaScript development. Now, let's create a new project directory and initialize our npm project. Open up your terminal and run these commands:</p>
+<pre><code class="hljs">mkdir electron-react-sqlite-example
+cd electron-react-sqlite-example
+npm init -y
+</code></pre>
+<p>This will create a new directory and initialize a <code>package.json</code> file with default settings. Next, we need to install the necessary dependencies. We'll need <strong>Electron, React, ReactDOM, and a few other goodies</strong> to get us started. Run the following command:</p>
+<pre><code class="hljs">npm install electron react react-dom electron-is-dev --save-dev
+npm install @types/react @types/react-dom --save-dev
+npm install sqlite3 --save
+</code></pre>
+<p>Here's a quick rundown of what these packages are for:</p>
+<ul>
+<li><strong>electron</strong>: The core Electron framework.</li>
+<li><strong>react</strong> and <strong>react-dom</strong>: The React libraries for building our UI.</li>
+<li><strong>electron-is-dev</strong>: A handy utility to check if we're in development mode.</li>
+<li><strong>@types/react</strong> and <strong>@types/react-dom</strong>: TypeScript definitions for React.</li>
+<li><strong>sqlite3</strong>: The Node.js driver for SQLite databases.</li>
+</ul>
+<h3>Configuring Your Project</h3>
+<p>Now that we have our dependencies installed, let's set up our project structure. Create the following directories and files:</p>
+<pre><code class="hljs">electron-react-sqlite-example/
+├── electron/
+│   ├── main.ts
+│   └── preload.ts
+├── src/
+│   ├── App.tsx
+│   ├── index.tsx
+│   └── components/
+│       └── Playlist.tsx
+├── public/
+│   └── index.html
+├── tsconfig.json
+├── webpack.config.js
+└── package.json
+</code></pre>
+<p>This structure will help us keep our code organized. The <code>electron/</code> directory will house our Electron main process files, <code>src/</code> will contain our React source code, <code>public/</code> will hold static assets, and <code>tsconfig.json</code> and <code>webpack.config.js</code> will configure our TypeScript and Webpack build processes, respectively. Let's start by setting up our <code>package.json</code> file with the necessary scripts to run our app. Open <code>package.json</code> and add the following scripts:</p>
+<pre><code class="hljs">&quot;scripts&quot;: {
+    &quot;start&quot;: &quot;electron-forge start&quot;,
+    &quot;dev&quot;: &quot;webpack serve &amp; electron .&quot;,
+    &quot;build&quot;: &quot;webpack&quot;,
+    &quot;package&quot;: &quot;electron-forge package&quot;,
+    &quot;make&quot;: &quot;electron-forge make&quot;
+  },
+</code></pre>
+<p>These scripts will allow us to start our app in development mode, build our React code, and package our Electron app for distribution. Next, we need to configure TypeScript and Webpack. Create a <code>tsconfig.json</code> file in the root directory with the following content:</p>
+<pre><code class="hljs">{
+  &quot;compilerOptions&quot;: {
+    &quot;target&quot;: &quot;es2020&quot;,
+    &quot;module&quot;: &quot;CommonJS&quot;,
+    &quot;jsx&quot;: &quot;react-jsx&quot;,
+    &quot;esModuleInterop&quot;: true,
+    &quot;forceConsistentCasingInFileNames&quot;: true,
+    &quot;strict&quot;: true,
+    &quot;skipLibCheck&quot;: true,
+    &quot;moduleResolution&quot;: &quot;node&quot;,
+    &quot;baseUrl&quot;: &quot;.&quot;,
+    &quot;paths&quot;: {
+      &quot;*&quot;: [&quot;src/*&quot;]
+    }
+  },
+  &quot;include&quot;: [&quot;src&quot;, &quot;electron&quot;]
+}
+</code></pre>
+<p>This configuration tells TypeScript how to compile our code. Now, let's create a <code>webpack.config.js</code> file in the root directory with the following content:</p>
+<pre><code class="hljs">const path = require(&#39;path&#39;);
+
+module.exports = {
+  entry: &#39;./src/index.tsx&#39;,
+  output: {
+    path: path.resolve(__dirname, &#39;dist&#39;),
+    filename: &#39;bundle.js&#39;
+  },
+  devtool: &#39;source-map&#39;,
+  resolve: {
+    extensions: [&#39;.tsx&#39;, &#39;.ts&#39;, &#39;.js&#39;]
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(ts|tsx)$/,
+        use: &#39;ts-loader&#39;,
+        exclude: /node_modules/
+      },
+      {
+        test: /\.css$/i,
+        use: [&quot;style-loader&quot;, &quot;css-loader&quot;],
+      },
+    ]
+  },
+  devServer: {
+    static: {
+      directory: path.join(__dirname, &#39;public&#39;),
+    },
+    hot: true,
+    port: 3000,
+    proxy: {
+      &#39;/api&#39;: &#39;http://localhost:8000&#39;
+    }
+  },
+  target: &#39;electron-renderer&#39;
+};
+</code></pre>
+<p>This configuration tells Webpack how to bundle our React code. With these configurations in place, we're ready to start building our Electron app!</p>
+<h2>Setting up SQLite in Electron Main Process</h2>
+<p>Now for the juicy part – let's get our <strong>SQLite database</strong> up and running in the Electron main process. This is where we'll handle all the database interactions, keeping our data secure and separate from the React frontend. First, we need to import the <code>sqlite3</code> module and create a new database instance in our <code>electron/main.ts</code> file. Open <code>electron/main.ts</code> and add the following code:</p>
+<pre><code class="hljs">import { app, BrowserWindow, ipcMain } from &#39;electron&#39;;
+import path from &#39;path&#39;;
+import isDev from &#39;electron-is-dev&#39;;
+const sqlite3 = require(&#39;sqlite3&#39;).verbose();
+
+let db = new sqlite3.Database(path.join(app.getPath(&#39;userData&#39;), &#39;playlists.db&#39;), (err: Error | null) =&gt; {
+  if (err) {
+    console.error(err.message);
+  } else {
+    console.log(&#39;Connected to the SQLite database.&#39;);
+    db.run(`
+      CREATE TABLE IF NOT EXISTS playlists (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL
+      )
+    `, (err: Error | null) =&gt; {
+      if (err) {
+        console.error(err.message);
+      }
+    });
+  }
+});
+
+function createWindow() {
+  const win = new BrowserWindow({
+    width: 800,
+    height: 600,
+    webPreferences: {
+      nodeIntegration: false,
+      contextIsolation: true,
+      preload: path.join(__dirname, &#39;preload.ts&#39;),
+    },
+  });
+
+  win.loadURL(
+    isDev
+      ? &#39;http://localhost:3000&#39;
+      : `file://${path.join(__dirname, &#39;../dist/index.html&#39;)}`
+  );
+
+  if (isDev) {
+    win.webContents.openDevTools();
+  }
+}
+
+app.whenReady().then(() =&gt; {
+  createWindow();
+
+  app.on(&#39;activate&#39;, () =&gt; {
+    if (BrowserWindow.getAllWindows().length === 0) {
+      createWindow();
+    }
+  });
+});
+
+app.on(&#39;window-all-closed&#39;, () =&gt; {
+  if (process.platform !== &#39;darwin&#39;) {
+    app.quit();
+  }
+});
+</code></pre>
+<p>Let's break down what's happening here. We're importing the necessary Electron modules, including <code>app</code>, <code>BrowserWindow</code>, and <code>ipcMain</code>. We're also importing the <code>path</code> module to handle file paths and <code>electron-is-dev</code> to check if we're in development mode. Then, we're creating a new <code>sqlite3.Database</code> instance, which will connect to our <strong>SQLite database file</strong>. We're storing the database file in the user's data directory, which is a safe place to store application-specific data. We're also creating a <code>playlists</code> table if it doesn't already exist. This table will store the names of our playlists. Finally, we have the <code>createWindow</code> function that creates our main window and loads our React app. We're also setting <code>nodeIntegration</code> to <code>false</code> and <code>contextIsolation</code> to <code>true</code> in the <code>webPreferences</code>, which are important security settings. We're also specifying a <code>preload.ts</code> script, which we'll use to expose our backend functionalities to the React frontend.</p>
+<h3>Exposing Database Operations via IPC</h3>
+<p>Now that we have our database connection set up, we need to expose the database operations to our React frontend. We'll do this using <strong>Electron's IPC (Inter-Process Communication)</strong>. We'll define handlers in the main process that will respond to requests from the renderer process. Open <code>electron/main.ts</code> and add the following code within the <code>app.whenReady().then(() =&gt; { ... });</code> block:</p>
+<pre><code class="hljs">ipcMain.handle(&#39;db-get-playlists&#39;, async () =&gt; {
+  return new Promise((resolve, reject) =&gt; {
+    db.all(&#39;SELECT * FROM playlists&#39;, (err: Error | null, rows: any[]) =&gt; {
+      if (err) {
+        console.error(err.message);
+        reject(err);
+      } else {
+        resolve(rows);
+      }
+    });
+  });
+});
+
+ipcMain.handle(&#39;db-add-playlist&#39;, async (event, name: string) =&gt; {
+  return new Promise((resolve, reject) =&gt; {
+    db.run(&#39;INSERT INTO playlists (name) VALUES (?)&#39;, name, function(err: Error | null) {
+      if (err) {
+        console.error(err.message);
+        reject(err);
+      } else {
+        resolve({ id: this.lastID, name });
+      }
+    });
+  });
+});
+</code></pre>
+<p>Here, we're using <code>ipcMain.handle</code> to define two handlers: <code>db-get-playlists</code> and <code>db-add-playlist</code>. The <code>db-get-playlists</code> handler queries the database for all playlists and returns the results. The <code>db-add-playlist</code> handler inserts a new playlist into the database and returns the newly created playlist object. We're using promises to handle the asynchronous nature of the database operations. This makes our code cleaner and easier to read. We're also handling errors and logging them to the console. This is crucial for debugging and ensuring our app behaves predictably.</p>
+<h2>Accessing SQLite from React Frontend</h2>
+<p>Okay, we've got our database set up in the main process, and we've exposed the necessary operations via IPC. Now, let's switch gears and focus on the React frontend. We need to create a way for our React components to communicate with the main process and fetch or modify data in our <strong>SQLite database</strong>. This is where our <code>preload.ts</code> script comes into play. The <code>preload.ts</code> script acts as a bridge between the renderer process (our React frontend) and the main process. It allows us to selectively expose certain Node.js APIs to the renderer process while maintaining security. Open <code>electron/preload.ts</code> and add the following code:</p>
+<pre><code class="hljs">import { contextBridge, ipcRenderer } from &#39;electron&#39;;
+
+contextBridge.exposeInMainWorld(&#39;electronAPI&#39;, {
+  getPlaylists: () =&gt; ipcRenderer.invoke(&#39;db-get-playlists&#39;),
+  addPlaylist: (name: string) =&gt; ipcRenderer.invoke(&#39;db-add-playlist&#39;, name),
+});
+</code></pre>
+<p>Here, we're using <code>contextBridge.exposeInMainWorld</code> to expose a global object called <code>electronAPI</code> to our React frontend. This object contains two functions: <code>getPlaylists</code> and <code>addPlaylist</code>. These functions use <code>ipcRenderer.invoke</code> to send messages to the main process and receive responses. This is a secure way to communicate between the renderer process and the main process. Now, in our React components, we can access these functions via the <code>window.electronAPI</code> object. Let's create a <code>Playlist.tsx</code> component to display our playlists. Create a <code>src/components/Playlist.tsx</code> file with the following content:</p>
+<pre><code class="hljs">import React, { useState, useEffect } from &#39;react&#39;;
+
+interface Playlist {
+  id: number;
+  name: string;
+}
+
+declare global {
+  interface Window {
+    electronAPI: {
+      getPlaylists: () =&gt; Promise&lt;Playlist[]&gt;;
+      addPlaylist: (name: string) =&gt; Promise&lt;Playlist&gt;;
+    };
+  }
+}
+
+const Playlist: React.FC = () =&gt; {
+  const [playlists, setPlaylists] = useState&lt;Playlist[]&gt;([]);
+  const [newPlaylistName, setNewPlaylistName] = useState(&#39;&#39;);
+
+  useEffect(() =&gt; {
+    const fetchPlaylists = async () =&gt; {
+      const playlists = await window.electronAPI.getPlaylists();
+      setPlaylists(playlists);
+    };
+
+    fetchPlaylists();
+  }, []);
+
+  const handleAddPlaylist = async () =&gt; {
+    if (newPlaylistName) {
+      const newPlaylist = await window.electronAPI.addPlaylist(newPlaylistName);
+      setPlaylists([...playlists, newPlaylist]);
+      setNewPlaylistName(&#39;&#39;);
+    }
+  };
+
+  return (
+    &lt;div&gt;
+      &lt;h2&gt;Playlists&lt;/h2&gt;
+      &lt;ul&gt;
+        {playlists.map((playlist) =&gt; (
+          &lt;li key={playlist.id}&gt;{playlist.name}&lt;/li&gt;
+        ))}
+      &lt;/ul&gt;
+      &lt;div&gt;
+        &lt;input
+          type=&quot;text&quot;
+          value={newPlaylistName}
+          onChange={(e) =&gt; setNewPlaylistName(e.target.value)}
+        /&gt;
+        &lt;button onClick={handleAddPlaylist}&gt;Add Playlist&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+};
+
+export default Playlist;
+</code></pre>
+<p>In this component, we're using the <code>useState</code> hook to manage the list of playlists and the input for the new playlist name. We're using the <code>useEffect</code> hook to fetch the playlists when the component mounts. We're also defining a <code>handleAddPlaylist</code> function that adds a new playlist to the database. Notice how we're accessing the <code>window.electronAPI</code> object to call the <code>getPlaylists</code> and <code>addPlaylist</code> functions. This is how we're communicating with the main process from our React frontend. Finally, let's render our <code>Playlist</code> component in our main <code>App.tsx</code> component. Open <code>src/App.tsx</code> and add the following code:</p>
+<pre><code class="hljs">import React from &#39;react&#39;;
+import Playlist from &#39;./components/Playlist&#39;;
+
+const App: React.FC = () =&gt; {
+  return (
+    &lt;div&gt;
+      &lt;h1&gt;Electron + React + SQLite Example&lt;/h1&gt;
+      &lt;Playlist /&gt;
+    &lt;/div&gt;
+  );
+};
+
+export default App;
+</code></pre>
+<p>And in <code>src/index.tsx</code>:</p>
+<pre><code class="hljs">import React from &#39;react&#39;;
+import ReactDOM from &#39;react-dom/client&#39;;
+import App from &#39;./App&#39;;
+
+const root = ReactDOM.createRoot(
+  document.getElementById(&#39;root&#39;) as HTMLElement
+);
+root.render(
+    &lt;App /&gt;
+);
+</code></pre>
+<p>With these changes, you should be able to run your Electron app and see the list of playlists. You should also be able to add new playlists, and they'll be persisted in the <strong>SQLite database</strong>. How cool is that?</p>
+<h2>Handling File System Operations</h2>
+<p>Now that we've conquered SQLite, let's tackle file system operations. This is another crucial aspect of many desktop applications, allowing you to read, write, and manipulate files on the user's system. Just like with SQLite, we'll need to use IPC to bridge the gap between our React frontend and the Electron main process. We'll start by defining the file system operations we need in our <code>electron/main.ts</code> file. Let's add a handler to read a file from the file system. Open <code>electron/main.ts</code> and add the following code within the <code>app.whenReady().then(() =&gt; { ... });</code> block:</p>
+<pre><code class="hljs">import fs from &#39;fs&#39;;
+
+ipcMain.handle(&#39;fs-read-file&#39;, async (event, filePath: string) =&gt; {
+  return new Promise((resolve, reject) =&gt; {
+    fs.readFile(filePath, &#39;utf8&#39;, (err, data) =&gt; {
+      if (err) {
+        console.error(err.message);
+        reject(err);
+      } else {
+        resolve(data);
+      }
+    });
+  });
+});
+</code></pre>
+<p>Here, we're importing the <code>fs</code> module, which provides file system functionalities. We're defining an <code>fs-read-file</code> handler that takes a <code>filePath</code> as an argument and reads the content of the file using <code>fs.readFile</code>. We're using promises to handle the asynchronous nature of the file system operation. Now, we need to expose this handler to our React frontend via the <code>preload.ts</code> script. Open <code>electron/preload.ts</code> and add the following code to the <code>electronAPI</code> object:</p>
+<pre><code class="hljs">readFile: (filePath: string) =&gt; ipcRenderer.invoke(&#39;fs-read-file&#39;, filePath),
+</code></pre>
+<p>This will add a <code>readFile</code> function to the <code>electronAPI</code> object that we can access from our React components. Now, let's create a component to display the content of a file. Create a new component in <code>src/components/FileViewer.tsx</code> with the following content:</p>
+<pre><code class="hljs">import React, { useState } from &#39;react&#39;;
+
+declare global {
+  interface Window {
+    electronAPI: {
+      getPlaylists: () =&gt; Promise&lt;any&gt;;
+      addPlaylist: (name: string) =&gt; Promise&lt;any&gt;;
+      readFile: (filePath: string) =&gt; Promise&lt;string&gt;;
+    };
+  }
+}
+
+const FileViewer: React.FC = () =&gt; {
+  const [filePath, setFilePath] = useState(&#39;&#39;);
+  const [fileContent, setFileContent] = useState(&#39;&#39;);
+
+  const handleFileChange = (event: React.ChangeEvent&lt;HTMLInputElement&gt;) =&gt; {
+    const file = event.target.files?.[0];
+    if (file) {
+      setFilePath(file.path);
+    }
+  };
+
+  const handleReadFile = async () =&gt; {
+    if (filePath) {
+      const content = await window.electronAPI.readFile(filePath);
+      setFileContent(content);
+    }
+  };
+
+  return (
+    &lt;div&gt;
+      &lt;h2&gt;File Viewer&lt;/h2&gt;
+      &lt;input type=&quot;file&quot; onChange={handleFileChange} /&gt;
+      &lt;button onClick={handleReadFile}&gt;Read File&lt;/button&gt;
+      &lt;pre&gt;{fileContent}&lt;/pre&gt;
+    &lt;/div&gt;
+  );
+};
+
+export default FileViewer;
+</code></pre>
+<p>In this component, we're using a file input to allow the user to select a file. We're storing the file path in the <code>filePath</code> state variable. We're also defining a <code>handleReadFile</code> function that reads the content of the file using the <code>window.electronAPI.readFile</code> function and displays it in a <code>&lt;pre&gt;</code> element. Finally, let's add the <code>FileViewer</code> component to our <code>App.tsx</code> component. Open <code>src/App.tsx</code> and add the following code:</p>
+<pre><code class="hljs">import React from &#39;react&#39;;
+import Playlist from &#39;./components/Playlist&#39;;
+import FileViewer from &#39;./components/FileViewer&#39;;
+
+const App: React.FC = () =&gt; {
+  return (
+    &lt;div&gt;
+      &lt;h1&gt;Electron + React + SQLite Example&lt;/h1&gt;
+      &lt;Playlist /&gt;
+      &lt;FileViewer /&gt;
+    &lt;/div&gt;
+  );
+};
+
+export default App;
+</code></pre>
+<p>Now, you should be able to run your Electron app and select a file. When you click the</p>
+
+                    </div>
+                    <aside class="related-posts">
+                        <div class="ad-sidebar container">
+                            <div class="ad-wrapper">
+    <span>Iklan Related</span>
+</div>
+                        </div>
+                        <h2 class="related-posts-title">Related Posts</h2><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/understanding-zig-compile-error-depends">Understanding Zig Compile Error Depends On Being Pointer Aligned</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-27T17:04:34+00:00">Jul 27, 2025</time>
+		                        <span class="view-count">
+									64 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/mattress-stitch-the-invisible-seam">Mattress Stitch: The Invisible Seam Knitting Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-04T19:31:03+00:00">Aug 4, 2025</time>
+		                        <span class="view-count">
+									50 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/power-steering-spill-will-it">Power Steering Spill: Will It Damage My Car?</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-03T00:00:35+00:00">Aug 3, 2025</time>
+		                        <span class="view-count">
+									44 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/troubleshooting-ms-gaming-overlay-pop">Troubleshooting MS Gaming Overlay Pop-Up On Windows 11 24H2</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-14T05:54:53+00:00">Jul 14, 2025</time>
+		                        <span class="view-count">
+									59 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/ne555-frequency-instability-fs1000a-interference">NE555 Frequency Instability: FS1000A Interference Fix</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-01T15:53:24+00:00">Aug 1, 2025</time>
+		                        <span class="view-count">
+									53 views
+		                        </span>
+                            </div>
+                        </article>
+                    </aside>
+                    <aside class="related-posts"></aside>
+                </div>
+            </div>
+        </article>
+        <a href="#" class="back-to-top" id="backToTop" title="Back to top">
+        	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-bar-up" viewBox="0 0 16 16">
+			  <path fill-rule="evenodd" d="M3.646 11.854a.5.5 0 0 0 .708 0L8 8.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708M2.4 5.2c0 .22.18.4.4.4h10.4a.4.4 0 0 0 0-.8H2.8a.4.4 0 0 0-.4.4"/>
+			</svg>
+		</a>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 ANABEL</p>
+        </div>
+    </footer>
+    <script>
+    	(() => {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            const toggleMenu = () => {
+                navMenu.classList.toggle('nav-menu-active');
+                navToggle.classList.toggle('nav-toggle-active');
+            };
+            const backToTopHandler = (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            navToggle.addEventListener('click', toggleMenu);
+            document.getElementById('backToTop').addEventListener('click', backToTopHandler);
+            window.addEventListener('pagehide', () => {
+                navToggle.removeEventListener('click', toggleMenu);
+                document.getElementById('backToTop').removeEventListener('click', backToTopHandler);
+            });
+        })();
+		(() => {
+            window.addEventListener("DOMContentLoaded", (event) => {
+                const ellHljs = document.createElement("script");
+                ellHljs.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js");
+                ellHljs.onload = () => {
+                    hljs.highlightAll();
+                };
+                document.querySelector("body").append(ellHljs);
+                const ellFont = document.createElement("link");
+                ellFont.setAttribute("href", "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css");
+                ellFont.setAttribute("rel", "stylesheet");
+                document.querySelector("head").append(ellFont);
+                window.addEventListener('pagehide', () => {
+                    // ellHljs.remove();
+                    ellFont.remove();
+                });
+
+            });
+        })();
+    </script>
+    
+    
+    
+</body>
+</html>

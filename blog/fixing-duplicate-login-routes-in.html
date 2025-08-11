@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Fixing Duplicate Login Routes In FastAPI: A Guide</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Fixing Duplicate Login Routes In FastAPI: A Guide...">
+    <link rel="canonical" href="https://catatansoal.github.io/blog/fixing-duplicate-login-routes-in">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Fixing Duplicate Login Routes In FastAPI: A Guide">
+	<meta property="og:description" content="Fixing Duplicate Login Routes In FastAPI: A Guide...">
+	<meta property="og:url" content="https://catatansoal.github.io/blog/fixing-duplicate-login-routes-in">
+	<meta property="og:site_name" content="ANABEL">
+	<meta property="article:published_time" content="2025-08-08T22:29:05+00:00">
+	<meta property="article:author" content="ADMIN">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+    <link rel="preload" fetchpriority="high" as="image" href="https://tse4.mm.bing.net/th?q=Duplicate%20Login%20Route%20Inconsistent%20Auth%20Behavior%3A%20OpenAI%20Docs%20Discussion">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style type="text/css">
+    	:root{--primary-color:#3740ff;--text-color:#202124;--background-color:#ffffff;--gray-100:#f8f9fa;--gray-200:#e9ecef}*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;line-height:1.6;color:var(--text-color);background-color:var(--background-color)}.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}.header{background-color:var(--background-color);border-bottom:1px solid var(--gray-200);position:sticky;top:0;z-index:100}.nav{padding:.5rem 0}.nav-container{display:flex;justify-content:space-between;align-items:center;gap:1rem}.nav-left{display:flex;align-items:center;flex-shrink:0}.logo{font-weight:700;color:var(--primary-color)}.blog-tag{margin-left:1rem;padding:.25rem .5rem;background-color:var(--gray-100);border-radius:4px;font-size:.875rem}.nav-search{flex-grow:1;max-width:300px}.search-form{position:relative;width:100%}.search-input{width:100%;padding:.5rem 2.5rem .5rem 1rem;border:1px solid var(--gray-200);border-radius:24px;font-size:.875rem;transition:all 0.2s}.search-input:focus{outline:none;border-color:var(--primary-color);box-shadow:0 0 0 2px rgb(55 64 255 / .1)}.search-button{position:absolute;right:.5rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#5f6368;cursor:pointer;padding:.25rem;display:flex;align-items:center;justify-content:center}.search-button:hover{color:var(--primary-color)}.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:.5rem}.hamburger{display:block;position:relative;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before,.hamburger::after{content:'';position:absolute;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before{top:-6px}.hamburger::after{bottom:-6px}.nav-toggle-active .hamburger{background:#fff0}.nav-toggle-active .hamburger::before{transform:rotate(45deg);top:0}.nav-toggle-active .hamburger::after{transform:rotate(-45deg);bottom:0}.nav-list{display:flex;list-style:none;gap:2rem}.nav-link{color:var(--text-color);text-decoration:none;font-size:.9rem;transition:color 0.2s}.nav-link:hover{color:var(--primary-color)}.article-header{padding:2rem 0;background-color:var(--gray-100)}.article-layout{display:grid;grid-template-columns:1fr 350px;gap:3rem;padding:1rem 0;align-items: start}h1,h2,h3,h4,h5,h6{font-family:"Crimson Text","Times New Roman",Times,serif}h1{font-size:2.5rem;line-height:1.2;margin-bottom:1rem}.meta{color:#5f6368;font-size:.875rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}.view-count{display:inline-flex;align-items:center;gap:.25rem}.view-count svg{color:#5f6368}.content{min-width:0;border-bottom:1px solid #dddddd5e;margin-top:1rem;white-space:pre-line !important;overflow-wrap:break-word;overflow-x:auto;word-break:break-word}.lead{font-size:1.25rem;color:#5f6368;margin-bottom:2rem}h2,h3,h4,h5,h6{font-size:1.75rem;margin:1rem 0 1rem}p,pre,ol,ul>li{margin-bottom:1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;font-size:1.3rem;text-align: justify;}p>code{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px}hr{margin:1rem 0 1rem 0}.code-example{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;margin:1.5rem 0;overflow-x:auto}code{font-family:'Roboto Mono',monospace;font-size:.875rem}ul{margin:.2rem 0;padding-left:1.5rem}.related-posts{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;position:sticky;top:5rem}.related-posts-title,.newpost-posts-list{font-size:1.75rem;margin:0 0 1rem}.related-posts-list{display:flex;flex-direction:column;gap:.5rem}.related-post,.newpost-post{border-bottom:1px solid #ddd;padding-bottom:10px;margin-bottom:10px}.related-post:last-child,.newpost-post:last-child{padding-bottom:0;border-bottom:none}.related-post-title,.newpost-post-title{font-size:1.2rem;margin:0 0 .1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;}.related-post-title a,.newpost-post-title a{color:var(--text-color);text-decoration:none;transition:color 0.2s}.related-post-title a:hover,.newpost-post-title a:hover{color:var(--primary-color)}.related-post time{font-size:.875rem;color:#5f6368}.footer{background-color:var(--gray-100);padding:2rem 0;margin-top:4rem;color:#5f6368;font-size:.875rem}.nav-menu>ul>li{margin-bottom:0}@media (max-width:1024px){.container{max-width:800px}.article-layout{grid-template-columns:1fr;gap:2rem}.related-posts{position:static}}@media (max-width:768px){.nav-container{flex-wrap:wrap}.nav-search{order:3;max-width:none;width:100%;margin-top:.1rem}.nav-toggle{display:block}.nav-menu{display:none;position:absolute;top:100%;left:0;right:0;background:var(--background-color);padding:1rem 0;border-bottom:1px solid var(--gray-200)}.nav-menu-active{display:block}.nav-list{flex-direction:column;gap:.1rem;padding:0 1.5rem}.nav-link{display:block;padding:.2rem 0}h1{font-size:2rem}.article-header{padding:2rem 0}.content{padding:.1rem 0}}table{width:100%;border-collapse:collapse;margin:20px 0;font-family:'Arial',sans-serif}th,td{padding:12px 15px;text-align:left;border:1px solid #ddd}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9}tr:nth-child(even) td{background-color:#f2f2f2}@media screen and (max-width:768px){table{border:0;display:block;overflow-x:auto;white-space:nowrap}th,td{padding:10px;text-align:right}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9;border-bottom:1px solid #ddd}tr:nth-child(even) td{background-color:#f2f2f2}}a{text-decoration:none;color:#540707}.katex-html{padding: .2rem;color: #000;font-weight: 700;font-size: 1.3rem;overflow-wrap: break-word;max-width: 100%;white-space: normal !important}.category{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin:1rem 0 1rem 0}.tag{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px;font-family:"Newsreader",serif}.tag>a{text-decoration:none;color:#000}img{margin:auto;display:block;max-width:100%;height:auto;margin-bottom:1rem}.katex{white-space: pre-line !important;display: inline-block;max-width: 100%;overflow-x: auto;overflow-y: hidden;scrollbar-width: thin;overflow-wrap: break-word;word-break: break-word;vertical-align: -7px}.content > p {overflow-wrap: break-word;word-break: break-word}
+    </style>
+    <style type="text/css">
+    	pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}
+		.hljs{color:#c9d1d9;background:#0d1117}.hljs-doctag,.hljs-keyword,.hljs-meta .hljs-keyword,.hljs-template-tag,.hljs-template-variable,.hljs-type,.hljs-variable.language_{color:#ff7b72}.hljs-title,.hljs-title.class_,.hljs-title.class_.inherited__,.hljs-title.function_{color:#d2a8ff}.hljs-attr,.hljs-attribute,.hljs-literal,.hljs-meta,.hljs-number,.hljs-operator,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-variable{color:#79c0ff}.hljs-meta .hljs-string,.hljs-regexp,.hljs-string{color:#a5d6ff}.hljs-built_in,.hljs-symbol{color:#ffa657}.hljs-code,.hljs-comment,.hljs-formula{color:#8b949e}.hljs-name,.hljs-quote,.hljs-selector-pseudo,.hljs-selector-tag{color:#7ee787}.hljs-subst{color:#c9d1d9}.hljs-section{color:#1f6feb;font-weight:700}.hljs-bullet{color:#f2cc60}.hljs-emphasis{color:#c9d1d9;font-style:italic}.hljs-strong{color:#c9d1d9;font-weight:700}.hljs-addition{color:#aff5b4;background-color:#033a16}.hljs-deletion{color:#ffdcd7;background-color:#67060c}
+    	pre{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;font-weight:400;word-break:break-word;word-wrap:break-word;box-sizing:inherit;border-radius:4px;overflow-x:auto;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}code{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;word-wrap:break-word;word-break:break-word;font-style:normal;line-height:20px;letter-spacing:-.003em;box-sizing:inherit;font-weight:400;font-size:75%;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}
+    </style>
+    <style type="text/css">
+    	.back-to-top{position:fixed;bottom:20px;right:20px;background-color:#a73f3f;color:#fff;padding:8px 10px;border-radius:50%;box-shadow:0 4px 6px rgb(0 0 0 / .2);font-size:10px;font-weight:700;text-decoration:none;text-align:center;transition:opacity 0.3s ease,visibility 0.3s ease;z-index:99999;opacity:1;visibility:visible}.back-to-top:hover{background-color:#0056b3}
+    </style>
+    <style type="text/css">
+        .ad-header {margin: 1rem auto 1rem;background-color: #fdfdfd;text-align: center;display: block;}.ad-header .ad-wrapper {min-height: 90px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #555;font-weight: 500;padding: 3rem;border: 1px dashed #ccc;border-radius: 6px;}@media (max-width: 768px) {.ad-header {padding: 0.75rem;}}.ad-sidebar {margin: 0 0 1rem;background-color: #fefefe;text-align: center;padding: 0px;width: 100%;max-width: 100%;display: block;}.ad-sidebar .ad-wrapper {min-height: 250px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #444;font-weight: 500;border: 1px dashed #aaa;border-radius: 6px;padding: 0rem;}@media (max-width: 1024px) {.ad-sidebar {padding: 0.75rem;}}
+    </style>
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://catatansoal.github.io/blog/fixing-duplicate-login-routes-in"
+          },
+          "headline": "Fixing Duplicate Login Routes In FastAPI: A Guide",
+          "description": "Fixing Duplicate Login Routes In FastAPI: A Guide...",
+          "image": [
+            "https://tse4.mm.bing.net/th?q=Duplicate%20Login%20Route%20Inconsistent%20Auth%20Behavior%3A%20OpenAI%20Docs%20Discussion"
+          ],
+          "author": {
+            "@type": "Person",
+            "name": "ADMIN",
+            "jobTitle": "Editor web"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "ANABEL",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://tse4.mm.bing.net/th?q=ANABEL%20WEB"
+            }
+          },
+          "datePublished": "2025-08-08T22:29:05+00:00",
+          "dateModified": "2025-08-08T22:29:05+00:00"
+        }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="container nav-container">
+                <div class="nav-left">
+                    <span class="logo">ANABEL</span>
+                    <span class="blog-tag">Article</span>
+                </div>
+                <div class="nav-search">
+                    <form class="search-form" role="search">
+                        <input 
+                            type="search" 
+                            class="search-input"
+                            placeholder="Search articles..."
+                            aria-label="Search articles"
+                        >
+                        <button type="submit" class="search-button" aria-label="Submit search">🔎</button>
+                    </form>
+                </div>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+                <div class="nav-menu">
+                    <ul class="nav-list">
+                    	<li><a href="/" class="nav-link">HOME</a></li>
+                        <li><a href="/pages/About" class="nav-link">About</a></li>
+                        <li><a href="/pages/Contact" class="nav-link">Contact</a></li>
+                        <li><a href="/pages/Disclaimer" class="nav-link">Disclaimer</a></li>
+                        <li><a href="/pages/Privacy" class="nav-link">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="main">
+        <article class="article">
+            <header class="article-header">
+                <div class="container">
+                    <h1>Fixing Duplicate Login Routes In FastAPI: A Guide</h1>
+                    <div class="meta">
+                        <time datetime="2025-08-08T22:29:05+00:00">Aug 8, 2025</time>
+                        <span class="author">by ADMIN</span>
+                        <span class="view-count">
+                            <span id="viewCount">50</span> views
+                        </span>
+                    </div>
+                </div>
+            </header>
+            <div class="ad-header container">
+                <div class="ad-wrapper">
+    Iklan Headers
+</div>
+            </div>
+            <div class="container">
+                <div class="article-layout">
+                    <div class="content">
+                        <img src="https://tse4.mm.bing.net/th?q=Duplicate%20Login%20Route%20Inconsistent%20Auth%20Behavior%3A%20OpenAI%20Docs%20Discussion" title="Duplicate Login Route Inconsistent Auth Behavior: OpenAI Docs Discussion" width="300" height="200"/><h2>Introduction</h2>
+<p>Hey guys! Today, we're diving deep into a tricky issue that's been popping up in the OpenAI Docs Discussion category, specifically highlighted by JonathanP323 under user_management. It's all about a <strong>duplicate /login route</strong> causing some seriously inconsistent authentication behavior. This kind of thing can be a real headache, leading to unexpected errors and confusing user experiences. We're going to break down what's happening, why it's a problem, and how to tackle it head-on. So, buckle up and let's get started!</p>
+<h2>The Problem: Duplicate /login Endpoints</h2>
+<p>So, what's the fuss about duplicate login routes? Well, in simple terms, it means that the application has two different places where it thinks it should handle login requests. Imagine having two doors to your house labeled &quot;Front Door,&quot; but only one actually works – confusing, right? This issue, as pointed out by JonathanP323, stems from having <strong>two /login endpoints defined</strong> within the application. When this happens, FastAPI, which is likely the framework being used, might register one endpoint over the other. This can lead to one of the /login routes being effectively unreachable, or worse, behaving in ways you didn't intend. This can be a <em>major security risk</em> if one of the routes isn't properly secured or validated. To really understand the depth of the issue, it's crucial to consider the context in which it arises. Think about a scenario where developers are working on different parts of the application, perhaps in separate modules or using different approaches to authentication. If these different parts of the application each define their own /login endpoint, you end up with the exact problem we're discussing. It's also worth noting that this issue might not be immediately obvious. Depending on the order in which the routes are registered, one endpoint might appear to work perfectly fine, while the other silently fails or behaves unexpectedly. This can make debugging incredibly difficult, as the behavior of the login functionality can seem erratic and unpredictable. And let's not forget about the user experience. Imagine a user trying to log in and repeatedly getting errors, or being redirected to a page they don't expect. This can quickly lead to frustration and a loss of trust in the application. Therefore, addressing this issue isn't just about fixing a technical glitch; it's about ensuring a smooth, secure, and reliable login process for all users.</p>
+<h2>Steps to Reproduce the Issue</h2>
+<p>To really get our hands dirty and understand what's going on, we need to reproduce the issue. Here's a step-by-step guide, laid out in a way that even your grandma could follow (no offense, Grandma!). First, you need to <strong>start the FastAPI application</strong>. This is the foundation, the engine that drives the whole thing. Once the app is up and running, you're going to try logging in using the <strong>/login/</strong> endpoint. Now, here's where the fun begins! You can do this in a couple of ways: either use Swagger UI (that handy tool for interacting with APIs) or send a request directly using something like curl. Swagger UI is great because it gives you a nice visual interface to work with, while curl lets you get down and dirty with the raw HTTP requests. Keep an eye on what happens when you try to log in. The critical observation here is that one endpoint might be unreachable. This means that when you try to access it, you might get an error message, a timeout, or just nothing at all. Alternatively, the endpoint might behave unexpectedly. This could mean that you get logged in under the wrong user account, or that you're redirected to a page that doesn't make sense, or even that the authentication process fails without giving you a clear reason why. By going through these steps, you're essentially recreating the scenario where the duplicate /login routes cause problems. This hands-on experience will give you a much better understanding of the issue and will help you in the troubleshooting process. Remember, the key is to be observant and document what you see. Write down the exact error messages you get, the URLs you're trying to access, and any other details that might be relevant. This information will be invaluable when you start to diagnose the root cause of the problem and come up with a solution.</p>
+<h2>Expected vs. Actual Behavior: A Tale of Two Endpoints</h2>
+<p>Let's talk about expectations versus reality. In a perfect world, there should be <strong>only a single /login endpoint defined</strong>. This endpoint would be the one-stop shop for all login-related activities. It should handle everything consistently, no matter how you try to log in or what your user profile looks like. This is the <em>expected behavior</em>: a streamlined, predictable, and reliable login process. But, as we've already seen, things aren't always so rosy. The <em>actual behavior</em>, in this case, is that <strong>two /login endpoints exist</strong>. This is where the trouble begins. With two endpoints vying for attention, there's a potential for conflicts in how requests are handled. Depending on the order in which these routes were registered within the application, one definition might completely override the other. This means that if you try to access the &quot;wrong&quot; endpoint, nothing might happen, or worse, something unexpected might occur. To really grasp the severity of this, think about the implications for security. If one of the endpoints isn't properly secured or validated, it could become a vulnerability that malicious actors could exploit. For example, an attacker might be able to bypass authentication altogether, or gain access to sensitive user data. From a user experience perspective, the inconsistencies introduced by duplicate endpoints can be incredibly frustrating. Imagine trying to log in and getting different results depending on how you access the application. This can lead to confusion, wasted time, and ultimately, a negative impression of the application. So, to recap: the expectation is a single, reliable /login endpoint, while the reality is two endpoints causing potential conflicts and inconsistent behavior. This discrepancy is the heart of the problem we're trying to solve. By clearly defining the expected and actual behaviors, we set the stage for a focused and effective resolution.</p>
+<h2>Diving into the Context: How Did This Happen?</h2>
+<p>So, how did we end up with this mess in the first place? Well, the <strong>issue might have crept in during a merge</strong>, those times when different pieces of code come together. Imagine two developers working on separate features, each including a /login endpoint. When these features are merged, boom, you've got duplicates. Another likely culprit is when authentication code is copied from multiple sources. Copy-pasting code can be a quick fix, but it can also bring along unwanted baggage, like duplicate routes. Without careful consolidation, these duplicates can slip through the cracks. It's also possible that the issue arose from a misunderstanding of the framework's routing mechanisms. If developers aren't crystal clear on how FastAPI handles routes, they might inadvertently define the same endpoint multiple times. To really understand the context, we need to think about the development process itself. How are features developed and merged? What kind of code review processes are in place? Are there clear guidelines for defining routes and handling authentication? These factors can all contribute to the likelihood of duplicate routes appearing in the codebase. It's also worth considering the size and complexity of the application. In larger projects with multiple developers and modules, the chances of these kinds of issues increase. This is why having robust code review processes and clear architectural guidelines are so crucial. So, to summarize, the duplicate /login endpoints could be the result of a merge gone wrong, copied code without proper consolidation, or a misunderstanding of routing mechanisms. By understanding these potential causes, we can start to put measures in place to prevent similar issues from happening in the future. This might involve implementing stricter code review processes, providing better training for developers, or refactoring the codebase to eliminate redundancy. The key is to address the root causes, not just the symptoms, so that we can build a more robust and maintainable application.</p>
+<h2>Repair Input Keywords</h2>
+<ul>
+<li>What causes duplicate <strong>/login</strong> endpoints in FastAPI applications?</li>
+<li>How to reproduce inconsistent authentication behavior due to duplicate routes?</li>
+<li>How can merging code introduce duplicate <strong>/login</strong> endpoints?</li>
+<li>What steps to take when two <strong>/login</strong> endpoints exist?</li>
+</ul>
+<h2>Conclusion: Taming the Duplicate Login Beast</h2>
+<p>Alright, guys, we've journeyed through the murky waters of duplicate /login routes and inconsistent authentication behavior. We've seen how this issue can arise, what problems it can cause, and how to reproduce it. More importantly, we've started to think about the steps we can take to fix it and prevent it from happening again. The key takeaway here is that <strong>a single, well-defined /login endpoint</strong> is the golden rule. Having duplicates is like having two captains steering the same ship – chaos is bound to ensue! By understanding the potential causes, like messy merges or copied code, we can put in place processes to keep our codebase clean and consistent. So, what's next? Well, if you're facing this issue in your own projects, it's time to roll up your sleeves and start digging. Check your routing configurations, review your code merge processes, and make sure everyone on your team is on the same page about authentication. And remember, a little bit of prevention goes a long way. By being proactive and addressing these kinds of issues early on, you can save yourself a lot of headaches (and potential security risks) down the road. So, keep those endpoints unique, your authentication consistent, and your users happy! Thanks for joining me on this deep dive, and I'll catch you in the next discussion!</p>
+
+                    </div>
+                    <aside class="related-posts">
+                        <div class="ad-sidebar container">
+                            <div class="ad-wrapper">
+    <span>Iklan Related</span>
+</div>
+                        </div>
+                        <h2 class="related-posts-title">Related Posts</h2><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/fast-food-calorie-count-analysis">Fast Food Calorie Count Analysis Is The Average Really 839 Calories</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-21T22:42:18+00:00">Jul 21, 2025</time>
+		                        <span class="view-count">
+									67 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/enhancing-llms-with-external-knowledge">Enhancing LLMs With External Knowledge Integration A Comprehensive Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-28T23:14:28+00:00">Jul 28, 2025</time>
+		                        <span class="view-count">
+									72 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/lazy-read-functions-and-batching">Lazy Read Functions And Batching Calls For Blockchain Efficiency</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-13T17:25:22+00:00">Jul 13, 2025</time>
+		                        <span class="view-count">
+									64 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/finding-the-y-intercept-of-1752728556361">Finding The Y-Intercept Of F(x) = X^2 + 3x + 5</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-17T05:02:36+00:00">Jul 17, 2025</time>
+		                        <span class="view-count">
+									46 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/optimize-github-actions-on-windows">Optimize GitHub Actions On Windows For Speed</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-06T13:59:17+00:00">Aug 6, 2025</time>
+		                        <span class="view-count">
+									44 views
+		                        </span>
+                            </div>
+                        </article>
+                    </aside>
+                    <aside class="related-posts"></aside>
+                </div>
+            </div>
+        </article>
+        <a href="#" class="back-to-top" id="backToTop" title="Back to top">
+        	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-bar-up" viewBox="0 0 16 16">
+			  <path fill-rule="evenodd" d="M3.646 11.854a.5.5 0 0 0 .708 0L8 8.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708M2.4 5.2c0 .22.18.4.4.4h10.4a.4.4 0 0 0 0-.8H2.8a.4.4 0 0 0-.4.4"/>
+			</svg>
+		</a>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 ANABEL</p>
+        </div>
+    </footer>
+    <script>
+    	(() => {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            const toggleMenu = () => {
+                navMenu.classList.toggle('nav-menu-active');
+                navToggle.classList.toggle('nav-toggle-active');
+            };
+            const backToTopHandler = (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            navToggle.addEventListener('click', toggleMenu);
+            document.getElementById('backToTop').addEventListener('click', backToTopHandler);
+            window.addEventListener('pagehide', () => {
+                navToggle.removeEventListener('click', toggleMenu);
+                document.getElementById('backToTop').removeEventListener('click', backToTopHandler);
+            });
+        })();
+		(() => {
+            window.addEventListener("DOMContentLoaded", (event) => {
+                const ellHljs = document.createElement("script");
+                ellHljs.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js");
+                ellHljs.onload = () => {
+                    hljs.highlightAll();
+                };
+                document.querySelector("body").append(ellHljs);
+                const ellFont = document.createElement("link");
+                ellFont.setAttribute("href", "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css");
+                ellFont.setAttribute("rel", "stylesheet");
+                document.querySelector("head").append(ellFont);
+                window.addEventListener('pagehide', () => {
+                    // ellHljs.remove();
+                    ellFont.remove();
+                });
+
+            });
+        })();
+    </script>
+    
+    
+    
+</body>
+</html>

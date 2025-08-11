@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>MemoryCache &amp; Thread Pool Issues: A Deep Dive</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MemoryCache & Thread Pool Issues: A Deep Dive...">
+    <link rel="canonical" href="https://catatansoal.github.io/blog/memorycache-and-thread-pool-issues">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="MemoryCache &amp; Thread Pool Issues: A Deep Dive">
+	<meta property="og:description" content="MemoryCache & Thread Pool Issues: A Deep Dive...">
+	<meta property="og:url" content="https://catatansoal.github.io/blog/memorycache-and-thread-pool-issues">
+	<meta property="og:site_name" content="ANABEL">
+	<meta property="article:published_time" content="2025-08-09T02:21:37+00:00">
+	<meta property="article:author" content="ADMIN">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+    <link rel="preload" fetchpriority="high" as="image" href="https://tse4.mm.bing.net/th?q=Unveiling%20MemoryCache%20Post-Eviction%20Callback%20Thread%20Pool%20Queueing%20Issue%20in%20.NET">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style type="text/css">
+    	:root{--primary-color:#3740ff;--text-color:#202124;--background-color:#ffffff;--gray-100:#f8f9fa;--gray-200:#e9ecef}*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;line-height:1.6;color:var(--text-color);background-color:var(--background-color)}.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}.header{background-color:var(--background-color);border-bottom:1px solid var(--gray-200);position:sticky;top:0;z-index:100}.nav{padding:.5rem 0}.nav-container{display:flex;justify-content:space-between;align-items:center;gap:1rem}.nav-left{display:flex;align-items:center;flex-shrink:0}.logo{font-weight:700;color:var(--primary-color)}.blog-tag{margin-left:1rem;padding:.25rem .5rem;background-color:var(--gray-100);border-radius:4px;font-size:.875rem}.nav-search{flex-grow:1;max-width:300px}.search-form{position:relative;width:100%}.search-input{width:100%;padding:.5rem 2.5rem .5rem 1rem;border:1px solid var(--gray-200);border-radius:24px;font-size:.875rem;transition:all 0.2s}.search-input:focus{outline:none;border-color:var(--primary-color);box-shadow:0 0 0 2px rgb(55 64 255 / .1)}.search-button{position:absolute;right:.5rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#5f6368;cursor:pointer;padding:.25rem;display:flex;align-items:center;justify-content:center}.search-button:hover{color:var(--primary-color)}.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:.5rem}.hamburger{display:block;position:relative;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before,.hamburger::after{content:'';position:absolute;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before{top:-6px}.hamburger::after{bottom:-6px}.nav-toggle-active .hamburger{background:#fff0}.nav-toggle-active .hamburger::before{transform:rotate(45deg);top:0}.nav-toggle-active .hamburger::after{transform:rotate(-45deg);bottom:0}.nav-list{display:flex;list-style:none;gap:2rem}.nav-link{color:var(--text-color);text-decoration:none;font-size:.9rem;transition:color 0.2s}.nav-link:hover{color:var(--primary-color)}.article-header{padding:2rem 0;background-color:var(--gray-100)}.article-layout{display:grid;grid-template-columns:1fr 350px;gap:3rem;padding:1rem 0;align-items: start}h1,h2,h3,h4,h5,h6{font-family:"Crimson Text","Times New Roman",Times,serif}h1{font-size:2.5rem;line-height:1.2;margin-bottom:1rem}.meta{color:#5f6368;font-size:.875rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}.view-count{display:inline-flex;align-items:center;gap:.25rem}.view-count svg{color:#5f6368}.content{min-width:0;border-bottom:1px solid #dddddd5e;margin-top:1rem;white-space:pre-line !important;overflow-wrap:break-word;overflow-x:auto;word-break:break-word}.lead{font-size:1.25rem;color:#5f6368;margin-bottom:2rem}h2,h3,h4,h5,h6{font-size:1.75rem;margin:1rem 0 1rem}p,pre,ol,ul>li{margin-bottom:1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;font-size:1.3rem;text-align: justify;}p>code{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px}hr{margin:1rem 0 1rem 0}.code-example{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;margin:1.5rem 0;overflow-x:auto}code{font-family:'Roboto Mono',monospace;font-size:.875rem}ul{margin:.2rem 0;padding-left:1.5rem}.related-posts{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;position:sticky;top:5rem}.related-posts-title,.newpost-posts-list{font-size:1.75rem;margin:0 0 1rem}.related-posts-list{display:flex;flex-direction:column;gap:.5rem}.related-post,.newpost-post{border-bottom:1px solid #ddd;padding-bottom:10px;margin-bottom:10px}.related-post:last-child,.newpost-post:last-child{padding-bottom:0;border-bottom:none}.related-post-title,.newpost-post-title{font-size:1.2rem;margin:0 0 .1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;}.related-post-title a,.newpost-post-title a{color:var(--text-color);text-decoration:none;transition:color 0.2s}.related-post-title a:hover,.newpost-post-title a:hover{color:var(--primary-color)}.related-post time{font-size:.875rem;color:#5f6368}.footer{background-color:var(--gray-100);padding:2rem 0;margin-top:4rem;color:#5f6368;font-size:.875rem}.nav-menu>ul>li{margin-bottom:0}@media (max-width:1024px){.container{max-width:800px}.article-layout{grid-template-columns:1fr;gap:2rem}.related-posts{position:static}}@media (max-width:768px){.nav-container{flex-wrap:wrap}.nav-search{order:3;max-width:none;width:100%;margin-top:.1rem}.nav-toggle{display:block}.nav-menu{display:none;position:absolute;top:100%;left:0;right:0;background:var(--background-color);padding:1rem 0;border-bottom:1px solid var(--gray-200)}.nav-menu-active{display:block}.nav-list{flex-direction:column;gap:.1rem;padding:0 1.5rem}.nav-link{display:block;padding:.2rem 0}h1{font-size:2rem}.article-header{padding:2rem 0}.content{padding:.1rem 0}}table{width:100%;border-collapse:collapse;margin:20px 0;font-family:'Arial',sans-serif}th,td{padding:12px 15px;text-align:left;border:1px solid #ddd}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9}tr:nth-child(even) td{background-color:#f2f2f2}@media screen and (max-width:768px){table{border:0;display:block;overflow-x:auto;white-space:nowrap}th,td{padding:10px;text-align:right}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9;border-bottom:1px solid #ddd}tr:nth-child(even) td{background-color:#f2f2f2}}a{text-decoration:none;color:#540707}.katex-html{padding: .2rem;color: #000;font-weight: 700;font-size: 1.3rem;overflow-wrap: break-word;max-width: 100%;white-space: normal !important}.category{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin:1rem 0 1rem 0}.tag{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px;font-family:"Newsreader",serif}.tag>a{text-decoration:none;color:#000}img{margin:auto;display:block;max-width:100%;height:auto;margin-bottom:1rem}.katex{white-space: pre-line !important;display: inline-block;max-width: 100%;overflow-x: auto;overflow-y: hidden;scrollbar-width: thin;overflow-wrap: break-word;word-break: break-word;vertical-align: -7px}.content > p {overflow-wrap: break-word;word-break: break-word}
+    </style>
+    <style type="text/css">
+    	pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}
+		.hljs{color:#c9d1d9;background:#0d1117}.hljs-doctag,.hljs-keyword,.hljs-meta .hljs-keyword,.hljs-template-tag,.hljs-template-variable,.hljs-type,.hljs-variable.language_{color:#ff7b72}.hljs-title,.hljs-title.class_,.hljs-title.class_.inherited__,.hljs-title.function_{color:#d2a8ff}.hljs-attr,.hljs-attribute,.hljs-literal,.hljs-meta,.hljs-number,.hljs-operator,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-variable{color:#79c0ff}.hljs-meta .hljs-string,.hljs-regexp,.hljs-string{color:#a5d6ff}.hljs-built_in,.hljs-symbol{color:#ffa657}.hljs-code,.hljs-comment,.hljs-formula{color:#8b949e}.hljs-name,.hljs-quote,.hljs-selector-pseudo,.hljs-selector-tag{color:#7ee787}.hljs-subst{color:#c9d1d9}.hljs-section{color:#1f6feb;font-weight:700}.hljs-bullet{color:#f2cc60}.hljs-emphasis{color:#c9d1d9;font-style:italic}.hljs-strong{color:#c9d1d9;font-weight:700}.hljs-addition{color:#aff5b4;background-color:#033a16}.hljs-deletion{color:#ffdcd7;background-color:#67060c}
+    	pre{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;font-weight:400;word-break:break-word;word-wrap:break-word;box-sizing:inherit;border-radius:4px;overflow-x:auto;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}code{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;word-wrap:break-word;word-break:break-word;font-style:normal;line-height:20px;letter-spacing:-.003em;box-sizing:inherit;font-weight:400;font-size:75%;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}
+    </style>
+    <style type="text/css">
+    	.back-to-top{position:fixed;bottom:20px;right:20px;background-color:#a73f3f;color:#fff;padding:8px 10px;border-radius:50%;box-shadow:0 4px 6px rgb(0 0 0 / .2);font-size:10px;font-weight:700;text-decoration:none;text-align:center;transition:opacity 0.3s ease,visibility 0.3s ease;z-index:99999;opacity:1;visibility:visible}.back-to-top:hover{background-color:#0056b3}
+    </style>
+    <style type="text/css">
+        .ad-header {margin: 1rem auto 1rem;background-color: #fdfdfd;text-align: center;display: block;}.ad-header .ad-wrapper {min-height: 90px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #555;font-weight: 500;padding: 3rem;border: 1px dashed #ccc;border-radius: 6px;}@media (max-width: 768px) {.ad-header {padding: 0.75rem;}}.ad-sidebar {margin: 0 0 1rem;background-color: #fefefe;text-align: center;padding: 0px;width: 100%;max-width: 100%;display: block;}.ad-sidebar .ad-wrapper {min-height: 250px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #444;font-weight: 500;border: 1px dashed #aaa;border-radius: 6px;padding: 0rem;}@media (max-width: 1024px) {.ad-sidebar {padding: 0.75rem;}}
+    </style>
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://catatansoal.github.io/blog/memorycache-and-thread-pool-issues"
+          },
+          "headline": "MemoryCache &amp; Thread Pool Issues: A Deep Dive",
+          "description": "MemoryCache & Thread Pool Issues: A Deep Dive...",
+          "image": [
+            "https://tse4.mm.bing.net/th?q=Unveiling%20MemoryCache%20Post-Eviction%20Callback%20Thread%20Pool%20Queueing%20Issue%20in%20.NET"
+          ],
+          "author": {
+            "@type": "Person",
+            "name": "ADMIN",
+            "jobTitle": "Editor web"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "ANABEL",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://tse4.mm.bing.net/th?q=ANABEL%20WEB"
+            }
+          },
+          "datePublished": "2025-08-09T02:21:37+00:00",
+          "dateModified": "2025-08-09T02:21:37+00:00"
+        }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="container nav-container">
+                <div class="nav-left">
+                    <span class="logo">ANABEL</span>
+                    <span class="blog-tag">Article</span>
+                </div>
+                <div class="nav-search">
+                    <form class="search-form" role="search">
+                        <input 
+                            type="search" 
+                            class="search-input"
+                            placeholder="Search articles..."
+                            aria-label="Search articles"
+                        >
+                        <button type="submit" class="search-button" aria-label="Submit search">🔎</button>
+                    </form>
+                </div>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+                <div class="nav-menu">
+                    <ul class="nav-list">
+                    	<li><a href="/" class="nav-link">HOME</a></li>
+                        <li><a href="/pages/About" class="nav-link">About</a></li>
+                        <li><a href="/pages/Contact" class="nav-link">Contact</a></li>
+                        <li><a href="/pages/Disclaimer" class="nav-link">Disclaimer</a></li>
+                        <li><a href="/pages/Privacy" class="nav-link">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="main">
+        <article class="article">
+            <header class="article-header">
+                <div class="container">
+                    <h1>MemoryCache &amp; Thread Pool Issues: A Deep Dive</h1>
+                    <div class="meta">
+                        <time datetime="2025-08-09T02:21:37+00:00">Aug 9, 2025</time>
+                        <span class="author">by ADMIN</span>
+                        <span class="view-count">
+                            <span id="viewCount">46</span> views
+                        </span>
+                    </div>
+                </div>
+            </header>
+            <div class="ad-header container">
+                <div class="ad-wrapper">
+    Iklan Headers
+</div>
+            </div>
+            <div class="container">
+                <div class="article-layout">
+                    <div class="content">
+                        <img src="https://tse4.mm.bing.net/th?q=Unveiling%20MemoryCache%20Post-Eviction%20Callback%20Thread%20Pool%20Queueing%20Issue%20in%20.NET" title="Unveiling MemoryCache Post-Eviction Callback Thread Pool Queueing Issue in .NET" width="300" height="200"/><p>Hey guys! Ever wondered how post-eviction callbacks in <code>Microsoft.Extensions.Caching.Memory.MemoryCache</code> can cause some serious thread pool queueing issues? Well, let's dive deep into this fascinating topic and break it down in a way that's super easy to understand. We’ll explore the nitty-gritty details, potential pitfalls, and how to keep your .NET applications running smoothly. So, buckle up, and let's get started!</p>
+<h2>Introduction to MemoryCache and Post-Eviction Callbacks</h2>
+<p>First off, let's quickly recap what <strong>MemoryCache</strong> is all about. In .NET, <code>MemoryCache</code> is your go-to solution for in-memory data caching. It's like a super-fast temporary storage space for your app, helping you avoid frequent database hits or complex computations. This can seriously boost your application's performance and responsiveness.</p>
+<p>Now, what about <strong>post-eviction callbacks</strong>? These are essentially functions that get triggered when an item is removed (evicted) from the cache. Eviction can happen for several reasons – maybe the item has expired, the cache is full, or you've manually removed it. Post-eviction callbacks are incredibly useful for tasks like logging, cleanup operations, or even refreshing the cache with new data. They allow you to react to cache changes in real-time, ensuring your application remains consistent and efficient.</p>
+<p>However, as with any powerful tool, there are potential pitfalls. Using post-eviction callbacks without understanding their implications can lead to performance bottlenecks, particularly with thread pool management. Imagine a scenario where a high volume of cache entries are being evicted simultaneously, each triggering a callback. This could result in a sudden surge of tasks being queued to the thread pool, causing delays and potentially impacting your application's overall performance. This is where things can get tricky, and it's what we'll be focusing on in this article. We'll explore a real-world scenario where this issue surfaced and discuss how to identify, analyze, and mitigate such problems. So, stick around, and let's get into the details!</p>
+<h2>The Thread Pool Queueing Issue</h2>
+<p>So, what's the fuss about thread pool queueing, you ask? Well, imagine you're running a bustling web service, and suddenly, things start slowing down. Requests are taking longer to process, and your users are getting frustrated. One potential culprit behind this slowdown could be an overloaded thread pool, especially when dealing with post-eviction callbacks in your <code>MemoryCache</code>.</p>
+<p>The core issue here is that <code>MemoryCache</code> uses the <strong>ThreadPool</strong> to execute these callbacks. When a cache entry is evicted, the callback is queued as a work item in the thread pool. Sounds simple enough, right? But what happens when you have a <strong>high turnover rate</strong> in your cache? This means a lot of items are being added and evicted frequently. If each eviction triggers a callback, you can quickly end up with a massive number of work items piling up in the thread pool queue.</p>
+<p>To really understand the impact, let's break down the symptoms observed in a real-world scenario:</p>
+<ol>
+<li><strong>Thread Pool Thread Count Doubled</strong>: A sudden increase in the number of threads in the thread pool is a clear sign that it's struggling to keep up with the workload. The thread pool tries to compensate for the backlog by creating more threads, but this can only go so far.</li>
+<li><strong>Thread Pool Queue Length Increased Significantly</strong>: This is where things get critical. A long queue length means work items are waiting longer to be processed. In the reported case, the queue length increased by a whopping 13 times! This delay directly translates to slower response times for your application.</li>
+<li><strong>Thread Pool Completed Work Item Count Showed Periodic Spikes</strong>: These spikes indicate bursts of activity where the thread pool is trying to catch up with the queued work items. However, these bursts can be sporadic and lead to inconsistent performance.</li>
+</ol>
+<p>The problem arises because the eviction callbacks are queued using <code>Task.Factory.StartNew()</code>, which, by default, queues the work item to the thread pool. If <code>ScanForExpiredItems</code> runs and finds a large number of expired entries, each triggering a callback, you get a flood of work items submitted to the thread pool. This sudden surge can overwhelm the thread pool, leading to the symptoms we discussed above. It’s like a traffic jam on a highway – too many cars trying to get through at once!</p>
+<h2>Reproducing the Issue with Code</h2>
+<p>Alright, let's get our hands dirty and see how this issue can be reproduced in code. Nothing beats seeing the problem in action, right? Here’s a snippet that effectively demonstrates the thread pool queueing problem with <code>MemoryCache</code> post-eviction callbacks:</p>
+<pre><code class="hljs">public static void Main(string[] args)
+{
+    ThreadPool.SetMinThreads(100, 100);
+
+    var cache = new MemoryCache(Options.Create(
+        new MemoryCacheOptions()
+        {
+            ExpirationScanFrequency = TimeSpan.FromSeconds(30),
+        }));
+
+    var entryOptions = new MemoryCacheEntryOptions()
+    {
+        SlidingExpiration = TimeSpan.FromSeconds(30),
+    };
+
+    int capacityEvictionCount = 0;
+    entryOptions.RegisterPostEvictionCallback((_, _, reason, _) =&gt;
+    {
+        // The contents of the eviction callback don&#39;t matter. This example shows that even
+        // a very short-running method can reproduce the issue.
+        if (reason == EvictionReason.Capacity)
+        {
+            Interlocked.Increment(ref capacityEvictionCount);
+        }
+    });
+
+    // add 600 cache entries per second.
+    int key = 0;
+    while (true)
+    {
+        const int batchSize = 120;
+        for (int i = 0; i &lt; batchSize; i++)
+        {
+            cache.Set(key, &quot;test&quot;, entryOptions);
+            key++;
+        }
+
+        Thread.Sleep(200);
+    }
+}
+</code></pre>
+<p>Let’s break down what’s happening in this code:</p>
+<ul>
+<li><strong>Setting Thread Pool Min Threads</strong>: <code>ThreadPool.SetMinThreads(100, 100)</code> configures the thread pool to maintain a minimum of 100 threads. This is a common practice in web services to handle traffic bursts efficiently. However, in this case, it exacerbates the issue by allowing the thread pool to scale up more aggressively.</li>
+<li><strong>Creating a MemoryCache</strong>: We create a <code>MemoryCache</code> instance with an <code>ExpirationScanFrequency</code> of 30 seconds. This means the cache will scan for expired items every 30 seconds.</li>
+<li><strong>Cache Entry Options</strong>: We define <code>MemoryCacheEntryOptions</code> with a <code>SlidingExpiration</code> of 30 seconds. This means an entry will expire if it's not accessed within 30 seconds.</li>
+<li><strong>Post-Eviction Callback</strong>: We register a post-eviction callback that increments a counter (<code>capacityEvictionCount</code>) when an item is evicted due to capacity constraints. The actual content of the callback is minimal, demonstrating that even short-running callbacks can trigger the issue.</li>
+<li><strong>Adding Cache Entries</strong>: The code adds 600 cache entries per second. This high rate of addition, combined with the 30-second sliding expiration, leads to significant evictions when the expiration scan runs.</li>
+<li><strong>The Loop</strong>: The <code>while (true)</code> loop continuously adds entries to the cache, simulating a high-load scenario.</li>
+</ul>
+<p>When you run this code, you’ll likely observe the thread pool metrics spiking, similar to the charts presented earlier. The key takeaway here is that the combination of a high cache turnover rate and post-eviction callbacks queued to the thread pool can create a bottleneck.</p>
+<p>The reason this happens is that the expiration scan, running every 30 seconds, removes a large number of entries (around 18,000 in this case). Each evicted entry triggers the post-eviction callback, queuing a work item to the thread pool. This sudden burst of 18,000 work items causes the thread pool to scale up, leading to the observed performance issues.</p>
+<p>So, now that we've seen the issue in action, let's discuss how to analyze it in a real-world application.</p>
+<h2>Analyzing the Performance Regression</h2>
+<p>Okay, so you suspect you're running into this thread pool queueing issue in your application. How do you go about confirming it and figuring out the extent of the problem? Let's walk through the steps to analyze the performance regression.</p>
+<p>First up, <strong>monitoring is your best friend</strong>. You need to keep a close eye on your application's performance metrics. Here are some key metrics you should be tracking:</p>
+<ul>
+<li><strong>Thread Pool Metrics</strong>: As we've seen, the thread pool is at the heart of this issue. Monitor the thread count, queue length, and completed work item count. Spikes in these metrics, especially queue length, are red flags.</li>
+<li><strong>Request Queue Length</strong>: This metric tells you how long requests are waiting in the web server queue before being processed by your application. A significant increase here indicates that your application is struggling to handle incoming requests promptly.</li>
+<li><strong>Response Times</strong>: Keep track of your application's response times. A noticeable slowdown is a clear sign that something's amiss.</li>
+<li><strong>CPU Usage</strong>: High CPU usage can sometimes be a symptom of thread pool contention. While not always directly related, it's worth monitoring.</li>
+</ul>
+<p>In the real-world scenario we discussed earlier, the team noticed a significant drop in service performance when they introduced post-eviction callbacks. The charts they shared clearly illustrate the problem:</p>
+<ul>
+<li><strong>Web Server Queue Length Chart</strong>: This chart showed a dramatic increase in the amount of time requests spent queued in the web server. This was a crucial indicator that the application was unable to process requests quickly enough.</li>
+</ul>
+<p>Once you've identified a potential issue through monitoring, the next step is to <strong>dive deeper into the logs and diagnostics</strong>. Look for patterns and correlations. For instance, do the thread pool spikes coincide with cache expiration scans? Are certain types of requests more affected than others?</p>
+<p>Tools like <strong>performance profilers</strong> can be invaluable in this stage. They allow you to trace the execution flow of your application and pinpoint the exact methods that are causing bottlenecks. You can use profilers to see how much time is being spent in the eviction callbacks and identify any unexpected delays.</p>
+<p>Another useful technique is to <strong>capture memory dumps</strong> of your application when it's experiencing performance issues. These dumps can be analyzed to understand the state of the thread pool, the number of queued work items, and the objects residing in memory. This can provide valuable insights into the root cause of the problem.</p>
+<p>By carefully analyzing these data points, you can confirm whether post-eviction callbacks are indeed the culprit behind your performance regression. Once you've confirmed the issue, the next step is to explore mitigation strategies. So, let's jump into that!</p>
+<h2>Mitigation Strategies and Best Practices</h2>
+<p>Alright, so you've identified that post-eviction callbacks are causing thread pool queueing issues in your application. Don't fret! There are several strategies you can employ to mitigate the problem and get your performance back on track. Let's explore some best practices and techniques.</p>
+<ol>
+<li>
+<p><strong>Optimize Your Callbacks</strong>: The first thing to consider is the complexity of your eviction callbacks. Are they doing too much work? Remember, these callbacks are executed on the thread pool, so any time-consuming operations will block threads and exacerbate the queueing issue. Keep your callbacks lean and mean!</p>
+<ul>
+<li><strong>Offload Heavy Operations</strong>: If your callback involves heavy processing, consider offloading it to a background task or a dedicated queue. This can prevent the thread pool from being overwhelmed. You could use tools like <code>BackgroundService</code> in <a href="http://ASP.NET">ASP.NET</a> Core or a message queue like RabbitMQ to handle these tasks asynchronously.</li>
+<li><strong>Avoid Blocking Calls</strong>: Ensure your callbacks don't make any blocking calls, such as synchronous I/O operations or waiting on locks. Blocking calls can tie up threads in the pool, reducing its capacity to handle other work.</li>
+</ul>
+</li>
+<li>
+<p><strong>Control the Callback Execution</strong>: Instead of blindly queuing every eviction callback to the thread pool, you can implement a mechanism to control the execution rate. This can prevent sudden bursts of work items.</p>
+<ul>
+<li><strong>Throttling</strong>: Introduce a throttling mechanism to limit the number of callbacks that can be executed within a given time window. This can smooth out the workload and prevent the thread pool from being overwhelmed.</li>
+<li><strong>Debouncing</strong>: If rapid evictions are triggering multiple callbacks for the same item, consider debouncing the callbacks. Debouncing ensures that the callback is executed only once after a certain period of inactivity.</li>
+</ul>
+</li>
+<li>
+<p><strong>Review Cache Configuration</strong>: Sometimes, the issue isn't with the callbacks themselves but with the cache configuration. A poorly configured cache can lead to excessive evictions, triggering a cascade of callbacks.</p>
+<ul>
+<li><strong>Expiration Policies</strong>: Carefully review your expiration policies. Are you using the right combination of absolute and sliding expirations? Setting overly aggressive expiration times can lead to frequent evictions.</li>
+<li><strong>Cache Size</strong>: Ensure your cache size is appropriate for your application's needs. A small cache can lead to frequent evictions due to capacity constraints.</li>
+<li><strong>Expiration Scan Frequency</strong>: Adjust the <code>ExpirationScanFrequency</code> of your <code>MemoryCache</code>. Scanning too frequently can put unnecessary load on the system. However, scanning too infrequently can lead to stale data in the cache.</li>
+</ul>
+</li>
+<li>
+<p><strong>Consider Alternative Caching Strategies</strong>: In some cases, the default <code>MemoryCache</code> might not be the best fit for your application's needs. Explore alternative caching strategies that offer more control over eviction and callback execution.</p>
+<ul>
+<li><strong>Distributed Cache</strong>: If you're running a distributed application, consider using a distributed cache like Redis or Memcached. These caches offer advanced features like pub/sub, which can be used to handle cache invalidation more efficiently.</li>
+<li><strong>Custom Cache Implementation</strong>: For highly specialized scenarios, you might consider implementing your own caching mechanism. This gives you complete control over eviction policies and callback execution.</li>
+</ul>
+</li>
+<li>
+<p><strong>Monitor and Tune</strong>: Finally, remember that performance tuning is an iterative process. Continuously monitor your application's performance and adjust your caching strategies as needed. Use the metrics we discussed earlier to track the effectiveness of your mitigation efforts.</p>
+</li>
+</ol>
+<p>By implementing these strategies, you can effectively mitigate thread pool queueing issues caused by post-eviction callbacks in <code>MemoryCache</code>. The key is to understand the root cause of the problem and choose the right approach for your specific scenario.</p>
+<h2>Conclusion</h2>
+<p>So, guys, we've journeyed through the intricate world of <code>MemoryCache</code> post-eviction callbacks and their potential impact on thread pool queueing. We've seen how seemingly innocent callbacks can lead to performance bottlenecks if not handled carefully. We've explored real-world scenarios, dissected the underlying issues, and armed ourselves with a toolbox of mitigation strategies.</p>
+<p>The key takeaways from our discussion are:</p>
+<ul>
+<li><strong>Post-eviction callbacks in <code>MemoryCache</code> can trigger thread pool queueing issues</strong> when there's a high cache turnover rate.</li>
+<li><strong>Monitoring thread pool metrics, request queue length, and response times is crucial</strong> for identifying performance regressions.</li>
+<li><strong>Optimizing callbacks, controlling their execution, and reviewing cache configuration</strong> are essential mitigation strategies.</li>
+<li><strong>Alternative caching strategies and continuous monitoring</strong> can further enhance your application's performance.</li>
+</ul>
+<p>Remember, caching is a powerful tool, but it's not a silver bullet. Like any tool, it needs to be wielded with care and understanding. By being mindful of the potential pitfalls of post-eviction callbacks and employing the techniques we've discussed, you can ensure your .NET applications remain performant and responsive, even under heavy load.</p>
+<p>So, keep caching, keep optimizing, and keep building amazing applications! And if you ever run into thread pool queueing issues, you know where to start looking. Happy coding, everyone!</p>
+
+                    </div>
+                    <aside class="related-posts">
+                        <div class="ad-sidebar container">
+                            <div class="ad-wrapper">
+    <span>Iklan Related</span>
+</div>
+                        </div>
+                        <h2 class="related-posts-title">Related Posts</h2><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/troubleshooting-broken-react-grid-layout">Troubleshooting Broken React Grid Layout Demo Link Solutions</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-13T18:43:39+00:00">Jul 13, 2025</time>
+		                        <span class="view-count">
+									60 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/solving-rational-equations-a-step-1754607981857">Solving Rational Equations: A Step-by-Step Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-07T23:06:21+00:00">Aug 7, 2025</time>
+		                        <span class="view-count">
+									48 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/calculate-electron-flow-15-0-1754143530187">Calculate Electron Flow: 15.0 A Current In 30 Seconds</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-02T14:05:30+00:00">Aug 2, 2025</time>
+		                        <span class="view-count">
+									53 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/dryad-founding-partners-list-updated">Dryad Founding Partners List Updated Information</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-29T23:31:40+00:00">Jul 29, 2025</time>
+		                        <span class="view-count">
+									48 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/polynomial-division-find-the-quotient">Polynomial Division: Find The Quotient Explained</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-07T01:52:57+00:00">Aug 7, 2025</time>
+		                        <span class="view-count">
+									48 views
+		                        </span>
+                            </div>
+                        </article>
+                    </aside>
+                    <aside class="related-posts"></aside>
+                </div>
+            </div>
+        </article>
+        <a href="#" class="back-to-top" id="backToTop" title="Back to top">
+        	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-bar-up" viewBox="0 0 16 16">
+			  <path fill-rule="evenodd" d="M3.646 11.854a.5.5 0 0 0 .708 0L8 8.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708M2.4 5.2c0 .22.18.4.4.4h10.4a.4.4 0 0 0 0-.8H2.8a.4.4 0 0 0-.4.4"/>
+			</svg>
+		</a>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 ANABEL</p>
+        </div>
+    </footer>
+    <script>
+    	(() => {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            const toggleMenu = () => {
+                navMenu.classList.toggle('nav-menu-active');
+                navToggle.classList.toggle('nav-toggle-active');
+            };
+            const backToTopHandler = (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            navToggle.addEventListener('click', toggleMenu);
+            document.getElementById('backToTop').addEventListener('click', backToTopHandler);
+            window.addEventListener('pagehide', () => {
+                navToggle.removeEventListener('click', toggleMenu);
+                document.getElementById('backToTop').removeEventListener('click', backToTopHandler);
+            });
+        })();
+		(() => {
+            window.addEventListener("DOMContentLoaded", (event) => {
+                const ellHljs = document.createElement("script");
+                ellHljs.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js");
+                ellHljs.onload = () => {
+                    hljs.highlightAll();
+                };
+                document.querySelector("body").append(ellHljs);
+                const ellFont = document.createElement("link");
+                ellFont.setAttribute("href", "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css");
+                ellFont.setAttribute("rel", "stylesheet");
+                document.querySelector("head").append(ellFont);
+                window.addEventListener('pagehide', () => {
+                    // ellHljs.remove();
+                    ellFont.remove();
+                });
+
+            });
+        })();
+    </script>
+    
+    
+    
+</body>
+</html>

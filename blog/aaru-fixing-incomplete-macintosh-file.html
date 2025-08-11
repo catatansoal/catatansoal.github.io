@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Aaru: Fixing Incomplete Macintosh File Extraction</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Aaru: Fixing Incomplete Macintosh File Extraction...">
+    <link rel="canonical" href="https://catatansoal.github.io/blog/aaru-fixing-incomplete-macintosh-file">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Aaru: Fixing Incomplete Macintosh File Extraction">
+	<meta property="og:description" content="Aaru: Fixing Incomplete Macintosh File Extraction...">
+	<meta property="og:url" content="https://catatansoal.github.io/blog/aaru-fixing-incomplete-macintosh-file">
+	<meta property="og:site_name" content="ANABEL">
+	<meta property="article:published_time" content="2025-08-09T13:22:05+00:00">
+	<meta property="article:author" content="ADMIN">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+    <link rel="preload" fetchpriority="high" as="image" href="https://tse4.mm.bing.net/th?q=Apple%20Macintosh%20Filesystem%3A%20Can't%20Extract%20All%20Files">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style type="text/css">
+    	:root{--primary-color:#3740ff;--text-color:#202124;--background-color:#ffffff;--gray-100:#f8f9fa;--gray-200:#e9ecef}*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;line-height:1.6;color:var(--text-color);background-color:var(--background-color)}.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}.header{background-color:var(--background-color);border-bottom:1px solid var(--gray-200);position:sticky;top:0;z-index:100}.nav{padding:.5rem 0}.nav-container{display:flex;justify-content:space-between;align-items:center;gap:1rem}.nav-left{display:flex;align-items:center;flex-shrink:0}.logo{font-weight:700;color:var(--primary-color)}.blog-tag{margin-left:1rem;padding:.25rem .5rem;background-color:var(--gray-100);border-radius:4px;font-size:.875rem}.nav-search{flex-grow:1;max-width:300px}.search-form{position:relative;width:100%}.search-input{width:100%;padding:.5rem 2.5rem .5rem 1rem;border:1px solid var(--gray-200);border-radius:24px;font-size:.875rem;transition:all 0.2s}.search-input:focus{outline:none;border-color:var(--primary-color);box-shadow:0 0 0 2px rgb(55 64 255 / .1)}.search-button{position:absolute;right:.5rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#5f6368;cursor:pointer;padding:.25rem;display:flex;align-items:center;justify-content:center}.search-button:hover{color:var(--primary-color)}.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:.5rem}.hamburger{display:block;position:relative;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before,.hamburger::after{content:'';position:absolute;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before{top:-6px}.hamburger::after{bottom:-6px}.nav-toggle-active .hamburger{background:#fff0}.nav-toggle-active .hamburger::before{transform:rotate(45deg);top:0}.nav-toggle-active .hamburger::after{transform:rotate(-45deg);bottom:0}.nav-list{display:flex;list-style:none;gap:2rem}.nav-link{color:var(--text-color);text-decoration:none;font-size:.9rem;transition:color 0.2s}.nav-link:hover{color:var(--primary-color)}.article-header{padding:2rem 0;background-color:var(--gray-100)}.article-layout{display:grid;grid-template-columns:1fr 350px;gap:3rem;padding:1rem 0;align-items: start}h1,h2,h3,h4,h5,h6{font-family:"Crimson Text","Times New Roman",Times,serif}h1{font-size:2.5rem;line-height:1.2;margin-bottom:1rem}.meta{color:#5f6368;font-size:.875rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}.view-count{display:inline-flex;align-items:center;gap:.25rem}.view-count svg{color:#5f6368}.content{min-width:0;border-bottom:1px solid #dddddd5e;margin-top:1rem;white-space:pre-line !important;overflow-wrap:break-word;overflow-x:auto;word-break:break-word}.lead{font-size:1.25rem;color:#5f6368;margin-bottom:2rem}h2,h3,h4,h5,h6{font-size:1.75rem;margin:1rem 0 1rem}p,pre,ol,ul>li{margin-bottom:1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;font-size:1.3rem;text-align: justify;}p>code{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px}hr{margin:1rem 0 1rem 0}.code-example{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;margin:1.5rem 0;overflow-x:auto}code{font-family:'Roboto Mono',monospace;font-size:.875rem}ul{margin:.2rem 0;padding-left:1.5rem}.related-posts{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;position:sticky;top:5rem}.related-posts-title,.newpost-posts-list{font-size:1.75rem;margin:0 0 1rem}.related-posts-list{display:flex;flex-direction:column;gap:.5rem}.related-post,.newpost-post{border-bottom:1px solid #ddd;padding-bottom:10px;margin-bottom:10px}.related-post:last-child,.newpost-post:last-child{padding-bottom:0;border-bottom:none}.related-post-title,.newpost-post-title{font-size:1.2rem;margin:0 0 .1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;}.related-post-title a,.newpost-post-title a{color:var(--text-color);text-decoration:none;transition:color 0.2s}.related-post-title a:hover,.newpost-post-title a:hover{color:var(--primary-color)}.related-post time{font-size:.875rem;color:#5f6368}.footer{background-color:var(--gray-100);padding:2rem 0;margin-top:4rem;color:#5f6368;font-size:.875rem}.nav-menu>ul>li{margin-bottom:0}@media (max-width:1024px){.container{max-width:800px}.article-layout{grid-template-columns:1fr;gap:2rem}.related-posts{position:static}}@media (max-width:768px){.nav-container{flex-wrap:wrap}.nav-search{order:3;max-width:none;width:100%;margin-top:.1rem}.nav-toggle{display:block}.nav-menu{display:none;position:absolute;top:100%;left:0;right:0;background:var(--background-color);padding:1rem 0;border-bottom:1px solid var(--gray-200)}.nav-menu-active{display:block}.nav-list{flex-direction:column;gap:.1rem;padding:0 1.5rem}.nav-link{display:block;padding:.2rem 0}h1{font-size:2rem}.article-header{padding:2rem 0}.content{padding:.1rem 0}}table{width:100%;border-collapse:collapse;margin:20px 0;font-family:'Arial',sans-serif}th,td{padding:12px 15px;text-align:left;border:1px solid #ddd}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9}tr:nth-child(even) td{background-color:#f2f2f2}@media screen and (max-width:768px){table{border:0;display:block;overflow-x:auto;white-space:nowrap}th,td{padding:10px;text-align:right}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9;border-bottom:1px solid #ddd}tr:nth-child(even) td{background-color:#f2f2f2}}a{text-decoration:none;color:#540707}.katex-html{padding: .2rem;color: #000;font-weight: 700;font-size: 1.3rem;overflow-wrap: break-word;max-width: 100%;white-space: normal !important}.category{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin:1rem 0 1rem 0}.tag{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px;font-family:"Newsreader",serif}.tag>a{text-decoration:none;color:#000}img{margin:auto;display:block;max-width:100%;height:auto;margin-bottom:1rem}.katex{white-space: pre-line !important;display: inline-block;max-width: 100%;overflow-x: auto;overflow-y: hidden;scrollbar-width: thin;overflow-wrap: break-word;word-break: break-word;vertical-align: -7px}.content > p {overflow-wrap: break-word;word-break: break-word}
+    </style>
+    <style type="text/css">
+    	pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}
+		.hljs{color:#c9d1d9;background:#0d1117}.hljs-doctag,.hljs-keyword,.hljs-meta .hljs-keyword,.hljs-template-tag,.hljs-template-variable,.hljs-type,.hljs-variable.language_{color:#ff7b72}.hljs-title,.hljs-title.class_,.hljs-title.class_.inherited__,.hljs-title.function_{color:#d2a8ff}.hljs-attr,.hljs-attribute,.hljs-literal,.hljs-meta,.hljs-number,.hljs-operator,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-variable{color:#79c0ff}.hljs-meta .hljs-string,.hljs-regexp,.hljs-string{color:#a5d6ff}.hljs-built_in,.hljs-symbol{color:#ffa657}.hljs-code,.hljs-comment,.hljs-formula{color:#8b949e}.hljs-name,.hljs-quote,.hljs-selector-pseudo,.hljs-selector-tag{color:#7ee787}.hljs-subst{color:#c9d1d9}.hljs-section{color:#1f6feb;font-weight:700}.hljs-bullet{color:#f2cc60}.hljs-emphasis{color:#c9d1d9;font-style:italic}.hljs-strong{color:#c9d1d9;font-weight:700}.hljs-addition{color:#aff5b4;background-color:#033a16}.hljs-deletion{color:#ffdcd7;background-color:#67060c}
+    	pre{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;font-weight:400;word-break:break-word;word-wrap:break-word;box-sizing:inherit;border-radius:4px;overflow-x:auto;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}code{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;word-wrap:break-word;word-break:break-word;font-style:normal;line-height:20px;letter-spacing:-.003em;box-sizing:inherit;font-weight:400;font-size:75%;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}
+    </style>
+    <style type="text/css">
+    	.back-to-top{position:fixed;bottom:20px;right:20px;background-color:#a73f3f;color:#fff;padding:8px 10px;border-radius:50%;box-shadow:0 4px 6px rgb(0 0 0 / .2);font-size:10px;font-weight:700;text-decoration:none;text-align:center;transition:opacity 0.3s ease,visibility 0.3s ease;z-index:99999;opacity:1;visibility:visible}.back-to-top:hover{background-color:#0056b3}
+    </style>
+    <style type="text/css">
+        .ad-header {margin: 1rem auto 1rem;background-color: #fdfdfd;text-align: center;display: block;}.ad-header .ad-wrapper {min-height: 90px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #555;font-weight: 500;padding: 3rem;border: 1px dashed #ccc;border-radius: 6px;}@media (max-width: 768px) {.ad-header {padding: 0.75rem;}}.ad-sidebar {margin: 0 0 1rem;background-color: #fefefe;text-align: center;padding: 0px;width: 100%;max-width: 100%;display: block;}.ad-sidebar .ad-wrapper {min-height: 250px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #444;font-weight: 500;border: 1px dashed #aaa;border-radius: 6px;padding: 0rem;}@media (max-width: 1024px) {.ad-sidebar {padding: 0.75rem;}}
+    </style>
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://catatansoal.github.io/blog/aaru-fixing-incomplete-macintosh-file"
+          },
+          "headline": "Aaru: Fixing Incomplete Macintosh File Extraction",
+          "description": "Aaru: Fixing Incomplete Macintosh File Extraction...",
+          "image": [
+            "https://tse4.mm.bing.net/th?q=Apple%20Macintosh%20Filesystem%3A%20Can't%20Extract%20All%20Files"
+          ],
+          "author": {
+            "@type": "Person",
+            "name": "ADMIN",
+            "jobTitle": "Editor web"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "ANABEL",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://tse4.mm.bing.net/th?q=ANABEL%20WEB"
+            }
+          },
+          "datePublished": "2025-08-09T13:22:05+00:00",
+          "dateModified": "2025-08-09T13:22:05+00:00"
+        }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="container nav-container">
+                <div class="nav-left">
+                    <span class="logo">ANABEL</span>
+                    <span class="blog-tag">Article</span>
+                </div>
+                <div class="nav-search">
+                    <form class="search-form" role="search">
+                        <input 
+                            type="search" 
+                            class="search-input"
+                            placeholder="Search articles..."
+                            aria-label="Search articles"
+                        >
+                        <button type="submit" class="search-button" aria-label="Submit search">🔎</button>
+                    </form>
+                </div>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+                <div class="nav-menu">
+                    <ul class="nav-list">
+                    	<li><a href="/" class="nav-link">HOME</a></li>
+                        <li><a href="/pages/About" class="nav-link">About</a></li>
+                        <li><a href="/pages/Contact" class="nav-link">Contact</a></li>
+                        <li><a href="/pages/Disclaimer" class="nav-link">Disclaimer</a></li>
+                        <li><a href="/pages/Privacy" class="nav-link">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="main">
+        <article class="article">
+            <header class="article-header">
+                <div class="container">
+                    <h1>Aaru: Fixing Incomplete Macintosh File Extraction</h1>
+                    <div class="meta">
+                        <time datetime="2025-08-09T13:22:05+00:00">Aug 9, 2025</time>
+                        <span class="author">by ADMIN</span>
+                        <span class="view-count">
+                            <span id="viewCount">50</span> views
+                        </span>
+                    </div>
+                </div>
+            </header>
+            <div class="ad-header container">
+                <div class="ad-wrapper">
+    Iklan Headers
+</div>
+            </div>
+            <div class="container">
+                <div class="article-layout">
+                    <div class="content">
+                        <img src="https://tse4.mm.bing.net/th?q=Apple%20Macintosh%20Filesystem%3A%20Can't%20Extract%20All%20Files" title="Apple Macintosh Filesystem: Can&#39;t Extract All Files" width="300" height="200"/><h2>Introduction</h2>
+<p>Hey guys! Today, we're diving into a frustrating issue encountered while using <strong>aaru</strong> to extract files from an Apple Macintosh filesystem image. Specifically, we're looking at a problem where not all files are being extracted or listed as expected. This can be a major headache when you're trying to archive or access old data, so let's break down the problem, explore the details, and see what might be going on.</p>
+<p>This article will cover everything you need to know about this specific issue with <strong>Apple Macintosh File Systems</strong>, including the versions and commands used, the expected behavior, and the actual results. We'll go through the debug output step by step to understand what might be causing this problem. Whether you're a seasoned archivist or just getting started with <strong>disk imaging</strong>, this guide will help you understand the intricacies of <strong>Macintosh filesystems</strong> and how to troubleshoot extraction issues.</p>
+<h2>Discussion Category: Aaru-dps, Aaru</h2>
+<p>This issue falls under the categories of <strong>Aaru Disk Preservation System (DPS)</strong> and general <strong>Aaru</strong> usage. These categories are crucial because they help us understand the context of the problem. <strong>Aaru DPS</strong> is designed for preserving digital media, and any issues related to file extraction directly impact its effectiveness. Discussing this under the <strong>Aaru</strong> category ensures that the broader community can contribute insights, as the problem might stem from the core functionality of the tool itself. Knowing these categories helps developers and users alike to focus their efforts and find solutions more efficiently.</p>
+<h2>Additional Information</h2>
+<h3>Version</h3>
+<p>The specific version of <strong>aaru</strong> being used is <strong>6.0.0-alpha6</strong>. This is an important detail because alpha versions are pre-release software and often contain bugs or incomplete features. Identifying the version helps determine if the issue is a known bug that has been fixed in a later release or if it’s a new problem that needs investigation. If you're encountering issues with alpha software, it’s always a good first step to check if an update is available.</p>
+<h3>Commit Hash</h3>
+<p>The commit hash is <strong>89ae5e8</strong>. This is a unique identifier for a specific version of the software's source code. Providing the commit hash is incredibly useful for developers because it allows them to pinpoint the exact state of the software when the issue occurred. This level of detail is essential for debugging and resolving complex problems. If you're reporting a bug, including the commit hash can significantly speed up the troubleshooting process.</p>
+<h3>Tested Debug Version?</h3>
+<p>The user has confirmed that they <strong>tested the debug version</strong>. This is a critical piece of information. Debug versions include extra logging and diagnostic information that can be invaluable for identifying the root cause of a problem. When you run a command with debug output enabled, <strong>aaru</strong> provides a detailed trace of its operations, making it easier to see where things might be going wrong. This practice is highly recommended when troubleshooting issues with any software.</p>
+<h3>Operating Systems Used</h3>
+<p>The issue was encountered on <strong>Windows</strong>. Knowing the operating system is important because software can behave differently across platforms due to variations in file system handling, memory management, and other system-level functions. If a bug is specific to Windows, developers can focus their testing and debugging efforts on that platform. This detail helps narrow down the possible causes of the issue.</p>
+<h3>Architectural Bit Size</h3>
+<p>The user is using a <strong>64-bit</strong> operating system. The architecture (32-bit or 64-bit) can affect how software interacts with the system's memory and resources. Bugs can sometimes be specific to one architecture, so this information is valuable for developers. Knowing that the issue occurred on a 64-bit system helps to ensure that any fixes are tested and validated on the same architecture.</p>
+<h3>Processor</h3>
+<p>The processor is <strong>Intel or AMD</strong>. Specifying the processor type can be relevant in some cases, although it's less critical than the operating system and architecture. Some software issues are specific to certain processor families due to differences in instruction sets or hardware features. While this detail might not always be the primary cause, it’s good to include as much information as possible when reporting a bug.</p>
+<h3>Image Format</h3>
+<p>The image format is a <strong>Bootable Mac HFS Volume/Disk image</strong>. This is crucial information because the <strong>Apple Macintosh File System (HFS)</strong> has specific structures and metadata that <strong>aaru</strong> needs to interpret correctly. Understanding the image format helps to identify if the problem is related to how <strong>aaru</strong> handles <strong>HFS images</strong> specifically. This detail narrows the scope of the investigation and helps to focus on the relevant parts of the code.</p>
+<h3>Application That Created the Image</h3>
+<p>The application that created the image is unknown. While this information would be helpful, its absence doesn't necessarily prevent troubleshooting. Knowing the application could provide clues if the image creation process itself introduced errors or inconsistencies. However, <strong>aaru</strong> should ideally be able to handle images created by various applications, so the focus remains on <strong>aaru's ability to process the HFS image</strong>.</p>
+<h3>What Were You Doing When It Failed?</h3>
+<p>The user was <strong>listing the filesystem contents</strong> and <strong>extracting the filesystem contents</strong> when the failure occurred. This clarifies the specific actions that triggered the issue. Knowing that both listing and extraction failed suggests a problem with how <strong>aaru</strong> is reading or interpreting the filesystem structure, rather than an issue specific to one operation. This information helps to direct the investigation towards the core filesystem handling logic.</p>
+<h3>Destination Image Format</h3>
+<p>No response was provided for the destination image format. This is not critical in this case because the issue occurs during listing and extraction, which are source-related operations. The destination format would be relevant if the problem occurred during conversion, but since the focus is on reading the <strong>HFS image</strong>, this detail is less important.</p>
+<h3>Filesystem</h3>
+<p>The filesystem is <strong>Apple Macintosh File System</strong>. As mentioned earlier, this is a key piece of information. The <strong>Macintosh File System</strong> has unique characteristics, and issues can arise if <strong>aaru</strong> doesn't correctly handle its specific structures. This reiterates the importance of focusing on the <strong>HFS-related code</strong> within <strong>aaru</strong> when troubleshooting.</p>
+<h3>Description</h3>
+<p>The core issue is that <strong>only 4 files are being extracted/listed</strong>: <code>Desktop</code> and <code>Finder</code>, both with 0 bytes in size, and <code>SCORES</code> and <code>System</code>, which are very small. This is a clear indication that <strong>aaru</strong> is not correctly reading the entire filesystem. The fact that some files are listed but others are missing suggests a potential problem with directory traversal or file metadata interpretation within the <strong>HFS filesystem</strong>. Understanding this limited extraction is key to diagnosing the root cause.</p>
+<h3>Exact Command Line Used</h3>
+<p>The command line used was <code>aaru filesystem list .\Frogger.dsk -d</code>. This is essential for replicating the issue. The <code>-d</code> flag indicates that debug output was enabled, which is invaluable for troubleshooting. The command shows that the user was attempting to list the contents of the <code>Frogger.dsk</code> image. Replicating the issue with the same command line helps to confirm the bug and test potential fixes.</p>
+<h3>Expected Behavior</h3>
+<p>The <strong>expected behavior</strong> was for the entire content to be extracted/listed. This is the standard expectation when using a tool like <strong>aaru</strong>: all files and directories within the image should be accessible. The deviation from this expected behavior is what defines the bug and needs to be addressed.</p>
+<h3>Actual Behavior</h3>
+<p>The <strong>actual behavior</strong> was that some files were missing. This confirms the core problem. The missing files indicate that <strong>aaru</strong> is not correctly parsing the <strong>HFS filesystem</strong> structure, leading to incomplete extraction and listing. This discrepancy between expected and actual behavior is the focus of the troubleshooting effort.</p>
+<h3>Output of Command Execution with Debug Output Enabled</h3>
+<p>Now, let's analyze the debug output. This is where we can really start to dig into what's happening under the hood.</p>
+<pre><code class="hljs">aaru 6.0.0~alpha9+e10c237e
+Copyright ╕ 2011-2023 Natalia Portillo
+
+Identifying file filter...: 0%
+Identifying image format...: 0%
+Image format identified by Raw Disk Image.
+Opening image file...: 0%
+Enumerating partitions...: 0%
+1 partitions found.
+
+Partition 1:
+Identifying filesystems on partition...: 0%
+Identified by Apple Macintosh File System.
+Mounting filesystem...: 0%
+Root directory
+Reading directory...: 0%
+Retrieving file information...: 0%
+                              0         6 144  $
+                              0           590  $Bitmap
+                              0           512  $Boot
+                              0           512  $MDB
+03.04.2010     15:49:49       1             0  Desktop
+                com.apple.FinderInfo    16
+                com.apple.ResourceFork  1 807
+23.03.1984     19:16:30       2             0  Finder
+                com.apple.FinderInfo    16
+                com.apple.ResourceFork  68 649
+26.03.2010     06:08:02       4           180  SCORES
+                com.apple.FinderInfo    16
+02.06.1986     11:20:53       3         1 024  System
+                com.apple.FinderInfo    16
+                com.apple.ResourceFork  98 128
+</code></pre>
+<p>This initial part of the output shows that <strong>aaru</strong> correctly identifies the image format as a <strong>Raw Disk Image</strong> and the filesystem as <strong>Apple Macintosh File System</strong>. It also lists the four files that were successfully read: <code>Desktop</code>, <code>Finder</code>, <code>SCORES</code>, and <code>System</code>. This confirms that <strong>aaru</strong> can at least partially read the <strong>HFS filesystem</strong>. The issue is why it stops there and doesn't list the remaining files.</p>
+<p>The next section of the debug output shows the parsed command line options and the attempts to identify the image format using various plugins:</p>
+<pre><code class="hljs">DEBUG (Ls command): --debug=True
+DEBUG (Ls command): --encoding=
+DEBUG (Ls command): --input=.\Frogger.dsk
+DEBUG (Ls command): --options=
+DEBUG (Ls command): --verbose=False
+DEBUG (Ls command): Parsed options:
+DEBUG (Format detection): Trying plugin Aaru Format
+DEBUG (Format detection): Trying plugin ACT Apricot Disk Image
+DEBUG (Format detection): Trying plugin Alcohol 120% Media Descriptor Structure
+DEBUG (Format detection): Trying plugin Anex86 Disk Image
+DEBUG (Anex86 plugin): fdihdr.unknown = 6310732
+DEBUG (Anex86 plugin): fdihdr.hddtype = 302024192
+DEBUG (Anex86 plugin): fdihdr.hdrSize = 1392902144
+DEBUG (Anex86 plugin): fdihdr.dskSize = 1702130553
+DEBUG (Anex86 plugin): fdihdr.bps = 538976365
+DEBUG (Anex86 plugin): fdihdr.spt = 538976288
+DEBUG (Anex86 plugin): fdihdr.heads = 1174806560
+DEBUG (Anex86 plugin): fdihdr.cylinders = 1701080681
+DEBUG (Format detection): Trying plugin Apple 2IMG
+DEBUG (Format detection): Trying plugin Apple Disk Archival/Retrieval Tool
+DEBUG (Format detection): Trying plugin Apple DiskCopy 4.2
+DEBUG (Format detection): Trying plugin Apple New Disk Image Format
+DEBUG (Format detection): Trying plugin Apple NIB
+DEBUG (Format detection): Trying plugin Apple Universal Disk Image Format
+DEBUG (Format detection): Trying plugin Basic Lisa Utility
+DEBUG (Format detection): Trying plugin BlindWrite 4
+DEBUG (Format detection): Trying plugin BlindWrite 5
+DEBUG (Format detection): Trying plugin CDRDAO tocfile
+DEBUG (Format detection): Trying plugin CDRWin cuesheet
+DEBUG (Format detection): Trying plugin CisCopy Disk Image (DC-File)
+DEBUG (Format detection): Trying plugin CloneCD
+DEBUG (Format detection): Trying plugin CopyTape
+DEBUG (Format detection): Trying plugin CPCEMU Disk-File and Extended CPC
+Disk-File
+DEBUG (Format detection): Trying plugin d2f disk image
+DEBUG (Format detection): Trying plugin D88 Disk Image
+DEBUG (D88 plugin): d88hdr.name = &quot;LK`&quot;
+DEBUG (D88 plugin): d88hdr.reserved is empty? = False
+DEBUG (D88 plugin): d88hdr.write_protect = 0x06
+DEBUG (D88 plugin): d88hdr.disk_type = 70 (70)
+DEBUG (D88 plugin): d88hdr.disk_size = 1701080681
+DEBUG (Format detection): Trying plugin Digital Research DiskCopy
+DEBUG (Format detection): Trying plugin DIM Disk Image
+DEBUG (Format detection): Trying plugin DiscFerret
+DEBUG (Format detection): Trying plugin DiscJuggler
+DEBUG (DiscJuggler plugin): dscLen = 0
+DEBUG (Format detection): Trying plugin DiskDupe DDI Disk Image
+DEBUG (Format detection): Trying plugin Dreamcast GDI image
+DEBUG (Format detection): Trying plugin Dunfield&#39;s IMD
+DEBUG (Format detection): Trying plugin HD-Copy disk image
+DEBUG (Format detection): Trying plugin IBM SaveDskF
+DEBUG (Format detection): Trying plugin KryoFlux STREAM
+DEBUG (Format detection): Trying plugin MAME Compressed Hunks of Data
+DEBUG (Format detection): Trying plugin MAXI Disk image
+DEBUG (MAXI Disk plugin): tmp_header.unknown = 76
+DEBUG (MAXI Disk plugin): tmp_header.diskType = 75
+DEBUG (MAXI Disk plugin): tmp_header.heads = 96
+DEBUG (MAXI Disk plugin): tmp_header.cylinders = 0
+DEBUG (MAXI Disk plugin): tmp_header.bytesPerSector = 0
+DEBUG (MAXI Disk plugin): tmp_header.sectorsPerTrack = 134
+DEBUG (MAXI Disk plugin): tmp_header.unknown2 = 0
+DEBUG (MAXI Disk plugin): tmp_header.unknown3 = 18
+DEBUG (Format detection): Trying plugin Microsoft VHDX
+DEBUG (Format detection): Trying plugin Nero Burning ROM image
+DEBUG (Nero plugin): imageStream.Length = 409600
+DEBUG (Nero plugin): footerV1.ChunkID = 0x00000000
+DEBUG (Nero plugin): footerV1.FirstChunkOffset = 0
+DEBUG (Nero plugin): footerV2.ChunkID = 0x00000000
+DEBUG (Nero plugin): footerV2.FirstChunkOffset = 0
+DEBUG (Format detection): Trying plugin Parallels disk image
+DEBUG (Format detection): Trying plugin PartClone disk image
+DEBUG (Format detection): Trying plugin Partimage disk image
+DEBUG (Format detection): Trying plugin QEMU Copy-On-Write disk image
+DEBUG (Format detection): Trying plugin QEMU Copy-On-Write disk image v2
+DEBUG (QCOW plugin): qHdr.magic = 0x4C4B6000
+DEBUG (QCOW plugin): qHdr.version = 8781842
+DEBUG (Format detection): Trying plugin QEMU Enhanced Disk image
+DEBUG (Format detection): Trying plugin Ray Arachelian&#39;s Disk IMage
+DEBUG (Ray Arachelian&#39;s Disk IMage plugin): header.signature = LK`
+DEBUG (Ray Arachelian&#39;s Disk IMage plugin): header.diskType = 85
+DEBUG (Ray Arachelian&#39;s Disk IMage plugin): header.heads = 99
+DEBUG (Ray Arachelian&#39;s Disk IMage plugin): header.cylinders = 112
+DEBUG (Ray Arachelian&#39;s Disk IMage plugin): header.sectorsPerTrack = 83
+DEBUG (Ray Arachelian&#39;s Disk IMage plugin): header.signature matches? = False
+DEBUG (Format detection): Trying plugin RS-IDE Hard Disk Image
+DEBUG (Format detection): Trying plugin Spectrum Floppy Disk Image
+DEBUG (Format detection): Trying plugin SuperCardPro
+DEBUG (Format detection): Trying plugin Sydex CopyQM
+DEBUG (Format detection): Trying plugin Sydex TeleDisk
+DEBUG (Format detection): Trying plugin T98 Hard Disk Image
+DEBUG (Format detection): Trying plugin T98-Next NHD r0 Disk Image
+DEBUG (Format detection): Trying plugin Virtual98 Disk Image
+DEBUG (Format detection): Trying plugin VirtualBox Disk Image
+DEBUG (Format detection): Trying plugin VirtualPC
+DEBUG (Format detection): Trying plugin VMware disk image
+DEBUG (Format detection): Trying plugin Atari Lynx
+DEBUG (Format detection): Trying plugin iNES
+DEBUG (Format detection): Trying plugin Nintendo 64
+DEBUG (Format detection): Trying plugin Nintendo Game Boy
+DEBUG (Format detection): Trying plugin Nintendo Game Boy Advance
+DEBUG (Format detection): Trying plugin Sega Game Gear / Master System
+DEBUG (Format detection): Trying plugin Sega Mega Drive / 32X / Pico
+DEBUG (Format detection): Trying plugin Super Nintendo
+DEBUG (Format detection): Trying plugin Raw Disk Image
+</code></pre>
+<p>This section shows <strong>aaru</strong> trying various plugins to identify the disk image format. It's a long list, and it eventually settles on <strong>Raw Disk Image</strong>, which is a generic format. This is fine, but it means <strong>aaru</strong> is relying on subsequent steps to identify the filesystem. The key takeaway here is that the format detection process itself doesn't seem to be the problem, as it correctly falls back to Raw Disk Image.</p>
+<pre><code class="hljs">DEBUG (Ls command): Correctly opened image file.
+DEBUG (Ls command): Image without headers is 409600 bytes.
+DEBUG (Ls command): Image has 800 sectors.
+DEBUG (Ls command): Image identifies disk type as AppleSonySS.
+</code></pre>
+<p>This part confirms that <strong>aaru</strong> successfully opened the image file and determined it to be an <strong>AppleSonySS</strong> disk type. This is more specific and helps in understanding the disk's characteristics. The size (409600 bytes) and sector count (800) provide further context. This information is used to correctly interpret the disk's structure.</p>
+<p>Next, <strong>aaru</strong> attempts to identify partition tables and filesystems:</p>
+<pre><code class="hljs">DEBUG (Amiga RDB plugin): Possible magic at block 0 is 0x4C4B6000
+DEBUG (Amiga RDB plugin): Possible magic at block 1 is 0x0116203C
+DEBUG (Amiga RDB plugin): Possible magic at block 2 is 0xD2D7C7DD
+DEBUG (Amiga RDB plugin): Possible magic at block 3 is 0x00000000
+DEBUG (Amiga RDB plugin): Possible magic at block 4 is 0x8000464E
+DEBUG (Amiga RDB plugin): Possible magic at block 5 is 0x00000000
+DEBUG (Amiga RDB plugin): Possible magic at block 6 is 0x00000000
+DEBUG (Amiga RDB plugin): Possible magic at block 7 is 0x00000000
+DEBUG (Amiga RDB plugin): Possible magic at block 8 is 0x00000000
+DEBUG (Amiga RDB plugin): Possible magic at block 9 is 0x00000000
+DEBUG (Amiga RDB plugin): Possible magic at block 10 is 0x00000000
+DEBUG (Amiga RDB plugin): Possible magic at block 11 is 0x00000000
+DEBUG (Amiga RDB plugin): Possible magic at block 12 is 0x00000000
+DEBUG (Amiga RDB plugin): Possible magic at block 13 is 0x00000000
+DEBUG (Amiga RDB plugin): Possible magic at block 14 is 0x00000000
+DEBUG (Amiga RDB plugin): Possible magic at block 15 is 0x00000000
+DEBUG (AppleMap Plugin): ddm.sbSig = 0x4C4B
+DEBUG (AppleMap Plugin): ddm.sbBlockSize = 24576
+DEBUG (AppleMap Plugin): ddm.sbBlocks = 8781842
+DEBUG (AppleMap Plugin): ddm.sbDevType = 0
+DEBUG (AppleMap Plugin): ddm.sbDevId = 1619
+DEBUG (AppleMap Plugin): ddm.sbData = 0x79737465
+DEBUG (AppleMap Plugin): ddm.sbDrvrCount = 27936
+DEBUG (Atari partition plugin): Boot code SHA1:
+f1122990c948b6786abfa7baba9c2b1afce78858
+DEBUG (Atari partition plugin): table.icdEntries[[0]].flag = 0x54
+DEBUG (Atari partition plugin): table.icdEntries[[0]].type = 0x403200
+DEBUG (Atari partition plugin): table.icdEntries[[0]].start = 2803769800
+DEBUG (Atari partition plugin): table.icdEntries[[0]].length = 55455937
+DEBUG (Atari partition plugin): table.icdEntries[[1]].flag = 0x31
+DEBUG (Atari partition plugin): table.icdEntries[[1]].type = 0xFC0002
+DEBUG (Atari partition plugin): table.icdEntries[[1]].start = 55353084
+DEBUG (Atari partition plugin): table.icdEntries[[1]].length = 3285071
+DEBUG (Atari partition plugin): table.icdEntries[[2]].flag = 0x31
+DEBUG (Atari partition plugin): table.icdEntries[[2]].type = 0x780210
+DEBUG (Atari partition plugin): table.icdEntries[[2]].start = 1482767
+DEBUG (Atari partition plugin): table.icdEntries[[2]].length = 1711276466
+DEBUG (Atari partition plugin): table.icdEntries[[3]].flag = 0xDE
+DEBUG (Atari partition plugin): table.icdEntries[[3]].type = 0xFC0032
+DEBUG (Atari partition plugin): table.icdEntries[[3]].start = 1140329176
+DEBUG (Atari partition plugin): table.icdEntries[[3]].length = 1106968198
+DEBUG (Atari partition plugin): table.icdEntries[[4]].flag = 0x70
+DEBUG (Atari partition plugin): table.icdEntries[[4]].type = 0x10A02E
+DEBUG (Atari partition plugin): table.icdEntries[[4]].start = 1431252751
+DEBUG (Atari partition plugin): table.icdEntries[[4]].length = 1215826426
+DEBUG (Atari partition plugin): table.icdEntries[[5]].flag = 0x20
+DEBUG (Atari partition plugin): table.icdEntries[[5]].type = 0x780810
+DEBUG (Atari partition plugin): table.icdEntries[[5]].start = 1318072351
+DEBUG (Atari partition plugin): table.icdEntries[[5]].length = 3863491008
+DEBUG (Atari partition plugin): table.icdEntries[[6]].flag = 0x01
+DEBUG (Atari partition plugin): table.icdEntries[[6]].type = 0x060838
+DEBUG (Atari partition plugin): table.icdEntries[[6]].start = 393739
+DEBUG (Atari partition plugin): table.icdEntries[[6]].length = 1459095763
+DEBUG (Atari partition plugin): table.icdEntries[[7]].flag = 0xA8
+DEBUG (Atari partition plugin): table.icdEntries[[7]].type = 0x5243FA
+DEBUG (Atari partition plugin): table.icdEntries[[7]].start = 4271666689
+DEBUG (Atari partition plugin): table.icdEntries[[7]].length = 1627390360
+DEBUG (Atari partition plugin): table.size = 1627390448
+DEBUG (Atari partition plugin): table.entries[[0]].flag = 0xA8
+DEBUG (Atari partition plugin): table.entries[[0]].type = 0x53554F
+DEBUG (Atari partition plugin): table.entries[[0]].start = 1119357682
+DEBUG (Atari partition plugin): table.entries[[0]].length = 2845133407
+DEBUG (Atari partition plugin): table.entries[[1]].flag = 0x6B
+DEBUG (Atari partition plugin): table.entries[[1]].type = 0x000156
+DEBUG (Atari partition plugin): table.entries[[1]].start = 1042227295
+DEBUG (Atari partition plugin): table.entries[[1]].length = 2690064888
+DEBUG (Atari partition plugin): table.entries[[2]].flag = 0x02
+DEBUG (Atari partition plugin): table.entries[[2]].type = 0xA60118
+DEBUG (Atari partition plugin): table.entries[[2]].start = 1498361660
+DEBUG (Atari partition plugin): table.entries[[2]].length = 1146306900
+DEBUG (Atari partition plugin): table.entries[[3]].flag = 0x42
+DEBUG (Atari partition plugin): table.entries[[3]].type = 0x67A9A0
+DEBUG (Atari partition plugin): table.entries[[3]].start = 706701056
+DEBUG (Atari partition plugin): table.entries[[3]].length = 18751557
+DEBUG (Atari partition plugin): table.badStart = 567280314
+DEBUG (Atari partition plugin): table.badLength = 2835247144
+DEBUG (Atari partition plugin): table.checksum = 0x6100
+DEBUG (BSD plugin): dl.magic on sector 0 at offset 0 = 0x00604B4C (expected
+0x82564557)
+DEBUG (BSD plugin): dl.magic on sector 0 at offset 9 = 0x79530600 (expected
+0x82564557)
+DEBUG (BSD plugin): dl.magic on sector 0 at offset 64 = 0x626D6573 (expected
+0x82564557)
+DEBUG (BSD plugin): dl.magic on sector 0 at offset 128 = 0x00000043 (expected
+0x82564557)
+DEBUG (BSD plugin): dl.magic on sector 0 at offset 516 = 0x00060000 (expected
+0x82564557)
+DEBUG (BSD plugin): dl.magic on sector 1 at offset 0 = 0x3C201601 (expected
+0x82564557)
+DEBUG (BSD plugin): dl.magic on sector 1 at offset 9 = 0x67FEFD3A (expected
+0x82564557)
+DEBUG (BSD plugin): dl.magic on sector 1 at offset 64 = 0x0061F570 (expected
+0x82564557)
+DEBUG (BSD plugin): dl.magic on sector 1 at offset 128 = 0x472092A9 (expected
+0x82564557)
+DEBUG (BSD plugin): dl.magic on sector 1 at offset 516 = 0xDDC73D30 (expected
+0x82564557)
+DEBUG (BSD plugin): dl.magic on sector 2 at offset 0 = 0xDDC7D7D2 (expected
+0x82564557)
+DEBUG (BSD plugin): dl.magic on sector 2 at offset 9 = 0x0000003D (expected
+0x82564557)
+DEBUG (BSD plugin): dl.magic on sector 2 at offset 64 = 0x00043000 (expected
+0x82564557)
+DEBUG (BSD plugin): dl.magic on sector 2 at offset 128 = 0xF0022ED0 (expected
+0x82564557)
+DEBUG (BSD plugin): dl.magic on sector 2 at offset 516 = 0x00000000 (expected
+0x82564557)
+DEBUG (BSD plugin): dl.magic on sector 9 at offset 0 = 0x00000000 (expected
+0x82564557)
+DEBUG (BSD plugin): dl.magic on sector 9 at offset 9 = 0x00000000 (expected
+0x82564557)
+DEBUG (BSD plugin): dl.magic on sector 9 at offset 64 = 0x00000000 (expected
+0x82564557)
+DEBUG (BSD plugin): dl.magic on sector 9 at offset 128 = 0x00000000 (expected
+0x82564557)
+DEBUG (BSD plugin): dl.magic on sector 9 at offset 516 = 0x00000000 (expected
+0x82564557)
+DEBUG (GPT Plugin): hdr.signature = 0x000600003C201601
+DEBUG (Human68k plugin): sectorSize = 512
+DEBUG (Human68k plugin): table.magic = 8000464E
+DEBUG (MBR plugin): xmlmedia = BlockMedia
+DEBUG (MBR plugin): mbr.magic = 0061
+DEBUG (SGIVH plugin): dvh.magic = 0x4C4B6000 (should be 0x0BE5A941)
+DEBUG (Sun plugin): dkl.dkl_magic = 0x2870
+DEBUG (Sun plugin): dkl8.dkl_vtoc.v_sanity = 0x0C01B8D1
+DEBUG (Sun plugin): dkl16.dkl_vtoc.v_sanity = 0x65747379
+DEBUG (VTOC plugin): sanity at 0 is 0x12008600 (should be 0xCA5E600D or
+0x0D605ECA)
+DEBUG (VTOC plugin): sanity at 1 is 0x00060000 (should be 0xCA5E600D or
+0x0D605ECA)
+DEBUG (VTOC plugin): sanity at 8 is 0x00000000 (should be 0xCA5E600D or
+0x0D605ECA)
+DEBUG (VTOC plugin): sanity at 29 is 0x72462020 (should be 0xCA5E600D or
+0x0D605ECA)
+DEBUG (XENIX plugin): xnxtbl.p_magic = 0x6842 (should be 0x1234)
+DEBUG (Ls command): No partitions found
+</code></pre>
+<p>This extensive section shows <strong>aaru</strong> trying various partition table formats. It's attempting to identify if the disk image has a partition table and, if so, what type. The output shows probes for <strong>Amiga RDB, Apple Partition Map, Atari partitions, BSD disklabels, GPT, MBR</strong>, and more. The key line here is <code>DEBUG (Ls command): No partitions found</code>. This indicates that <strong>aaru</strong> doesn't recognize a standard partition table on the disk image. For <strong>HFS disks</strong>, this is typical; they often don't have a separate partition table but rather the filesystem directly on the disk.</p>
+<p>After the partition table checks, <strong>aaru</strong> tries to identify various filesystems:</p>
+<pre><code class="hljs">DEBUG (ADFS Plugin): oldMap0.checksum = 65
+DEBUG (ADFS Plugin): oldChk0 = 40
+DEBUG (ADFS Plugin): oldMap1.checksum = 7
+DEBUG (ADFS Plugin): oldChk1 = 217
+DEBUG (ADFS Plugin): newChk = 154
+DEBUG (ADFS Plugin): map.zoneChecksum = 76
+DEBUG (ADFS Plugin): bootChk = 0
+DEBUG (ADFS Plugin): bBlock.checksum = 0
+DEBUG (ADFS Plugin): drSb.log2secsize = 0
+DEBUG (ADFS Plugin): drSb.idlen = 0
+DEBUG (ADFS Plugin): drSb.disc_size_high = 0
+DEBUG (ADFS Plugin): drSb.disc_size = 0
+DEBUG (ADFS Plugin): IsNullOrEmpty(drSb.reserved) = True
+DEBUG (ProDOS plugin): prePointer = 55250
+DEBUG (BTRFS Plugin): sbSectorOff = 128
+DEBUG (BTRFS Plugin): sbSectorSize = 8
+DEBUG (BTRFS Plugin): partition.PartitionStartSector = 0
+DEBUG (BTRFS Plugin): btrfsSb.magic = 0x0000000000000000
+DEBUG (dump(8) plugin): old magic = 0x00002020
+DEBUG (dump(8) plugin): aix magic = 0x46062020
+DEBUG (dump(8) plugin): new magic = 0x46062020
+DEBUG (EFS plugin): magic at 1 = 0x0400010C (expected 0x00072959 or 0x0007295A)
+DEBUG (Files-11 plugin): magic: &quot;System     &quot;
+DEBUG (Fossil plugin): magic at 0x2F3C494E (expected 0x3776AE89)
+DEBUG (LIF plugin): magic 0x00004C4B (expected 0x00008000)
+DEBUG (Locus plugin): magic at 0 = 0x00604B4C
+DEBUG (Locus plugin): magic at 1 = 0x3C201601
+DEBUG (Locus plugin): magic at 2 = 0xDDC7D7D2
+DEBUG (Locus plugin): magic at 3 = 0x00000000
+DEBUG (Locus plugin): magic at 4 = 0x4E460080
+DEBUG (Locus plugin): magic at 5 = 0x00000000
+DEBUG (Locus plugin): magic at 6 = 0x00000000
+DEBUG (Locus plugin): magic at 7 = 0x00000000
+DEBUG (Locus plugin): magic at 8 = 0x00000000
+DEBUG (FAT plugin): Human bpc = 8224
+DEBUG (FAT plugin): Human clusters = 1606
+DEBUG (FAT plugin): Human big_clusters = 1684369952
+DEBUG (FAT plugin): Human expected clusters = 49
+DEBUG (FAT plugin): humanClustersCorrect = False
+DEBUG (FAT plugin): humanOemCorrect = False
+DEBUG (FAT plugin): humanBranchCorrect = False
+DEBUG (FAT plugin): atari_oem_correct = False
+DEBUG (FAT plugin): dos_oem_correct = False
+DEBUG (FAT plugin): bps = 31059
+DEBUG (FAT plugin): bits in bps = 9
+DEBUG (FAT plugin): spc = 115
+DEBUG (FAT plugin): correct_spc = False
+DEBUG (FAT plugin): reserved_secs = 25972
+DEBUG (FAT plugin): fats_no = 109
+DEBUG (FAT plugin): root_entries = 8224
+DEBUG (FAT plugin): sectors = 8224
+DEBUG (FAT plugin): media_descriptor = 0x20
+DEBUG (FAT plugin): fat_sectors = 8224
+DEBUG (FAT plugin): msx_id = &quot;Screen&quot;
+DEBUG (FAT plugin): big_sectors = 538976370
+DEBUG (FAT plugin): bpb_signature = 0x20
+DEBUG (FAT plugin): fat32_signature = 0x6D
+DEBUG (FAT plugin): fat32_id = &quot;Screen  &quot;
+DEBUG (FAT plugin): huge_sectors = 2314971590241182547
+DEBUG (FAT plugin): fat_id = 0x01
+DEBUG (FAT plugin): apricot_bps = 28757
+DEBUG (FAT plugin): apricot_spc = 83
+DEBUG (FAT plugin): apricot_correct_spc = False
+DEBUG (FAT plugin): apricot_reserved_secs = 29283
+DEBUG (FAT plugin): apricot_fats_no = 101
+DEBUG (FAT plugin): apricot_root_entries = 28261
+DEBUG (FAT plugin): apricot_sectors = 8224
+DEBUG (FAT plugin): apricot_media_descriptor = 0x06
+DEBUG (FAT plugin): apricot_fat_sectors = 26950
+DEBUG (FAT plugin): 1st fat cluster 1 = 620
+DEBUG (RBF plugin): magic at 0 = 0x72202020 or 0x4C4B6000 (expected 0x4372757A
+or 0x7A757243)
+DEBUG (RBF plugin): magic at 4 = 0x00011000 or 0x8000464E (expected 0x4372757A
+or 0x7A757243)
+DEBUG (RBF plugin): magic at 15 = 0x00000000 or 0x00000000 (expected 0x4372757A
+or 0x7A757243)
+DEBUG (UCSD Pascal Plugin): volEntry.firstBlock = -11561
+DEBUG (UCSD Pascal Plugin): volEntry.lastBlock = -14371
+DEBUG (UCSD Pascal Plugin): volEntry.entryType = 12349
+DEBUG (UCSD Pascal Plugin): volEntry.blocks = 4
+DEBUG (UCSD Pascal Plugin): volEntry.files = 12
+DEBUG (UCSD Pascal Plugin): volEntry.dummy = 391
+DEBUG (UCSD Pascal Plugin): volEntry.lastBoot = 0
+DEBUG (UCSD Pascal Plugin): volEntry.tail = 67108864
+DEBUG (UNICOS plugin): magic = 0x4C4B600000860012 (expected 0x6E6331667331636E)
+DEBUG (UDF Plugin): anchor.tag.tagIdentifier = 15407
+DEBUG (UDF Plugin): anchor.tag.descriptorVersion = 20041
+DEBUG (UDF Plugin): anchor.tag.tagChecksum = 0x54
+DEBUG (UDF Plugin): anchor.tag.reserved = 76
+DEBUG (UDF Plugin): anchor.tag.tagSerialNumber = 831
+DEBUG (UDF Plugin): anchor.tag.descriptorCrc = 0xA0A9
+DEBUG (UDF Plugin): anchor.tag.descriptorCrcLength = 7978
+DEBUG (UDF Plugin): anchor.tag.tagLocation = 1330974311
+DEBUG (UDF Plugin): anchor.mainVolumeDescriptorSequenceExtent.length =
+2762540335
+DEBUG (UDF Plugin): anchor.mainVolumeDescriptorSequenceExtent.location =
+73818040
+DEBUG (UDF Plugin): anchor.reserveVolumeDescriptorSequenceExtent.length =
+2913535279
+DEBUG (UDF Plugin): anchor.reserveVolumeDescriptorSequenceExtent.location =
+1009716015
+DEBUG (UDF Plugin): anchor.tag.tagIdentifier = 0
+DEBUG (UDF Plugin): anchor.tag.descriptorVersion = 512
+DEBUG (UDF Plugin): anchor.tag.tagChecksum = 0xFF
+DEBUG (UDF Plugin): anchor.tag.reserved = 255
+DEBUG (UDF Plugin): anchor.tag.tagSerialNumber = 65535
+DEBUG (UDF Plugin): anchor.tag.descriptorCrc = 0xFFFF
+DEBUG (UDF Plugin): anchor.tag.descriptorCrcLength = 65535
+DEBUG (UDF Plugin): anchor.tag.tagLocation = 4286054365
+DEBUG (UDF Plugin): anchor.mainVolumeDescriptorSequenceExtent.length =
+4286054365
+DEBUG (UDF Plugin): anchor.mainVolumeDescriptorSequenceExtent.location =
+2011002845
+DEBUG (UDF Plugin): anchor.reserveVolumeDescriptorSequenceExtent.length =
+2011002845
+DEBUG (UDF Plugin): anchor.reserveVolumeDescriptorSequenceExtent.location =
+1437226410
+DEBUG (UDF Plugin): anchor.tag.tagIdentifier = 252
+DEBUG (UDF Plugin): anchor.tag.descriptorVersion = 1536
+DEBUG (UDF Plugin): anchor.tag.tagChecksum = 0xF6
+DEBUG (UDF Plugin): anchor.tag.reserved = 0
+DEBUG (UDF Plugin): anchor.tag.tagSerialNumber = 258
+DEBUG (UDF Plugin): anchor.tag.descriptorCrc = 0xF5F4
+DEBUG (UDF Plugin): anchor.tag.descriptorCrcLength = 237
+DEBUG (UDF Plugin): anchor.tag.tagLocation = 2933587717
+DEBUG (UDF Plugin): anchor.mainVolumeDescriptorSequenceExtent.length =
+4236292010
+DEBUG (UDF Plugin): anchor.mainVolumeDescriptorSequenceExtent.location = 393984
+DEBUG (UDF Plugin): anchor.reserveVolumeDescriptorSequenceExtent.length =
+16461824
+DEBUG (UDF Plugin): anchor.reserveVolumeDescriptorSequenceExtent.location =
+16658432
+DEBUG (UDF Plugin): anchor.tag.tagIdentifier = 0
+DEBUG (UDF Plugin): anchor.tag.descriptorVersion = 0
+DEBUG (UDF Plugin): anchor.tag.tagChecksum = 0x00
+DEBUG (UDF Plugin): anchor.tag.reserved = 0
+DEBUG (UDF Plugin): anchor.tag.tagSerialNumber = 0
+DEBUG (UDF Plugin): anchor.tag.descriptorCrc = 0x0000
+DEBUG (UDF Plugin): anchor.tag.descriptorCrcLength = 0
+DEBUG (UDF Plugin): anchor.tag.tagLocation = 0
+DEBUG (UDF Plugin): anchor.mainVolumeDescriptorSequenceExtent.length = 0
+DEBUG (UDF Plugin): anchor.mainVolumeDescriptorSequenceExtent.location = 0
+DEBUG (UDF Plugin): anchor.reserveVolumeDescriptorSequenceExtent.length = 0
+DEBUG (UDF Plugin): anchor.reserveVolumeDescriptorSequenceExtent.location = 0
+DEBUG (XFS plugin): magic at 0 = 0x4C4B6000 (expected 0x58465342)
+DEBUG (XFS plugin): magic at 1 = 0x0116203C (expected 0x58465342)
+DEBUG (XFS plugin): magic at 2 = 0xD2D7C7DD (expected 0x58465342)
+</code></pre>
+<p>This section is another long list, with <strong>aaru</strong> trying various filesystem plugins like <strong>ADFS, ProDOS, BTRFS, EFS, FAT, UDF, XFS</strong>, and many others. It's essentially trying to match the disk's data structures to known filesystem formats. While it goes through many attempts, none of them seem to positively identify a filesystem <em>except</em> for the earlier message</p>
+
+                    </div>
+                    <aside class="related-posts">
+                        <div class="ad-sidebar container">
+                            <div class="ad-wrapper">
+    <span>Iklan Related</span>
+</div>
+                        </div>
+                        <h2 class="related-posts-title">Related Posts</h2><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/best-word-to-describe-letter">Best Word To Describe Letter Tone? Find Out Here!</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-07T00:43:05+00:00">Aug 7, 2025</time>
+		                        <span class="view-count">
+									49 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/backend-automation-agents-jason-explained">Backend Automation: Agents.jason Explained</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-11T09:29:27+00:00">Aug 11, 2025</time>
+		                        <span class="view-count">
+									42 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/land-purchase-can-roberto-afford">Land Purchase: Can Roberto Afford It?</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-05T08:00:47+00:00">Aug 5, 2025</time>
+		                        <span class="view-count">
+									37 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/analyze-july-album-sales-data">Analyze July Album Sales Data: Find Top Sellers</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-08T15:17:20+00:00">Aug 8, 2025</time>
+		                        <span class="view-count">
+									47 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/understanding-set-intersections-and-unions">Understanding Set Intersections And Unions With A Quiz Competition Example</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-14T06:16:20+00:00">Jul 14, 2025</time>
+		                        <span class="view-count">
+									74 views
+		                        </span>
+                            </div>
+                        </article>
+                    </aside>
+                    <aside class="related-posts"></aside>
+                </div>
+            </div>
+        </article>
+        <a href="#" class="back-to-top" id="backToTop" title="Back to top">
+        	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-bar-up" viewBox="0 0 16 16">
+			  <path fill-rule="evenodd" d="M3.646 11.854a.5.5 0 0 0 .708 0L8 8.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708M2.4 5.2c0 .22.18.4.4.4h10.4a.4.4 0 0 0 0-.8H2.8a.4.4 0 0 0-.4.4"/>
+			</svg>
+		</a>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 ANABEL</p>
+        </div>
+    </footer>
+    <script>
+    	(() => {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            const toggleMenu = () => {
+                navMenu.classList.toggle('nav-menu-active');
+                navToggle.classList.toggle('nav-toggle-active');
+            };
+            const backToTopHandler = (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            navToggle.addEventListener('click', toggleMenu);
+            document.getElementById('backToTop').addEventListener('click', backToTopHandler);
+            window.addEventListener('pagehide', () => {
+                navToggle.removeEventListener('click', toggleMenu);
+                document.getElementById('backToTop').removeEventListener('click', backToTopHandler);
+            });
+        })();
+		(() => {
+            window.addEventListener("DOMContentLoaded", (event) => {
+                const ellHljs = document.createElement("script");
+                ellHljs.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js");
+                ellHljs.onload = () => {
+                    hljs.highlightAll();
+                };
+                document.querySelector("body").append(ellHljs);
+                const ellFont = document.createElement("link");
+                ellFont.setAttribute("href", "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css");
+                ellFont.setAttribute("rel", "stylesheet");
+                document.querySelector("head").append(ellFont);
+                window.addEventListener('pagehide', () => {
+                    // ellHljs.remove();
+                    ellFont.remove();
+                });
+
+            });
+        })();
+    </script>
+    
+    
+    
+</body>
+</html>

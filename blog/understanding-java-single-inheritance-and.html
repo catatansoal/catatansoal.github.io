@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Understanding Java Single Inheritance And The Diamond Problem Avoidance</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Understanding Java Single Inheritance And The Diamond Problem Avoidance...">
+    <link rel="canonical" href="https://catatansoal.github.io/blog/understanding-java-single-inheritance-and">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Understanding Java Single Inheritance And The Diamond Problem Avoidance">
+	<meta property="og:description" content="Understanding Java Single Inheritance And The Diamond Problem Avoidance...">
+	<meta property="og:url" content="https://catatansoal.github.io/blog/understanding-java-single-inheritance-and">
+	<meta property="og:site_name" content="ANABEL">
+	<meta property="article:published_time" content="2025-07-31T08:49:56+00:00">
+	<meta property="article:author" content="ADMIN">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+    <link rel="preload" fetchpriority="high" as="image" href="https://tse4.mm.bing.net/th?q=OOP%20Concepts%20and%20Exam%20Preparation%20Questions">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style type="text/css">
+    	:root{--primary-color:#3740ff;--text-color:#202124;--background-color:#ffffff;--gray-100:#f8f9fa;--gray-200:#e9ecef}*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;line-height:1.6;color:var(--text-color);background-color:var(--background-color)}.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}.header{background-color:var(--background-color);border-bottom:1px solid var(--gray-200);position:sticky;top:0;z-index:100}.nav{padding:.5rem 0}.nav-container{display:flex;justify-content:space-between;align-items:center;gap:1rem}.nav-left{display:flex;align-items:center;flex-shrink:0}.logo{font-weight:700;color:var(--primary-color)}.blog-tag{margin-left:1rem;padding:.25rem .5rem;background-color:var(--gray-100);border-radius:4px;font-size:.875rem}.nav-search{flex-grow:1;max-width:300px}.search-form{position:relative;width:100%}.search-input{width:100%;padding:.5rem 2.5rem .5rem 1rem;border:1px solid var(--gray-200);border-radius:24px;font-size:.875rem;transition:all 0.2s}.search-input:focus{outline:none;border-color:var(--primary-color);box-shadow:0 0 0 2px rgb(55 64 255 / .1)}.search-button{position:absolute;right:.5rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#5f6368;cursor:pointer;padding:.25rem;display:flex;align-items:center;justify-content:center}.search-button:hover{color:var(--primary-color)}.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:.5rem}.hamburger{display:block;position:relative;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before,.hamburger::after{content:'';position:absolute;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before{top:-6px}.hamburger::after{bottom:-6px}.nav-toggle-active .hamburger{background:#fff0}.nav-toggle-active .hamburger::before{transform:rotate(45deg);top:0}.nav-toggle-active .hamburger::after{transform:rotate(-45deg);bottom:0}.nav-list{display:flex;list-style:none;gap:2rem}.nav-link{color:var(--text-color);text-decoration:none;font-size:.9rem;transition:color 0.2s}.nav-link:hover{color:var(--primary-color)}.article-header{padding:2rem 0;background-color:var(--gray-100)}.article-layout{display:grid;grid-template-columns:1fr 350px;gap:3rem;padding:1rem 0;align-items: start}h1,h2,h3,h4,h5,h6{font-family:"Crimson Text","Times New Roman",Times,serif}h1{font-size:2.5rem;line-height:1.2;margin-bottom:1rem}.meta{color:#5f6368;font-size:.875rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}.view-count{display:inline-flex;align-items:center;gap:.25rem}.view-count svg{color:#5f6368}.content{min-width:0;border-bottom:1px solid #dddddd5e;margin-top:1rem;white-space:pre-line !important;overflow-wrap:break-word;overflow-x:auto;word-break:break-word}.lead{font-size:1.25rem;color:#5f6368;margin-bottom:2rem}h2,h3,h4,h5,h6{font-size:1.75rem;margin:1rem 0 1rem}p,pre,ol,ul>li{margin-bottom:1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;font-size:1.3rem;text-align: justify;}p>code{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px}hr{margin:1rem 0 1rem 0}.code-example{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;margin:1.5rem 0;overflow-x:auto}code{font-family:'Roboto Mono',monospace;font-size:.875rem}ul{margin:.2rem 0;padding-left:1.5rem}.related-posts{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;position:sticky;top:5rem}.related-posts-title,.newpost-posts-list{font-size:1.75rem;margin:0 0 1rem}.related-posts-list{display:flex;flex-direction:column;gap:.5rem}.related-post,.newpost-post{border-bottom:1px solid #ddd;padding-bottom:10px;margin-bottom:10px}.related-post:last-child,.newpost-post:last-child{padding-bottom:0;border-bottom:none}.related-post-title,.newpost-post-title{font-size:1.2rem;margin:0 0 .1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;}.related-post-title a,.newpost-post-title a{color:var(--text-color);text-decoration:none;transition:color 0.2s}.related-post-title a:hover,.newpost-post-title a:hover{color:var(--primary-color)}.related-post time{font-size:.875rem;color:#5f6368}.footer{background-color:var(--gray-100);padding:2rem 0;margin-top:4rem;color:#5f6368;font-size:.875rem}.nav-menu>ul>li{margin-bottom:0}@media (max-width:1024px){.container{max-width:800px}.article-layout{grid-template-columns:1fr;gap:2rem}.related-posts{position:static}}@media (max-width:768px){.nav-container{flex-wrap:wrap}.nav-search{order:3;max-width:none;width:100%;margin-top:.1rem}.nav-toggle{display:block}.nav-menu{display:none;position:absolute;top:100%;left:0;right:0;background:var(--background-color);padding:1rem 0;border-bottom:1px solid var(--gray-200)}.nav-menu-active{display:block}.nav-list{flex-direction:column;gap:.1rem;padding:0 1.5rem}.nav-link{display:block;padding:.2rem 0}h1{font-size:2rem}.article-header{padding:2rem 0}.content{padding:.1rem 0}}table{width:100%;border-collapse:collapse;margin:20px 0;font-family:'Arial',sans-serif}th,td{padding:12px 15px;text-align:left;border:1px solid #ddd}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9}tr:nth-child(even) td{background-color:#f2f2f2}@media screen and (max-width:768px){table{border:0;display:block;overflow-x:auto;white-space:nowrap}th,td{padding:10px;text-align:right}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9;border-bottom:1px solid #ddd}tr:nth-child(even) td{background-color:#f2f2f2}}a{text-decoration:none;color:#540707}.katex-html{padding: .2rem;color: #000;font-weight: 700;font-size: 1.3rem;overflow-wrap: break-word;max-width: 100%;white-space: normal !important}.category{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin:1rem 0 1rem 0}.tag{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px;font-family:"Newsreader",serif}.tag>a{text-decoration:none;color:#000}img{margin:auto;display:block;max-width:100%;height:auto;margin-bottom:1rem}.katex{white-space: pre-line !important;display: inline-block;max-width: 100%;overflow-x: auto;overflow-y: hidden;scrollbar-width: thin;overflow-wrap: break-word;word-break: break-word;vertical-align: -7px}.content > p {overflow-wrap: break-word;word-break: break-word}
+    </style>
+    <style type="text/css">
+    	pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}
+		.hljs{color:#c9d1d9;background:#0d1117}.hljs-doctag,.hljs-keyword,.hljs-meta .hljs-keyword,.hljs-template-tag,.hljs-template-variable,.hljs-type,.hljs-variable.language_{color:#ff7b72}.hljs-title,.hljs-title.class_,.hljs-title.class_.inherited__,.hljs-title.function_{color:#d2a8ff}.hljs-attr,.hljs-attribute,.hljs-literal,.hljs-meta,.hljs-number,.hljs-operator,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-variable{color:#79c0ff}.hljs-meta .hljs-string,.hljs-regexp,.hljs-string{color:#a5d6ff}.hljs-built_in,.hljs-symbol{color:#ffa657}.hljs-code,.hljs-comment,.hljs-formula{color:#8b949e}.hljs-name,.hljs-quote,.hljs-selector-pseudo,.hljs-selector-tag{color:#7ee787}.hljs-subst{color:#c9d1d9}.hljs-section{color:#1f6feb;font-weight:700}.hljs-bullet{color:#f2cc60}.hljs-emphasis{color:#c9d1d9;font-style:italic}.hljs-strong{color:#c9d1d9;font-weight:700}.hljs-addition{color:#aff5b4;background-color:#033a16}.hljs-deletion{color:#ffdcd7;background-color:#67060c}
+    	pre{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;font-weight:400;word-break:break-word;word-wrap:break-word;box-sizing:inherit;border-radius:4px;overflow-x:auto;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}code{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;word-wrap:break-word;word-break:break-word;font-style:normal;line-height:20px;letter-spacing:-.003em;box-sizing:inherit;font-weight:400;font-size:75%;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}
+    </style>
+    <style type="text/css">
+    	.back-to-top{position:fixed;bottom:20px;right:20px;background-color:#a73f3f;color:#fff;padding:8px 10px;border-radius:50%;box-shadow:0 4px 6px rgb(0 0 0 / .2);font-size:10px;font-weight:700;text-decoration:none;text-align:center;transition:opacity 0.3s ease,visibility 0.3s ease;z-index:99999;opacity:1;visibility:visible}.back-to-top:hover{background-color:#0056b3}
+    </style>
+    <style type="text/css">
+        .ad-header {margin: 1rem auto 1rem;background-color: #fdfdfd;text-align: center;display: block;}.ad-header .ad-wrapper {min-height: 90px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #555;font-weight: 500;padding: 3rem;border: 1px dashed #ccc;border-radius: 6px;}@media (max-width: 768px) {.ad-header {padding: 0.75rem;}}.ad-sidebar {margin: 0 0 1rem;background-color: #fefefe;text-align: center;padding: 0px;width: 100%;max-width: 100%;display: block;}.ad-sidebar .ad-wrapper {min-height: 250px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #444;font-weight: 500;border: 1px dashed #aaa;border-radius: 6px;padding: 0rem;}@media (max-width: 1024px) {.ad-sidebar {padding: 0.75rem;}}
+    </style>
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://catatansoal.github.io/blog/understanding-java-single-inheritance-and"
+          },
+          "headline": "Understanding Java Single Inheritance And The Diamond Problem Avoidance",
+          "description": "Understanding Java Single Inheritance And The Diamond Problem Avoidance...",
+          "image": [
+            "https://tse4.mm.bing.net/th?q=OOP%20Concepts%20and%20Exam%20Preparation%20Questions"
+          ],
+          "author": {
+            "@type": "Person",
+            "name": "ADMIN",
+            "jobTitle": "Editor web"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "ANABEL",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://tse4.mm.bing.net/th?q=ANABEL%20WEB"
+            }
+          },
+          "datePublished": "2025-07-31T08:49:56+00:00",
+          "dateModified": "2025-07-31T08:49:56+00:00"
+        }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="container nav-container">
+                <div class="nav-left">
+                    <span class="logo">ANABEL</span>
+                    <span class="blog-tag">Article</span>
+                </div>
+                <div class="nav-search">
+                    <form class="search-form" role="search">
+                        <input 
+                            type="search" 
+                            class="search-input"
+                            placeholder="Search articles..."
+                            aria-label="Search articles"
+                        >
+                        <button type="submit" class="search-button" aria-label="Submit search">🔎</button>
+                    </form>
+                </div>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+                <div class="nav-menu">
+                    <ul class="nav-list">
+                    	<li><a href="/" class="nav-link">HOME</a></li>
+                        <li><a href="/pages/About" class="nav-link">About</a></li>
+                        <li><a href="/pages/Contact" class="nav-link">Contact</a></li>
+                        <li><a href="/pages/Disclaimer" class="nav-link">Disclaimer</a></li>
+                        <li><a href="/pages/Privacy" class="nav-link">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="main">
+        <article class="article">
+            <header class="article-header">
+                <div class="container">
+                    <h1>Understanding Java Single Inheritance And The Diamond Problem Avoidance</h1>
+                    <div class="meta">
+                        <time datetime="2025-07-31T08:49:56+00:00">Jul 31, 2025</time>
+                        <span class="author">by ADMIN</span>
+                        <span class="view-count">
+                            <span id="viewCount">72</span> views
+                        </span>
+                    </div>
+                </div>
+            </header>
+            <div class="ad-header container">
+                <div class="ad-wrapper">
+    Iklan Headers
+</div>
+            </div>
+            <div class="container">
+                <div class="article-layout">
+                    <div class="content">
+                        <img src="https://tse4.mm.bing.net/th?q=OOP%20Concepts%20and%20Exam%20Preparation%20Questions" title="OOP Concepts and Exam Preparation Questions" width="300" height="200"/><p>Hey guys! Let's dive into the world of <strong>Object-Oriented Programming (OOP)</strong>, a crucial topic for any programmer. This article will cover key OOP concepts and provide a bunch of questions to help you ace your exams. We’ll break it down in a way that’s easy to understand, making sure you’re well-prepared to tackle those tricky questions. Whether you're brushing up on your skills or learning from scratch, this guide has got you covered. So, let's get started and make OOP a breeze!</p>
+<h2>✅ <strong>Section A: Multiple Choice Questions (50 × 1 = 50 Marks)</strong></h2>
+<p><em>(Choose the correct option. Each question has four options. Answer in the space provided.)</em></p>
+<ol>
+<li>
+<p>Which OOP concept allows code reuse?
+ a) Polymorphism b) <strong>Inheritance</strong> c) Abstraction d) Encapsulation
+<strong>Ans:
+Inheritance</strong></p>
+<p><strong>Inheritance</strong> is a cornerstone of OOP, enabling you to create new classes based on existing ones, thus promoting code reuse and reducing redundancy. Let's dive deeper into why <strong><em>inheritance</em></strong> is the correct answer. Imagine you're building a system for a zoo. You might have a base class called <code>Animal</code> with common attributes like <code>name</code>, <code>age</code>, and <code>species</code>, as well as methods like <code>eat()</code> and <code>sleep()</code>. Now, instead of rewriting these attributes and methods for every animal, you can create subclasses like <code>Lion</code>, <code>Elephant</code>, and <code>Penguin</code> that <strong><em>inherit</em></strong> from the <code>Animal</code> class. This means each subclass automatically gets the attributes and methods of the <code>Animal</code> class, and you can add specific attributes and behaviors unique to each animal. For example, a <code>Lion</code> class might have a <code>roar()</code> method, while an <code>Elephant</code> class might have a <code>trumpet()</code> method. This not only saves you time and effort but also makes your code more organized and easier to maintain. Changes to the base class (<code>Animal</code>) are automatically reflected in the subclasses, ensuring consistency across your application. Moreover, <strong><em>inheritance</em></strong> facilitates the creation of a hierarchy of classes, making your code more structured and easier to understand. By reusing code through <strong><em>inheritance</em></strong>, you minimize the chances of introducing errors, as you're relying on tested and proven code from the base class. This also aligns with the DRY (Don't Repeat Yourself) principle, which is a fundamental best practice in software development. So, when you think about <strong><em>inheritance</em></strong>, think about building upon existing foundations rather than reinventing the wheel each time. It's a powerful tool for creating robust and maintainable OOP applications. Understanding <strong><em>inheritance</em></strong> deeply will help you design more efficient and elegant solutions in your programming projects.</p>
+</li>
+<li>
+<p>Which of the following is a blueprint for creating objects?
+ a) Object b) Method c) <strong>Class</strong> d) Interface
+<strong>Ans:
+Class</strong></p>
+<p>The <strong><em>class</em></strong> serves as the foundational blueprint in object-oriented programming, defining the structure and behavior of objects. To truly grasp the significance of a <strong><em>class</em></strong>, envision it as an architect's plan for a building. This plan details everything from the number of rooms and their dimensions to the materials used in construction. Similarly, a <strong><em>class</em></strong> in programming outlines the attributes (data) and methods (functions) that objects of that <strong><em>class</em></strong> will possess. For instance, if we're talking about creating a <code>Car</code> <strong><em>class</em></strong>, the blueprint would specify attributes like <code>color</code>, <code>model</code>, and <code>engineType</code>, as well as methods like <code>start()</code>, <code>accelerate()</code>, and <code>brake()</code>. When we create an object of the <code>Car</code> <strong><em>class</em></strong>, say <code>myCar</code>, it becomes a tangible instance based on this blueprint, with its own specific values for the attributes (e.g., <code>color</code> might be &quot;red&quot;, <code>model</code> might be &quot;Sedan&quot;). This is the essence of object instantiation: bringing the blueprint to life. One of the primary benefits of using <strong><em>classes</em></strong> is that they allow for abstraction. We can define complex behaviors and data structures within a <strong><em>class</em></strong> and then interact with objects of that <strong><em>class</em></strong> without needing to know the intricate details of its implementation. This makes code more modular, easier to understand, and less prone to errors. Furthermore, <strong><em>classes</em></strong> facilitate code reusability. Once a <strong><em>class</em></strong> is defined, we can create multiple objects from it, each with its own state, but all sharing the same fundamental structure and behavior. This not only saves time and effort but also ensures consistency across our application. By understanding the role of a <strong><em>class</em></strong> as a blueprint, you can effectively design and implement object-oriented systems that are well-organized, maintainable, and scalable. The ability to create and manage <strong><em>classes</em></strong> is a core skill for any OOP developer, allowing for the construction of complex software systems from manageable, reusable components.</p>
+</li>
+<li>
+<p>What is used to restrict access to class members?
+ a) Variables b) Constructors c) <strong>Access Modifiers</strong> d) Interfaces
+<strong>Ans:
+Access Modifiers</strong></p>
+<p><strong>Access modifiers</strong> are essential tools in OOP for controlling the visibility and accessibility of class members, ensuring data <strong><em>encapsulation</em></strong> and security. Imagine you're building a secure vault; you wouldn't want just anyone to be able to walk in and access the valuables inside. <strong>Access modifiers</strong> work similarly, acting as gatekeepers for your <strong><em>class</em></strong> data and methods. In Java, the primary <strong><em>access modifiers</em></strong> are <code>public</code>, <code>private</code>, and <code>protected</code>, along with the default (package-private) <strong><em>access</em></strong>. Each <strong><em>modifier</em></strong> provides a different level of <strong><em>access</em></strong> control. <code>Public</code> members are the most accessible, visible to any part of your code, both within and outside the <strong><em>class</em></strong> and package. This is like having a front door that's always open. <code>Private</code> members, on the other hand, are the most restricted, accessible only from within the <strong><em>class</em></strong> itself. This is akin to having a secret room that only the <strong><em>class</em></strong> can enter. <code>Protected</code> members are <strong><em>accessible</em></strong> within the <strong><em>class</em></strong>, within the same package, and by subclasses in other packages. Think of this as a back door that family members (subclasses) can use. The default <strong><em>access</em></strong> (no modifier specified) means the member is <strong><em>accessible</em></strong> within the same package but not from outside the package. This is like having a side door that neighbors can use but not strangers from far away. By using <strong><em>access modifiers</em></strong> judiciously, you can implement data <strong><em>hiding</em></strong>, a key principle of <strong><em>encapsulation</em></strong>. This prevents direct manipulation of an object's internal state from outside the <strong><em>class</em></strong>, reducing the risk of errors and making your code more robust. For instance, you might make a <code>BankAccount</code> <strong><em>class's</em></strong> balance <code>private</code> and provide public methods like <code>deposit()</code> and <code>withdraw()</code> to control how the balance is changed. This way, you ensure that the balance is only modified in a controlled manner. Understanding <strong><em>access modifiers</em></strong> is crucial for designing secure and maintainable OOP systems. They allow you to manage the complexity of your code by limiting dependencies and promoting clear boundaries between different parts of your application. By mastering the use of <strong><em>access modifiers</em></strong>, you can build software that is more resilient to errors and easier to evolve over time.</p>
+</li>
+<li>
+<p>Which OOP concept hides the internal details?
+ a) Inheritance b) <strong>Abstraction</strong> c) Encapsulation d) Overriding
+<strong>Ans:
+Abstraction</strong></p>
+<p><strong>Abstraction</strong> is the OOP concept that focuses on hiding complex implementation details and exposing only the essential information to the user. Think of driving a car. You interact with the steering wheel, accelerator, and brakes, but you don’t need to understand the intricate workings of the engine, transmission, or exhaust system to operate the vehicle. <strong>Abstraction</strong> works in a similar way in programming. It allows you to create simplified views of complex systems, making them easier to use and understand. In essence, <strong>abstraction</strong> involves identifying the key characteristics and behaviors of an object and representing them in a simplified model, while hiding the underlying complexity. This is often achieved through abstract classes and interfaces. An <strong>abstract class</strong> can define common methods and properties that its subclasses must implement, while an <strong>interface</strong> specifies a contract that classes can adhere to, without dictating how they should implement the methods. For example, consider a <code>Shape</code> class. It might have abstract methods like <code>draw()</code> and <code>calculateArea()</code>. Concrete subclasses like <code>Circle</code>, <code>Square</code>, and <code>Triangle</code> would then implement these methods in their own specific ways. The user interacts with the <code>Shape</code> object through the <code>draw()</code> and <code>calculateArea()</code> methods without needing to know the specific details of how each shape is drawn or how its area is calculated. This <strong>abstraction</strong> makes the code more flexible and maintainable. If you decide to add a new shape, like a <code>Rectangle</code>, you only need to create a new class that inherits from <code>Shape</code> and implements the <code>draw()</code> and <code>calculateArea()</code> methods. The rest of the code that uses <code>Shape</code> objects doesn't need to be changed. By hiding the internal details, <strong>abstraction</strong> reduces the cognitive load on the programmer. They can focus on what an object does rather than how it does it. This simplifies the development process and makes it easier to build complex systems. Understanding <strong>abstraction</strong> is crucial for designing well-structured and maintainable OOP applications. It allows you to create clear boundaries between different parts of your system and to manage complexity by focusing on essential aspects while hiding unnecessary details. Mastering <strong>abstraction</strong> techniques will significantly improve your ability to build robust and scalable software.</p>
+</li>
+<li>
+<p>Which keyword is used to inherit a class?
+ a) extend b) <strong>extends</strong> c) inherit d) implements
+<strong>Ans:
+extends</strong></p>
+<p>The keyword <code>extends</code> is the cornerstone of <strong><em>inheritance</em></strong> in Java and many other object-oriented languages, allowing a <strong><em>class</em></strong> to inherit properties and behaviors from another <strong><em>class</em></strong>. Let's break down why <code>extends</code> is so crucial and how it works. When you use <code>extends</code>, you're essentially creating a parent-child relationship between <strong><em>classes</em></strong>. The <strong><em>class</em></strong> being inherited from is called the superclass (or parent <strong><em>class</em></strong>), and the <strong><em>class</em></strong> that inherits is called the subclass (or child <strong><em>class</em></strong>). This relationship enables the subclass to acquire all the non-private members (fields and methods) of the superclass. Imagine you have a <code>Vehicle</code> <strong><em>class</em></strong> with attributes like <code>speed</code> and <code>color</code>, and methods like <code>accelerate()</code> and <code>brake()</code>. If you want to create a <code>Car</code> <strong><em>class</em></strong>, you don't have to start from scratch. Instead, you can use <code>extends</code> to inherit from <code>Vehicle</code>: <code>java class Car extends Vehicle { // Car-specific attributes and methods } </code> Now, the <code>Car</code> <strong><em>class</em></strong> automatically has all the <code>speed</code>, <code>color</code>, <code>accelerate()</code>, and <code>brake()</code> features of the <code>Vehicle</code> <strong><em>class</em></strong>. You can then add car-specific features, like <code>numberOfDoors</code> or <code>openSunroof()</code>, to the <code>Car</code> <strong><em>class</em></strong>. This not only saves you from rewriting code but also ensures consistency. If you modify the <code>accelerate()</code> method in the <code>Vehicle</code> <strong><em>class</em></strong>, all subclasses, including <code>Car</code>, will inherit the change. <code>extends</code> supports the principle of code reuse, a fundamental tenet of OOP. By inheriting from existing <strong><em>classes</em></strong>, you reduce redundancy and make your code more maintainable. It also allows you to create a hierarchy of <strong><em>classes</em></strong>, reflecting real-world relationships. For example, you might have <code>Vehicle</code>, then <code>Car</code> extending <code>Vehicle</code>, and <code>ElectricCar</code> extending <code>Car</code>, creating a clear lineage. However, Java only supports single <strong><em>inheritance</em></strong> with <strong><em>classes</em></strong>, meaning a <strong><em>class</em></strong> can only <code>extends</code> one other <strong><em>class</em></strong>. To achieve multiple <strong><em>inheritance</em></strong>-like behavior, Java uses interfaces, which we'll discuss later. Understanding <code>extends</code> is key to mastering <strong><em>inheritance</em></strong> and building efficient, well-structured OOP applications. It's the foundation upon which you can create complex systems by building upon existing functionality.</p>
+</li>
+<li>
+<p>Java supports</p>
+<p>inheritance using classes.
+ a) Multiple b) <strong>Single</strong> c) Hierarchical d) Both b and c
+<strong>Ans:
+Single</strong></p>
+<p>Java's <strong>single inheritance</strong> model for classes means that a class can inherit from only one superclass, promoting simplicity and avoiding complexities associated with multiple inheritance. Let's explore why Java chose this path and the implications of <strong><em>single inheritance</em></strong>. In a <strong><em>single inheritance</em></strong> system, each class has only one direct parent class. This creates a clear and straightforward class hierarchy, resembling a tree structure where each branch has a single parent. This simplicity makes it easier to understand the relationships between <strong><em>classes</em></strong> and the flow of <strong><em>inheritance</em></strong>. For example, a <code>Dog</code> class might inherit from an <code>Animal</code> class, and an <code>Animal</code> class might inherit from a <code>LivingOrganism</code> class. Each class has a clear ancestor, making the hierarchy easy to follow. The primary reason Java enforces <strong><em>single inheritance</em></strong> is to avoid the</p>
+</li>
+</ol>
+
+                    </div>
+                    <aside class="related-posts">
+                        <div class="ad-sidebar container">
+                            <div class="ad-wrapper">
+    <span>Iklan Related</span>
+</div>
+                        </div>
+                        <h2 class="related-posts-title">Related Posts</h2><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/local-oas-validation-a-developers">Local OAS Validation: A Developer&#39;s Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-09T01:06:55+00:00">Aug 9, 2025</time>
+		                        <span class="view-count">
+									41 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/choosing-the-right-correlation-test">Choosing The Right Correlation Test For Continuous And Binary Variables</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-14T04:39:58+00:00">Jul 14, 2025</time>
+		                        <span class="view-count">
+									71 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/oops-posted-on-the-wrong">Oops! Posted On The Wrong Account? Delete And Prevent Social Media Fails</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-14T03:16:38+00:00">Jul 14, 2025</time>
+		                        <span class="view-count">
+									72 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/integrating-webrtc-vad-in-your">Integrating WebRTC VAD In Your C Project: A Complete Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-04T14:04:15+00:00">Aug 4, 2025</time>
+		                        <span class="view-count">
+									58 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/improving-keyboard-stability-a-guide">Improving Keyboard Stability A Guide To Upgrading Hot-Swap Sockets</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-17T02:37:17+00:00">Jul 17, 2025</time>
+		                        <span class="view-count">
+									66 views
+		                        </span>
+                            </div>
+                        </article>
+                    </aside>
+                    <aside class="related-posts"></aside>
+                </div>
+            </div>
+        </article>
+        <a href="#" class="back-to-top" id="backToTop" title="Back to top">
+        	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-bar-up" viewBox="0 0 16 16">
+			  <path fill-rule="evenodd" d="M3.646 11.854a.5.5 0 0 0 .708 0L8 8.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708M2.4 5.2c0 .22.18.4.4.4h10.4a.4.4 0 0 0 0-.8H2.8a.4.4 0 0 0-.4.4"/>
+			</svg>
+		</a>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 ANABEL</p>
+        </div>
+    </footer>
+    <script>
+    	(() => {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            const toggleMenu = () => {
+                navMenu.classList.toggle('nav-menu-active');
+                navToggle.classList.toggle('nav-toggle-active');
+            };
+            const backToTopHandler = (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            navToggle.addEventListener('click', toggleMenu);
+            document.getElementById('backToTop').addEventListener('click', backToTopHandler);
+            window.addEventListener('pagehide', () => {
+                navToggle.removeEventListener('click', toggleMenu);
+                document.getElementById('backToTop').removeEventListener('click', backToTopHandler);
+            });
+        })();
+		(() => {
+            window.addEventListener("DOMContentLoaded", (event) => {
+                const ellHljs = document.createElement("script");
+                ellHljs.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js");
+                ellHljs.onload = () => {
+                    hljs.highlightAll();
+                };
+                document.querySelector("body").append(ellHljs);
+                const ellFont = document.createElement("link");
+                ellFont.setAttribute("href", "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css");
+                ellFont.setAttribute("rel", "stylesheet");
+                document.querySelector("head").append(ellFont);
+                window.addEventListener('pagehide', () => {
+                    // ellHljs.remove();
+                    ellFont.remove();
+                });
+
+            });
+        })();
+    </script>
+    
+    
+    
+</body>
+</html>

@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Finding Docker Container By Host PID Of Crashed Process A Comprehensive Guide</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Finding Docker Container By Host PID Of Crashed Process A Comprehensive Guide...">
+    <link rel="canonical" href="https://catatansoal.github.io/blog/finding-docker-container-by-host">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Finding Docker Container By Host PID Of Crashed Process A Comprehensive Guide">
+	<meta property="og:description" content="Finding Docker Container By Host PID Of Crashed Process A Comprehensive Guide...">
+	<meta property="og:url" content="https://catatansoal.github.io/blog/finding-docker-container-by-host">
+	<meta property="og:site_name" content="ANABEL">
+	<meta property="article:published_time" content="2025-07-14T10:41:39+00:00">
+	<meta property="article:author" content="ADMIN">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+    <link rel="preload" fetchpriority="high" as="image" href="https://tse4.mm.bing.net/th?q=Finding%20Docker%20Container%20by%20Host%20PID%20of%20a%20Crashed%20Process%3A%20A%20Comprehensive%20Guide">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style type="text/css">
+    	:root{--primary-color:#3740ff;--text-color:#202124;--background-color:#ffffff;--gray-100:#f8f9fa;--gray-200:#e9ecef}*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;line-height:1.6;color:var(--text-color);background-color:var(--background-color)}.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}.header{background-color:var(--background-color);border-bottom:1px solid var(--gray-200);position:sticky;top:0;z-index:100}.nav{padding:.5rem 0}.nav-container{display:flex;justify-content:space-between;align-items:center;gap:1rem}.nav-left{display:flex;align-items:center;flex-shrink:0}.logo{font-weight:700;color:var(--primary-color)}.blog-tag{margin-left:1rem;padding:.25rem .5rem;background-color:var(--gray-100);border-radius:4px;font-size:.875rem}.nav-search{flex-grow:1;max-width:300px}.search-form{position:relative;width:100%}.search-input{width:100%;padding:.5rem 2.5rem .5rem 1rem;border:1px solid var(--gray-200);border-radius:24px;font-size:.875rem;transition:all 0.2s}.search-input:focus{outline:none;border-color:var(--primary-color);box-shadow:0 0 0 2px rgb(55 64 255 / .1)}.search-button{position:absolute;right:.5rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#5f6368;cursor:pointer;padding:.25rem;display:flex;align-items:center;justify-content:center}.search-button:hover{color:var(--primary-color)}.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:.5rem}.hamburger{display:block;position:relative;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before,.hamburger::after{content:'';position:absolute;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before{top:-6px}.hamburger::after{bottom:-6px}.nav-toggle-active .hamburger{background:#fff0}.nav-toggle-active .hamburger::before{transform:rotate(45deg);top:0}.nav-toggle-active .hamburger::after{transform:rotate(-45deg);bottom:0}.nav-list{display:flex;list-style:none;gap:2rem}.nav-link{color:var(--text-color);text-decoration:none;font-size:.9rem;transition:color 0.2s}.nav-link:hover{color:var(--primary-color)}.article-header{padding:2rem 0;background-color:var(--gray-100)}.article-layout{display:grid;grid-template-columns:1fr 350px;gap:3rem;padding:1rem 0;align-items: start}h1,h2,h3,h4,h5,h6{font-family:"Crimson Text","Times New Roman",Times,serif}h1{font-size:2.5rem;line-height:1.2;margin-bottom:1rem}.meta{color:#5f6368;font-size:.875rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}.view-count{display:inline-flex;align-items:center;gap:.25rem}.view-count svg{color:#5f6368}.content{min-width:0;border-bottom:1px solid #dddddd5e;margin-top:1rem;white-space:pre-line !important;overflow-wrap:break-word;overflow-x:auto;word-break:break-word}.lead{font-size:1.25rem;color:#5f6368;margin-bottom:2rem}h2,h3,h4,h5,h6{font-size:1.75rem;margin:1rem 0 1rem}p,pre,ol,ul>li{margin-bottom:1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;font-size:1.3rem;text-align: justify;}p>code{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px}hr{margin:1rem 0 1rem 0}.code-example{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;margin:1.5rem 0;overflow-x:auto}code{font-family:'Roboto Mono',monospace;font-size:.875rem}ul{margin:.2rem 0;padding-left:1.5rem}.related-posts{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;position:sticky;top:5rem}.related-posts-title,.newpost-posts-list{font-size:1.75rem;margin:0 0 1rem}.related-posts-list{display:flex;flex-direction:column;gap:.5rem}.related-post,.newpost-post{border-bottom:1px solid #ddd;padding-bottom:10px;margin-bottom:10px}.related-post:last-child,.newpost-post:last-child{padding-bottom:0;border-bottom:none}.related-post-title,.newpost-post-title{font-size:1.2rem;margin:0 0 .1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;}.related-post-title a,.newpost-post-title a{color:var(--text-color);text-decoration:none;transition:color 0.2s}.related-post-title a:hover,.newpost-post-title a:hover{color:var(--primary-color)}.related-post time{font-size:.875rem;color:#5f6368}.footer{background-color:var(--gray-100);padding:2rem 0;margin-top:4rem;color:#5f6368;font-size:.875rem}.nav-menu>ul>li{margin-bottom:0}@media (max-width:1024px){.container{max-width:800px}.article-layout{grid-template-columns:1fr;gap:2rem}.related-posts{position:static}}@media (max-width:768px){.nav-container{flex-wrap:wrap}.nav-search{order:3;max-width:none;width:100%;margin-top:.1rem}.nav-toggle{display:block}.nav-menu{display:none;position:absolute;top:100%;left:0;right:0;background:var(--background-color);padding:1rem 0;border-bottom:1px solid var(--gray-200)}.nav-menu-active{display:block}.nav-list{flex-direction:column;gap:.1rem;padding:0 1.5rem}.nav-link{display:block;padding:.2rem 0}h1{font-size:2rem}.article-header{padding:2rem 0}.content{padding:.1rem 0}}table{width:100%;border-collapse:collapse;margin:20px 0;font-family:'Arial',sans-serif}th,td{padding:12px 15px;text-align:left;border:1px solid #ddd}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9}tr:nth-child(even) td{background-color:#f2f2f2}@media screen and (max-width:768px){table{border:0;display:block;overflow-x:auto;white-space:nowrap}th,td{padding:10px;text-align:right}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9;border-bottom:1px solid #ddd}tr:nth-child(even) td{background-color:#f2f2f2}}a{text-decoration:none;color:#540707}.katex-html{padding: .2rem;color: #000;font-weight: 700;font-size: 1.3rem;overflow-wrap: break-word;max-width: 100%;white-space: normal !important}.category{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin:1rem 0 1rem 0}.tag{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px;font-family:"Newsreader",serif}.tag>a{text-decoration:none;color:#000}img{margin:auto;display:block;max-width:100%;height:auto;margin-bottom:1rem}.katex{white-space: pre-line !important;display: inline-block;max-width: 100%;overflow-x: auto;overflow-y: hidden;scrollbar-width: thin;overflow-wrap: break-word;word-break: break-word;vertical-align: -7px}.content > p {overflow-wrap: break-word;word-break: break-word}
+    </style>
+    <style type="text/css">
+    	pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}
+		.hljs{color:#c9d1d9;background:#0d1117}.hljs-doctag,.hljs-keyword,.hljs-meta .hljs-keyword,.hljs-template-tag,.hljs-template-variable,.hljs-type,.hljs-variable.language_{color:#ff7b72}.hljs-title,.hljs-title.class_,.hljs-title.class_.inherited__,.hljs-title.function_{color:#d2a8ff}.hljs-attr,.hljs-attribute,.hljs-literal,.hljs-meta,.hljs-number,.hljs-operator,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-variable{color:#79c0ff}.hljs-meta .hljs-string,.hljs-regexp,.hljs-string{color:#a5d6ff}.hljs-built_in,.hljs-symbol{color:#ffa657}.hljs-code,.hljs-comment,.hljs-formula{color:#8b949e}.hljs-name,.hljs-quote,.hljs-selector-pseudo,.hljs-selector-tag{color:#7ee787}.hljs-subst{color:#c9d1d9}.hljs-section{color:#1f6feb;font-weight:700}.hljs-bullet{color:#f2cc60}.hljs-emphasis{color:#c9d1d9;font-style:italic}.hljs-strong{color:#c9d1d9;font-weight:700}.hljs-addition{color:#aff5b4;background-color:#033a16}.hljs-deletion{color:#ffdcd7;background-color:#67060c}
+    	pre{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;font-weight:400;word-break:break-word;word-wrap:break-word;box-sizing:inherit;border-radius:4px;overflow-x:auto;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}code{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;word-wrap:break-word;word-break:break-word;font-style:normal;line-height:20px;letter-spacing:-.003em;box-sizing:inherit;font-weight:400;font-size:75%;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}
+    </style>
+    <style type="text/css">
+    	.back-to-top{position:fixed;bottom:20px;right:20px;background-color:#a73f3f;color:#fff;padding:8px 10px;border-radius:50%;box-shadow:0 4px 6px rgb(0 0 0 / .2);font-size:10px;font-weight:700;text-decoration:none;text-align:center;transition:opacity 0.3s ease,visibility 0.3s ease;z-index:99999;opacity:1;visibility:visible}.back-to-top:hover{background-color:#0056b3}
+    </style>
+    <style type="text/css">
+        .ad-header {margin: 1rem auto 1rem;background-color: #fdfdfd;text-align: center;display: block;}.ad-header .ad-wrapper {min-height: 90px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #555;font-weight: 500;padding: 3rem;border: 1px dashed #ccc;border-radius: 6px;}@media (max-width: 768px) {.ad-header {padding: 0.75rem;}}.ad-sidebar {margin: 0 0 1rem;background-color: #fefefe;text-align: center;padding: 0px;width: 100%;max-width: 100%;display: block;}.ad-sidebar .ad-wrapper {min-height: 250px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #444;font-weight: 500;border: 1px dashed #aaa;border-radius: 6px;padding: 0rem;}@media (max-width: 1024px) {.ad-sidebar {padding: 0.75rem;}}
+    </style>
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://catatansoal.github.io/blog/finding-docker-container-by-host"
+          },
+          "headline": "Finding Docker Container By Host PID Of Crashed Process A Comprehensive Guide",
+          "description": "Finding Docker Container By Host PID Of Crashed Process A Comprehensive Guide...",
+          "image": [
+            "https://tse4.mm.bing.net/th?q=Finding%20Docker%20Container%20by%20Host%20PID%20of%20a%20Crashed%20Process%3A%20A%20Comprehensive%20Guide"
+          ],
+          "author": {
+            "@type": "Person",
+            "name": "ADMIN",
+            "jobTitle": "Editor web"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "ANABEL",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://tse4.mm.bing.net/th?q=ANABEL%20WEB"
+            }
+          },
+          "datePublished": "2025-07-14T10:41:39+00:00",
+          "dateModified": "2025-07-14T10:41:39+00:00"
+        }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="container nav-container">
+                <div class="nav-left">
+                    <span class="logo">ANABEL</span>
+                    <span class="blog-tag">Article</span>
+                </div>
+                <div class="nav-search">
+                    <form class="search-form" role="search">
+                        <input 
+                            type="search" 
+                            class="search-input"
+                            placeholder="Search articles..."
+                            aria-label="Search articles"
+                        >
+                        <button type="submit" class="search-button" aria-label="Submit search">🔎</button>
+                    </form>
+                </div>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+                <div class="nav-menu">
+                    <ul class="nav-list">
+                    	<li><a href="/" class="nav-link">HOME</a></li>
+                        <li><a href="/pages/About" class="nav-link">About</a></li>
+                        <li><a href="/pages/Contact" class="nav-link">Contact</a></li>
+                        <li><a href="/pages/Disclaimer" class="nav-link">Disclaimer</a></li>
+                        <li><a href="/pages/Privacy" class="nav-link">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="main">
+        <article class="article">
+            <header class="article-header">
+                <div class="container">
+                    <h1>Finding Docker Container By Host PID Of Crashed Process A Comprehensive Guide</h1>
+                    <div class="meta">
+                        <time datetime="2025-07-14T10:41:39+00:00">Jul 14, 2025</time>
+                        <span class="author">by ADMIN</span>
+                        <span class="view-count">
+                            <span id="viewCount">78</span> views
+                        </span>
+                    </div>
+                </div>
+            </header>
+            <div class="ad-header container">
+                <div class="ad-wrapper">
+    Iklan Headers
+</div>
+            </div>
+            <div class="container">
+                <div class="article-layout">
+                    <div class="content">
+                        <img src="https://tse4.mm.bing.net/th?q=Finding%20Docker%20Container%20by%20Host%20PID%20of%20a%20Crashed%20Process%3A%20A%20Comprehensive%20Guide" title="Finding Docker Container by Host PID of a Crashed Process: A Comprehensive Guide" width="300" height="200"/>
+<p>Have you ever encountered a situation where a process within a Docker container crashes, leaving you with a core dump on the host system and scratching your head about which container the process belonged to? <strong>Finding the Docker container</strong> associated with a crashed process, identified by its host PID, can be a crucial step in debugging and resolving issues. This comprehensive guide dives deep into the techniques and tools you can use to achieve this, ensuring you're well-equipped to handle such scenarios. Guys, let's get started and explore this topic together!</p>
+<h2>Understanding the Challenge</h2>
+<p>Before we jump into the solutions, it's important to understand why this task can be tricky. Docker containers, while providing isolation, share the host kernel. This means that processes running inside containers have PIDs that are visible on the host, but these PIDs are relative to the host's PID namespace, not the container's. The challenge lies in mapping a host PID back to its corresponding container. When dealing with core dumps, which are essentially snapshots of a process's memory at the time of a crash, having the correct container context is vital for effective debugging. Core dumps captured on the host need to be directed into volumes mounted within the containers that triggered them, especially in dynamically created container environments. The goal is to automate the process of identifying the container responsible for the crash, making the debugging workflow smoother and more efficient. This involves understanding how Docker manages processes and namespaces, and leveraging tools that can bridge the gap between the host's view and the container's perspective.</p>
+<h2>Methods to Identify Docker Container by Host PID</h2>
+<p>Several methods can be employed to <strong>identify the Docker container</strong> associated with a host PID. Each approach has its strengths and weaknesses, and the best choice often depends on the specific environment and tools available. We'll explore the most effective techniques, providing practical examples and step-by-step instructions.</p>
+<h3>1. Using <code>docker inspect</code></h3>
+<p>The <code>docker inspect</code> command is a powerful tool for retrieving detailed information about Docker objects, including containers. By inspecting a container, you can access its PID within the container's namespace. However, to use this method, you first need to narrow down the list of potential containers. Here's how you can use <code>docker inspect</code> in conjunction with other tools to pinpoint the correct container:</p>
+<ol>
+<li><strong>Identify the Parent Process:</strong> Often, the crashed process will have a parent process that is directly managed by Docker, such as the container's entrypoint process. You can use tools like <code>ps</code> or <code>pstree</code> on the host to trace the parent-child relationships of processes. For example, <code>ps -ef | grep &lt;host_pid&gt;</code> can show you the process and its parent PID.</li>
+<li><strong>List Running Containers:</strong> Use <code>docker ps</code> to get a list of all running containers. This will give you the container IDs and names.</li>
+<li><strong>Inspect Potential Containers:</strong> For each potential container, use <code>docker inspect &lt;container_id&gt;</code> and look for the <code>Pid</code> field in the output. This field represents the PID of the container's main process within the host's PID namespace.</li>
+<li><strong>Compare PIDs:</strong> If the PID from <code>docker inspect</code> matches the parent PID you identified in step 1, you've likely found the container associated with the crashed process.</li>
+</ol>
+<p>This method is reliable but can be time-consuming if you have a large number of containers. It requires manual intervention and comparison of PIDs, which might not be ideal in automated environments.</p>
+<h3>2. Leveraging cgroups</h3>
+<p>cgroups (Control Groups) are a Linux kernel feature that Docker uses to isolate and manage container resources. Each Docker container has its own cgroup, and this cgroup contains information about all the processes running within the container. This makes cgroups a valuable resource for mapping host PIDs to containers. The cgroup filesystem exposes this information in a structured way, allowing you to programmatically retrieve the container ID associated with a given PID.</p>
+<p>Here's how you can use cgroups to <strong>find the Docker container</strong>:</p>
+<ol>
+<li><strong>Locate the cgroup Directory:</strong> The cgroup filesystem is typically mounted at <code>/sys/fs/cgroup</code>. Within this directory, Docker creates subdirectories for each container, usually under the <code>docker</code> or <code>system.slice</code> cgroup.</li>
+<li><strong>Navigate to the PID's cgroup:</strong> For a given host PID, you can find its cgroup by examining the <code>/proc/&lt;host_pid&gt;/cgroup</code> file. This file contains a list of cgroup paths associated with the process.</li>
+<li><strong>Extract the Container ID:</strong> The cgroup path will typically include the container ID. For example, a path might look like <code>/sys/fs/cgroup/pids/docker/&lt;container_id&gt;</code>. You can extract the container ID from this path.</li>
+</ol>
+<p>This method is more efficient than <code>docker inspect</code> for automated scenarios because it allows you to directly map a PID to a container ID without iterating through all containers. However, it requires familiarity with the cgroup filesystem and how Docker organizes cgroups.</p>
+<h3>3. Using <code>docker top</code></h3>
+<p>The <code>docker top</code> command displays the processes running inside a container, but it doesn't directly provide the host PID. However, it can be used in conjunction with other tools to narrow down the possibilities. You can run <code>docker top &lt;container_id&gt;</code> for each potential container to see the processes running inside. If you can identify the crashed process by its name or other characteristics, you can then use <code>docker inspect</code> or cgroups to confirm the container.</p>
+<p>This method is less direct than the previous two but can be helpful in situations where you have some information about the crashed process but not its host PID.</p>
+<h3>4. Utilizing Third-Party Tools and Scripts</h3>
+<p>Several third-party tools and scripts are designed to simplify the process of mapping host PIDs to Docker containers. These tools often automate the steps involved in using <code>docker inspect</code> or cgroups, providing a more user-friendly interface. Examples include custom scripts that parse cgroup information or tools that integrate with container monitoring systems. These scripts are helpful in dynamic environments where automation is key.</p>
+<h2>Practical Example: Automating Core Dump Redirection</h2>
+<p>Now, let's consider the original problem: setting up redirection of core dumps captured on the host into volumes mounted in the containers that caused them. This is a common requirement in production environments where debugging crashes is critical. The following example demonstrates how you can automate this process using a combination of cgroups and a simple script. The goal is to ensure that core dumps are captured and stored within the relevant container's volume, making it easier to diagnose issues.</p>
+<ol>
+<li>
+<p><strong>Capture Core Dumps:</strong> Configure the host system to capture core dumps. This typically involves setting the <code>kernel.core_pattern</code> sysctl setting to a script that will handle the core dump.</p>
+</li>
+<li>
+<p><strong>Script to Identify Container and Redirect Core Dump:</strong> Write a script that will be executed when a core dump is generated. This script should:</p>
+<ul>
+<li>Receive the host PID of the crashed process as an argument.</li>
+<li>Use the cgroups method described above to determine the container ID associated with the PID.</li>
+<li>Determine the mount point of the container's volume. This information can be retrieved using <code>docker inspect</code>.</li>
+<li>Move the core dump file to the appropriate directory within the container's volume.</li>
+</ul>
+</li>
+<li>
+<p><strong>Example Script (Conceptual):</strong></p>
+<pre><code class="hljs">#!/bin/bash
+
+host_pid=$1
+
+# Get container ID from cgroups
+container_id=$(awk &#39;/docker/ {print $0}&#39; /proc/$host_pid/cgroup | sed -E &#39;s/^.*docker
+</code></pre>
+</li>
+</ol>
+<p>/(.*)$/1/' | tr -d '\n')</p>
+<pre><code>if [ -z &quot;$container_id&quot; ]; then
+  echo &quot;Could not determine container ID for PID $host_pid&quot; &gt;&amp;2
+  exit 1
+fi
+
+# Get container inspect in JSON format
+container_inspect_json=$(docker inspect &quot;$container_id&quot;)
+
+# if container inspect returned an empty string, exit with an error
+if [ -z &quot;$container_inspect_json&quot; ]; then
+  echo &quot;Could not inspect container with id '$container_id'&quot; &gt;&amp;2
+  exit 1
+fi
+
+# Get volume mount path from container inspect
+volume_mount_path=$(echo &quot;$container_inspect_json&quot; | jq -r '.[0].Mounts[].Destination' | grep '/path/inside/container')
+
+# if the mount path is empty, log error and exit
+if [ -z &quot;$volume_mount_path&quot; ]; then
+    echo &quot;Mount path is empty, core dump will not be saved&quot; &gt;&amp;2
+    exit 1
+fi
+
+# Get container volume mount source
+container_volume_mount_source=$(echo &quot;$container_inspect_json&quot; | jq -r '.[0].Mounts[] | select(.Destination == &quot;'$volume_mount_path'&quot;) | .Source')
+
+# if the container volume mount source is empty, log error and exit
+if [ -z &quot;$container_volume_mount_source&quot; ]; then
+    echo &quot;Volume mount source is empty, core dump will not be saved&quot; &gt;&amp;2
+    exit 1
+fi
+
+# Move core dump to container volume directory
+core_dump_path=&quot;$container_volume_mount_source/core.$(date +%s).$host_pid&quot;
+mv /tmp/core.$host_pid $core_dump_path
+
+echo &quot;Core dump for PID $host_pid saved to $core_dump_path&quot;
+```
+
+**Disclaimer:** *This script is conceptual and requires adaptation to fit your specific environment. You'll need to replace `/tmp/core.$host_pid` and `/path/inside/container` with your actual paths.* Also, the script assumes you're capturing core dumps in `/tmp` and have a volume mounted at `/path/inside/container` within your container. Adjust these paths according to your setup.
+</code></pre>
+<p>This automated approach ensures that core dumps are correctly associated with their respective containers, streamlining the debugging process and saving valuable time.</p>
+<h2>Troubleshooting and Best Practices</h2>
+<p>While mapping host PIDs to Docker containers can be straightforward, certain scenarios can present challenges. Here are some troubleshooting tips and best practices to keep in mind:</p>
+<ul>
+<li><strong>PID Reuse:</strong> Be aware that PIDs can be reused over time. If a process exits and another starts, it might be assigned the same PID. Therefore, it's crucial to perform the mapping as soon as possible after the crash.</li>
+<li><strong>Container Restarts:</strong> If a container restarts, its PIDs will change. This means that a core dump captured before the restart will not be associated with the new container instance.</li>
+<li><strong>Namespaces:</strong> Remember that PIDs are namespace-specific. The host PID is different from the PID within the container. Use the methods described above to correctly map between these namespaces.</li>
+<li><strong>Logging:</strong> Implement proper logging within your containers to help identify the cause of crashes. Log messages can provide valuable context when analyzing core dumps.</li>
+<li><strong>Monitoring:</strong> Use container monitoring tools to track resource usage and identify potential issues before they lead to crashes. Proactive monitoring can prevent many problems and reduce the need for debugging core dumps.</li>
+<li><strong>Security:</strong> Ensure that your core dump redirection scripts are secure and do not introduce vulnerabilities. Avoid storing sensitive information in core dumps.</li>
+</ul>
+<h2>Conclusion</h2>
+<p>Identifying the Docker container associated with a host PID is a crucial skill for debugging and managing containerized applications. By understanding the methods described in this guide, you can effectively map PIDs to containers, automate core dump redirection, and troubleshoot issues more efficiently. Guys, remember to leverage the tools and techniques that best suit your environment and always prioritize automation and best practices to ensure a smooth and reliable containerized environment. Happy debugging!</p>
+
+                    </div>
+                    <aside class="related-posts">
+                        <div class="ad-sidebar container">
+                            <div class="ad-wrapper">
+    <span>Iklan Related</span>
+</div>
+                        </div>
+                        <h2 class="related-posts-title">Related Posts</h2><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/solving-biker-race-distances-using">Solving Biker Race Distances Using Matrix Equations</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-24T15:02:52+00:00">Jul 24, 2025</time>
+		                        <span class="view-count">
+									51 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/manifest-a-job-your-guide">Manifest A Job: Your Guide To Career Success</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-02T07:43:20+00:00">Aug 2, 2025</time>
+		                        <span class="view-count">
+									44 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/install-unpacked-chrome-extension-for">Install Unpacked Chrome Extension For Multiple Users A Comprehensive Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-13T22:55:30+00:00">Jul 13, 2025</time>
+		                        <span class="view-count">
+									74 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/highlighting-vs-outlining-in-science">Highlighting Vs Outlining In Science Textbooks Which Study Method Is Best</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-27T20:26:49+00:00">Jul 27, 2025</time>
+		                        <span class="view-count">
+									73 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/what-is-a-memetic-proxy">What Is A Memetic Proxy In AI Prompt Engineering?</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-13T19:38:59+00:00">Jul 13, 2025</time>
+		                        <span class="view-count">
+									49 views
+		                        </span>
+                            </div>
+                        </article>
+                    </aside>
+                    <aside class="related-posts"></aside>
+                </div>
+            </div>
+        </article>
+        <a href="#" class="back-to-top" id="backToTop" title="Back to top">
+        	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-bar-up" viewBox="0 0 16 16">
+			  <path fill-rule="evenodd" d="M3.646 11.854a.5.5 0 0 0 .708 0L8 8.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708M2.4 5.2c0 .22.18.4.4.4h10.4a.4.4 0 0 0 0-.8H2.8a.4.4 0 0 0-.4.4"/>
+			</svg>
+		</a>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 ANABEL</p>
+        </div>
+    </footer>
+    <script>
+    	(() => {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            const toggleMenu = () => {
+                navMenu.classList.toggle('nav-menu-active');
+                navToggle.classList.toggle('nav-toggle-active');
+            };
+            const backToTopHandler = (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            navToggle.addEventListener('click', toggleMenu);
+            document.getElementById('backToTop').addEventListener('click', backToTopHandler);
+            window.addEventListener('pagehide', () => {
+                navToggle.removeEventListener('click', toggleMenu);
+                document.getElementById('backToTop').removeEventListener('click', backToTopHandler);
+            });
+        })();
+		(() => {
+            window.addEventListener("DOMContentLoaded", (event) => {
+                const ellHljs = document.createElement("script");
+                ellHljs.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js");
+                ellHljs.onload = () => {
+                    hljs.highlightAll();
+                };
+                document.querySelector("body").append(ellHljs);
+                const ellFont = document.createElement("link");
+                ellFont.setAttribute("href", "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css");
+                ellFont.setAttribute("rel", "stylesheet");
+                document.querySelector("head").append(ellFont);
+                window.addEventListener('pagehide', () => {
+                    // ellHljs.remove();
+                    ellFont.remove();
+                });
+
+            });
+        })();
+    </script>
+    
+    
+    
+</body>
+</html>

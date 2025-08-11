@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>RabbitMQ Multiple Consumers Same Queue - Message Delivery Explained</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="RabbitMQ Multiple Consumers Same Queue - Message Delivery Explained...">
+    <link rel="canonical" href="https://catatansoal.github.io/blog/rabbitmq-multiple-consumers-same-queue">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="RabbitMQ Multiple Consumers Same Queue - Message Delivery Explained">
+	<meta property="og:description" content="RabbitMQ Multiple Consumers Same Queue - Message Delivery Explained...">
+	<meta property="og:url" content="https://catatansoal.github.io/blog/rabbitmq-multiple-consumers-same-queue">
+	<meta property="og:site_name" content="ANABEL">
+	<meta property="article:published_time" content="2025-07-14T10:44:07+00:00">
+	<meta property="article:author" content="ADMIN">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+    <link rel="preload" fetchpriority="high" as="image" href="https://tse4.mm.bing.net/th?q=RabbitMQ%20Multiple%20Consumers%20and%20Message%20Delivery">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style type="text/css">
+    	:root{--primary-color:#3740ff;--text-color:#202124;--background-color:#ffffff;--gray-100:#f8f9fa;--gray-200:#e9ecef}*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;line-height:1.6;color:var(--text-color);background-color:var(--background-color)}.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}.header{background-color:var(--background-color);border-bottom:1px solid var(--gray-200);position:sticky;top:0;z-index:100}.nav{padding:.5rem 0}.nav-container{display:flex;justify-content:space-between;align-items:center;gap:1rem}.nav-left{display:flex;align-items:center;flex-shrink:0}.logo{font-weight:700;color:var(--primary-color)}.blog-tag{margin-left:1rem;padding:.25rem .5rem;background-color:var(--gray-100);border-radius:4px;font-size:.875rem}.nav-search{flex-grow:1;max-width:300px}.search-form{position:relative;width:100%}.search-input{width:100%;padding:.5rem 2.5rem .5rem 1rem;border:1px solid var(--gray-200);border-radius:24px;font-size:.875rem;transition:all 0.2s}.search-input:focus{outline:none;border-color:var(--primary-color);box-shadow:0 0 0 2px rgb(55 64 255 / .1)}.search-button{position:absolute;right:.5rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#5f6368;cursor:pointer;padding:.25rem;display:flex;align-items:center;justify-content:center}.search-button:hover{color:var(--primary-color)}.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:.5rem}.hamburger{display:block;position:relative;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before,.hamburger::after{content:'';position:absolute;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before{top:-6px}.hamburger::after{bottom:-6px}.nav-toggle-active .hamburger{background:#fff0}.nav-toggle-active .hamburger::before{transform:rotate(45deg);top:0}.nav-toggle-active .hamburger::after{transform:rotate(-45deg);bottom:0}.nav-list{display:flex;list-style:none;gap:2rem}.nav-link{color:var(--text-color);text-decoration:none;font-size:.9rem;transition:color 0.2s}.nav-link:hover{color:var(--primary-color)}.article-header{padding:2rem 0;background-color:var(--gray-100)}.article-layout{display:grid;grid-template-columns:1fr 350px;gap:3rem;padding:1rem 0;align-items: start}h1,h2,h3,h4,h5,h6{font-family:"Crimson Text","Times New Roman",Times,serif}h1{font-size:2.5rem;line-height:1.2;margin-bottom:1rem}.meta{color:#5f6368;font-size:.875rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}.view-count{display:inline-flex;align-items:center;gap:.25rem}.view-count svg{color:#5f6368}.content{min-width:0;border-bottom:1px solid #dddddd5e;margin-top:1rem;white-space:pre-line !important;overflow-wrap:break-word;overflow-x:auto;word-break:break-word}.lead{font-size:1.25rem;color:#5f6368;margin-bottom:2rem}h2,h3,h4,h5,h6{font-size:1.75rem;margin:1rem 0 1rem}p,pre,ol,ul>li{margin-bottom:1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;font-size:1.3rem;text-align: justify;}p>code{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px}hr{margin:1rem 0 1rem 0}.code-example{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;margin:1.5rem 0;overflow-x:auto}code{font-family:'Roboto Mono',monospace;font-size:.875rem}ul{margin:.2rem 0;padding-left:1.5rem}.related-posts{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;position:sticky;top:5rem}.related-posts-title,.newpost-posts-list{font-size:1.75rem;margin:0 0 1rem}.related-posts-list{display:flex;flex-direction:column;gap:.5rem}.related-post,.newpost-post{border-bottom:1px solid #ddd;padding-bottom:10px;margin-bottom:10px}.related-post:last-child,.newpost-post:last-child{padding-bottom:0;border-bottom:none}.related-post-title,.newpost-post-title{font-size:1.2rem;margin:0 0 .1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;}.related-post-title a,.newpost-post-title a{color:var(--text-color);text-decoration:none;transition:color 0.2s}.related-post-title a:hover,.newpost-post-title a:hover{color:var(--primary-color)}.related-post time{font-size:.875rem;color:#5f6368}.footer{background-color:var(--gray-100);padding:2rem 0;margin-top:4rem;color:#5f6368;font-size:.875rem}.nav-menu>ul>li{margin-bottom:0}@media (max-width:1024px){.container{max-width:800px}.article-layout{grid-template-columns:1fr;gap:2rem}.related-posts{position:static}}@media (max-width:768px){.nav-container{flex-wrap:wrap}.nav-search{order:3;max-width:none;width:100%;margin-top:.1rem}.nav-toggle{display:block}.nav-menu{display:none;position:absolute;top:100%;left:0;right:0;background:var(--background-color);padding:1rem 0;border-bottom:1px solid var(--gray-200)}.nav-menu-active{display:block}.nav-list{flex-direction:column;gap:.1rem;padding:0 1.5rem}.nav-link{display:block;padding:.2rem 0}h1{font-size:2rem}.article-header{padding:2rem 0}.content{padding:.1rem 0}}table{width:100%;border-collapse:collapse;margin:20px 0;font-family:'Arial',sans-serif}th,td{padding:12px 15px;text-align:left;border:1px solid #ddd}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9}tr:nth-child(even) td{background-color:#f2f2f2}@media screen and (max-width:768px){table{border:0;display:block;overflow-x:auto;white-space:nowrap}th,td{padding:10px;text-align:right}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9;border-bottom:1px solid #ddd}tr:nth-child(even) td{background-color:#f2f2f2}}a{text-decoration:none;color:#540707}.katex-html{padding: .2rem;color: #000;font-weight: 700;font-size: 1.3rem;overflow-wrap: break-word;max-width: 100%;white-space: normal !important}.category{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin:1rem 0 1rem 0}.tag{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px;font-family:"Newsreader",serif}.tag>a{text-decoration:none;color:#000}img{margin:auto;display:block;max-width:100%;height:auto;margin-bottom:1rem}.katex{white-space: pre-line !important;display: inline-block;max-width: 100%;overflow-x: auto;overflow-y: hidden;scrollbar-width: thin;overflow-wrap: break-word;word-break: break-word;vertical-align: -7px}.content > p {overflow-wrap: break-word;word-break: break-word}
+    </style>
+    <style type="text/css">
+    	pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}
+		.hljs{color:#c9d1d9;background:#0d1117}.hljs-doctag,.hljs-keyword,.hljs-meta .hljs-keyword,.hljs-template-tag,.hljs-template-variable,.hljs-type,.hljs-variable.language_{color:#ff7b72}.hljs-title,.hljs-title.class_,.hljs-title.class_.inherited__,.hljs-title.function_{color:#d2a8ff}.hljs-attr,.hljs-attribute,.hljs-literal,.hljs-meta,.hljs-number,.hljs-operator,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-variable{color:#79c0ff}.hljs-meta .hljs-string,.hljs-regexp,.hljs-string{color:#a5d6ff}.hljs-built_in,.hljs-symbol{color:#ffa657}.hljs-code,.hljs-comment,.hljs-formula{color:#8b949e}.hljs-name,.hljs-quote,.hljs-selector-pseudo,.hljs-selector-tag{color:#7ee787}.hljs-subst{color:#c9d1d9}.hljs-section{color:#1f6feb;font-weight:700}.hljs-bullet{color:#f2cc60}.hljs-emphasis{color:#c9d1d9;font-style:italic}.hljs-strong{color:#c9d1d9;font-weight:700}.hljs-addition{color:#aff5b4;background-color:#033a16}.hljs-deletion{color:#ffdcd7;background-color:#67060c}
+    	pre{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;font-weight:400;word-break:break-word;word-wrap:break-word;box-sizing:inherit;border-radius:4px;overflow-x:auto;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}code{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;word-wrap:break-word;word-break:break-word;font-style:normal;line-height:20px;letter-spacing:-.003em;box-sizing:inherit;font-weight:400;font-size:75%;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}
+    </style>
+    <style type="text/css">
+    	.back-to-top{position:fixed;bottom:20px;right:20px;background-color:#a73f3f;color:#fff;padding:8px 10px;border-radius:50%;box-shadow:0 4px 6px rgb(0 0 0 / .2);font-size:10px;font-weight:700;text-decoration:none;text-align:center;transition:opacity 0.3s ease,visibility 0.3s ease;z-index:99999;opacity:1;visibility:visible}.back-to-top:hover{background-color:#0056b3}
+    </style>
+    <style type="text/css">
+        .ad-header {margin: 1rem auto 1rem;background-color: #fdfdfd;text-align: center;display: block;}.ad-header .ad-wrapper {min-height: 90px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #555;font-weight: 500;padding: 3rem;border: 1px dashed #ccc;border-radius: 6px;}@media (max-width: 768px) {.ad-header {padding: 0.75rem;}}.ad-sidebar {margin: 0 0 1rem;background-color: #fefefe;text-align: center;padding: 0px;width: 100%;max-width: 100%;display: block;}.ad-sidebar .ad-wrapper {min-height: 250px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #444;font-weight: 500;border: 1px dashed #aaa;border-radius: 6px;padding: 0rem;}@media (max-width: 1024px) {.ad-sidebar {padding: 0.75rem;}}
+    </style>
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://catatansoal.github.io/blog/rabbitmq-multiple-consumers-same-queue"
+          },
+          "headline": "RabbitMQ Multiple Consumers Same Queue - Message Delivery Explained",
+          "description": "RabbitMQ Multiple Consumers Same Queue - Message Delivery Explained...",
+          "image": [
+            "https://tse4.mm.bing.net/th?q=RabbitMQ%20Multiple%20Consumers%20and%20Message%20Delivery"
+          ],
+          "author": {
+            "@type": "Person",
+            "name": "ADMIN",
+            "jobTitle": "Editor web"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "ANABEL",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://tse4.mm.bing.net/th?q=ANABEL%20WEB"
+            }
+          },
+          "datePublished": "2025-07-14T10:44:07+00:00",
+          "dateModified": "2025-07-14T10:44:07+00:00"
+        }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="container nav-container">
+                <div class="nav-left">
+                    <span class="logo">ANABEL</span>
+                    <span class="blog-tag">Article</span>
+                </div>
+                <div class="nav-search">
+                    <form class="search-form" role="search">
+                        <input 
+                            type="search" 
+                            class="search-input"
+                            placeholder="Search articles..."
+                            aria-label="Search articles"
+                        >
+                        <button type="submit" class="search-button" aria-label="Submit search">🔎</button>
+                    </form>
+                </div>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+                <div class="nav-menu">
+                    <ul class="nav-list">
+                    	<li><a href="/" class="nav-link">HOME</a></li>
+                        <li><a href="/pages/About" class="nav-link">About</a></li>
+                        <li><a href="/pages/Contact" class="nav-link">Contact</a></li>
+                        <li><a href="/pages/Disclaimer" class="nav-link">Disclaimer</a></li>
+                        <li><a href="/pages/Privacy" class="nav-link">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="main">
+        <article class="article">
+            <header class="article-header">
+                <div class="container">
+                    <h1>RabbitMQ Multiple Consumers Same Queue - Message Delivery Explained</h1>
+                    <div class="meta">
+                        <time datetime="2025-07-14T10:44:07+00:00">Jul 14, 2025</time>
+                        <span class="author">by ADMIN</span>
+                        <span class="view-count">
+                            <span id="viewCount">68</span> views
+                        </span>
+                    </div>
+                </div>
+            </header>
+            <div class="ad-header container">
+                <div class="ad-wrapper">
+    Iklan Headers
+</div>
+            </div>
+            <div class="container">
+                <div class="article-layout">
+                    <div class="content">
+                        <img src="https://tse4.mm.bing.net/th?q=RabbitMQ%20Multiple%20Consumers%20and%20Message%20Delivery" title="RabbitMQ Multiple Consumers and Message Delivery" width="300" height="200"/>
+<p>Hey guys! Let's dive into a common question that pops up when working with RabbitMQ: <strong>Can multiple consumers subscribe to the same queue and receive the <em>same</em> message?</strong> The short answer is generally <strong>no</strong>, but let's unpack that a bit to understand why and explore the nuances. This article explores RabbitMQ's message delivery model when multiple consumers subscribe to the same queue. We'll clarify how RabbitMQ distributes messages and address scenarios where you might need multiple consumers to process a single message. So, stick around, and let’s unravel the message delivery magic of RabbitMQ!</p>
+<h2>Understanding RabbitMQ's Message Distribution</h2>
+<p>To understand why multiple consumers typically don't receive the same message from a queue, we need to grasp RabbitMQ's core message distribution mechanism. By default, RabbitMQ uses a <strong>round-robin</strong> approach. Think of it like dealing cards in a card game – each player gets a card in turn. When a message arrives in a queue, RabbitMQ looks at the available consumers subscribed to that queue and dispatches the message to the next consumer in line. This ensures that the workload is distributed evenly across the consumers, preventing any single consumer from being overwhelmed. This round-robin distribution is ideal for scenarios where you want to scale your message processing by adding more consumers. Each consumer takes its fair share of the load, leading to efficient and parallel processing. If you have a queue processing image resizing, for example, and you add more consumers, the messages will be distributed evenly, and the workload will be processed faster. Therefore, when consumer_1 and consumer_2 both subscribe to queue_1, and a single message arrives, RabbitMQ will send that message to either consumer_1 <strong>or</strong> consumer_2, but not both. This is the fundamental principle of RabbitMQ's default message distribution strategy, designed for efficient and scalable message processing.</p>
+<h3>Round-Robin Distribution in Detail</h3>
+<p>Let's break down the round-robin distribution in more detail. Imagine you have three consumers (Consumer A, Consumer B, and Consumer C) all subscribed to the same queue. When the first message arrives, RabbitMQ sends it to Consumer A. The second message goes to Consumer B, and the third message goes to Consumer C. The fourth message then loops back to Consumer A, and the cycle continues. This pattern ensures that each consumer gets a roughly equal share of the messages, providing a basic form of load balancing. The consumers do not need to acknowledge messages. Even if Consumer B is temporarily unavailable, RabbitMQ will continue sending messages to Consumer A and Consumer C. When Consumer B comes back online, it will start receiving new messages in the round-robin sequence. This inherent load balancing is a key advantage of RabbitMQ, as it allows you to easily scale your message processing capabilities by adding more consumers to the queue. There's no need for complex configuration or custom logic to distribute the workload. RabbitMQ handles it automatically. This makes it a robust and efficient solution for handling high message throughput in distributed systems. The round-robin approach minimizes the risk of bottlenecks and ensures that your application can handle varying workloads gracefully. To further enhance the understanding, imagine a scenario where you have a queue for processing email notifications. By adding more consumers to this queue, you can handle a larger volume of email requests without overwhelming a single consumer. This scalability is crucial for applications that experience peak loads or fluctuating traffic patterns.</p>
+<h2>Scenarios Where You Might Need the Same Message Delivered to Multiple Consumers</h2>
+<p>While the default round-robin approach is great for many use cases, there are situations where you might actually <em>want</em> multiple consumers to receive the same message. Think about scenarios like these:</p>
+<ul>
+<li><strong>Auditing:</strong> You might want to record every message processed by the system for compliance or debugging purposes. Sending a copy of each message to an auditing service ensures a complete log of activity.</li>
+<li><strong>Real-time Analytics:</strong> You might need to feed the same data stream into multiple analytics dashboards or processing pipelines.</li>
+<li><strong>Fanout Scenarios:</strong> Imagine you have a service that needs to notify multiple other services about an event. Each service might have its own specific way of handling the notification.</li>
+</ul>
+<p>In such cases, you need a different message delivery pattern than the default round-robin. This is where <strong>Fanout Exchanges</strong> come into play.</p>
+<h2>Fanout Exchanges: Broadcasting Messages</h2>
+<p>Fanout exchanges are a key concept in RabbitMQ for achieving message broadcasting. Unlike direct exchanges (which route messages to specific queues based on a routing key), fanout exchanges broadcast each message they receive to <em>all</em> queues bound to them. Think of it like a radio station – it broadcasts its signal, and anyone tuned to the correct frequency can receive it. In RabbitMQ terms, the fanout exchange acts as the radio station, and the queues bound to it are the listeners. When a message is published to a fanout exchange, a copy of that message is sent to every queue connected to it. This is the crucial difference from the round-robin approach, where only one consumer receives the message. To implement the scenarios we discussed earlier (auditing, real-time analytics, etc.), you would use a fanout exchange. You'd bind multiple queues to the exchange, each representing a different consumer or service that needs to receive a copy of the message. For example, if you have an auditing service and two analytics dashboards, you would create a fanout exchange and bind three queues to it – one for the auditing service and one for each dashboard. When a message is published to the fanout exchange, each of these three queues will receive a copy of the message. This ensures that all interested parties receive the data they need. In essence, fanout exchanges provide a publish-subscribe pattern, where publishers send messages to the exchange, and subscribers (queues) receive copies of those messages. This decoupling of publishers and subscribers is a powerful feature of RabbitMQ, enabling flexible and scalable system architectures.</p>
+<h3>Setting Up a Fanout Exchange</h3>
+<p>Setting up a fanout exchange in RabbitMQ is relatively straightforward. You first declare the exchange, specifying its type as &quot;fanout.&quot; Then, you create the queues that will receive the messages. The crucial step is to bind these queues to the fanout exchange. The binding tells RabbitMQ that messages published to the exchange should be routed to the bound queue. There's no routing key involved in fanout exchanges, as the exchange simply broadcasts messages to all bound queues. The code to set up a fanout exchange typically involves using the RabbitMQ client library for your programming language. You'll use methods to declare the exchange, declare the queues, and bind the queues to the exchange. The order of these operations is important. You typically declare the exchange first, then the queues, and finally the bindings. Once the setup is complete, any message published to the fanout exchange will be automatically copied to all bound queues, ensuring that all consumers attached to those queues receive the message. This broadcast mechanism is ideal for scenarios where you need to distribute information widely and efficiently. In addition to the basic setup, you can also configure other properties of the exchange and queues, such as durability (whether the exchange and queues survive broker restarts) and auto-delete (whether the exchange and queues are automatically deleted when they are no longer in use). These configurations help you tailor the RabbitMQ setup to your specific application requirements. It's worth noting that fanout exchanges can lead to higher message duplication, as each consumer receives a copy of the message. Therefore, it's important to carefully consider whether a fanout exchange is the right choice for your use case, weighing the benefits of broadcasting against the potential overhead of message duplication.</p>
+<h2>Other Exchange Types: Direct, Topic, and Headers</h2>
+<p>While fanout exchanges are perfect for broadcasting messages, RabbitMQ offers other exchange types to cater to different routing needs. Understanding these exchange types is crucial for designing efficient and flexible messaging architectures.</p>
+<ul>
+<li><strong>Direct Exchanges:</strong> As mentioned earlier, direct exchanges route messages to queues based on an exact match of the routing key. This is useful when you need to send messages to specific consumers or services based on their routing key. Think of it like sending a letter to a specific address – the routing key is the address, and the message is delivered only to the queue with that exact routing key binding.</li>
+<li><strong>Topic Exchanges:</strong> Topic exchanges are more flexible than direct exchanges, allowing you to route messages based on a pattern matching of the routing key. You can use wildcards in the routing key to match multiple queues. This is useful for implementing complex routing logic based on message topics or categories. Imagine a news feed where you want to route articles to different categories based on keywords in the title – a topic exchange would be ideal for this scenario.</li>
+<li><strong>Headers Exchanges:</strong> Headers exchanges route messages based on message headers instead of routing keys. This allows for more complex routing logic based on multiple attributes of the message. This can be useful when you need to route messages based on a combination of criteria, such as the message type and priority.</li>
+</ul>
+<p>Choosing the right exchange type depends on your specific application requirements. If you need to broadcast messages to all consumers, a fanout exchange is the way to go. If you need to route messages to specific consumers based on an exact routing key, a direct exchange is suitable. For pattern-based routing, a topic exchange is the best choice. And for routing based on message headers, a headers exchange provides the necessary flexibility. By understanding the strengths of each exchange type, you can design a robust and efficient messaging system that meets your needs.</p>
+<h2>Ensuring Message Processing and Acknowledgements</h2>
+<p>Regardless of the exchange type you use, it's crucial to ensure that messages are processed correctly and reliably. RabbitMQ provides a mechanism called <strong>acknowledgements</strong> to achieve this. When a consumer receives a message, it can send an acknowledgement back to RabbitMQ to confirm that the message was successfully processed. If a consumer fails to acknowledge a message (e.g., due to a crash or error), RabbitMQ can requeue the message and deliver it to another consumer. This ensures that messages are not lost and that processing is guaranteed. There are two types of acknowledgements: automatic and manual. In <strong>automatic acknowledgement</strong> mode, the consumer automatically sends an acknowledgement after receiving the message, regardless of whether it was processed successfully. This is the simplest mode but is also the least reliable, as messages can be lost if the consumer crashes after receiving the message but before processing it. <strong>Manual acknowledgement</strong> mode provides more control and reliability. In this mode, the consumer explicitly sends an acknowledgement after successfully processing the message. If the consumer crashes before sending the acknowledgement, RabbitMQ will requeue the message. Manual acknowledgements are the recommended approach for most production systems, as they provide the best guarantee of message delivery. To use manual acknowledgements, you need to configure your consumer to operate in this mode and explicitly call the acknowledgement method in your code after processing the message. This involves a bit more code but significantly improves the reliability of your messaging system. By using acknowledgements, you can ensure that messages are processed at least once, which is a fundamental requirement for many applications. You can also implement more complex message processing patterns, such as dead-letter exchanges, to handle messages that cannot be processed after multiple attempts.</p>
+<h2>Conclusion</h2>
+<p>So, can multiple consumers get the same message from the same queue in RabbitMQ? The answer, as we've seen, is generally no, thanks to the default round-robin distribution. However, by leveraging <strong>fanout exchanges</strong>, you can achieve message broadcasting and ensure that multiple consumers receive a copy of each message. Understanding the different exchange types and message acknowledgement mechanisms is key to building robust and scalable messaging systems with RabbitMQ. Remember to choose the right exchange type for your use case and implement acknowledgements to ensure reliable message processing. With these tools in your arsenal, you'll be well-equipped to tackle a wide range of messaging challenges. Happy messaging, guys!</p>
+
+                    </div>
+                    <aside class="related-posts">
+                        <div class="ad-sidebar container">
+                            <div class="ad-wrapper">
+    <span>Iklan Related</span>
+</div>
+                        </div>
+                        <h2 class="related-posts-title">Related Posts</h2><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/ultrasonic-sensor-guide-exploring-working">Ultrasonic Sensor Guide Exploring Working Principles And Arduino Integration</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-14T14:12:21+00:00">Jul 14, 2025</time>
+		                        <span class="view-count">
+									76 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/get-sponsorships-your-ultimate-guide">Get Sponsorships: Your Ultimate Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-01T03:38:48+00:00">Aug 1, 2025</time>
+		                        <span class="view-count">
+									37 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/case-study-method-for-rare">Case Study Method For Rare Psychological Disorders In-Depth Analysis</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-14T04:00:08+00:00">Jul 14, 2025</time>
+		                        <span class="view-count">
+									68 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/solve-2-1-8x-leqslant">Solve $2(1-8x) \leqslant -5x$: A Step-by-Step Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-06T02:42:05+00:00">Aug 6, 2025</time>
+		                        <span class="view-count">
+									51 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/where-is-the-result-of">Where Is The Result Of Formula =C6*D6 Displayed In A Spreadsheet?</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-14T18:25:01+00:00">Jul 14, 2025</time>
+		                        <span class="view-count">
+									65 views
+		                        </span>
+                            </div>
+                        </article>
+                    </aside>
+                    <aside class="related-posts"></aside>
+                </div>
+            </div>
+        </article>
+        <a href="#" class="back-to-top" id="backToTop" title="Back to top">
+        	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-bar-up" viewBox="0 0 16 16">
+			  <path fill-rule="evenodd" d="M3.646 11.854a.5.5 0 0 0 .708 0L8 8.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708M2.4 5.2c0 .22.18.4.4.4h10.4a.4.4 0 0 0 0-.8H2.8a.4.4 0 0 0-.4.4"/>
+			</svg>
+		</a>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 ANABEL</p>
+        </div>
+    </footer>
+    <script>
+    	(() => {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            const toggleMenu = () => {
+                navMenu.classList.toggle('nav-menu-active');
+                navToggle.classList.toggle('nav-toggle-active');
+            };
+            const backToTopHandler = (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            navToggle.addEventListener('click', toggleMenu);
+            document.getElementById('backToTop').addEventListener('click', backToTopHandler);
+            window.addEventListener('pagehide', () => {
+                navToggle.removeEventListener('click', toggleMenu);
+                document.getElementById('backToTop').removeEventListener('click', backToTopHandler);
+            });
+        })();
+		(() => {
+            window.addEventListener("DOMContentLoaded", (event) => {
+                const ellHljs = document.createElement("script");
+                ellHljs.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js");
+                ellHljs.onload = () => {
+                    hljs.highlightAll();
+                };
+                document.querySelector("body").append(ellHljs);
+                const ellFont = document.createElement("link");
+                ellFont.setAttribute("href", "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css");
+                ellFont.setAttribute("rel", "stylesheet");
+                document.querySelector("head").append(ellFont);
+                window.addEventListener('pagehide', () => {
+                    // ellHljs.remove();
+                    ellFont.remove();
+                });
+
+            });
+        })();
+    </script>
+    
+    
+    
+</body>
+</html>

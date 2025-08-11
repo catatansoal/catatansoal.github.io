@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>List MySQL User Accounts Via Command Line</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="List MySQL User Accounts Via Command Line...">
+    <link rel="canonical" href="https://catatansoal.github.io/blog/list-mysql-user-accounts-via">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="List MySQL User Accounts Via Command Line">
+	<meta property="og:description" content="List MySQL User Accounts Via Command Line...">
+	<meta property="og:url" content="https://catatansoal.github.io/blog/list-mysql-user-accounts-via">
+	<meta property="og:site_name" content="ANABEL">
+	<meta property="article:published_time" content="2025-07-23T16:44:43+00:00">
+	<meta property="article:author" content="ADMIN">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+    <link rel="preload" fetchpriority="high" as="image" href="https://tse4.mm.bing.net/th?q=How%20to%20List%20User%20Accounts%20in%20MySQL%20Using%20the%20Command%20Line">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style type="text/css">
+    	:root{--primary-color:#3740ff;--text-color:#202124;--background-color:#ffffff;--gray-100:#f8f9fa;--gray-200:#e9ecef}*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;line-height:1.6;color:var(--text-color);background-color:var(--background-color)}.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}.header{background-color:var(--background-color);border-bottom:1px solid var(--gray-200);position:sticky;top:0;z-index:100}.nav{padding:.5rem 0}.nav-container{display:flex;justify-content:space-between;align-items:center;gap:1rem}.nav-left{display:flex;align-items:center;flex-shrink:0}.logo{font-weight:700;color:var(--primary-color)}.blog-tag{margin-left:1rem;padding:.25rem .5rem;background-color:var(--gray-100);border-radius:4px;font-size:.875rem}.nav-search{flex-grow:1;max-width:300px}.search-form{position:relative;width:100%}.search-input{width:100%;padding:.5rem 2.5rem .5rem 1rem;border:1px solid var(--gray-200);border-radius:24px;font-size:.875rem;transition:all 0.2s}.search-input:focus{outline:none;border-color:var(--primary-color);box-shadow:0 0 0 2px rgb(55 64 255 / .1)}.search-button{position:absolute;right:.5rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#5f6368;cursor:pointer;padding:.25rem;display:flex;align-items:center;justify-content:center}.search-button:hover{color:var(--primary-color)}.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:.5rem}.hamburger{display:block;position:relative;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before,.hamburger::after{content:'';position:absolute;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before{top:-6px}.hamburger::after{bottom:-6px}.nav-toggle-active .hamburger{background:#fff0}.nav-toggle-active .hamburger::before{transform:rotate(45deg);top:0}.nav-toggle-active .hamburger::after{transform:rotate(-45deg);bottom:0}.nav-list{display:flex;list-style:none;gap:2rem}.nav-link{color:var(--text-color);text-decoration:none;font-size:.9rem;transition:color 0.2s}.nav-link:hover{color:var(--primary-color)}.article-header{padding:2rem 0;background-color:var(--gray-100)}.article-layout{display:grid;grid-template-columns:1fr 350px;gap:3rem;padding:1rem 0;align-items: start}h1,h2,h3,h4,h5,h6{font-family:"Crimson Text","Times New Roman",Times,serif}h1{font-size:2.5rem;line-height:1.2;margin-bottom:1rem}.meta{color:#5f6368;font-size:.875rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}.view-count{display:inline-flex;align-items:center;gap:.25rem}.view-count svg{color:#5f6368}.content{min-width:0;border-bottom:1px solid #dddddd5e;margin-top:1rem;white-space:pre-line !important;overflow-wrap:break-word;overflow-x:auto;word-break:break-word}.lead{font-size:1.25rem;color:#5f6368;margin-bottom:2rem}h2,h3,h4,h5,h6{font-size:1.75rem;margin:1rem 0 1rem}p,pre,ol,ul>li{margin-bottom:1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;font-size:1.3rem;text-align: justify;}p>code{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px}hr{margin:1rem 0 1rem 0}.code-example{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;margin:1.5rem 0;overflow-x:auto}code{font-family:'Roboto Mono',monospace;font-size:.875rem}ul{margin:.2rem 0;padding-left:1.5rem}.related-posts{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;position:sticky;top:5rem}.related-posts-title,.newpost-posts-list{font-size:1.75rem;margin:0 0 1rem}.related-posts-list{display:flex;flex-direction:column;gap:.5rem}.related-post,.newpost-post{border-bottom:1px solid #ddd;padding-bottom:10px;margin-bottom:10px}.related-post:last-child,.newpost-post:last-child{padding-bottom:0;border-bottom:none}.related-post-title,.newpost-post-title{font-size:1.2rem;margin:0 0 .1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;}.related-post-title a,.newpost-post-title a{color:var(--text-color);text-decoration:none;transition:color 0.2s}.related-post-title a:hover,.newpost-post-title a:hover{color:var(--primary-color)}.related-post time{font-size:.875rem;color:#5f6368}.footer{background-color:var(--gray-100);padding:2rem 0;margin-top:4rem;color:#5f6368;font-size:.875rem}.nav-menu>ul>li{margin-bottom:0}@media (max-width:1024px){.container{max-width:800px}.article-layout{grid-template-columns:1fr;gap:2rem}.related-posts{position:static}}@media (max-width:768px){.nav-container{flex-wrap:wrap}.nav-search{order:3;max-width:none;width:100%;margin-top:.1rem}.nav-toggle{display:block}.nav-menu{display:none;position:absolute;top:100%;left:0;right:0;background:var(--background-color);padding:1rem 0;border-bottom:1px solid var(--gray-200)}.nav-menu-active{display:block}.nav-list{flex-direction:column;gap:.1rem;padding:0 1.5rem}.nav-link{display:block;padding:.2rem 0}h1{font-size:2rem}.article-header{padding:2rem 0}.content{padding:.1rem 0}}table{width:100%;border-collapse:collapse;margin:20px 0;font-family:'Arial',sans-serif}th,td{padding:12px 15px;text-align:left;border:1px solid #ddd}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9}tr:nth-child(even) td{background-color:#f2f2f2}@media screen and (max-width:768px){table{border:0;display:block;overflow-x:auto;white-space:nowrap}th,td{padding:10px;text-align:right}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9;border-bottom:1px solid #ddd}tr:nth-child(even) td{background-color:#f2f2f2}}a{text-decoration:none;color:#540707}.katex-html{padding: .2rem;color: #000;font-weight: 700;font-size: 1.3rem;overflow-wrap: break-word;max-width: 100%;white-space: normal !important}.category{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin:1rem 0 1rem 0}.tag{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px;font-family:"Newsreader",serif}.tag>a{text-decoration:none;color:#000}img{margin:auto;display:block;max-width:100%;height:auto;margin-bottom:1rem}.katex{white-space: pre-line !important;display: inline-block;max-width: 100%;overflow-x: auto;overflow-y: hidden;scrollbar-width: thin;overflow-wrap: break-word;word-break: break-word;vertical-align: -7px}.content > p {overflow-wrap: break-word;word-break: break-word}
+    </style>
+    <style type="text/css">
+    	pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}
+		.hljs{color:#c9d1d9;background:#0d1117}.hljs-doctag,.hljs-keyword,.hljs-meta .hljs-keyword,.hljs-template-tag,.hljs-template-variable,.hljs-type,.hljs-variable.language_{color:#ff7b72}.hljs-title,.hljs-title.class_,.hljs-title.class_.inherited__,.hljs-title.function_{color:#d2a8ff}.hljs-attr,.hljs-attribute,.hljs-literal,.hljs-meta,.hljs-number,.hljs-operator,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-variable{color:#79c0ff}.hljs-meta .hljs-string,.hljs-regexp,.hljs-string{color:#a5d6ff}.hljs-built_in,.hljs-symbol{color:#ffa657}.hljs-code,.hljs-comment,.hljs-formula{color:#8b949e}.hljs-name,.hljs-quote,.hljs-selector-pseudo,.hljs-selector-tag{color:#7ee787}.hljs-subst{color:#c9d1d9}.hljs-section{color:#1f6feb;font-weight:700}.hljs-bullet{color:#f2cc60}.hljs-emphasis{color:#c9d1d9;font-style:italic}.hljs-strong{color:#c9d1d9;font-weight:700}.hljs-addition{color:#aff5b4;background-color:#033a16}.hljs-deletion{color:#ffdcd7;background-color:#67060c}
+    	pre{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;font-weight:400;word-break:break-word;word-wrap:break-word;box-sizing:inherit;border-radius:4px;overflow-x:auto;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}code{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;word-wrap:break-word;word-break:break-word;font-style:normal;line-height:20px;letter-spacing:-.003em;box-sizing:inherit;font-weight:400;font-size:75%;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}
+    </style>
+    <style type="text/css">
+    	.back-to-top{position:fixed;bottom:20px;right:20px;background-color:#a73f3f;color:#fff;padding:8px 10px;border-radius:50%;box-shadow:0 4px 6px rgb(0 0 0 / .2);font-size:10px;font-weight:700;text-decoration:none;text-align:center;transition:opacity 0.3s ease,visibility 0.3s ease;z-index:99999;opacity:1;visibility:visible}.back-to-top:hover{background-color:#0056b3}
+    </style>
+    <style type="text/css">
+        .ad-header {margin: 1rem auto 1rem;background-color: #fdfdfd;text-align: center;display: block;}.ad-header .ad-wrapper {min-height: 90px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #555;font-weight: 500;padding: 3rem;border: 1px dashed #ccc;border-radius: 6px;}@media (max-width: 768px) {.ad-header {padding: 0.75rem;}}.ad-sidebar {margin: 0 0 1rem;background-color: #fefefe;text-align: center;padding: 0px;width: 100%;max-width: 100%;display: block;}.ad-sidebar .ad-wrapper {min-height: 250px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #444;font-weight: 500;border: 1px dashed #aaa;border-radius: 6px;padding: 0rem;}@media (max-width: 1024px) {.ad-sidebar {padding: 0.75rem;}}
+    </style>
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://catatansoal.github.io/blog/list-mysql-user-accounts-via"
+          },
+          "headline": "List MySQL User Accounts Via Command Line",
+          "description": "List MySQL User Accounts Via Command Line...",
+          "image": [
+            "https://tse4.mm.bing.net/th?q=How%20to%20List%20User%20Accounts%20in%20MySQL%20Using%20the%20Command%20Line"
+          ],
+          "author": {
+            "@type": "Person",
+            "name": "ADMIN",
+            "jobTitle": "Editor web"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "ANABEL",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://tse4.mm.bing.net/th?q=ANABEL%20WEB"
+            }
+          },
+          "datePublished": "2025-07-23T16:44:43+00:00",
+          "dateModified": "2025-07-23T16:44:43+00:00"
+        }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="container nav-container">
+                <div class="nav-left">
+                    <span class="logo">ANABEL</span>
+                    <span class="blog-tag">Article</span>
+                </div>
+                <div class="nav-search">
+                    <form class="search-form" role="search">
+                        <input 
+                            type="search" 
+                            class="search-input"
+                            placeholder="Search articles..."
+                            aria-label="Search articles"
+                        >
+                        <button type="submit" class="search-button" aria-label="Submit search">🔎</button>
+                    </form>
+                </div>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+                <div class="nav-menu">
+                    <ul class="nav-list">
+                    	<li><a href="/" class="nav-link">HOME</a></li>
+                        <li><a href="/pages/About" class="nav-link">About</a></li>
+                        <li><a href="/pages/Contact" class="nav-link">Contact</a></li>
+                        <li><a href="/pages/Disclaimer" class="nav-link">Disclaimer</a></li>
+                        <li><a href="/pages/Privacy" class="nav-link">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="main">
+        <article class="article">
+            <header class="article-header">
+                <div class="container">
+                    <h1>List MySQL User Accounts Via Command Line</h1>
+                    <div class="meta">
+                        <time datetime="2025-07-23T16:44:43+00:00">Jul 23, 2025</time>
+                        <span class="author">by ADMIN</span>
+                        <span class="view-count">
+                            <span id="viewCount">42</span> views
+                        </span>
+                    </div>
+                </div>
+            </header>
+            <div class="ad-header container">
+                <div class="ad-wrapper">
+    Iklan Headers
+</div>
+            </div>
+            <div class="container">
+                <div class="article-layout">
+                    <div class="content">
+                        <img src="https://tse4.mm.bing.net/th?q=How%20to%20List%20User%20Accounts%20in%20MySQL%20Using%20the%20Command%20Line" title="How to List User Accounts in MySQL Using the Command Line" width="300" height="200"/><p>Hey guys! Ever found yourself needing to peek at the user accounts in your MySQL database but scratching your head on how to do it via the command line? It's a common task, especially when you're managing databases, setting up permissions, or just doing a general audit. In this guide, we'll walk through the steps to list user accounts in MySQL using the command line, making it super easy and straightforward. Let's dive in!</p>
+<h2>Understanding MySQL User Management</h2>
+<p>Before we jump into the commands, let's get a quick overview of how MySQL handles users. In MySQL, user accounts are stored in the <code>mysql.user</code> table. This table holds crucial information like usernames, hostnames (which determine where the user can connect from), passwords, and privileges. Think of it as the central hub for all user-related data. Accessing this table is key to listing and managing user accounts.</p>
+<p>When you create a user in MySQL, you're essentially adding a new row to this table. Each user is defined by a username and a host. The host part is important because it specifies from where the user can connect. For example, <code>'localhost'</code> means the user can only connect from the same machine where MySQL is running, while <code>'%'</code> means the user can connect from any host (which should be used with caution for security reasons!).</p>
+<p>Privileges, or permissions, determine what actions a user can perform on the database. These include things like selecting data, inserting new records, updating existing ones, and even creating or deleting databases. Managing these privileges is a critical part of database administration, ensuring that users have the necessary access without compromising security. By understanding this foundation, you'll be better equipped to manage users effectively.</p>
+<p>Now, let’s talk about why the command line is so powerful for this task. While GUI tools like phpMyAdmin offer a visual interface, the command line provides a direct and efficient way to interact with MySQL. It's particularly useful for scripting and automation, allowing you to perform tasks quickly and repeatedly without manual intervention. Plus, it's a must-know skill for any serious database administrator or developer. So, whether you're a seasoned pro or just starting out, mastering these command-line techniques will definitely level up your MySQL game!</p>
+<h2>Step-by-Step Guide to Listing User Accounts</h2>
+<p>Okay, let's get down to the nitty-gritty. To list user accounts in MySQL using the command line, we'll need to follow a few simple steps. Don't worry; it's easier than you might think!</p>
+<h3>1. Accessing the MySQL Command-Line Interface</h3>
+<p>First things first, you need to open your terminal or command prompt. This is your gateway to the MySQL server. Once you've got that open, you'll need to log in to MySQL as a user with sufficient privileges to access the <code>mysql.user</code> table – typically, this is the <code>root</code> user or another user with <code>SELECT</code> privileges on the <code>mysql</code> database. To log in, you'll use the <code>mysql</code> command followed by the <code>-u</code> flag for the username, <code>-p</code> flag to prompt for the password, and optionally, the <code>-h</code> flag to specify the host if you're connecting to a remote server.</p>
+<p>Here’s what the command looks like:</p>
+<pre><code class="hljs">mysql -u root -p
+</code></pre>
+<p>When you hit enter, MySQL will ask for your password. Type it in and press enter again. If everything goes smoothly, you'll be greeted with the MySQL prompt, which usually looks like <code>mysql&gt;</code>. This means you're successfully logged in and ready to run queries. If you encounter any errors, double-check your username, password, and the host if you're connecting remotely. A common mistake is typing the wrong password, so make sure Caps Lock isn't on! Once you're in, you're one step closer to listing those user accounts.</p>
+<h3>2. Selecting the <code>mysql</code> Database</h3>
+<p>Once you're logged in, you need to tell MySQL which database you want to work with. In our case, we're interested in the <code>mysql</code> database because that's where the user information is stored. To select the database, you'll use the <code>USE</code> command followed by the database name. This is a crucial step because it sets the context for all subsequent queries.</p>
+<p>Here’s the command you'll use:</p>
+<pre><code class="hljs">USE mysql;
+</code></pre>
+<p>After you type this command and hit enter, you should see a message that says <code>Database changed</code>. This confirms that you've successfully switched to the <code>mysql</code> database. If you don't see this message, double-check the spelling of the database name and make sure you have the necessary privileges to access it. Selecting the right database is like choosing the right folder on your computer before you start looking for files – it ensures you're searching in the correct place. With the <code>mysql</code> database selected, you're now ready to query the <code>user</code> table and retrieve the list of user accounts.</p>
+<h3>3. Querying the <code>mysql.user</code> Table</h3>
+<p>Now for the main event: querying the <code>mysql.user</code> table to get the list of user accounts. We'll use a simple <code>SELECT</code> statement to retrieve the <code>User</code> and <code>Host</code> columns, which contain the usernames and the hosts they can connect from. This is the heart of the process, and it's where the magic happens. By running this query, you'll get a clear overview of all the user accounts in your MySQL server.</p>
+<p>Here’s the query you'll use:</p>
+<pre><code class="hljs">SELECT User, Host FROM user;
+</code></pre>
+<p>Type this command into the MySQL prompt and press enter. MySQL will then display a table with the <code>User</code> and <code>Host</code> columns, showing you all the user accounts and their respective hosts. This output gives you a quick snapshot of who has access to your MySQL server and from where they can connect. It's a great way to audit your user accounts and ensure that everything is set up as it should be. Remember, the <code>Host</code> column is just as important as the <code>User</code> column, as it determines the security context of the user account. With this information at your fingertips, you can start making informed decisions about user management and security.</p>
+<h2>Advanced Tips and Tricks</h2>
+<p>So, you've got the basics down, but let's spice things up with some advanced tips and tricks! These will help you refine your user account listing skills and make you a command-line ninja.</p>
+<h3>Filtering and Sorting Results</h3>
+<p>Sometimes, you might not want to see the entire list of users. Perhaps you're looking for a specific user, or you want to sort the list alphabetically. That's where filtering and sorting come in handy. You can use the <code>WHERE</code> clause to filter results based on specific criteria and the <code>ORDER BY</code> clause to sort the output. These clauses add a layer of precision to your queries, allowing you to focus on exactly what you need.</p>
+<p>For example, if you want to list users who can connect from any host (<code>'%'</code>), you can use the following query:</p>
+<pre><code class="hljs">SELECT User, Host FROM user WHERE Host = &#39;%&#39;;
+</code></pre>
+<p>This will show you only the users with a wildcard host, which is useful for identifying potential security risks. On the other hand, if you want to list users sorted alphabetically by username, you can use:</p>
+<pre><code class="hljs">SELECT User, Host FROM user ORDER BY User;
+</code></pre>
+<p>This sorts the output in ascending order by username, making it easier to find a specific user in a long list. You can also sort in descending order by adding <code>DESC</code> after the column name:</p>
+<pre><code class="hljs">SELECT User, Host FROM user ORDER BY User DESC;
+</code></pre>
+<p>Combining <code>WHERE</code> and <code>ORDER BY</code> gives you even more control. For instance, to list users who can connect from any host, sorted alphabetically, you'd use:</p>
+<pre><code class="hljs">SELECT User, Host FROM user WHERE Host = &#39;%&#39; ORDER BY User;
+</code></pre>
+<p>These techniques are invaluable for managing large databases with many users. They allow you to quickly find the information you need and keep your user accounts organized.</p>
+<h3>Displaying Additional User Information</h3>
+<p>While the <code>User</code> and <code>Host</code> columns are essential, the <code>mysql.user</code> table contains a wealth of other information. You can display additional columns to get a more complete picture of each user account. This can include things like password information, SSL settings, and various privileges. By expanding the columns you select, you gain deeper insights into user configurations and security settings.</p>
+<p>For example, if you want to see the password encryption type (which is stored in the <code>authentication_string</code> column in newer MySQL versions or <code>Password</code> column in older versions), you can modify your query like this:</p>
+<pre><code class="hljs">SELECT User, Host, authentication_string FROM user;
+</code></pre>
+<p>This will add the <code>authentication_string</code> column to the output, showing you the encrypted password for each user. Note that the actual password isn't displayed, just the encrypted string. If you're using an older version of MySQL (like the 5.4.1 mentioned in the original question), you might need to use the <code>Password</code> column instead:</p>
+<pre><code class="hljs">SELECT User, Host, Password FROM user;
+</code></pre>
+<p>You can also display other privilege-related columns, such as <code>Select_priv</code>, <code>Insert_priv</code>, <code>Update_priv</code>, and so on. These columns show whether a user has the corresponding privilege (Y for yes, N for no). For instance:</p>
+<pre><code class="hljs">SELECT User, Host, Select_priv, Insert_priv FROM user;
+</code></pre>
+<p>This query will display the select and insert privileges for each user. By exploring these additional columns, you can get a comprehensive view of user settings and ensure that privileges are configured correctly. This is particularly useful for security audits and compliance checks.</p>
+<h2>Security Considerations</h2>
+<p>Listing user accounts is a powerful tool, but it's crucial to be mindful of security. Access to user information should be restricted to authorized personnel only. You don't want just anyone poking around and seeing who has access to your database! Securing this information is a fundamental part of database administration and helps prevent unauthorized access and potential security breaches.</p>
+<h3>Limiting Access to User Information</h3>
+<p>The first line of defense is to ensure that only users with the necessary privileges can access the <code>mysql.user</code> table. Typically, this means granting <code>SELECT</code> privileges on the <code>mysql</code> database to only a few trusted administrators. You should avoid giving broad access to this table, as it contains sensitive information. By limiting access, you reduce the risk of accidental or malicious exposure of user credentials and configurations.</p>
+<p>To revoke access from a user who doesn't need it, you can use the <code>REVOKE</code> statement. For example, to revoke <code>SELECT</code> privileges on the <code>mysql.user</code> table from a user named <code>johndoe</code>, you would use the following command:</p>
+<pre><code class="hljs">REVOKE SELECT ON mysql.user FROM &#39;johndoe&#39;@&#39;localhost&#39;;
+</code></pre>
+<p>This ensures that <code>johndoe</code> can no longer query the <code>mysql.user</code> table. Similarly, you can grant access using the <code>GRANT</code> statement:</p>
+<pre><code class="hljs">GRANT SELECT ON mysql.user TO &#39;admin&#39;@&#39;localhost&#39;;
+</code></pre>
+<p>This gives the <code>admin</code> user the ability to select data from the <code>mysql.user</code> table. Regularly reviewing and adjusting these privileges is a good security practice.</p>
+<h3>Best Practices for User Management</h3>
+<p>Beyond just limiting access to the <code>mysql.user</code> table, there are other best practices for user management that can enhance your database security. One key practice is to use strong and unique passwords for all user accounts. Weak passwords are an easy target for attackers, so it's crucial to enforce password complexity requirements and encourage users to choose secure passwords. Think of it as locking your front door with a high-security deadbolt instead of a flimsy latch.</p>
+<p>Another important practice is to regularly review user accounts and privileges. Over time, users may leave the organization or change roles, and their database access should be updated accordingly. Removing inactive accounts and revoking unnecessary privileges helps minimize the attack surface. It's like decluttering your house – getting rid of things you don't need reduces the risk of tripping over them.</p>
+<p>Additionally, consider using the principle of least privilege, which means granting users only the minimum privileges they need to perform their job duties. This reduces the potential damage if an account is compromised. For example, a user who only needs to read data shouldn't have the ability to modify it. By following these best practices, you can create a more secure and manageable MySQL environment.</p>
+<h2>Conclusion</h2>
+<p>Listing user accounts in MySQL using the command line is a fundamental skill for any database administrator or developer. We've walked through the steps, from accessing the MySQL command-line interface to querying the <code>mysql.user</code> table. You've also learned some advanced tips and tricks for filtering, sorting, and displaying additional user information. And, most importantly, we've covered the security considerations to keep your database safe and sound. So, go ahead and give it a try – you've got this! Happy database managing, guys!</p>
+
+                    </div>
+                    <aside class="related-posts">
+                        <div class="ad-sidebar container">
+                            <div class="ad-wrapper">
+    <span>Iklan Related</span>
+</div>
+                        </div>
+                        <h2 class="related-posts-title">Related Posts</h2><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/hide-roles-from-non-admins">Hide Roles From Non-Admins In Apache Superset: A Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-08T13:19:54+00:00">Aug 8, 2025</time>
+		                        <span class="view-count">
+									54 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/persistent-kv-seq-len-bug">Persistent Kv_seq_len Bug In KVCache Factory Breaks Core Pruning Logic</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-14T08:45:52+00:00">Jul 14, 2025</time>
+		                        <span class="view-count">
+									70 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/solving-sin-x-3p-2">Solving Sin(x + 3π/2) = √3/2 On [0, 2π) A Comprehensive Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-14T03:17:26+00:00">Jul 14, 2025</time>
+		                        <span class="view-count">
+									61 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/why-one-of-isnt-negated">Why &quot;One Of&quot; Isn&#39;t Negated As &quot;Neither, Either, Or Both&quot;</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-06T13:25:43+00:00">Aug 6, 2025</time>
+		                        <span class="view-count">
+									56 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/recognizing-gender-bias-at-home">Recognizing Gender Bias At Home Creating An Equitable Environment</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-21T13:31:30+00:00">Jul 21, 2025</time>
+		                        <span class="view-count">
+									65 views
+		                        </span>
+                            </div>
+                        </article>
+                    </aside>
+                    <aside class="related-posts"></aside>
+                </div>
+            </div>
+        </article>
+        <a href="#" class="back-to-top" id="backToTop" title="Back to top">
+        	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-bar-up" viewBox="0 0 16 16">
+			  <path fill-rule="evenodd" d="M3.646 11.854a.5.5 0 0 0 .708 0L8 8.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708M2.4 5.2c0 .22.18.4.4.4h10.4a.4.4 0 0 0 0-.8H2.8a.4.4 0 0 0-.4.4"/>
+			</svg>
+		</a>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 ANABEL</p>
+        </div>
+    </footer>
+    <script>
+    	(() => {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            const toggleMenu = () => {
+                navMenu.classList.toggle('nav-menu-active');
+                navToggle.classList.toggle('nav-toggle-active');
+            };
+            const backToTopHandler = (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            navToggle.addEventListener('click', toggleMenu);
+            document.getElementById('backToTop').addEventListener('click', backToTopHandler);
+            window.addEventListener('pagehide', () => {
+                navToggle.removeEventListener('click', toggleMenu);
+                document.getElementById('backToTop').removeEventListener('click', backToTopHandler);
+            });
+        })();
+		(() => {
+            window.addEventListener("DOMContentLoaded", (event) => {
+                const ellHljs = document.createElement("script");
+                ellHljs.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js");
+                ellHljs.onload = () => {
+                    hljs.highlightAll();
+                };
+                document.querySelector("body").append(ellHljs);
+                const ellFont = document.createElement("link");
+                ellFont.setAttribute("href", "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css");
+                ellFont.setAttribute("rel", "stylesheet");
+                document.querySelector("head").append(ellFont);
+                window.addEventListener('pagehide', () => {
+                    // ellHljs.remove();
+                    ellFont.remove();
+                });
+
+            });
+        })();
+    </script>
+    
+    
+    
+</body>
+</html>

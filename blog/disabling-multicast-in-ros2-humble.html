@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Disabling Multicast In ROS2 Humble A Comprehensive Guide With CycloneDDS</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Disabling Multicast In ROS2 Humble A Comprehensive Guide With CycloneDDS...">
+    <link rel="canonical" href="https://catatansoal.github.io/blog/disabling-multicast-in-ros2-humble">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Disabling Multicast In ROS2 Humble A Comprehensive Guide With CycloneDDS">
+	<meta property="og:description" content="Disabling Multicast In ROS2 Humble A Comprehensive Guide With CycloneDDS...">
+	<meta property="og:url" content="https://catatansoal.github.io/blog/disabling-multicast-in-ros2-humble">
+	<meta property="og:site_name" content="ANABEL">
+	<meta property="article:published_time" content="2025-07-27T14:20:30+00:00">
+	<meta property="article:author" content="ADMIN">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+    <link rel="preload" fetchpriority="high" as="image" href="https://tse4.mm.bing.net/th?q=Disabling%20Multicast%20in%20ROS2%20Humble%20with%20CycloneDDS">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style type="text/css">
+    	:root{--primary-color:#3740ff;--text-color:#202124;--background-color:#ffffff;--gray-100:#f8f9fa;--gray-200:#e9ecef}*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;line-height:1.6;color:var(--text-color);background-color:var(--background-color)}.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}.header{background-color:var(--background-color);border-bottom:1px solid var(--gray-200);position:sticky;top:0;z-index:100}.nav{padding:.5rem 0}.nav-container{display:flex;justify-content:space-between;align-items:center;gap:1rem}.nav-left{display:flex;align-items:center;flex-shrink:0}.logo{font-weight:700;color:var(--primary-color)}.blog-tag{margin-left:1rem;padding:.25rem .5rem;background-color:var(--gray-100);border-radius:4px;font-size:.875rem}.nav-search{flex-grow:1;max-width:300px}.search-form{position:relative;width:100%}.search-input{width:100%;padding:.5rem 2.5rem .5rem 1rem;border:1px solid var(--gray-200);border-radius:24px;font-size:.875rem;transition:all 0.2s}.search-input:focus{outline:none;border-color:var(--primary-color);box-shadow:0 0 0 2px rgb(55 64 255 / .1)}.search-button{position:absolute;right:.5rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#5f6368;cursor:pointer;padding:.25rem;display:flex;align-items:center;justify-content:center}.search-button:hover{color:var(--primary-color)}.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:.5rem}.hamburger{display:block;position:relative;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before,.hamburger::after{content:'';position:absolute;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before{top:-6px}.hamburger::after{bottom:-6px}.nav-toggle-active .hamburger{background:#fff0}.nav-toggle-active .hamburger::before{transform:rotate(45deg);top:0}.nav-toggle-active .hamburger::after{transform:rotate(-45deg);bottom:0}.nav-list{display:flex;list-style:none;gap:2rem}.nav-link{color:var(--text-color);text-decoration:none;font-size:.9rem;transition:color 0.2s}.nav-link:hover{color:var(--primary-color)}.article-header{padding:2rem 0;background-color:var(--gray-100)}.article-layout{display:grid;grid-template-columns:1fr 350px;gap:3rem;padding:1rem 0;align-items: start}h1,h2,h3,h4,h5,h6{font-family:"Crimson Text","Times New Roman",Times,serif}h1{font-size:2.5rem;line-height:1.2;margin-bottom:1rem}.meta{color:#5f6368;font-size:.875rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}.view-count{display:inline-flex;align-items:center;gap:.25rem}.view-count svg{color:#5f6368}.content{min-width:0;border-bottom:1px solid #dddddd5e;margin-top:1rem;white-space:pre-line !important;overflow-wrap:break-word;overflow-x:auto;word-break:break-word}.lead{font-size:1.25rem;color:#5f6368;margin-bottom:2rem}h2,h3,h4,h5,h6{font-size:1.75rem;margin:1rem 0 1rem}p,pre,ol,ul>li{margin-bottom:1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;font-size:1.3rem;text-align: justify;}p>code{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px}hr{margin:1rem 0 1rem 0}.code-example{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;margin:1.5rem 0;overflow-x:auto}code{font-family:'Roboto Mono',monospace;font-size:.875rem}ul{margin:.2rem 0;padding-left:1.5rem}.related-posts{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;position:sticky;top:5rem}.related-posts-title,.newpost-posts-list{font-size:1.75rem;margin:0 0 1rem}.related-posts-list{display:flex;flex-direction:column;gap:.5rem}.related-post,.newpost-post{border-bottom:1px solid #ddd;padding-bottom:10px;margin-bottom:10px}.related-post:last-child,.newpost-post:last-child{padding-bottom:0;border-bottom:none}.related-post-title,.newpost-post-title{font-size:1.2rem;margin:0 0 .1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;}.related-post-title a,.newpost-post-title a{color:var(--text-color);text-decoration:none;transition:color 0.2s}.related-post-title a:hover,.newpost-post-title a:hover{color:var(--primary-color)}.related-post time{font-size:.875rem;color:#5f6368}.footer{background-color:var(--gray-100);padding:2rem 0;margin-top:4rem;color:#5f6368;font-size:.875rem}.nav-menu>ul>li{margin-bottom:0}@media (max-width:1024px){.container{max-width:800px}.article-layout{grid-template-columns:1fr;gap:2rem}.related-posts{position:static}}@media (max-width:768px){.nav-container{flex-wrap:wrap}.nav-search{order:3;max-width:none;width:100%;margin-top:.1rem}.nav-toggle{display:block}.nav-menu{display:none;position:absolute;top:100%;left:0;right:0;background:var(--background-color);padding:1rem 0;border-bottom:1px solid var(--gray-200)}.nav-menu-active{display:block}.nav-list{flex-direction:column;gap:.1rem;padding:0 1.5rem}.nav-link{display:block;padding:.2rem 0}h1{font-size:2rem}.article-header{padding:2rem 0}.content{padding:.1rem 0}}table{width:100%;border-collapse:collapse;margin:20px 0;font-family:'Arial',sans-serif}th,td{padding:12px 15px;text-align:left;border:1px solid #ddd}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9}tr:nth-child(even) td{background-color:#f2f2f2}@media screen and (max-width:768px){table{border:0;display:block;overflow-x:auto;white-space:nowrap}th,td{padding:10px;text-align:right}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9;border-bottom:1px solid #ddd}tr:nth-child(even) td{background-color:#f2f2f2}}a{text-decoration:none;color:#540707}.katex-html{padding: .2rem;color: #000;font-weight: 700;font-size: 1.3rem;overflow-wrap: break-word;max-width: 100%;white-space: normal !important}.category{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin:1rem 0 1rem 0}.tag{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px;font-family:"Newsreader",serif}.tag>a{text-decoration:none;color:#000}img{margin:auto;display:block;max-width:100%;height:auto;margin-bottom:1rem}.katex{white-space: pre-line !important;display: inline-block;max-width: 100%;overflow-x: auto;overflow-y: hidden;scrollbar-width: thin;overflow-wrap: break-word;word-break: break-word;vertical-align: -7px}.content > p {overflow-wrap: break-word;word-break: break-word}
+    </style>
+    <style type="text/css">
+    	pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}
+		.hljs{color:#c9d1d9;background:#0d1117}.hljs-doctag,.hljs-keyword,.hljs-meta .hljs-keyword,.hljs-template-tag,.hljs-template-variable,.hljs-type,.hljs-variable.language_{color:#ff7b72}.hljs-title,.hljs-title.class_,.hljs-title.class_.inherited__,.hljs-title.function_{color:#d2a8ff}.hljs-attr,.hljs-attribute,.hljs-literal,.hljs-meta,.hljs-number,.hljs-operator,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-variable{color:#79c0ff}.hljs-meta .hljs-string,.hljs-regexp,.hljs-string{color:#a5d6ff}.hljs-built_in,.hljs-symbol{color:#ffa657}.hljs-code,.hljs-comment,.hljs-formula{color:#8b949e}.hljs-name,.hljs-quote,.hljs-selector-pseudo,.hljs-selector-tag{color:#7ee787}.hljs-subst{color:#c9d1d9}.hljs-section{color:#1f6feb;font-weight:700}.hljs-bullet{color:#f2cc60}.hljs-emphasis{color:#c9d1d9;font-style:italic}.hljs-strong{color:#c9d1d9;font-weight:700}.hljs-addition{color:#aff5b4;background-color:#033a16}.hljs-deletion{color:#ffdcd7;background-color:#67060c}
+    	pre{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;font-weight:400;word-break:break-word;word-wrap:break-word;box-sizing:inherit;border-radius:4px;overflow-x:auto;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}code{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;word-wrap:break-word;word-break:break-word;font-style:normal;line-height:20px;letter-spacing:-.003em;box-sizing:inherit;font-weight:400;font-size:75%;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}
+    </style>
+    <style type="text/css">
+    	.back-to-top{position:fixed;bottom:20px;right:20px;background-color:#a73f3f;color:#fff;padding:8px 10px;border-radius:50%;box-shadow:0 4px 6px rgb(0 0 0 / .2);font-size:10px;font-weight:700;text-decoration:none;text-align:center;transition:opacity 0.3s ease,visibility 0.3s ease;z-index:99999;opacity:1;visibility:visible}.back-to-top:hover{background-color:#0056b3}
+    </style>
+    <style type="text/css">
+        .ad-header {margin: 1rem auto 1rem;background-color: #fdfdfd;text-align: center;display: block;}.ad-header .ad-wrapper {min-height: 90px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #555;font-weight: 500;padding: 3rem;border: 1px dashed #ccc;border-radius: 6px;}@media (max-width: 768px) {.ad-header {padding: 0.75rem;}}.ad-sidebar {margin: 0 0 1rem;background-color: #fefefe;text-align: center;padding: 0px;width: 100%;max-width: 100%;display: block;}.ad-sidebar .ad-wrapper {min-height: 250px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #444;font-weight: 500;border: 1px dashed #aaa;border-radius: 6px;padding: 0rem;}@media (max-width: 1024px) {.ad-sidebar {padding: 0.75rem;}}
+    </style>
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://catatansoal.github.io/blog/disabling-multicast-in-ros2-humble"
+          },
+          "headline": "Disabling Multicast In ROS2 Humble A Comprehensive Guide With CycloneDDS",
+          "description": "Disabling Multicast In ROS2 Humble A Comprehensive Guide With CycloneDDS...",
+          "image": [
+            "https://tse4.mm.bing.net/th?q=Disabling%20Multicast%20in%20ROS2%20Humble%20with%20CycloneDDS"
+          ],
+          "author": {
+            "@type": "Person",
+            "name": "ADMIN",
+            "jobTitle": "Editor web"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "ANABEL",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://tse4.mm.bing.net/th?q=ANABEL%20WEB"
+            }
+          },
+          "datePublished": "2025-07-27T14:20:30+00:00",
+          "dateModified": "2025-07-27T14:20:30+00:00"
+        }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="container nav-container">
+                <div class="nav-left">
+                    <span class="logo">ANABEL</span>
+                    <span class="blog-tag">Article</span>
+                </div>
+                <div class="nav-search">
+                    <form class="search-form" role="search">
+                        <input 
+                            type="search" 
+                            class="search-input"
+                            placeholder="Search articles..."
+                            aria-label="Search articles"
+                        >
+                        <button type="submit" class="search-button" aria-label="Submit search">🔎</button>
+                    </form>
+                </div>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+                <div class="nav-menu">
+                    <ul class="nav-list">
+                    	<li><a href="/" class="nav-link">HOME</a></li>
+                        <li><a href="/pages/About" class="nav-link">About</a></li>
+                        <li><a href="/pages/Contact" class="nav-link">Contact</a></li>
+                        <li><a href="/pages/Disclaimer" class="nav-link">Disclaimer</a></li>
+                        <li><a href="/pages/Privacy" class="nav-link">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="main">
+        <article class="article">
+            <header class="article-header">
+                <div class="container">
+                    <h1>Disabling Multicast In ROS2 Humble A Comprehensive Guide With CycloneDDS</h1>
+                    <div class="meta">
+                        <time datetime="2025-07-27T14:20:30+00:00">Jul 27, 2025</time>
+                        <span class="author">by ADMIN</span>
+                        <span class="view-count">
+                            <span id="viewCount">73</span> views
+                        </span>
+                    </div>
+                </div>
+            </header>
+            <div class="ad-header container">
+                <div class="ad-wrapper">
+    Iklan Headers
+</div>
+            </div>
+            <div class="container">
+                <div class="article-layout">
+                    <div class="content">
+                        <img src="https://tse4.mm.bing.net/th?q=Disabling%20Multicast%20in%20ROS2%20Humble%20with%20CycloneDDS" title="Disabling Multicast in ROS2 Humble with CycloneDDS" width="300" height="200"/><p>Hey everyone! Today, we're diving into a common challenge faced when using ROS2 Humble with CycloneDDS: <strong>disabling multicast</strong>. Multicast, while efficient in many network setups, can sometimes cause issues, especially with network equipment that has limitations. Let's explore how to tackle this and ensure your ROS2 environment plays nicely with your network.</p>
+<h2>Understanding the Multicast Challenge in ROS2 Humble</h2>
+<p>When working with <strong>ROS2 Humble</strong>, CycloneDDS is a popular choice for DDS (Data Distribution Service) implementation. By default, CycloneDDS leverages multicast for discovering participants and exchanging data. This can be super handy, but what happens when your network doesn't play well with multicast? That's where the need to disable it comes in.</p>
+<h3>Why Disable Multicast?</h3>
+<p>In certain network environments, multicast can be problematic. Maybe your network switches don't fully support multicast, or perhaps you're dealing with bandwidth constraints. Whatever the reason, turning off multicast might be necessary for a smooth ROS2 experience. So, you might be thinking, &quot;Okay, how do I actually do this?&quot; Let's get into the nitty-gritty of configuring CycloneDDS.</p>
+<h3>The Initial Configuration Attempt</h3>
+<p>Many developers, like the one who posted the original question, start by creating an XML configuration file. This file is meant to instruct CycloneDDS to disable multicast. A typical configuration might look something like this:</p>
+<pre><code class="hljs">&lt;CycloneDDS&gt;
+ &lt;Domain&gt;
+ &lt;Id&gt;42&lt;/Id&gt;
+ &lt;General&gt;
+ &lt;Interfaces&gt;
+ &lt;NetworkInterface autodetermine=&quot;true&quot; multicast=&quot;false&quot; /&gt;
+ &lt;/Interfaces&gt;
+ &lt;AllowMulticast&gt;false&lt;/AllowMulticast&gt;
+ &lt;EnableMulticastLoopback&gt;false&lt;/EnableMulticastLoopback&gt;
+ &lt;/General&gt;
+ &lt;Discovery&gt;
+ &lt;ParticipantIndex&gt;auto&lt;/ParticipantIndex&gt;
+ &lt;Peers&gt;
+ &lt;Peer Address=&quot;192.168.0.107:7410&quot;/&gt;
+ &lt;Peer Address=&quot;192.168.0.198:7410&quot;/&gt;
+ &lt;/Peers&gt;
+ &lt;/Discovery&gt;
+ &lt;SHM&gt;
+ &lt;Enable&gt;false&lt;/Enable&gt;
+ &lt;/SHM&gt;
+ &lt;/Domain&gt;
+&lt;/CycloneDDS&gt;
+</code></pre>
+<p>This configuration seems straightforward, right? We're setting <code>multicast=&quot;false&quot;</code> in the <code>&lt;NetworkInterface&gt;</code> tag, disabling <code>AllowMulticast</code>, and turning off <code>EnableMulticastLoopback</code>. But, as the original poster discovered, sometimes multicast packets are still observed on the network. What gives?</p>
+<h2>Diving Deeper: Troubleshooting Multicast Issues</h2>
+<p>So, you've set up your XML configuration, but you're still seeing those pesky multicast packets. Don't worry, <strong>we've got you covered</strong>. Let's troubleshoot this step-by-step. There are several reasons why multicast might still be active despite your configuration.</p>
+<h3>1. Configuration File Loading</h3>
+<p>The first thing to check is whether your configuration file is actually being loaded. ROS2 uses an environment variable, <code>CYCLONEDDS_URI</code>, to specify the location of the CycloneDDS configuration file. If this variable isn't set correctly, or if the file path is wrong, CycloneDDS will fall back to its default settings, which include multicast. So, double-check your environment variables. Make sure <code>CYCLONEDDS_URI</code> points to the correct path of your XML file. If the path is incorrect, then the configurations you have made in the xml file will be ignored, and multicast will not be disabled.</p>
+<h3>2. XML Configuration File Overrides</h3>
+<p>Sometimes, other parts of your configuration might be overriding your multicast settings. For example, specific QoS (Quality of Service) profiles can re-enable multicast. It's crucial to review your entire XML file for any conflicting settings. Look for any sections that might be enabling multicast implicitly or explicitly. Ensure that your configurations are consistent throughout the file.</p>
+<h3>3. Network Interfaces</h3>
+<p>Another potential issue lies in how CycloneDDS is interpreting your network interfaces. The <code>&lt;NetworkInterface autodetermine=&quot;true&quot; multicast=&quot;false&quot; /&gt;</code> setting tells CycloneDDS to automatically detect interfaces but disable multicast on them. However, if you have multiple network interfaces, CycloneDDS might be using one that's still sending multicast traffic. Try explicitly specifying the network interface you want to use and ensure multicast is disabled on that specific interface.</p>
+<h3>4. Peer Discovery</h3>
+<p>In the provided XML configuration, there's a <code>&lt;Discovery&gt;</code> section with specific <code>&lt;Peer&gt;</code> addresses. This is good for unicast discovery, but it's essential to ensure that multicast discovery is entirely disabled. Even with peer addresses specified, CycloneDDS might still attempt multicast for initial discovery. You need to make sure there are no lingering multicast settings that could interfere.</p>
+<h3>5. ROS 2 Environment Overrides</h3>
+<p>ROS 2 itself can sometimes override DDS settings. Check your ROS 2 launch files and any environment variables that might be influencing DDS configuration. It's possible that some ROS 2 settings are taking precedence over your CycloneDDS XML file. This is crucial because ROS 2 environment configurations might unintentionally re-enable multicast, bypassing your intended settings in the CycloneDDS XML file.</p>
+<h2>The Solution: A Comprehensive Approach to Disabling Multicast</h2>
+<p>Alright, let's put it all together and create a foolproof method for disabling multicast in ROS2 Humble with CycloneDDS. We'll go through each step to ensure you've covered all bases.</p>
+<h3>Step 1: Verify the <code>CYCLONEDDS_URI</code> Environment Variable</h3>
+<p>First and foremost, <strong>ensure your <code>CYCLONEDDS_URI</code> environment variable</strong> is correctly set. This is the golden key to loading your custom configuration. Open your terminal and check the variable:</p>
+<pre><code class="hljs">echo $CYCLONEDDS_URI
+</code></pre>
+<p>If it's not set or points to the wrong file, set it correctly. For example:</p>
+<pre><code class="hljs">export CYCLONEDDS_URI=/path/to/your/cyclonedds.xml
+</code></pre>
+<p>Make sure to add this line to your <code>.bashrc</code> or <code>.zshrc</code> file to persist the setting across sessions. This step ensures that CycloneDDS loads your configuration file, which is the foundation for disabling multicast. The correct path is essential for the configuration to be applied.</p>
+<h3>Step 2: Refine Your XML Configuration File</h3>
+<p>Next, let's refine your XML configuration file. Here's a more robust configuration that explicitly disables multicast and relies on unicast for discovery:</p>
+<pre><code class="hljs">&lt;CycloneDDS&gt;
+ &lt;Domain&gt;
+ &lt;Id&gt;42&lt;/Id&gt;
+ &lt;General&gt;
+ &lt;Interfaces&gt;
+ &lt;NetworkInterface name=&quot;eth0&quot; multicast=&quot;false&quot; /&gt;
+ &lt;/Interfaces&gt;
+ &lt;AllowMulticast&gt;false&lt;/AllowMulticast&gt;
+ &lt;EnableMulticastLoopback&gt;false&lt;/EnableMulticastLoopback&gt;
+ &lt;/General&gt;
+ &lt;Discovery&gt;
+ &lt;ParticipantIndex&gt;auto&lt;/ParticipantIndex&gt;
+ &lt;Peers&gt;
+ &lt;Peer Address=&quot;192.168.0.107:7410&quot;/&gt;
+ &lt;Peer Address=&quot;192.168.0.198:7410&quot;/&gt;
+ &lt;/Peers&gt;
+ &lt;Unicast&gt;
+ &lt;Address mask=&quot;192.168.0.0/24&quot; /&gt;
+ &lt;/Unicast&gt;
+ &lt;/Discovery&gt;
+ &lt;SHM&gt;
+ &lt;Enable&gt;false&lt;/Enable&gt;
+ &lt;/SHM&gt;
+ &lt;/Domain&gt;
+&lt;/CycloneDDS&gt;
+</code></pre>
+<p>Here’s a breakdown of the key changes:</p>
+<ul>
+<li><strong>Explicit Interface Name:</strong> Instead of <code>autodetermine</code>, we've specified the network interface name (<code>eth0</code> in this example). Replace <code>eth0</code> with your actual interface name.</li>
+<li><strong>Unicast Configuration:</strong> We've added a <code>&lt;Unicast&gt;</code> section within <code>&lt;Discovery&gt;</code>. This ensures that CycloneDDS uses unicast for discovery within the specified subnet.</li>
+</ul>
+<p>This refined configuration provides a more precise control over multicast and unicast settings, ensuring that multicast is effectively disabled and unicast is used for communication.</p>
+<h3>Step 3: Check Network Interface Configuration</h3>
+<p>Verify your network interface name using <code>ifconfig</code> or <code>ip addr</code>. Ensure that the interface name in your XML configuration matches the actual interface name on your system. Mismatched interface names can lead to incorrect configuration application, and multicast might not be disabled as intended.</p>
+<h3>Step 4: Disable Multicast in ROS 2 Launch Files</h3>
+<p>To be absolutely sure, you can also set environment variables within your ROS 2 launch files. This ensures that the settings are applied whenever you launch your ROS 2 nodes. Here’s an example of how to do it in a Python launch file:</p>
+<pre><code class="hljs">from launch import LaunchDescription
+from launch_ros.actions import Node
+import os
+
+def generate_launch_description():
+ return LaunchDescription([
+ Node(
+ package=&#39;your_package&#39;,
+ executable=&#39;your_node&#39;,
+ name=&#39;your_node_name&#39;,
+ env={
+ &#39;CYCLONEDDS_URI&#39;: &#39;/path/to/your/cyclonedds.xml&#39;,
+ &#39;ROS_DOMAIN_ID&#39;: &#39;42&#39;, # Match your &lt;Domain&gt;&lt;Id&gt; in XML
+ },
+ )
+ ])
+</code></pre>
+<p>This launch file sets the <code>CYCLONEDDS_URI</code> and <code>ROS_DOMAIN_ID</code> environment variables for your node, ensuring that your custom CycloneDDS configuration is used. Setting these variables in your launch files provides an additional layer of certainty that your configurations are applied correctly.</p>
+<h3>Step 5: Test and Verify</h3>
+<p>Finally, it's time to test your configuration. Launch your ROS 2 nodes and use a network packet analyzer like Wireshark to monitor network traffic. Filter for multicast traffic to confirm that no multicast packets are being transmitted. Successful verification confirms that multicast is effectively disabled, and your system is communicating via unicast as intended.</p>
+<h2>Extra Tips for a Smooth Ride</h2>
+<p>Here are a few extra tips to keep in mind when disabling multicast:</p>
+<ul>
+<li><strong>ROS_DOMAIN_ID Consistency:</strong> Ensure that the <code>ROS_DOMAIN_ID</code> in your environment and launch files matches the <code>&lt;Domain&gt;&lt;Id&gt;</code> in your CycloneDDS XML configuration. Inconsistent domain IDs can lead to communication issues.</li>
+<li><strong>QoS Profiles:</strong> If you're using custom QoS profiles, review them to ensure they don't inadvertently re-enable multicast. Explicitly set QoS settings to unicast if necessary.</li>
+<li><strong>Network Segmentation:</strong> If you have a complex network setup, consider segmenting your network to isolate ROS 2 traffic. This can help prevent multicast issues from affecting other network devices.</li>
+</ul>
+<h2>Conclusion: Mastering Multicast in ROS2 Humble</h2>
+<p>Disabling multicast in ROS2 Humble with CycloneDDS might seem tricky at first, but by following these steps, you can ensure a smooth and reliable communication setup. Remember to double-check your configuration file, verify your environment variables, and test your setup thoroughly. With these tips and tricks, you'll be well-equipped to tackle any multicast challenges in your ROS2 projects. Keep experimenting, keep learning, and happy developing, <strong>guys</strong>! If you've got any other cool insights or challenges you've faced, drop them in the comments below – let's keep the conversation rolling!</p>
+
+                    </div>
+                    <aside class="related-posts">
+                        <div class="ad-sidebar container">
+                            <div class="ad-wrapper">
+    <span>Iklan Related</span>
+</div>
+                        </div>
+                        <h2 class="related-posts-title">Related Posts</h2><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/crispresso2-website-ssl-tls-certificate">CRISPResso2 Website SSL TLS Certificate Expiration Security Implications And Solutions</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-22T09:06:32+00:00">Jul 22, 2025</time>
+		                        <span class="view-count">
+									86 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/enhance-binary-ninja-demangler-callback">Enhance Binary Ninja Demangler Callback With Mangled Symbol Address</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-13T17:05:28+00:00">Jul 13, 2025</time>
+		                        <span class="view-count">
+									67 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/sampled-vs-digital-signals-why">Sampled Vs Digital Signals: Why Quantization Matters</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-05T17:30:45+00:00">Aug 5, 2025</time>
+		                        <span class="view-count">
+									52 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/identifying-functions-from-ordered-pairs">Identifying Functions From Ordered Pairs A Step By Step Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-16T13:58:20+00:00">Jul 16, 2025</time>
+		                        <span class="view-count">
+									61 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/saving-showdown-friends-trip-savings">Saving Showdown: Friends&#39; Trip Savings Math Problem</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-06T23:19:22+00:00">Aug 6, 2025</time>
+		                        <span class="view-count">
+									51 views
+		                        </span>
+                            </div>
+                        </article>
+                    </aside>
+                    <aside class="related-posts"></aside>
+                </div>
+            </div>
+        </article>
+        <a href="#" class="back-to-top" id="backToTop" title="Back to top">
+        	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-bar-up" viewBox="0 0 16 16">
+			  <path fill-rule="evenodd" d="M3.646 11.854a.5.5 0 0 0 .708 0L8 8.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708M2.4 5.2c0 .22.18.4.4.4h10.4a.4.4 0 0 0 0-.8H2.8a.4.4 0 0 0-.4.4"/>
+			</svg>
+		</a>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 ANABEL</p>
+        </div>
+    </footer>
+    <script>
+    	(() => {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            const toggleMenu = () => {
+                navMenu.classList.toggle('nav-menu-active');
+                navToggle.classList.toggle('nav-toggle-active');
+            };
+            const backToTopHandler = (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            navToggle.addEventListener('click', toggleMenu);
+            document.getElementById('backToTop').addEventListener('click', backToTopHandler);
+            window.addEventListener('pagehide', () => {
+                navToggle.removeEventListener('click', toggleMenu);
+                document.getElementById('backToTop').removeEventListener('click', backToTopHandler);
+            });
+        })();
+		(() => {
+            window.addEventListener("DOMContentLoaded", (event) => {
+                const ellHljs = document.createElement("script");
+                ellHljs.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js");
+                ellHljs.onload = () => {
+                    hljs.highlightAll();
+                };
+                document.querySelector("body").append(ellHljs);
+                const ellFont = document.createElement("link");
+                ellFont.setAttribute("href", "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css");
+                ellFont.setAttribute("rel", "stylesheet");
+                document.querySelector("head").append(ellFont);
+                window.addEventListener('pagehide', () => {
+                    // ellHljs.remove();
+                    ellFont.remove();
+                });
+
+            });
+        })();
+    </script>
+    
+    
+    
+</body>
+</html>

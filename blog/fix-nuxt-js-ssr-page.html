@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Fix: Nuxt.js SSR Page Reload Not Found On Nginx</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Fix: Nuxt.js SSR Page Reload Not Found On Nginx...">
+    <link rel="canonical" href="https://catatansoal.github.io/blog/fix-nuxt-js-ssr-page">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Fix: Nuxt.js SSR Page Reload Not Found On Nginx">
+	<meta property="og:description" content="Fix: Nuxt.js SSR Page Reload Not Found On Nginx...">
+	<meta property="og:url" content="https://catatansoal.github.io/blog/fix-nuxt-js-ssr-page">
+	<meta property="og:site_name" content="ANABEL">
+	<meta property="article:published_time" content="2025-08-10T13:05:57+00:00">
+	<meta property="article:author" content="ADMIN">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+    <link rel="preload" fetchpriority="high" as="image" href="https://tse4.mm.bing.net/th?q=Nuxt.js%20SSR%20Reload%20Page%20Issue%3A%20Troubleshooting%20Guide">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style type="text/css">
+    	:root{--primary-color:#3740ff;--text-color:#202124;--background-color:#ffffff;--gray-100:#f8f9fa;--gray-200:#e9ecef}*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;line-height:1.6;color:var(--text-color);background-color:var(--background-color)}.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}.header{background-color:var(--background-color);border-bottom:1px solid var(--gray-200);position:sticky;top:0;z-index:100}.nav{padding:.5rem 0}.nav-container{display:flex;justify-content:space-between;align-items:center;gap:1rem}.nav-left{display:flex;align-items:center;flex-shrink:0}.logo{font-weight:700;color:var(--primary-color)}.blog-tag{margin-left:1rem;padding:.25rem .5rem;background-color:var(--gray-100);border-radius:4px;font-size:.875rem}.nav-search{flex-grow:1;max-width:300px}.search-form{position:relative;width:100%}.search-input{width:100%;padding:.5rem 2.5rem .5rem 1rem;border:1px solid var(--gray-200);border-radius:24px;font-size:.875rem;transition:all 0.2s}.search-input:focus{outline:none;border-color:var(--primary-color);box-shadow:0 0 0 2px rgb(55 64 255 / .1)}.search-button{position:absolute;right:.5rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#5f6368;cursor:pointer;padding:.25rem;display:flex;align-items:center;justify-content:center}.search-button:hover{color:var(--primary-color)}.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:.5rem}.hamburger{display:block;position:relative;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before,.hamburger::after{content:'';position:absolute;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before{top:-6px}.hamburger::after{bottom:-6px}.nav-toggle-active .hamburger{background:#fff0}.nav-toggle-active .hamburger::before{transform:rotate(45deg);top:0}.nav-toggle-active .hamburger::after{transform:rotate(-45deg);bottom:0}.nav-list{display:flex;list-style:none;gap:2rem}.nav-link{color:var(--text-color);text-decoration:none;font-size:.9rem;transition:color 0.2s}.nav-link:hover{color:var(--primary-color)}.article-header{padding:2rem 0;background-color:var(--gray-100)}.article-layout{display:grid;grid-template-columns:1fr 350px;gap:3rem;padding:1rem 0;align-items: start}h1,h2,h3,h4,h5,h6{font-family:"Crimson Text","Times New Roman",Times,serif}h1{font-size:2.5rem;line-height:1.2;margin-bottom:1rem}.meta{color:#5f6368;font-size:.875rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}.view-count{display:inline-flex;align-items:center;gap:.25rem}.view-count svg{color:#5f6368}.content{min-width:0;border-bottom:1px solid #dddddd5e;margin-top:1rem;white-space:pre-line !important;overflow-wrap:break-word;overflow-x:auto;word-break:break-word}.lead{font-size:1.25rem;color:#5f6368;margin-bottom:2rem}h2,h3,h4,h5,h6{font-size:1.75rem;margin:1rem 0 1rem}p,pre,ol,ul>li{margin-bottom:1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;font-size:1.3rem;text-align: justify;}p>code{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px}hr{margin:1rem 0 1rem 0}.code-example{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;margin:1.5rem 0;overflow-x:auto}code{font-family:'Roboto Mono',monospace;font-size:.875rem}ul{margin:.2rem 0;padding-left:1.5rem}.related-posts{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;position:sticky;top:5rem}.related-posts-title,.newpost-posts-list{font-size:1.75rem;margin:0 0 1rem}.related-posts-list{display:flex;flex-direction:column;gap:.5rem}.related-post,.newpost-post{border-bottom:1px solid #ddd;padding-bottom:10px;margin-bottom:10px}.related-post:last-child,.newpost-post:last-child{padding-bottom:0;border-bottom:none}.related-post-title,.newpost-post-title{font-size:1.2rem;margin:0 0 .1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;}.related-post-title a,.newpost-post-title a{color:var(--text-color);text-decoration:none;transition:color 0.2s}.related-post-title a:hover,.newpost-post-title a:hover{color:var(--primary-color)}.related-post time{font-size:.875rem;color:#5f6368}.footer{background-color:var(--gray-100);padding:2rem 0;margin-top:4rem;color:#5f6368;font-size:.875rem}.nav-menu>ul>li{margin-bottom:0}@media (max-width:1024px){.container{max-width:800px}.article-layout{grid-template-columns:1fr;gap:2rem}.related-posts{position:static}}@media (max-width:768px){.nav-container{flex-wrap:wrap}.nav-search{order:3;max-width:none;width:100%;margin-top:.1rem}.nav-toggle{display:block}.nav-menu{display:none;position:absolute;top:100%;left:0;right:0;background:var(--background-color);padding:1rem 0;border-bottom:1px solid var(--gray-200)}.nav-menu-active{display:block}.nav-list{flex-direction:column;gap:.1rem;padding:0 1.5rem}.nav-link{display:block;padding:.2rem 0}h1{font-size:2rem}.article-header{padding:2rem 0}.content{padding:.1rem 0}}table{width:100%;border-collapse:collapse;margin:20px 0;font-family:'Arial',sans-serif}th,td{padding:12px 15px;text-align:left;border:1px solid #ddd}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9}tr:nth-child(even) td{background-color:#f2f2f2}@media screen and (max-width:768px){table{border:0;display:block;overflow-x:auto;white-space:nowrap}th,td{padding:10px;text-align:right}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9;border-bottom:1px solid #ddd}tr:nth-child(even) td{background-color:#f2f2f2}}a{text-decoration:none;color:#540707}.katex-html{padding: .2rem;color: #000;font-weight: 700;font-size: 1.3rem;overflow-wrap: break-word;max-width: 100%;white-space: normal !important}.category{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin:1rem 0 1rem 0}.tag{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px;font-family:"Newsreader",serif}.tag>a{text-decoration:none;color:#000}img{margin:auto;display:block;max-width:100%;height:auto;margin-bottom:1rem}.katex{white-space: pre-line !important;display: inline-block;max-width: 100%;overflow-x: auto;overflow-y: hidden;scrollbar-width: thin;overflow-wrap: break-word;word-break: break-word;vertical-align: -7px}.content > p {overflow-wrap: break-word;word-break: break-word}
+    </style>
+    <style type="text/css">
+    	pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}
+		.hljs{color:#c9d1d9;background:#0d1117}.hljs-doctag,.hljs-keyword,.hljs-meta .hljs-keyword,.hljs-template-tag,.hljs-template-variable,.hljs-type,.hljs-variable.language_{color:#ff7b72}.hljs-title,.hljs-title.class_,.hljs-title.class_.inherited__,.hljs-title.function_{color:#d2a8ff}.hljs-attr,.hljs-attribute,.hljs-literal,.hljs-meta,.hljs-number,.hljs-operator,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-variable{color:#79c0ff}.hljs-meta .hljs-string,.hljs-regexp,.hljs-string{color:#a5d6ff}.hljs-built_in,.hljs-symbol{color:#ffa657}.hljs-code,.hljs-comment,.hljs-formula{color:#8b949e}.hljs-name,.hljs-quote,.hljs-selector-pseudo,.hljs-selector-tag{color:#7ee787}.hljs-subst{color:#c9d1d9}.hljs-section{color:#1f6feb;font-weight:700}.hljs-bullet{color:#f2cc60}.hljs-emphasis{color:#c9d1d9;font-style:italic}.hljs-strong{color:#c9d1d9;font-weight:700}.hljs-addition{color:#aff5b4;background-color:#033a16}.hljs-deletion{color:#ffdcd7;background-color:#67060c}
+    	pre{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;font-weight:400;word-break:break-word;word-wrap:break-word;box-sizing:inherit;border-radius:4px;overflow-x:auto;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}code{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;word-wrap:break-word;word-break:break-word;font-style:normal;line-height:20px;letter-spacing:-.003em;box-sizing:inherit;font-weight:400;font-size:75%;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}
+    </style>
+    <style type="text/css">
+    	.back-to-top{position:fixed;bottom:20px;right:20px;background-color:#a73f3f;color:#fff;padding:8px 10px;border-radius:50%;box-shadow:0 4px 6px rgb(0 0 0 / .2);font-size:10px;font-weight:700;text-decoration:none;text-align:center;transition:opacity 0.3s ease,visibility 0.3s ease;z-index:99999;opacity:1;visibility:visible}.back-to-top:hover{background-color:#0056b3}
+    </style>
+    <style type="text/css">
+        .ad-header {margin: 1rem auto 1rem;background-color: #fdfdfd;text-align: center;display: block;}.ad-header .ad-wrapper {min-height: 90px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #555;font-weight: 500;padding: 3rem;border: 1px dashed #ccc;border-radius: 6px;}@media (max-width: 768px) {.ad-header {padding: 0.75rem;}}.ad-sidebar {margin: 0 0 1rem;background-color: #fefefe;text-align: center;padding: 0px;width: 100%;max-width: 100%;display: block;}.ad-sidebar .ad-wrapper {min-height: 250px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #444;font-weight: 500;border: 1px dashed #aaa;border-radius: 6px;padding: 0rem;}@media (max-width: 1024px) {.ad-sidebar {padding: 0.75rem;}}
+    </style>
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://catatansoal.github.io/blog/fix-nuxt-js-ssr-page"
+          },
+          "headline": "Fix: Nuxt.js SSR Page Reload Not Found On Nginx",
+          "description": "Fix: Nuxt.js SSR Page Reload Not Found On Nginx...",
+          "image": [
+            "https://tse4.mm.bing.net/th?q=Nuxt.js%20SSR%20Reload%20Page%20Issue%3A%20Troubleshooting%20Guide"
+          ],
+          "author": {
+            "@type": "Person",
+            "name": "ADMIN",
+            "jobTitle": "Editor web"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "ANABEL",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://tse4.mm.bing.net/th?q=ANABEL%20WEB"
+            }
+          },
+          "datePublished": "2025-08-10T13:05:57+00:00",
+          "dateModified": "2025-08-10T13:05:57+00:00"
+        }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="container nav-container">
+                <div class="nav-left">
+                    <span class="logo">ANABEL</span>
+                    <span class="blog-tag">Article</span>
+                </div>
+                <div class="nav-search">
+                    <form class="search-form" role="search">
+                        <input 
+                            type="search" 
+                            class="search-input"
+                            placeholder="Search articles..."
+                            aria-label="Search articles"
+                        >
+                        <button type="submit" class="search-button" aria-label="Submit search">🔎</button>
+                    </form>
+                </div>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+                <div class="nav-menu">
+                    <ul class="nav-list">
+                    	<li><a href="/" class="nav-link">HOME</a></li>
+                        <li><a href="/pages/About" class="nav-link">About</a></li>
+                        <li><a href="/pages/Contact" class="nav-link">Contact</a></li>
+                        <li><a href="/pages/Disclaimer" class="nav-link">Disclaimer</a></li>
+                        <li><a href="/pages/Privacy" class="nav-link">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="main">
+        <article class="article">
+            <header class="article-header">
+                <div class="container">
+                    <h1>Fix: Nuxt.js SSR Page Reload Not Found On Nginx</h1>
+                    <div class="meta">
+                        <time datetime="2025-08-10T13:05:57+00:00">Aug 10, 2025</time>
+                        <span class="author">by ADMIN</span>
+                        <span class="view-count">
+                            <span id="viewCount">50</span> views
+                        </span>
+                    </div>
+                </div>
+            </header>
+            <div class="ad-header container">
+                <div class="ad-wrapper">
+    Iklan Headers
+</div>
+            </div>
+            <div class="container">
+                <div class="article-layout">
+                    <div class="content">
+                        <img src="https://tse4.mm.bing.net/th?q=Nuxt.js%20SSR%20Reload%20Page%20Issue%3A%20Troubleshooting%20Guide" title="Nuxt.js SSR Reload Page Issue: Troubleshooting Guide" width="300" height="200"/><p>Are you encountering the dreaded <strong>&quot;Page Not Found&quot; error</strong> when reloading or directly accessing subpages on your Nuxt.js SSR (Server-Side Rendered) application hosted on a server running Nginx? Don't worry, you're not alone! This is a common issue, and we're here to guide you through the troubleshooting process. Let's dive deep into the potential causes and solutions to get your Nuxt.js application running smoothly.</p>
+<h2>Understanding the Problem</h2>
+<p>The root cause of this issue often lies in how your server, specifically Nginx, is configured to handle requests for your Nuxt.js application. When using SSR, the server needs to correctly route incoming requests to your Nuxt.js application, which then renders the appropriate content. If Nginx isn't properly set up to handle these requests, it might try to directly serve static files for routes that are actually handled by Nuxt.js, leading to the &quot;Page Not Found&quot; error. This is especially prevalent when you navigate directly to a subpage or refresh the page on a subpage, as the server then directly processes the request without the initial Nuxt.js routing taking place on the client-side.</p>
+<h3>Common Culprits</h3>
+<p>Several factors can contribute to this problem. Here are some of the most common:</p>
+<ul>
+<li><strong>Incorrect Nginx Configuration:</strong> The most frequent cause is a misconfigured Nginx server block. This includes issues with the <code>try_files</code> directive, which tells Nginx how to handle requests for files or directories. A faulty configuration might prevent Nginx from correctly passing requests to your Nuxt.js application.</li>
+<li><strong>Missing or Incorrect Proxy Settings:</strong> If you're using a reverse proxy (which is typical in SSR setups), the proxy settings might not be correctly configured. This can prevent requests from being properly forwarded to your Nuxt.js server.</li>
+<li><strong>Base Path Issues:</strong> If your Nuxt.js application is served from a subdirectory (e.g., <code>example.com/my-app</code>), you need to configure both Nuxt.js and Nginx to be aware of this base path. Failing to do so can lead to routing problems.</li>
+<li><strong>PM2 Configuration:</strong> While PM2 primarily manages your Node.js process, incorrect configurations can sometimes interfere with the application's ability to handle requests properly. This is less common but still worth investigating.</li>
+</ul>
+<h2>Diagnosing the Issue</h2>
+<p>Before we jump into solutions, let's take a moment to diagnose the problem. Here's a step-by-step approach:</p>
+<ol>
+<li><strong>Check Your Nginx Configuration:</strong> Carefully review your Nginx configuration file (usually located at <code>/etc/nginx/sites-available/your-site</code> or <code>/etc/nginx/conf.d/your-site.conf</code>). Pay close attention to the <code>server</code> block for your Nuxt.js application.</li>
+<li><strong>Examine the Nginx Error Logs:</strong> Nginx logs are invaluable for troubleshooting. Check the error logs (usually located at <code>/var/log/nginx/error.log</code>) for any clues about what's going wrong. Look for error messages related to file not found, permission denied, or connection refused.</li>
+<li><strong>Inspect the Browser Console:</strong> Open your browser's developer console and check for any JavaScript errors or network requests that are failing. This can provide insights into client-side routing issues.</li>
+<li><strong>Test Direct Access:</strong> Try accessing a subpage directly by typing the URL into the browser's address bar. This will help you determine if the issue is specific to direct access or if it also occurs during navigation within the application.</li>
+<li><strong>Simplify Your Setup:</strong> If possible, try simplifying your setup to isolate the problem. For example, you could try running your Nuxt.js application without PM2 to see if that resolves the issue.</li>
+</ol>
+<h2>Solutions: Configuring Nginx for Nuxt.js SSR</h2>
+<p>Alright, let's get down to fixing this! The most common solution involves correctly configuring your Nginx server block. Here's a sample configuration that you can adapt to your specific needs:</p>
+<pre><code class="hljs">server {
+    listen 80;
+    server_name your-domain.com;
+
+    root /path/to/your/nuxt/app;
+
+    index index.html index.htm;
+
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+
+    location ~ /.well-known {
+            allow all;
+    }
+
+    access_log /var/log/nginx/nuxt-access.log;
+    error_log /var/log/nginx/nuxt-error.log;
+}
+</code></pre>
+<h3>Explanation of the Configuration</h3>
+<ul>
+<li><strong><code>listen 80;</code></strong>: This tells Nginx to listen for incoming requests on port 80 (the standard HTTP port).</li>
+<li><strong><code>server_name your-domain.com;</code></strong>: Replace <code>your-domain.com</code> with your actual domain name.</li>
+<li><strong><code>root /path/to/your/nuxt/app;</code></strong>:  Specify the root directory of your Nuxt.js application. This is where your <code>nuxt.config.js</code> file and <code>package.json</code> are located.  <strong><em>Ensure this path is correct!</em></strong></li>
+<li><strong><code>index index.html index.htm;</code></strong>: This tells Nginx which files to serve as the index page if a directory is requested.</li>
+<li><strong><code>location / { try_files $uri $uri/ /index.html; }</code></strong>: This is the <strong><em>most crucial part</em></strong>. Let's break it down:
+<ul>
+<li><code>try_files</code>: This directive tells Nginx to try the following in order:
+<ul>
+<li><code>$uri</code>:  Check if a file exists that matches the requested URI (e.g., <code>/about.html</code>).</li>
+<li><code>$uri/</code>: Check if a directory exists that matches the requested URI (e.g., <code>/about/</code>).</li>
+<li><code>/index.html</code>: If neither a file nor a directory is found, serve the <code>index.html</code> file.  This is where Nuxt.js takes over and handles the routing.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>location ~ /.well-known { allow all; }</code></strong>: This is important if you are using Let's Encrypt for SSL certificates. It allows access to the <code>.well-known</code> directory, which is used for certificate validation.</li>
+<li><strong><code>access_log /var/log/nginx/nuxt-access.log;</code></strong> and <strong><code>error_log /var/log/nginx/nuxt-error.log;</code></strong>: These lines specify the paths to the access and error logs, respectively.  <strong><em>These logs are your best friends when troubleshooting!</em></strong></li>
+</ul>
+<h3>Important Considerations</h3>
+<ul>
+<li>
+<p><strong>HTTPS:</strong> If you're using HTTPS (which you absolutely should be!), you'll need to configure Nginx to listen on port 443 and set up SSL certificates.  Tools like Let's Encrypt can help with this.</p>
+</li>
+<li>
+<p><strong>Base Path:</strong> If your Nuxt.js application is served from a subdirectory (e.g., <code>example.com/my-app</code>), you need to adjust the <code>location</code> block accordingly:</p>
+<pre><code class="hljs">location /my-app/ {
+    try_files $uri $uri/ /my-app/index.html;
+}
+</code></pre>
+<p>And in your <code>nuxt.config.js</code>:</p>
+<pre><code class="hljs">export default {
+  router: {
+    base: &#39;/my-app/&#39;
+  }
+}
+</code></pre>
+</li>
+<li>
+<p><strong>Proxy Settings:</strong> If you're using a reverse proxy (e.g., running your Nuxt.js application on a different port), you'll need to configure the proxy settings in your Nginx configuration:</p>
+<pre><code class="hljs">location / {
+    proxy_pass http://localhost:3000;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection &#39;upgrade&#39;;
+    proxy_set_header Host $host;
+    proxy_cache_bypass $http_upgrade;
+}
+</code></pre>
+<p>Replace <code>http://localhost:3000</code> with the actual address of your Nuxt.js server.</p>
+</li>
+</ul>
+<h2>PM2 Configuration</h2>
+<p>While less likely to be the primary cause, incorrect PM2 configurations can sometimes contribute to the problem. Ensure that your PM2 process is running correctly and that it has sufficient resources. You can check the status of your PM2 process using the command <code>pm2 list</code>. Also, verify that the user running the PM2 process has the necessary permissions to access the application files.</p>
+<h2>Troubleshooting Steps</h2>
+<ol>
+<li><strong>Apply the Configuration:</strong> After making changes to your Nginx configuration, save the file and test the configuration using the command <code>sudo nginx -t</code>. This will check for syntax errors.</li>
+<li><strong>Reload Nginx:</strong> If the configuration is valid, reload Nginx to apply the changes: <code>sudo systemctl reload nginx</code> or <code>sudo service nginx reload</code>.</li>
+<li><strong>Clear Browser Cache:</strong> Sometimes, the browser's cache can interfere with the routing. Clear your browser's cache and try again.</li>
+<li><strong>Restart PM2:</strong> Restart your PM2 process to ensure that the changes are reflected in your Nuxt.js application: <code>pm2 restart your-app-name</code>.</li>
+<li><strong>Check Logs Again:</strong> After making changes, check the Nginx error logs and the browser console for any new errors or warnings.</li>
+</ol>
+<h2>Conclusion</h2>
+<p><strong><em>The &quot;Page Not Found&quot; error on Nuxt.js SSR applications can be frustrating, but with a systematic approach to troubleshooting, you can usually resolve the issue.</em></strong> By carefully reviewing your Nginx configuration, checking your logs, and following the solutions outlined in this guide, you'll be well on your way to a smoothly running Nuxt.js application. Remember to pay close attention to the <code>try_files</code> directive, base path configurations, and proxy settings. Good luck, and happy coding! If you're still facing issues, don't hesitate to seek help from the Nuxt.js community or consult with a server administrator. They can provide valuable insights and assistance in resolving your specific problem.</p>
+
+                    </div>
+                    <aside class="related-posts">
+                        <div class="ad-sidebar container">
+                            <div class="ad-wrapper">
+    <span>Iklan Related</span>
+</div>
+                        </div>
+                        <h2 class="related-posts-title">Related Posts</h2><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/binomials-explained-a-comprehensive-guide">Binomials Explained A Comprehensive Guide To Identifying And Understanding Algebraic Expressions</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-14T07:25:40+00:00">Jul 14, 2025</time>
+		                        <span class="view-count">
+									96 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/how-to-calculate-performance-ratio">How To Calculate Performance Ratio PR For Image Segmentation And Edge Detection</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-26T06:05:56+00:00">Jul 26, 2025</time>
+		                        <span class="view-count">
+									79 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/deprecated-rna-structure-prediction-tool">Deprecated RNA Structure Prediction Tool In Galaxy</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-06T20:16:56+00:00">Aug 6, 2025</time>
+		                        <span class="view-count">
+									50 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/dreaming-theories-lacking-empirical-support">Dreaming Theories Lacking Empirical Support Problem-Solving, Activation-Synthesis, Cognitive, And Psychoanalytic Theories</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-14T17:05:32+00:00">Jul 14, 2025</time>
+		                        <span class="view-count">
+									121 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/aaru-fixing-incomplete-macintosh-file">Aaru: Fixing Incomplete Macintosh File Extraction</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-09T13:22:05+00:00">Aug 9, 2025</time>
+		                        <span class="view-count">
+									49 views
+		                        </span>
+                            </div>
+                        </article>
+                    </aside>
+                    <aside class="related-posts"></aside>
+                </div>
+            </div>
+        </article>
+        <a href="#" class="back-to-top" id="backToTop" title="Back to top">
+        	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-bar-up" viewBox="0 0 16 16">
+			  <path fill-rule="evenodd" d="M3.646 11.854a.5.5 0 0 0 .708 0L8 8.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708M2.4 5.2c0 .22.18.4.4.4h10.4a.4.4 0 0 0 0-.8H2.8a.4.4 0 0 0-.4.4"/>
+			</svg>
+		</a>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 ANABEL</p>
+        </div>
+    </footer>
+    <script>
+    	(() => {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            const toggleMenu = () => {
+                navMenu.classList.toggle('nav-menu-active');
+                navToggle.classList.toggle('nav-toggle-active');
+            };
+            const backToTopHandler = (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            navToggle.addEventListener('click', toggleMenu);
+            document.getElementById('backToTop').addEventListener('click', backToTopHandler);
+            window.addEventListener('pagehide', () => {
+                navToggle.removeEventListener('click', toggleMenu);
+                document.getElementById('backToTop').removeEventListener('click', backToTopHandler);
+            });
+        })();
+		(() => {
+            window.addEventListener("DOMContentLoaded", (event) => {
+                const ellHljs = document.createElement("script");
+                ellHljs.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js");
+                ellHljs.onload = () => {
+                    hljs.highlightAll();
+                };
+                document.querySelector("body").append(ellHljs);
+                const ellFont = document.createElement("link");
+                ellFont.setAttribute("href", "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css");
+                ellFont.setAttribute("rel", "stylesheet");
+                document.querySelector("head").append(ellFont);
+                window.addEventListener('pagehide', () => {
+                    // ellHljs.remove();
+                    ellFont.remove();
+                });
+
+            });
+        })();
+    </script>
+    
+    
+    
+</body>
+</html>

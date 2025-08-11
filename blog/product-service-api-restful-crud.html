@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Product Service API: RESTful CRUD Guide</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Product Service API: RESTful CRUD Guide...">
+    <link rel="canonical" href="https://catatansoal.github.io/blog/product-service-api-restful-crud">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Product Service API: RESTful CRUD Guide">
+	<meta property="og:description" content="Product Service API: RESTful CRUD Guide...">
+	<meta property="og:url" content="https://catatansoal.github.io/blog/product-service-api-restful-crud">
+	<meta property="og:site_name" content="ANABEL">
+	<meta property="article:published_time" content="2025-08-02T03:11:53+00:00">
+	<meta property="article:author" content="ADMIN">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+    <link rel="preload" fetchpriority="high" as="image" href="https://tse4.mm.bing.net/th?q=Product%20Service%20API%3A%20A%20Comprehensive%20Guide%20to%20RESTful%20CRUD%20Operations">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style type="text/css">
+    	:root{--primary-color:#3740ff;--text-color:#202124;--background-color:#ffffff;--gray-100:#f8f9fa;--gray-200:#e9ecef}*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;line-height:1.6;color:var(--text-color);background-color:var(--background-color)}.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}.header{background-color:var(--background-color);border-bottom:1px solid var(--gray-200);position:sticky;top:0;z-index:100}.nav{padding:.5rem 0}.nav-container{display:flex;justify-content:space-between;align-items:center;gap:1rem}.nav-left{display:flex;align-items:center;flex-shrink:0}.logo{font-weight:700;color:var(--primary-color)}.blog-tag{margin-left:1rem;padding:.25rem .5rem;background-color:var(--gray-100);border-radius:4px;font-size:.875rem}.nav-search{flex-grow:1;max-width:300px}.search-form{position:relative;width:100%}.search-input{width:100%;padding:.5rem 2.5rem .5rem 1rem;border:1px solid var(--gray-200);border-radius:24px;font-size:.875rem;transition:all 0.2s}.search-input:focus{outline:none;border-color:var(--primary-color);box-shadow:0 0 0 2px rgb(55 64 255 / .1)}.search-button{position:absolute;right:.5rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#5f6368;cursor:pointer;padding:.25rem;display:flex;align-items:center;justify-content:center}.search-button:hover{color:var(--primary-color)}.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:.5rem}.hamburger{display:block;position:relative;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before,.hamburger::after{content:'';position:absolute;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before{top:-6px}.hamburger::after{bottom:-6px}.nav-toggle-active .hamburger{background:#fff0}.nav-toggle-active .hamburger::before{transform:rotate(45deg);top:0}.nav-toggle-active .hamburger::after{transform:rotate(-45deg);bottom:0}.nav-list{display:flex;list-style:none;gap:2rem}.nav-link{color:var(--text-color);text-decoration:none;font-size:.9rem;transition:color 0.2s}.nav-link:hover{color:var(--primary-color)}.article-header{padding:2rem 0;background-color:var(--gray-100)}.article-layout{display:grid;grid-template-columns:1fr 350px;gap:3rem;padding:1rem 0;align-items: start}h1,h2,h3,h4,h5,h6{font-family:"Crimson Text","Times New Roman",Times,serif}h1{font-size:2.5rem;line-height:1.2;margin-bottom:1rem}.meta{color:#5f6368;font-size:.875rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}.view-count{display:inline-flex;align-items:center;gap:.25rem}.view-count svg{color:#5f6368}.content{min-width:0;border-bottom:1px solid #dddddd5e;margin-top:1rem;white-space:pre-line !important;overflow-wrap:break-word;overflow-x:auto;word-break:break-word}.lead{font-size:1.25rem;color:#5f6368;margin-bottom:2rem}h2,h3,h4,h5,h6{font-size:1.75rem;margin:1rem 0 1rem}p,pre,ol,ul>li{margin-bottom:1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;font-size:1.3rem;text-align: justify;}p>code{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px}hr{margin:1rem 0 1rem 0}.code-example{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;margin:1.5rem 0;overflow-x:auto}code{font-family:'Roboto Mono',monospace;font-size:.875rem}ul{margin:.2rem 0;padding-left:1.5rem}.related-posts{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;position:sticky;top:5rem}.related-posts-title,.newpost-posts-list{font-size:1.75rem;margin:0 0 1rem}.related-posts-list{display:flex;flex-direction:column;gap:.5rem}.related-post,.newpost-post{border-bottom:1px solid #ddd;padding-bottom:10px;margin-bottom:10px}.related-post:last-child,.newpost-post:last-child{padding-bottom:0;border-bottom:none}.related-post-title,.newpost-post-title{font-size:1.2rem;margin:0 0 .1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;}.related-post-title a,.newpost-post-title a{color:var(--text-color);text-decoration:none;transition:color 0.2s}.related-post-title a:hover,.newpost-post-title a:hover{color:var(--primary-color)}.related-post time{font-size:.875rem;color:#5f6368}.footer{background-color:var(--gray-100);padding:2rem 0;margin-top:4rem;color:#5f6368;font-size:.875rem}.nav-menu>ul>li{margin-bottom:0}@media (max-width:1024px){.container{max-width:800px}.article-layout{grid-template-columns:1fr;gap:2rem}.related-posts{position:static}}@media (max-width:768px){.nav-container{flex-wrap:wrap}.nav-search{order:3;max-width:none;width:100%;margin-top:.1rem}.nav-toggle{display:block}.nav-menu{display:none;position:absolute;top:100%;left:0;right:0;background:var(--background-color);padding:1rem 0;border-bottom:1px solid var(--gray-200)}.nav-menu-active{display:block}.nav-list{flex-direction:column;gap:.1rem;padding:0 1.5rem}.nav-link{display:block;padding:.2rem 0}h1{font-size:2rem}.article-header{padding:2rem 0}.content{padding:.1rem 0}}table{width:100%;border-collapse:collapse;margin:20px 0;font-family:'Arial',sans-serif}th,td{padding:12px 15px;text-align:left;border:1px solid #ddd}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9}tr:nth-child(even) td{background-color:#f2f2f2}@media screen and (max-width:768px){table{border:0;display:block;overflow-x:auto;white-space:nowrap}th,td{padding:10px;text-align:right}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9;border-bottom:1px solid #ddd}tr:nth-child(even) td{background-color:#f2f2f2}}a{text-decoration:none;color:#540707}.katex-html{padding: .2rem;color: #000;font-weight: 700;font-size: 1.3rem;overflow-wrap: break-word;max-width: 100%;white-space: normal !important}.category{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin:1rem 0 1rem 0}.tag{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px;font-family:"Newsreader",serif}.tag>a{text-decoration:none;color:#000}img{margin:auto;display:block;max-width:100%;height:auto;margin-bottom:1rem}.katex{white-space: pre-line !important;display: inline-block;max-width: 100%;overflow-x: auto;overflow-y: hidden;scrollbar-width: thin;overflow-wrap: break-word;word-break: break-word;vertical-align: -7px}.content > p {overflow-wrap: break-word;word-break: break-word}
+    </style>
+    <style type="text/css">
+    	pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}
+		.hljs{color:#c9d1d9;background:#0d1117}.hljs-doctag,.hljs-keyword,.hljs-meta .hljs-keyword,.hljs-template-tag,.hljs-template-variable,.hljs-type,.hljs-variable.language_{color:#ff7b72}.hljs-title,.hljs-title.class_,.hljs-title.class_.inherited__,.hljs-title.function_{color:#d2a8ff}.hljs-attr,.hljs-attribute,.hljs-literal,.hljs-meta,.hljs-number,.hljs-operator,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-variable{color:#79c0ff}.hljs-meta .hljs-string,.hljs-regexp,.hljs-string{color:#a5d6ff}.hljs-built_in,.hljs-symbol{color:#ffa657}.hljs-code,.hljs-comment,.hljs-formula{color:#8b949e}.hljs-name,.hljs-quote,.hljs-selector-pseudo,.hljs-selector-tag{color:#7ee787}.hljs-subst{color:#c9d1d9}.hljs-section{color:#1f6feb;font-weight:700}.hljs-bullet{color:#f2cc60}.hljs-emphasis{color:#c9d1d9;font-style:italic}.hljs-strong{color:#c9d1d9;font-weight:700}.hljs-addition{color:#aff5b4;background-color:#033a16}.hljs-deletion{color:#ffdcd7;background-color:#67060c}
+    	pre{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;font-weight:400;word-break:break-word;word-wrap:break-word;box-sizing:inherit;border-radius:4px;overflow-x:auto;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}code{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;word-wrap:break-word;word-break:break-word;font-style:normal;line-height:20px;letter-spacing:-.003em;box-sizing:inherit;font-weight:400;font-size:75%;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}
+    </style>
+    <style type="text/css">
+    	.back-to-top{position:fixed;bottom:20px;right:20px;background-color:#a73f3f;color:#fff;padding:8px 10px;border-radius:50%;box-shadow:0 4px 6px rgb(0 0 0 / .2);font-size:10px;font-weight:700;text-decoration:none;text-align:center;transition:opacity 0.3s ease,visibility 0.3s ease;z-index:99999;opacity:1;visibility:visible}.back-to-top:hover{background-color:#0056b3}
+    </style>
+    <style type="text/css">
+        .ad-header {margin: 1rem auto 1rem;background-color: #fdfdfd;text-align: center;display: block;}.ad-header .ad-wrapper {min-height: 90px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #555;font-weight: 500;padding: 3rem;border: 1px dashed #ccc;border-radius: 6px;}@media (max-width: 768px) {.ad-header {padding: 0.75rem;}}.ad-sidebar {margin: 0 0 1rem;background-color: #fefefe;text-align: center;padding: 0px;width: 100%;max-width: 100%;display: block;}.ad-sidebar .ad-wrapper {min-height: 250px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #444;font-weight: 500;border: 1px dashed #aaa;border-radius: 6px;padding: 0rem;}@media (max-width: 1024px) {.ad-sidebar {padding: 0.75rem;}}
+    </style>
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://catatansoal.github.io/blog/product-service-api-restful-crud"
+          },
+          "headline": "Product Service API: RESTful CRUD Guide",
+          "description": "Product Service API: RESTful CRUD Guide...",
+          "image": [
+            "https://tse4.mm.bing.net/th?q=Product%20Service%20API%3A%20A%20Comprehensive%20Guide%20to%20RESTful%20CRUD%20Operations"
+          ],
+          "author": {
+            "@type": "Person",
+            "name": "ADMIN",
+            "jobTitle": "Editor web"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "ANABEL",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://tse4.mm.bing.net/th?q=ANABEL%20WEB"
+            }
+          },
+          "datePublished": "2025-08-02T03:11:53+00:00",
+          "dateModified": "2025-08-02T03:11:53+00:00"
+        }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="container nav-container">
+                <div class="nav-left">
+                    <span class="logo">ANABEL</span>
+                    <span class="blog-tag">Article</span>
+                </div>
+                <div class="nav-search">
+                    <form class="search-form" role="search">
+                        <input 
+                            type="search" 
+                            class="search-input"
+                            placeholder="Search articles..."
+                            aria-label="Search articles"
+                        >
+                        <button type="submit" class="search-button" aria-label="Submit search">🔎</button>
+                    </form>
+                </div>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+                <div class="nav-menu">
+                    <ul class="nav-list">
+                    	<li><a href="/" class="nav-link">HOME</a></li>
+                        <li><a href="/pages/About" class="nav-link">About</a></li>
+                        <li><a href="/pages/Contact" class="nav-link">Contact</a></li>
+                        <li><a href="/pages/Disclaimer" class="nav-link">Disclaimer</a></li>
+                        <li><a href="/pages/Privacy" class="nav-link">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="main">
+        <article class="article">
+            <header class="article-header">
+                <div class="container">
+                    <h1>Product Service API: RESTful CRUD Guide</h1>
+                    <div class="meta">
+                        <time datetime="2025-08-02T03:11:53+00:00">Aug 2, 2025</time>
+                        <span class="author">by ADMIN</span>
+                        <span class="view-count">
+                            <span id="viewCount">40</span> views
+                        </span>
+                    </div>
+                </div>
+            </header>
+            <div class="ad-header container">
+                <div class="ad-wrapper">
+    Iklan Headers
+</div>
+            </div>
+            <div class="container">
+                <div class="article-layout">
+                    <div class="content">
+                        <img src="https://tse4.mm.bing.net/th?q=Product%20Service%20API%3A%20A%20Comprehensive%20Guide%20to%20RESTful%20CRUD%20Operations" title="Product Service API: A Comprehensive Guide to RESTful CRUD Operations" width="300" height="200"/>
+<p>Hey guys! Ever wondered how e-commerce platforms manage their massive product catalogs? A crucial part of that is a well-designed Product Service API. This guide dives deep into creating a RESTful API that handles <strong>CRUD</strong> (Create, Read, Update, Delete) operations for products. We'll break down the objective, acceptance criteria, and how to implement each operation effectively. So, buckle up and let's get started!</p>
+<h2>Objective: Building a Robust Product Management API</h2>
+<p>The primary objective here is to design and implement a <strong>RESTful API</strong> specifically tailored for managing products in an e-commerce system. Think of it as the backend engine that powers all product-related activities on a website or app. This API needs to be efficient, reliable, and easy to use, both for the developers integrating it and the system it supports. The core functionality revolves around the standard <strong>CRUD operations</strong>: creating new products, reading product details, updating existing product information, and deleting products when necessary. Each of these operations needs to be handled with precision to ensure data integrity and a smooth user experience. We'll explore how to structure the API endpoints, handle requests, and format responses to meet these goals. Beyond the basic functionality, the API should also incorporate robust error handling and validation mechanisms. This means ensuring that invalid data doesn't make its way into the system and that meaningful error messages are returned to the client when things go wrong. For example, if a user tries to create a product with a negative price, the API should detect this and respond with an appropriate error message, guiding the user to correct the input. Similarly, if a requested product is not found in the database, the API should return a &quot;Not Found&quot; error, rather than crashing or returning unexpected data. These measures are crucial for maintaining the reliability and usability of the API.</p>
+<p>Furthermore, the API should be designed with scalability in mind. As the e-commerce system grows and the number of products increases, the API needs to be able to handle the increased load without performance degradation. This might involve implementing techniques such as caching, load balancing, and database optimization. In terms of security, the API should be protected against unauthorized access and malicious attacks. This can be achieved through various measures, such as authentication, authorization, and input validation. Authentication ensures that only authorized users can access the API, while authorization controls what each user is allowed to do. Input validation, as mentioned earlier, helps prevent attacks such as SQL injection and cross-site scripting. By addressing these aspects, we can create a Product Service API that is not only functional but also reliable, scalable, and secure. This is essential for any e-commerce system that aims to provide a seamless and trustworthy experience for its customers.</p>
+<h2>Acceptance Criteria: Setting the Standards</h2>
+<p>To ensure our API meets the required standards of quality and functionality, we need to define clear acceptance criteria. These criteria act as a checklist, guiding the development process and providing a benchmark for testing. Let's break down the key acceptance criteria for our Product Service API.</p>
+<h3>1. JSON Format for API Responses</h3>
+<p>One of the most fundamental requirements is that all API responses should be in <strong>JSON (JavaScript Object Notation) format</strong>. JSON is a lightweight data-interchange format that is easy for both humans and machines to read and write. It's the de facto standard for web APIs due to its simplicity and compatibility with various programming languages and platforms. By using JSON, we ensure consistency and make it easier for clients to parse and process the API responses. This means that when a client requests product details, creates a new product, updates an existing product, or deletes a product, the response they receive will be formatted as a JSON object. This object will contain the relevant data, such as product name, description, price, and ID, in a structured manner. The use of JSON also facilitates the integration of the API with different front-end frameworks and mobile applications, as they typically have built-in support for JSON parsing. For example, a front-end application built with React or Angular can easily consume the JSON responses from the API and display the product information to the user. Similarly, a mobile app developed with Swift or Kotlin can use JSON parsing libraries to process the API responses and render the product details on the screen. By adhering to the JSON format, we ensure that our API is interoperable and can be easily integrated with a wide range of clients and systems.</p>
+<h3>2. Proper HTTP Status Codes</h3>
+<p>The use of <strong>proper HTTP status codes</strong> is crucial for conveying the outcome of an API request. These codes provide a standardized way to communicate whether a request was successful, encountered an error, or requires further action. By using the correct status codes, we enable clients to understand the result of their requests and take appropriate action. For example, a status code of <strong>200 OK</strong> indicates that the request was successful and the server has returned the requested data. A status code of <strong>201 Created</strong> signifies that a new resource has been successfully created on the server, such as a new product. On the other hand, a status code of <strong>400 Bad Request</strong> indicates that the client has sent an invalid request, such as missing required parameters or providing incorrect data. A status code of <strong>404 Not Found</strong> means that the requested resource, such as a product with a specific ID, could not be found on the server. By returning these status codes, the API provides valuable information to the client, allowing them to handle different scenarios gracefully. For instance, if a client receives a 404 Not Found error, it can display an appropriate message to the user, informing them that the product they are looking for does not exist. Similarly, if a client receives a 400 Bad Request error, it can validate the user input and prompt the user to correct any errors. In addition to these common status codes, there are many other HTTP status codes that can be used to convey different outcomes. By understanding and using these codes correctly, we can create an API that is informative, user-friendly, and easy to debug.</p>
+<h3>3. Request Validation</h3>
+<p><strong>Validating incoming requests</strong> is a critical step in ensuring the integrity of our data and preventing errors. It involves checking the data sent by clients to ensure it meets certain criteria before it is processed by the API. This helps to prevent invalid data from being stored in the database and can also protect against malicious attacks. For our Product Service API, this includes several key validations. For example, the <em>name</em> of a product cannot be empty. A product without a name is essentially meaningless, so we need to ensure that this field is always provided. Similarly, the <em>price</em> of a product must be a positive number. A negative price doesn't make sense in the context of e-commerce, so we need to enforce this constraint. In addition to these basic validations, we might also want to validate other fields, such as the product <em>description</em>, <em>category</em>, and <em>image URL</em>. For example, we might want to limit the length of the description to prevent it from being too long and unwieldy. We might also want to ensure that the category is one of a predefined set of valid categories. And we might want to validate the image URL to ensure that it is a valid URL and that the image exists. By implementing these validations, we can ensure that our API only accepts valid data and that our database remains consistent. This not only improves the reliability of our API but also enhances the user experience by preventing errors and providing clear feedback to the client when invalid data is submitted. There are various ways to implement request validation, such as using middleware, data annotations, or custom validation functions. The specific approach will depend on the programming language and framework being used, but the underlying principle remains the same: to ensure that data is valid before it is processed.</p>
+<h3>4. Meaningful Error Messages</h3>
+<p>Effective <strong>error handling</strong> is a cornerstone of any robust API. When things go wrong, it's not enough to simply return a generic error message. Instead, we need to provide <strong>meaningful error messages</strong> that help the client understand what went wrong and how to fix it. This is crucial for debugging and ensuring a smooth user experience. Imagine a scenario where a client attempts to create a new product but provides an invalid price (e.g., a negative value). If the API simply returns a generic &quot;Error&quot; message, the client will be left guessing about the cause of the problem. However, if the API returns a specific error message like &quot;Price must be a positive number,&quot; the client can immediately identify the issue and correct it. This level of clarity is essential for developers integrating with the API and for end-users interacting with the application. Meaningful error messages should be clear, concise, and informative. They should explain the nature of the error, the specific field or parameter that caused the error, and any steps the client can take to resolve the issue. For example, if a required field is missing, the error message should clearly state which field is missing. If a value is out of range, the error message should specify the valid range. And if a resource is not found, the error message should indicate the ID or other identifier that was used to search for the resource. In addition to providing informative error messages, it's also important to use appropriate HTTP status codes, as discussed earlier. This allows clients to differentiate between different types of errors and handle them accordingly. For example, a 400 Bad Request error can be used to indicate that the client has sent an invalid request, while a 500 Internal Server Error can be used to indicate that something went wrong on the server side. By combining meaningful error messages with appropriate HTTP status codes, we can create an API that is easy to debug and use.</p>
+<h3>5. Auto-Generated Product ID</h3>
+<p>To ensure the uniqueness and integrity of our product data, the <strong>Product ID</strong> should be <strong>auto-generated</strong>. This means that the API should automatically assign a unique identifier to each new product created, rather than relying on the client to provide it. This approach has several advantages. First, it eliminates the risk of ID collisions, which can occur if multiple clients attempt to create products with the same ID. Second, it simplifies the client's task, as they don't need to worry about generating unique IDs themselves. Third, it provides a consistent and reliable way to identify products within the system. There are various techniques for auto-generating IDs, such as using sequential integers, UUIDs (Universally Unique Identifiers), or database-specific mechanisms. Sequential integers are simple to implement but can be predictable, which might be a security concern in some cases. UUIDs are more complex but provide a high degree of uniqueness and are less predictable. Database-specific mechanisms, such as auto-incrementing columns, can be efficient but might tie the API to a specific database system. The choice of ID generation technique will depend on the specific requirements of the application, such as the desired level of uniqueness, performance considerations, and database compatibility. Regardless of the technique used, the API should ensure that the generated IDs are unique and that they are properly associated with the new products. This typically involves storing the IDs in the database and using them to retrieve and update product information. By auto-generating Product IDs, we can simplify the development process, improve data integrity, and enhance the overall reliability of our Product Service API.</p>
+<h2>RESTful CRUD Operations: The Core Functionality</h2>
+<p>Now, let's dive into the heart of our Product Service API: the <strong>RESTful CRUD operations</strong>. These operations define how we interact with product data, allowing us to create, read, update, and delete products. Each operation maps to a specific HTTP method and endpoint, following the principles of REST (Representational State Transfer).</p>
+<h3>1. Create (POST)</h3>
+<p>The <strong>Create</strong> operation allows us to add new products to our system. In RESTful APIs, this is typically achieved using the <strong>POST</strong> method. When a client wants to create a new product, they send a POST request to a specific endpoint, such as <code>/products</code>. The request body contains the data for the new product, usually in JSON format. This data might include the product name, description, price, and other relevant details. The API then processes this data, creates a new product record in the database, and returns a response to the client. The response should include the details of the newly created product, including the auto-generated Product ID. It should also include an appropriate HTTP status code, such as <strong>201 Created</strong>, to indicate that the creation was successful. In addition to the basic data validation discussed earlier, the Create operation should also handle any necessary data transformations or business logic. For example, it might need to normalize the product name, calculate a discounted price, or associate the product with a specific category. These operations should be performed before the product record is saved to the database. The Create operation should also handle potential errors gracefully. If the request body is invalid, the API should return a <strong>400 Bad Request</strong> error with a meaningful error message. If there is a problem saving the product to the database, the API should return a <strong>500 Internal Server Error</strong>. By handling errors appropriately, the API can provide valuable feedback to the client and prevent unexpected behavior. Overall, the Create operation is a fundamental part of the Product Service API, allowing us to add new products to our system in a consistent and reliable manner. It should be designed with careful attention to data validation, error handling, and business logic to ensure that it meets the needs of the e-commerce application.</p>
+<h3>2. Read (GET)</h3>
+<p>The <strong>Read</strong> operation allows us to retrieve product information from our system. In RESTful APIs, this is typically achieved using the <strong>GET</strong> method. There are two main ways to read product data: by ID and by querying a list of products. To read a specific product by ID, the client sends a GET request to an endpoint that includes the product ID, such as <code>/products/{productId}</code>. The API then retrieves the product record from the database based on the provided ID and returns the product details in the response. The response should include an HTTP status code of <strong>200 OK</strong> to indicate that the request was successful. If the product is not found, the API should return a <strong>404 Not Found</strong> error. To read a list of products, the client sends a GET request to a base endpoint, such as <code>/products</code>. The API then retrieves a list of products from the database and returns the list in the response. The client can also use query parameters to filter and sort the list of products. For example, they might want to retrieve only products in a specific category or sort the products by price. The API should support these query parameters and use them to construct the appropriate database query. The response should include an HTTP status code of <strong>200 OK</strong> and the list of products in JSON format. The Read operation is a critical part of the Product Service API, allowing us to retrieve product information efficiently and effectively. It should be designed to handle both individual product requests and list requests, and it should support filtering and sorting of products. By providing a flexible and powerful Read operation, we can enable clients to access the product data they need in a timely manner.</p>
+<h3>3. Update (PUT/PATCH)</h3>
+<p>The <strong>Update</strong> operation allows us to modify existing product information in our system. In RESTful APIs, this can be achieved using either the <strong>PUT</strong> or <strong>PATCH</strong> method. PUT is typically used to replace an entire resource, while PATCH is used to update only specific fields. For our Product Service API, we might choose to use PATCH, as it allows clients to update only the fields they need to change, without having to send the entire product record. When a client wants to update a product, they send a PATCH request to an endpoint that includes the product ID, such as <code>/products/{productId}</code>. The request body contains the data to be updated, usually in JSON format. This data might include the product name, description, price, or other relevant details. The API then processes this data, updates the product record in the database, and returns a response to the client. The response should include an HTTP status code of <strong>200 OK</strong> to indicate that the update was successful. If the product is not found, the API should return a <strong>404 Not Found</strong> error. If the request body is invalid, the API should return a <strong>400 Bad Request</strong> error with a meaningful error message. The Update operation should also handle any necessary data transformations or business logic. For example, it might need to validate the updated price or recalculate a discounted price. These operations should be performed before the product record is updated in the database. It's important to note that the Update operation should be designed to handle concurrent updates gracefully. If multiple clients attempt to update the same product at the same time, the API should ensure that the updates are applied correctly and that no data is lost. This might involve using techniques such as optimistic locking or pessimistic locking. Overall, the Update operation is a crucial part of the Product Service API, allowing us to modify existing product information in a consistent and reliable manner. It should be designed with careful attention to data validation, error handling, business logic, and concurrency control to ensure that it meets the needs of the e-commerce application.</p>
+<h3>4. Delete (DELETE)</h3>
+<p>The <strong>Delete</strong> operation allows us to remove products from our system. In RESTful APIs, this is typically achieved using the <strong>DELETE</strong> method. When a client wants to delete a product, they send a DELETE request to an endpoint that includes the product ID, such as <code>/products/{productId}</code>. The API then retrieves the product record from the database based on the provided ID and deletes it. The API returns a response to the client, including an appropriate HTTP status code. A successful deletion is typically indicated by a <strong>204 No Content</strong> status code, signifying that the operation was successful but there is no content to return. If the product is not found, the API should return a <strong>404 Not Found</strong> error. It's crucial to implement proper authorization checks for the Delete operation to prevent unauthorized users from deleting products. This might involve verifying the user's role or permissions before allowing the deletion to proceed. The Delete operation should also handle potential cascading effects. For example, if a product is associated with other entities in the system, such as orders or reviews, the API might need to handle these associations appropriately. This might involve deleting the associated entities as well or updating them to reflect the deletion of the product. In some cases, it might be preferable to implement a &quot;soft delete&quot; mechanism, where the product is not physically deleted from the database but is instead marked as deleted. This allows for the possibility of restoring the product later if needed. The Delete operation is a critical part of the Product Service API, allowing us to remove products from our system in a controlled and secure manner. It should be designed with careful attention to authorization, cascading effects, and data integrity to ensure that it meets the needs of the e-commerce application.</p>
+<h2>Conclusion: Building a Powerful Product Service API</h2>
+<p>Alright, guys, we've covered a lot of ground in this guide! We've explored the objective and acceptance criteria for building a robust Product Service API, and we've delved into the core RESTful CRUD operations. By implementing these operations effectively, we can create an API that allows us to manage products in an e-commerce system efficiently and reliably. Remember, a well-designed API is crucial for the success of any e-commerce platform. It provides a consistent and standardized way to interact with product data, making it easier for developers to build and maintain the system. So, go ahead and start building your own Product Service API, and let me know how it goes! Happy coding!</p>
+
+                    </div>
+                    <aside class="related-posts">
+                        <div class="ad-sidebar container">
+                            <div class="ad-wrapper">
+    <span>Iklan Related</span>
+</div>
+                        </div>
+                        <h2 class="related-posts-title">Related Posts</h2><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/proving-d-j-1-v">Proving D^(j-1)(β) Rotation Matrix A Comprehensive Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-14T06:14:11+00:00">Jul 14, 2025</time>
+		                        <span class="view-count">
+									56 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/simplifying-the-expression-2-5">Simplifying The Expression (2 * 5)^2 + 2 * 2 * 5 * 1 * 4 + (1 * 4)^2 / (2 * 5 + 1 * 4)</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-16T23:04:44+00:00">Jul 16, 2025</time>
+		                        <span class="view-count">
+									86 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/identifying-inverse-functions-a-step">Identifying Inverse Functions A Step-by-Step Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-16T16:52:33+00:00">Jul 16, 2025</time>
+		                        <span class="view-count">
+									50 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/analyzing-house-sizes-mean-median">Analyzing House Sizes: Mean, Median &amp; Range Explained</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-04T23:19:55+00:00">Aug 4, 2025</time>
+		                        <span class="view-count">
+									53 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/solving-1-3x-x-3">Solving √1-3x = X+3: A Step-by-Step Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-01T04:48:55+00:00">Aug 1, 2025</time>
+		                        <span class="view-count">
+									41 views
+		                        </span>
+                            </div>
+                        </article>
+                    </aside>
+                    <aside class="related-posts"></aside>
+                </div>
+            </div>
+        </article>
+        <a href="#" class="back-to-top" id="backToTop" title="Back to top">
+        	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-bar-up" viewBox="0 0 16 16">
+			  <path fill-rule="evenodd" d="M3.646 11.854a.5.5 0 0 0 .708 0L8 8.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708M2.4 5.2c0 .22.18.4.4.4h10.4a.4.4 0 0 0 0-.8H2.8a.4.4 0 0 0-.4.4"/>
+			</svg>
+		</a>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 ANABEL</p>
+        </div>
+    </footer>
+    <script>
+    	(() => {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            const toggleMenu = () => {
+                navMenu.classList.toggle('nav-menu-active');
+                navToggle.classList.toggle('nav-toggle-active');
+            };
+            const backToTopHandler = (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            navToggle.addEventListener('click', toggleMenu);
+            document.getElementById('backToTop').addEventListener('click', backToTopHandler);
+            window.addEventListener('pagehide', () => {
+                navToggle.removeEventListener('click', toggleMenu);
+                document.getElementById('backToTop').removeEventListener('click', backToTopHandler);
+            });
+        })();
+		(() => {
+            window.addEventListener("DOMContentLoaded", (event) => {
+                const ellHljs = document.createElement("script");
+                ellHljs.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js");
+                ellHljs.onload = () => {
+                    hljs.highlightAll();
+                };
+                document.querySelector("body").append(ellHljs);
+                const ellFont = document.createElement("link");
+                ellFont.setAttribute("href", "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css");
+                ellFont.setAttribute("rel", "stylesheet");
+                document.querySelector("head").append(ellFont);
+                window.addEventListener('pagehide', () => {
+                    // ellHljs.remove();
+                    ellFont.remove();
+                });
+
+            });
+        })();
+    </script>
+    
+    
+    
+</body>
+</html>

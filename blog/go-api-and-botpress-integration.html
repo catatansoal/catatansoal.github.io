@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Go API And Botpress Integration Setup Guide</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Go API And Botpress Integration Setup Guide...">
+    <link rel="canonical" href="https://catatansoal.github.io/blog/go-api-and-botpress-integration">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Go API And Botpress Integration Setup Guide">
+	<meta property="og:description" content="Go API And Botpress Integration Setup Guide...">
+	<meta property="og:url" content="https://catatansoal.github.io/blog/go-api-and-botpress-integration">
+	<meta property="og:site_name" content="ANABEL">
+	<meta property="article:published_time" content="2025-07-14T03:34:13+00:00">
+	<meta property="article:author" content="ADMIN">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+    <link rel="preload" fetchpriority="high" as="image" href="https://tse4.mm.bing.net/th?q=Setting%20Up%20and%20Running%20the%20Go%20API%20and%20Botpress%20Integration">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style type="text/css">
+    	:root{--primary-color:#3740ff;--text-color:#202124;--background-color:#ffffff;--gray-100:#f8f9fa;--gray-200:#e9ecef}*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;line-height:1.6;color:var(--text-color);background-color:var(--background-color)}.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}.header{background-color:var(--background-color);border-bottom:1px solid var(--gray-200);position:sticky;top:0;z-index:100}.nav{padding:.5rem 0}.nav-container{display:flex;justify-content:space-between;align-items:center;gap:1rem}.nav-left{display:flex;align-items:center;flex-shrink:0}.logo{font-weight:700;color:var(--primary-color)}.blog-tag{margin-left:1rem;padding:.25rem .5rem;background-color:var(--gray-100);border-radius:4px;font-size:.875rem}.nav-search{flex-grow:1;max-width:300px}.search-form{position:relative;width:100%}.search-input{width:100%;padding:.5rem 2.5rem .5rem 1rem;border:1px solid var(--gray-200);border-radius:24px;font-size:.875rem;transition:all 0.2s}.search-input:focus{outline:none;border-color:var(--primary-color);box-shadow:0 0 0 2px rgb(55 64 255 / .1)}.search-button{position:absolute;right:.5rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#5f6368;cursor:pointer;padding:.25rem;display:flex;align-items:center;justify-content:center}.search-button:hover{color:var(--primary-color)}.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:.5rem}.hamburger{display:block;position:relative;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before,.hamburger::after{content:'';position:absolute;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before{top:-6px}.hamburger::after{bottom:-6px}.nav-toggle-active .hamburger{background:#fff0}.nav-toggle-active .hamburger::before{transform:rotate(45deg);top:0}.nav-toggle-active .hamburger::after{transform:rotate(-45deg);bottom:0}.nav-list{display:flex;list-style:none;gap:2rem}.nav-link{color:var(--text-color);text-decoration:none;font-size:.9rem;transition:color 0.2s}.nav-link:hover{color:var(--primary-color)}.article-header{padding:2rem 0;background-color:var(--gray-100)}.article-layout{display:grid;grid-template-columns:1fr 350px;gap:3rem;padding:1rem 0;align-items: start}h1,h2,h3,h4,h5,h6{font-family:"Crimson Text","Times New Roman",Times,serif}h1{font-size:2.5rem;line-height:1.2;margin-bottom:1rem}.meta{color:#5f6368;font-size:.875rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}.view-count{display:inline-flex;align-items:center;gap:.25rem}.view-count svg{color:#5f6368}.content{min-width:0;border-bottom:1px solid #dddddd5e;margin-top:1rem;white-space:pre-line !important;overflow-wrap:break-word;overflow-x:auto;word-break:break-word}.lead{font-size:1.25rem;color:#5f6368;margin-bottom:2rem}h2,h3,h4,h5,h6{font-size:1.75rem;margin:1rem 0 1rem}p,pre,ol,ul>li{margin-bottom:1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;font-size:1.3rem;text-align: justify;}p>code{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px}hr{margin:1rem 0 1rem 0}.code-example{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;margin:1.5rem 0;overflow-x:auto}code{font-family:'Roboto Mono',monospace;font-size:.875rem}ul{margin:.2rem 0;padding-left:1.5rem}.related-posts{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;position:sticky;top:5rem}.related-posts-title,.newpost-posts-list{font-size:1.75rem;margin:0 0 1rem}.related-posts-list{display:flex;flex-direction:column;gap:.5rem}.related-post,.newpost-post{border-bottom:1px solid #ddd;padding-bottom:10px;margin-bottom:10px}.related-post:last-child,.newpost-post:last-child{padding-bottom:0;border-bottom:none}.related-post-title,.newpost-post-title{font-size:1.2rem;margin:0 0 .1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;}.related-post-title a,.newpost-post-title a{color:var(--text-color);text-decoration:none;transition:color 0.2s}.related-post-title a:hover,.newpost-post-title a:hover{color:var(--primary-color)}.related-post time{font-size:.875rem;color:#5f6368}.footer{background-color:var(--gray-100);padding:2rem 0;margin-top:4rem;color:#5f6368;font-size:.875rem}.nav-menu>ul>li{margin-bottom:0}@media (max-width:1024px){.container{max-width:800px}.article-layout{grid-template-columns:1fr;gap:2rem}.related-posts{position:static}}@media (max-width:768px){.nav-container{flex-wrap:wrap}.nav-search{order:3;max-width:none;width:100%;margin-top:.1rem}.nav-toggle{display:block}.nav-menu{display:none;position:absolute;top:100%;left:0;right:0;background:var(--background-color);padding:1rem 0;border-bottom:1px solid var(--gray-200)}.nav-menu-active{display:block}.nav-list{flex-direction:column;gap:.1rem;padding:0 1.5rem}.nav-link{display:block;padding:.2rem 0}h1{font-size:2rem}.article-header{padding:2rem 0}.content{padding:.1rem 0}}table{width:100%;border-collapse:collapse;margin:20px 0;font-family:'Arial',sans-serif}th,td{padding:12px 15px;text-align:left;border:1px solid #ddd}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9}tr:nth-child(even) td{background-color:#f2f2f2}@media screen and (max-width:768px){table{border:0;display:block;overflow-x:auto;white-space:nowrap}th,td{padding:10px;text-align:right}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9;border-bottom:1px solid #ddd}tr:nth-child(even) td{background-color:#f2f2f2}}a{text-decoration:none;color:#540707}.katex-html{padding: .2rem;color: #000;font-weight: 700;font-size: 1.3rem;overflow-wrap: break-word;max-width: 100%;white-space: normal !important}.category{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin:1rem 0 1rem 0}.tag{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px;font-family:"Newsreader",serif}.tag>a{text-decoration:none;color:#000}img{margin:auto;display:block;max-width:100%;height:auto;margin-bottom:1rem}.katex{white-space: pre-line !important;display: inline-block;max-width: 100%;overflow-x: auto;overflow-y: hidden;scrollbar-width: thin;overflow-wrap: break-word;word-break: break-word;vertical-align: -7px}.content > p {overflow-wrap: break-word;word-break: break-word}
+    </style>
+    <style type="text/css">
+    	pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}
+		.hljs{color:#c9d1d9;background:#0d1117}.hljs-doctag,.hljs-keyword,.hljs-meta .hljs-keyword,.hljs-template-tag,.hljs-template-variable,.hljs-type,.hljs-variable.language_{color:#ff7b72}.hljs-title,.hljs-title.class_,.hljs-title.class_.inherited__,.hljs-title.function_{color:#d2a8ff}.hljs-attr,.hljs-attribute,.hljs-literal,.hljs-meta,.hljs-number,.hljs-operator,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-variable{color:#79c0ff}.hljs-meta .hljs-string,.hljs-regexp,.hljs-string{color:#a5d6ff}.hljs-built_in,.hljs-symbol{color:#ffa657}.hljs-code,.hljs-comment,.hljs-formula{color:#8b949e}.hljs-name,.hljs-quote,.hljs-selector-pseudo,.hljs-selector-tag{color:#7ee787}.hljs-subst{color:#c9d1d9}.hljs-section{color:#1f6feb;font-weight:700}.hljs-bullet{color:#f2cc60}.hljs-emphasis{color:#c9d1d9;font-style:italic}.hljs-strong{color:#c9d1d9;font-weight:700}.hljs-addition{color:#aff5b4;background-color:#033a16}.hljs-deletion{color:#ffdcd7;background-color:#67060c}
+    	pre{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;font-weight:400;word-break:break-word;word-wrap:break-word;box-sizing:inherit;border-radius:4px;overflow-x:auto;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}code{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;word-wrap:break-word;word-break:break-word;font-style:normal;line-height:20px;letter-spacing:-.003em;box-sizing:inherit;font-weight:400;font-size:75%;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}
+    </style>
+    <style type="text/css">
+    	.back-to-top{position:fixed;bottom:20px;right:20px;background-color:#a73f3f;color:#fff;padding:8px 10px;border-radius:50%;box-shadow:0 4px 6px rgb(0 0 0 / .2);font-size:10px;font-weight:700;text-decoration:none;text-align:center;transition:opacity 0.3s ease,visibility 0.3s ease;z-index:99999;opacity:1;visibility:visible}.back-to-top:hover{background-color:#0056b3}
+    </style>
+    <style type="text/css">
+        .ad-header {margin: 1rem auto 1rem;background-color: #fdfdfd;text-align: center;display: block;}.ad-header .ad-wrapper {min-height: 90px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #555;font-weight: 500;padding: 3rem;border: 1px dashed #ccc;border-radius: 6px;}@media (max-width: 768px) {.ad-header {padding: 0.75rem;}}.ad-sidebar {margin: 0 0 1rem;background-color: #fefefe;text-align: center;padding: 0px;width: 100%;max-width: 100%;display: block;}.ad-sidebar .ad-wrapper {min-height: 250px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #444;font-weight: 500;border: 1px dashed #aaa;border-radius: 6px;padding: 0rem;}@media (max-width: 1024px) {.ad-sidebar {padding: 0.75rem;}}
+    </style>
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://catatansoal.github.io/blog/go-api-and-botpress-integration"
+          },
+          "headline": "Go API And Botpress Integration Setup Guide",
+          "description": "Go API And Botpress Integration Setup Guide...",
+          "image": [
+            "https://tse4.mm.bing.net/th?q=Setting%20Up%20and%20Running%20the%20Go%20API%20and%20Botpress%20Integration"
+          ],
+          "author": {
+            "@type": "Person",
+            "name": "ADMIN",
+            "jobTitle": "Editor web"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "ANABEL",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://tse4.mm.bing.net/th?q=ANABEL%20WEB"
+            }
+          },
+          "datePublished": "2025-07-14T03:34:13+00:00",
+          "dateModified": "2025-07-14T03:34:13+00:00"
+        }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="container nav-container">
+                <div class="nav-left">
+                    <span class="logo">ANABEL</span>
+                    <span class="blog-tag">Article</span>
+                </div>
+                <div class="nav-search">
+                    <form class="search-form" role="search">
+                        <input 
+                            type="search" 
+                            class="search-input"
+                            placeholder="Search articles..."
+                            aria-label="Search articles"
+                        >
+                        <button type="submit" class="search-button" aria-label="Submit search">🔎</button>
+                    </form>
+                </div>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+                <div class="nav-menu">
+                    <ul class="nav-list">
+                    	<li><a href="/" class="nav-link">HOME</a></li>
+                        <li><a href="/pages/About" class="nav-link">About</a></li>
+                        <li><a href="/pages/Contact" class="nav-link">Contact</a></li>
+                        <li><a href="/pages/Disclaimer" class="nav-link">Disclaimer</a></li>
+                        <li><a href="/pages/Privacy" class="nav-link">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="main">
+        <article class="article">
+            <header class="article-header">
+                <div class="container">
+                    <h1>Go API And Botpress Integration Setup Guide</h1>
+                    <div class="meta">
+                        <time datetime="2025-07-14T03:34:13+00:00">Jul 14, 2025</time>
+                        <span class="author">by ADMIN</span>
+                        <span class="view-count">
+                            <span id="viewCount">44</span> views
+                        </span>
+                    </div>
+                </div>
+            </header>
+            <div class="ad-header container">
+                <div class="ad-wrapper">
+    Iklan Headers
+</div>
+            </div>
+            <div class="container">
+                <div class="article-layout">
+                    <div class="content">
+                        <img src="https://tse4.mm.bing.net/th?q=Setting%20Up%20and%20Running%20the%20Go%20API%20and%20Botpress%20Integration" title="Setting Up and Running the Go API and Botpress Integration" width="300" height="200"/><p>Hey guys! 👋 This guide will walk you through setting up, running, and testing the Go API and its integration with Botpress. We'll cover everything from initial setup to example API calls and Botpress configuration. Let's dive in!</p>
+<h2>Prerequisites</h2>
+<p>Before we get started, make sure you have the following installed:</p>
+<ul>
+<li><strong>Go:</strong> You'll need Go installed to build and run the API. If you don't have it already, you can download it from the official <a href="https://golang.org/dl/">Go website</a>. Make sure to set your <code>GOPATH</code> and <code>GOROOT</code> environment variables correctly.</li>
+<li><strong>Botpress:</strong> Botpress is the chatbot platform we're integrating with. You can install it by following the instructions on the <a href="https://botpress.com/docs/getting-started/installation">Botpress website</a>. You'll also need a Botpress project set up.</li>
+<li><strong>Dep:</strong> We're using Dep for dependency management in this project. If you don't have it, you can install it using <code>go get -u github.com/golang/dep/cmd/dep</code>. Seriously, get this set up first – dependency management is a lifesaver! 😅</li>
+<li><strong>curl or similar:</strong> For making HTTP requests to the API endpoints, curl (or any similar tool like Postman) will come in handy.</li>
+</ul>
+<h2>Getting Started with Setup Instructions</h2>
+<h3>Step 1: Cloning the Repository</h3>
+<p>First things first, let's clone the repository to your local machine. Open your terminal and run:</p>
+<pre><code class="hljs">git clone &lt;repository_url&gt;
+cd &lt;repository_directory&gt;
+</code></pre>
+<p>Replace <code>&lt;repository_url&gt;</code> with the actual URL of the repository and <code>&lt;repository_directory&gt;</code> with the name of the directory you want to clone into. This step is crucial; it's where all the magic begins! ✨</p>
+<h3>Step 2: Installing Dependencies</h3>
+<p>Once you've cloned the repository, navigate into the directory and use Dep to install the project dependencies. Run the following command:</p>
+<pre><code class="hljs">dep ensure
+</code></pre>
+<p>This command reads the <code>Gopkg.toml</code> file and downloads all the necessary dependencies into your <code>vendor</code> directory. Dependency management can be a pain, but Dep makes it much smoother. Seriously, thank the open-source gods for tools like these! 🙌</p>
+<h3>Step 3: Configuring the API</h3>
+<p>Before running the API, you'll need to configure it. This typically involves setting environment variables or modifying a configuration file. Look for a <code>.env</code> file or a <code>config.yaml</code> (or similar) in the repository. You'll likely need to set things like:</p>
+<ul>
+<li><strong>Botpress Endpoint:</strong> The URL of your Botpress instance.</li>
+<li><strong>API Keys:</strong> Any API keys required to interact with Botpress or other services.</li>
+<li><strong>Database Connection Details:</strong> If the API uses a database, you'll need to configure the connection details.</li>
+</ul>
+<p>Make sure to fill these in correctly; otherwise, the API won't be able to communicate with Botpress or other services. This is like giving your API its marching orders, so get it right! 🎯</p>
+<h2>Running the Go API</h2>
+<h3>Step 1: Building the API</h3>
+<p>To build the API, use the following Go command:</p>
+<pre><code class="hljs">go build -o main
+</code></pre>
+<p>This will compile the Go code and create an executable file named <code>main</code> (or whatever you specify with the <code>-o</code> flag). Think of this as baking your API cake – you need to bake it before you can eat it! 🎂</p>
+<h3>Step 2: Running the API</h3>
+<p>Now that you've built the API, you can run it by executing the compiled file:</p>
+<pre><code class="hljs">./main
+</code></pre>
+<p>This will start the API server. You should see some output in the console indicating that the server is running and listening on a specific port (usually <code>8080</code> or similar). This is the moment of truth – your API is alive! 🥳</p>
+<h3>Step 3: Verifying the API is Running</h3>
+<p>To make sure the API is running correctly, you can send a simple HTTP request to one of its endpoints. For example, if the API has a health check endpoint at <code>/health</code>, you can use curl:</p>
+<pre><code class="hljs">curl http://localhost:8080/health
+</code></pre>
+<p>If the API is running correctly, you should get a <code>200 OK</code> response or a JSON response indicating the health status. This is like checking the heartbeat of your API – you want to make sure it's strong and steady! 💖</p>
+<h2>Testing the Go API</h2>
+<h3>Example API Calls</h3>
+<p>Here are a few example curl commands to interact with the API:</p>
+<ol>
+<li>
+<p><strong>Sending a message to Botpress:</strong></p>
+<pre><code class="hljs">curl -X POST -H &quot;Content-Type: application/json&quot; -d &#39;{&quot;userId&quot;: &quot;user123&quot;, &quot;text&quot;: &quot;Hello, Bot!&quot;}&#39; http://localhost:8080/api/messages
+</code></pre>
+<p>This command sends a POST request to the <code>/api/messages</code> endpoint with a JSON payload containing the user ID and the message text. Think of this as sending a text message to your bot – you're saying hello and expecting a response! 💬</p>
+</li>
+<li>
+<p><strong>Getting conversation history:</strong></p>
+<pre><code class="hljs">curl http://localhost:8080/api/conversations/user123
+</code></pre>
+<p>This command sends a GET request to the <code>/api/conversations/{userId}</code> endpoint to retrieve the conversation history for a specific user. It's like reading the chat log – you're reviewing past interactions to understand the conversation flow. 📚</p>
+</li>
+<li>
+<p><strong>Triggering a Botpress event:</strong></p>
+<pre><code class="hljs">curl -X POST -H &quot;Content-Type: application/json&quot; -d &#39;{&quot;userId&quot;: &quot;user123&quot;, &quot;eventName&quot;: &quot;custom_event&quot;}&#39; http://localhost:8080/api/events
+</code></pre>
+<p>This command sends a POST request to the <code>/api/events</code> endpoint to trigger a custom event in Botpress. It's like pressing a button to activate a specific function in your bot – you're telling it to do something specific based on the event. ⚙️</p>
+</li>
+</ol>
+<h3>Writing Unit Tests</h3>
+<p><strong>Testing your code is super important</strong>, guys! 🧪 Write unit tests to ensure that your API functions as expected. Go has excellent built-in support for testing. Here’s a basic example:</p>
+<ol>
+<li>
+<p><strong>Create a test file:</strong> For example, if you have a file named <code>api.go</code>, create a corresponding test file named <code>api_test.go</code>.</p>
+</li>
+<li>
+<p><strong>Write test functions:</strong> Test functions in Go start with the word <code>Test</code> and take a <code>*testing.T</code> argument.</p>
+<pre><code class="hljs">package main
+
+import (
+	&quot;testing&quot;
+)
+
+func TestYourFunction(t *testing.T) {
+	// Your test logic here
+	// Use t.Errorf() to report errors
+}
+</code></pre>
+</li>
+<li>
+<p><strong>Run tests:</strong> Use the <code>go test</code> command to run your tests:</p>
+<pre><code class="hljs">go test
+</code></pre>
+</li>
+</ol>
+<p>Write tests for different scenarios, including <strong>happy paths</strong>, <strong>edge cases</strong>, and <strong>error conditions</strong>. Think of tests as your safety net – they catch bugs before they become bigger problems! 🐛</p>
+<h2>Botpress Integration</h2>
+<h3>Step 1: Configuring Botpress</h3>
+<p>To integrate the Go API with Botpress, you'll need to configure Botpress to communicate with the API. This typically involves:</p>
+<ol>
+<li><strong>Creating a Botpress bot:</strong> If you don't already have one, create a new bot in Botpress.</li>
+<li><strong>Setting up webhooks:</strong> Configure Botpress to send messages and events to your API endpoints. You'll need to provide the API endpoint URLs in the Botpress settings.</li>
+<li><strong>Configuring API integrations:</strong> Some Botpress integrations may require additional configuration, such as API keys or authentication tokens. Think of this as setting up the communication channels between your bot and your API – you're making sure they can talk to each other! 🗣️</li>
+</ol>
+<h3>Step 2: Handling Botpress Events in the API</h3>
+<p>Your API needs to be able to handle events and messages from Botpress. This involves:</p>
+<ol>
+<li><strong>Creating API endpoints:</strong> Implement API endpoints to receive messages and events from Botpress (e.g., <code>/api/messages</code>, <code>/api/events</code>).</li>
+<li><strong>Processing the data:</strong> Parse the data sent by Botpress and take appropriate actions, such as updating the conversation state or triggering other services. It's like being the interpreter between Botpress and your backend systems – you're translating their messages and ensuring they understand each other! 🌐</li>
+</ol>
+<h3>Step 3: Testing the Integration</h3>
+<p>Test the integration by sending messages to your Botpress bot and verifying that the API receives and processes them correctly. You can also trigger events in Botpress and check if they are handled by the API. This is like a final exam for your integration – you're making sure everything works together smoothly! 💯</p>
+<h2>Conclusion</h2>
+<p>Setting up and running the Go API and Botpress integration might seem like a lot, but by following these steps, you'll be up and running in no time! Remember to test your API thoroughly and configure Botpress correctly for seamless integration. You've got this! 💪</p>
+<p>If you encounter any issues, don't hesitate to consult the documentation or reach out to the community for help. Happy coding! 🎉</p>
+
+                    </div>
+                    <aside class="related-posts">
+                        <div class="ad-sidebar container">
+                            <div class="ad-wrapper">
+    <span>Iklan Related</span>
+</div>
+                        </div>
+                        <h2 class="related-posts-title">Related Posts</h2><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/diy-box-braids-create-style">DIY Box Braids: Create, Style, And Maintain Like A Pro</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-02T13:37:10+00:00">Aug 2, 2025</time>
+		                        <span class="view-count">
+									54 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/visualize-and-conquer-your-guide">Visualize &amp; Conquer: Your Guide To Study Unit Tracking</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-08T01:04:44+00:00">Aug 8, 2025</time>
+		                        <span class="view-count">
+									54 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/learn-to-make-balloon-animals">Learn To Make Balloon Animals: Dog, Monkey, Swan</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-06T15:36:55+00:00">Aug 6, 2025</time>
+		                        <span class="view-count">
+									48 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/rewritecond-for-url-with-parameters">RewriteCond For URL With Parameters: A Comprehensive Guide To URL Rewriting</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-28T09:27:32+00:00">Jul 28, 2025</time>
+		                        <span class="view-count">
+									75 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/reproductive-isolation-in-prairie-grasses">Reproductive Isolation In Prairie Grasses</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-14T05:38:03+00:00">Jul 14, 2025</time>
+		                        <span class="view-count">
+									41 views
+		                        </span>
+                            </div>
+                        </article>
+                    </aside>
+                    <aside class="related-posts"></aside>
+                </div>
+            </div>
+        </article>
+        <a href="#" class="back-to-top" id="backToTop" title="Back to top">
+        	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-bar-up" viewBox="0 0 16 16">
+			  <path fill-rule="evenodd" d="M3.646 11.854a.5.5 0 0 0 .708 0L8 8.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708M2.4 5.2c0 .22.18.4.4.4h10.4a.4.4 0 0 0 0-.8H2.8a.4.4 0 0 0-.4.4"/>
+			</svg>
+		</a>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 ANABEL</p>
+        </div>
+    </footer>
+    <script>
+    	(() => {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            const toggleMenu = () => {
+                navMenu.classList.toggle('nav-menu-active');
+                navToggle.classList.toggle('nav-toggle-active');
+            };
+            const backToTopHandler = (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            navToggle.addEventListener('click', toggleMenu);
+            document.getElementById('backToTop').addEventListener('click', backToTopHandler);
+            window.addEventListener('pagehide', () => {
+                navToggle.removeEventListener('click', toggleMenu);
+                document.getElementById('backToTop').removeEventListener('click', backToTopHandler);
+            });
+        })();
+		(() => {
+            window.addEventListener("DOMContentLoaded", (event) => {
+                const ellHljs = document.createElement("script");
+                ellHljs.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js");
+                ellHljs.onload = () => {
+                    hljs.highlightAll();
+                };
+                document.querySelector("body").append(ellHljs);
+                const ellFont = document.createElement("link");
+                ellFont.setAttribute("href", "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css");
+                ellFont.setAttribute("rel", "stylesheet");
+                document.querySelector("head").append(ellFont);
+                window.addEventListener('pagehide', () => {
+                    // ellHljs.remove();
+                    ellFont.remove();
+                });
+
+            });
+        })();
+    </script>
+    
+    
+    
+</body>
+</html>

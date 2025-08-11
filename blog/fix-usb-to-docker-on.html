@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Fix: USB To Docker On Windows (usbipd-win Guide)</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Fix: USB To Docker On Windows (usbipd-win Guide)...">
+    <link rel="canonical" href="https://catatansoal.github.io/blog/fix-usb-to-docker-on">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Fix: USB To Docker On Windows (usbipd-win Guide)">
+	<meta property="og:description" content="Fix: USB To Docker On Windows (usbipd-win Guide)...">
+	<meta property="og:url" content="https://catatansoal.github.io/blog/fix-usb-to-docker-on">
+	<meta property="og:site_name" content="ANABEL">
+	<meta property="article:published_time" content="2025-08-01T14:48:47+00:00">
+	<meta property="article:author" content="ADMIN">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+    <link rel="preload" fetchpriority="high" as="image" href="https://tse4.mm.bing.net/th?q=Troubleshooting%20USB%20Passthrough%20to%20Docker%20Containers%20on%20Windows">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style type="text/css">
+    	:root{--primary-color:#3740ff;--text-color:#202124;--background-color:#ffffff;--gray-100:#f8f9fa;--gray-200:#e9ecef}*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;line-height:1.6;color:var(--text-color);background-color:var(--background-color)}.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}.header{background-color:var(--background-color);border-bottom:1px solid var(--gray-200);position:sticky;top:0;z-index:100}.nav{padding:.5rem 0}.nav-container{display:flex;justify-content:space-between;align-items:center;gap:1rem}.nav-left{display:flex;align-items:center;flex-shrink:0}.logo{font-weight:700;color:var(--primary-color)}.blog-tag{margin-left:1rem;padding:.25rem .5rem;background-color:var(--gray-100);border-radius:4px;font-size:.875rem}.nav-search{flex-grow:1;max-width:300px}.search-form{position:relative;width:100%}.search-input{width:100%;padding:.5rem 2.5rem .5rem 1rem;border:1px solid var(--gray-200);border-radius:24px;font-size:.875rem;transition:all 0.2s}.search-input:focus{outline:none;border-color:var(--primary-color);box-shadow:0 0 0 2px rgb(55 64 255 / .1)}.search-button{position:absolute;right:.5rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#5f6368;cursor:pointer;padding:.25rem;display:flex;align-items:center;justify-content:center}.search-button:hover{color:var(--primary-color)}.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:.5rem}.hamburger{display:block;position:relative;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before,.hamburger::after{content:'';position:absolute;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before{top:-6px}.hamburger::after{bottom:-6px}.nav-toggle-active .hamburger{background:#fff0}.nav-toggle-active .hamburger::before{transform:rotate(45deg);top:0}.nav-toggle-active .hamburger::after{transform:rotate(-45deg);bottom:0}.nav-list{display:flex;list-style:none;gap:2rem}.nav-link{color:var(--text-color);text-decoration:none;font-size:.9rem;transition:color 0.2s}.nav-link:hover{color:var(--primary-color)}.article-header{padding:2rem 0;background-color:var(--gray-100)}.article-layout{display:grid;grid-template-columns:1fr 350px;gap:3rem;padding:1rem 0;align-items: start}h1,h2,h3,h4,h5,h6{font-family:"Crimson Text","Times New Roman",Times,serif}h1{font-size:2.5rem;line-height:1.2;margin-bottom:1rem}.meta{color:#5f6368;font-size:.875rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}.view-count{display:inline-flex;align-items:center;gap:.25rem}.view-count svg{color:#5f6368}.content{min-width:0;border-bottom:1px solid #dddddd5e;margin-top:1rem;white-space:pre-line !important;overflow-wrap:break-word;overflow-x:auto;word-break:break-word}.lead{font-size:1.25rem;color:#5f6368;margin-bottom:2rem}h2,h3,h4,h5,h6{font-size:1.75rem;margin:1rem 0 1rem}p,pre,ol,ul>li{margin-bottom:1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;font-size:1.3rem;text-align: justify;}p>code{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px}hr{margin:1rem 0 1rem 0}.code-example{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;margin:1.5rem 0;overflow-x:auto}code{font-family:'Roboto Mono',monospace;font-size:.875rem}ul{margin:.2rem 0;padding-left:1.5rem}.related-posts{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;position:sticky;top:5rem}.related-posts-title,.newpost-posts-list{font-size:1.75rem;margin:0 0 1rem}.related-posts-list{display:flex;flex-direction:column;gap:.5rem}.related-post,.newpost-post{border-bottom:1px solid #ddd;padding-bottom:10px;margin-bottom:10px}.related-post:last-child,.newpost-post:last-child{padding-bottom:0;border-bottom:none}.related-post-title,.newpost-post-title{font-size:1.2rem;margin:0 0 .1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;}.related-post-title a,.newpost-post-title a{color:var(--text-color);text-decoration:none;transition:color 0.2s}.related-post-title a:hover,.newpost-post-title a:hover{color:var(--primary-color)}.related-post time{font-size:.875rem;color:#5f6368}.footer{background-color:var(--gray-100);padding:2rem 0;margin-top:4rem;color:#5f6368;font-size:.875rem}.nav-menu>ul>li{margin-bottom:0}@media (max-width:1024px){.container{max-width:800px}.article-layout{grid-template-columns:1fr;gap:2rem}.related-posts{position:static}}@media (max-width:768px){.nav-container{flex-wrap:wrap}.nav-search{order:3;max-width:none;width:100%;margin-top:.1rem}.nav-toggle{display:block}.nav-menu{display:none;position:absolute;top:100%;left:0;right:0;background:var(--background-color);padding:1rem 0;border-bottom:1px solid var(--gray-200)}.nav-menu-active{display:block}.nav-list{flex-direction:column;gap:.1rem;padding:0 1.5rem}.nav-link{display:block;padding:.2rem 0}h1{font-size:2rem}.article-header{padding:2rem 0}.content{padding:.1rem 0}}table{width:100%;border-collapse:collapse;margin:20px 0;font-family:'Arial',sans-serif}th,td{padding:12px 15px;text-align:left;border:1px solid #ddd}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9}tr:nth-child(even) td{background-color:#f2f2f2}@media screen and (max-width:768px){table{border:0;display:block;overflow-x:auto;white-space:nowrap}th,td{padding:10px;text-align:right}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9;border-bottom:1px solid #ddd}tr:nth-child(even) td{background-color:#f2f2f2}}a{text-decoration:none;color:#540707}.katex-html{padding: .2rem;color: #000;font-weight: 700;font-size: 1.3rem;overflow-wrap: break-word;max-width: 100%;white-space: normal !important}.category{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin:1rem 0 1rem 0}.tag{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px;font-family:"Newsreader",serif}.tag>a{text-decoration:none;color:#000}img{margin:auto;display:block;max-width:100%;height:auto;margin-bottom:1rem}.katex{white-space: pre-line !important;display: inline-block;max-width: 100%;overflow-x: auto;overflow-y: hidden;scrollbar-width: thin;overflow-wrap: break-word;word-break: break-word;vertical-align: -7px}.content > p {overflow-wrap: break-word;word-break: break-word}
+    </style>
+    <style type="text/css">
+    	pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}
+		.hljs{color:#c9d1d9;background:#0d1117}.hljs-doctag,.hljs-keyword,.hljs-meta .hljs-keyword,.hljs-template-tag,.hljs-template-variable,.hljs-type,.hljs-variable.language_{color:#ff7b72}.hljs-title,.hljs-title.class_,.hljs-title.class_.inherited__,.hljs-title.function_{color:#d2a8ff}.hljs-attr,.hljs-attribute,.hljs-literal,.hljs-meta,.hljs-number,.hljs-operator,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-variable{color:#79c0ff}.hljs-meta .hljs-string,.hljs-regexp,.hljs-string{color:#a5d6ff}.hljs-built_in,.hljs-symbol{color:#ffa657}.hljs-code,.hljs-comment,.hljs-formula{color:#8b949e}.hljs-name,.hljs-quote,.hljs-selector-pseudo,.hljs-selector-tag{color:#7ee787}.hljs-subst{color:#c9d1d9}.hljs-section{color:#1f6feb;font-weight:700}.hljs-bullet{color:#f2cc60}.hljs-emphasis{color:#c9d1d9;font-style:italic}.hljs-strong{color:#c9d1d9;font-weight:700}.hljs-addition{color:#aff5b4;background-color:#033a16}.hljs-deletion{color:#ffdcd7;background-color:#67060c}
+    	pre{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;font-weight:400;word-break:break-word;word-wrap:break-word;box-sizing:inherit;border-radius:4px;overflow-x:auto;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}code{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;word-wrap:break-word;word-break:break-word;font-style:normal;line-height:20px;letter-spacing:-.003em;box-sizing:inherit;font-weight:400;font-size:75%;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}
+    </style>
+    <style type="text/css">
+    	.back-to-top{position:fixed;bottom:20px;right:20px;background-color:#a73f3f;color:#fff;padding:8px 10px;border-radius:50%;box-shadow:0 4px 6px rgb(0 0 0 / .2);font-size:10px;font-weight:700;text-decoration:none;text-align:center;transition:opacity 0.3s ease,visibility 0.3s ease;z-index:99999;opacity:1;visibility:visible}.back-to-top:hover{background-color:#0056b3}
+    </style>
+    <style type="text/css">
+        .ad-header {margin: 1rem auto 1rem;background-color: #fdfdfd;text-align: center;display: block;}.ad-header .ad-wrapper {min-height: 90px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #555;font-weight: 500;padding: 3rem;border: 1px dashed #ccc;border-radius: 6px;}@media (max-width: 768px) {.ad-header {padding: 0.75rem;}}.ad-sidebar {margin: 0 0 1rem;background-color: #fefefe;text-align: center;padding: 0px;width: 100%;max-width: 100%;display: block;}.ad-sidebar .ad-wrapper {min-height: 250px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #444;font-weight: 500;border: 1px dashed #aaa;border-radius: 6px;padding: 0rem;}@media (max-width: 1024px) {.ad-sidebar {padding: 0.75rem;}}
+    </style>
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://catatansoal.github.io/blog/fix-usb-to-docker-on"
+          },
+          "headline": "Fix: USB To Docker On Windows (usbipd-win Guide)",
+          "description": "Fix: USB To Docker On Windows (usbipd-win Guide)...",
+          "image": [
+            "https://tse4.mm.bing.net/th?q=Troubleshooting%20USB%20Passthrough%20to%20Docker%20Containers%20on%20Windows"
+          ],
+          "author": {
+            "@type": "Person",
+            "name": "ADMIN",
+            "jobTitle": "Editor web"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "ANABEL",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://tse4.mm.bing.net/th?q=ANABEL%20WEB"
+            }
+          },
+          "datePublished": "2025-08-01T14:48:47+00:00",
+          "dateModified": "2025-08-01T14:48:47+00:00"
+        }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="container nav-container">
+                <div class="nav-left">
+                    <span class="logo">ANABEL</span>
+                    <span class="blog-tag">Article</span>
+                </div>
+                <div class="nav-search">
+                    <form class="search-form" role="search">
+                        <input 
+                            type="search" 
+                            class="search-input"
+                            placeholder="Search articles..."
+                            aria-label="Search articles"
+                        >
+                        <button type="submit" class="search-button" aria-label="Submit search">🔎</button>
+                    </form>
+                </div>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+                <div class="nav-menu">
+                    <ul class="nav-list">
+                    	<li><a href="/" class="nav-link">HOME</a></li>
+                        <li><a href="/pages/About" class="nav-link">About</a></li>
+                        <li><a href="/pages/Contact" class="nav-link">Contact</a></li>
+                        <li><a href="/pages/Disclaimer" class="nav-link">Disclaimer</a></li>
+                        <li><a href="/pages/Privacy" class="nav-link">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="main">
+        <article class="article">
+            <header class="article-header">
+                <div class="container">
+                    <h1>Fix: USB To Docker On Windows (usbipd-win Guide)</h1>
+                    <div class="meta">
+                        <time datetime="2025-08-01T14:48:47+00:00">Aug 1, 2025</time>
+                        <span class="author">by ADMIN</span>
+                        <span class="view-count">
+                            <span id="viewCount">49</span> views
+                        </span>
+                    </div>
+                </div>
+            </header>
+            <div class="ad-header container">
+                <div class="ad-wrapper">
+    Iklan Headers
+</div>
+            </div>
+            <div class="container">
+                <div class="article-layout">
+                    <div class="content">
+                        <img src="https://tse4.mm.bing.net/th?q=Troubleshooting%20USB%20Passthrough%20to%20Docker%20Containers%20on%20Windows" title="Troubleshooting USB Passthrough to Docker Containers on Windows" width="300" height="200"/>
+<p>Hey guys! Ever tried getting a USB device to work inside a Docker container running on Windows? It can be a bit of a headache, but don't worry, we'll walk through it. This article will guide you through the steps to troubleshoot USB passthrough to a Linux Docker container on a Windows host, specifically focusing on scenarios involving <code>usbipd-win</code>, WSL2, and Docker Desktop. We'll cover common issues and provide solutions to get your devices connected and working smoothly. Whether you're dealing with debugging tools like J-Link or other USB peripherals, understanding the process and potential pitfalls is crucial.</p>
+<h2>Understanding the Setup</h2>
+<p>Before diving into troubleshooting, let's break down the setup. We're using Windows 11 with WSL2 (Windows Subsystem for Linux 2) enabled. WSL2 is essential because it provides a real Linux kernel, which is necessary for <code>usbipd-win</code> to function correctly. <strong>Docker Desktop</strong> leverages WSL2 for its Linux containers, which means we can use <code>usbipd-win</code> to pass USB devices from the Windows host into these containers. <em>The key components</em> include <code>usbipd-win</code> (the USB IP daemon for Windows), WSL2 (providing the Linux environment), and Docker Desktop (managing our containers). Our goal is to connect a USB device, such as a J-Link debugger, to a Docker container running Ubuntu 24.04. This setup allows developers to work with hardware devices within a containerized environment, which is especially useful for embedded systems development and testing. Ensuring each component is correctly installed and configured is the first step in troubleshooting any issues. The interaction between these components can sometimes be complex, so understanding how they fit together is vital for effective problem-solving.</p>
+<h2>Common Issues and Solutions</h2>
+<h3>1. <strong>usbipd-win Installation and Configuration</strong></h3>
+<p>The first hurdle is often the installation and setup of <code>usbipd-win</code>. If this isn't done correctly, you won't be able to attach USB devices to your WSL2 environment. Let's dive into some common problems and their solutions. First, ensure you've installed <code>usbipd-win</code> correctly. This typically involves downloading the latest release from the GitHub repository and running the installer. A common mistake is not having the latest version, so <strong>double-check</strong> you've got the most recent one. <em>After installation</em>, you need to run the following command in an elevated PowerShell prompt: <code>usbipd wsl install</code>. This command sets up the necessary components within WSL2. If you encounter errors here, it might be due to missing dependencies or incorrect permissions. Make sure you're running PowerShell as an administrator. Another common issue is that the WSL2 integration might not be enabled. You can verify this by running <code>wsl --list --verbose</code> in PowerShell. This will show you the installed WSL distributions and their versions. Ensure your distribution is using WSL2. If it's using WSL1, you'll need to convert it using <code>wsl --set-version &lt;DistributionName&gt; 2</code>. Finally, ensure that the <code>usbipd</code> service is running. You can check this by opening the Services application in Windows and looking for <code>usbipd</code>. If it's not running, start it manually or set it to start automatically. These initial steps are crucial, and getting them right will save you a lot of headaches down the road. Properly configuring <code>usbipd-win</code> is the foundation for successful USB passthrough.</p>
+<h3>2. <strong>WSL2 Integration Issues</strong></h3>
+<p>WSL2 integration is crucial for <code>usbipd-win</code> to function correctly. If WSL2 isn't set up properly, you'll face issues connecting USB devices. A common problem is an outdated WSL2 kernel. Ensure you have the latest WSL2 kernel by running <code>wsl --update</code> in an elevated PowerShell. This command updates the kernel to the most recent version, which often includes fixes and improvements for USB device passthrough. Another issue might be that WSL2 isn't set as the default version. You can set it as the default by running <code>wsl --set-default-version 2</code>. This ensures that new WSL distributions use WSL2 by default. Sometimes, the WSL2 integration with Docker Desktop can cause problems. Ensure that the <em>WSL integration</em> is enabled in Docker Desktop settings. Go to Docker Desktop settings, then Resources, and then WSL Integration. Make sure your distribution is selected. If you're still facing issues, try restarting Docker Desktop and WSL2. You can restart WSL2 by running <code>wsl --shutdown</code> in PowerShell. This will shut down all running WSL2 distributions. After that, start Docker Desktop, which will automatically start WSL2. <em>Incorrect network configurations</em> can also hinder USB device passthrough. WSL2 uses a virtual network, and sometimes this network can conflict with other networks on your system. Ensure there are no conflicting IP addresses or subnets. Checking these settings and ensuring they are correctly configured is essential for smooth USB passthrough. Proper WSL2 integration is the backbone of our setup, and a stable WSL2 environment is key to resolving many USB connectivity issues.</p>
+<h3>3. <strong>Docker Container Configuration</strong></h3>
+<p>Configuring your Docker container correctly is essential for USB passthrough. If the container isn't set up to recognize USB devices, you'll run into problems. The first thing to check is whether the container has the necessary permissions to access USB devices. By default, Docker containers run in an isolated environment with limited access to host resources. To allow USB access, you might need to run the container with elevated privileges or add specific capabilities. For testing purposes, you can try running the container in privileged mode using the <code>--privileged</code> flag in the <code>docker run</code> command. However, this is generally not recommended for production environments due to security concerns. A more secure approach is to add specific capabilities using the <code>--cap-add</code> flag. For USB devices, you might need to add capabilities like <code>SYS_ADMIN</code> and <code>NET_ADMIN</code>. Another crucial step is to ensure that the necessary packages are installed inside the container. For example, if you're using <code>usbip</code>, you need to install the <code>linux-tools</code> package, which includes the <code>usbip</code> command-line tool. Use your distribution's package manager (e.g., <code>apt</code> for Ubuntu) to install the required packages. You also need to attach the USB device to the container once it's running. Inside the container, use the <code>usbip attach</code> command to connect to the device. The device needs to be detached from the host first using the command <code>usbip detach</code>. Make sure you have the correct bus ID of the USB device. This can be found using the <code>usbip list</code> command on the Windows host and in the WSL2 environment. Properly configuring the Docker container's permissions and dependencies is crucial for successful USB device passthrough. Failing to do so will often result in the container not recognizing or being able to communicate with the attached USB device. Remember, security is important, so try to avoid using <code>--privileged</code> in production and instead opt for specific capabilities.</p>
+<h3>4. <strong>Device Driver Issues</strong></h3>
+<p>Device driver issues can be a significant roadblock when trying to pass USB devices to a Docker container. If the drivers aren't correctly installed on the host or within the container, the device won't function as expected. On the Windows host, ensure that the drivers for your USB device are properly installed. Sometimes, even if the device appears to be working on Windows, the drivers might not be fully compatible with <code>usbipd-win</code>. Try reinstalling the drivers or updating them to the latest version. You can usually find the latest drivers on the manufacturer's website. Within the WSL2 environment and the Docker container, you also need to ensure that the necessary drivers are installed. This might involve installing additional packages or kernel modules. For example, if you're working with a J-Link debugger, you might need to install the J-Link drivers within the container. Use the package manager to install the appropriate drivers for your device. Another common issue is that the USB device might not be recognized by the container because it's not properly attached. After attaching the device using <code>usbip attach</code>, verify that it's visible within the container. You can use commands like <code>lsusb</code> to list the connected USB devices. If the device isn't listed, there might be a driver issue or a problem with the USB passthrough configuration. <em>It's also important to check</em> for any driver conflicts. Sometimes, multiple drivers might be trying to handle the same device, leading to conflicts. Try disabling any unnecessary drivers or devices to see if that resolves the issue. Properly managing device drivers both on the host and within the container is essential for successful USB device passthrough. Driver issues can be tricky to diagnose, but systematically checking and updating drivers can often resolve the problem.</p>
+<h3>5. <strong>Firewall and Network Configuration</strong></h3>
+<p>Firewall and network configurations can sometimes interfere with USB passthrough, especially if there are restrictions on network communication between the host and the container. Firewalls on the Windows host might block the communication between <code>usbipd-win</code> and the WSL2 environment or the Docker container. Ensure that your firewall allows traffic on the ports used by <code>usbipd-win</code>. You might need to create specific rules to allow inbound and outbound connections. Similarly, network configurations within WSL2 and the Docker container can cause issues. WSL2 uses a virtual network, and sometimes this network might not be correctly configured to communicate with the host or the external network. Check your WSL2 network settings and ensure that there are no conflicting IP addresses or subnets. <em>Docker containers also have their own</em> networking configurations. By default, containers are isolated from the host network, but you can configure them to use different networking modes, such as bridge mode or host mode. If you're having trouble with USB passthrough, try using host mode networking, which allows the container to share the host's network namespace. This can sometimes resolve network-related issues. It's also important to check for any network proxies or VPNs that might be interfering with the communication. Proxies can sometimes block traffic between the host and the container, and VPNs can change the network configuration in a way that disrupts USB passthrough. <em>Temporarily disabling these services</em> can help you determine if they are the cause of the issue. Properly configuring firewalls and network settings is crucial for ensuring seamless USB device passthrough. Network issues can be subtle and hard to diagnose, so it's important to systematically check each component of your network configuration.</p>
+<h2>Step-by-Step Troubleshooting Guide</h2>
+<p>To make things easier, here’s a step-by-step guide you can follow when troubleshooting USB passthrough:</p>
+<ol>
+<li><strong>Verify usbipd-win Installation:</strong>
+<ul>
+<li>Ensure <code>usbipd-win</code> is installed correctly and is the latest version.</li>
+<li>Run <code>usbipd wsl install</code> in an elevated PowerShell.</li>
+<li>Check that the <code>usbipd</code> service is running.</li>
+</ul>
+</li>
+<li><strong>Check WSL2 Status:</strong>
+<ul>
+<li>Run <code>wsl --list --verbose</code> to verify WSL2 is the default version.</li>
+<li>Update WSL2 kernel using <code>wsl --update</code>.</li>
+<li>Restart WSL2 with <code>wsl --shutdown</code> if necessary.</li>
+</ul>
+</li>
+<li><strong>Configure Docker Desktop:</strong>
+<ul>
+<li>Ensure WSL integration is enabled in Docker Desktop settings.</li>
+<li>Restart Docker Desktop.</li>
+</ul>
+</li>
+<li><strong>Container Configuration:</strong>
+<ul>
+<li>Run the container with <code>--privileged</code> (for testing) or <code>--cap-add</code> (for production).</li>
+<li>Install necessary packages (<code>linux-tools</code> for <code>usbip</code>).</li>
+<li>Attach the device using <code>usbip attach</code> inside the container.</li>
+</ul>
+</li>
+<li><strong>Device Drivers:</strong>
+<ul>
+<li>Ensure the latest drivers are installed on the Windows host.</li>
+<li>Install necessary drivers within the WSL2 environment and the Docker container.</li>
+<li>Check for driver conflicts.</li>
+</ul>
+</li>
+<li><strong>Firewall and Network:</strong>
+<ul>
+<li>Check Windows Firewall settings for any blocked traffic.</li>
+<li>Verify WSL2 network settings.</li>
+<li>Try using host mode networking in Docker.</li>
+<li>Disable any network proxies or VPNs temporarily.</li>
+</ul>
+</li>
+</ol>
+<h2>Conclusion</h2>
+<p>USB passthrough to Docker containers on Windows can be tricky, but with a systematic approach, you can overcome most issues. <em>Remember to check each component</em> of the setup, from <code>usbipd-win</code> installation to container configuration and network settings. By following the steps outlined in this article, you should be able to get your USB devices working smoothly within your Docker containers. Happy debugging, guys! If you have other concerns or questions, feel free to reach out, and we’ll do our best to help you out.</p>
+
+                    </div>
+                    <aside class="related-posts">
+                        <div class="ad-sidebar container">
+                            <div class="ad-wrapper">
+    <span>Iklan Related</span>
+</div>
+                        </div>
+                        <h2 class="related-posts-title">Related Posts</h2><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/decoding-equations-from-tables-a">Decoding Equations From Tables A Comprehensive Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-16T14:01:56+00:00">Jul 16, 2025</time>
+		                        <span class="view-count">
+									52 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/user-authentication-routes-a-comprehensive">User Authentication Routes A Comprehensive Guide To Secure Login Registration And Secure Data Handling</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-26T12:33:54+00:00">Jul 26, 2025</time>
+		                        <span class="view-count">
+									102 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/set-up-a-barometer-your">Set Up A Barometer: Your Ultimate Weather Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-10T03:43:00+00:00">Aug 10, 2025</time>
+		                        <span class="view-count">
+									47 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/piagets-cognitive-stages-do-kids">Piaget&#39;s Cognitive Stages: Do Kids Explain Reality The Same?</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-07T11:52:28+00:00">Aug 7, 2025</time>
+		                        <span class="view-count">
+									60 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/im-injection-your-comprehensive-guide">IM Injection: Your Comprehensive Guide To Intramuscular Injections</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-03T05:57:10+00:00">Aug 3, 2025</time>
+		                        <span class="view-count">
+									66 views
+		                        </span>
+                            </div>
+                        </article>
+                    </aside>
+                    <aside class="related-posts"></aside>
+                </div>
+            </div>
+        </article>
+        <a href="#" class="back-to-top" id="backToTop" title="Back to top">
+        	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-bar-up" viewBox="0 0 16 16">
+			  <path fill-rule="evenodd" d="M3.646 11.854a.5.5 0 0 0 .708 0L8 8.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708M2.4 5.2c0 .22.18.4.4.4h10.4a.4.4 0 0 0 0-.8H2.8a.4.4 0 0 0-.4.4"/>
+			</svg>
+		</a>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 ANABEL</p>
+        </div>
+    </footer>
+    <script>
+    	(() => {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            const toggleMenu = () => {
+                navMenu.classList.toggle('nav-menu-active');
+                navToggle.classList.toggle('nav-toggle-active');
+            };
+            const backToTopHandler = (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            navToggle.addEventListener('click', toggleMenu);
+            document.getElementById('backToTop').addEventListener('click', backToTopHandler);
+            window.addEventListener('pagehide', () => {
+                navToggle.removeEventListener('click', toggleMenu);
+                document.getElementById('backToTop').removeEventListener('click', backToTopHandler);
+            });
+        })();
+		(() => {
+            window.addEventListener("DOMContentLoaded", (event) => {
+                const ellHljs = document.createElement("script");
+                ellHljs.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js");
+                ellHljs.onload = () => {
+                    hljs.highlightAll();
+                };
+                document.querySelector("body").append(ellHljs);
+                const ellFont = document.createElement("link");
+                ellFont.setAttribute("href", "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css");
+                ellFont.setAttribute("rel", "stylesheet");
+                document.querySelector("head").append(ellFont);
+                window.addEventListener('pagehide', () => {
+                    // ellHljs.remove();
+                    ellFont.remove();
+                });
+
+            });
+        })();
+    </script>
+    
+    
+    
+</body>
+</html>

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>KeeWeb Subpath Setup: Nginx &amp; Traefik Guide</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="KeeWeb Subpath Setup: Nginx & Traefik Guide...">
+    <link rel="canonical" href="https://catatansoal.github.io/blog/keeweb-subpath-setup-nginx-and">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="KeeWeb Subpath Setup: Nginx &amp; Traefik Guide">
+	<meta property="og:description" content="KeeWeb Subpath Setup: Nginx & Traefik Guide...">
+	<meta property="og:url" content="https://catatansoal.github.io/blog/keeweb-subpath-setup-nginx-and">
+	<meta property="og:site_name" content="ANABEL">
+	<meta property="article:published_time" content="2025-08-01T13:35:44+00:00">
+	<meta property="article:author" content="ADMIN">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+    <link rel="preload" fetchpriority="high" as="image" href="https://tse4.mm.bing.net/th?q=%F0%9F%92%A1%20Feature%3A%20Subpath%2FBasepath%20Discussion">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style type="text/css">
+    	:root{--primary-color:#3740ff;--text-color:#202124;--background-color:#ffffff;--gray-100:#f8f9fa;--gray-200:#e9ecef}*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;line-height:1.6;color:var(--text-color);background-color:var(--background-color)}.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}.header{background-color:var(--background-color);border-bottom:1px solid var(--gray-200);position:sticky;top:0;z-index:100}.nav{padding:.5rem 0}.nav-container{display:flex;justify-content:space-between;align-items:center;gap:1rem}.nav-left{display:flex;align-items:center;flex-shrink:0}.logo{font-weight:700;color:var(--primary-color)}.blog-tag{margin-left:1rem;padding:.25rem .5rem;background-color:var(--gray-100);border-radius:4px;font-size:.875rem}.nav-search{flex-grow:1;max-width:300px}.search-form{position:relative;width:100%}.search-input{width:100%;padding:.5rem 2.5rem .5rem 1rem;border:1px solid var(--gray-200);border-radius:24px;font-size:.875rem;transition:all 0.2s}.search-input:focus{outline:none;border-color:var(--primary-color);box-shadow:0 0 0 2px rgb(55 64 255 / .1)}.search-button{position:absolute;right:.5rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#5f6368;cursor:pointer;padding:.25rem;display:flex;align-items:center;justify-content:center}.search-button:hover{color:var(--primary-color)}.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:.5rem}.hamburger{display:block;position:relative;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before,.hamburger::after{content:'';position:absolute;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before{top:-6px}.hamburger::after{bottom:-6px}.nav-toggle-active .hamburger{background:#fff0}.nav-toggle-active .hamburger::before{transform:rotate(45deg);top:0}.nav-toggle-active .hamburger::after{transform:rotate(-45deg);bottom:0}.nav-list{display:flex;list-style:none;gap:2rem}.nav-link{color:var(--text-color);text-decoration:none;font-size:.9rem;transition:color 0.2s}.nav-link:hover{color:var(--primary-color)}.article-header{padding:2rem 0;background-color:var(--gray-100)}.article-layout{display:grid;grid-template-columns:1fr 350px;gap:3rem;padding:1rem 0;align-items: start}h1,h2,h3,h4,h5,h6{font-family:"Crimson Text","Times New Roman",Times,serif}h1{font-size:2.5rem;line-height:1.2;margin-bottom:1rem}.meta{color:#5f6368;font-size:.875rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}.view-count{display:inline-flex;align-items:center;gap:.25rem}.view-count svg{color:#5f6368}.content{min-width:0;border-bottom:1px solid #dddddd5e;margin-top:1rem;white-space:pre-line !important;overflow-wrap:break-word;overflow-x:auto;word-break:break-word}.lead{font-size:1.25rem;color:#5f6368;margin-bottom:2rem}h2,h3,h4,h5,h6{font-size:1.75rem;margin:1rem 0 1rem}p,pre,ol,ul>li{margin-bottom:1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;font-size:1.3rem;text-align: justify;}p>code{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px}hr{margin:1rem 0 1rem 0}.code-example{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;margin:1.5rem 0;overflow-x:auto}code{font-family:'Roboto Mono',monospace;font-size:.875rem}ul{margin:.2rem 0;padding-left:1.5rem}.related-posts{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;position:sticky;top:5rem}.related-posts-title,.newpost-posts-list{font-size:1.75rem;margin:0 0 1rem}.related-posts-list{display:flex;flex-direction:column;gap:.5rem}.related-post,.newpost-post{border-bottom:1px solid #ddd;padding-bottom:10px;margin-bottom:10px}.related-post:last-child,.newpost-post:last-child{padding-bottom:0;border-bottom:none}.related-post-title,.newpost-post-title{font-size:1.2rem;margin:0 0 .1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;}.related-post-title a,.newpost-post-title a{color:var(--text-color);text-decoration:none;transition:color 0.2s}.related-post-title a:hover,.newpost-post-title a:hover{color:var(--primary-color)}.related-post time{font-size:.875rem;color:#5f6368}.footer{background-color:var(--gray-100);padding:2rem 0;margin-top:4rem;color:#5f6368;font-size:.875rem}.nav-menu>ul>li{margin-bottom:0}@media (max-width:1024px){.container{max-width:800px}.article-layout{grid-template-columns:1fr;gap:2rem}.related-posts{position:static}}@media (max-width:768px){.nav-container{flex-wrap:wrap}.nav-search{order:3;max-width:none;width:100%;margin-top:.1rem}.nav-toggle{display:block}.nav-menu{display:none;position:absolute;top:100%;left:0;right:0;background:var(--background-color);padding:1rem 0;border-bottom:1px solid var(--gray-200)}.nav-menu-active{display:block}.nav-list{flex-direction:column;gap:.1rem;padding:0 1.5rem}.nav-link{display:block;padding:.2rem 0}h1{font-size:2rem}.article-header{padding:2rem 0}.content{padding:.1rem 0}}table{width:100%;border-collapse:collapse;margin:20px 0;font-family:'Arial',sans-serif}th,td{padding:12px 15px;text-align:left;border:1px solid #ddd}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9}tr:nth-child(even) td{background-color:#f2f2f2}@media screen and (max-width:768px){table{border:0;display:block;overflow-x:auto;white-space:nowrap}th,td{padding:10px;text-align:right}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9;border-bottom:1px solid #ddd}tr:nth-child(even) td{background-color:#f2f2f2}}a{text-decoration:none;color:#540707}.katex-html{padding: .2rem;color: #000;font-weight: 700;font-size: 1.3rem;overflow-wrap: break-word;max-width: 100%;white-space: normal !important}.category{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin:1rem 0 1rem 0}.tag{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px;font-family:"Newsreader",serif}.tag>a{text-decoration:none;color:#000}img{margin:auto;display:block;max-width:100%;height:auto;margin-bottom:1rem}.katex{white-space: pre-line !important;display: inline-block;max-width: 100%;overflow-x: auto;overflow-y: hidden;scrollbar-width: thin;overflow-wrap: break-word;word-break: break-word;vertical-align: -7px}.content > p {overflow-wrap: break-word;word-break: break-word}
+    </style>
+    <style type="text/css">
+    	pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}
+		.hljs{color:#c9d1d9;background:#0d1117}.hljs-doctag,.hljs-keyword,.hljs-meta .hljs-keyword,.hljs-template-tag,.hljs-template-variable,.hljs-type,.hljs-variable.language_{color:#ff7b72}.hljs-title,.hljs-title.class_,.hljs-title.class_.inherited__,.hljs-title.function_{color:#d2a8ff}.hljs-attr,.hljs-attribute,.hljs-literal,.hljs-meta,.hljs-number,.hljs-operator,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-variable{color:#79c0ff}.hljs-meta .hljs-string,.hljs-regexp,.hljs-string{color:#a5d6ff}.hljs-built_in,.hljs-symbol{color:#ffa657}.hljs-code,.hljs-comment,.hljs-formula{color:#8b949e}.hljs-name,.hljs-quote,.hljs-selector-pseudo,.hljs-selector-tag{color:#7ee787}.hljs-subst{color:#c9d1d9}.hljs-section{color:#1f6feb;font-weight:700}.hljs-bullet{color:#f2cc60}.hljs-emphasis{color:#c9d1d9;font-style:italic}.hljs-strong{color:#c9d1d9;font-weight:700}.hljs-addition{color:#aff5b4;background-color:#033a16}.hljs-deletion{color:#ffdcd7;background-color:#67060c}
+    	pre{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;font-weight:400;word-break:break-word;word-wrap:break-word;box-sizing:inherit;border-radius:4px;overflow-x:auto;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}code{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;word-wrap:break-word;word-break:break-word;font-style:normal;line-height:20px;letter-spacing:-.003em;box-sizing:inherit;font-weight:400;font-size:75%;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}
+    </style>
+    <style type="text/css">
+    	.back-to-top{position:fixed;bottom:20px;right:20px;background-color:#a73f3f;color:#fff;padding:8px 10px;border-radius:50%;box-shadow:0 4px 6px rgb(0 0 0 / .2);font-size:10px;font-weight:700;text-decoration:none;text-align:center;transition:opacity 0.3s ease,visibility 0.3s ease;z-index:99999;opacity:1;visibility:visible}.back-to-top:hover{background-color:#0056b3}
+    </style>
+    <style type="text/css">
+        .ad-header {margin: 1rem auto 1rem;background-color: #fdfdfd;text-align: center;display: block;}.ad-header .ad-wrapper {min-height: 90px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #555;font-weight: 500;padding: 3rem;border: 1px dashed #ccc;border-radius: 6px;}@media (max-width: 768px) {.ad-header {padding: 0.75rem;}}.ad-sidebar {margin: 0 0 1rem;background-color: #fefefe;text-align: center;padding: 0px;width: 100%;max-width: 100%;display: block;}.ad-sidebar .ad-wrapper {min-height: 250px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #444;font-weight: 500;border: 1px dashed #aaa;border-radius: 6px;padding: 0rem;}@media (max-width: 1024px) {.ad-sidebar {padding: 0.75rem;}}
+    </style>
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://catatansoal.github.io/blog/keeweb-subpath-setup-nginx-and"
+          },
+          "headline": "KeeWeb Subpath Setup: Nginx &amp; Traefik Guide",
+          "description": "KeeWeb Subpath Setup: Nginx & Traefik Guide...",
+          "image": [
+            "https://tse4.mm.bing.net/th?q=%F0%9F%92%A1%20Feature%3A%20Subpath%2FBasepath%20Discussion"
+          ],
+          "author": {
+            "@type": "Person",
+            "name": "ADMIN",
+            "jobTitle": "Editor web"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "ANABEL",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://tse4.mm.bing.net/th?q=ANABEL%20WEB"
+            }
+          },
+          "datePublished": "2025-08-01T13:35:44+00:00",
+          "dateModified": "2025-08-01T13:35:44+00:00"
+        }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="container nav-container">
+                <div class="nav-left">
+                    <span class="logo">ANABEL</span>
+                    <span class="blog-tag">Article</span>
+                </div>
+                <div class="nav-search">
+                    <form class="search-form" role="search">
+                        <input 
+                            type="search" 
+                            class="search-input"
+                            placeholder="Search articles..."
+                            aria-label="Search articles"
+                        >
+                        <button type="submit" class="search-button" aria-label="Submit search">🔎</button>
+                    </form>
+                </div>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+                <div class="nav-menu">
+                    <ul class="nav-list">
+                    	<li><a href="/" class="nav-link">HOME</a></li>
+                        <li><a href="/pages/About" class="nav-link">About</a></li>
+                        <li><a href="/pages/Contact" class="nav-link">Contact</a></li>
+                        <li><a href="/pages/Disclaimer" class="nav-link">Disclaimer</a></li>
+                        <li><a href="/pages/Privacy" class="nav-link">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="main">
+        <article class="article">
+            <header class="article-header">
+                <div class="container">
+                    <h1>KeeWeb Subpath Setup: Nginx &amp; Traefik Guide</h1>
+                    <div class="meta">
+                        <time datetime="2025-08-01T13:35:44+00:00">Aug 1, 2025</time>
+                        <span class="author">by ADMIN</span>
+                        <span class="view-count">
+                            <span id="viewCount">44</span> views
+                        </span>
+                    </div>
+                </div>
+            </header>
+            <div class="ad-header container">
+                <div class="ad-wrapper">
+    Iklan Headers
+</div>
+            </div>
+            <div class="container">
+                <div class="article-layout">
+                    <div class="content">
+                        <img src="https://tse4.mm.bing.net/th?q=%F0%9F%92%A1%20Feature%3A%20Subpath%2FBasepath%20Discussion" title="💡 Feature: Subpath/Basepath Discussion" width="300" height="200"/>
+<p>Hey guys! Today, we're diving deep into a feature discussion around KeeWeb: <strong>subpath or basepath support</strong>. This is super important for those of you running KeeWeb behind reverse proxies like Nginx or Traefik. We'll break down what it means, why it's beneficial, and how you can potentially make it work. Let's get started!</p>
+<h2>What is Subpath/Basepath Support?</h2>
+<p>Let's kick things off by understanding <strong>subpath/basepath support</strong> in the context of web applications. Imagine you have a main domain, like <code>foohost.com</code>. Without subpath support, if you want to run KeeWeb, you might need to dedicate a subdomain (e.g., <code>keeweb.foohost.com</code>) or even a separate domain entirely. Subpath support changes the game by allowing you to host KeeWeb under a specific path, such as <code>foohost.com/keeweb/</code>. This means multiple applications can share the same domain and port (usually 80 for HTTP and 443 for HTTPS), making your setup cleaner and more manageable. This is crucial for scenarios where you're using a <strong>reverse proxy</strong> like Nginx or Traefik, which act as gatekeepers, routing traffic to different applications based on the URL path.</p>
+<p>For instance, a request to <code>foohost.com/keeweb/</code> would be directed to your KeeWeb instance, while a request to <code>foohost.com/blog/</code> might go to your blog application. This approach not only simplifies your domain management but also conserves valuable ports. Each application doesn't need its own dedicated port; they can all live harmoniously on the standard HTTP/HTTPS ports. The reverse proxy handles the intricate task of routing traffic correctly. Furthermore, subpath support enhances security. By centralizing SSL termination (encryption and decryption of HTTPS traffic) at the reverse proxy level, you reduce the complexity of managing certificates for each individual application. This means you have a single point for securing your web traffic, making it easier to maintain and monitor. Additionally, using subpaths can lead to better organization and user experience. Users can easily remember and navigate to different applications hosted on your domain by simply adding a path to the main URL. This creates a more intuitive and streamlined experience compared to using multiple subdomains, which can sometimes feel disjointed.</p>
+<p><strong>Subpath or basepath support</strong> essentially allows you to host your application, like KeeWeb, under a specific directory within your domain, such as <code>yourdomain.com/keeweb/</code>. This is super handy when you're using a reverse proxy. A reverse proxy, like Nginx or Traefik, acts as a middleman, routing traffic from the outside world to the correct application on your server. Without subpath support, you might need to use subdomains (like <code>keeweb.yourdomain.com</code>) for each application, which can get messy. But with subpath support, everything can live under the main domain, making things much cleaner and easier to manage. This is especially important when you're running multiple applications on a single server and want to keep things organized. The reverse proxy uses the subpath to determine which application should handle the request, so it's like having a traffic controller for your web server. Plus, it helps with security, as the reverse proxy can handle things like SSL encryption, protecting your applications from direct exposure to the internet.</p>
+<h2>Benefits of Running KeeWeb on a Subpath</h2>
+<p>Okay, so why is <strong>running KeeWeb on a subpath</strong> such a big deal? The benefits are numerous, especially when you're thinking about the bigger picture of your server setup. First and foremost, it's all about <strong>port management</strong>. When you're using a reverse proxy, you typically want to stick to the standard ports (80 for HTTP and 443 for HTTPS) to avoid confusing users and firewalls. Without subpath support, each application might need its own port, which can quickly become a headache. By using a subpath, you can run multiple applications on the same port, letting the reverse proxy sort out the routing. This simplifies your network configuration and reduces the risk of port conflicts. Another major advantage is <strong>SSL/TLS certificate management</strong>. If each application has its own subdomain, you'll need to manage certificates for each one individually. With subpaths, you can often use a single certificate for your entire domain, making the process much more streamlined. This not only saves you time and effort but also reduces the chance of errors and security vulnerabilities related to certificate management.</p>
+<p>Furthermore, <strong>subpath support</strong> enhances the overall organization of your web server. It creates a clear and logical structure for your applications, making it easier to understand and maintain. Instead of scattered subdomains, everything is neatly tucked under your main domain, accessible via intuitive URLs. This can also improve the user experience, as users can easily remember and navigate to different applications by simply adding a path to your domain. In addition to these benefits, <strong>running KeeWeb on a subpath</strong> can also improve security. Reverse proxies often provide security features like web application firewalls (WAFs) and intrusion detection systems (IDS). By routing traffic through a reverse proxy, you can leverage these features to protect KeeWeb from various online threats. The reverse proxy acts as a shield, filtering out malicious requests and preventing direct access to your KeeWeb instance. This adds an extra layer of security, reducing the risk of attacks and data breaches. Overall, <strong>running KeeWeb on a subpath</strong> offers a range of benefits, from simplified port and certificate management to improved organization, user experience, and security. It's a best practice for modern web server setups, especially when using reverse proxies like Nginx or Traefik.</p>
+<h2>User Experiences and Potential Solutions</h2>
+<p>Now, let's talk about real-world <strong>user experiences and potential solutions</strong> for getting KeeWeb to play nicely with subpaths. The original poster mentioned using Nginx or Traefik, which are both excellent reverse proxy choices. The key here is to configure the reverse proxy to correctly forward requests to the KeeWeb application. This usually involves setting up specific rules that match the subpath (e.g., <code>/keeweb/</code>) and direct traffic to the appropriate backend server or container where KeeWeb is running. One common challenge users face is related to how KeeWeb handles its internal URLs and assets. If KeeWeb isn't aware that it's running on a subpath, it might generate URLs that don't include the subpath, leading to broken links and resources. This is where the application's configuration comes into play. Some applications have a specific setting for the base URL or root path, which tells the application what subpath it's running under. If KeeWeb has such a setting, configuring it correctly is crucial for subpath support to work seamlessly.</p>
+<p>If KeeWeb doesn't have a built-in setting for the base URL, there are still ways to make it work. One approach is to use reverse proxy directives to rewrite URLs on the fly. For example, you can configure Nginx or Traefik to add the subpath to any outgoing URLs generated by KeeWeb. This ensures that all links and resources are correctly served under the subpath. However, this approach can be more complex and might require a deeper understanding of reverse proxy configuration. Another potential solution is to use a containerization technology like Docker. Docker allows you to package KeeWeb and its dependencies into a self-contained unit, making it easier to deploy and manage. When using Docker, you can configure the container to run KeeWeb under a specific subpath, and the reverse proxy can then forward traffic to the container. This approach can simplify the overall setup and make it more portable. In addition to these technical solutions, it's also worth exploring community forums and documentation for KeeWeb. Other users might have encountered similar challenges and found solutions that work. Sharing experiences and knowledge within the community can be a valuable resource for troubleshooting and finding the best approach for your specific setup. Remember, the goal is to ensure that KeeWeb is aware of its subpath and generates URLs accordingly, allowing it to function correctly behind a reverse proxy.</p>
+<h2>Nginx and Traefik Configuration Examples (Conceptual)</h2>
+<p>Alright, let's get a bit more practical and talk about <strong>Nginx and Traefik configuration examples</strong>. Keep in mind that these are conceptual examples, and you'll need to adapt them to your specific setup, but they should give you a good starting point. For Nginx, you'll typically be working with the <code>nginx.conf</code> file or a separate configuration file for your KeeWeb site. The key is to create a <code>location</code> block that matches the subpath and forwards traffic to the KeeWeb backend. This backend could be a local port on your server, a Docker container, or even another server entirely. Within the <code>location</code> block, you'll need to use directives like <code>proxy_pass</code> to specify the backend address and <code>proxy_set_header</code> to pass along important information like the host and X-Forwarded-For headers. These headers help KeeWeb understand the original request and respond accordingly.</p>
+<p>Here's a basic example of an Nginx configuration snippet:</p>
+<pre><code class="hljs">location /keeweb/ {
+ proxy_pass http://localhost:8080/;
+ proxy_set_header Host $host;
+ proxy_set_header X-Real-IP $remote_addr;
+ proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+ proxy_set_header X-Forwarded-Proto $scheme;
+}
+</code></pre>
+<p>In this example, any requests to <code>/keeweb/</code> will be forwarded to <code>http://localhost:8080/</code>, which is where KeeWeb is assumed to be running. The <code>proxy_set_header</code> directives ensure that the correct headers are passed along. For Traefik, the configuration is often done using labels on your Docker containers or through a separate configuration file. Traefik automatically discovers services and routes traffic based on these labels, making it a very flexible and dynamic reverse proxy. To configure Traefik for KeeWeb on a subpath, you'll typically need to define a router that matches the subpath and a service that points to your KeeWeb container. The router will use a rule that matches the <code>PathPrefix</code> of the subpath, and the service will specify the container's address and port.</p>
+<p>Here's a conceptual example of Traefik labels for a Docker container:</p>
+<pre><code class="hljs">labels:
+ - &quot;traefik.enable=true&quot;
+ - &quot;traefik.http.routers.keeweb.rule=PathPrefix(`/keeweb`)&quot;
+ - &quot;traefik.http.routers.keeweb.entrypoints=websecure&quot;
+ - &quot;traefik.http.routers.keeweb.tls.certresolver=myresolver&quot;
+ - &quot;traefik.http.services.keeweb.loadbalancer.server.port=8080&quot;
+</code></pre>
+<p>In this example, Traefik will create a router named <code>keeweb</code> that matches requests to <code>/keeweb</code>. It will use the <code>websecure</code> entrypoint (which assumes you have TLS configured) and the <code>myresolver</code> certificate resolver. The service <code>keeweb</code> will forward traffic to port 8080 on the container. Remember, these are just basic examples. You'll likely need to adjust them based on your specific needs and environment. Always consult the official documentation for Nginx and Traefik for the most accurate and up-to-date information.</p>
+<h2>Conclusion: Subpaths and KeeWeb – A Worthwhile Endeavor</h2>
+<p>So, in conclusion, <strong>subpaths and KeeWeb</strong> can be a powerful combination! While it might require a bit of configuration, the benefits of running KeeWeb on a subpath, especially with a reverse proxy like Nginx or Traefik, are well worth the effort. You get cleaner port management, simplified SSL certificate handling, better organization, and potentially improved security. Plus, it just makes your whole setup feel more professional and streamlined. If you're loving KeeWeb and want to take your setup to the next level, exploring subpath support is definitely something to consider.</p>
+<p>We've covered the what, why, and how of subpath support, and hopefully, you now have a clearer understanding of how it can benefit your KeeWeb deployment. Remember to consult the documentation for your reverse proxy and KeeWeb itself, and don't be afraid to experiment and ask for help in the community. With a little bit of effort, you can get KeeWeb running smoothly on a subpath and enjoy all the advantages it offers. Keep your passwords safe and your setups clean, guys! Thanks for diving deep with me on this topic, and happy KeeWeb-ing!</p>
+
+                    </div>
+                    <aside class="related-posts">
+                        <div class="ad-sidebar container">
+                            <div class="ad-wrapper">
+    <span>Iklan Related</span>
+</div>
+                        </div>
+                        <h2 class="related-posts-title">Related Posts</h2><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/converting-mass-to-moles-for">Converting Mass To Moles For Reactants A Chemistry Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-13T21:29:34+00:00">Jul 13, 2025</time>
+		                        <span class="view-count">
+									56 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/gift-wrapping-how-to-wrap">Gift Wrapping: How To Wrap A Present Like A Pro</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-01T23:15:07+00:00">Aug 1, 2025</time>
+		                        <span class="view-count">
+									47 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/handle-cat-remains-cremation-burial">Handle Cat Remains: Cremation, Burial &amp; Memorial Ideas</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-03T12:44:14+00:00">Aug 3, 2025</time>
+		                        <span class="view-count">
+									54 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/implementing-stripe-checkout-endpoint-a">Implementing Stripe Checkout Endpoint A Step By Step Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-13T20:27:23+00:00">Jul 13, 2025</time>
+		                        <span class="view-count">
+									58 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/fix-ut2004-soria-model-multiplayer">Fix UT2004 Soria Model: Multiplayer Version Mismatch</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-01T10:45:38+00:00">Aug 1, 2025</time>
+		                        <span class="view-count">
+									52 views
+		                        </span>
+                            </div>
+                        </article>
+                    </aside>
+                    <aside class="related-posts"></aside>
+                </div>
+            </div>
+        </article>
+        <a href="#" class="back-to-top" id="backToTop" title="Back to top">
+        	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-bar-up" viewBox="0 0 16 16">
+			  <path fill-rule="evenodd" d="M3.646 11.854a.5.5 0 0 0 .708 0L8 8.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708M2.4 5.2c0 .22.18.4.4.4h10.4a.4.4 0 0 0 0-.8H2.8a.4.4 0 0 0-.4.4"/>
+			</svg>
+		</a>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 ANABEL</p>
+        </div>
+    </footer>
+    <script>
+    	(() => {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            const toggleMenu = () => {
+                navMenu.classList.toggle('nav-menu-active');
+                navToggle.classList.toggle('nav-toggle-active');
+            };
+            const backToTopHandler = (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            navToggle.addEventListener('click', toggleMenu);
+            document.getElementById('backToTop').addEventListener('click', backToTopHandler);
+            window.addEventListener('pagehide', () => {
+                navToggle.removeEventListener('click', toggleMenu);
+                document.getElementById('backToTop').removeEventListener('click', backToTopHandler);
+            });
+        })();
+		(() => {
+            window.addEventListener("DOMContentLoaded", (event) => {
+                const ellHljs = document.createElement("script");
+                ellHljs.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js");
+                ellHljs.onload = () => {
+                    hljs.highlightAll();
+                };
+                document.querySelector("body").append(ellHljs);
+                const ellFont = document.createElement("link");
+                ellFont.setAttribute("href", "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css");
+                ellFont.setAttribute("rel", "stylesheet");
+                document.querySelector("head").append(ellFont);
+                window.addEventListener('pagehide', () => {
+                    // ellHljs.remove();
+                    ellFont.remove();
+                });
+
+            });
+        })();
+    </script>
+    
+    
+    
+</body>
+</html>

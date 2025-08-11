@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>SharePoint API Get Items Troubleshooting Missing Excel And Word Documents</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SharePoint API Get Items Troubleshooting Missing Excel And Word Documents...">
+    <link rel="canonical" href="https://catatansoal.github.io/blog/sharepoint-api-get-items-troubleshooting">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="SharePoint API Get Items Troubleshooting Missing Excel And Word Documents">
+	<meta property="og:description" content="SharePoint API Get Items Troubleshooting Missing Excel And Word Documents...">
+	<meta property="og:url" content="https://catatansoal.github.io/blog/sharepoint-api-get-items-troubleshooting">
+	<meta property="og:site_name" content="ANABEL">
+	<meta property="article:published_time" content="2025-07-22T10:12:22+00:00">
+	<meta property="article:author" content="ADMIN">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+    <link rel="preload" fetchpriority="high" as="image" href="https://tse4.mm.bing.net/th?q=SharePoint%20API%20Issue%20Getting%20Items%20in%20Document%20Library%3A%20Missing%20.xlsx%20and%20.docx%20Files">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style type="text/css">
+    	:root{--primary-color:#3740ff;--text-color:#202124;--background-color:#ffffff;--gray-100:#f8f9fa;--gray-200:#e9ecef}*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;line-height:1.6;color:var(--text-color);background-color:var(--background-color)}.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}.header{background-color:var(--background-color);border-bottom:1px solid var(--gray-200);position:sticky;top:0;z-index:100}.nav{padding:.5rem 0}.nav-container{display:flex;justify-content:space-between;align-items:center;gap:1rem}.nav-left{display:flex;align-items:center;flex-shrink:0}.logo{font-weight:700;color:var(--primary-color)}.blog-tag{margin-left:1rem;padding:.25rem .5rem;background-color:var(--gray-100);border-radius:4px;font-size:.875rem}.nav-search{flex-grow:1;max-width:300px}.search-form{position:relative;width:100%}.search-input{width:100%;padding:.5rem 2.5rem .5rem 1rem;border:1px solid var(--gray-200);border-radius:24px;font-size:.875rem;transition:all 0.2s}.search-input:focus{outline:none;border-color:var(--primary-color);box-shadow:0 0 0 2px rgb(55 64 255 / .1)}.search-button{position:absolute;right:.5rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#5f6368;cursor:pointer;padding:.25rem;display:flex;align-items:center;justify-content:center}.search-button:hover{color:var(--primary-color)}.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:.5rem}.hamburger{display:block;position:relative;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before,.hamburger::after{content:'';position:absolute;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before{top:-6px}.hamburger::after{bottom:-6px}.nav-toggle-active .hamburger{background:#fff0}.nav-toggle-active .hamburger::before{transform:rotate(45deg);top:0}.nav-toggle-active .hamburger::after{transform:rotate(-45deg);bottom:0}.nav-list{display:flex;list-style:none;gap:2rem}.nav-link{color:var(--text-color);text-decoration:none;font-size:.9rem;transition:color 0.2s}.nav-link:hover{color:var(--primary-color)}.article-header{padding:2rem 0;background-color:var(--gray-100)}.article-layout{display:grid;grid-template-columns:1fr 350px;gap:3rem;padding:1rem 0;align-items: start}h1,h2,h3,h4,h5,h6{font-family:"Crimson Text","Times New Roman",Times,serif}h1{font-size:2.5rem;line-height:1.2;margin-bottom:1rem}.meta{color:#5f6368;font-size:.875rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}.view-count{display:inline-flex;align-items:center;gap:.25rem}.view-count svg{color:#5f6368}.content{min-width:0;border-bottom:1px solid #dddddd5e;margin-top:1rem;white-space:pre-line !important;overflow-wrap:break-word;overflow-x:auto;word-break:break-word}.lead{font-size:1.25rem;color:#5f6368;margin-bottom:2rem}h2,h3,h4,h5,h6{font-size:1.75rem;margin:1rem 0 1rem}p,pre,ol,ul>li{margin-bottom:1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;font-size:1.3rem;text-align: justify;}p>code{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px}hr{margin:1rem 0 1rem 0}.code-example{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;margin:1.5rem 0;overflow-x:auto}code{font-family:'Roboto Mono',monospace;font-size:.875rem}ul{margin:.2rem 0;padding-left:1.5rem}.related-posts{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;position:sticky;top:5rem}.related-posts-title,.newpost-posts-list{font-size:1.75rem;margin:0 0 1rem}.related-posts-list{display:flex;flex-direction:column;gap:.5rem}.related-post,.newpost-post{border-bottom:1px solid #ddd;padding-bottom:10px;margin-bottom:10px}.related-post:last-child,.newpost-post:last-child{padding-bottom:0;border-bottom:none}.related-post-title,.newpost-post-title{font-size:1.2rem;margin:0 0 .1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;}.related-post-title a,.newpost-post-title a{color:var(--text-color);text-decoration:none;transition:color 0.2s}.related-post-title a:hover,.newpost-post-title a:hover{color:var(--primary-color)}.related-post time{font-size:.875rem;color:#5f6368}.footer{background-color:var(--gray-100);padding:2rem 0;margin-top:4rem;color:#5f6368;font-size:.875rem}.nav-menu>ul>li{margin-bottom:0}@media (max-width:1024px){.container{max-width:800px}.article-layout{grid-template-columns:1fr;gap:2rem}.related-posts{position:static}}@media (max-width:768px){.nav-container{flex-wrap:wrap}.nav-search{order:3;max-width:none;width:100%;margin-top:.1rem}.nav-toggle{display:block}.nav-menu{display:none;position:absolute;top:100%;left:0;right:0;background:var(--background-color);padding:1rem 0;border-bottom:1px solid var(--gray-200)}.nav-menu-active{display:block}.nav-list{flex-direction:column;gap:.1rem;padding:0 1.5rem}.nav-link{display:block;padding:.2rem 0}h1{font-size:2rem}.article-header{padding:2rem 0}.content{padding:.1rem 0}}table{width:100%;border-collapse:collapse;margin:20px 0;font-family:'Arial',sans-serif}th,td{padding:12px 15px;text-align:left;border:1px solid #ddd}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9}tr:nth-child(even) td{background-color:#f2f2f2}@media screen and (max-width:768px){table{border:0;display:block;overflow-x:auto;white-space:nowrap}th,td{padding:10px;text-align:right}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9;border-bottom:1px solid #ddd}tr:nth-child(even) td{background-color:#f2f2f2}}a{text-decoration:none;color:#540707}.katex-html{padding: .2rem;color: #000;font-weight: 700;font-size: 1.3rem;overflow-wrap: break-word;max-width: 100%;white-space: normal !important}.category{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin:1rem 0 1rem 0}.tag{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px;font-family:"Newsreader",serif}.tag>a{text-decoration:none;color:#000}img{margin:auto;display:block;max-width:100%;height:auto;margin-bottom:1rem}.katex{white-space: pre-line !important;display: inline-block;max-width: 100%;overflow-x: auto;overflow-y: hidden;scrollbar-width: thin;overflow-wrap: break-word;word-break: break-word;vertical-align: -7px}.content > p {overflow-wrap: break-word;word-break: break-word}
+    </style>
+    <style type="text/css">
+    	pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}
+		.hljs{color:#c9d1d9;background:#0d1117}.hljs-doctag,.hljs-keyword,.hljs-meta .hljs-keyword,.hljs-template-tag,.hljs-template-variable,.hljs-type,.hljs-variable.language_{color:#ff7b72}.hljs-title,.hljs-title.class_,.hljs-title.class_.inherited__,.hljs-title.function_{color:#d2a8ff}.hljs-attr,.hljs-attribute,.hljs-literal,.hljs-meta,.hljs-number,.hljs-operator,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-variable{color:#79c0ff}.hljs-meta .hljs-string,.hljs-regexp,.hljs-string{color:#a5d6ff}.hljs-built_in,.hljs-symbol{color:#ffa657}.hljs-code,.hljs-comment,.hljs-formula{color:#8b949e}.hljs-name,.hljs-quote,.hljs-selector-pseudo,.hljs-selector-tag{color:#7ee787}.hljs-subst{color:#c9d1d9}.hljs-section{color:#1f6feb;font-weight:700}.hljs-bullet{color:#f2cc60}.hljs-emphasis{color:#c9d1d9;font-style:italic}.hljs-strong{color:#c9d1d9;font-weight:700}.hljs-addition{color:#aff5b4;background-color:#033a16}.hljs-deletion{color:#ffdcd7;background-color:#67060c}
+    	pre{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;font-weight:400;word-break:break-word;word-wrap:break-word;box-sizing:inherit;border-radius:4px;overflow-x:auto;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}code{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;word-wrap:break-word;word-break:break-word;font-style:normal;line-height:20px;letter-spacing:-.003em;box-sizing:inherit;font-weight:400;font-size:75%;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}
+    </style>
+    <style type="text/css">
+    	.back-to-top{position:fixed;bottom:20px;right:20px;background-color:#a73f3f;color:#fff;padding:8px 10px;border-radius:50%;box-shadow:0 4px 6px rgb(0 0 0 / .2);font-size:10px;font-weight:700;text-decoration:none;text-align:center;transition:opacity 0.3s ease,visibility 0.3s ease;z-index:99999;opacity:1;visibility:visible}.back-to-top:hover{background-color:#0056b3}
+    </style>
+    <style type="text/css">
+        .ad-header {margin: 1rem auto 1rem;background-color: #fdfdfd;text-align: center;display: block;}.ad-header .ad-wrapper {min-height: 90px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #555;font-weight: 500;padding: 3rem;border: 1px dashed #ccc;border-radius: 6px;}@media (max-width: 768px) {.ad-header {padding: 0.75rem;}}.ad-sidebar {margin: 0 0 1rem;background-color: #fefefe;text-align: center;padding: 0px;width: 100%;max-width: 100%;display: block;}.ad-sidebar .ad-wrapper {min-height: 250px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #444;font-weight: 500;border: 1px dashed #aaa;border-radius: 6px;padding: 0rem;}@media (max-width: 1024px) {.ad-sidebar {padding: 0.75rem;}}
+    </style>
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://catatansoal.github.io/blog/sharepoint-api-get-items-troubleshooting"
+          },
+          "headline": "SharePoint API Get Items Troubleshooting Missing Excel And Word Documents",
+          "description": "SharePoint API Get Items Troubleshooting Missing Excel And Word Documents...",
+          "image": [
+            "https://tse4.mm.bing.net/th?q=SharePoint%20API%20Issue%20Getting%20Items%20in%20Document%20Library%3A%20Missing%20.xlsx%20and%20.docx%20Files"
+          ],
+          "author": {
+            "@type": "Person",
+            "name": "ADMIN",
+            "jobTitle": "Editor web"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "ANABEL",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://tse4.mm.bing.net/th?q=ANABEL%20WEB"
+            }
+          },
+          "datePublished": "2025-07-22T10:12:22+00:00",
+          "dateModified": "2025-07-22T10:12:22+00:00"
+        }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="container nav-container">
+                <div class="nav-left">
+                    <span class="logo">ANABEL</span>
+                    <span class="blog-tag">Article</span>
+                </div>
+                <div class="nav-search">
+                    <form class="search-form" role="search">
+                        <input 
+                            type="search" 
+                            class="search-input"
+                            placeholder="Search articles..."
+                            aria-label="Search articles"
+                        >
+                        <button type="submit" class="search-button" aria-label="Submit search">🔎</button>
+                    </form>
+                </div>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+                <div class="nav-menu">
+                    <ul class="nav-list">
+                    	<li><a href="/" class="nav-link">HOME</a></li>
+                        <li><a href="/pages/About" class="nav-link">About</a></li>
+                        <li><a href="/pages/Contact" class="nav-link">Contact</a></li>
+                        <li><a href="/pages/Disclaimer" class="nav-link">Disclaimer</a></li>
+                        <li><a href="/pages/Privacy" class="nav-link">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="main">
+        <article class="article">
+            <header class="article-header">
+                <div class="container">
+                    <h1>SharePoint API Get Items Troubleshooting Missing Excel And Word Documents</h1>
+                    <div class="meta">
+                        <time datetime="2025-07-22T10:12:22+00:00">Jul 22, 2025</time>
+                        <span class="author">by ADMIN</span>
+                        <span class="view-count">
+                            <span id="viewCount">74</span> views
+                        </span>
+                    </div>
+                </div>
+            </header>
+            <div class="ad-header container">
+                <div class="ad-wrapper">
+    Iklan Headers
+</div>
+            </div>
+            <div class="container">
+                <div class="article-layout">
+                    <div class="content">
+                        <img src="https://tse4.mm.bing.net/th?q=SharePoint%20API%20Issue%20Getting%20Items%20in%20Document%20Library%3A%20Missing%20.xlsx%20and%20.docx%20Files" title="SharePoint API Issue Getting Items in Document Library: Missing .xlsx and .docx Files" width="300" height="200"/>
+<p>Hey guys! Ever run into a snag where you're trying to pull a list of documents from your SharePoint document library using the API, but some files, specifically those trusty .xlsx and .docx files, seem to be playing hide-and-seek? Yeah, it's a head-scratcher, but you're not alone! This is a common issue, and we're going to dive deep into why this happens and how to fix it. We'll explore the ins and outs of SharePoint Online, Document Libraries, and the SharePoint REST API, making sure you're equipped to tackle this problem head-on. Think of this as your ultimate guide to ensuring all your documents show up when you call the API. So, grab your coding gear, and let's get started!</p>
+
+<p>First, let's break down the basics to make sure we're all on the same page. The <strong>SharePoint REST API</strong> is like a messenger that allows different systems to talk to SharePoint. It lets you perform actions like retrieving, updating, and deleting data within your SharePoint environment. Think of it as the bridge between your code and your SharePoint site. When you use the API, you send requests to specific URLs (endpoints) that tell SharePoint what you want to do. For example, you might ask for a list of all files in a document library, or you might want to update a file's metadata. Understanding how these endpoints work is crucial for getting the results you expect.</p>
+<p>Now, let's talk about <strong>document libraries</strong>. These are special libraries in SharePoint designed to store and manage files. They're more than just folders; they come with built-in features for versioning, metadata, and workflow automation. When you upload a file to a document library, SharePoint automatically indexes it, making it searchable and accessible via the API. However, the way SharePoint handles different file types and metadata can sometimes lead to unexpected behavior when you're retrieving items. This is especially true for file types like .xlsx and .docx, which have their own unique properties and indexing considerations. Sometimes, the default settings or permissions can prevent these files from being returned in your API results, leading to the issue we're tackling today. So, to effectively troubleshoot, it's super important to have a solid grasp of both the SharePoint REST API and how document libraries function.</p>
+
+<p>Alright, let's get to the heart of the matter: why are those .xlsx and .docx files playing hard to get? There are a few common culprits we need to investigate. The first one is <strong>permissions</strong>. SharePoint permissions can be complex, and if the user account you're using to make the API call doesn't have the correct permissions to access the document library or specific files, those files won't show up in your results. It's like trying to enter a club without a VIP pass – you're just not getting in! You need to ensure the account has at least read access to the library and the files in question. This might involve checking the SharePoint group memberships and individual file permissions to make sure everything is correctly configured.</p>
+<p>Another frequent reason is <strong>indexing issues</strong>. SharePoint uses a search index to quickly retrieve files, but sometimes this index can get out of sync or might not include certain file types. If your .xlsx and .docx files haven't been properly indexed, they won't appear in your API results. Think of it like a library where the card catalog is missing some entries – you can't find the books if they're not listed. You might need to manually trigger a re-indexing of the document library or site to ensure all files are included. This process tells SharePoint to go through all the files again and update its index, making sure nothing is missed. Also, <strong>metadata settings</strong> play a crucial role. If the required metadata fields aren't filled in correctly for your .xlsx and .docx files, or if certain metadata filters are applied in your API query, these files might be excluded. It’s like having a specific search filter in an online store – if the product doesn't match the filter criteria, it won't show up. You should verify that all necessary metadata is present and accurate and that your API query isn't inadvertently filtering out these files.</p>
+
+<p>Okay, so we know the potential suspects. Now, let's put on our detective hats and go through the troubleshooting steps to get those missing files back in action. First things first, <strong>verify the API endpoint</strong>. Double-check that the URL you're using to make the API call is correct and that it's pointing to the right document library. A small typo or an incorrect list title can lead to big problems. It's like giving the wrong address to a taxi driver – you're not going to get where you need to go! Make sure the endpoint includes the correct site URL, the list title, and any necessary filters or parameters. For example, if you're trying to retrieve files from a library named “Project Documents,” ensure the endpoint includes that exact name. Using tools like Postman or Insomnia can help you test your API calls and see the raw responses from SharePoint, making it easier to spot any errors in your endpoint.</p>
+<p>Next, let’s <strong>check user permissions</strong>. This is a big one, guys! Ensure that the user account you're using to make the API call has the necessary permissions to access the document library and the files within it. It's like having the right key to unlock the door. If the account doesn't have read access, you won't be able to retrieve the files. Go into SharePoint settings and verify the permissions for the user or group. If necessary, grant the appropriate permissions, such as read or contribute access, to the library. Also, examine the permissions on individual files or folders within the library, as these might override the library-level permissions. This is especially important if certain files have been shared with specific users or groups, potentially restricting access for others.</p>
+<p>Then, <strong>investigate indexing status</strong>. Sometimes, files don't show up because they haven't been indexed by SharePoint's search service. It's like trying to find a book in a library that hasn't been cataloged yet. To resolve this, you can manually request a re-indexing of the document library. Go to the library settings, click on “Advanced settings,” and then click the “Reindex Document Library” button. This will trigger SharePoint to crawl the library again and update its index. Keep in mind that re-indexing can take some time, especially for large libraries, so be patient. You can also check the search crawl logs to see if there are any errors or warnings related to your document library. Addressing any indexing issues is crucial to ensure that all files are discoverable through the API. Also, <strong>review metadata and filters</strong>. Make sure that your .xlsx and .docx files have the required metadata and that your API query isn't inadvertently filtering them out. It’s like using a search filter that excludes certain items. Check the metadata columns in your document library and ensure that the necessary fields are filled in for your files. If you're using filters in your API query, such as filtering by content type or modified date, verify that these filters aren't excluding your .xlsx and .docx files. Sometimes, a simple adjustment to the filter criteria can bring those missing files back into the results.</p>
+
+<p>Alright, let's get our hands dirty with some code! To effectively retrieve items from a SharePoint document library, you need to craft the right API call. Here’s an example using JavaScript and the Fetch API to get items, including .xlsx and .docx files:</p>
+<pre><code class="hljs">async function getSharePointItems(siteUrl, listTitle) {
+ const endpoint = `${siteUrl}/_api/web/lists/getbytitle(&#39;${listTitle}&#39;)/items`;
+ const headers = {
+ &quot;Accept&quot;: &quot;application/json;odata=nometadata&quot;
+ };
+
+ try {
+ const response = await fetch(endpoint, {
+ method: &#39;GET&#39;,
+ headers: headers
+ });
+
+ if (!response.ok) {
+ throw new Error(`HTTP error! status: ${response.status}`);
+ }
+
+ const data = await response.json();
+ console.log(data.value);
+ return data.value;
+ } catch (error) {
+ console.error(&quot;Error fetching items:&quot;, error);
+ return [];
+ }
+}
+
+// Usage
+const siteUrl = &quot;https://mysite.sharepoint.com/sites/RapidMachiningSolutionsLLC&quot;;
+const listTitle = &quot;YourDocumentLibraryTitle&quot;;
+
+getSharePointItems(siteUrl, listTitle)
+ .then(items =&gt; {
+ console.log(&quot;Items retrieved:&quot;, items);
+ });
+</code></pre>
+<p>In this example, we're using the Fetch API to make a GET request to the SharePoint REST API endpoint. The <code>Accept</code> header is set to <code>application/json;odata=nometadata</code> to ensure we receive the response in a clean JSON format without extra metadata. This is super helpful for parsing the results. To avoid common pitfalls, always <strong>use the correct API endpoint</strong>. Double-check the site URL and list title. A small typo can cause the request to fail or return unexpected results. Also, <strong>handle errors gracefully</strong>. Wrap your API calls in a <code>try...catch</code> block to handle any errors that might occur. Log the errors to the console so you can easily debug them. Additionally, <strong>implement proper error handling</strong> in your application to provide a better user experience. Always <strong>use <code>odata=nometadata</code></strong> in the <code>Accept</code> header. This simplifies the JSON response and makes it easier to work with the data. It removes the extra metadata that SharePoint includes by default, giving you just the raw data you need. Also, if you're dealing with a large number of items, consider using <strong>pagination</strong>. SharePoint imposes limits on the number of items returned in a single API call. To retrieve all items, you might need to make multiple requests using the <code>$skiptoken</code> parameter to paginate through the results. This ensures you get all the files without hitting the limit. Another best practice is to <strong>filter efficiently</strong>. If you only need specific items, use filters in your API query to reduce the amount of data transferred. This can improve performance and reduce the load on the SharePoint server. For example, you can filter by file type, modified date, or metadata fields.</p>
+
+<p>Okay, you've tried the basic troubleshooting, but what if those pesky files are still playing hide-and-seek? It's time to bring out the advanced techniques! One powerful method is using <strong>CAML queries</strong> in your REST API calls. CAML (Collaborative Application Markup Language) is a query language specific to SharePoint, and it gives you fine-grained control over what you retrieve. Think of it as a super-precise search tool that lets you specify exactly what you want. For example, you can use CAML to filter items based on multiple criteria, such as file type, metadata, and date ranges. This is particularly useful if you're dealing with complex requirements or need to retrieve files that match specific conditions.</p>
+<p>Here’s an example of how to use a CAML query in your REST API call:</p>
+<pre><code class="hljs">async function getSharePointItemsWithCAML(siteUrl, listTitle) {
+ const endpoint = `${siteUrl}/_api/web/lists/getbytitle(&#39;${listTitle}&#39;)/GetItems`;
+ const headers = {
+ &quot;Accept&quot;: &quot;application/json;odata=nometadata&quot;,
+ &quot;Content-Type&quot;: &quot;application/json&quot;
+ };
+
+ const camlQuery = `
+ &lt;View&gt;
+ &lt;Query&gt;
+ &lt;Where&gt;
+ &lt;Eq&gt;
+ &lt;FieldRef Name=&#39;File_x0020_Type&#39; /&gt;
+ &lt;Value Type=&#39;Text&#39;&gt;xlsx&lt;/Value&gt;
+ &lt;/Eq&gt;
+ &lt;/Where&gt;
+ &lt;/Query&gt;
+ &lt;RowLimit&gt;100&lt;/RowLimit&gt;
+ &lt;/View&gt;
+ `;
+
+ const body = JSON.stringify({
+ &quot;query&quot;: {
+ &quot;__metadata&quot;: {
+ &quot;type&quot;: &quot;SP.CamlQuery&quot;
+ },
+ &quot;ViewXml&quot;: camlQuery
+ }
+ });
+
+ try {
+ const response = await fetch(endpoint, {
+ method: &#39;POST&#39;,
+ headers: headers,
+ body: body
+ });
+
+ if (!response.ok) {
+ throw new Error(`HTTP error! status: ${response.status}`);
+ }
+
+ const data = await response.json();
+ console.log(data.d.results);
+ return data.d.results;
+ } catch (error) {
+ console.error(&quot;Error fetching items with CAML:&quot;, error);
+ return [];
+ }
+}
+
+// Usage
+const siteUrl = &quot;https://mysite.sharepoint.com/sites/RapidMachiningSolutionsLLC&quot;;
+const listTitle = &quot;YourDocumentLibraryTitle&quot;;
+
+getSharePointItemsWithCAML(siteUrl, listTitle)
+ .then(items =&gt; {
+ console.log(&quot;Items retrieved with CAML:&quot;, items);
+ });
+</code></pre>
+<p>In this example, we're sending a CAML query in the body of a POST request to the <code>GetItems</code> endpoint. The CAML query filters the results to only include files with the file type “xlsx.” This approach is more flexible and powerful than using simple filter parameters in the URL. Another advanced technique is <strong>using the SharePoint Search API</strong>. If you're still having trouble retrieving files, the Search API can be a lifesaver. The Search API indexes all content in SharePoint, so it's often more reliable than querying the list items directly. It also provides advanced search capabilities, such as full-text search and result ranking. To use the Search API, you'll need to construct a search query that specifies the file types and other criteria you're interested in. This can be a bit more complex than using the REST API directly, but it's worth the effort if you need robust search capabilities. Additionally, <strong>consider custom indexing solutions</strong>. In some cases, the default SharePoint indexing settings might not be sufficient for your needs. You might need to create custom managed properties and configure the search schema to ensure that your .xlsx and .docx files are properly indexed. This involves mapping the metadata fields in your documents to managed properties in SharePoint, allowing the search engine to index and retrieve them effectively. This is a more advanced topic, but it can be crucial for organizations with specific indexing requirements. If you've tried all the troubleshooting steps and are still facing issues, <strong>reach out to SharePoint support</strong>. They have the expertise and tools to diagnose and resolve complex issues that you might not be able to handle on your own. They can look into server-side logs, analyze your configuration, and provide tailored solutions to your specific problem. Don't hesitate to seek their help if you're stuck. It's like calling in the experts when you've exhausted all other options.</p>
+
+<p>So, there you have it, guys! We've journeyed through the ins and outs of retrieving items from SharePoint document libraries, tackled the mystery of missing .xlsx and .docx files, and armed ourselves with a bunch of troubleshooting techniques and best practices. Remember, when files go missing, it's usually down to permissions, indexing issues, or metadata hiccups. But with a systematic approach, you can nail down the culprit and get those files back in the spotlight. From verifying API endpoints and user permissions to diving deep into CAML queries and the Search API, you've got a solid toolkit to conquer these challenges. Keep these tips handy, and you'll be a SharePoint API whiz in no time! And remember, if all else fails, don't hesitate to call in the SharePoint support squad. They're there to help you navigate the trickiest situations. Happy coding, and may your document libraries always be complete!</p>
+
+                    </div>
+                    <aside class="related-posts">
+                        <div class="ad-sidebar container">
+                            <div class="ad-wrapper">
+    <span>Iklan Related</span>
+</div>
+                        </div>
+                        <h2 class="related-posts-title">Related Posts</h2><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/triangle-inequality-x-y-z">Triangle Inequality: (x+y/z)^(R/r) ≥ √e Explained</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-10T16:10:13+00:00">Aug 10, 2025</time>
+		                        <span class="view-count">
+									49 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/solving-1d-euler-equations-with">Solving 1D Euler Equations With NDSolve In Mathematica For Fluid Dynamics</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-25T18:49:20+00:00">Jul 25, 2025</time>
+		                        <span class="view-count">
+									73 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/reduce-word-file-size-easy">Reduce Word File Size: Easy Compression Tips</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-04T10:31:44+00:00">Aug 4, 2025</time>
+		                        <span class="view-count">
+									44 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/calculating-3-20-of-4">Calculating 3/20 Of 4 Step-by-Step Fraction Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-13T18:22:05+00:00">Jul 13, 2025</time>
+		                        <span class="view-count">
+									49 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/definite-integrals-solving-0-to">Definite Integrals: Solving ∫[0 To Π/2] Cos((2π/3)sin²(x)) Dx</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-10T14:55:18+00:00">Aug 10, 2025</time>
+		                        <span class="view-count">
+									61 views
+		                        </span>
+                            </div>
+                        </article>
+                    </aside>
+                    <aside class="related-posts"></aside>
+                </div>
+            </div>
+        </article>
+        <a href="#" class="back-to-top" id="backToTop" title="Back to top">
+        	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-bar-up" viewBox="0 0 16 16">
+			  <path fill-rule="evenodd" d="M3.646 11.854a.5.5 0 0 0 .708 0L8 8.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708M2.4 5.2c0 .22.18.4.4.4h10.4a.4.4 0 0 0 0-.8H2.8a.4.4 0 0 0-.4.4"/>
+			</svg>
+		</a>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 ANABEL</p>
+        </div>
+    </footer>
+    <script>
+    	(() => {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            const toggleMenu = () => {
+                navMenu.classList.toggle('nav-menu-active');
+                navToggle.classList.toggle('nav-toggle-active');
+            };
+            const backToTopHandler = (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            navToggle.addEventListener('click', toggleMenu);
+            document.getElementById('backToTop').addEventListener('click', backToTopHandler);
+            window.addEventListener('pagehide', () => {
+                navToggle.removeEventListener('click', toggleMenu);
+                document.getElementById('backToTop').removeEventListener('click', backToTopHandler);
+            });
+        })();
+		(() => {
+            window.addEventListener("DOMContentLoaded", (event) => {
+                const ellHljs = document.createElement("script");
+                ellHljs.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js");
+                ellHljs.onload = () => {
+                    hljs.highlightAll();
+                };
+                document.querySelector("body").append(ellHljs);
+                const ellFont = document.createElement("link");
+                ellFont.setAttribute("href", "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css");
+                ellFont.setAttribute("rel", "stylesheet");
+                document.querySelector("head").append(ellFont);
+                window.addEventListener('pagehide', () => {
+                    // ellHljs.remove();
+                    ellFont.remove();
+                });
+
+            });
+        })();
+    </script>
+    
+    
+    
+</body>
+</html>

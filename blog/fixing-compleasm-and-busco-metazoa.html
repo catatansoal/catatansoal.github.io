@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Fixing Compleasm &amp; BUSCO Metazoa Odb12 Lineage Issues</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Fixing Compleasm & BUSCO Metazoa Odb12 Lineage Issues...">
+    <link rel="canonical" href="https://catatansoal.github.io/blog/fixing-compleasm-and-busco-metazoa">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Fixing Compleasm &amp; BUSCO Metazoa Odb12 Lineage Issues">
+	<meta property="og:description" content="Fixing Compleasm & BUSCO Metazoa Odb12 Lineage Issues...">
+	<meta property="og:url" content="https://catatansoal.github.io/blog/fixing-compleasm-and-busco-metazoa">
+	<meta property="og:site_name" content="ANABEL">
+	<meta property="article:published_time" content="2025-08-07T00:36:22+00:00">
+	<meta property="article:author" content="ADMIN">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+    <link rel="preload" fetchpriority="high" as="image" href="https://tse4.mm.bing.net/th?q=Troubleshooting%20BUSCO%20and%20Compleasm%20Metazoa%20odb12%20Lineage%20Fetch%20Issues">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style type="text/css">
+    	:root{--primary-color:#3740ff;--text-color:#202124;--background-color:#ffffff;--gray-100:#f8f9fa;--gray-200:#e9ecef}*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;line-height:1.6;color:var(--text-color);background-color:var(--background-color)}.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}.header{background-color:var(--background-color);border-bottom:1px solid var(--gray-200);position:sticky;top:0;z-index:100}.nav{padding:.5rem 0}.nav-container{display:flex;justify-content:space-between;align-items:center;gap:1rem}.nav-left{display:flex;align-items:center;flex-shrink:0}.logo{font-weight:700;color:var(--primary-color)}.blog-tag{margin-left:1rem;padding:.25rem .5rem;background-color:var(--gray-100);border-radius:4px;font-size:.875rem}.nav-search{flex-grow:1;max-width:300px}.search-form{position:relative;width:100%}.search-input{width:100%;padding:.5rem 2.5rem .5rem 1rem;border:1px solid var(--gray-200);border-radius:24px;font-size:.875rem;transition:all 0.2s}.search-input:focus{outline:none;border-color:var(--primary-color);box-shadow:0 0 0 2px rgb(55 64 255 / .1)}.search-button{position:absolute;right:.5rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#5f6368;cursor:pointer;padding:.25rem;display:flex;align-items:center;justify-content:center}.search-button:hover{color:var(--primary-color)}.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:.5rem}.hamburger{display:block;position:relative;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before,.hamburger::after{content:'';position:absolute;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before{top:-6px}.hamburger::after{bottom:-6px}.nav-toggle-active .hamburger{background:#fff0}.nav-toggle-active .hamburger::before{transform:rotate(45deg);top:0}.nav-toggle-active .hamburger::after{transform:rotate(-45deg);bottom:0}.nav-list{display:flex;list-style:none;gap:2rem}.nav-link{color:var(--text-color);text-decoration:none;font-size:.9rem;transition:color 0.2s}.nav-link:hover{color:var(--primary-color)}.article-header{padding:2rem 0;background-color:var(--gray-100)}.article-layout{display:grid;grid-template-columns:1fr 350px;gap:3rem;padding:1rem 0;align-items: start}h1,h2,h3,h4,h5,h6{font-family:"Crimson Text","Times New Roman",Times,serif}h1{font-size:2.5rem;line-height:1.2;margin-bottom:1rem}.meta{color:#5f6368;font-size:.875rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}.view-count{display:inline-flex;align-items:center;gap:.25rem}.view-count svg{color:#5f6368}.content{min-width:0;border-bottom:1px solid #dddddd5e;margin-top:1rem;white-space:pre-line !important;overflow-wrap:break-word;overflow-x:auto;word-break:break-word}.lead{font-size:1.25rem;color:#5f6368;margin-bottom:2rem}h2,h3,h4,h5,h6{font-size:1.75rem;margin:1rem 0 1rem}p,pre,ol,ul>li{margin-bottom:1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;font-size:1.3rem;text-align: justify;}p>code{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px}hr{margin:1rem 0 1rem 0}.code-example{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;margin:1.5rem 0;overflow-x:auto}code{font-family:'Roboto Mono',monospace;font-size:.875rem}ul{margin:.2rem 0;padding-left:1.5rem}.related-posts{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;position:sticky;top:5rem}.related-posts-title,.newpost-posts-list{font-size:1.75rem;margin:0 0 1rem}.related-posts-list{display:flex;flex-direction:column;gap:.5rem}.related-post,.newpost-post{border-bottom:1px solid #ddd;padding-bottom:10px;margin-bottom:10px}.related-post:last-child,.newpost-post:last-child{padding-bottom:0;border-bottom:none}.related-post-title,.newpost-post-title{font-size:1.2rem;margin:0 0 .1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;}.related-post-title a,.newpost-post-title a{color:var(--text-color);text-decoration:none;transition:color 0.2s}.related-post-title a:hover,.newpost-post-title a:hover{color:var(--primary-color)}.related-post time{font-size:.875rem;color:#5f6368}.footer{background-color:var(--gray-100);padding:2rem 0;margin-top:4rem;color:#5f6368;font-size:.875rem}.nav-menu>ul>li{margin-bottom:0}@media (max-width:1024px){.container{max-width:800px}.article-layout{grid-template-columns:1fr;gap:2rem}.related-posts{position:static}}@media (max-width:768px){.nav-container{flex-wrap:wrap}.nav-search{order:3;max-width:none;width:100%;margin-top:.1rem}.nav-toggle{display:block}.nav-menu{display:none;position:absolute;top:100%;left:0;right:0;background:var(--background-color);padding:1rem 0;border-bottom:1px solid var(--gray-200)}.nav-menu-active{display:block}.nav-list{flex-direction:column;gap:.1rem;padding:0 1.5rem}.nav-link{display:block;padding:.2rem 0}h1{font-size:2rem}.article-header{padding:2rem 0}.content{padding:.1rem 0}}table{width:100%;border-collapse:collapse;margin:20px 0;font-family:'Arial',sans-serif}th,td{padding:12px 15px;text-align:left;border:1px solid #ddd}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9}tr:nth-child(even) td{background-color:#f2f2f2}@media screen and (max-width:768px){table{border:0;display:block;overflow-x:auto;white-space:nowrap}th,td{padding:10px;text-align:right}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9;border-bottom:1px solid #ddd}tr:nth-child(even) td{background-color:#f2f2f2}}a{text-decoration:none;color:#540707}.katex-html{padding: .2rem;color: #000;font-weight: 700;font-size: 1.3rem;overflow-wrap: break-word;max-width: 100%;white-space: normal !important}.category{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin:1rem 0 1rem 0}.tag{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px;font-family:"Newsreader",serif}.tag>a{text-decoration:none;color:#000}img{margin:auto;display:block;max-width:100%;height:auto;margin-bottom:1rem}.katex{white-space: pre-line !important;display: inline-block;max-width: 100%;overflow-x: auto;overflow-y: hidden;scrollbar-width: thin;overflow-wrap: break-word;word-break: break-word;vertical-align: -7px}.content > p {overflow-wrap: break-word;word-break: break-word}
+    </style>
+    <style type="text/css">
+    	pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}
+		.hljs{color:#c9d1d9;background:#0d1117}.hljs-doctag,.hljs-keyword,.hljs-meta .hljs-keyword,.hljs-template-tag,.hljs-template-variable,.hljs-type,.hljs-variable.language_{color:#ff7b72}.hljs-title,.hljs-title.class_,.hljs-title.class_.inherited__,.hljs-title.function_{color:#d2a8ff}.hljs-attr,.hljs-attribute,.hljs-literal,.hljs-meta,.hljs-number,.hljs-operator,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-variable{color:#79c0ff}.hljs-meta .hljs-string,.hljs-regexp,.hljs-string{color:#a5d6ff}.hljs-built_in,.hljs-symbol{color:#ffa657}.hljs-code,.hljs-comment,.hljs-formula{color:#8b949e}.hljs-name,.hljs-quote,.hljs-selector-pseudo,.hljs-selector-tag{color:#7ee787}.hljs-subst{color:#c9d1d9}.hljs-section{color:#1f6feb;font-weight:700}.hljs-bullet{color:#f2cc60}.hljs-emphasis{color:#c9d1d9;font-style:italic}.hljs-strong{color:#c9d1d9;font-weight:700}.hljs-addition{color:#aff5b4;background-color:#033a16}.hljs-deletion{color:#ffdcd7;background-color:#67060c}
+    	pre{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;font-weight:400;word-break:break-word;word-wrap:break-word;box-sizing:inherit;border-radius:4px;overflow-x:auto;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}code{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;word-wrap:break-word;word-break:break-word;font-style:normal;line-height:20px;letter-spacing:-.003em;box-sizing:inherit;font-weight:400;font-size:75%;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}
+    </style>
+    <style type="text/css">
+    	.back-to-top{position:fixed;bottom:20px;right:20px;background-color:#a73f3f;color:#fff;padding:8px 10px;border-radius:50%;box-shadow:0 4px 6px rgb(0 0 0 / .2);font-size:10px;font-weight:700;text-decoration:none;text-align:center;transition:opacity 0.3s ease,visibility 0.3s ease;z-index:99999;opacity:1;visibility:visible}.back-to-top:hover{background-color:#0056b3}
+    </style>
+    <style type="text/css">
+        .ad-header {margin: 1rem auto 1rem;background-color: #fdfdfd;text-align: center;display: block;}.ad-header .ad-wrapper {min-height: 90px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #555;font-weight: 500;padding: 3rem;border: 1px dashed #ccc;border-radius: 6px;}@media (max-width: 768px) {.ad-header {padding: 0.75rem;}}.ad-sidebar {margin: 0 0 1rem;background-color: #fefefe;text-align: center;padding: 0px;width: 100%;max-width: 100%;display: block;}.ad-sidebar .ad-wrapper {min-height: 250px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #444;font-weight: 500;border: 1px dashed #aaa;border-radius: 6px;padding: 0rem;}@media (max-width: 1024px) {.ad-sidebar {padding: 0.75rem;}}
+    </style>
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://catatansoal.github.io/blog/fixing-compleasm-and-busco-metazoa"
+          },
+          "headline": "Fixing Compleasm &amp; BUSCO Metazoa Odb12 Lineage Issues",
+          "description": "Fixing Compleasm & BUSCO Metazoa Odb12 Lineage Issues...",
+          "image": [
+            "https://tse4.mm.bing.net/th?q=Troubleshooting%20BUSCO%20and%20Compleasm%20Metazoa%20odb12%20Lineage%20Fetch%20Issues"
+          ],
+          "author": {
+            "@type": "Person",
+            "name": "ADMIN",
+            "jobTitle": "Editor web"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "ANABEL",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://tse4.mm.bing.net/th?q=ANABEL%20WEB"
+            }
+          },
+          "datePublished": "2025-08-07T00:36:22+00:00",
+          "dateModified": "2025-08-07T00:36:22+00:00"
+        }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="container nav-container">
+                <div class="nav-left">
+                    <span class="logo">ANABEL</span>
+                    <span class="blog-tag">Article</span>
+                </div>
+                <div class="nav-search">
+                    <form class="search-form" role="search">
+                        <input 
+                            type="search" 
+                            class="search-input"
+                            placeholder="Search articles..."
+                            aria-label="Search articles"
+                        >
+                        <button type="submit" class="search-button" aria-label="Submit search">🔎</button>
+                    </form>
+                </div>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+                <div class="nav-menu">
+                    <ul class="nav-list">
+                    	<li><a href="/" class="nav-link">HOME</a></li>
+                        <li><a href="/pages/About" class="nav-link">About</a></li>
+                        <li><a href="/pages/Contact" class="nav-link">Contact</a></li>
+                        <li><a href="/pages/Disclaimer" class="nav-link">Disclaimer</a></li>
+                        <li><a href="/pages/Privacy" class="nav-link">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="main">
+        <article class="article">
+            <header class="article-header">
+                <div class="container">
+                    <h1>Fixing Compleasm &amp; BUSCO Metazoa Odb12 Lineage Issues</h1>
+                    <div class="meta">
+                        <time datetime="2025-08-07T00:36:22+00:00">Aug 7, 2025</time>
+                        <span class="author">by ADMIN</span>
+                        <span class="view-count">
+                            <span id="viewCount">54</span> views
+                        </span>
+                    </div>
+                </div>
+            </header>
+            <div class="ad-header container">
+                <div class="ad-wrapper">
+    Iklan Headers
+</div>
+            </div>
+            <div class="container">
+                <div class="article-layout">
+                    <div class="content">
+                        <img src="https://tse4.mm.bing.net/th?q=Troubleshooting%20BUSCO%20and%20Compleasm%20Metazoa%20odb12%20Lineage%20Fetch%20Issues" title="Troubleshooting BUSCO and Compleasm Metazoa odb12 Lineage Fetch Issues" width="300" height="200"/><p>Have you ever run into a snag while trying to get Compleasm to play nice with the Metazoa odb12 lineage from BUSCO? It can be a bit frustrating when things don't go as planned, especially when you're trying to piece together genomic puzzles. Let's dive into how to tackle these issues, making sure your analysis runs smoothly. We'll cover common problems, manual workarounds, and keeping your lineage lists up-to-date. So, grab your coding hat, and let's get started!</p>
+<h2>Understanding the Issue</h2>
+<p>When running Compleasm, one common hiccup is the script's failure to automatically download necessary files, particularly those associated with the Metazoa odb12 lineage from BUSCO. This can halt your analysis in its tracks, leaving you scratching your head. The error typically arises when Compleasm attempts to fetch the required database files, but encounters network issues, incorrect paths, or outdated configurations. In essence, the script can't find what it needs to proceed.</p>
+<p><em>Why does this happen?</em> Several factors can contribute to this problem. Network connectivity might be unstable, preventing the script from accessing the BUSCO FTP server. The paths specified in the Compleasm configuration could be incorrect, leading the script to look in the wrong places. Outdated lineage lists within Compleasm might not recognize the latest odb12 lineages, causing a mismatch between what the script expects and what's actually available. Understanding these potential causes is the first step in troubleshooting the issue. Once you pinpoint the root cause, you can apply the appropriate fixes to get your analysis back on track. So, before diving into manual downloads and configurations, take a moment to check your network connection, verify your paths, and update your lineage lists. This will save you time and effort in the long run.</p>
+<h2>Manual Intervention: A Workaround</h2>
+<p>When automated processes fail, sometimes you have to roll up your sleeves and get your hands dirty. A practical workaround involves manually downloading the necessary files and preparing them for Compleasm. Here's a step-by-step guide to get you through this process.</p>
+<h3>Step 1: Manual Download</h3>
+<p>The first step is to manually download the Metazoa odb12 lineage files from the BUSCO FTP server. Navigate to the appropriate directory and grab the required files. This usually involves a compressed archive containing the reference sequence database.</p>
+<h3>Step 2: Extraction and Preparation</h3>
+<p>Once you've downloaded the archive, extract its contents. Inside, you'll find the <code>refseq_db.faa</code> file, which is crucial for Compleasm. To optimize storage and ensure compatibility, compress this file using gzip. This reduces its size and makes it easier for Compleasm to handle.</p>
+<h3>Step 3: Creating the <code>.done</code> File</h3>
+<p>Compleasm relies on a <code>.done</code> file to recognize that the lineage has been successfully downloaded and prepared. Create an empty file named <code>metazoa_odb12.done</code> in the same directory as the compressed <code>refseq_db.faa</code> file. This signals to Compleasm that the lineage is ready for use.</p>
+<p>By following these steps, you can bypass the automated download process and manually prepare the Metazoa odb12 lineage for Compleasm. This ensures that your analysis can proceed even when the script encounters issues with fetching the files.</p>
+<h2>Addressing Missing Lineages</h2>
+<p>Another challenge you might encounter is the absence of new odb12 lineages when running the <code>compleasm list --remote</code> command. This means that Compleasm isn't aware of the latest lineages available for analysis. To resolve this, you need to update Compleasm's lineage lists.</p>
+<p><em>Why does this happen?</em> Compleasm maintains a list of available lineages, which it uses to determine what can be downloaded and used. If this list is outdated, it won't include the latest odb12 lineages. This can occur if Compleasm hasn't been updated recently or if the lineage lists haven't been refreshed.</p>
+<h3>Updating Lineage Lists</h3>
+<p>To update the lineage lists, you can use the <code>compleasm update</code> command. This command connects to the Compleasm server and downloads the latest lineage information. Once the update is complete, run <code>compleasm list --remote</code> again to verify that the new odb12 lineages are now displayed. If they are, you're good to go.</p>
+<p>By keeping your lineage lists up-to-date, you ensure that Compleasm is aware of the latest resources available for analysis. This prevents issues related to missing lineages and ensures that you can take full advantage of the tool's capabilities. So, remember to update your lineage lists regularly to stay on top of things.</p>
+<h2>Real-World Scenario: Running Compleasm</h2>
+<p>Let's walk through a practical example using a real-world scenario. Suppose you're working with a genome assembly file named <code>GCF_947086385.1/G*.fna.gz</code> and you want to run Compleasm using the Metazoa odb12 lineage. Here's how you would do it.</p>
+<h3>The Command</h3>
+<p>The command you would use is:</p>
+<pre><code class="hljs">compleasm.py run -t 16 -a GCF_947086385.1/G*.fna.gz -L mb_odb12 -l metazoa -o GCF_947086385.1/GCF_947086385.1.mb
+</code></pre>
+<p>Let's break down this command:</p>
+<ul>
+<li><code>compleasm.py run</code>: This invokes the Compleasm script and tells it to run the analysis.</li>
+<li><code>-t 16</code>: This specifies the number of threads to use for the analysis. In this case, we're using 16 threads to speed things up.</li>
+<li><code>-a GCF_947086385.1/G*.fna.gz</code>: This specifies the input genome assembly file. The <code>G*.fna.gz</code> pattern allows Compleasm to find the correct file within the specified directory.</li>
+<li><code>-L mb_odb12</code>: This specifies the lineage to use for the analysis. In this case, we're using the <code>mb_odb12</code> lineage, which is a subset of Metazoa odb12.</li>
+<li><code>-l metazoa</code>: This specifies the taxonomic group to use for the analysis. In this case, we're using the <code>metazoa</code> group.</li>
+<li><code>-o GCF_947086385.1/GCF_947086385.1.mb</code>: This specifies the output directory and file name for the analysis results.</li>
+</ul>
+<p>By running this command, Compleasm will analyze the input genome assembly using the specified lineage and taxonomic group, and then save the results to the specified output file. This allows you to assess the completeness of the genome assembly and identify any missing genes or proteins.</p>
+<h2>Best Practices for Smooth Runs</h2>
+<p>To ensure smooth and trouble-free runs with Compleasm, here are some best practices to keep in mind.</p>
+<ul>
+<li><strong>Keep Compleasm Updated:</strong> Regularly update Compleasm to the latest version. This ensures that you have access to the latest features, bug fixes, and lineage lists.</li>
+<li><strong>Verify Network Connectivity:</strong> Before running Compleasm, verify that you have a stable and reliable network connection. This prevents issues related to downloading necessary files.</li>
+<li><strong>Double-Check Paths:</strong> Double-check the paths specified in your Compleasm configuration. Make sure they are correct and point to the right locations.</li>
+<li><strong>Monitor Resource Usage:</strong> Monitor the resource usage of Compleasm during analysis. Adjust the number of threads and memory allocation as needed to optimize performance.</li>
+<li><strong>Consult Documentation:</strong> Refer to the Compleasm documentation for detailed information on usage, configuration, and troubleshooting.</li>
+</ul>
+<p>By following these best practices, you can minimize the chances of encountering issues and ensure that your Compleasm runs are as smooth and efficient as possible. This allows you to focus on the analysis results and gain valuable insights into your data. So, take a moment to review these practices and incorporate them into your workflow.</p>
+<h2>Conclusion</h2>
+<p>Navigating the world of bioinformatics tools like BUSCO and Compleasm can sometimes feel like traversing a maze. However, by understanding common issues, applying manual workarounds, and keeping your software up-to-date, you can overcome these challenges and achieve your research goals. Whether it's manually downloading lineage files or updating lineage lists, each step brings you closer to a successful analysis. So, keep exploring, keep troubleshooting, and keep pushing the boundaries of genomic discovery!</p>
+<p>Happy analyzing, folks! And remember, every error is just a stepping stone to becoming a bioinformatics wizard!</p>
+
+                    </div>
+                    <aside class="related-posts">
+                        <div class="ad-sidebar container">
+                            <div class="ad-wrapper">
+    <span>Iklan Related</span>
+</div>
+                        </div>
+                        <h2 class="related-posts-title">Related Posts</h2><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/service-error-generic-fix-common">Service Error Generic: Fix Common Issues &amp; Prevention</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-08T09:42:06+00:00">Aug 8, 2025</time>
+		                        <span class="view-count">
+									53 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/biased-dice-probability-of-rolling">Biased Dice: Probability Of Rolling A 6 Explained</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-04T14:37:34+00:00">Aug 4, 2025</time>
+		                        <span class="view-count">
+									49 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/understanding-the-bitwise-xor-operator">Understanding The Bitwise XOR Operator In Civet And Its Compilation</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-24T21:18:35+00:00">Jul 24, 2025</time>
+		                        <span class="view-count">
+									67 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/rangegroup-element-explained-examples-and">RangeGroup Element Explained Examples And Semantic Implications</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-28T14:49:51+00:00">Jul 28, 2025</time>
+		                        <span class="view-count">
+									63 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/lower-thermostat-energized-only-when">Lower Thermostat Energized Only When Upper Is Satisfied?</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-04T01:34:09+00:00">Aug 4, 2025</time>
+		                        <span class="view-count">
+									56 views
+		                        </span>
+                            </div>
+                        </article>
+                    </aside>
+                    <aside class="related-posts"></aside>
+                </div>
+            </div>
+        </article>
+        <a href="#" class="back-to-top" id="backToTop" title="Back to top">
+        	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-bar-up" viewBox="0 0 16 16">
+			  <path fill-rule="evenodd" d="M3.646 11.854a.5.5 0 0 0 .708 0L8 8.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708M2.4 5.2c0 .22.18.4.4.4h10.4a.4.4 0 0 0 0-.8H2.8a.4.4 0 0 0-.4.4"/>
+			</svg>
+		</a>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 ANABEL</p>
+        </div>
+    </footer>
+    <script>
+    	(() => {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            const toggleMenu = () => {
+                navMenu.classList.toggle('nav-menu-active');
+                navToggle.classList.toggle('nav-toggle-active');
+            };
+            const backToTopHandler = (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            navToggle.addEventListener('click', toggleMenu);
+            document.getElementById('backToTop').addEventListener('click', backToTopHandler);
+            window.addEventListener('pagehide', () => {
+                navToggle.removeEventListener('click', toggleMenu);
+                document.getElementById('backToTop').removeEventListener('click', backToTopHandler);
+            });
+        })();
+		(() => {
+            window.addEventListener("DOMContentLoaded", (event) => {
+                const ellHljs = document.createElement("script");
+                ellHljs.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js");
+                ellHljs.onload = () => {
+                    hljs.highlightAll();
+                };
+                document.querySelector("body").append(ellHljs);
+                const ellFont = document.createElement("link");
+                ellFont.setAttribute("href", "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css");
+                ellFont.setAttribute("rel", "stylesheet");
+                document.querySelector("head").append(ellFont);
+                window.addEventListener('pagehide', () => {
+                    // ellHljs.remove();
+                    ellFont.remove();
+                });
+
+            });
+        })();
+    </script>
+    
+    
+    
+</body>
+</html>

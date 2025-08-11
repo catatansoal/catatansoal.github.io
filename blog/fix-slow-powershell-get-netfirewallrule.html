@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Fix: Slow PowerShell Get-NetFirewallRule On Server Core</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Fix: Slow PowerShell Get-NetFirewallRule On Server Core...">
+    <link rel="canonical" href="https://catatansoal.github.io/blog/fix-slow-powershell-get-netfirewallrule">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Fix: Slow PowerShell Get-NetFirewallRule On Server Core">
+	<meta property="og:description" content="Fix: Slow PowerShell Get-NetFirewallRule On Server Core...">
+	<meta property="og:url" content="https://catatansoal.github.io/blog/fix-slow-powershell-get-netfirewallrule">
+	<meta property="og:site_name" content="ANABEL">
+	<meta property="article:published_time" content="2025-08-03T12:01:17+00:00">
+	<meta property="article:author" content="ADMIN">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+    <link rel="preload" fetchpriority="high" as="image" href="https://tse4.mm.bing.net/th?q=Troubleshooting%20Slow%20PowerShell%20Get-NetFirewallRule%20on%20Domain-Joined%20Server%20Core">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style type="text/css">
+    	:root{--primary-color:#3740ff;--text-color:#202124;--background-color:#ffffff;--gray-100:#f8f9fa;--gray-200:#e9ecef}*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;line-height:1.6;color:var(--text-color);background-color:var(--background-color)}.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}.header{background-color:var(--background-color);border-bottom:1px solid var(--gray-200);position:sticky;top:0;z-index:100}.nav{padding:.5rem 0}.nav-container{display:flex;justify-content:space-between;align-items:center;gap:1rem}.nav-left{display:flex;align-items:center;flex-shrink:0}.logo{font-weight:700;color:var(--primary-color)}.blog-tag{margin-left:1rem;padding:.25rem .5rem;background-color:var(--gray-100);border-radius:4px;font-size:.875rem}.nav-search{flex-grow:1;max-width:300px}.search-form{position:relative;width:100%}.search-input{width:100%;padding:.5rem 2.5rem .5rem 1rem;border:1px solid var(--gray-200);border-radius:24px;font-size:.875rem;transition:all 0.2s}.search-input:focus{outline:none;border-color:var(--primary-color);box-shadow:0 0 0 2px rgb(55 64 255 / .1)}.search-button{position:absolute;right:.5rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#5f6368;cursor:pointer;padding:.25rem;display:flex;align-items:center;justify-content:center}.search-button:hover{color:var(--primary-color)}.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:.5rem}.hamburger{display:block;position:relative;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before,.hamburger::after{content:'';position:absolute;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before{top:-6px}.hamburger::after{bottom:-6px}.nav-toggle-active .hamburger{background:#fff0}.nav-toggle-active .hamburger::before{transform:rotate(45deg);top:0}.nav-toggle-active .hamburger::after{transform:rotate(-45deg);bottom:0}.nav-list{display:flex;list-style:none;gap:2rem}.nav-link{color:var(--text-color);text-decoration:none;font-size:.9rem;transition:color 0.2s}.nav-link:hover{color:var(--primary-color)}.article-header{padding:2rem 0;background-color:var(--gray-100)}.article-layout{display:grid;grid-template-columns:1fr 350px;gap:3rem;padding:1rem 0;align-items: start}h1,h2,h3,h4,h5,h6{font-family:"Crimson Text","Times New Roman",Times,serif}h1{font-size:2.5rem;line-height:1.2;margin-bottom:1rem}.meta{color:#5f6368;font-size:.875rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}.view-count{display:inline-flex;align-items:center;gap:.25rem}.view-count svg{color:#5f6368}.content{min-width:0;border-bottom:1px solid #dddddd5e;margin-top:1rem;white-space:pre-line !important;overflow-wrap:break-word;overflow-x:auto;word-break:break-word}.lead{font-size:1.25rem;color:#5f6368;margin-bottom:2rem}h2,h3,h4,h5,h6{font-size:1.75rem;margin:1rem 0 1rem}p,pre,ol,ul>li{margin-bottom:1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;font-size:1.3rem;text-align: justify;}p>code{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px}hr{margin:1rem 0 1rem 0}.code-example{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;margin:1.5rem 0;overflow-x:auto}code{font-family:'Roboto Mono',monospace;font-size:.875rem}ul{margin:.2rem 0;padding-left:1.5rem}.related-posts{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;position:sticky;top:5rem}.related-posts-title,.newpost-posts-list{font-size:1.75rem;margin:0 0 1rem}.related-posts-list{display:flex;flex-direction:column;gap:.5rem}.related-post,.newpost-post{border-bottom:1px solid #ddd;padding-bottom:10px;margin-bottom:10px}.related-post:last-child,.newpost-post:last-child{padding-bottom:0;border-bottom:none}.related-post-title,.newpost-post-title{font-size:1.2rem;margin:0 0 .1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;}.related-post-title a,.newpost-post-title a{color:var(--text-color);text-decoration:none;transition:color 0.2s}.related-post-title a:hover,.newpost-post-title a:hover{color:var(--primary-color)}.related-post time{font-size:.875rem;color:#5f6368}.footer{background-color:var(--gray-100);padding:2rem 0;margin-top:4rem;color:#5f6368;font-size:.875rem}.nav-menu>ul>li{margin-bottom:0}@media (max-width:1024px){.container{max-width:800px}.article-layout{grid-template-columns:1fr;gap:2rem}.related-posts{position:static}}@media (max-width:768px){.nav-container{flex-wrap:wrap}.nav-search{order:3;max-width:none;width:100%;margin-top:.1rem}.nav-toggle{display:block}.nav-menu{display:none;position:absolute;top:100%;left:0;right:0;background:var(--background-color);padding:1rem 0;border-bottom:1px solid var(--gray-200)}.nav-menu-active{display:block}.nav-list{flex-direction:column;gap:.1rem;padding:0 1.5rem}.nav-link{display:block;padding:.2rem 0}h1{font-size:2rem}.article-header{padding:2rem 0}.content{padding:.1rem 0}}table{width:100%;border-collapse:collapse;margin:20px 0;font-family:'Arial',sans-serif}th,td{padding:12px 15px;text-align:left;border:1px solid #ddd}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9}tr:nth-child(even) td{background-color:#f2f2f2}@media screen and (max-width:768px){table{border:0;display:block;overflow-x:auto;white-space:nowrap}th,td{padding:10px;text-align:right}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9;border-bottom:1px solid #ddd}tr:nth-child(even) td{background-color:#f2f2f2}}a{text-decoration:none;color:#540707}.katex-html{padding: .2rem;color: #000;font-weight: 700;font-size: 1.3rem;overflow-wrap: break-word;max-width: 100%;white-space: normal !important}.category{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin:1rem 0 1rem 0}.tag{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px;font-family:"Newsreader",serif}.tag>a{text-decoration:none;color:#000}img{margin:auto;display:block;max-width:100%;height:auto;margin-bottom:1rem}.katex{white-space: pre-line !important;display: inline-block;max-width: 100%;overflow-x: auto;overflow-y: hidden;scrollbar-width: thin;overflow-wrap: break-word;word-break: break-word;vertical-align: -7px}.content > p {overflow-wrap: break-word;word-break: break-word}
+    </style>
+    <style type="text/css">
+    	pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}
+		.hljs{color:#c9d1d9;background:#0d1117}.hljs-doctag,.hljs-keyword,.hljs-meta .hljs-keyword,.hljs-template-tag,.hljs-template-variable,.hljs-type,.hljs-variable.language_{color:#ff7b72}.hljs-title,.hljs-title.class_,.hljs-title.class_.inherited__,.hljs-title.function_{color:#d2a8ff}.hljs-attr,.hljs-attribute,.hljs-literal,.hljs-meta,.hljs-number,.hljs-operator,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-variable{color:#79c0ff}.hljs-meta .hljs-string,.hljs-regexp,.hljs-string{color:#a5d6ff}.hljs-built_in,.hljs-symbol{color:#ffa657}.hljs-code,.hljs-comment,.hljs-formula{color:#8b949e}.hljs-name,.hljs-quote,.hljs-selector-pseudo,.hljs-selector-tag{color:#7ee787}.hljs-subst{color:#c9d1d9}.hljs-section{color:#1f6feb;font-weight:700}.hljs-bullet{color:#f2cc60}.hljs-emphasis{color:#c9d1d9;font-style:italic}.hljs-strong{color:#c9d1d9;font-weight:700}.hljs-addition{color:#aff5b4;background-color:#033a16}.hljs-deletion{color:#ffdcd7;background-color:#67060c}
+    	pre{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;font-weight:400;word-break:break-word;word-wrap:break-word;box-sizing:inherit;border-radius:4px;overflow-x:auto;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}code{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;word-wrap:break-word;word-break:break-word;font-style:normal;line-height:20px;letter-spacing:-.003em;box-sizing:inherit;font-weight:400;font-size:75%;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}
+    </style>
+    <style type="text/css">
+    	.back-to-top{position:fixed;bottom:20px;right:20px;background-color:#a73f3f;color:#fff;padding:8px 10px;border-radius:50%;box-shadow:0 4px 6px rgb(0 0 0 / .2);font-size:10px;font-weight:700;text-decoration:none;text-align:center;transition:opacity 0.3s ease,visibility 0.3s ease;z-index:99999;opacity:1;visibility:visible}.back-to-top:hover{background-color:#0056b3}
+    </style>
+    <style type="text/css">
+        .ad-header {margin: 1rem auto 1rem;background-color: #fdfdfd;text-align: center;display: block;}.ad-header .ad-wrapper {min-height: 90px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #555;font-weight: 500;padding: 3rem;border: 1px dashed #ccc;border-radius: 6px;}@media (max-width: 768px) {.ad-header {padding: 0.75rem;}}.ad-sidebar {margin: 0 0 1rem;background-color: #fefefe;text-align: center;padding: 0px;width: 100%;max-width: 100%;display: block;}.ad-sidebar .ad-wrapper {min-height: 250px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #444;font-weight: 500;border: 1px dashed #aaa;border-radius: 6px;padding: 0rem;}@media (max-width: 1024px) {.ad-sidebar {padding: 0.75rem;}}
+    </style>
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://catatansoal.github.io/blog/fix-slow-powershell-get-netfirewallrule"
+          },
+          "headline": "Fix: Slow PowerShell Get-NetFirewallRule On Server Core",
+          "description": "Fix: Slow PowerShell Get-NetFirewallRule On Server Core...",
+          "image": [
+            "https://tse4.mm.bing.net/th?q=Troubleshooting%20Slow%20PowerShell%20Get-NetFirewallRule%20on%20Domain-Joined%20Server%20Core"
+          ],
+          "author": {
+            "@type": "Person",
+            "name": "ADMIN",
+            "jobTitle": "Editor web"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "ANABEL",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://tse4.mm.bing.net/th?q=ANABEL%20WEB"
+            }
+          },
+          "datePublished": "2025-08-03T12:01:17+00:00",
+          "dateModified": "2025-08-03T12:01:17+00:00"
+        }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="container nav-container">
+                <div class="nav-left">
+                    <span class="logo">ANABEL</span>
+                    <span class="blog-tag">Article</span>
+                </div>
+                <div class="nav-search">
+                    <form class="search-form" role="search">
+                        <input 
+                            type="search" 
+                            class="search-input"
+                            placeholder="Search articles..."
+                            aria-label="Search articles"
+                        >
+                        <button type="submit" class="search-button" aria-label="Submit search">🔎</button>
+                    </form>
+                </div>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+                <div class="nav-menu">
+                    <ul class="nav-list">
+                    	<li><a href="/" class="nav-link">HOME</a></li>
+                        <li><a href="/pages/About" class="nav-link">About</a></li>
+                        <li><a href="/pages/Contact" class="nav-link">Contact</a></li>
+                        <li><a href="/pages/Disclaimer" class="nav-link">Disclaimer</a></li>
+                        <li><a href="/pages/Privacy" class="nav-link">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="main">
+        <article class="article">
+            <header class="article-header">
+                <div class="container">
+                    <h1>Fix: Slow PowerShell Get-NetFirewallRule On Server Core</h1>
+                    <div class="meta">
+                        <time datetime="2025-08-03T12:01:17+00:00">Aug 3, 2025</time>
+                        <span class="author">by ADMIN</span>
+                        <span class="view-count">
+                            <span id="viewCount">56</span> views
+                        </span>
+                    </div>
+                </div>
+            </header>
+            <div class="ad-header container">
+                <div class="ad-wrapper">
+    Iklan Headers
+</div>
+            </div>
+            <div class="container">
+                <div class="article-layout">
+                    <div class="content">
+                        <img src="https://tse4.mm.bing.net/th?q=Troubleshooting%20Slow%20PowerShell%20Get-NetFirewallRule%20on%20Domain-Joined%20Server%20Core" title="Troubleshooting Slow PowerShell Get-NetFirewallRule on Domain-Joined Server Core" width="300" height="200"/>
+<p>Hey guys! Ever run into a situation where a seemingly simple PowerShell command takes forever to execute? I recently encountered a frustrating issue with the <code>Get-NetFirewallRule</code> cmdlet on a domain-joined Windows Server 2022 Core machine. This command, which should quickly retrieve firewall rules, was taking over 3 minutes to complete! That's an eternity in the world of scripting and automation. So, I dove deep to figure out what was going on and how to fix it. In this article, I'll walk you through the troubleshooting process, the potential causes, and the solutions I found. Whether you're a seasoned sysadmin or just starting with PowerShell, this guide will help you tackle similar performance issues.</p>
+
+<p>The core issue was that running <code>Get-NetFirewallRule | Where-Object {$_.Enabled -eq $true}</code> on a Windows Server 2022 Core machine joined to a domain was excruciatingly slow. We're talking over three minutes to get a list of enabled firewall rules. This made scripting and automation tasks involving firewall rules completely impractical. Imagine waiting that long every time you need to check or modify a rule! It was clear that something was seriously wrong. <strong>Firewall configurations</strong> are crucial for server security, and the ability to manage them efficiently is a must. The sluggish performance of <code>Get-NetFirewallRule</code> was a major roadblock.</p>
+<p>At first, I thought it might be a hardware issue or a general performance bottleneck on the server. But after checking the usual suspects—CPU usage, memory, disk I/O—everything looked normal. The server was humming along just fine, except for this one pesky command. That's when I realized the problem was likely specific to the <strong>PowerShell cmdlet</strong> itself or its interaction with the system's firewall configuration. This kind of performance issue can stem from a variety of factors, including network latency, group policy interference, or even the sheer number of firewall rules configured on the server. The key is to methodically investigate each possibility to pinpoint the root cause. Let’s dive deeper into the troubleshooting steps I took.</p>
+
+<p>To kick things off, I needed to narrow down the scope of the problem. Was it <code>Get-NetFirewallRule</code> itself, or was it the filtering with <code>Where-Object</code>? To find out, I ran <code>Get-NetFirewallRule</code> without any filtering. The result? It was still slow, confirming that the issue lay with the base cmdlet, not the filtering. This was a crucial first step because it eliminated one potential cause and allowed me to focus my efforts. Understanding the <strong>performance characteristics of cmdlets</strong> is essential for effective troubleshooting. If the unfiltered command is slow, you know the problem is inherent to the cmdlet itself. If the filtering is the culprit, you can investigate the filter conditions and data processing.</p>
+<p>Next, I checked the obvious: the number of firewall rules. A large number of rules can indeed slow down <code>Get-NetFirewallRule</code>. However, the server in question didn't have an unusually high number of rules. So, that wasn't it. This step highlights the importance of checking the basics. Sometimes the simplest explanation is the correct one. <strong>Firewall rule management</strong> becomes more complex as the number of rules increases, and performance can suffer if not properly optimized. Rule consolidation, grouping, and efficient querying are crucial for maintaining responsiveness. Rule conflicts and overly broad rules can also contribute to performance degradation, making regular review and cleanup essential.</p>
+<p>I also considered Group Policy. Group Policy can apply firewall rules, and if there are issues with GPO processing, it could potentially slow things down. A quick check of the Group Policy application logs didn't reveal any errors, so I ruled that out for the moment. <strong>Group Policy Objects (GPOs)</strong> can have a significant impact on system performance, especially when dealing with security settings like firewall rules. Incorrectly configured GPOs can lead to slow processing times, conflicts, and unexpected behavior. Regularly auditing and testing GPOs is crucial for ensuring optimal performance and security. Make sure to check for GPO conflicts and apply the principle of least privilege when configuring firewall rules through GPOs.</p>
+
+<p>With the initial checks out of the way, it was time to dig deeper. Here are some of the potential causes I considered:</p>
+<ul>
+<li><strong>Network Latency:</strong> Since the server was domain-joined, it needed to communicate with the domain controller to retrieve firewall policy information. Network latency could be a factor.</li>
+<li><strong>DNS Resolution Issues:</strong> Slow DNS resolution could delay the retrieval of domain information required by the cmdlet.</li>
+<li><strong>WMI (Windows Management Instrumentation) Problems:</strong> <code>Get-NetFirewallRule</code> relies on WMI to access firewall configuration data. WMI issues can cause performance problems.</li>
+<li><strong>Profile Corruption:</strong> A corrupted user profile, especially the profile under which PowerShell was running, could lead to unexpected behavior.</li>
+<li><strong>Antivirus Interference:</strong> Antivirus software can sometimes interfere with system processes, including PowerShell cmdlets.</li>
+</ul>
+<p>Each of these potential causes required a different approach to investigate. <strong>Network latency</strong>, for instance, can be checked using tools like <code>ping</code> and <code>traceroute</code>. DNS resolution problems can be diagnosed with <code>nslookup</code>. WMI issues often require more in-depth troubleshooting, including checking WMI repository health and rebuilding the repository if necessary. Profile corruption can be addressed by creating a new user profile or repairing the existing one. And antivirus interference may necessitate temporarily disabling the antivirus software to see if it resolves the issue.</p>
+
+<p>After exploring the potential causes, I tried several solutions and workarounds. Here's what I found:</p>
+<ol>
+<li>
+<p><strong>Checking Network Latency:</strong> I used <code>ping</code> to test the latency between the server and the domain controller. The latency was low, so network latency wasn't the primary culprit. However, it's always a good practice to rule out network issues early in the troubleshooting process.</p>
+</li>
+<li>
+<p><strong>Verifying DNS Resolution:</strong> I used <code>nslookup</code> to verify that the server could resolve the domain controller's hostname. DNS resolution was working correctly, so that wasn't the issue either. <strong>DNS resolution</strong> is a critical component of network communication, and any problems with DNS can lead to a variety of performance issues. Slow DNS resolution can delay the retrieval of domain information, which can impact the performance of domain-joined systems and applications. Ensuring proper DNS configuration and monitoring DNS server performance is essential for maintaining network responsiveness.</p>
+</li>
+<li>
+<p><strong>Investigating WMI:</strong> This was the most promising lead. I suspected WMI because <code>Get-NetFirewallRule</code> relies on it. I checked the WMI repository's health and found some inconsistencies. To fix this, I tried rebuilding the WMI repository. This is a bit of a drastic step, but it can often resolve WMI-related performance issues. Rebuilding the WMI repository involves stopping the WMI service, deleting the repository files, and restarting the service. This forces WMI to rebuild the repository from scratch. However, it's important to note that rebuilding the WMI repository can have unintended consequences, so it should be done with caution and as a last resort.</p>
+<p>To rebuild the WMI repository, I used the following steps:</p>
+<ul>
+<li>Stop the WMI service: <code>Stop-Service winmgmt</code></li>
+<li>Navigate to the WMI repository directory: <code>cd %systemroot%\System32\Wbem</code></li>
+<li>Rename the repository directory: <code>Rename-Item Repository Repository.old</code></li>
+<li>Restart the WMI service: <code>Start-Service winmgmt</code></li>
+</ul>
+<p>After restarting the WMI service, the repository is automatically rebuilt. I then tested <code>Get-NetFirewallRule</code> again, and... it was still slow. Disappointing, but not unexpected. WMI issues can be complex, and rebuilding the repository doesn't always fix the problem. It was time to explore other avenues.</p>
+</li>
+<li>
+<p><strong>Checking PowerShell Execution Policy:</strong> Sometimes, restrictive PowerShell execution policies can impact cmdlet performance. I checked the execution policy using <code>Get-ExecutionPolicy</code> and found it was set to <code>RemoteSigned</code>, which is a common and generally acceptable setting. So, execution policy wasn't the issue in this case. <strong>PowerShell execution policies</strong> control which scripts and configuration files can be run on a system. Restrictive execution policies can prevent the execution of legitimate scripts, while permissive policies can pose a security risk. Choosing the right execution policy is a balancing act between security and usability. Regularly reviewing and updating execution policies is crucial for maintaining a secure and functional PowerShell environment.</p>
+</li>
+<li>
+<p><strong>Looking at Antivirus Software:</strong> I decided to temporarily disable the antivirus software to see if it was interfering with <code>Get-NetFirewallRule</code>. Lo and behold, disabling the antivirus software significantly improved the performance of the cmdlet! This was a major breakthrough. <strong>Antivirus software</strong> is essential for protecting systems from malware and other threats, but it can sometimes interfere with legitimate applications and processes. Antivirus software can impact performance by scanning files, monitoring system activity, and injecting code into running processes. Properly configuring antivirus software to minimize its impact on performance is crucial, especially in server environments where performance is critical. Adding exceptions for specific applications and processes can help reduce the overhead caused by antivirus scanning.</p>
+</li>
+</ol>
+
+<p>It turned out that the antivirus software was indeed the culprit. The real-time scanning feature was causing significant delays when <code>Get-NetFirewallRule</code> accessed the firewall configuration data. This is a common issue, especially with security-related cmdlets that interact with system-level components. <strong>Antivirus interference</strong> can manifest in various ways, including slow performance, application crashes, and unexpected behavior. Identifying and resolving antivirus interference requires careful investigation and often involves configuring exceptions or adjusting scanning settings. Monitoring system performance and logs can help detect antivirus interference and guide troubleshooting efforts.</p>
+
+<p>The solution was to create exclusions in the antivirus software for the PowerShell process (<code>powershell.exe</code>) and the WMI process (<code>wmiprvse.exe</code>). This prevented the antivirus software from scanning these processes, which eliminated the performance bottleneck. <strong>Antivirus exclusions</strong> allow specific files, folders, processes, or network resources to be excluded from scanning. Using exclusions can improve performance and prevent interference with legitimate applications and processes. However, it's important to carefully consider the security implications of creating exclusions, as they can potentially create vulnerabilities if not properly managed. Regularly reviewing and updating exclusions is crucial for maintaining a balance between performance and security.</p>
+<p>To create exclusions, you'll typically need to access the antivirus software's settings and add the necessary exceptions. The exact steps will vary depending on the specific antivirus product you're using. Consult your antivirus software's documentation for detailed instructions.</p>
+
+<p>This troubleshooting journey was a great reminder that performance issues can have unexpected causes. What started as a slow PowerShell cmdlet turned into a deep dive into WMI, DNS, and antivirus software. Here are some key takeaways:</p>
+<ul>
+<li><strong>Methodical Troubleshooting:</strong> Start with the basics and narrow down the scope of the problem step by step.</li>
+<li><strong>Consider All Potential Causes:</strong> Don't jump to conclusions. Explore all possibilities, even the ones that seem unlikely.</li>
+<li><strong>Antivirus Interference is Real:</strong> Antivirus software can sometimes be the culprit behind performance issues.</li>
+<li><strong>WMI is Critical:</strong> WMI is a fundamental component of Windows, and issues with WMI can have widespread effects.</li>
+<li><strong>Document Your Findings:</strong> Keep track of the steps you've taken and the results you've obtained. This will help you (and others) in the future.</li>
+</ul>
+<p>I hope this article has been helpful! If you encounter similar issues with <code>Get-NetFirewallRule</code> or other PowerShell cmdlets, remember to think methodically, explore all potential causes, and don't forget to check your antivirus software. Happy scripting!</p>
+
+                    </div>
+                    <aside class="related-posts">
+                        <div class="ad-sidebar container">
+                            <div class="ad-wrapper">
+    <span>Iklan Related</span>
+</div>
+                        </div>
+                        <h2 class="related-posts-title">Related Posts</h2><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/polynomial-long-division-find-r">Polynomial Long Division: Find R(x)!</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-04T01:12:35+00:00">Aug 4, 2025</time>
+		                        <span class="view-count">
+									36 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/unfactorable-expressions-which-one-doesnt">Unfactorable Expressions: Which One Doesn&#39;t Factor?</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-03T16:28:14+00:00">Aug 3, 2025</time>
+		                        <span class="view-count">
+									51 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/evans-and-gariepy-ch-3">Evans &amp; Gariepy Ch 3 Remark: A Deep Dive</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-01T16:39:25+00:00">Aug 1, 2025</time>
+		                        <span class="view-count">
+									40 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/how-to-eat-vegemite-an">How To Eat Vegemite: An Enjoyable Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-03T14:49:48+00:00">Aug 3, 2025</time>
+		                        <span class="view-count">
+									39 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/decoding-2m3-11-correct-statement">Decoding $2m^3 - 11$: Correct Statement Explained</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-06T21:32:17+00:00">Aug 6, 2025</time>
+		                        <span class="view-count">
+									49 views
+		                        </span>
+                            </div>
+                        </article>
+                    </aside>
+                    <aside class="related-posts"></aside>
+                </div>
+            </div>
+        </article>
+        <a href="#" class="back-to-top" id="backToTop" title="Back to top">
+        	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-bar-up" viewBox="0 0 16 16">
+			  <path fill-rule="evenodd" d="M3.646 11.854a.5.5 0 0 0 .708 0L8 8.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708M2.4 5.2c0 .22.18.4.4.4h10.4a.4.4 0 0 0 0-.8H2.8a.4.4 0 0 0-.4.4"/>
+			</svg>
+		</a>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 ANABEL</p>
+        </div>
+    </footer>
+    <script>
+    	(() => {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            const toggleMenu = () => {
+                navMenu.classList.toggle('nav-menu-active');
+                navToggle.classList.toggle('nav-toggle-active');
+            };
+            const backToTopHandler = (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            navToggle.addEventListener('click', toggleMenu);
+            document.getElementById('backToTop').addEventListener('click', backToTopHandler);
+            window.addEventListener('pagehide', () => {
+                navToggle.removeEventListener('click', toggleMenu);
+                document.getElementById('backToTop').removeEventListener('click', backToTopHandler);
+            });
+        })();
+		(() => {
+            window.addEventListener("DOMContentLoaded", (event) => {
+                const ellHljs = document.createElement("script");
+                ellHljs.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js");
+                ellHljs.onload = () => {
+                    hljs.highlightAll();
+                };
+                document.querySelector("body").append(ellHljs);
+                const ellFont = document.createElement("link");
+                ellFont.setAttribute("href", "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css");
+                ellFont.setAttribute("rel", "stylesheet");
+                document.querySelector("head").append(ellFont);
+                window.addEventListener('pagehide', () => {
+                    // ellHljs.remove();
+                    ellFont.remove();
+                });
+
+            });
+        })();
+    </script>
+    
+    
+    
+</body>
+</html>

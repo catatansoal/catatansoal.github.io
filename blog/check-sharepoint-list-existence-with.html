@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Check SharePoint List Existence With REST API</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Check SharePoint List Existence With REST API...">
+    <link rel="canonical" href="https://catatansoal.github.io/blog/check-sharepoint-list-existence-with">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Check SharePoint List Existence With REST API">
+	<meta property="og:description" content="Check SharePoint List Existence With REST API...">
+	<meta property="og:url" content="https://catatansoal.github.io/blog/check-sharepoint-list-existence-with">
+	<meta property="og:site_name" content="ANABEL">
+	<meta property="article:published_time" content="2025-08-01T14:10:19+00:00">
+	<meta property="article:author" content="ADMIN">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+    <link rel="preload" fetchpriority="high" as="image" href="https://tse4.mm.bing.net/th?q=Check%20SharePoint%20Online%20List%20Existence%20with%20REST%20API%3A%20A%20Comprehensive%20Guide">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style type="text/css">
+    	:root{--primary-color:#3740ff;--text-color:#202124;--background-color:#ffffff;--gray-100:#f8f9fa;--gray-200:#e9ecef}*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;line-height:1.6;color:var(--text-color);background-color:var(--background-color)}.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}.header{background-color:var(--background-color);border-bottom:1px solid var(--gray-200);position:sticky;top:0;z-index:100}.nav{padding:.5rem 0}.nav-container{display:flex;justify-content:space-between;align-items:center;gap:1rem}.nav-left{display:flex;align-items:center;flex-shrink:0}.logo{font-weight:700;color:var(--primary-color)}.blog-tag{margin-left:1rem;padding:.25rem .5rem;background-color:var(--gray-100);border-radius:4px;font-size:.875rem}.nav-search{flex-grow:1;max-width:300px}.search-form{position:relative;width:100%}.search-input{width:100%;padding:.5rem 2.5rem .5rem 1rem;border:1px solid var(--gray-200);border-radius:24px;font-size:.875rem;transition:all 0.2s}.search-input:focus{outline:none;border-color:var(--primary-color);box-shadow:0 0 0 2px rgb(55 64 255 / .1)}.search-button{position:absolute;right:.5rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#5f6368;cursor:pointer;padding:.25rem;display:flex;align-items:center;justify-content:center}.search-button:hover{color:var(--primary-color)}.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:.5rem}.hamburger{display:block;position:relative;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before,.hamburger::after{content:'';position:absolute;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before{top:-6px}.hamburger::after{bottom:-6px}.nav-toggle-active .hamburger{background:#fff0}.nav-toggle-active .hamburger::before{transform:rotate(45deg);top:0}.nav-toggle-active .hamburger::after{transform:rotate(-45deg);bottom:0}.nav-list{display:flex;list-style:none;gap:2rem}.nav-link{color:var(--text-color);text-decoration:none;font-size:.9rem;transition:color 0.2s}.nav-link:hover{color:var(--primary-color)}.article-header{padding:2rem 0;background-color:var(--gray-100)}.article-layout{display:grid;grid-template-columns:1fr 350px;gap:3rem;padding:1rem 0;align-items: start}h1,h2,h3,h4,h5,h6{font-family:"Crimson Text","Times New Roman",Times,serif}h1{font-size:2.5rem;line-height:1.2;margin-bottom:1rem}.meta{color:#5f6368;font-size:.875rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}.view-count{display:inline-flex;align-items:center;gap:.25rem}.view-count svg{color:#5f6368}.content{min-width:0;border-bottom:1px solid #dddddd5e;margin-top:1rem;white-space:pre-line !important;overflow-wrap:break-word;overflow-x:auto;word-break:break-word}.lead{font-size:1.25rem;color:#5f6368;margin-bottom:2rem}h2,h3,h4,h5,h6{font-size:1.75rem;margin:1rem 0 1rem}p,pre,ol,ul>li{margin-bottom:1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;font-size:1.3rem;text-align: justify;}p>code{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px}hr{margin:1rem 0 1rem 0}.code-example{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;margin:1.5rem 0;overflow-x:auto}code{font-family:'Roboto Mono',monospace;font-size:.875rem}ul{margin:.2rem 0;padding-left:1.5rem}.related-posts{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;position:sticky;top:5rem}.related-posts-title,.newpost-posts-list{font-size:1.75rem;margin:0 0 1rem}.related-posts-list{display:flex;flex-direction:column;gap:.5rem}.related-post,.newpost-post{border-bottom:1px solid #ddd;padding-bottom:10px;margin-bottom:10px}.related-post:last-child,.newpost-post:last-child{padding-bottom:0;border-bottom:none}.related-post-title,.newpost-post-title{font-size:1.2rem;margin:0 0 .1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;}.related-post-title a,.newpost-post-title a{color:var(--text-color);text-decoration:none;transition:color 0.2s}.related-post-title a:hover,.newpost-post-title a:hover{color:var(--primary-color)}.related-post time{font-size:.875rem;color:#5f6368}.footer{background-color:var(--gray-100);padding:2rem 0;margin-top:4rem;color:#5f6368;font-size:.875rem}.nav-menu>ul>li{margin-bottom:0}@media (max-width:1024px){.container{max-width:800px}.article-layout{grid-template-columns:1fr;gap:2rem}.related-posts{position:static}}@media (max-width:768px){.nav-container{flex-wrap:wrap}.nav-search{order:3;max-width:none;width:100%;margin-top:.1rem}.nav-toggle{display:block}.nav-menu{display:none;position:absolute;top:100%;left:0;right:0;background:var(--background-color);padding:1rem 0;border-bottom:1px solid var(--gray-200)}.nav-menu-active{display:block}.nav-list{flex-direction:column;gap:.1rem;padding:0 1.5rem}.nav-link{display:block;padding:.2rem 0}h1{font-size:2rem}.article-header{padding:2rem 0}.content{padding:.1rem 0}}table{width:100%;border-collapse:collapse;margin:20px 0;font-family:'Arial',sans-serif}th,td{padding:12px 15px;text-align:left;border:1px solid #ddd}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9}tr:nth-child(even) td{background-color:#f2f2f2}@media screen and (max-width:768px){table{border:0;display:block;overflow-x:auto;white-space:nowrap}th,td{padding:10px;text-align:right}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9;border-bottom:1px solid #ddd}tr:nth-child(even) td{background-color:#f2f2f2}}a{text-decoration:none;color:#540707}.katex-html{padding: .2rem;color: #000;font-weight: 700;font-size: 1.3rem;overflow-wrap: break-word;max-width: 100%;white-space: normal !important}.category{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin:1rem 0 1rem 0}.tag{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px;font-family:"Newsreader",serif}.tag>a{text-decoration:none;color:#000}img{margin:auto;display:block;max-width:100%;height:auto;margin-bottom:1rem}.katex{white-space: pre-line !important;display: inline-block;max-width: 100%;overflow-x: auto;overflow-y: hidden;scrollbar-width: thin;overflow-wrap: break-word;word-break: break-word;vertical-align: -7px}.content > p {overflow-wrap: break-word;word-break: break-word}
+    </style>
+    <style type="text/css">
+    	pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}
+		.hljs{color:#c9d1d9;background:#0d1117}.hljs-doctag,.hljs-keyword,.hljs-meta .hljs-keyword,.hljs-template-tag,.hljs-template-variable,.hljs-type,.hljs-variable.language_{color:#ff7b72}.hljs-title,.hljs-title.class_,.hljs-title.class_.inherited__,.hljs-title.function_{color:#d2a8ff}.hljs-attr,.hljs-attribute,.hljs-literal,.hljs-meta,.hljs-number,.hljs-operator,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-variable{color:#79c0ff}.hljs-meta .hljs-string,.hljs-regexp,.hljs-string{color:#a5d6ff}.hljs-built_in,.hljs-symbol{color:#ffa657}.hljs-code,.hljs-comment,.hljs-formula{color:#8b949e}.hljs-name,.hljs-quote,.hljs-selector-pseudo,.hljs-selector-tag{color:#7ee787}.hljs-subst{color:#c9d1d9}.hljs-section{color:#1f6feb;font-weight:700}.hljs-bullet{color:#f2cc60}.hljs-emphasis{color:#c9d1d9;font-style:italic}.hljs-strong{color:#c9d1d9;font-weight:700}.hljs-addition{color:#aff5b4;background-color:#033a16}.hljs-deletion{color:#ffdcd7;background-color:#67060c}
+    	pre{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;font-weight:400;word-break:break-word;word-wrap:break-word;box-sizing:inherit;border-radius:4px;overflow-x:auto;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}code{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;word-wrap:break-word;word-break:break-word;font-style:normal;line-height:20px;letter-spacing:-.003em;box-sizing:inherit;font-weight:400;font-size:75%;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}
+    </style>
+    <style type="text/css">
+    	.back-to-top{position:fixed;bottom:20px;right:20px;background-color:#a73f3f;color:#fff;padding:8px 10px;border-radius:50%;box-shadow:0 4px 6px rgb(0 0 0 / .2);font-size:10px;font-weight:700;text-decoration:none;text-align:center;transition:opacity 0.3s ease,visibility 0.3s ease;z-index:99999;opacity:1;visibility:visible}.back-to-top:hover{background-color:#0056b3}
+    </style>
+    <style type="text/css">
+        .ad-header {margin: 1rem auto 1rem;background-color: #fdfdfd;text-align: center;display: block;}.ad-header .ad-wrapper {min-height: 90px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #555;font-weight: 500;padding: 3rem;border: 1px dashed #ccc;border-radius: 6px;}@media (max-width: 768px) {.ad-header {padding: 0.75rem;}}.ad-sidebar {margin: 0 0 1rem;background-color: #fefefe;text-align: center;padding: 0px;width: 100%;max-width: 100%;display: block;}.ad-sidebar .ad-wrapper {min-height: 250px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #444;font-weight: 500;border: 1px dashed #aaa;border-radius: 6px;padding: 0rem;}@media (max-width: 1024px) {.ad-sidebar {padding: 0.75rem;}}
+    </style>
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://catatansoal.github.io/blog/check-sharepoint-list-existence-with"
+          },
+          "headline": "Check SharePoint List Existence With REST API",
+          "description": "Check SharePoint List Existence With REST API...",
+          "image": [
+            "https://tse4.mm.bing.net/th?q=Check%20SharePoint%20Online%20List%20Existence%20with%20REST%20API%3A%20A%20Comprehensive%20Guide"
+          ],
+          "author": {
+            "@type": "Person",
+            "name": "ADMIN",
+            "jobTitle": "Editor web"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "ANABEL",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://tse4.mm.bing.net/th?q=ANABEL%20WEB"
+            }
+          },
+          "datePublished": "2025-08-01T14:10:19+00:00",
+          "dateModified": "2025-08-01T14:10:19+00:00"
+        }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="container nav-container">
+                <div class="nav-left">
+                    <span class="logo">ANABEL</span>
+                    <span class="blog-tag">Article</span>
+                </div>
+                <div class="nav-search">
+                    <form class="search-form" role="search">
+                        <input 
+                            type="search" 
+                            class="search-input"
+                            placeholder="Search articles..."
+                            aria-label="Search articles"
+                        >
+                        <button type="submit" class="search-button" aria-label="Submit search">🔎</button>
+                    </form>
+                </div>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+                <div class="nav-menu">
+                    <ul class="nav-list">
+                    	<li><a href="/" class="nav-link">HOME</a></li>
+                        <li><a href="/pages/About" class="nav-link">About</a></li>
+                        <li><a href="/pages/Contact" class="nav-link">Contact</a></li>
+                        <li><a href="/pages/Disclaimer" class="nav-link">Disclaimer</a></li>
+                        <li><a href="/pages/Privacy" class="nav-link">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="main">
+        <article class="article">
+            <header class="article-header">
+                <div class="container">
+                    <h1>Check SharePoint List Existence With REST API</h1>
+                    <div class="meta">
+                        <time datetime="2025-08-01T14:10:19+00:00">Aug 1, 2025</time>
+                        <span class="author">by ADMIN</span>
+                        <span class="view-count">
+                            <span id="viewCount">46</span> views
+                        </span>
+                    </div>
+                </div>
+            </header>
+            <div class="ad-header container">
+                <div class="ad-wrapper">
+    Iklan Headers
+</div>
+            </div>
+            <div class="container">
+                <div class="article-layout">
+                    <div class="content">
+                        <img src="https://tse4.mm.bing.net/th?q=Check%20SharePoint%20Online%20List%20Existence%20with%20REST%20API%3A%20A%20Comprehensive%20Guide" title="Check SharePoint Online List Existence with REST API: A Comprehensive Guide" width="300" height="200"/><p>Hey guys! Ever found yourself needing to check if a list exists in SharePoint Online, especially when dealing with a massive number of lists? You're not alone! In this article, we'll dive deep into how to tackle this challenge efficiently using the REST API. We'll cover the ins and outs, best practices, and even some performance tips to make your life easier. So, buckle up and let's get started!</p>
+<h2>The Challenge: Verifying List Existence in SharePoint Online</h2>
+<p>When you're working with SharePoint Online, one common task is to check whether a specific list exists before performing any operations on it. This is crucial to avoid errors and ensure your code runs smoothly. However, when you're dealing with <strong>thousands of lists</strong>, like 10,000 or more, the traditional methods might not cut it. That's where the REST API comes to the rescue. Let's break down why this is a challenge and how we can overcome it.</p>
+<h3>Why is Checking List Existence Important?</h3>
+<p>Before we jump into the technical details, let's quickly cover why checking for list existence is so important. Imagine you're building a workflow that needs to update items in a specific list. If the list doesn't exist, your workflow will fail, potentially causing a ripple effect of issues. By checking for the list's existence beforehand, you can handle the situation gracefully, perhaps by creating the list if it's missing or notifying an administrator.</p>
+<h3>The Scalability Issue</h3>
+<p>Now, let's talk about scalability. If you have a small number of lists, you might get away with simply trying to access the list and catching any exceptions. But when you're dealing with 10,000+ lists, this approach becomes incredibly inefficient. Each attempt to access a non-existent list generates an error, which consumes resources and slows down your process. This is where the REST API shines, offering a more efficient way to query for list existence.</p>
+<h2>Leveraging the SharePoint REST API for List Verification</h2>
+<p>The SharePoint REST API allows you to interact with SharePoint data using standard HTTP requests. This means you can perform operations like checking for list existence without having to load the entire SharePoint object model. It's lightweight, fast, and perfect for our scenario. Let's explore how to use it.</p>
+<h3>Understanding the REST Endpoint</h3>
+<p>The key to checking list existence via the REST API is understanding the correct endpoint. The primary endpoint for accessing lists is:</p>
+<pre><code class="hljs">_api/web/lists
+</code></pre>
+<p>This endpoint allows you to retrieve information about all lists in a SharePoint site or web. However, we don't want to retrieve all lists just to check for one. That's where filtering comes in. We can use the <code>$filter</code> query parameter to narrow down our results. The endpoint to check if the list exists based on the list title is:</p>
+<pre><code class="hljs">_api/web/lists?$filter=Title eq &#39;&lt;Your List Title&gt;&#39;
+</code></pre>
+<p>Replace <code>&lt;Your List Title&gt;</code> with the actual title of the list you're looking for. This query will return only the lists that match the specified title. If the list exists, you'll get a result; otherwise, you'll get an empty result.</p>
+<h3>Making the REST Call</h3>
+<p>To make the REST call, you'll need to use an HTTP client. This could be anything from JavaScript's <code>fetch</code> API to a server-side library like <code>axios</code> or <code>node-fetch</code>. Here’s an example using JavaScript's <code>fetch</code> API:</p>
+<pre><code class="hljs">async function checkListExists(siteUrl, listTitle) {
+ const url = `${siteUrl}/_api/web/lists?$filter=Title eq &#39;${listTitle}&#39;`;
+
+ try {
+ const response = await fetch(url, {
+ method: &#39;GET&#39;,
+ headers: {
+ &#39;Accept&#39;: &#39;application/json;odata=nometadata&#39;
+ }
+ });
+
+ if (!response.ok) {
+ throw new Error(`HTTP error! status: ${response.status}`);
+ }
+
+ const data = await response.json();
+ return data.value.length &gt; 0;
+ } catch (error) {
+ console.error(&#39;Error checking list existence:&#39;, error);
+ return false;
+ }
+}
+
+// Example usage:
+const siteUrl = &#39;https://yourtenant.sharepoint.com/sites/yoursite&#39;;
+const listTitle = &#39;Your List Name&#39;;
+
+checkListExists(siteUrl, listTitle)
+ .then(exists =&gt; {
+ if (exists) {
+ console.log(`List &#39;${listTitle}&#39; exists.`);
+ } else {
+ console.log(`List &#39;${listTitle}&#39; does not exist.`);
+ }
+ });
+</code></pre>
+<p>In this code:</p>
+<ol>
+<li>We define an <code>async</code> function <code>checkListExists</code> that takes the site URL and list title as parameters.</li>
+<li>We construct the REST API URL using the <code>$filter</code> parameter.</li>
+<li>We use the <code>fetch</code> API to make a GET request to the SharePoint REST endpoint.</li>
+<li>We set the <code>Accept</code> header to <code>application/json;odata=nometadata</code> to get a clean JSON response without extra metadata.</li>
+<li>We check the response status to handle any HTTP errors.</li>
+<li>We parse the JSON response and check the length of the <code>value</code> array. If it's greater than 0, the list exists.</li>
+<li>We handle any errors that occur during the process.</li>
+<li>Finally, we provide an example usage of the function.</li>
+</ol>
+<h3>Handling Authentication</h3>
+<p>Before you can make REST calls to SharePoint Online, you need to authenticate. The authentication method you use will depend on your environment and application type. Some common methods include:</p>
+<ul>
+<li><strong>OAuth 2.0:</strong> This is the recommended approach for modern applications. It involves obtaining an access token from Azure Active Directory and including it in the <code>Authorization</code> header of your requests.</li>
+<li><strong>App-Only Authentication:</strong> This method allows your application to access SharePoint resources without a user context. It's suitable for background processes and services.</li>
+<li><strong>SharePoint Add-in Model:</strong> If you're building a SharePoint add-in, you can use the add-in's identity to authenticate.</li>
+</ul>
+<p>For detailed guidance on authentication, refer to the official Microsoft SharePoint documentation.</p>
+<h2>Optimizing Performance for 10,000+ Lists</h2>
+<p>Now, let's address the elephant in the room: how do we make this efficient when dealing with 10,000+ lists? Simply looping through each list and making a REST call for each one isn't going to cut it. We need to optimize our approach. Here are some key strategies:</p>
+<h3>Batching Requests</h3>
+<p>One of the most effective ways to improve performance is to batch your requests. Instead of making one REST call per list, you can combine multiple checks into a single request using the <code>$batch</code> endpoint. This significantly reduces the overhead of making multiple HTTP requests.</p>
+<p>Here's how batching works:</p>
+<ol>
+<li>Create a batch request payload containing multiple individual requests.</li>
+<li>Send the batch request to the <code>_api/$batch</code> endpoint.</li>
+<li>SharePoint processes the batch request and returns a single response containing the results of all individual requests.</li>
+</ol>
+<p>Here's an example of how to construct a batch request in JavaScript:</p>
+<pre><code class="hljs">async function checkListsExistBatch(siteUrl, listTitles) {
+ const batchUrl = `${siteUrl}/_api/$batch`;
+ const batchBoundary = &#39;batch_&#39; + Date.now();
+ const changeSetBoundary = &#39;changeset_&#39; + Date.now();
+
+ let batchPayload = `--${batchBoundary}\n`;
+ batchPayload += &#39;Content-Type: multipart/mixed; boundary=&quot;&#39; + changeSetBoundary + &#39;&quot;\n\n&#39;;
+
+ listTitles.forEach((listTitle, index) =&gt; {
+ batchPayload += `--${changeSetBoundary}\n`;
+ batchPayload += &#39;Content-Type: application/http\n&#39;;
+ batchPayload += &#39;Content-Transfer-Encoding: binary\n\n&#39;;
+ batchPayload += `GET _api/web/lists?$filter=Title eq &#39;${listTitle}&#39; HTTP/1.1\n`;
+ batchPayload += &#39;Accept: application/json;odata=nometadata\n\n&#39;;
+ });
+
+ batchPayload += `--${changeSetBoundary}--\n`;
+ batchPayload += `--${batchBoundary}--`;
+
+ try {
+ const response = await fetch(batchUrl, {
+ method: &#39;POST&#39;,
+ headers: {
+ &#39;Content-Type&#39;: `multipart/mixed; boundary=&quot;${batchBoundary}&quot;`, 
+ &#39;Accept&#39;: &#39;application/json;odata=verbose&#39;
+ },
+ body: batchPayload
+ });
+
+ if (!response.ok) {
+ throw new Error(`HTTP error! status: ${response.status}`);
+ }
+
+ const responseText = await response.text();
+ const results = parseBatchResponse(responseText, changeSetBoundary);
+ return results;
+ } catch (error) {
+ console.error(&#39;Error checking lists existence in batch:&#39;, error);
+ return [];
+ }
+}
+
+function parseBatchResponse(responseText, changeSetBoundary) {
+ const responses = [];
+ const parts = responseText.split(`--${changeSetBoundary}`);
+ parts.forEach(part =&gt; {
+ if (part.includes(&#39;Content-Type: application/http&#39;)) {
+ const jsonPart = part.substring(part.indexOf(&#39;{&#39;), part.lastIndexOf(&#39;}&#39;) + 1);
+ if (jsonPart) {
+ try {
+ const data = JSON.parse(jsonPart);
+ responses.push(data.d.results.length &gt; 0);
+ } catch (e) {
+ console.error(&#39;Error parsing JSON:&#39;, e);
+ responses.push(false); 
+ }
+ }
+ }
+ });
+ return responses;
+}
+
+
+// Example usage:
+const siteUrl = &#39;https://yourtenant.sharepoint.com/sites/yoursite&#39;;
+const listTitles = [&#39;List 1&#39;, &#39;List 2&#39;, &#39;List 3&#39;, /* ... */];
+
+checkListsExistBatch(siteUrl, listTitles)
+ .then(existsArray =&gt; {
+ existsArray.forEach((exists, index) =&gt; {
+ console.log(`List &#39;${listTitles[index]}&#39; ${exists ? &#39;exists&#39; : &#39;does not exist&#39;}.`);
+ });
+ });
+</code></pre>
+<p>In this code:</p>
+<ol>
+<li>We define an <code>async</code> function <code>checkListsExistBatch</code> that takes the site URL and an array of list titles as parameters.</li>
+<li>We construct the batch request URL, batch boundary, and changeset boundary.</li>
+<li>We build the batch request payload by iterating over the list titles and creating individual GET requests for each one.</li>
+<li>We make a POST request to the <code>_api/$batch</code> endpoint with the batch payload.</li>
+<li>We parse the response text to extract the results of each individual request.</li>
+<li>The <code>parseBatchResponse</code> function splits the response text by the changeset boundary and parses the JSON part of each response.</li>
+<li>We return an array of boolean values indicating whether each list exists.</li>
+<li>Finally, we provide an example usage of the function.</li>
+</ol>
+<p>Batching can significantly improve performance, but there are limits to how many requests you can include in a single batch. SharePoint Online typically allows up to 100 sub-requests in a single batch, but it's always a good idea to test and optimize based on your specific scenario.</p>
+<h3>Paging Results</h3>
+<p>When querying for lists, SharePoint Online might return a limited number of results per page. If you have more than the default limit (usually 100), you'll need to implement paging to retrieve all results. The REST API provides the <code>$skiptoken</code> parameter for this purpose. Here's how it works:</p>
+<ol>
+<li>Make an initial request to the lists endpoint.</li>
+<li>Check the response for a <code>@odata.nextLink</code> property. If it exists, it contains the URL for the next page of results.</li>
+<li>Make a request to the URL in <code>@odata.nextLink</code> to retrieve the next page.</li>
+<li>Repeat steps 2 and 3 until there is no <code>@odata.nextLink</code> property in the response.</li>
+</ol>
+<p>While paging is more relevant when you need to retrieve a large number of lists, it's worth knowing about in case your needs change in the future.</p>
+<h3>Caching Results</h3>
+<p>If you're frequently checking for the existence of the same lists, caching the results can save you a lot of time. You can implement caching on the client-side (e.g., in a browser using <code>localStorage</code> or <code>sessionStorage</code>) or on the server-side (e.g., using a Redis cache). Before making a REST call, check the cache. If the result is already cached, use it; otherwise, make the REST call and cache the result.</p>
+<h3>Parallel Processing</h3>
+<p>If you have a large number of lists to check and you're not using batching, you can improve performance by making multiple REST calls in parallel. This can be achieved using <code>Promise.all</code> in JavaScript or similar constructs in other languages. However, be mindful of SharePoint Online's throttling limits. Making too many concurrent requests can lead to throttling, which will slow down your process.</p>
+<h3>Filtering on Indexed Columns</h3>
+<p>When using the <code>$filter</code> parameter, filtering on indexed columns can significantly improve performance. The <code>Title</code> column is automatically indexed in SharePoint Online, so our example of filtering by title is already optimized in this regard. However, if you're filtering on other columns, make sure they are indexed.</p>
+<h2>Best Practices for SharePoint Online REST API</h2>
+<p>To wrap things up, let's go over some best practices for using the SharePoint Online REST API:</p>
+<ul>
+<li><strong>Use <code>$filter</code> to Narrow Down Results:</strong> Avoid retrieving all data and filtering on the client-side. Use the <code>$filter</code> parameter to retrieve only the data you need.</li>
+<li><strong>Use <code>$select</code> to Retrieve Specific Properties:</strong> Similarly, use the <code>$select</code> parameter to retrieve only the properties you need. This reduces the amount of data transferred over the network.</li>
+<li><strong>Handle Errors Gracefully:</strong> Always check the response status and handle any errors that occur during the REST call.</li>
+<li><strong>Implement Retries:</strong> Transient errors can occur in cloud environments. Implement a retry mechanism to handle these errors.</li>
+<li><strong>Monitor Performance:</strong> Regularly monitor the performance of your code and make adjustments as needed.</li>
+<li><strong>Respect Throttling Limits:</strong> Be aware of SharePoint Online's throttling limits and design your code to avoid throttling.</li>
+</ul>
+<h2>Conclusion</h2>
+<p>Checking for list existence in SharePoint Online, especially when dealing with a large number of lists, can be a performance-sensitive task. By leveraging the SharePoint REST API, batching requests, and following best practices, you can efficiently verify list existence and build robust applications. So, go ahead and implement these techniques in your projects, and you'll be well-equipped to handle any SharePoint challenge that comes your way! Keep coding, guys!</p>
+
+                    </div>
+                    <aside class="related-posts">
+                        <div class="ad-sidebar container">
+                            <div class="ad-wrapper">
+    <span>Iklan Related</span>
+</div>
+                        </div>
+                        <h2 class="related-posts-title">Related Posts</h2><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/focus-and-directrix-parabola-y">Focus &amp; Directrix: Parabola Y = -1/12 X^2 Explained</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-01T16:15:24+00:00">Aug 1, 2025</time>
+		                        <span class="view-count">
+									51 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/epa-protecting-our-environment-and">EPA: Protecting Our Environment And Health</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-06T17:04:14+00:00">Aug 6, 2025</time>
+		                        <span class="view-count">
+									42 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/going-concern-materiality-matching-accrual">Going Concern, Materiality, Matching, Accrual, And Business Entity Concepts</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-14T09:57:07+00:00">Jul 14, 2025</time>
+		                        <span class="view-count">
+									75 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/pleco-feeding-guide-diet-tips">Pleco Feeding Guide: Diet, Tips &amp; Challenges</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-06T13:31:08+00:00">Aug 6, 2025</time>
+		                        <span class="view-count">
+									44 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/understanding-air-compressor-flow-input">Understanding Air Compressor Flow Input Vs Output</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-13T21:10:32+00:00">Jul 13, 2025</time>
+		                        <span class="view-count">
+									49 views
+		                        </span>
+                            </div>
+                        </article>
+                    </aside>
+                    <aside class="related-posts"></aside>
+                </div>
+            </div>
+        </article>
+        <a href="#" class="back-to-top" id="backToTop" title="Back to top">
+        	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-bar-up" viewBox="0 0 16 16">
+			  <path fill-rule="evenodd" d="M3.646 11.854a.5.5 0 0 0 .708 0L8 8.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708M2.4 5.2c0 .22.18.4.4.4h10.4a.4.4 0 0 0 0-.8H2.8a.4.4 0 0 0-.4.4"/>
+			</svg>
+		</a>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 ANABEL</p>
+        </div>
+    </footer>
+    <script>
+    	(() => {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            const toggleMenu = () => {
+                navMenu.classList.toggle('nav-menu-active');
+                navToggle.classList.toggle('nav-toggle-active');
+            };
+            const backToTopHandler = (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            navToggle.addEventListener('click', toggleMenu);
+            document.getElementById('backToTop').addEventListener('click', backToTopHandler);
+            window.addEventListener('pagehide', () => {
+                navToggle.removeEventListener('click', toggleMenu);
+                document.getElementById('backToTop').removeEventListener('click', backToTopHandler);
+            });
+        })();
+		(() => {
+            window.addEventListener("DOMContentLoaded", (event) => {
+                const ellHljs = document.createElement("script");
+                ellHljs.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js");
+                ellHljs.onload = () => {
+                    hljs.highlightAll();
+                };
+                document.querySelector("body").append(ellHljs);
+                const ellFont = document.createElement("link");
+                ellFont.setAttribute("href", "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css");
+                ellFont.setAttribute("rel", "stylesheet");
+                document.querySelector("head").append(ellFont);
+                window.addEventListener('pagehide', () => {
+                    // ellHljs.remove();
+                    ellFont.remove();
+                });
+
+            });
+        })();
+    </script>
+    
+    
+    
+</body>
+</html>

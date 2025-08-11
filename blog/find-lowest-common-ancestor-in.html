@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Find Lowest Common Ancestor In Binary Tree: A Guide</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Find Lowest Common Ancestor In Binary Tree: A Guide...">
+    <link rel="canonical" href="https://catatansoal.github.io/blog/find-lowest-common-ancestor-in">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Find Lowest Common Ancestor In Binary Tree: A Guide">
+	<meta property="og:description" content="Find Lowest Common Ancestor In Binary Tree: A Guide...">
+	<meta property="og:url" content="https://catatansoal.github.io/blog/find-lowest-common-ancestor-in">
+	<meta property="og:site_name" content="ANABEL">
+	<meta property="article:published_time" content="2025-08-05T01:39:54+00:00">
+	<meta property="article:author" content="ADMIN">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+    <link rel="preload" fetchpriority="high" as="image" href="https://tse4.mm.bing.net/th?q=Finding%20the%20Lowest%20Common%20Ancestor%20in%20a%20Binary%20Tree%3A%20A%20Comprehensive%20Guide">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style type="text/css">
+    	:root{--primary-color:#3740ff;--text-color:#202124;--background-color:#ffffff;--gray-100:#f8f9fa;--gray-200:#e9ecef}*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;line-height:1.6;color:var(--text-color);background-color:var(--background-color)}.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}.header{background-color:var(--background-color);border-bottom:1px solid var(--gray-200);position:sticky;top:0;z-index:100}.nav{padding:.5rem 0}.nav-container{display:flex;justify-content:space-between;align-items:center;gap:1rem}.nav-left{display:flex;align-items:center;flex-shrink:0}.logo{font-weight:700;color:var(--primary-color)}.blog-tag{margin-left:1rem;padding:.25rem .5rem;background-color:var(--gray-100);border-radius:4px;font-size:.875rem}.nav-search{flex-grow:1;max-width:300px}.search-form{position:relative;width:100%}.search-input{width:100%;padding:.5rem 2.5rem .5rem 1rem;border:1px solid var(--gray-200);border-radius:24px;font-size:.875rem;transition:all 0.2s}.search-input:focus{outline:none;border-color:var(--primary-color);box-shadow:0 0 0 2px rgb(55 64 255 / .1)}.search-button{position:absolute;right:.5rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#5f6368;cursor:pointer;padding:.25rem;display:flex;align-items:center;justify-content:center}.search-button:hover{color:var(--primary-color)}.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:.5rem}.hamburger{display:block;position:relative;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before,.hamburger::after{content:'';position:absolute;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before{top:-6px}.hamburger::after{bottom:-6px}.nav-toggle-active .hamburger{background:#fff0}.nav-toggle-active .hamburger::before{transform:rotate(45deg);top:0}.nav-toggle-active .hamburger::after{transform:rotate(-45deg);bottom:0}.nav-list{display:flex;list-style:none;gap:2rem}.nav-link{color:var(--text-color);text-decoration:none;font-size:.9rem;transition:color 0.2s}.nav-link:hover{color:var(--primary-color)}.article-header{padding:2rem 0;background-color:var(--gray-100)}.article-layout{display:grid;grid-template-columns:1fr 350px;gap:3rem;padding:1rem 0;align-items: start}h1,h2,h3,h4,h5,h6{font-family:"Crimson Text","Times New Roman",Times,serif}h1{font-size:2.5rem;line-height:1.2;margin-bottom:1rem}.meta{color:#5f6368;font-size:.875rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}.view-count{display:inline-flex;align-items:center;gap:.25rem}.view-count svg{color:#5f6368}.content{min-width:0;border-bottom:1px solid #dddddd5e;margin-top:1rem;white-space:pre-line !important;overflow-wrap:break-word;overflow-x:auto;word-break:break-word}.lead{font-size:1.25rem;color:#5f6368;margin-bottom:2rem}h2,h3,h4,h5,h6{font-size:1.75rem;margin:1rem 0 1rem}p,pre,ol,ul>li{margin-bottom:1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;font-size:1.3rem;text-align: justify;}p>code{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px}hr{margin:1rem 0 1rem 0}.code-example{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;margin:1.5rem 0;overflow-x:auto}code{font-family:'Roboto Mono',monospace;font-size:.875rem}ul{margin:.2rem 0;padding-left:1.5rem}.related-posts{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;position:sticky;top:5rem}.related-posts-title,.newpost-posts-list{font-size:1.75rem;margin:0 0 1rem}.related-posts-list{display:flex;flex-direction:column;gap:.5rem}.related-post,.newpost-post{border-bottom:1px solid #ddd;padding-bottom:10px;margin-bottom:10px}.related-post:last-child,.newpost-post:last-child{padding-bottom:0;border-bottom:none}.related-post-title,.newpost-post-title{font-size:1.2rem;margin:0 0 .1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;}.related-post-title a,.newpost-post-title a{color:var(--text-color);text-decoration:none;transition:color 0.2s}.related-post-title a:hover,.newpost-post-title a:hover{color:var(--primary-color)}.related-post time{font-size:.875rem;color:#5f6368}.footer{background-color:var(--gray-100);padding:2rem 0;margin-top:4rem;color:#5f6368;font-size:.875rem}.nav-menu>ul>li{margin-bottom:0}@media (max-width:1024px){.container{max-width:800px}.article-layout{grid-template-columns:1fr;gap:2rem}.related-posts{position:static}}@media (max-width:768px){.nav-container{flex-wrap:wrap}.nav-search{order:3;max-width:none;width:100%;margin-top:.1rem}.nav-toggle{display:block}.nav-menu{display:none;position:absolute;top:100%;left:0;right:0;background:var(--background-color);padding:1rem 0;border-bottom:1px solid var(--gray-200)}.nav-menu-active{display:block}.nav-list{flex-direction:column;gap:.1rem;padding:0 1.5rem}.nav-link{display:block;padding:.2rem 0}h1{font-size:2rem}.article-header{padding:2rem 0}.content{padding:.1rem 0}}table{width:100%;border-collapse:collapse;margin:20px 0;font-family:'Arial',sans-serif}th,td{padding:12px 15px;text-align:left;border:1px solid #ddd}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9}tr:nth-child(even) td{background-color:#f2f2f2}@media screen and (max-width:768px){table{border:0;display:block;overflow-x:auto;white-space:nowrap}th,td{padding:10px;text-align:right}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9;border-bottom:1px solid #ddd}tr:nth-child(even) td{background-color:#f2f2f2}}a{text-decoration:none;color:#540707}.katex-html{padding: .2rem;color: #000;font-weight: 700;font-size: 1.3rem;overflow-wrap: break-word;max-width: 100%;white-space: normal !important}.category{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin:1rem 0 1rem 0}.tag{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px;font-family:"Newsreader",serif}.tag>a{text-decoration:none;color:#000}img{margin:auto;display:block;max-width:100%;height:auto;margin-bottom:1rem}.katex{white-space: pre-line !important;display: inline-block;max-width: 100%;overflow-x: auto;overflow-y: hidden;scrollbar-width: thin;overflow-wrap: break-word;word-break: break-word;vertical-align: -7px}.content > p {overflow-wrap: break-word;word-break: break-word}
+    </style>
+    <style type="text/css">
+    	pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}
+		.hljs{color:#c9d1d9;background:#0d1117}.hljs-doctag,.hljs-keyword,.hljs-meta .hljs-keyword,.hljs-template-tag,.hljs-template-variable,.hljs-type,.hljs-variable.language_{color:#ff7b72}.hljs-title,.hljs-title.class_,.hljs-title.class_.inherited__,.hljs-title.function_{color:#d2a8ff}.hljs-attr,.hljs-attribute,.hljs-literal,.hljs-meta,.hljs-number,.hljs-operator,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-variable{color:#79c0ff}.hljs-meta .hljs-string,.hljs-regexp,.hljs-string{color:#a5d6ff}.hljs-built_in,.hljs-symbol{color:#ffa657}.hljs-code,.hljs-comment,.hljs-formula{color:#8b949e}.hljs-name,.hljs-quote,.hljs-selector-pseudo,.hljs-selector-tag{color:#7ee787}.hljs-subst{color:#c9d1d9}.hljs-section{color:#1f6feb;font-weight:700}.hljs-bullet{color:#f2cc60}.hljs-emphasis{color:#c9d1d9;font-style:italic}.hljs-strong{color:#c9d1d9;font-weight:700}.hljs-addition{color:#aff5b4;background-color:#033a16}.hljs-deletion{color:#ffdcd7;background-color:#67060c}
+    	pre{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;font-weight:400;word-break:break-word;word-wrap:break-word;box-sizing:inherit;border-radius:4px;overflow-x:auto;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}code{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;word-wrap:break-word;word-break:break-word;font-style:normal;line-height:20px;letter-spacing:-.003em;box-sizing:inherit;font-weight:400;font-size:75%;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}
+    </style>
+    <style type="text/css">
+    	.back-to-top{position:fixed;bottom:20px;right:20px;background-color:#a73f3f;color:#fff;padding:8px 10px;border-radius:50%;box-shadow:0 4px 6px rgb(0 0 0 / .2);font-size:10px;font-weight:700;text-decoration:none;text-align:center;transition:opacity 0.3s ease,visibility 0.3s ease;z-index:99999;opacity:1;visibility:visible}.back-to-top:hover{background-color:#0056b3}
+    </style>
+    <style type="text/css">
+        .ad-header {margin: 1rem auto 1rem;background-color: #fdfdfd;text-align: center;display: block;}.ad-header .ad-wrapper {min-height: 90px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #555;font-weight: 500;padding: 3rem;border: 1px dashed #ccc;border-radius: 6px;}@media (max-width: 768px) {.ad-header {padding: 0.75rem;}}.ad-sidebar {margin: 0 0 1rem;background-color: #fefefe;text-align: center;padding: 0px;width: 100%;max-width: 100%;display: block;}.ad-sidebar .ad-wrapper {min-height: 250px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #444;font-weight: 500;border: 1px dashed #aaa;border-radius: 6px;padding: 0rem;}@media (max-width: 1024px) {.ad-sidebar {padding: 0.75rem;}}
+    </style>
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://catatansoal.github.io/blog/find-lowest-common-ancestor-in"
+          },
+          "headline": "Find Lowest Common Ancestor In Binary Tree: A Guide",
+          "description": "Find Lowest Common Ancestor In Binary Tree: A Guide...",
+          "image": [
+            "https://tse4.mm.bing.net/th?q=Finding%20the%20Lowest%20Common%20Ancestor%20in%20a%20Binary%20Tree%3A%20A%20Comprehensive%20Guide"
+          ],
+          "author": {
+            "@type": "Person",
+            "name": "ADMIN",
+            "jobTitle": "Editor web"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "ANABEL",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://tse4.mm.bing.net/th?q=ANABEL%20WEB"
+            }
+          },
+          "datePublished": "2025-08-05T01:39:54+00:00",
+          "dateModified": "2025-08-05T01:39:54+00:00"
+        }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="container nav-container">
+                <div class="nav-left">
+                    <span class="logo">ANABEL</span>
+                    <span class="blog-tag">Article</span>
+                </div>
+                <div class="nav-search">
+                    <form class="search-form" role="search">
+                        <input 
+                            type="search" 
+                            class="search-input"
+                            placeholder="Search articles..."
+                            aria-label="Search articles"
+                        >
+                        <button type="submit" class="search-button" aria-label="Submit search">🔎</button>
+                    </form>
+                </div>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+                <div class="nav-menu">
+                    <ul class="nav-list">
+                    	<li><a href="/" class="nav-link">HOME</a></li>
+                        <li><a href="/pages/About" class="nav-link">About</a></li>
+                        <li><a href="/pages/Contact" class="nav-link">Contact</a></li>
+                        <li><a href="/pages/Disclaimer" class="nav-link">Disclaimer</a></li>
+                        <li><a href="/pages/Privacy" class="nav-link">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="main">
+        <article class="article">
+            <header class="article-header">
+                <div class="container">
+                    <h1>Find Lowest Common Ancestor In Binary Tree: A Guide</h1>
+                    <div class="meta">
+                        <time datetime="2025-08-05T01:39:54+00:00">Aug 5, 2025</time>
+                        <span class="author">by ADMIN</span>
+                        <span class="view-count">
+                            <span id="viewCount">52</span> views
+                        </span>
+                    </div>
+                </div>
+            </header>
+            <div class="ad-header container">
+                <div class="ad-wrapper">
+    Iklan Headers
+</div>
+            </div>
+            <div class="container">
+                <div class="article-layout">
+                    <div class="content">
+                        <img src="https://tse4.mm.bing.net/th?q=Finding%20the%20Lowest%20Common%20Ancestor%20in%20a%20Binary%20Tree%3A%20A%20Comprehensive%20Guide" title="Finding the Lowest Common Ancestor in a Binary Tree: A Comprehensive Guide" width="300" height="200"/><h2>Introduction to Lowest Common Ancestor (LCA)</h2>
+<p>Hey guys! Let's dive into the fascinating world of binary trees and explore a fundamental concept: the <strong>Lowest Common Ancestor (LCA)</strong>. You might be wondering, “What exactly is LCA, and why should I care?” Well, in a binary tree, the LCA of two nodes is defined as the deepest node that has both nodes as descendants. Think of it like tracing family lineages; the LCA is the most recent common ancestor of two individuals. Understanding LCA isn't just an academic exercise; it has practical applications in various fields, including phylogenetic analysis, network routing, and even file systems. In computer science, it’s a classic problem that tests your understanding of tree traversals and recursive algorithms. Mastering the concept of LCA will not only enhance your problem-solving skills but also provide you with a powerful tool for tackling complex data structure challenges. So, whether you're preparing for a coding interview or simply expanding your knowledge of algorithms, understanding LCA is definitely worth your time. We're going to break down the definition, explore different approaches to finding it, and walk through code examples to make sure you've got a solid grasp on this concept. Stick around, and let’s get started!</p>
+<h2>Understanding Binary Trees and Tree Traversals</h2>
+<p>Before we jump into the intricacies of finding the Lowest Common Ancestor, let's ensure we have a solid grasp of binary trees and tree traversals. A <strong>binary tree</strong> is a hierarchical data structure where each node has at most two children, referred to as the left child and the right child. The topmost node in the tree is called the root, and nodes without children are called leaves. This structure allows for efficient searching, insertion, and deletion operations, making binary trees a fundamental data structure in computer science. Now, <strong>tree traversals</strong> are methods of visiting (checking and/or updating) each node in a tree. There are primarily three types of traversals we need to understand: <em>preorder</em>, <em>inorder</em>, and <em>postorder</em>. <em>Preorder</em> traversal visits the current node first, then the left subtree, and finally the right subtree. <em>Inorder</em> traversal visits the left subtree, then the current node, and finally the right subtree. <em>Postorder</em> traversal visits the left subtree, then the right subtree, and finally the current node. Each of these traversal methods provides a unique way to explore the tree, and the choice of which one to use often depends on the specific problem we're trying to solve. For finding the LCA, understanding how these traversals work is crucial, as different approaches may utilize different traversal techniques. We'll see how these concepts come into play when we discuss algorithms for finding the LCA in the upcoming sections. So, keep these concepts in mind as we delve deeper into the topic – they’re the building blocks for our journey!</p>
+<h2>Different Approaches to Finding LCA</h2>
+<p>Alright, let's get to the heart of the matter: how do we actually find the Lowest Common Ancestor in a binary tree? There are several approaches, each with its own set of trade-offs in terms of time and space complexity. We'll explore a few of the most common and efficient methods. First up is the <strong>recursive approach</strong>. This method leverages the inherent recursive structure of binary trees. The basic idea is to traverse the tree, and for each node, check if it is the LCA. If the current node is one of the two nodes we're looking for, or if one node is in the left subtree and the other is in the right subtree, then the current node is the LCA. This approach is elegant and relatively easy to implement, making it a favorite for many programmers. Next, we have the <strong>iterative approach using parent pointers</strong>. In this method, we first find the paths from the root to both nodes. Then, we compare these paths from the root down until the paths diverge. The node just before the divergence is the LCA. This approach requires us to store the parent of each node, which can be done using a hash map. While it might seem a bit more complex than the recursive approach, it can be more space-efficient in some cases. Lastly, there’s the <strong>dynamic programming approach</strong>, which is more advanced but can be very efficient for repeated LCA queries on the same tree. This method involves preprocessing the tree to store information that can be used to quickly answer LCA queries. We’ll delve into the specifics of each of these methods, including code examples and step-by-step explanations, to give you a comprehensive understanding. By the end of this section, you'll have a toolbox of techniques to tackle LCA problems with confidence!</p>
+<h2>Recursive Approach</h2>
+<p>Let's zoom in on the <strong>recursive approach</strong> to finding the Lowest Common Ancestor. As we mentioned earlier, this method beautifully exploits the recursive nature of binary trees. The core idea is to traverse the tree recursively, checking at each node if it’s the LCA of the two target nodes, let’s call them <code>p</code> and <code>q</code>. The algorithm works as follows: starting from the root, we recursively explore the left and right subtrees. If we find either <code>p</code> or <code>q</code> in a subtree, we return that node. If we find <code>p</code> in one subtree and <code>q</code> in the other, it means the current node is the LCA. If both <code>p</code> and <code>q</code> are in the same subtree, we continue the search in that subtree. To put it in simpler terms, imagine you're searching a family tree. You start at the top (the root) and work your way down. If you find one relative on one branch and another on a different branch, the person at the current junction is their common ancestor. If you find both relatives on the same branch, you continue searching down that branch. Now, let’s talk about the code. A typical recursive implementation involves a function that takes the current node and the two target nodes <code>p</code> and <code>q</code> as input. The base cases are when the current node is null or is either <code>p</code> or <code>q</code>. In these cases, we simply return the current node. The recursive step involves calling the function on the left and right subtrees. If both calls return a non-null value, it means the current node is the LCA. If only one call returns a non-null value, we return that value, indicating that the LCA is in that subtree. The beauty of this approach lies in its simplicity and elegance. It mirrors the way we naturally think about tree structures, making it intuitive to understand and implement. However, it's crucial to be mindful of the call stack, as excessive recursion can lead to stack overflow errors in very deep trees. We’ll illustrate this with a code example shortly, but for now, let's appreciate the recursive approach for its clarity and efficiency in many common scenarios.</p>
+<h3>Code Example and Explanation</h3>
+<p>Let's get our hands dirty with some code! Here’s a Python example of the recursive approach to finding the Lowest Common Ancestor:</p>
+<pre><code class="hljs">class TreeNode:
+    def __init__(self, val):
+        self.val = val
+        self.left = None
+        self.right = None
+
+def lowestCommonAncestor(root, p, q):
+    if not root or root == p or root == q:
+        return root
+
+    left = lowestCommonAncestor(root.left, p, q)
+    right = lowestCommonAncestor(root.right, p, q)
+
+    if left and right:
+        return root
+    elif left:
+        return left
+    elif right:
+        return right
+    else:
+        return None
+</code></pre>
+<p>In this code, we define a <code>TreeNode</code> class to represent nodes in the binary tree. The <code>lowestCommonAncestor</code> function takes the root of the tree and the two target nodes <code>p</code> and <code>q</code> as input. The first part of the function handles the base cases: if the root is <code>None</code> or if the root is either <code>p</code> or <code>q</code>, we return the root. This is because if the root is <code>None</code>, it means we've reached the end of a branch, and if the root is one of the target nodes, it is the LCA if the other node is in its subtree. Next, we recursively call <code>lowestCommonAncestor</code> on the left and right subtrees. This is where the magic happens. We explore each subtree to find <code>p</code> and <code>q</code>. The results of these recursive calls are stored in <code>left</code> and <code>right</code>. Now, we check the results of the recursive calls. If both <code>left</code> and <code>right</code> are non-null, it means we've found <code>p</code> in one subtree and <code>q</code> in the other, so the current root is the LCA. If only <code>left</code> is non-null, it means both <code>p</code> and <code>q</code> are in the left subtree, so the LCA is in the left subtree. Similarly, if only <code>right</code> is non-null, the LCA is in the right subtree. If both <code>left</code> and <code>right</code> are null, it means neither <code>p</code> nor <code>q</code> was found in the subtrees, so we return <code>None</code>. To illustrate how this works, consider a simple binary tree and trace the execution of the function with different target nodes. You'll see how the recursion elegantly navigates the tree, homing in on the LCA. This example should give you a clearer picture of how the recursive approach works in practice.</p>
+<h2>Iterative Approach using Parent Pointers</h2>
+<p>Now, let's switch gears and explore the <strong>iterative approach</strong> to finding the Lowest Common Ancestor, which employs parent pointers. This method takes a different route compared to the recursive one, offering its own advantages in certain scenarios. The central idea here is to trace the paths from the two target nodes, <code>p</code> and <code>q</code>, back to the root of the tree. To do this, we first need to establish a way to find the parent of each node. We can achieve this using a hash map (or a dictionary in Python), where we store each node and its parent. Once we have this mapping, we can start from <code>p</code> and <code>q</code> and move upwards towards the root, recording the nodes we visit along the way. Think of it as following breadcrumbs back to the starting point. After tracing the paths from both <code>p</code> and <code>q</code> to the root, we essentially have two lists of nodes representing the ancestors of <code>p</code> and <code>q</code>. The next step is to find the point where these paths diverge. We can do this by iterating backwards from <code>p</code> and <code>q</code> towards the root, comparing the nodes at each level. The last common node we encounter before the paths split is the LCA. This approach might sound a bit more involved than the recursive one, but it has the advantage of avoiding the overhead of recursive function calls, which can be significant for very deep trees. Also, it can be more space-efficient in situations where the call stack in the recursive approach might become a bottleneck. However, it does require extra space to store the parent pointers, so there’s a trade-off to consider. We’ll break down the implementation details with a code example shortly, but first, let’s appreciate the iterative approach for its systematic and step-by-step method of finding the LCA.</p>
+<h3>Code Example and Explanation</h3>
+<p>Let’s dive into the code for the iterative approach using parent pointers. This method involves a couple of key steps: first, creating a map of parent pointers, and second, traversing up the tree from the target nodes to find the LCA. Here’s a Python code snippet that illustrates this:</p>
+<pre><code class="hljs">class TreeNode:
+    def __init__(self, val):
+        self.val = val
+        self.left = None
+        self.right = None
+
+def lowestCommonAncestor(root, p, q):
+    # Create a map to store parent pointers
+    parent_map = {root: None}
+    stack = [root]
+
+    # Populate the parent map
+    while p not in parent_map or q not in parent_map:
+        node = stack.pop()
+        if node.left:
+            parent_map[node.left] = node
+            stack.append(node.left)
+        if node.right:
+            parent_map[node.right] = node
+            stack.append(node.right)
+
+    # Get the ancestors of p
+    ancestors = set()
+    while p:
+        ancestors.add(p)
+        p = parent_map[p]
+
+    # Traverse ancestors of q to find the first common ancestor
+    while q not in ancestors:
+        q = parent_map[q]
+
+    return q
+</code></pre>
+<p>In this code, we start by defining the <code>TreeNode</code> class, just as in the recursive approach. The <code>lowestCommonAncestor</code> function takes the root and the two target nodes <code>p</code> and <code>q</code> as input. The first part of the function is dedicated to building the <code>parent_map</code>. We use a dictionary <code>parent_map</code> to store each node and its parent. We start with the root, whose parent is <code>None</code>. We then use a stack to perform a depth-first traversal of the tree. As we visit each node, we add its children to the stack and record the parent-child relationship in the <code>parent_map</code>. We continue this process until both <code>p</code> and <code>q</code> are in the <code>parent_map</code>. Once we have the <code>parent_map</code>, we can trace the ancestors of <code>p</code>. We create a set called <code>ancestors</code> to store all the ancestors of <code>p</code>. We start from <code>p</code> and move upwards, adding each parent to the <code>ancestors</code> set until we reach the root. Now, we do a similar traversal for <code>q</code>. We start from <code>q</code> and move upwards, checking if each ancestor of <code>q</code> is in the <code>ancestors</code> set. The first ancestor of <code>q</code> that is also in the <code>ancestors</code> set is the LCA. This is because it’s the first common node we encounter as we move up the tree. To understand this better, imagine drawing the paths from <code>p</code> and <code>q</code> to the root. The point where these paths intersect is the LCA. The code efficiently finds this intersection by using the <code>parent_map</code> and the <code>ancestors</code> set. This iterative approach provides a robust alternative to the recursive method, especially for large trees where recursion depth might be a concern.</p>
+<h2>Dynamic Programming Approach</h2>
+<p>Let's now explore a more advanced technique for finding the Lowest Common Ancestor: the <strong>dynamic programming approach</strong>. This method is particularly useful when you need to perform multiple LCA queries on the same binary tree. The core idea behind dynamic programming is to preprocess the tree and store information that can be reused to answer queries quickly. In the context of LCA, this typically involves building a table that stores the ancestors of each node at different levels. This preprocessing step might seem like extra work upfront, but it pays off handsomely when you have to answer many LCA queries. Imagine you're a librarian who frequently needs to find the common ancestor of books on a library's organizational chart. Instead of tracing the lineage every time, you create a quick-reference guide listing ancestors at various levels, making future searches much faster. The most common dynamic programming technique for LCA is based on the concept of <strong>binary lifting</strong>. Binary lifting involves creating a 2D array (or table) where <code>dp[i][j]</code> stores the 2^j-th ancestor of node <code>i</code>. In other words, it tells you the ancestor you would reach if you climbed 2^j steps up the tree from node <code>i</code>. By precomputing this table, we can quickly jump up the tree in powers of two, making it much faster to find the LCA. The preprocessing step involves a depth-first traversal of the tree to compute the <code>dp</code> table. During the traversal, we also compute the depth of each node, which is essential for the LCA query. When answering an LCA query for nodes <code>p</code> and <code>q</code>, we first bring them to the same depth. Then, we climb up the tree in powers of two, using the <code>dp</code> table to quickly jump to the appropriate ancestors. Once <code>p</code> and <code>q</code> are at the same level, we climb them up together until we find their LCA. This approach significantly reduces the time complexity for each query, making it highly efficient for scenarios with multiple queries. We’ll delve into a detailed code example to illustrate the dynamic programming approach, but for now, let’s appreciate its power in optimizing LCA queries through smart preprocessing and efficient lookups.</p>
+<h3>Code Example and Explanation</h3>
+<p>Time to break down the dynamic programming approach with a code example. This method is a bit more involved but offers significant performance gains for multiple LCA queries. We'll use Python to illustrate the concept of binary lifting. Here’s how it looks:</p>
+<pre><code class="hljs">class TreeNode:
+    def __init__(self, val):
+        self.val = val
+        self.left = None
+        self.right = None
+
+def preprocess(root):
+    depth = {}
+    parent = {}
+    dp = {}
+
+    def dfs(node, d, p):
+        if not node:
+            return
+        depth[node] = d
+        parent[node] = p
+        dp[node] = {0: p}
+        dfs(node.left, d + 1, node)
+        dfs(node.right, d + 1, node)
+
+    dfs(root, 0, None)
+
+    max_depth = max(depth.values())
+    max_j = 0
+    while (1 &lt;&lt; max_j) &lt;= max_depth:
+        max_j += 1
+
+    for j in range(1, max_j + 1):
+        for node in depth:
+            if node and dp[node][j - 1]:
+                dp[node][j] = dp[dp[node][j - 1]][j - 1] if dp[dp[node][j - 1]].get(j - 1) else None
+            else:
+                dp[node][j] = None
+    return depth, dp
+
+def lowestCommonAncestor(root, p, q):
+    depth, dp = preprocess(root)
+
+    # Bring p and q to the same depth
+    if depth[p] &lt; depth[q]:
+        p, q = q, p
+    
+    depth_diff = depth[p] - depth[q]
+    while depth_diff &gt; 0:
+        j = depth_diff.bit_length() - 1
+        p = dp[p][j]
+        depth_diff -= (1 &lt;&lt; j)
+
+    if p == q:
+        return p
+
+    # Climb p and q until LCA is found
+    max_j = max(j for node in dp for j in dp[node] if dp[node][j])
+    for j in range(max_j, -1, -1):
+        if dp[p].get(j) and dp[q].get(j) and dp[p][j] != dp[q][j]:
+            p = dp[p][j]
+            q = dp[q][j]
+
+    return dp[p][0]
+</code></pre>
+<p>This code is split into two main parts: <code>preprocess</code> and <code>lowestCommonAncestor</code>. The <code>preprocess</code> function is where the dynamic programming magic happens. It starts by performing a depth-first search (DFS) to compute the depth of each node and store the immediate parent in the <code>parent</code> dictionary. It also initializes the <code>dp</code> table, where <code>dp[node][j]</code> will store the 2^j-th ancestor of <code>node</code>. The DFS populates the <code>depth</code>, <code>parent</code>, and the first level of the <code>dp</code> table (ancestors 2^0 = 1 step away). Next, the <code>preprocess</code> function computes the higher levels of the <code>dp</code> table. It iterates through powers of two (2^1, 2^2, etc.) and for each node, it finds the 2^j-th ancestor by looking up the (2^(j-1))-th ancestor of the (2^(j-1))-th ancestor. This is the essence of binary lifting – we’re using previously computed values to efficiently find ancestors at higher levels. The <code>lowestCommonAncestor</code> function first calls <code>preprocess</code> to get the <code>depth</code> and <code>dp</code> tables. Then, it brings <code>p</code> and <code>q</code> to the same depth. If they’re at different depths, it moves the deeper node up the tree in powers of two, using the <code>dp</code> table to jump quickly to the appropriate level. If <code>p</code> and <code>q</code> are the same after this step, it means one is the ancestor of the other, and we’ve found the LCA. If <code>p</code> and <code>q</code> are not the same, we climb them up the tree together, moving them up in powers of two until we find their LCA. We iterate through the levels of the <code>dp</code> table in reverse order and move <code>p</code> and <code>q</code> up as long as their 2^j-th ancestors are different. Finally, the parent of <code>p</code> (or <code>q</code>) is the LCA. This dynamic programming approach allows for efficient LCA queries once the preprocessing is done, making it a powerful tool for scenarios where you need to find the LCA multiple times.</p>
+<h2>Comparing the Approaches</h2>
+<p>Now that we've explored three different approaches for finding the Lowest Common Ancestor in a binary tree – recursive, iterative with parent pointers, and dynamic programming – let's take a step back and compare them. Each method has its own strengths and weaknesses, and the best choice often depends on the specific requirements of the problem at hand. The <strong>recursive approach</strong> is often the easiest to understand and implement. Its code is typically concise and mirrors the inherent recursive structure of binary trees. However, its main drawback is the potential for stack overflow errors in very deep trees, as each recursive call adds a new frame to the call stack. This can limit its practicality for extremely large trees. On the other hand, the <strong>iterative approach using parent pointers</strong> avoids the stack overflow issue by using a loop instead of recursion. It does require extra space to store the parent pointers, but this can be a worthwhile trade-off for large trees. The iterative approach can be a bit more complex to implement than the recursive one, but it provides a more robust solution for deep trees. The <strong>dynamic programming approach</strong> is the most complex to implement, but it shines when you need to perform multiple LCA queries on the same tree. The preprocessing step takes time and space, but it allows for very fast LCA queries. This makes it ideal for scenarios where you have a fixed tree and need to answer many LCA questions. In terms of time complexity, the recursive and iterative approaches typically have a time complexity of O(N) for a single query, where N is the number of nodes in the tree. The dynamic programming approach has a preprocessing time complexity of O(N log N) but allows for LCA queries in O(log N) time. In terms of space complexity, the recursive approach has a space complexity of O(H) in the worst case, where H is the height of the tree (due to the call stack). The iterative approach has a space complexity of O(N) to store the parent pointers. The dynamic programming approach has a space complexity of O(N log N) to store the DP table. So, which approach should you choose? If you're dealing with a small to medium-sized tree and need a quick and easy solution, the recursive approach is often a good choice. If you're working with a very deep tree and want to avoid stack overflow errors, the iterative approach is a solid option. And if you need to answer multiple LCA queries on the same tree, the dynamic programming approach is the way to go. Understanding these trade-offs will help you make the best decision for your specific situation.</p>
+<h2>Conclusion</h2>
+<p>Alright guys, we've reached the end of our journey into the world of finding the Lowest Common Ancestor in a binary tree! We've covered a lot of ground, from understanding the basic concepts of binary trees and tree traversals to diving deep into different approaches for solving the LCA problem. We started by defining what LCA is and why it's important, highlighting its applications in various fields. We then explored three main methods: the recursive approach, the iterative approach using parent pointers, and the dynamic programming approach. Each method has its own unique way of tackling the problem, and we dissected their code implementations to understand the nitty-gritty details. We also took the time to compare these approaches, weighing their pros and cons in terms of time complexity, space complexity, and ease of implementation. The recursive approach, with its elegant and intuitive nature, is great for smaller trees and quick solutions. The iterative approach, which avoids stack overflow issues, is a robust choice for deeper trees. And the dynamic programming approach, with its preprocessing overhead but lightning-fast query times, is perfect for scenarios with multiple LCA queries. So, what’s the key takeaway here? It’s that understanding the problem and its constraints is crucial for choosing the right tool. There’s no one-size-fits-all solution, and the best approach depends on the specific situation. By mastering these different techniques, you'll be well-equipped to tackle LCA problems in various contexts, whether it's a coding interview, a real-world application, or simply expanding your knowledge of algorithms and data structures. Keep practicing, keep exploring, and keep pushing your boundaries. Happy coding, and until next time!</p>
+
+                    </div>
+                    <aside class="related-posts">
+                        <div class="ad-sidebar container">
+                            <div class="ad-wrapper">
+    <span>Iklan Related</span>
+</div>
+                        </div>
+                        <h2 class="related-posts-title">Related Posts</h2><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/ciclo-for-em-lisp-guia">Ciclo For Em Lisp: Guia Completo Para Iniciantes</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-04T04:05:36+00:00">Aug 4, 2025</time>
+		                        <span class="view-count">
+									48 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/calculating-the-35th-percentile-a">Calculating The 35th Percentile A Step-by-Step Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-26T01:03:25+00:00">Jul 26, 2025</time>
+		                        <span class="view-count">
+									52 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/polynomial-long-division-step-by">Polynomial Long Division: Step-by-Step Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-08T02:57:36+00:00">Aug 8, 2025</time>
+		                        <span class="view-count">
+									44 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/be-happy-for-others-a">Be Happy For Others: A Guide To Genuine Joy And Success</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-01T17:28:07+00:00">Aug 1, 2025</time>
+		                        <span class="view-count">
+									55 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/equivalent-expressions-for-x-y">Equivalent Expressions For $x Y^{\frac{2}{9}}$ A Step By Step Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-14T01:48:27+00:00">Jul 14, 2025</time>
+		                        <span class="view-count">
+									67 views
+		                        </span>
+                            </div>
+                        </article>
+                    </aside>
+                    <aside class="related-posts"></aside>
+                </div>
+            </div>
+        </article>
+        <a href="#" class="back-to-top" id="backToTop" title="Back to top">
+        	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-bar-up" viewBox="0 0 16 16">
+			  <path fill-rule="evenodd" d="M3.646 11.854a.5.5 0 0 0 .708 0L8 8.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708M2.4 5.2c0 .22.18.4.4.4h10.4a.4.4 0 0 0 0-.8H2.8a.4.4 0 0 0-.4.4"/>
+			</svg>
+		</a>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 ANABEL</p>
+        </div>
+    </footer>
+    <script>
+    	(() => {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            const toggleMenu = () => {
+                navMenu.classList.toggle('nav-menu-active');
+                navToggle.classList.toggle('nav-toggle-active');
+            };
+            const backToTopHandler = (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            navToggle.addEventListener('click', toggleMenu);
+            document.getElementById('backToTop').addEventListener('click', backToTopHandler);
+            window.addEventListener('pagehide', () => {
+                navToggle.removeEventListener('click', toggleMenu);
+                document.getElementById('backToTop').removeEventListener('click', backToTopHandler);
+            });
+        })();
+		(() => {
+            window.addEventListener("DOMContentLoaded", (event) => {
+                const ellHljs = document.createElement("script");
+                ellHljs.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js");
+                ellHljs.onload = () => {
+                    hljs.highlightAll();
+                };
+                document.querySelector("body").append(ellHljs);
+                const ellFont = document.createElement("link");
+                ellFont.setAttribute("href", "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css");
+                ellFont.setAttribute("rel", "stylesheet");
+                document.querySelector("head").append(ellFont);
+                window.addEventListener('pagehide', () => {
+                    // ellHljs.remove();
+                    ellFont.remove();
+                });
+
+            });
+        })();
+    </script>
+    
+    
+    
+</body>
+</html>

@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>GitHub Actions: Your First Workflow Tutorial</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GitHub Actions: Your First Workflow Tutorial...">
+    <link rel="canonical" href="https://catatansoal.github.io/blog/github-actions-your-first-workflow">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="GitHub Actions: Your First Workflow Tutorial">
+	<meta property="og:description" content="GitHub Actions: Your First Workflow Tutorial...">
+	<meta property="og:url" content="https://catatansoal.github.io/blog/github-actions-your-first-workflow">
+	<meta property="og:site_name" content="ANABEL">
+	<meta property="article:published_time" content="2025-08-09T02:11:03+00:00">
+	<meta property="article:author" content="ADMIN">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+    <link rel="preload" fetchpriority="high" as="image" href="https://tse4.mm.bing.net/th?q=Hello%20GitHub%20Actions%20Exercise%3A%20A%20Beginner's%20Guide">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style type="text/css">
+    	:root{--primary-color:#3740ff;--text-color:#202124;--background-color:#ffffff;--gray-100:#f8f9fa;--gray-200:#e9ecef}*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;line-height:1.6;color:var(--text-color);background-color:var(--background-color)}.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}.header{background-color:var(--background-color);border-bottom:1px solid var(--gray-200);position:sticky;top:0;z-index:100}.nav{padding:.5rem 0}.nav-container{display:flex;justify-content:space-between;align-items:center;gap:1rem}.nav-left{display:flex;align-items:center;flex-shrink:0}.logo{font-weight:700;color:var(--primary-color)}.blog-tag{margin-left:1rem;padding:.25rem .5rem;background-color:var(--gray-100);border-radius:4px;font-size:.875rem}.nav-search{flex-grow:1;max-width:300px}.search-form{position:relative;width:100%}.search-input{width:100%;padding:.5rem 2.5rem .5rem 1rem;border:1px solid var(--gray-200);border-radius:24px;font-size:.875rem;transition:all 0.2s}.search-input:focus{outline:none;border-color:var(--primary-color);box-shadow:0 0 0 2px rgb(55 64 255 / .1)}.search-button{position:absolute;right:.5rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#5f6368;cursor:pointer;padding:.25rem;display:flex;align-items:center;justify-content:center}.search-button:hover{color:var(--primary-color)}.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:.5rem}.hamburger{display:block;position:relative;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before,.hamburger::after{content:'';position:absolute;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before{top:-6px}.hamburger::after{bottom:-6px}.nav-toggle-active .hamburger{background:#fff0}.nav-toggle-active .hamburger::before{transform:rotate(45deg);top:0}.nav-toggle-active .hamburger::after{transform:rotate(-45deg);bottom:0}.nav-list{display:flex;list-style:none;gap:2rem}.nav-link{color:var(--text-color);text-decoration:none;font-size:.9rem;transition:color 0.2s}.nav-link:hover{color:var(--primary-color)}.article-header{padding:2rem 0;background-color:var(--gray-100)}.article-layout{display:grid;grid-template-columns:1fr 350px;gap:3rem;padding:1rem 0;align-items: start}h1,h2,h3,h4,h5,h6{font-family:"Crimson Text","Times New Roman",Times,serif}h1{font-size:2.5rem;line-height:1.2;margin-bottom:1rem}.meta{color:#5f6368;font-size:.875rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}.view-count{display:inline-flex;align-items:center;gap:.25rem}.view-count svg{color:#5f6368}.content{min-width:0;border-bottom:1px solid #dddddd5e;margin-top:1rem;white-space:pre-line !important;overflow-wrap:break-word;overflow-x:auto;word-break:break-word}.lead{font-size:1.25rem;color:#5f6368;margin-bottom:2rem}h2,h3,h4,h5,h6{font-size:1.75rem;margin:1rem 0 1rem}p,pre,ol,ul>li{margin-bottom:1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;font-size:1.3rem;text-align: justify;}p>code{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px}hr{margin:1rem 0 1rem 0}.code-example{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;margin:1.5rem 0;overflow-x:auto}code{font-family:'Roboto Mono',monospace;font-size:.875rem}ul{margin:.2rem 0;padding-left:1.5rem}.related-posts{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;position:sticky;top:5rem}.related-posts-title,.newpost-posts-list{font-size:1.75rem;margin:0 0 1rem}.related-posts-list{display:flex;flex-direction:column;gap:.5rem}.related-post,.newpost-post{border-bottom:1px solid #ddd;padding-bottom:10px;margin-bottom:10px}.related-post:last-child,.newpost-post:last-child{padding-bottom:0;border-bottom:none}.related-post-title,.newpost-post-title{font-size:1.2rem;margin:0 0 .1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;}.related-post-title a,.newpost-post-title a{color:var(--text-color);text-decoration:none;transition:color 0.2s}.related-post-title a:hover,.newpost-post-title a:hover{color:var(--primary-color)}.related-post time{font-size:.875rem;color:#5f6368}.footer{background-color:var(--gray-100);padding:2rem 0;margin-top:4rem;color:#5f6368;font-size:.875rem}.nav-menu>ul>li{margin-bottom:0}@media (max-width:1024px){.container{max-width:800px}.article-layout{grid-template-columns:1fr;gap:2rem}.related-posts{position:static}}@media (max-width:768px){.nav-container{flex-wrap:wrap}.nav-search{order:3;max-width:none;width:100%;margin-top:.1rem}.nav-toggle{display:block}.nav-menu{display:none;position:absolute;top:100%;left:0;right:0;background:var(--background-color);padding:1rem 0;border-bottom:1px solid var(--gray-200)}.nav-menu-active{display:block}.nav-list{flex-direction:column;gap:.1rem;padding:0 1.5rem}.nav-link{display:block;padding:.2rem 0}h1{font-size:2rem}.article-header{padding:2rem 0}.content{padding:.1rem 0}}table{width:100%;border-collapse:collapse;margin:20px 0;font-family:'Arial',sans-serif}th,td{padding:12px 15px;text-align:left;border:1px solid #ddd}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9}tr:nth-child(even) td{background-color:#f2f2f2}@media screen and (max-width:768px){table{border:0;display:block;overflow-x:auto;white-space:nowrap}th,td{padding:10px;text-align:right}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9;border-bottom:1px solid #ddd}tr:nth-child(even) td{background-color:#f2f2f2}}a{text-decoration:none;color:#540707}.katex-html{padding: .2rem;color: #000;font-weight: 700;font-size: 1.3rem;overflow-wrap: break-word;max-width: 100%;white-space: normal !important}.category{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin:1rem 0 1rem 0}.tag{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px;font-family:"Newsreader",serif}.tag>a{text-decoration:none;color:#000}img{margin:auto;display:block;max-width:100%;height:auto;margin-bottom:1rem}.katex{white-space: pre-line !important;display: inline-block;max-width: 100%;overflow-x: auto;overflow-y: hidden;scrollbar-width: thin;overflow-wrap: break-word;word-break: break-word;vertical-align: -7px}.content > p {overflow-wrap: break-word;word-break: break-word}
+    </style>
+    <style type="text/css">
+    	pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}
+		.hljs{color:#c9d1d9;background:#0d1117}.hljs-doctag,.hljs-keyword,.hljs-meta .hljs-keyword,.hljs-template-tag,.hljs-template-variable,.hljs-type,.hljs-variable.language_{color:#ff7b72}.hljs-title,.hljs-title.class_,.hljs-title.class_.inherited__,.hljs-title.function_{color:#d2a8ff}.hljs-attr,.hljs-attribute,.hljs-literal,.hljs-meta,.hljs-number,.hljs-operator,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-variable{color:#79c0ff}.hljs-meta .hljs-string,.hljs-regexp,.hljs-string{color:#a5d6ff}.hljs-built_in,.hljs-symbol{color:#ffa657}.hljs-code,.hljs-comment,.hljs-formula{color:#8b949e}.hljs-name,.hljs-quote,.hljs-selector-pseudo,.hljs-selector-tag{color:#7ee787}.hljs-subst{color:#c9d1d9}.hljs-section{color:#1f6feb;font-weight:700}.hljs-bullet{color:#f2cc60}.hljs-emphasis{color:#c9d1d9;font-style:italic}.hljs-strong{color:#c9d1d9;font-weight:700}.hljs-addition{color:#aff5b4;background-color:#033a16}.hljs-deletion{color:#ffdcd7;background-color:#67060c}
+    	pre{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;font-weight:400;word-break:break-word;word-wrap:break-word;box-sizing:inherit;border-radius:4px;overflow-x:auto;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}code{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;word-wrap:break-word;word-break:break-word;font-style:normal;line-height:20px;letter-spacing:-.003em;box-sizing:inherit;font-weight:400;font-size:75%;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}
+    </style>
+    <style type="text/css">
+    	.back-to-top{position:fixed;bottom:20px;right:20px;background-color:#a73f3f;color:#fff;padding:8px 10px;border-radius:50%;box-shadow:0 4px 6px rgb(0 0 0 / .2);font-size:10px;font-weight:700;text-decoration:none;text-align:center;transition:opacity 0.3s ease,visibility 0.3s ease;z-index:99999;opacity:1;visibility:visible}.back-to-top:hover{background-color:#0056b3}
+    </style>
+    <style type="text/css">
+        .ad-header {margin: 1rem auto 1rem;background-color: #fdfdfd;text-align: center;display: block;}.ad-header .ad-wrapper {min-height: 90px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #555;font-weight: 500;padding: 3rem;border: 1px dashed #ccc;border-radius: 6px;}@media (max-width: 768px) {.ad-header {padding: 0.75rem;}}.ad-sidebar {margin: 0 0 1rem;background-color: #fefefe;text-align: center;padding: 0px;width: 100%;max-width: 100%;display: block;}.ad-sidebar .ad-wrapper {min-height: 250px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #444;font-weight: 500;border: 1px dashed #aaa;border-radius: 6px;padding: 0rem;}@media (max-width: 1024px) {.ad-sidebar {padding: 0.75rem;}}
+    </style>
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://catatansoal.github.io/blog/github-actions-your-first-workflow"
+          },
+          "headline": "GitHub Actions: Your First Workflow Tutorial",
+          "description": "GitHub Actions: Your First Workflow Tutorial...",
+          "image": [
+            "https://tse4.mm.bing.net/th?q=Hello%20GitHub%20Actions%20Exercise%3A%20A%20Beginner's%20Guide"
+          ],
+          "author": {
+            "@type": "Person",
+            "name": "ADMIN",
+            "jobTitle": "Editor web"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "ANABEL",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://tse4.mm.bing.net/th?q=ANABEL%20WEB"
+            }
+          },
+          "datePublished": "2025-08-09T02:11:03+00:00",
+          "dateModified": "2025-08-09T02:11:03+00:00"
+        }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="container nav-container">
+                <div class="nav-left">
+                    <span class="logo">ANABEL</span>
+                    <span class="blog-tag">Article</span>
+                </div>
+                <div class="nav-search">
+                    <form class="search-form" role="search">
+                        <input 
+                            type="search" 
+                            class="search-input"
+                            placeholder="Search articles..."
+                            aria-label="Search articles"
+                        >
+                        <button type="submit" class="search-button" aria-label="Submit search">🔎</button>
+                    </form>
+                </div>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+                <div class="nav-menu">
+                    <ul class="nav-list">
+                    	<li><a href="/" class="nav-link">HOME</a></li>
+                        <li><a href="/pages/About" class="nav-link">About</a></li>
+                        <li><a href="/pages/Contact" class="nav-link">Contact</a></li>
+                        <li><a href="/pages/Disclaimer" class="nav-link">Disclaimer</a></li>
+                        <li><a href="/pages/Privacy" class="nav-link">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="main">
+        <article class="article">
+            <header class="article-header">
+                <div class="container">
+                    <h1>GitHub Actions: Your First Workflow Tutorial</h1>
+                    <div class="meta">
+                        <time datetime="2025-08-09T02:11:03+00:00">Aug 9, 2025</time>
+                        <span class="author">by ADMIN</span>
+                        <span class="view-count">
+                            <span id="viewCount">45</span> views
+                        </span>
+                    </div>
+                </div>
+            </header>
+            <div class="ad-header container">
+                <div class="ad-wrapper">
+    Iklan Headers
+</div>
+            </div>
+            <div class="container">
+                <div class="article-layout">
+                    <div class="content">
+                        <img src="https://tse4.mm.bing.net/th?q=Hello%20GitHub%20Actions%20Exercise%3A%20A%20Beginner's%20Guide" title="Hello GitHub Actions Exercise: A Beginner&#39;s Guide" width="300" height="200"/>
+<p><img src="https://octodex.github.com/images/original.png" alt="Original GitHub Octocat" loading="lazy"> 👋 Hey there @Yesenia-Dev! Welcome to your Skills exercise!</p>
+<p><strong>Embark on an exciting journey into the world of GitHub Actions!</strong> This exercise is designed to help you create and run your very first GitHub Actions workflow. Think of it as your initiation into the realm of automation, where you'll learn how to streamline your development process and make your life as a developer significantly easier.</p>
+<p>This isn't just about clicking buttons and following instructions; it's about understanding the core principles behind GitHub Actions and how they can be applied to a wide range of scenarios. From automating tests and deployments to managing your project's dependencies, GitHub Actions is a powerful tool that every developer should have in their arsenal.</p>
+<h2>What are GitHub Actions?</h2>
+<p>Before we dive into the nitty-gritty details of creating a workflow, let's take a moment to understand what GitHub Actions actually are. In essence, <strong>GitHub Actions</strong> are automated processes that you can set up to run in response to events that occur in your GitHub repository. These events can be anything from a new commit being pushed to the repository to a pull request being opened or even a scheduled event that triggers a workflow at a specific time.</p>
+<p>Imagine you have a web application that you want to deploy every time you push new code to your <code>main</code> branch. Manually deploying the application can be a tedious and time-consuming task, involving multiple steps such as building the application, running tests, and transferring the files to your production server. With GitHub Actions, you can automate this entire process, so that every time you push a commit to <code>main</code>, a workflow is automatically triggered to build, test, and deploy your application. This not only saves you time and effort but also reduces the risk of human error.</p>
+<p>GitHub Actions are based on the concept of <strong>workflows</strong>, which are defined in YAML files and stored in your repository's <code>.github/workflows</code> directory. A workflow consists of one or more <strong>jobs</strong>, which are sets of steps that are executed on a virtual machine or in a container. Each job can have multiple <strong>steps</strong>, which are individual tasks that are executed in sequence. These steps can be anything from running a shell command to executing a pre-built action from the GitHub Marketplace.</p>
+<p>One of the key benefits of GitHub Actions is its flexibility. You can use it to automate virtually any task that you can think of, from simple tasks like linting your code to complex tasks like deploying a multi-tier application. The GitHub Marketplace offers a vast library of pre-built actions that you can use in your workflows, and you can also create your own custom actions to meet your specific needs.</p>
+<h2>Why Use GitHub Actions?</h2>
+<p>So, why should you bother learning about GitHub Actions? The answer is simple: <strong>automation</strong>. In today's fast-paced development environment, automation is essential for streamlining your workflow, improving efficiency, and reducing errors. GitHub Actions provide a powerful and flexible platform for automating a wide range of tasks, allowing you to focus on what you do best: writing code.</p>
+<p>Here are some of the key benefits of using GitHub Actions:</p>
+<ul>
+<li><strong>Automation:</strong> Automate repetitive tasks such as building, testing, and deploying your code.</li>
+<li><strong>Efficiency:</strong> Save time and effort by automating your workflow.</li>
+<li><strong>Reduced Errors:</strong> Minimize the risk of human error by automating tasks that are prone to mistakes.</li>
+<li><strong>Flexibility:</strong> Automate virtually any task that you can think of.</li>
+<li><strong>Scalability:</strong> Scale your automation as your project grows.</li>
+<li><strong>Integration:</strong> Seamlessly integrate with other GitHub features such as pull requests and issues.</li>
+<li><strong>Community:</strong> Leverage the vast library of pre-built actions in the GitHub Marketplace.</li>
+</ul>
+<p>By incorporating GitHub Actions into your development workflow, you can significantly improve your productivity and the quality of your code. You'll be able to ship features faster, reduce the risk of bugs, and free up your time to focus on the more creative aspects of your work.</p>
+<h2>Getting Started with Your First Workflow</h2>
+<p>Now that you understand the basics of GitHub Actions and why they're so valuable, let's dive into the hands-on exercise. In this exercise, you'll create and run a simple workflow that demonstrates the core concepts of GitHub Actions. Don't worry if you're feeling a little intimidated – we'll walk through each step together, and by the end of it, you'll have a solid foundation for building more complex workflows.</p>
+<p>The goal of this exercise is to create a workflow that is triggered when a new commit is pushed to your repository. This workflow will then print a simple message to the console, demonstrating that the workflow has been executed successfully. This may seem like a simple task, but it will give you a good understanding of the basic structure of a GitHub Actions workflow and how to configure it to run in response to specific events.</p>
+<p>To get started, you'll need to create a new file in your repository's <code>.github/workflows</code> directory. This file will contain the YAML definition of your workflow. The name of the file is up to you, but it's a good practice to choose a descriptive name that reflects the purpose of the workflow. For example, you might name your file <code>hello-world.yml</code> or <code>on-push.yml</code>.</p>
+<p>Once you've created the file, you can start defining your workflow using YAML syntax. The basic structure of a workflow file is as follows:</p>
+<pre><code class="hljs">name: My Workflow Name
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  my-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: My Step
+        run: echo &quot;Hello, World!&quot;
+</code></pre>
+<p>Let's break down this code snippet to understand each part of the workflow definition:</p>
+<ul>
+<li><code>name</code>: This specifies the name of the workflow, which will be displayed in the GitHub Actions interface.</li>
+<li><code>on</code>: This defines the event that triggers the workflow. In this case, the workflow is triggered when a <code>push</code> event occurs on the <code>main</code> branch.</li>
+<li><code>jobs</code>: This section defines the jobs that will be executed in the workflow. A workflow can have multiple jobs, which are executed in parallel by default.</li>
+<li><code>my-job</code>: This is the name of the job. You can choose any name you like.</li>
+<li><code>runs-on</code>: This specifies the virtual machine or container that the job will run on. In this case, the job will run on the latest version of Ubuntu.</li>
+<li><code>steps</code>: This section defines the steps that will be executed in the job. Each step represents a specific task that you want to perform.</li>
+<li><code>name</code>: This specifies the name of the step, which will be displayed in the GitHub Actions interface.</li>
+<li><code>run</code>: This specifies the command that will be executed in the step. In this case, the step will execute the <code>echo</code> command, which will print the message &quot;Hello, World!&quot; to the console.</li>
+</ul>
+<h2>Diving Deeper into Workflow Components</h2>
+<p>Now that you've seen the basic structure of a GitHub Actions workflow, let's delve deeper into some of the key components and concepts. Understanding these components will allow you to build more complex and sophisticated workflows that can automate a wide range of tasks.</p>
+<h3>Events</h3>
+<p>As we mentioned earlier, <strong>events</strong> are the triggers that initiate a workflow. GitHub Actions supports a wide range of events, including:</p>
+<ul>
+<li><code>push</code>: Triggered when code is pushed to a repository.</li>
+<li><code>pull_request</code>: Triggered when a pull request is opened, updated, or merged.</li>
+<li><code>schedule</code>: Triggered at a specific time or on a recurring schedule.</li>
+<li><code>workflow_dispatch</code>: Triggered manually by a user.</li>
+<li><code>issues</code>: Triggered when an issue is opened, closed, or labeled.</li>
+</ul>
+<p>You can configure a workflow to be triggered by one or more events, and you can also specify conditions that must be met for the workflow to be triggered. For example, you might want to trigger a workflow only when code is pushed to a specific branch or when a pull request is opened against a specific branch.</p>
+<h3>Jobs</h3>
+<p><strong>Jobs</strong> are the individual units of work that make up a workflow. A workflow can have multiple jobs, and each job is executed on a separate virtual machine or container. By default, jobs are executed in parallel, which can significantly speed up the execution of your workflow. However, you can also configure jobs to run sequentially, if necessary.</p>
+<p>Each job consists of a set of steps that are executed in sequence. You can think of a job as a mini-workflow within the larger workflow. This modular approach makes it easier to organize your workflow and break it down into smaller, more manageable tasks.</p>
+<h3>Steps</h3>
+<p><strong>Steps</strong> are the individual tasks that are executed within a job. A step can be anything from running a shell command to executing a pre-built action from the GitHub Marketplace. Steps are executed in sequence, and if one step fails, the entire job is considered to have failed.</p>
+<p>GitHub Actions provides a rich set of built-in actions that you can use in your steps, such as actions for checking out code, setting up a programming language environment, and deploying your application. You can also create your own custom actions to meet your specific needs.</p>
+<h3>Actions</h3>
+<p><strong>Actions</strong> are reusable components that you can use in your workflows. They are essentially pre-packaged sets of steps that perform a specific task, such as checking out code, setting up a programming language environment, or deploying your application. The GitHub Marketplace offers a vast library of pre-built actions that you can use in your workflows, and you can also create your own custom actions.</p>
+<p>Using actions can significantly simplify your workflow definitions and reduce the amount of code you need to write. Instead of writing the same steps over and over again, you can simply use an action to perform the task for you. This makes your workflows more maintainable and easier to understand.</p>
+<h3>Runners</h3>
+<p><strong>Runners</strong> are the virtual machines or containers that execute your workflows. GitHub provides a set of hosted runners that you can use for free, and you can also set up your own self-hosted runners if you have specific requirements.</p>
+<p>Hosted runners are pre-configured with a variety of software and tools, such as programming language runtimes, build tools, and testing frameworks. This makes it easy to get started with GitHub Actions without having to worry about setting up your own environment.</p>
+<p>Self-hosted runners, on the other hand, give you more control over the environment in which your workflows are executed. This can be useful if you need to run workflows that require specific software or hardware configurations.</p>
+<h2>Completing the Exercise and Beyond</h2>
+<p>As you complete each step of this exercise, I’ll leave updates in the comments, checking your work, sharing helpful tips and resources, and celebrating your progress. Remember, the goal is not just to complete the exercise but to understand the concepts behind GitHub Actions and how they can be applied to your own projects.</p>
+<p>Once you've successfully created and run your first workflow, you'll have a solid foundation for exploring the more advanced features of GitHub Actions. You can start experimenting with different events, jobs, steps, and actions to automate a wide range of tasks.</p>
+<p>Here are some ideas for things you can try:</p>
+<ul>
+<li>Automate your testing process: Run your tests automatically whenever code is pushed to your repository or a pull request is opened.</li>
+<li>Automate your deployment process: Deploy your application automatically whenever code is merged into your <code>main</code> branch.</li>
+<li>Automate code formatting and linting: Ensure that your code adheres to a consistent style guide.</li>
+<li>Automate dependency management: Keep your project's dependencies up to date.</li>
+<li>Create custom actions: Build your own reusable actions to automate specific tasks.</li>
+</ul>
+<p>The possibilities are endless! GitHub Actions is a powerful tool that can help you streamline your development workflow and improve the quality of your code. So, get out there, experiment, and see what you can create!</p>
+<hr>
+<p>✨ <strong>This is an interactive, hands-on GitHub Skills exercise!</strong></p>
+<p>As you complete each step, I’ll leave updates in the comments:</p>
+<ul>
+<li>✅ Check your work and guide you forward</li>
+<li>💡 Share helpful tips and resources</li>
+<li>🚀 Celebrate your progress and completion</li>
+</ul>
+<p>Let’s get started - good luck and have fun!</p>
+<p><sub>— Mona</sub></p>
+
+                    </div>
+                    <aside class="related-posts">
+                        <div class="ad-sidebar container">
+                            <div class="ad-wrapper">
+    <span>Iklan Related</span>
+</div>
+                        </div>
+                        <h2 class="related-posts-title">Related Posts</h2><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/get-your-ex-back-a">Get Your Ex Back: A Guide To Winning Him Back</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-05T23:09:17+00:00">Aug 5, 2025</time>
+		                        <span class="view-count">
+									45 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/lt3060-15-troubleshooting-overheating-and">LT3060-15 Troubleshooting: Overheating &amp; No Output Fix</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-05T21:05:58+00:00">Aug 5, 2025</time>
+		                        <span class="view-count">
+									54 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/chrome-devtools-dark-theme-enable">Chrome DevTools Dark Theme: Enable For All Pages</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-10T16:45:08+00:00">Aug 10, 2025</time>
+		                        <span class="view-count">
+									48 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/left-arm-pain-when-to">Left Arm Pain: When To Worry And What To Do</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-09T10:00:05+00:00">Aug 9, 2025</time>
+		                        <span class="view-count">
+									43 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/limit-to-acceleration-special-relativity">Limit To Acceleration? Special Relativity &amp; Rocket Science</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-05T08:35:16+00:00">Aug 5, 2025</time>
+		                        <span class="view-count">
+									58 views
+		                        </span>
+                            </div>
+                        </article>
+                    </aside>
+                    <aside class="related-posts"></aside>
+                </div>
+            </div>
+        </article>
+        <a href="#" class="back-to-top" id="backToTop" title="Back to top">
+        	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-bar-up" viewBox="0 0 16 16">
+			  <path fill-rule="evenodd" d="M3.646 11.854a.5.5 0 0 0 .708 0L8 8.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708M2.4 5.2c0 .22.18.4.4.4h10.4a.4.4 0 0 0 0-.8H2.8a.4.4 0 0 0-.4.4"/>
+			</svg>
+		</a>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 ANABEL</p>
+        </div>
+    </footer>
+    <script>
+    	(() => {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            const toggleMenu = () => {
+                navMenu.classList.toggle('nav-menu-active');
+                navToggle.classList.toggle('nav-toggle-active');
+            };
+            const backToTopHandler = (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            navToggle.addEventListener('click', toggleMenu);
+            document.getElementById('backToTop').addEventListener('click', backToTopHandler);
+            window.addEventListener('pagehide', () => {
+                navToggle.removeEventListener('click', toggleMenu);
+                document.getElementById('backToTop').removeEventListener('click', backToTopHandler);
+            });
+        })();
+		(() => {
+            window.addEventListener("DOMContentLoaded", (event) => {
+                const ellHljs = document.createElement("script");
+                ellHljs.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js");
+                ellHljs.onload = () => {
+                    hljs.highlightAll();
+                };
+                document.querySelector("body").append(ellHljs);
+                const ellFont = document.createElement("link");
+                ellFont.setAttribute("href", "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css");
+                ellFont.setAttribute("rel", "stylesheet");
+                document.querySelector("head").append(ellFont);
+                window.addEventListener('pagehide', () => {
+                    // ellHljs.remove();
+                    ellFont.remove();
+                });
+
+            });
+        })();
+    </script>
+    
+    
+    
+</body>
+</html>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Implementing A Simple Recommender System With Keras A Step-by-Step Guide</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Implementing A Simple Recommender System With Keras A Step-by-Step Guide...">
+    <link rel="canonical" href="https://catatansoal.github.io/blog/implementing-a-simple-recommender-system">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Implementing A Simple Recommender System With Keras A Step-by-Step Guide">
+	<meta property="og:description" content="Implementing A Simple Recommender System With Keras A Step-by-Step Guide...">
+	<meta property="og:url" content="https://catatansoal.github.io/blog/implementing-a-simple-recommender-system">
+	<meta property="og:site_name" content="ANABEL">
+	<meta property="article:published_time" content="2025-07-17T03:31:12+00:00">
+	<meta property="article:author" content="ADMIN">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+    <link rel="preload" fetchpriority="high" as="image" href="https://tse4.mm.bing.net/th?q=Implementing%20a%20Simple%20Recommender%20System%20Architecture%20in%20Keras">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style type="text/css">
+    	:root{--primary-color:#3740ff;--text-color:#202124;--background-color:#ffffff;--gray-100:#f8f9fa;--gray-200:#e9ecef}*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;line-height:1.6;color:var(--text-color);background-color:var(--background-color)}.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}.header{background-color:var(--background-color);border-bottom:1px solid var(--gray-200);position:sticky;top:0;z-index:100}.nav{padding:.5rem 0}.nav-container{display:flex;justify-content:space-between;align-items:center;gap:1rem}.nav-left{display:flex;align-items:center;flex-shrink:0}.logo{font-weight:700;color:var(--primary-color)}.blog-tag{margin-left:1rem;padding:.25rem .5rem;background-color:var(--gray-100);border-radius:4px;font-size:.875rem}.nav-search{flex-grow:1;max-width:300px}.search-form{position:relative;width:100%}.search-input{width:100%;padding:.5rem 2.5rem .5rem 1rem;border:1px solid var(--gray-200);border-radius:24px;font-size:.875rem;transition:all 0.2s}.search-input:focus{outline:none;border-color:var(--primary-color);box-shadow:0 0 0 2px rgb(55 64 255 / .1)}.search-button{position:absolute;right:.5rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#5f6368;cursor:pointer;padding:.25rem;display:flex;align-items:center;justify-content:center}.search-button:hover{color:var(--primary-color)}.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:.5rem}.hamburger{display:block;position:relative;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before,.hamburger::after{content:'';position:absolute;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before{top:-6px}.hamburger::after{bottom:-6px}.nav-toggle-active .hamburger{background:#fff0}.nav-toggle-active .hamburger::before{transform:rotate(45deg);top:0}.nav-toggle-active .hamburger::after{transform:rotate(-45deg);bottom:0}.nav-list{display:flex;list-style:none;gap:2rem}.nav-link{color:var(--text-color);text-decoration:none;font-size:.9rem;transition:color 0.2s}.nav-link:hover{color:var(--primary-color)}.article-header{padding:2rem 0;background-color:var(--gray-100)}.article-layout{display:grid;grid-template-columns:1fr 350px;gap:3rem;padding:1rem 0;align-items: start}h1,h2,h3,h4,h5,h6{font-family:"Crimson Text","Times New Roman",Times,serif}h1{font-size:2.5rem;line-height:1.2;margin-bottom:1rem}.meta{color:#5f6368;font-size:.875rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}.view-count{display:inline-flex;align-items:center;gap:.25rem}.view-count svg{color:#5f6368}.content{min-width:0;border-bottom:1px solid #dddddd5e;margin-top:1rem;white-space:pre-line !important;overflow-wrap:break-word;overflow-x:auto;word-break:break-word}.lead{font-size:1.25rem;color:#5f6368;margin-bottom:2rem}h2,h3,h4,h5,h6{font-size:1.75rem;margin:1rem 0 1rem}p,pre,ol,ul>li{margin-bottom:1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;font-size:1.3rem;text-align: justify;}p>code{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px}hr{margin:1rem 0 1rem 0}.code-example{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;margin:1.5rem 0;overflow-x:auto}code{font-family:'Roboto Mono',monospace;font-size:.875rem}ul{margin:.2rem 0;padding-left:1.5rem}.related-posts{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;position:sticky;top:5rem}.related-posts-title,.newpost-posts-list{font-size:1.75rem;margin:0 0 1rem}.related-posts-list{display:flex;flex-direction:column;gap:.5rem}.related-post,.newpost-post{border-bottom:1px solid #ddd;padding-bottom:10px;margin-bottom:10px}.related-post:last-child,.newpost-post:last-child{padding-bottom:0;border-bottom:none}.related-post-title,.newpost-post-title{font-size:1.2rem;margin:0 0 .1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;}.related-post-title a,.newpost-post-title a{color:var(--text-color);text-decoration:none;transition:color 0.2s}.related-post-title a:hover,.newpost-post-title a:hover{color:var(--primary-color)}.related-post time{font-size:.875rem;color:#5f6368}.footer{background-color:var(--gray-100);padding:2rem 0;margin-top:4rem;color:#5f6368;font-size:.875rem}.nav-menu>ul>li{margin-bottom:0}@media (max-width:1024px){.container{max-width:800px}.article-layout{grid-template-columns:1fr;gap:2rem}.related-posts{position:static}}@media (max-width:768px){.nav-container{flex-wrap:wrap}.nav-search{order:3;max-width:none;width:100%;margin-top:.1rem}.nav-toggle{display:block}.nav-menu{display:none;position:absolute;top:100%;left:0;right:0;background:var(--background-color);padding:1rem 0;border-bottom:1px solid var(--gray-200)}.nav-menu-active{display:block}.nav-list{flex-direction:column;gap:.1rem;padding:0 1.5rem}.nav-link{display:block;padding:.2rem 0}h1{font-size:2rem}.article-header{padding:2rem 0}.content{padding:.1rem 0}}table{width:100%;border-collapse:collapse;margin:20px 0;font-family:'Arial',sans-serif}th,td{padding:12px 15px;text-align:left;border:1px solid #ddd}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9}tr:nth-child(even) td{background-color:#f2f2f2}@media screen and (max-width:768px){table{border:0;display:block;overflow-x:auto;white-space:nowrap}th,td{padding:10px;text-align:right}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9;border-bottom:1px solid #ddd}tr:nth-child(even) td{background-color:#f2f2f2}}a{text-decoration:none;color:#540707}.katex-html{padding: .2rem;color: #000;font-weight: 700;font-size: 1.3rem;overflow-wrap: break-word;max-width: 100%;white-space: normal !important}.category{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin:1rem 0 1rem 0}.tag{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px;font-family:"Newsreader",serif}.tag>a{text-decoration:none;color:#000}img{margin:auto;display:block;max-width:100%;height:auto;margin-bottom:1rem}.katex{white-space: pre-line !important;display: inline-block;max-width: 100%;overflow-x: auto;overflow-y: hidden;scrollbar-width: thin;overflow-wrap: break-word;word-break: break-word;vertical-align: -7px}.content > p {overflow-wrap: break-word;word-break: break-word}
+    </style>
+    <style type="text/css">
+    	pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}
+		.hljs{color:#c9d1d9;background:#0d1117}.hljs-doctag,.hljs-keyword,.hljs-meta .hljs-keyword,.hljs-template-tag,.hljs-template-variable,.hljs-type,.hljs-variable.language_{color:#ff7b72}.hljs-title,.hljs-title.class_,.hljs-title.class_.inherited__,.hljs-title.function_{color:#d2a8ff}.hljs-attr,.hljs-attribute,.hljs-literal,.hljs-meta,.hljs-number,.hljs-operator,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-variable{color:#79c0ff}.hljs-meta .hljs-string,.hljs-regexp,.hljs-string{color:#a5d6ff}.hljs-built_in,.hljs-symbol{color:#ffa657}.hljs-code,.hljs-comment,.hljs-formula{color:#8b949e}.hljs-name,.hljs-quote,.hljs-selector-pseudo,.hljs-selector-tag{color:#7ee787}.hljs-subst{color:#c9d1d9}.hljs-section{color:#1f6feb;font-weight:700}.hljs-bullet{color:#f2cc60}.hljs-emphasis{color:#c9d1d9;font-style:italic}.hljs-strong{color:#c9d1d9;font-weight:700}.hljs-addition{color:#aff5b4;background-color:#033a16}.hljs-deletion{color:#ffdcd7;background-color:#67060c}
+    	pre{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;font-weight:400;word-break:break-word;word-wrap:break-word;box-sizing:inherit;border-radius:4px;overflow-x:auto;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}code{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;word-wrap:break-word;word-break:break-word;font-style:normal;line-height:20px;letter-spacing:-.003em;box-sizing:inherit;font-weight:400;font-size:75%;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}
+    </style>
+    <style type="text/css">
+    	.back-to-top{position:fixed;bottom:20px;right:20px;background-color:#a73f3f;color:#fff;padding:8px 10px;border-radius:50%;box-shadow:0 4px 6px rgb(0 0 0 / .2);font-size:10px;font-weight:700;text-decoration:none;text-align:center;transition:opacity 0.3s ease,visibility 0.3s ease;z-index:99999;opacity:1;visibility:visible}.back-to-top:hover{background-color:#0056b3}
+    </style>
+    <style type="text/css">
+        .ad-header {margin: 1rem auto 1rem;background-color: #fdfdfd;text-align: center;display: block;}.ad-header .ad-wrapper {min-height: 90px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #555;font-weight: 500;padding: 3rem;border: 1px dashed #ccc;border-radius: 6px;}@media (max-width: 768px) {.ad-header {padding: 0.75rem;}}.ad-sidebar {margin: 0 0 1rem;background-color: #fefefe;text-align: center;padding: 0px;width: 100%;max-width: 100%;display: block;}.ad-sidebar .ad-wrapper {min-height: 250px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #444;font-weight: 500;border: 1px dashed #aaa;border-radius: 6px;padding: 0rem;}@media (max-width: 1024px) {.ad-sidebar {padding: 0.75rem;}}
+    </style>
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://catatansoal.github.io/blog/implementing-a-simple-recommender-system"
+          },
+          "headline": "Implementing A Simple Recommender System With Keras A Step-by-Step Guide",
+          "description": "Implementing A Simple Recommender System With Keras A Step-by-Step Guide...",
+          "image": [
+            "https://tse4.mm.bing.net/th?q=Implementing%20a%20Simple%20Recommender%20System%20Architecture%20in%20Keras"
+          ],
+          "author": {
+            "@type": "Person",
+            "name": "ADMIN",
+            "jobTitle": "Editor web"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "ANABEL",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://tse4.mm.bing.net/th?q=ANABEL%20WEB"
+            }
+          },
+          "datePublished": "2025-07-17T03:31:12+00:00",
+          "dateModified": "2025-07-17T03:31:12+00:00"
+        }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="container nav-container">
+                <div class="nav-left">
+                    <span class="logo">ANABEL</span>
+                    <span class="blog-tag">Article</span>
+                </div>
+                <div class="nav-search">
+                    <form class="search-form" role="search">
+                        <input 
+                            type="search" 
+                            class="search-input"
+                            placeholder="Search articles..."
+                            aria-label="Search articles"
+                        >
+                        <button type="submit" class="search-button" aria-label="Submit search">🔎</button>
+                    </form>
+                </div>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+                <div class="nav-menu">
+                    <ul class="nav-list">
+                    	<li><a href="/" class="nav-link">HOME</a></li>
+                        <li><a href="/pages/About" class="nav-link">About</a></li>
+                        <li><a href="/pages/Contact" class="nav-link">Contact</a></li>
+                        <li><a href="/pages/Disclaimer" class="nav-link">Disclaimer</a></li>
+                        <li><a href="/pages/Privacy" class="nav-link">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="main">
+        <article class="article">
+            <header class="article-header">
+                <div class="container">
+                    <h1>Implementing A Simple Recommender System With Keras A Step-by-Step Guide</h1>
+                    <div class="meta">
+                        <time datetime="2025-07-17T03:31:12+00:00">Jul 17, 2025</time>
+                        <span class="author">by ADMIN</span>
+                        <span class="view-count">
+                            <span id="viewCount">73</span> views
+                        </span>
+                    </div>
+                </div>
+            </header>
+            <div class="ad-header container">
+                <div class="ad-wrapper">
+    Iklan Headers
+</div>
+            </div>
+            <div class="container">
+                <div class="article-layout">
+                    <div class="content">
+                        <img src="https://tse4.mm.bing.net/th?q=Implementing%20a%20Simple%20Recommender%20System%20Architecture%20in%20Keras" title="Implementing a Simple Recommender System Architecture in Keras" width="300" height="200"/><p>Hey guys! So, you're diving into the world of recommender systems with Keras? That's awesome! It's a super relevant and in-demand skill, especially with how much data is floating around these days. I get that feeling of wanting to build something from scratch, especially when you've mostly been using other people's code. Let's break down how you can implement a simple recommender architecture in Keras. We'll focus on making it understandable and practical, so you can really grasp the concepts and build from there. Get ready to roll up your sleeves and get coding!</p>
+<h2>Understanding the Basics of Recommender Systems</h2>
+<p>Before we jump into the code, let’s chat about the fundamentals. <strong>Recommender systems</strong> are, at their core, about predicting what a user might like. Think about it – Netflix suggesting shows, Amazon recommending products, or Spotify curating playlists. All these systems use algorithms to analyze user data and item characteristics to make personalized suggestions.</p>
+<p>There are two main approaches we'll talk about: <strong>content-based filtering</strong> and <strong>collaborative filtering</strong>. Content-based filtering is like saying, &quot;You liked this movie, which is a sci-fi action film with this actor, so you might like other sci-fi action films with the same actor.&quot; Collaborative filtering, on the other hand, is more like, &quot;Users who liked these movies also liked that movie, so you might like it too.&quot; We'll be focusing on collaborative filtering here because it's a powerful and versatile approach. Collaborative filtering doesn't need to understand <em>what</em> the items are, only how users interact with them. There are also <em>hybrid approaches</em> that leverage both content and collaborative filtering, but let's nail the basics first.</p>
+<p><strong>Collaborative filtering</strong> works by finding users who have similar tastes to you and recommending items they've liked. One of the most common techniques within collaborative filtering is using <strong>matrix factorization</strong>. Imagine you have a giant table where the rows are users, the columns are items, and the cells are ratings (or implicit feedback, like whether a user clicked on an item). Matrix factorization aims to break this big table into two smaller tables (matrices): one representing user embeddings and the other representing item embeddings. These embeddings are essentially dense vector representations that capture the underlying features of users and items. The dot product of a user embedding and an item embedding gives you a predicted rating. We'll be using Keras to learn these embeddings. So, in essence, we're teaching the model to learn what users and items are similar based on the patterns of interactions. This <strong>similarity is captured in the embedding space</strong>, and the closer two embeddings are, the more similar the corresponding users or items are predicted to be. This method is super effective because it can capture complex relationships between users and items without needing explicit information about their attributes. The <em>beauty of embeddings</em> is that they learn these relationships automatically from the data, which is why they're such a powerful tool in recommender systems. By learning these embeddings with Keras, we can then use them to make personalized recommendations. The key is to train the model in such a way that the dot product of the user and item embeddings accurately reflects the user's preference for that item. We can achieve this by feeding the model user-item interaction data, such as ratings or clicks, and optimizing the embeddings to minimize the difference between the predicted and actual interactions. This iterative process refines the embeddings, making them more and more representative of the users' and items' characteristics. Ultimately, this leads to more accurate and relevant recommendations, which is the goal of any recommender system.</p>
+<h2>Setting Up Your Environment and Data</h2>
+<p>Alright, let's get our hands dirty! First things first, you'll need to make sure you have Python, Keras, and a few other essential libraries installed. I recommend using a virtual environment to keep your project dependencies separate. You can use <code>venv</code> or <code>conda</code> for this. Once you have your environment set up, install the necessary packages. You'll need Keras (which comes with TensorFlow as a backend), NumPy for numerical operations, Pandas for data manipulation, and maybe Matplotlib for visualization if you're feeling fancy. A simple <code>pip install tensorflow keras numpy pandas matplotlib</code> should do the trick.</p>
+<p>Next up is data! You need a dataset of user-item interactions. A classic dataset for this is MovieLens, which comes in various sizes. You can download it easily and it contains movie ratings from users. You can grab a small version to start experimenting if you want a lighter load. Pandas is your best friend here. Load the data into a Pandas DataFrame. You'll typically have columns like <code>user_id</code>, <code>item_id</code> (movie ID in this case), and <code>rating</code>. <strong>Data preprocessing</strong> is key. You need to make sure your user and item IDs are integers and that they start from 0. This is important because we'll be using these IDs as indices into our embedding layers later. So, if your IDs start from 1, subtract 1 from them. You also want to normalize your ratings, especially if they're on a scale like 1-5. You can scale them to a 0-1 range or even subtract the mean and divide by the standard deviation. Normalizing the ratings helps the model learn faster and more effectively. Remember that the quality of your recommendations depends heavily on the quality of your data and how well you preprocess it. Don't skimp on this step! You should also consider splitting your data into training and validation sets. This is crucial for evaluating your model's performance and preventing overfitting. A common split is 80% for training and 20% for validation. You can use <code>train_test_split</code> from scikit-learn for this, or you can manually split the data based on user or time. If you split by user, you ensure that the validation set contains users the model hasn't seen before, which is a more realistic scenario. Splitting by time is useful if you want to evaluate how well your model can predict future interactions. Before feeding the data into your Keras model, you'll need to convert it into a format that Keras understands. This typically involves converting your user and item IDs into NumPy arrays. You'll also need to create a corresponding array for your ratings. Make sure the shapes of these arrays match up, so the model can correctly associate users, items, and their ratings. With your data preprocessed and ready to go, you're well on your way to building your recommender system in Keras!</p>
+<h2>Building the Keras Model</h2>
+<p>Okay, the fun part – let's build the Keras model! We'll create a simple yet effective architecture using embeddings and dot products. <strong>The core idea</strong> is to learn vector representations (embeddings) for users and items, such that the dot product of a user's embedding and an item's embedding approximates the user's rating for that item. Think of embeddings as representing the 'taste' of a user or the 'characteristics' of an item in a multi-dimensional space. The closer two embeddings are, the more likely the user is to like the item.</p>
+<p>First, we'll define two input layers: one for user IDs and one for item IDs. These input layers will take integers as input, representing the user and item indices. Next, we'll add <strong>embedding layers</strong>. An embedding layer is a lookup table that maps each integer (user ID or item ID) to a dense vector of a fixed size. The size of this vector is a hyperparameter, typically somewhere between 50 and 200. A larger embedding size can capture more complex relationships but also increases the model's complexity and training time. We'll have one embedding layer for users and another for items. These embedding layers will learn to represent users and items in a latent space, where similar users and items are located close to each other. Now, we'll use the <strong>dot product</strong> of the user and item embeddings to predict the rating. The dot product is a measure of similarity between two vectors. A high dot product indicates that the user and item embeddings are aligned, suggesting a high rating. We can achieve this in Keras using the <code>Dot</code> layer. We'll also add a <code>Reshape</code> layer to flatten the output of the dot product into a single value. To make things a bit more expressive, you can add a fully connected layer (Dense layer) after the dot product. This layer can learn non-linear relationships between the user-item interaction and the rating. You can experiment with different activation functions, like ReLU, to introduce non-linearity. Finally, we'll add an output layer with a linear activation to predict the rating. Since we've normalized our ratings to a 0-1 range, we can use a sigmoid activation function to constrain the output to this range. If you haven't normalized your ratings, you can use a linear activation function and a loss function that's suitable for regression, like mean squared error. Now, let's compile the model. We'll need to choose a loss function and an optimizer. For regression tasks like this, mean squared error (MSE) is a common choice. For the optimizer, Adam is a good default. You can also experiment with other optimizers like SGD or RMSprop. You'll also want to specify some metrics to monitor during training, such as mean absolute error (MAE). MAE is easier to interpret than MSE, as it gives you the average absolute difference between the predicted and actual ratings. With the model architecture defined and compiled, you're ready to train it on your data. Remember that building a good recommender system is an iterative process. You'll likely need to experiment with different architectures, embedding sizes, and hyperparameters to find what works best for your data.</p>
+<h2>Training and Evaluating the Model</h2>
+<p>Alright, the model is built, now let's train it! <strong>Training a recommender system</strong> is all about feeding it your user-item interaction data and letting it learn the optimal embeddings for users and items. We'll use the <code>fit</code> method in Keras to train our model. You'll need to provide your training data, which will consist of your user IDs, item IDs, and ratings. You'll also need to specify the batch size and the number of epochs. The batch size determines how many samples are processed before the model updates its weights. A larger batch size can lead to faster training but may also require more memory. The number of epochs determines how many times the model iterates over the entire training dataset. Start with a reasonable number of epochs, like 10 or 20, and increase it if your model is still improving.</p>
+<p>During training, Keras will output the loss and any metrics you specified (like MAE). You'll want to monitor these metrics to see how your model is performing. A decreasing loss and decreasing MAE indicate that your model is learning. But remember, you also need to evaluate your model on a validation set to prevent overfitting. Overfitting occurs when your model learns the training data too well and doesn't generalize well to new data. This is why we split our data into training and validation sets earlier. Keras will automatically evaluate your model on the validation set at the end of each epoch if you provide validation data to the <code>fit</code> method. Pay close attention to the validation loss and validation MAE. If the validation loss starts to increase while the training loss is still decreasing, it's a sign that your model is overfitting. To combat overfitting, you can try several techniques. One common technique is <strong>regularization</strong>. You can add L1 or L2 regularization to your embedding layers or dense layers. Regularization adds a penalty to the loss function based on the magnitude of the weights, which encourages the model to learn simpler representations. Another technique is <strong>dropout</strong>. Dropout randomly sets a fraction of the neurons to zero during training, which helps prevent the model from becoming too reliant on any single neuron. You can add dropout layers after your embedding layers or dense layers. Early stopping is another powerful technique for preventing overfitting. With early stopping, you monitor the validation loss and stop training when it stops improving for a certain number of epochs. This prevents the model from training for too long and overfitting the training data. Once your model is trained, it's time to evaluate its performance more thoroughly. You can use the <code>evaluate</code> method in Keras to compute the loss and metrics on your validation set. However, for recommender systems, it's often more informative to look at metrics like precision@k and recall@k. These metrics measure how well your model can rank relevant items in the top k recommendations. You can calculate these metrics manually by sorting the predicted ratings for each user and comparing the top k predicted items to the actual items the user interacted with. Remember that evaluating your model is crucial for understanding its strengths and weaknesses. It's an iterative process, and you'll likely need to train and evaluate your model multiple times, tweaking your architecture and hyperparameters along the way.</p>
+<h2>Making Recommendations</h2>
+<p>Okay, you've trained your model – now let's use it to make some recommendations! <strong>The process is pretty straightforward</strong>. For a given user, you want to predict their ratings for all the items they haven't interacted with yet, and then recommend the items with the highest predicted ratings. First, you need to get the user embedding and item embeddings from your trained model. You can do this using the <code>get_layer</code> method in Keras to access your embedding layers and then use the <code>get_weights</code> method to get the weights, which are the embeddings themselves. These embeddings are NumPy arrays, where each row represents the embedding for a user or item.</p>
+<p>Next, you need to identify the items that the user hasn't interacted with. This is important because you don't want to recommend items the user has already seen or rated. You can do this by comparing the user's interaction history with the list of all available items. Then, for each item the user hasn't interacted with, you'll compute the predicted rating. This involves taking the dot product of the user's embedding and the item's embedding. You can do this efficiently using NumPy's <code>dot</code> function. Once you have the predicted ratings for all the unrated items, you'll sort them in descending order. The top N items with the highest predicted ratings are your recommendations for that user. The value of N depends on your application. You might want to recommend 5 items, 10 items, or even more. To make your recommendations even better, you can add some filtering or post-processing steps. For example, you might want to filter out items that are too similar to items the user has already liked. This can help diversify your recommendations. You might also want to consider item popularity or other factors when making recommendations. Remember that the goal is to provide relevant and personalized recommendations that the user will find valuable. Making recommendations is just the final step in the process. The real magic happens in the data preprocessing, model building, and training phases. But seeing your model make predictions and recommend items is super rewarding! It's a testament to the power of machine learning and the ability to build systems that can truly understand and cater to individual preferences. So, go ahead, make some recommendations and see what your model can do!</p>
+<h2>Conclusion and Next Steps</h2>
+<p>And there you have it! We've walked through the process of implementing a simple recommender system architecture in Keras, from understanding the basics to making actual recommendations. You've learned about collaborative filtering, embeddings, building a Keras model, training and evaluating it, and finally, using it to predict user preferences. <strong>This is a fantastic foundation</strong> for diving deeper into the world of recommender systems. But remember, this is just the beginning! There's a whole universe of techniques and architectures to explore.</p>
+<p>So, what's next? Well, you can start by experimenting with different aspects of the model we've built. Try changing the embedding size, adding more layers, or using different activation functions. See how these changes affect your model's performance. You can also explore different loss functions and optimizers. Mean squared error is a good starting point, but you might find that other loss functions, like binary cross-entropy or hinge loss, work better for your specific dataset. Adam is a popular optimizer, but you can also try other optimizers like SGD or RMSprop. Another avenue to explore is more advanced recommender system architectures. We've built a simple model based on dot products, but there are many other approaches. You can look into matrix factorization techniques, neural collaborative filtering (NCF), or sequence-based recommenders. NCF, for example, uses neural networks to model the user-item interaction, which can capture more complex relationships than a simple dot product. Sequence-based recommenders take into account the order in which users interact with items, which is particularly useful for applications like e-commerce or music streaming. Don't forget about data! The quality and quantity of your data have a huge impact on the performance of your recommender system. You can experiment with different datasets, try data augmentation techniques, or incorporate external data sources to improve your recommendations. Also, consider incorporating user and item features into your model. We've focused on collaborative filtering, which only uses user-item interaction data. But if you have additional information about your users (like demographics or interests) or your items (like categories or attributes), you can use content-based filtering techniques to incorporate this information into your model. Remember that building a great recommender system is an iterative process. You'll need to experiment, evaluate, and refine your model based on the results. But with the foundation you've built here, you're well on your way to becoming a recommender system pro! So keep learning, keep experimenting, and most importantly, keep building cool things!</p>
+
+                    </div>
+                    <aside class="related-posts">
+                        <div class="ad-sidebar container">
+                            <div class="ad-wrapper">
+    <span>Iklan Related</span>
+</div>
+                        </div>
+                        <h2 class="related-posts-title">Related Posts</h2><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/antibiotic-diarrhea-relief-and-prevention">Antibiotic Diarrhea: Relief And Prevention Tips</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-04T12:14:13+00:00">Aug 4, 2025</time>
+		                        <span class="view-count">
+									47 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/roll-a-tulip-joint-the">Roll A Tulip Joint: The Ultimate Step-by-Step Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-03T09:19:32+00:00">Aug 3, 2025</time>
+		                        <span class="view-count">
+									51 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/analyzing-lc-tank-clock-buffers">Analyzing LC Tank Clock Buffers &amp; Doublers</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-07T07:41:31+00:00">Aug 7, 2025</time>
+		                        <span class="view-count">
+									42 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/gene-naming-consistency-key-to">Gene Naming Consistency: Key To Accurate Research</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-05T09:57:40+00:00">Aug 5, 2025</time>
+		                        <span class="view-count">
+									49 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/ace-hotel-check-in-complete">Ace Hotel Check-in: Complete The Conversation &amp; Tips</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-06T12:45:05+00:00">Aug 6, 2025</time>
+		                        <span class="view-count">
+									52 views
+		                        </span>
+                            </div>
+                        </article>
+                    </aside>
+                    <aside class="related-posts"></aside>
+                </div>
+            </div>
+        </article>
+        <a href="#" class="back-to-top" id="backToTop" title="Back to top">
+        	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-bar-up" viewBox="0 0 16 16">
+			  <path fill-rule="evenodd" d="M3.646 11.854a.5.5 0 0 0 .708 0L8 8.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708M2.4 5.2c0 .22.18.4.4.4h10.4a.4.4 0 0 0 0-.8H2.8a.4.4 0 0 0-.4.4"/>
+			</svg>
+		</a>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 ANABEL</p>
+        </div>
+    </footer>
+    <script>
+    	(() => {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            const toggleMenu = () => {
+                navMenu.classList.toggle('nav-menu-active');
+                navToggle.classList.toggle('nav-toggle-active');
+            };
+            const backToTopHandler = (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            navToggle.addEventListener('click', toggleMenu);
+            document.getElementById('backToTop').addEventListener('click', backToTopHandler);
+            window.addEventListener('pagehide', () => {
+                navToggle.removeEventListener('click', toggleMenu);
+                document.getElementById('backToTop').removeEventListener('click', backToTopHandler);
+            });
+        })();
+		(() => {
+            window.addEventListener("DOMContentLoaded", (event) => {
+                const ellHljs = document.createElement("script");
+                ellHljs.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js");
+                ellHljs.onload = () => {
+                    hljs.highlightAll();
+                };
+                document.querySelector("body").append(ellHljs);
+                const ellFont = document.createElement("link");
+                ellFont.setAttribute("href", "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css");
+                ellFont.setAttribute("rel", "stylesheet");
+                document.querySelector("head").append(ellFont);
+                window.addEventListener('pagehide', () => {
+                    // ellHljs.remove();
+                    ellFont.remove();
+                });
+
+            });
+        })();
+    </script>
+    
+    
+    
+</body>
+</html>

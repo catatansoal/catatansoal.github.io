@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Tech Debt Refactoring SimpleOperator Into A Workflow Node</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tech Debt Refactoring SimpleOperator Into A Workflow Node...">
+    <link rel="canonical" href="https://catatansoal.github.io/blog/tech-debt-refactoring-simpleoperator-into">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Tech Debt Refactoring SimpleOperator Into A Workflow Node">
+	<meta property="og:description" content="Tech Debt Refactoring SimpleOperator Into A Workflow Node...">
+	<meta property="og:url" content="https://catatansoal.github.io/blog/tech-debt-refactoring-simpleoperator-into">
+	<meta property="og:site_name" content="ANABEL">
+	<meta property="article:published_time" content="2025-07-17T10:40:19+00:00">
+	<meta property="article:author" content="ADMIN">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+    <link rel="preload" fetchpriority="high" as="image" href="https://tse4.mm.bing.net/th?q=%F0%9F%92%A3%20Tech%20Debt%3A%20Refactoring%20SimpleOperator%20into%20a%20Workflow%20Node">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style type="text/css">
+    	:root{--primary-color:#3740ff;--text-color:#202124;--background-color:#ffffff;--gray-100:#f8f9fa;--gray-200:#e9ecef}*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;line-height:1.6;color:var(--text-color);background-color:var(--background-color)}.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}.header{background-color:var(--background-color);border-bottom:1px solid var(--gray-200);position:sticky;top:0;z-index:100}.nav{padding:.5rem 0}.nav-container{display:flex;justify-content:space-between;align-items:center;gap:1rem}.nav-left{display:flex;align-items:center;flex-shrink:0}.logo{font-weight:700;color:var(--primary-color)}.blog-tag{margin-left:1rem;padding:.25rem .5rem;background-color:var(--gray-100);border-radius:4px;font-size:.875rem}.nav-search{flex-grow:1;max-width:300px}.search-form{position:relative;width:100%}.search-input{width:100%;padding:.5rem 2.5rem .5rem 1rem;border:1px solid var(--gray-200);border-radius:24px;font-size:.875rem;transition:all 0.2s}.search-input:focus{outline:none;border-color:var(--primary-color);box-shadow:0 0 0 2px rgb(55 64 255 / .1)}.search-button{position:absolute;right:.5rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#5f6368;cursor:pointer;padding:.25rem;display:flex;align-items:center;justify-content:center}.search-button:hover{color:var(--primary-color)}.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:.5rem}.hamburger{display:block;position:relative;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before,.hamburger::after{content:'';position:absolute;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before{top:-6px}.hamburger::after{bottom:-6px}.nav-toggle-active .hamburger{background:#fff0}.nav-toggle-active .hamburger::before{transform:rotate(45deg);top:0}.nav-toggle-active .hamburger::after{transform:rotate(-45deg);bottom:0}.nav-list{display:flex;list-style:none;gap:2rem}.nav-link{color:var(--text-color);text-decoration:none;font-size:.9rem;transition:color 0.2s}.nav-link:hover{color:var(--primary-color)}.article-header{padding:2rem 0;background-color:var(--gray-100)}.article-layout{display:grid;grid-template-columns:1fr 350px;gap:3rem;padding:1rem 0;align-items: start}h1,h2,h3,h4,h5,h6{font-family:"Crimson Text","Times New Roman",Times,serif}h1{font-size:2.5rem;line-height:1.2;margin-bottom:1rem}.meta{color:#5f6368;font-size:.875rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}.view-count{display:inline-flex;align-items:center;gap:.25rem}.view-count svg{color:#5f6368}.content{min-width:0;border-bottom:1px solid #dddddd5e;margin-top:1rem;white-space:pre-line !important;overflow-wrap:break-word;overflow-x:auto;word-break:break-word}.lead{font-size:1.25rem;color:#5f6368;margin-bottom:2rem}h2,h3,h4,h5,h6{font-size:1.75rem;margin:1rem 0 1rem}p,pre,ol,ul>li{margin-bottom:1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;font-size:1.3rem;text-align: justify;}p>code{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px}hr{margin:1rem 0 1rem 0}.code-example{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;margin:1.5rem 0;overflow-x:auto}code{font-family:'Roboto Mono',monospace;font-size:.875rem}ul{margin:.2rem 0;padding-left:1.5rem}.related-posts{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;position:sticky;top:5rem}.related-posts-title,.newpost-posts-list{font-size:1.75rem;margin:0 0 1rem}.related-posts-list{display:flex;flex-direction:column;gap:.5rem}.related-post,.newpost-post{border-bottom:1px solid #ddd;padding-bottom:10px;margin-bottom:10px}.related-post:last-child,.newpost-post:last-child{padding-bottom:0;border-bottom:none}.related-post-title,.newpost-post-title{font-size:1.2rem;margin:0 0 .1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;}.related-post-title a,.newpost-post-title a{color:var(--text-color);text-decoration:none;transition:color 0.2s}.related-post-title a:hover,.newpost-post-title a:hover{color:var(--primary-color)}.related-post time{font-size:.875rem;color:#5f6368}.footer{background-color:var(--gray-100);padding:2rem 0;margin-top:4rem;color:#5f6368;font-size:.875rem}.nav-menu>ul>li{margin-bottom:0}@media (max-width:1024px){.container{max-width:800px}.article-layout{grid-template-columns:1fr;gap:2rem}.related-posts{position:static}}@media (max-width:768px){.nav-container{flex-wrap:wrap}.nav-search{order:3;max-width:none;width:100%;margin-top:.1rem}.nav-toggle{display:block}.nav-menu{display:none;position:absolute;top:100%;left:0;right:0;background:var(--background-color);padding:1rem 0;border-bottom:1px solid var(--gray-200)}.nav-menu-active{display:block}.nav-list{flex-direction:column;gap:.1rem;padding:0 1.5rem}.nav-link{display:block;padding:.2rem 0}h1{font-size:2rem}.article-header{padding:2rem 0}.content{padding:.1rem 0}}table{width:100%;border-collapse:collapse;margin:20px 0;font-family:'Arial',sans-serif}th,td{padding:12px 15px;text-align:left;border:1px solid #ddd}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9}tr:nth-child(even) td{background-color:#f2f2f2}@media screen and (max-width:768px){table{border:0;display:block;overflow-x:auto;white-space:nowrap}th,td{padding:10px;text-align:right}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9;border-bottom:1px solid #ddd}tr:nth-child(even) td{background-color:#f2f2f2}}a{text-decoration:none;color:#540707}.katex-html{padding: .2rem;color: #000;font-weight: 700;font-size: 1.3rem;overflow-wrap: break-word;max-width: 100%;white-space: normal !important}.category{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin:1rem 0 1rem 0}.tag{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px;font-family:"Newsreader",serif}.tag>a{text-decoration:none;color:#000}img{margin:auto;display:block;max-width:100%;height:auto;margin-bottom:1rem}.katex{white-space: pre-line !important;display: inline-block;max-width: 100%;overflow-x: auto;overflow-y: hidden;scrollbar-width: thin;overflow-wrap: break-word;word-break: break-word;vertical-align: -7px}.content > p {overflow-wrap: break-word;word-break: break-word}
+    </style>
+    <style type="text/css">
+    	pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}
+		.hljs{color:#c9d1d9;background:#0d1117}.hljs-doctag,.hljs-keyword,.hljs-meta .hljs-keyword,.hljs-template-tag,.hljs-template-variable,.hljs-type,.hljs-variable.language_{color:#ff7b72}.hljs-title,.hljs-title.class_,.hljs-title.class_.inherited__,.hljs-title.function_{color:#d2a8ff}.hljs-attr,.hljs-attribute,.hljs-literal,.hljs-meta,.hljs-number,.hljs-operator,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-variable{color:#79c0ff}.hljs-meta .hljs-string,.hljs-regexp,.hljs-string{color:#a5d6ff}.hljs-built_in,.hljs-symbol{color:#ffa657}.hljs-code,.hljs-comment,.hljs-formula{color:#8b949e}.hljs-name,.hljs-quote,.hljs-selector-pseudo,.hljs-selector-tag{color:#7ee787}.hljs-subst{color:#c9d1d9}.hljs-section{color:#1f6feb;font-weight:700}.hljs-bullet{color:#f2cc60}.hljs-emphasis{color:#c9d1d9;font-style:italic}.hljs-strong{color:#c9d1d9;font-weight:700}.hljs-addition{color:#aff5b4;background-color:#033a16}.hljs-deletion{color:#ffdcd7;background-color:#67060c}
+    	pre{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;font-weight:400;word-break:break-word;word-wrap:break-word;box-sizing:inherit;border-radius:4px;overflow-x:auto;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}code{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;word-wrap:break-word;word-break:break-word;font-style:normal;line-height:20px;letter-spacing:-.003em;box-sizing:inherit;font-weight:400;font-size:75%;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}
+    </style>
+    <style type="text/css">
+    	.back-to-top{position:fixed;bottom:20px;right:20px;background-color:#a73f3f;color:#fff;padding:8px 10px;border-radius:50%;box-shadow:0 4px 6px rgb(0 0 0 / .2);font-size:10px;font-weight:700;text-decoration:none;text-align:center;transition:opacity 0.3s ease,visibility 0.3s ease;z-index:99999;opacity:1;visibility:visible}.back-to-top:hover{background-color:#0056b3}
+    </style>
+    <style type="text/css">
+        .ad-header {margin: 1rem auto 1rem;background-color: #fdfdfd;text-align: center;display: block;}.ad-header .ad-wrapper {min-height: 90px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #555;font-weight: 500;padding: 3rem;border: 1px dashed #ccc;border-radius: 6px;}@media (max-width: 768px) {.ad-header {padding: 0.75rem;}}.ad-sidebar {margin: 0 0 1rem;background-color: #fefefe;text-align: center;padding: 0px;width: 100%;max-width: 100%;display: block;}.ad-sidebar .ad-wrapper {min-height: 250px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #444;font-weight: 500;border: 1px dashed #aaa;border-radius: 6px;padding: 0rem;}@media (max-width: 1024px) {.ad-sidebar {padding: 0.75rem;}}
+    </style>
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://catatansoal.github.io/blog/tech-debt-refactoring-simpleoperator-into"
+          },
+          "headline": "Tech Debt Refactoring SimpleOperator Into A Workflow Node",
+          "description": "Tech Debt Refactoring SimpleOperator Into A Workflow Node...",
+          "image": [
+            "https://tse4.mm.bing.net/th?q=%F0%9F%92%A3%20Tech%20Debt%3A%20Refactoring%20SimpleOperator%20into%20a%20Workflow%20Node"
+          ],
+          "author": {
+            "@type": "Person",
+            "name": "ADMIN",
+            "jobTitle": "Editor web"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "ANABEL",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://tse4.mm.bing.net/th?q=ANABEL%20WEB"
+            }
+          },
+          "datePublished": "2025-07-17T10:40:19+00:00",
+          "dateModified": "2025-07-17T10:40:19+00:00"
+        }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="container nav-container">
+                <div class="nav-left">
+                    <span class="logo">ANABEL</span>
+                    <span class="blog-tag">Article</span>
+                </div>
+                <div class="nav-search">
+                    <form class="search-form" role="search">
+                        <input 
+                            type="search" 
+                            class="search-input"
+                            placeholder="Search articles..."
+                            aria-label="Search articles"
+                        >
+                        <button type="submit" class="search-button" aria-label="Submit search">🔎</button>
+                    </form>
+                </div>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+                <div class="nav-menu">
+                    <ul class="nav-list">
+                    	<li><a href="/" class="nav-link">HOME</a></li>
+                        <li><a href="/pages/About" class="nav-link">About</a></li>
+                        <li><a href="/pages/Contact" class="nav-link">Contact</a></li>
+                        <li><a href="/pages/Disclaimer" class="nav-link">Disclaimer</a></li>
+                        <li><a href="/pages/Privacy" class="nav-link">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="main">
+        <article class="article">
+            <header class="article-header">
+                <div class="container">
+                    <h1>Tech Debt Refactoring SimpleOperator Into A Workflow Node</h1>
+                    <div class="meta">
+                        <time datetime="2025-07-17T10:40:19+00:00">Jul 17, 2025</time>
+                        <span class="author">by ADMIN</span>
+                        <span class="view-count">
+                            <span id="viewCount">58</span> views
+                        </span>
+                    </div>
+                </div>
+            </header>
+            <div class="ad-header container">
+                <div class="ad-wrapper">
+    Iklan Headers
+</div>
+            </div>
+            <div class="container">
+                <div class="article-layout">
+                    <div class="content">
+                        <img src="https://tse4.mm.bing.net/th?q=%F0%9F%92%A3%20Tech%20Debt%3A%20Refactoring%20SimpleOperator%20into%20a%20Workflow%20Node" title="💣 Tech Debt: Refactoring SimpleOperator into a Workflow Node" width="300" height="200"/><p>Hey guys! Let's dive deep into some tech debt we've got lurking in our codebase. Today, we're tackling the <strong>SimpleOperator</strong>, which is currently snuggled inside <strong>ClaudeStepExecutor</strong>. This ain't ideal, and we're gonna break down why, and how we're gonna fix it. This article discusses the importance of refactoring <strong>SimpleOperator</strong> into a separate workflow node to enhance code maintainability and scalability.</p>
+<h2>Tech Debt Description: The SimpleOperator Dilemma</h2>
+<p>Our main problem? The <strong>SimpleOperator</strong> is currently embedded within <strong>ClaudeStepExecutor</strong>, which, from a software design perspective, is a big no-no. It violates the SOLID principles, specifically the Single Responsibility Principle. To put it simply, each class should have one job, and one job only. By refactoring <strong>SimpleOperator</strong> into a separate workflow node type, we can independently add it to workflows, making our system more flexible and maintainable. Let's break down the current architectural problems and see why this refactor is crucial.</p>
+<h3>Current Architecture Problems: Why We Need to Refactor</h3>
+<p>The current architecture suffers from a few key issues, primarily centered around tight coupling and a violation of the Single Responsibility Principle. When you first look at it, the problems might not jump out, but trust me, they're there, and they're impacting our code. Our goal here is to create high-quality content, so let's really dive deep into why this is a problem and how we plan to address it. Think of it like decluttering your house, but instead, we're decluttering our code to make it more organized and easier to manage.</p>
+<h4>Tight Coupling: A Tangled Web of Dependencies</h4>
+<p>Currently, <code>ClaudeStepExecutor.ts</code> imports and directly depends on <code>SimpleOperator</code>. This creates a tight coupling between the two components, which isn't great for several reasons:</p>
+<ul>
+<li><strong>Dependency Injection Overload:</strong> The constructor injection creates an unnecessary dependency, making the code more complex than it needs to be.</li>
+<li><strong>Single Responsibility Principle Violation:</strong> The executor is handling both Claude execution AND operator analysis, which are distinct responsibilities. This violation makes the class harder to understand and maintain.</li>
+<li><strong>Testing Nightmares:</strong> Tight coupling makes testing much more complex. You can't test <code>ClaudeStepExecutor</code> in isolation without also considering <code>SimpleOperator</code>.</li>
+<li><strong>Reduced Reusability:</strong> The operator logic becomes tied to the executor, reducing its reusability in other parts of the system.</li>
+</ul>
+<p>Think of it like trying to untangle a garden hose that's been left in a heap. It's messy, frustrating, and takes way longer than it should. We want our code to be like a neatly coiled hose, ready to use and easy to manage. This means <strong>separating concerns</strong> and ensuring that each component has a clear and focused responsibility.</p>
+<h4>Current Flow: A Single Point of Failure</h4>
+<p>The current flow looks something like this:</p>
+<pre><code class="hljs">ClaudeStepExecutor 
+  ├── Executes Claude agent steps
+  └── Calls SimpleOperator.checkStatus() (embedded dependency)
+</code></pre>
+<p>This means that <code>ClaudeStepExecutor</code> is not only responsible for executing Claude agent steps but also for checking the status using <code>SimpleOperator</code>. This intertwining of responsibilities creates a single point of failure and makes it difficult to modify or extend either functionality independently. We want to break this chain and create a more modular and resilient system.</p>
+<h3>Proposed Architecture: A Clean Break</h3>
+<p>Our proposed architecture aims to cleanly separate the responsibilities of Claude execution and operator analysis. We want to transform our current tangled system into a well-organized, modular structure. To do this, we're introducing a new <code>OperatorStepExecutor</code> and updating our workflow definitions to explicitly include operator nodes. Let's explore the details of this new architecture and how it will solve our current problems.</p>
+<h4>Separate Operator Node: Explicit and Independent</h4>
+<p>Instead of embedding operator logic within the executor, we propose creating a separate operator node type. This means our workflow definitions will now explicitly include steps for operator analysis. Here's how a workflow definition might look:</p>
+<pre><code class="hljs">Workflow Definition:
+[
+  { &quot;id&quot;: &quot;task&quot;, &quot;agentId&quot;: &quot;dev_01&quot;, &quot;task&quot;: &quot;Fix the bug&quot; },
+  { &quot;id&quot;: &quot;check&quot;, &quot;type&quot;: &quot;operator&quot;, &quot;task&quot;: &quot;Analyze if {task.output} succeeded&quot;, &quot;deps&quot;: [&quot;task&quot;] }
+]
+</code></pre>
+<p>In this example, we have a task node (<code>task</code>) that instructs an agent to fix a bug, followed by an operator node (<code>check</code>) that analyzes the output of the task. The <code>deps</code> field indicates that the <code>check</code> node depends on the <code>task</code> node, ensuring that the operator analysis happens after the task is completed. This explicit separation makes the workflow easier to understand and modify.</p>
+<h4>Clean Separation: Clear Responsibilities</h4>
+<p>Our new architecture will enforce a clean separation of concerns:</p>
+<pre><code class="hljs">ClaudeStepExecutor → Only handles Claude execution
+OperatorStepExecutor → Only handles operator analysis
+WorkflowNodeFactory → Creates appropriate node types
+</code></pre>
+<p>This separation brings several advantages:</p>
+<ul>
+<li><strong>Focused Executors:</strong> <code>ClaudeStepExecutor</code> will focus solely on executing Claude agent steps, while <code>OperatorStepExecutor</code> will handle operator analysis. This aligns with the Single Responsibility Principle.</li>
+<li><strong>Modular Design:</strong> Each executor can be developed, tested, and deployed independently, making the system more modular and resilient.</li>
+<li><strong>Clear Workflow:</strong> The workflow definition clearly outlines the steps involved, including operator analysis, making the overall process more transparent.</li>
+</ul>
+<h3>Implementation Plan: Our Roadmap to Refactoring</h3>
+<p>We've got a solid plan to tackle this refactoring in three phases. This phased approach allows us to break down the work into manageable chunks, ensuring that we can deliver value incrementally and minimize disruption. Let's walk through each phase and what it entails. This will give you a clear picture of the steps we'll be taking to refactor <strong>SimpleOperator</strong> and improve our codebase.</p>
+<h4>Phase 1: Create Operator Node Infrastructure</h4>
+<p>In this initial phase, we'll focus on building the foundation for our operator node. This involves creating the <code>OperatorStepExecutor</code>, adding the 'operator' node type to the <code>WorkflowNodeFactory</code>, updating the workflow schema, and implementing the core execution logic for operator nodes. It's like laying the groundwork for a new building – essential for the rest of the project.</p>
+<ul>
+<li><strong>Create <code>OperatorStepExecutor.ts</code>:</strong> We'll implement the logic for analyzing operator results within this class (Note: This file already exists but needs implementation).</li>
+<li><strong>Add 'operator' node type to <code>WorkflowNodeFactory</code>:</strong> This ensures that the factory can create instances of <code>OperatorStepExecutor</code> when needed.</li>
+<li><strong>Update workflow schema:</strong> We'll modify the workflow schema to support the new operator node type, allowing us to define operator steps in our workflows.</li>
+<li><strong>Implement operator node execution logic:</strong> This is where the magic happens – we'll define how the operator node actually analyzes the results and determines the next steps in the workflow.</li>
+</ul>
+<h4>Phase 2: Refactor ClaudeStepExecutor</h4>
+<p>With the operator node infrastructure in place, we can now focus on refactoring <code>ClaudeStepExecutor</code>. This phase involves removing the <code>SimpleOperator</code> dependency, extracting the operator analysis logic, and updating our tests to reflect the new, single-responsibility nature of the executor. It's like renovating a room – we're taking out the old stuff and making room for the new.</p>
+<ul>
+<li><strong>Remove <code>SimpleOperator</code> dependency from constructor:</strong> This is a crucial step in decoupling <code>ClaudeStepExecutor</code> from <code>SimpleOperator</code>.</li>
+<li><strong>Remove operator analysis logic from execute method:</strong> We'll move the operator analysis logic to the <code>OperatorStepExecutor</code>, keeping <code>ClaudeStepExecutor</code> focused on Claude execution.</li>
+<li><strong>Update tests:</strong> We'll update our tests to ensure that <code>ClaudeStepExecutor</code> is functioning correctly in its new, streamlined role. This includes testing the Claude execution logic in isolation.</li>
+<li><strong>Ensure backward compatibility with fallback:</strong> We'll add a fallback mechanism to ensure that existing workflows continue to work correctly during the migration period. This is like providing a temporary bridge while we build a new one.</li>
+</ul>
+<h4>Phase 3: Migration Support</h4>
+<p>The final phase is all about ensuring a smooth transition to the new architecture. This includes updating existing workflows to use separate operator nodes, creating a migration guide, adding examples, and updating our documentation. It's like putting the finishing touches on a project – ensuring that everything is polished and ready for use.</p>
+<ul>
+<li><strong>Update existing workflows:</strong> We'll need to modify existing workflow definitions to use the new operator nodes. This might involve scripting or manual updates, depending on the number of workflows we need to migrate.</li>
+<li><strong>Create migration guide:</strong> A clear and concise migration guide will help users understand how to update their workflows to use the new operator nodes.</li>
+<li><strong>Add examples:</strong> Providing examples of operator node usage will make it easier for users to adopt the new architecture.</li>
+<li><strong>Update documentation:</strong> We'll update our documentation to reflect the changes, ensuring that users have the information they need to use the new system effectively.</li>
+</ul>
+<h3>Technical Details: Files and Patterns</h3>
+<p>Let's get down to the nitty-gritty. We're going to be touching some key files and introducing a new workflow pattern. This section provides a technical overview of the changes we'll be making. Knowing which files are affected and understanding the new workflow pattern will give you a better grasp of the scope of this refactoring.</p>
+<h4>Files to Modify</h4>
+<p>We'll be primarily focusing on these files:</p>
+<ul>
+<li><code>web/server/services/executors/ClaudeStepExecutor.ts</code> - Removing the operator dependency.</li>
+<li><code>web/server/services/executors/OperatorStepExecutor.ts</code> - Implementing the operator logic.</li>
+<li><code>web/server/services/WorkflowNodeFactory.ts</code> - Adding operator node creation.</li>
+<li><code>web/server/schemas/invoke.ts</code> - Updating workflow step types.</li>
+</ul>
+<h4>New Workflow Pattern</h4>
+<p>The workflow pattern will change from an implicit operator analysis within the executor to an explicit operator node in the workflow definition. Here's a comparison:</p>
+<pre><code class="hljs">// Before (embedded):
+{ id: &quot;dev&quot;, role: &quot;developer&quot;, task: &quot;Fix bug&quot; }
+// Operator analysis happens automatically inside executor
+
+// After (explicit):
+{ id: &quot;dev&quot;, role: &quot;developer&quot;, task: &quot;Fix bug&quot; },
+{ id: &quot;check&quot;, type: &quot;operator&quot;, &quot;task&quot;: &quot;Check {dev.output}&quot;, deps: [&quot;dev&quot;] }
+// Clear separation of concerns
+</code></pre>
+<p>This explicit separation makes the workflow more transparent and easier to reason about. You can clearly see which steps involve operator analysis and how they relate to other steps in the workflow.</p>
+<h3>Benefits: Why This Matters</h3>
+<p>This refactoring isn't just about making things look pretty. It's about building a more robust, maintainable, and scalable system. By adhering to SOLID principles and improving our architecture, we're setting ourselves up for future success. Let's explore the key benefits of this refactoring.</p>
+<h4>SOLID Compliance: The Foundation of Good Design</h4>
+<p>By refactoring <code>SimpleOperator</code>, we're bringing our codebase into alignment with the SOLID principles of object-oriented design:</p>
+<ul>
+<li><strong>Single Responsibility:</strong> Each executor has one job, and one job only. This makes the code easier to understand, test, and maintain.</li>
+<li><strong>Open/Closed:</strong> We can easily add new operator strategies without modifying existing code. This promotes extensibility and reduces the risk of introducing bugs.</li>
+<li><strong>Liskov Substitution:</strong> All executors implement the <code>StepExecutor</code> interface, ensuring that they can be used interchangeably. This promotes flexibility and allows us to easily swap out implementations.</li>
+<li><strong>Interface Segregation:</strong> Clean interfaces make it clear what each component is responsible for. This reduces the complexity of the system and makes it easier to reason about.</li>
+<li><strong>Dependency Inversion:</strong> We depend on abstractions rather than concrete implementations, making the system more flexible and less prone to breakage. This allows us to change implementations without affecting other parts of the system.</li>
+</ul>
+<h4>Improved Architecture: A More Robust System</h4>
+<p>Beyond SOLID compliance, this refactoring brings several architectural improvements:</p>
+<ul>
+<li><strong>Better testability:</strong> We can test operators independently, ensuring that they function correctly in isolation. This leads to more reliable code.</li>
+<li><strong>Reusable operator logic:</strong> The operator logic becomes reusable for other executors, reducing code duplication and promoting consistency.</li>
+<li><strong>Cleaner workflow definitions:</strong> Workflows with explicit operator steps are easier to understand and maintain. This makes it easier to collaborate on workflows and reduces the risk of errors.</li>
+<li><strong>Follows existing pattern:</strong> The new architecture aligns with existing patterns in our system (parallel, loop, conditional nodes), making it easier to learn and use. This consistency reduces cognitive load and makes the system more predictable.</li>
+</ul>
+<h3>Dependencies: What We Need and What Relates</h3>
+<p>This refactoring is relatively self-contained, but it's important to understand its dependencies and related areas. This section outlines the prerequisites and related areas to give you a complete picture of the context. Knowing the dependencies and related areas will help us manage the refactoring effectively and avoid potential conflicts.</p>
+<h4>Prerequisites</h4>
+<p>Thankfully, this refactoring doesn't have any hard prerequisites. It's primarily a refactoring of existing code, which means we don't need to wait for other features to be completed before we can start. This makes it a great candidate for tackling our tech debt and improving our codebase.</p>
+<h4>Related</h4>
+<p>This refactoring is closely related to a few other areas:</p>
+<ul>
+<li><strong>Workflow engine improvements:</strong> As we improve our workflow engine, the benefits of this refactoring will become even more apparent. A cleaner architecture will make it easier to extend and enhance our workflow capabilities.</li>
+<li><strong>Future operator enhancements:</strong> With the operator logic separated, we can easily add new operator strategies and features in the future. This sets us up for innovation and allows us to quickly adapt to changing requirements.</li>
+</ul>
+<h3>Acceptance Criteria: How We Know We're Done</h3>
+<p>To ensure that this refactoring is successful, we've defined a clear set of acceptance criteria. These criteria will serve as our checklist, ensuring that we've addressed all the key aspects of the refactoring and that the new system is functioning correctly. Let's walk through these criteria so we're all on the same page about what constitutes a successful outcome.</p>
+<ul>
+<li>[ ] <code>OperatorStepExecutor</code> fully implemented</li>
+<li>[ ] <code>WorkflowNodeFactory</code> creates operator nodes</li>
+<li>[ ] <code>ClaudeStepExecutor</code> no longer depends on <code>SimpleOperator</code></li>
+<li>[ ] Operator nodes work in workflows</li>
+<li>[ ] All existing tests pass</li>
+<li>[ ] New tests for operator nodes</li>
+<li>[ ] Documentation updated</li>
+<li>[ ] Migration examples provided</li>
+<li>[ ] No breaking changes for existing workflows</li>
+</ul>
+<h3>Priority: Why Now?</h3>
+<p>We've assigned a <strong>HIGH</strong> priority to this refactoring. Why? Because this architectural improvement will make our codebase more maintainable and enable future operator enhancements. It's an investment in our future, allowing us to build more complex and robust systems with greater ease. Tackling tech debt is crucial for long-term success, and this refactoring is a key step in that direction.</p>
+<h2>Conclusion</h2>
+<p>Refactoring <strong>SimpleOperator</strong> into a separate workflow node is a significant step towards a cleaner, more maintainable architecture. By addressing the tight coupling and SOLID principle violations, we're setting ourselves up for future success. This architectural improvement will make the codebase more maintainable and enable future operator enhancements. So, let's get to work and make our codebase shine! This is a big win for our project, and I'm excited to see the results.</p>
+
+                    </div>
+                    <aside class="related-posts">
+                        <div class="ad-sidebar container">
+                            <div class="ad-wrapper">
+    <span>Iklan Related</span>
+</div>
+                        </div>
+                        <h2 class="related-posts-title">Related Posts</h2><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/simplify-3m2n3-3-m2-a">Simplify (3m^2n^3)^3/m^2 A Step-by-Step Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-21T11:25:05+00:00">Jul 21, 2025</time>
+		                        <span class="view-count">
+									45 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/overworked-bug-increases-overslime-consumption">Overworked Bug Increases Overslime Consumption In Tinkers Construct 1.20.1</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-29T04:15:33+00:00">Jul 29, 2025</time>
+		                        <span class="view-count">
+									74 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/buy-a-car-under-llc">Buy A Car Under LLC: Tax &amp; Liability Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-02T05:07:26+00:00">Aug 2, 2025</time>
+		                        <span class="view-count">
+									42 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/balancing-equations-using-the-half">Balancing Equations Using The Half-Reaction Method</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-16T17:22:29+00:00">Jul 16, 2025</time>
+		                        <span class="view-count">
+									50 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/troubleshooting-blockhash-expired-error-during">Troubleshooting Blockhash Expired Error During Solana Devnet Program Deployment</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-16T17:01:04+00:00">Jul 16, 2025</time>
+		                        <span class="view-count">
+									79 views
+		                        </span>
+                            </div>
+                        </article>
+                    </aside>
+                    <aside class="related-posts"></aside>
+                </div>
+            </div>
+        </article>
+        <a href="#" class="back-to-top" id="backToTop" title="Back to top">
+        	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-bar-up" viewBox="0 0 16 16">
+			  <path fill-rule="evenodd" d="M3.646 11.854a.5.5 0 0 0 .708 0L8 8.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708M2.4 5.2c0 .22.18.4.4.4h10.4a.4.4 0 0 0 0-.8H2.8a.4.4 0 0 0-.4.4"/>
+			</svg>
+		</a>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 ANABEL</p>
+        </div>
+    </footer>
+    <script>
+    	(() => {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            const toggleMenu = () => {
+                navMenu.classList.toggle('nav-menu-active');
+                navToggle.classList.toggle('nav-toggle-active');
+            };
+            const backToTopHandler = (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            navToggle.addEventListener('click', toggleMenu);
+            document.getElementById('backToTop').addEventListener('click', backToTopHandler);
+            window.addEventListener('pagehide', () => {
+                navToggle.removeEventListener('click', toggleMenu);
+                document.getElementById('backToTop').removeEventListener('click', backToTopHandler);
+            });
+        })();
+		(() => {
+            window.addEventListener("DOMContentLoaded", (event) => {
+                const ellHljs = document.createElement("script");
+                ellHljs.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js");
+                ellHljs.onload = () => {
+                    hljs.highlightAll();
+                };
+                document.querySelector("body").append(ellHljs);
+                const ellFont = document.createElement("link");
+                ellFont.setAttribute("href", "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css");
+                ellFont.setAttribute("rel", "stylesheet");
+                document.querySelector("head").append(ellFont);
+                window.addEventListener('pagehide', () => {
+                    // ellHljs.remove();
+                    ellFont.remove();
+                });
+
+            });
+        })();
+    </script>
+    
+    
+    
+</body>
+</html>

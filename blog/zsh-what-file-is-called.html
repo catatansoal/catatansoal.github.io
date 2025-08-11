@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Zsh: What File Is Called Between .zshenv And .zshrc?</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Zsh: What File Is Called Between .zshenv And .zshrc?...">
+    <link rel="canonical" href="https://catatansoal.github.io/blog/zsh-what-file-is-called">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Zsh: What File Is Called Between .zshenv And .zshrc?">
+	<meta property="og:description" content="Zsh: What File Is Called Between .zshenv And .zshrc?...">
+	<meta property="og:url" content="https://catatansoal.github.io/blog/zsh-what-file-is-called">
+	<meta property="og:site_name" content="ANABEL">
+	<meta property="article:published_time" content="2025-08-02T07:49:33+00:00">
+	<meta property="article:author" content="ADMIN">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+    <link rel="preload" fetchpriority="high" as="image" href="https://tse4.mm.bing.net/th?q=Unraveling%20Zsh%20Shell%20Startup%3A%20A%20Deep%20Dive%20into%20the%20Files%20Between%20.zshenv%20and%20.zshrc">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style type="text/css">
+    	:root{--primary-color:#3740ff;--text-color:#202124;--background-color:#ffffff;--gray-100:#f8f9fa;--gray-200:#e9ecef}*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;line-height:1.6;color:var(--text-color);background-color:var(--background-color)}.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}.header{background-color:var(--background-color);border-bottom:1px solid var(--gray-200);position:sticky;top:0;z-index:100}.nav{padding:.5rem 0}.nav-container{display:flex;justify-content:space-between;align-items:center;gap:1rem}.nav-left{display:flex;align-items:center;flex-shrink:0}.logo{font-weight:700;color:var(--primary-color)}.blog-tag{margin-left:1rem;padding:.25rem .5rem;background-color:var(--gray-100);border-radius:4px;font-size:.875rem}.nav-search{flex-grow:1;max-width:300px}.search-form{position:relative;width:100%}.search-input{width:100%;padding:.5rem 2.5rem .5rem 1rem;border:1px solid var(--gray-200);border-radius:24px;font-size:.875rem;transition:all 0.2s}.search-input:focus{outline:none;border-color:var(--primary-color);box-shadow:0 0 0 2px rgb(55 64 255 / .1)}.search-button{position:absolute;right:.5rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#5f6368;cursor:pointer;padding:.25rem;display:flex;align-items:center;justify-content:center}.search-button:hover{color:var(--primary-color)}.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:.5rem}.hamburger{display:block;position:relative;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before,.hamburger::after{content:'';position:absolute;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before{top:-6px}.hamburger::after{bottom:-6px}.nav-toggle-active .hamburger{background:#fff0}.nav-toggle-active .hamburger::before{transform:rotate(45deg);top:0}.nav-toggle-active .hamburger::after{transform:rotate(-45deg);bottom:0}.nav-list{display:flex;list-style:none;gap:2rem}.nav-link{color:var(--text-color);text-decoration:none;font-size:.9rem;transition:color 0.2s}.nav-link:hover{color:var(--primary-color)}.article-header{padding:2rem 0;background-color:var(--gray-100)}.article-layout{display:grid;grid-template-columns:1fr 350px;gap:3rem;padding:1rem 0;align-items: start}h1,h2,h3,h4,h5,h6{font-family:"Crimson Text","Times New Roman",Times,serif}h1{font-size:2.5rem;line-height:1.2;margin-bottom:1rem}.meta{color:#5f6368;font-size:.875rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}.view-count{display:inline-flex;align-items:center;gap:.25rem}.view-count svg{color:#5f6368}.content{min-width:0;border-bottom:1px solid #dddddd5e;margin-top:1rem;white-space:pre-line !important;overflow-wrap:break-word;overflow-x:auto;word-break:break-word}.lead{font-size:1.25rem;color:#5f6368;margin-bottom:2rem}h2,h3,h4,h5,h6{font-size:1.75rem;margin:1rem 0 1rem}p,pre,ol,ul>li{margin-bottom:1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;font-size:1.3rem;text-align: justify;}p>code{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px}hr{margin:1rem 0 1rem 0}.code-example{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;margin:1.5rem 0;overflow-x:auto}code{font-family:'Roboto Mono',monospace;font-size:.875rem}ul{margin:.2rem 0;padding-left:1.5rem}.related-posts{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;position:sticky;top:5rem}.related-posts-title,.newpost-posts-list{font-size:1.75rem;margin:0 0 1rem}.related-posts-list{display:flex;flex-direction:column;gap:.5rem}.related-post,.newpost-post{border-bottom:1px solid #ddd;padding-bottom:10px;margin-bottom:10px}.related-post:last-child,.newpost-post:last-child{padding-bottom:0;border-bottom:none}.related-post-title,.newpost-post-title{font-size:1.2rem;margin:0 0 .1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;}.related-post-title a,.newpost-post-title a{color:var(--text-color);text-decoration:none;transition:color 0.2s}.related-post-title a:hover,.newpost-post-title a:hover{color:var(--primary-color)}.related-post time{font-size:.875rem;color:#5f6368}.footer{background-color:var(--gray-100);padding:2rem 0;margin-top:4rem;color:#5f6368;font-size:.875rem}.nav-menu>ul>li{margin-bottom:0}@media (max-width:1024px){.container{max-width:800px}.article-layout{grid-template-columns:1fr;gap:2rem}.related-posts{position:static}}@media (max-width:768px){.nav-container{flex-wrap:wrap}.nav-search{order:3;max-width:none;width:100%;margin-top:.1rem}.nav-toggle{display:block}.nav-menu{display:none;position:absolute;top:100%;left:0;right:0;background:var(--background-color);padding:1rem 0;border-bottom:1px solid var(--gray-200)}.nav-menu-active{display:block}.nav-list{flex-direction:column;gap:.1rem;padding:0 1.5rem}.nav-link{display:block;padding:.2rem 0}h1{font-size:2rem}.article-header{padding:2rem 0}.content{padding:.1rem 0}}table{width:100%;border-collapse:collapse;margin:20px 0;font-family:'Arial',sans-serif}th,td{padding:12px 15px;text-align:left;border:1px solid #ddd}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9}tr:nth-child(even) td{background-color:#f2f2f2}@media screen and (max-width:768px){table{border:0;display:block;overflow-x:auto;white-space:nowrap}th,td{padding:10px;text-align:right}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9;border-bottom:1px solid #ddd}tr:nth-child(even) td{background-color:#f2f2f2}}a{text-decoration:none;color:#540707}.katex-html{padding: .2rem;color: #000;font-weight: 700;font-size: 1.3rem;overflow-wrap: break-word;max-width: 100%;white-space: normal !important}.category{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin:1rem 0 1rem 0}.tag{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px;font-family:"Newsreader",serif}.tag>a{text-decoration:none;color:#000}img{margin:auto;display:block;max-width:100%;height:auto;margin-bottom:1rem}.katex{white-space: pre-line !important;display: inline-block;max-width: 100%;overflow-x: auto;overflow-y: hidden;scrollbar-width: thin;overflow-wrap: break-word;word-break: break-word;vertical-align: -7px}.content > p {overflow-wrap: break-word;word-break: break-word}
+    </style>
+    <style type="text/css">
+    	pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}
+		.hljs{color:#c9d1d9;background:#0d1117}.hljs-doctag,.hljs-keyword,.hljs-meta .hljs-keyword,.hljs-template-tag,.hljs-template-variable,.hljs-type,.hljs-variable.language_{color:#ff7b72}.hljs-title,.hljs-title.class_,.hljs-title.class_.inherited__,.hljs-title.function_{color:#d2a8ff}.hljs-attr,.hljs-attribute,.hljs-literal,.hljs-meta,.hljs-number,.hljs-operator,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-variable{color:#79c0ff}.hljs-meta .hljs-string,.hljs-regexp,.hljs-string{color:#a5d6ff}.hljs-built_in,.hljs-symbol{color:#ffa657}.hljs-code,.hljs-comment,.hljs-formula{color:#8b949e}.hljs-name,.hljs-quote,.hljs-selector-pseudo,.hljs-selector-tag{color:#7ee787}.hljs-subst{color:#c9d1d9}.hljs-section{color:#1f6feb;font-weight:700}.hljs-bullet{color:#f2cc60}.hljs-emphasis{color:#c9d1d9;font-style:italic}.hljs-strong{color:#c9d1d9;font-weight:700}.hljs-addition{color:#aff5b4;background-color:#033a16}.hljs-deletion{color:#ffdcd7;background-color:#67060c}
+    	pre{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;font-weight:400;word-break:break-word;word-wrap:break-word;box-sizing:inherit;border-radius:4px;overflow-x:auto;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}code{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;word-wrap:break-word;word-break:break-word;font-style:normal;line-height:20px;letter-spacing:-.003em;box-sizing:inherit;font-weight:400;font-size:75%;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}
+    </style>
+    <style type="text/css">
+    	.back-to-top{position:fixed;bottom:20px;right:20px;background-color:#a73f3f;color:#fff;padding:8px 10px;border-radius:50%;box-shadow:0 4px 6px rgb(0 0 0 / .2);font-size:10px;font-weight:700;text-decoration:none;text-align:center;transition:opacity 0.3s ease,visibility 0.3s ease;z-index:99999;opacity:1;visibility:visible}.back-to-top:hover{background-color:#0056b3}
+    </style>
+    <style type="text/css">
+        .ad-header {margin: 1rem auto 1rem;background-color: #fdfdfd;text-align: center;display: block;}.ad-header .ad-wrapper {min-height: 90px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #555;font-weight: 500;padding: 3rem;border: 1px dashed #ccc;border-radius: 6px;}@media (max-width: 768px) {.ad-header {padding: 0.75rem;}}.ad-sidebar {margin: 0 0 1rem;background-color: #fefefe;text-align: center;padding: 0px;width: 100%;max-width: 100%;display: block;}.ad-sidebar .ad-wrapper {min-height: 250px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #444;font-weight: 500;border: 1px dashed #aaa;border-radius: 6px;padding: 0rem;}@media (max-width: 1024px) {.ad-sidebar {padding: 0.75rem;}}
+    </style>
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://catatansoal.github.io/blog/zsh-what-file-is-called"
+          },
+          "headline": "Zsh: What File Is Called Between .zshenv And .zshrc?",
+          "description": "Zsh: What File Is Called Between .zshenv And .zshrc?...",
+          "image": [
+            "https://tse4.mm.bing.net/th?q=Unraveling%20Zsh%20Shell%20Startup%3A%20A%20Deep%20Dive%20into%20the%20Files%20Between%20.zshenv%20and%20.zshrc"
+          ],
+          "author": {
+            "@type": "Person",
+            "name": "ADMIN",
+            "jobTitle": "Editor web"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "ANABEL",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://tse4.mm.bing.net/th?q=ANABEL%20WEB"
+            }
+          },
+          "datePublished": "2025-08-02T07:49:33+00:00",
+          "dateModified": "2025-08-02T07:49:33+00:00"
+        }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="container nav-container">
+                <div class="nav-left">
+                    <span class="logo">ANABEL</span>
+                    <span class="blog-tag">Article</span>
+                </div>
+                <div class="nav-search">
+                    <form class="search-form" role="search">
+                        <input 
+                            type="search" 
+                            class="search-input"
+                            placeholder="Search articles..."
+                            aria-label="Search articles"
+                        >
+                        <button type="submit" class="search-button" aria-label="Submit search">🔎</button>
+                    </form>
+                </div>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+                <div class="nav-menu">
+                    <ul class="nav-list">
+                    	<li><a href="/" class="nav-link">HOME</a></li>
+                        <li><a href="/pages/About" class="nav-link">About</a></li>
+                        <li><a href="/pages/Contact" class="nav-link">Contact</a></li>
+                        <li><a href="/pages/Disclaimer" class="nav-link">Disclaimer</a></li>
+                        <li><a href="/pages/Privacy" class="nav-link">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="main">
+        <article class="article">
+            <header class="article-header">
+                <div class="container">
+                    <h1>Zsh: What File Is Called Between .zshenv And .zshrc?</h1>
+                    <div class="meta">
+                        <time datetime="2025-08-02T07:49:33+00:00">Aug 2, 2025</time>
+                        <span class="author">by ADMIN</span>
+                        <span class="view-count">
+                            <span id="viewCount">53</span> views
+                        </span>
+                    </div>
+                </div>
+            </header>
+            <div class="ad-header container">
+                <div class="ad-wrapper">
+    Iklan Headers
+</div>
+            </div>
+            <div class="container">
+                <div class="article-layout">
+                    <div class="content">
+                        <img src="https://tse4.mm.bing.net/th?q=Unraveling%20Zsh%20Shell%20Startup%3A%20A%20Deep%20Dive%20into%20the%20Files%20Between%20.zshenv%20and%20.zshrc" title="Unraveling Zsh Shell Startup: A Deep Dive into the Files Between .zshenv and .zshrc" width="300" height="200"/><p>Hey guys! Ever felt like your Zsh shell is playing tricks on you, especially with your <code>$PATH</code>? You're not alone! It's a common head-scratcher, particularly when things seem to change mysteriously between your <code>.zshenv</code> and <code>.zshrc</code> files. Let's dive deep into the Zsh startup sequence, demystify the files involved, and figure out what might be altering your environment. This guide will help you understand the intricacies of Zsh shell initialization, ensuring your environment is set up exactly as you expect.</p>
+<h2>Understanding the Zsh Startup Files</h2>
+<p>To really get a handle on this, let's break down the Zsh startup file order. According to the official documentation, Zsh loads these files in a specific sequence during shell initialization. This order is crucial for understanding when and how your environment variables, like <code>$PATH</code>, are being set and modified. The sequence is as follows:</p>
+<ol>
+<li><strong>.zshenv</strong>: This is the first file sourced in every Zsh instance, no matter how the shell is invoked. Think of it as the foundational setup for your shell environment. It's the perfect place for setting environment variables that need to be available in all shell sessions.</li>
+<li><strong>.zprofile</strong>: This file is read only by login shells. Login shells are typically the first interactive shell you get when you log into your system. It's a good spot for commands that you want to run only once at the start of a session.</li>
+<li><strong>.zshrc</strong>: This file is read by interactive, non-login shells. These are the shells you usually get when you open a new terminal window or tab. It's the most common place for aliases, functions, and other interactive shell customizations.</li>
+<li><strong>.zlogin</strong>: Similar to <code>.zprofile</code>, this file is read by login shells, but it's read after <code>.zshrc</code>. This can be useful for commands that depend on settings in <code>.zshrc</code>.</li>
+</ol>
+<h3>.zshenv: The Foundation of Your Zsh Environment</h3>
+<p>The <strong>.zshenv</strong> file is the very first script that Zsh executes upon startup, making it the cornerstone of your shell environment. It's sourced for <em>every</em> Zsh instance, whether it's an interactive shell, a login shell, or even a script execution. This makes <code>.zshenv</code> the <strong><em>ideal place to define environment variables</em></strong> like <code>$PATH</code>, which need to be universally accessible across all your Zsh sessions. By setting <code>$PATH</code> here, you ensure that your system knows where to find executable files, regardless of how the shell is initiated.</p>
+<p>To effectively manage your environment, it's crucial to understand the role <code>.zshenv</code> plays. Think of it as the bedrock upon which your shell environment is built. Setting your <code>$PATH</code> here guarantees consistency across all shell instances. However, due to its ubiquitous nature, you should avoid placing commands that produce output or have side effects in <code>.zshenv</code>. This is because these commands will be executed every time a Zsh shell starts, potentially leading to unexpected behavior or performance issues. Instead, focus on defining environment variables and settings that are essential for the shell's operation.</p>
+<p>For instance, you might include lines like <code>export PATH=/usr/local/bin:$PATH</code> in your <code>.zshenv</code> to prepend a directory to your <code>$PATH</code>. To ensure that this setting is correctly applied, you can echo the <code>$PATH</code> variable within <code>.zshenv</code> for debugging purposes. This helps you verify that the variable is being set as expected before any other startup files are processed. However, remember that echoing variables in <code>.zshenv</code> will produce output for every shell instance, so it's best to remove these debugging lines once you're confident in your configuration. By carefully managing your <code>.zshenv</code> file, you can create a stable and predictable foundation for your Zsh environment.</p>
+<h3>.zprofile: Setting Up Login Shells</h3>
+<p>The <strong>.zprofile</strong> file is specifically designed for login shells, which are the initial interactive shells you encounter when you log into your system. This means it's the perfect place for configurations and commands that you only want to execute once per session. Unlike <code>.zshenv</code>, which is sourced for every Zsh instance, <code>.zprofile</code> is exclusive to login shells, making it ideal for tasks like setting up session-specific environment variables or running startup scripts that should not be repeated in subshells.</p>
+<p>When you log in, <code>.zprofile</code> is sourced after <code>.zshenv</code> but before <code>.zshrc</code>. This order is crucial because it allows you to build upon the foundational environment set in <code>.zshenv</code> and customize it further for the login session. A common use case for <code>.zprofile</code> is setting terminal settings or initializing graphical environments. For example, if you have specific applications or services that need to start automatically when you log in, <code>.zprofile</code> is the place to configure those settings. You can also use it to set environment variables that are only relevant for the duration of your login session.</p>
+<p>However, it's important to remember that <code>.zprofile</code> is not sourced for every new terminal window or tab you open. These new shells are typically non-login shells and will source <code>.zshrc</code> instead. Therefore, avoid placing essential environment variable definitions in <code>.zprofile</code> that should be available in all shell instances. Instead, reserve <code>.zprofile</code> for configurations that are specific to the login session. This separation of concerns helps maintain a clean and efficient shell environment. By carefully managing the commands and settings in your <code>.zprofile</code>, you can ensure that your login shell is properly configured without interfering with other shell instances.</p>
+<h3>.zshrc: Customizing Interactive Shells</h3>
+<p>The <strong>.zshrc</strong> file is the heart of your interactive Zsh experience. It's sourced every time you start a new interactive, non-login shell, such as opening a new terminal window or tab. This makes <code>.zshrc</code> the go-to place for customizations that you want to apply to your daily shell usage. Unlike <code>.zshenv</code> and <code>.zprofile</code>, which have more specific roles, <code>.zshrc</code> is where you'll define aliases, functions, and options that enhance your command-line workflow.</p>
+<p>The significance of <code>.zshrc</code> lies in its ability to tailor the shell environment to your personal preferences and needs. Aliases, for instance, can save you time and keystrokes by creating shortcuts for frequently used commands. Functions allow you to encapsulate complex operations into reusable blocks of code, making your shell scripts more organized and maintainable. Options, on the other hand, can modify the behavior of the shell itself, such as enabling command-line completion or changing the prompt style. By leveraging these features, you can create a shell environment that is both efficient and enjoyable to use.</p>
+<p>When configuring your <code>.zshrc</code>, it's important to keep in mind that it's sourced frequently. This means that any commands or settings you place in it will be executed every time a new interactive shell starts. Therefore, avoid putting resource-intensive operations or commands with side effects in <code>.zshrc</code>. Instead, focus on customizations that enhance interactivity and productivity. For example, you might define aliases for common Git commands, set up a custom prompt that displays useful information, or configure command-line completion to make your shell more user-friendly. By thoughtfully managing your <code>.zshrc</code> file, you can create a personalized shell environment that streamlines your workflow and boosts your efficiency.</p>
+<h3>.zlogin: Final Touches for Login Shells</h3>
+<p>The <strong>.zlogin</strong> file is the last script sourced by login shells in Zsh, following <code>.zshenv</code>, <code>.zprofile</code>, and <code>.zshrc</code>. This placement makes it ideal for commands that need to be executed after all other login-related configurations have been applied. Think of <code>.zlogin</code> as the final touch, allowing you to perform actions that depend on settings established in the earlier files.</p>
+<p>The primary role of <code>.zlogin</code> is to finalize the setup of the login shell environment. This can include tasks such as setting terminal-specific options, displaying a welcome message, or running cleanup scripts. Since it's sourced after <code>.zshrc</code>, <code>.zlogin</code> can also be used to override or refine settings made in <code>.zshrc</code>, providing an extra layer of control over the shell's behavior. This is particularly useful for ensuring that certain settings are consistently applied across all login sessions.</p>
+<p>However, it's important to use <code>.zlogin</code> judiciously. Because it's only sourced by login shells, any configurations placed here will not be applied to non-login shells, such as those opened in new terminal windows or tabs. Therefore, avoid putting essential environment variable definitions or customizations that should be available in all shell instances in <code>.zlogin</code>. Instead, reserve it for tasks that are specifically related to the login process. For example, you might use <code>.zlogin</code> to display system information, set up terminal emulators, or configure window managers. By carefully managing your <code>.zlogin</code> file, you can ensure that your login shells are properly initialized without affecting other shell instances.</p>
+<h2>Diagnosing the <code>$PATH</code> Mystery</h2>
+<p>Okay, so you've set your <code>$PATH</code> in <code>.zshenv</code>, echoed it, and it looks good. But then, somewhere between <code>.zshenv</code> and <code>.zshrc</code>, something changes it. What gives? Let's put on our detective hats and figure this out.</p>
+<h3>1. Echo <code>$PATH</code> in Every File</h3>
+<p>The first step is to add `echo</p>
+
+                    </div>
+                    <aside class="related-posts">
+                        <div class="ad-sidebar container">
+                            <div class="ad-wrapper">
+    <span>Iklan Related</span>
+</div>
+                        </div>
+                        <h2 class="related-posts-title">Related Posts</h2><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/bernoullis-equation-siphon-and-fluid">Bernoulli&#39;s Equation Siphon And Fluid Flow Problems Explained</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-14T13:03:21+00:00">Jul 14, 2025</time>
+		                        <span class="view-count">
+									61 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/current-flow-between-points-of">Current Flow Between Points Of Equal Potential Explained</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-14T10:46:16+00:00">Jul 14, 2025</time>
+		                        <span class="view-count">
+									56 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/become-a-hand-model-the">Become A Hand Model: The Ultimate Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-03T12:30:57+00:00">Aug 3, 2025</time>
+		                        <span class="view-count">
+									39 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/unblock-chakras-with-reiki-a">Unblock Chakras With Reiki: A Step-by-Step Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-08T05:45:17+00:00">Aug 8, 2025</time>
+		                        <span class="view-count">
+									48 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/first-draft-gold-top-writing">First Draft Gold: Top Writing Tips</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-06T03:28:55+00:00">Aug 6, 2025</time>
+		                        <span class="view-count">
+									34 views
+		                        </span>
+                            </div>
+                        </article>
+                    </aside>
+                    <aside class="related-posts"></aside>
+                </div>
+            </div>
+        </article>
+        <a href="#" class="back-to-top" id="backToTop" title="Back to top">
+        	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-bar-up" viewBox="0 0 16 16">
+			  <path fill-rule="evenodd" d="M3.646 11.854a.5.5 0 0 0 .708 0L8 8.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708M2.4 5.2c0 .22.18.4.4.4h10.4a.4.4 0 0 0 0-.8H2.8a.4.4 0 0 0-.4.4"/>
+			</svg>
+		</a>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 ANABEL</p>
+        </div>
+    </footer>
+    <script>
+    	(() => {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            const toggleMenu = () => {
+                navMenu.classList.toggle('nav-menu-active');
+                navToggle.classList.toggle('nav-toggle-active');
+            };
+            const backToTopHandler = (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            navToggle.addEventListener('click', toggleMenu);
+            document.getElementById('backToTop').addEventListener('click', backToTopHandler);
+            window.addEventListener('pagehide', () => {
+                navToggle.removeEventListener('click', toggleMenu);
+                document.getElementById('backToTop').removeEventListener('click', backToTopHandler);
+            });
+        })();
+		(() => {
+            window.addEventListener("DOMContentLoaded", (event) => {
+                const ellHljs = document.createElement("script");
+                ellHljs.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js");
+                ellHljs.onload = () => {
+                    hljs.highlightAll();
+                };
+                document.querySelector("body").append(ellHljs);
+                const ellFont = document.createElement("link");
+                ellFont.setAttribute("href", "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css");
+                ellFont.setAttribute("rel", "stylesheet");
+                document.querySelector("head").append(ellFont);
+                window.addEventListener('pagehide', () => {
+                    // ellHljs.remove();
+                    ellFont.remove();
+                });
+
+            });
+        })();
+    </script>
+    
+    
+    
+</body>
+</html>

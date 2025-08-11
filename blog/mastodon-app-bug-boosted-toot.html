@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Mastodon App Bug: Boosted Toot Double-Click Fix</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mastodon App Bug: Boosted Toot Double-Click Fix...">
+    <link rel="canonical" href="https://catatansoal.github.io/blog/mastodon-app-bug-boosted-toot">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Mastodon App Bug: Boosted Toot Double-Click Fix">
+	<meta property="og:description" content="Mastodon App Bug: Boosted Toot Double-Click Fix...">
+	<meta property="og:url" content="https://catatansoal.github.io/blog/mastodon-app-bug-boosted-toot">
+	<meta property="og:site_name" content="ANABEL">
+	<meta property="article:published_time" content="2025-08-06T16:24:32+00:00">
+	<meta property="article:author" content="ADMIN">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+    <link rel="preload" fetchpriority="high" as="image" href="https://tse4.mm.bing.net/th?q=Bug%3A%20Empty%20Window%20on%20Double-Click%20of%20Boosted%20Toot%20-%20Troubleshooting%20Guide">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style type="text/css">
+    	:root{--primary-color:#3740ff;--text-color:#202124;--background-color:#ffffff;--gray-100:#f8f9fa;--gray-200:#e9ecef}*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;line-height:1.6;color:var(--text-color);background-color:var(--background-color)}.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}.header{background-color:var(--background-color);border-bottom:1px solid var(--gray-200);position:sticky;top:0;z-index:100}.nav{padding:.5rem 0}.nav-container{display:flex;justify-content:space-between;align-items:center;gap:1rem}.nav-left{display:flex;align-items:center;flex-shrink:0}.logo{font-weight:700;color:var(--primary-color)}.blog-tag{margin-left:1rem;padding:.25rem .5rem;background-color:var(--gray-100);border-radius:4px;font-size:.875rem}.nav-search{flex-grow:1;max-width:300px}.search-form{position:relative;width:100%}.search-input{width:100%;padding:.5rem 2.5rem .5rem 1rem;border:1px solid var(--gray-200);border-radius:24px;font-size:.875rem;transition:all 0.2s}.search-input:focus{outline:none;border-color:var(--primary-color);box-shadow:0 0 0 2px rgb(55 64 255 / .1)}.search-button{position:absolute;right:.5rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#5f6368;cursor:pointer;padding:.25rem;display:flex;align-items:center;justify-content:center}.search-button:hover{color:var(--primary-color)}.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:.5rem}.hamburger{display:block;position:relative;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before,.hamburger::after{content:'';position:absolute;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before{top:-6px}.hamburger::after{bottom:-6px}.nav-toggle-active .hamburger{background:#fff0}.nav-toggle-active .hamburger::before{transform:rotate(45deg);top:0}.nav-toggle-active .hamburger::after{transform:rotate(-45deg);bottom:0}.nav-list{display:flex;list-style:none;gap:2rem}.nav-link{color:var(--text-color);text-decoration:none;font-size:.9rem;transition:color 0.2s}.nav-link:hover{color:var(--primary-color)}.article-header{padding:2rem 0;background-color:var(--gray-100)}.article-layout{display:grid;grid-template-columns:1fr 350px;gap:3rem;padding:1rem 0;align-items: start}h1,h2,h3,h4,h5,h6{font-family:"Crimson Text","Times New Roman",Times,serif}h1{font-size:2.5rem;line-height:1.2;margin-bottom:1rem}.meta{color:#5f6368;font-size:.875rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}.view-count{display:inline-flex;align-items:center;gap:.25rem}.view-count svg{color:#5f6368}.content{min-width:0;border-bottom:1px solid #dddddd5e;margin-top:1rem;white-space:pre-line !important;overflow-wrap:break-word;overflow-x:auto;word-break:break-word}.lead{font-size:1.25rem;color:#5f6368;margin-bottom:2rem}h2,h3,h4,h5,h6{font-size:1.75rem;margin:1rem 0 1rem}p,pre,ol,ul>li{margin-bottom:1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;font-size:1.3rem;text-align: justify;}p>code{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px}hr{margin:1rem 0 1rem 0}.code-example{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;margin:1.5rem 0;overflow-x:auto}code{font-family:'Roboto Mono',monospace;font-size:.875rem}ul{margin:.2rem 0;padding-left:1.5rem}.related-posts{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;position:sticky;top:5rem}.related-posts-title,.newpost-posts-list{font-size:1.75rem;margin:0 0 1rem}.related-posts-list{display:flex;flex-direction:column;gap:.5rem}.related-post,.newpost-post{border-bottom:1px solid #ddd;padding-bottom:10px;margin-bottom:10px}.related-post:last-child,.newpost-post:last-child{padding-bottom:0;border-bottom:none}.related-post-title,.newpost-post-title{font-size:1.2rem;margin:0 0 .1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;}.related-post-title a,.newpost-post-title a{color:var(--text-color);text-decoration:none;transition:color 0.2s}.related-post-title a:hover,.newpost-post-title a:hover{color:var(--primary-color)}.related-post time{font-size:.875rem;color:#5f6368}.footer{background-color:var(--gray-100);padding:2rem 0;margin-top:4rem;color:#5f6368;font-size:.875rem}.nav-menu>ul>li{margin-bottom:0}@media (max-width:1024px){.container{max-width:800px}.article-layout{grid-template-columns:1fr;gap:2rem}.related-posts{position:static}}@media (max-width:768px){.nav-container{flex-wrap:wrap}.nav-search{order:3;max-width:none;width:100%;margin-top:.1rem}.nav-toggle{display:block}.nav-menu{display:none;position:absolute;top:100%;left:0;right:0;background:var(--background-color);padding:1rem 0;border-bottom:1px solid var(--gray-200)}.nav-menu-active{display:block}.nav-list{flex-direction:column;gap:.1rem;padding:0 1.5rem}.nav-link{display:block;padding:.2rem 0}h1{font-size:2rem}.article-header{padding:2rem 0}.content{padding:.1rem 0}}table{width:100%;border-collapse:collapse;margin:20px 0;font-family:'Arial',sans-serif}th,td{padding:12px 15px;text-align:left;border:1px solid #ddd}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9}tr:nth-child(even) td{background-color:#f2f2f2}@media screen and (max-width:768px){table{border:0;display:block;overflow-x:auto;white-space:nowrap}th,td{padding:10px;text-align:right}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9;border-bottom:1px solid #ddd}tr:nth-child(even) td{background-color:#f2f2f2}}a{text-decoration:none;color:#540707}.katex-html{padding: .2rem;color: #000;font-weight: 700;font-size: 1.3rem;overflow-wrap: break-word;max-width: 100%;white-space: normal !important}.category{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin:1rem 0 1rem 0}.tag{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px;font-family:"Newsreader",serif}.tag>a{text-decoration:none;color:#000}img{margin:auto;display:block;max-width:100%;height:auto;margin-bottom:1rem}.katex{white-space: pre-line !important;display: inline-block;max-width: 100%;overflow-x: auto;overflow-y: hidden;scrollbar-width: thin;overflow-wrap: break-word;word-break: break-word;vertical-align: -7px}.content > p {overflow-wrap: break-word;word-break: break-word}
+    </style>
+    <style type="text/css">
+    	pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}
+		.hljs{color:#c9d1d9;background:#0d1117}.hljs-doctag,.hljs-keyword,.hljs-meta .hljs-keyword,.hljs-template-tag,.hljs-template-variable,.hljs-type,.hljs-variable.language_{color:#ff7b72}.hljs-title,.hljs-title.class_,.hljs-title.class_.inherited__,.hljs-title.function_{color:#d2a8ff}.hljs-attr,.hljs-attribute,.hljs-literal,.hljs-meta,.hljs-number,.hljs-operator,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-variable{color:#79c0ff}.hljs-meta .hljs-string,.hljs-regexp,.hljs-string{color:#a5d6ff}.hljs-built_in,.hljs-symbol{color:#ffa657}.hljs-code,.hljs-comment,.hljs-formula{color:#8b949e}.hljs-name,.hljs-quote,.hljs-selector-pseudo,.hljs-selector-tag{color:#7ee787}.hljs-subst{color:#c9d1d9}.hljs-section{color:#1f6feb;font-weight:700}.hljs-bullet{color:#f2cc60}.hljs-emphasis{color:#c9d1d9;font-style:italic}.hljs-strong{color:#c9d1d9;font-weight:700}.hljs-addition{color:#aff5b4;background-color:#033a16}.hljs-deletion{color:#ffdcd7;background-color:#67060c}
+    	pre{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;font-weight:400;word-break:break-word;word-wrap:break-word;box-sizing:inherit;border-radius:4px;overflow-x:auto;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}code{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;word-wrap:break-word;word-break:break-word;font-style:normal;line-height:20px;letter-spacing:-.003em;box-sizing:inherit;font-weight:400;font-size:75%;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}
+    </style>
+    <style type="text/css">
+    	.back-to-top{position:fixed;bottom:20px;right:20px;background-color:#a73f3f;color:#fff;padding:8px 10px;border-radius:50%;box-shadow:0 4px 6px rgb(0 0 0 / .2);font-size:10px;font-weight:700;text-decoration:none;text-align:center;transition:opacity 0.3s ease,visibility 0.3s ease;z-index:99999;opacity:1;visibility:visible}.back-to-top:hover{background-color:#0056b3}
+    </style>
+    <style type="text/css">
+        .ad-header {margin: 1rem auto 1rem;background-color: #fdfdfd;text-align: center;display: block;}.ad-header .ad-wrapper {min-height: 90px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #555;font-weight: 500;padding: 3rem;border: 1px dashed #ccc;border-radius: 6px;}@media (max-width: 768px) {.ad-header {padding: 0.75rem;}}.ad-sidebar {margin: 0 0 1rem;background-color: #fefefe;text-align: center;padding: 0px;width: 100%;max-width: 100%;display: block;}.ad-sidebar .ad-wrapper {min-height: 250px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #444;font-weight: 500;border: 1px dashed #aaa;border-radius: 6px;padding: 0rem;}@media (max-width: 1024px) {.ad-sidebar {padding: 0.75rem;}}
+    </style>
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://catatansoal.github.io/blog/mastodon-app-bug-boosted-toot"
+          },
+          "headline": "Mastodon App Bug: Boosted Toot Double-Click Fix",
+          "description": "Mastodon App Bug: Boosted Toot Double-Click Fix...",
+          "image": [
+            "https://tse4.mm.bing.net/th?q=Bug%3A%20Empty%20Window%20on%20Double-Click%20of%20Boosted%20Toot%20-%20Troubleshooting%20Guide"
+          ],
+          "author": {
+            "@type": "Person",
+            "name": "ADMIN",
+            "jobTitle": "Editor web"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "ANABEL",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://tse4.mm.bing.net/th?q=ANABEL%20WEB"
+            }
+          },
+          "datePublished": "2025-08-06T16:24:32+00:00",
+          "dateModified": "2025-08-06T16:24:32+00:00"
+        }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="container nav-container">
+                <div class="nav-left">
+                    <span class="logo">ANABEL</span>
+                    <span class="blog-tag">Article</span>
+                </div>
+                <div class="nav-search">
+                    <form class="search-form" role="search">
+                        <input 
+                            type="search" 
+                            class="search-input"
+                            placeholder="Search articles..."
+                            aria-label="Search articles"
+                        >
+                        <button type="submit" class="search-button" aria-label="Submit search">🔎</button>
+                    </form>
+                </div>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+                <div class="nav-menu">
+                    <ul class="nav-list">
+                    	<li><a href="/" class="nav-link">HOME</a></li>
+                        <li><a href="/pages/About" class="nav-link">About</a></li>
+                        <li><a href="/pages/Contact" class="nav-link">Contact</a></li>
+                        <li><a href="/pages/Disclaimer" class="nav-link">Disclaimer</a></li>
+                        <li><a href="/pages/Privacy" class="nav-link">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="main">
+        <article class="article">
+            <header class="article-header">
+                <div class="container">
+                    <h1>Mastodon App Bug: Boosted Toot Double-Click Fix</h1>
+                    <div class="meta">
+                        <time datetime="2025-08-06T16:24:32+00:00">Aug 6, 2025</time>
+                        <span class="author">by ADMIN</span>
+                        <span class="view-count">
+                            <span id="viewCount">48</span> views
+                        </span>
+                    </div>
+                </div>
+            </header>
+            <div class="ad-header container">
+                <div class="ad-wrapper">
+    Iklan Headers
+</div>
+            </div>
+            <div class="container">
+                <div class="article-layout">
+                    <div class="content">
+                        <img src="https://tse4.mm.bing.net/th?q=Bug%3A%20Empty%20Window%20on%20Double-Click%20of%20Boosted%20Toot%20-%20Troubleshooting%20Guide" title="Bug: Empty Window on Double-Click of Boosted Toot - Troubleshooting Guide" width="300" height="200"/><h2>Identifying the Issue: Double-Clicking Boosted Toots in Mastodon App</h2>
+<p>Alright, folks, let's dive into this pesky bug that's been causing some headaches. <strong>Double-clicking on a boosted toot,</strong> and instead of seeing the original post, you're greeted with an empty window titled &quot;No selection.&quot; This issue is specifically targeting the Mastodon app, and if you're experiencing this, you're definitely not alone. I've been digging through the details, and it seems like this is a reproducible issue that impacts the user experience, so let's troubleshoot it. The bug is consistently popping up for users on macOS Sequoia 15.5 with the Apple Silicon (ARM-64) architecture, running the Mastodon app version 1.0 (build number 7), downloaded directly from the App Store. This isn't just a random glitch; it's a structured problem, and understanding its nature is the first step towards a fix.</p>
+<p>This problem really messes with how we interact with boosted content. When you double-click a boosted toot, you expect to see the original post that someone found interesting enough to share, right? It's a fundamental part of how we explore the Mastodon ecosystem, allowing us to engage with content our network finds valuable. But the current behavior—displaying a blank window—breaks this flow. It stops you from quickly jumping to the original post and leaves you in the dark, making it harder to engage with the content and the network. So, to recap, you launch the app, spot a toot that's been boosted, double-click it, and... nothing! The empty window is the disappointing result, and this is something the developers definitely need to address.</p>
+<p>We're talking about a crucial feature here. Think about it: boosting is all about sharing cool stuff and letting your followers see it. It's a way of saying, &quot;Hey, check this out!&quot; When the app fails to show the original post, it undermines the entire process. It makes it harder for users to discover interesting content, engage in meaningful conversations, and generally enjoy the platform to its fullest. The empty window disrupts the social flow, and makes it harder to enjoy the features of the app. In fact, this behavior isn't just inconvenient; it actively works against the core functionality of the app. It's crucial for developers to recognize this and prioritize a fix, because it affects so many different aspects of the Mastodon experience.</p>
+<p>Understanding the specific situation is essential for a solid fix, so let's break down what's happening under the hood. This is about more than just a visual error. It's about the app's inability to properly retrieve and display the information associated with a boosted toot. There might be an issue with how the app handles the linking of the original post, or perhaps a problem with the way it fetches data. The specifics matter a lot, and will help developers pinpoint the root cause and roll out a solution as fast as possible. Now that we know what the bug is, let's move on to the factors that might be causing it. The next section covers system architecture, OS versions, application versions, and more.</p>
+<h2>The Technical Breakdown: Digging into the System Architecture and App Details</h2>
+<p>Let's get into the nitty-gritty and explore the technical aspects of the bug, and how it’s showing up on your systems. We will be focusing on the operating system and the app details, and other components involved in this issue. Understanding the precise environment where the bug occurs is key to finding a solution. We'll go over the ARM-64 architecture on Apple Silicon, macOS Sequoia 15.5, the Mastodon app version 1.0 (build number 7), and where you installed the app from.</p>
+<p><strong>System Architecture: ARM-64 (Apple Silicon)</strong></p>
+<p>First off, we're looking at ARM-64, which is Apple's custom silicon. This is important because the app is running on the newer generation of Macs. If the app isn’t properly optimized for this architecture, it might cause compatibility issues or bugs. This is just one piece of the puzzle, so keep this in mind as we move forward.</p>
+<p><strong>Operating System Version: macOS Sequoia 15.5</strong></p>
+<p>Next, we've got macOS Sequoia 15.5. The operating system is a crucial factor, because it's the foundation that the app runs on. Sometimes, bugs show up due to compatibility problems between the app and the OS. OS updates can introduce changes, so this could be related to an update, or perhaps an issue with the newest version. Software interactions are often complex, and keeping the OS in mind will help us find a solution.</p>
+<p><strong>Application Version: Mastodon 1.0 (Build Number 7)</strong></p>
+<p>Then we've got the app itself, specifically version 1.0, build number 7. This version is important, and understanding the specific build number helps developers identify where the problem might be. If the bug is related to a specific code, build numbers become crucial. Also, the fact that the issue persists in this build number tells us this bug needs attention.</p>
+<p><strong>Installation Source: App Store</strong></p>
+<p>Finally, the installation source is the App Store. This matters because it tells us how the app was installed and updated. This usually guarantees that you have the most stable version of the app, and it helps identify if the issue is related to the way the app is downloaded or updated.</p>
+<p>All of these factors combined give us a solid picture of the problem. The more details you have, the easier it is to troubleshoot and fix. Let's move on to the steps to reproduce the bug.</p>
+<h2>Step-by-Step Guide: How to Recreate the Empty Window Bug</h2>
+<p>Alright, let's figure out how to get this bug to show up every single time. The steps to reproduce this bug are straightforward. Here's a simple guide to recreate the problem, step by step.</p>
+<ol>
+<li><strong>Launch the app:</strong> First, you gotta fire up the Mastodon app on your macOS Sequoia 15.5 system. Make sure the app is completely loaded, and ready to go.</li>
+<li><strong>Find a boosted toot:</strong> Next, scroll through your timeline and find a toot that's been boosted. You'll know it's a boost if it displays the boost icon. It should be easy to spot.</li>
+<li><strong>Double-click that toot:</strong> Once you’ve found the boost, simply double-click on it. This action should trigger the app to show the original post, but as you know, we have a problem.</li>
+</ol>
+<p>That’s it! Now, when you double-click, instead of seeing the original content, an empty window with the title &quot;No selection&quot; shows up. These are the exact steps that trigger the bug. Now, if you're following these steps and still not experiencing the bug, that's good news! But if you are seeing the empty window, then you’ve successfully reproduced the issue.</p>
+<p>Reproducing a bug is a critical step in the troubleshooting process. When developers can consistently recreate the problem, they can start to dig into the code and find the root cause. This makes fixing the bug much faster and more efficient. So, if you're running into this issue, make sure to follow these steps. Providing clear steps is important because it helps developers to understand the exact conditions that lead to the problem. It also helps them to verify that any potential solutions actually work.</p>
+<h2>Troubleshooting and What to Expect</h2>
+<p>Okay, so you're facing the empty window issue, and you've followed all the steps to trigger it. Now, let's talk about what happens next and what you can do. Since you're dealing with an issue, here's what you need to know.</p>
+<p><strong>Expected Behavior vs. Actual Behavior</strong></p>
+<p>The <strong>expected behavior</strong> is that double-clicking a boosted toot should show the original post in a new window. You should be able to see the content, engage with it, and interact with the boosted post. The <strong>actual behavior</strong>, however, is an empty window titled &quot;No selection.&quot; This is the frustrating reality of the bug.</p>
+<p><strong>Troubleshooting Steps</strong></p>
+<p>Here's what you can try to help the developers find the issue:</p>
+<ul>
+<li><strong>Restart the App:</strong> Try closing the app completely, and then re-open it. This can resolve minor glitches.</li>
+<li><strong>Restart Your Mac:</strong> A full restart can fix underlying system problems that might be causing this.</li>
+<li><strong>Check for App Updates:</strong> Make sure you're running the latest version of the app.</li>
+<li><strong>Report the Issue:</strong> If the problem continues, report it to the developers. Provide all the details we've discussed: your system architecture, OS version, app version, steps to reproduce, and screenshots.</li>
+</ul>
+<p><strong>What to Expect</strong></p>
+<p>The developers are likely going to investigate the problem by:</p>
+<ul>
+<li><strong>Analyzing the Code:</strong> They will examine the code responsible for handling boosted toots.</li>
+<li><strong>Testing the Bug:</strong> They will try to reproduce the bug on their own systems.</li>
+<li><strong>Implementing a Fix:</strong> They will work on a solution and release an updated version of the app.</li>
+</ul>
+<p><strong>Screenshots and Screen Recordings</strong></p>
+<p>If you can, take screenshots or record a screen recording that shows the bug in action. This helps developers visualize the problem and makes it easier to pinpoint the cause. The more info you can provide, the better.</p>
+<p><strong>Additional Context</strong></p>
+<p>If you have any extra information, include it. Any details about when the bug started happening, or if it's linked to a specific action, can be really helpful.</p>
+<p><strong>In summary,</strong> the best course of action is to follow the troubleshooting steps, gather as much info as possible, and report the bug to the developers. With your help, they can fix this issue. Let's get this bug fixed so we can get back to enjoying our boosted toots without those annoying empty windows!</p>
+
+                    </div>
+                    <aside class="related-posts">
+                        <div class="ad-sidebar container">
+                            <div class="ad-wrapper">
+    <span>Iklan Related</span>
+</div>
+                        </div>
+                        <h2 class="related-posts-title">Related Posts</h2><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/diy-baby-mobile-a-step">DIY Baby Mobile: A Step-by-Step Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-04T15:35:17+00:00">Aug 4, 2025</time>
+		                        <span class="view-count">
+									37 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/how-can-topic-be-uncountable">How Can Topic Be Uncountable Exploring Grammar And Vocabulary</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-13T18:06:27+00:00">Jul 13, 2025</time>
+		                        <span class="view-count">
+									61 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/aft-wing-placement-effects-on">Aft Wing Placement Effects On Pitching Moment And Aircraft Design</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-14T01:50:00+00:00">Jul 14, 2025</time>
+		                        <span class="view-count">
+									65 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/cook-beef-tongue-recipes-tips">Cook Beef Tongue: Recipes, Tips, And Tricks</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-10T17:46:08+00:00">Aug 10, 2025</time>
+		                        <span class="view-count">
+									43 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/convert-fahrenheit-to-celsius-a">Convert Fahrenheit To Celsius: A Simple Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-05T05:06:59+00:00">Aug 5, 2025</time>
+		                        <span class="view-count">
+									45 views
+		                        </span>
+                            </div>
+                        </article>
+                    </aside>
+                    <aside class="related-posts"></aside>
+                </div>
+            </div>
+        </article>
+        <a href="#" class="back-to-top" id="backToTop" title="Back to top">
+        	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-bar-up" viewBox="0 0 16 16">
+			  <path fill-rule="evenodd" d="M3.646 11.854a.5.5 0 0 0 .708 0L8 8.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708M2.4 5.2c0 .22.18.4.4.4h10.4a.4.4 0 0 0 0-.8H2.8a.4.4 0 0 0-.4.4"/>
+			</svg>
+		</a>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 ANABEL</p>
+        </div>
+    </footer>
+    <script>
+    	(() => {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            const toggleMenu = () => {
+                navMenu.classList.toggle('nav-menu-active');
+                navToggle.classList.toggle('nav-toggle-active');
+            };
+            const backToTopHandler = (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            navToggle.addEventListener('click', toggleMenu);
+            document.getElementById('backToTop').addEventListener('click', backToTopHandler);
+            window.addEventListener('pagehide', () => {
+                navToggle.removeEventListener('click', toggleMenu);
+                document.getElementById('backToTop').removeEventListener('click', backToTopHandler);
+            });
+        })();
+		(() => {
+            window.addEventListener("DOMContentLoaded", (event) => {
+                const ellHljs = document.createElement("script");
+                ellHljs.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js");
+                ellHljs.onload = () => {
+                    hljs.highlightAll();
+                };
+                document.querySelector("body").append(ellHljs);
+                const ellFont = document.createElement("link");
+                ellFont.setAttribute("href", "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css");
+                ellFont.setAttribute("rel", "stylesheet");
+                document.querySelector("head").append(ellFont);
+                window.addEventListener('pagehide', () => {
+                    // ellHljs.remove();
+                    ellFont.remove();
+                });
+
+            });
+        })();
+    </script>
+    
+    
+    
+</body>
+</html>

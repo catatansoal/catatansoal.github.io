@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Java To WASM: TeaVM In React Vite Guide</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Java To WASM: TeaVM In React Vite Guide...">
+    <link rel="canonical" href="https://catatansoal.github.io/blog/java-to-wasm-teavm-in">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Java To WASM: TeaVM In React Vite Guide">
+	<meta property="og:description" content="Java To WASM: TeaVM In React Vite Guide...">
+	<meta property="og:url" content="https://catatansoal.github.io/blog/java-to-wasm-teavm-in">
+	<meta property="og:site_name" content="ANABEL">
+	<meta property="article:published_time" content="2025-08-01T05:50:08+00:00">
+	<meta property="article:author" content="ADMIN">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+    <link rel="preload" fetchpriority="high" as="image" href="https://tse4.mm.bing.net/th?q=How%20to%20Use%20Java%20Backend%20Compiled%20to%20WebAssembly%20(WASM)%20Using%20TeaVM%20in%20React%20Vite">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style type="text/css">
+    	:root{--primary-color:#3740ff;--text-color:#202124;--background-color:#ffffff;--gray-100:#f8f9fa;--gray-200:#e9ecef}*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;line-height:1.6;color:var(--text-color);background-color:var(--background-color)}.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}.header{background-color:var(--background-color);border-bottom:1px solid var(--gray-200);position:sticky;top:0;z-index:100}.nav{padding:.5rem 0}.nav-container{display:flex;justify-content:space-between;align-items:center;gap:1rem}.nav-left{display:flex;align-items:center;flex-shrink:0}.logo{font-weight:700;color:var(--primary-color)}.blog-tag{margin-left:1rem;padding:.25rem .5rem;background-color:var(--gray-100);border-radius:4px;font-size:.875rem}.nav-search{flex-grow:1;max-width:300px}.search-form{position:relative;width:100%}.search-input{width:100%;padding:.5rem 2.5rem .5rem 1rem;border:1px solid var(--gray-200);border-radius:24px;font-size:.875rem;transition:all 0.2s}.search-input:focus{outline:none;border-color:var(--primary-color);box-shadow:0 0 0 2px rgb(55 64 255 / .1)}.search-button{position:absolute;right:.5rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#5f6368;cursor:pointer;padding:.25rem;display:flex;align-items:center;justify-content:center}.search-button:hover{color:var(--primary-color)}.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:.5rem}.hamburger{display:block;position:relative;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before,.hamburger::after{content:'';position:absolute;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before{top:-6px}.hamburger::after{bottom:-6px}.nav-toggle-active .hamburger{background:#fff0}.nav-toggle-active .hamburger::before{transform:rotate(45deg);top:0}.nav-toggle-active .hamburger::after{transform:rotate(-45deg);bottom:0}.nav-list{display:flex;list-style:none;gap:2rem}.nav-link{color:var(--text-color);text-decoration:none;font-size:.9rem;transition:color 0.2s}.nav-link:hover{color:var(--primary-color)}.article-header{padding:2rem 0;background-color:var(--gray-100)}.article-layout{display:grid;grid-template-columns:1fr 350px;gap:3rem;padding:1rem 0;align-items: start}h1,h2,h3,h4,h5,h6{font-family:"Crimson Text","Times New Roman",Times,serif}h1{font-size:2.5rem;line-height:1.2;margin-bottom:1rem}.meta{color:#5f6368;font-size:.875rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}.view-count{display:inline-flex;align-items:center;gap:.25rem}.view-count svg{color:#5f6368}.content{min-width:0;border-bottom:1px solid #dddddd5e;margin-top:1rem;white-space:pre-line !important;overflow-wrap:break-word;overflow-x:auto;word-break:break-word}.lead{font-size:1.25rem;color:#5f6368;margin-bottom:2rem}h2,h3,h4,h5,h6{font-size:1.75rem;margin:1rem 0 1rem}p,pre,ol,ul>li{margin-bottom:1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;font-size:1.3rem;text-align: justify;}p>code{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px}hr{margin:1rem 0 1rem 0}.code-example{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;margin:1.5rem 0;overflow-x:auto}code{font-family:'Roboto Mono',monospace;font-size:.875rem}ul{margin:.2rem 0;padding-left:1.5rem}.related-posts{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;position:sticky;top:5rem}.related-posts-title,.newpost-posts-list{font-size:1.75rem;margin:0 0 1rem}.related-posts-list{display:flex;flex-direction:column;gap:.5rem}.related-post,.newpost-post{border-bottom:1px solid #ddd;padding-bottom:10px;margin-bottom:10px}.related-post:last-child,.newpost-post:last-child{padding-bottom:0;border-bottom:none}.related-post-title,.newpost-post-title{font-size:1.2rem;margin:0 0 .1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;}.related-post-title a,.newpost-post-title a{color:var(--text-color);text-decoration:none;transition:color 0.2s}.related-post-title a:hover,.newpost-post-title a:hover{color:var(--primary-color)}.related-post time{font-size:.875rem;color:#5f6368}.footer{background-color:var(--gray-100);padding:2rem 0;margin-top:4rem;color:#5f6368;font-size:.875rem}.nav-menu>ul>li{margin-bottom:0}@media (max-width:1024px){.container{max-width:800px}.article-layout{grid-template-columns:1fr;gap:2rem}.related-posts{position:static}}@media (max-width:768px){.nav-container{flex-wrap:wrap}.nav-search{order:3;max-width:none;width:100%;margin-top:.1rem}.nav-toggle{display:block}.nav-menu{display:none;position:absolute;top:100%;left:0;right:0;background:var(--background-color);padding:1rem 0;border-bottom:1px solid var(--gray-200)}.nav-menu-active{display:block}.nav-list{flex-direction:column;gap:.1rem;padding:0 1.5rem}.nav-link{display:block;padding:.2rem 0}h1{font-size:2rem}.article-header{padding:2rem 0}.content{padding:.1rem 0}}table{width:100%;border-collapse:collapse;margin:20px 0;font-family:'Arial',sans-serif}th,td{padding:12px 15px;text-align:left;border:1px solid #ddd}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9}tr:nth-child(even) td{background-color:#f2f2f2}@media screen and (max-width:768px){table{border:0;display:block;overflow-x:auto;white-space:nowrap}th,td{padding:10px;text-align:right}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9;border-bottom:1px solid #ddd}tr:nth-child(even) td{background-color:#f2f2f2}}a{text-decoration:none;color:#540707}.katex-html{padding: .2rem;color: #000;font-weight: 700;font-size: 1.3rem;overflow-wrap: break-word;max-width: 100%;white-space: normal !important}.category{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin:1rem 0 1rem 0}.tag{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px;font-family:"Newsreader",serif}.tag>a{text-decoration:none;color:#000}img{margin:auto;display:block;max-width:100%;height:auto;margin-bottom:1rem}.katex{white-space: pre-line !important;display: inline-block;max-width: 100%;overflow-x: auto;overflow-y: hidden;scrollbar-width: thin;overflow-wrap: break-word;word-break: break-word;vertical-align: -7px}.content > p {overflow-wrap: break-word;word-break: break-word}
+    </style>
+    <style type="text/css">
+    	pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}
+		.hljs{color:#c9d1d9;background:#0d1117}.hljs-doctag,.hljs-keyword,.hljs-meta .hljs-keyword,.hljs-template-tag,.hljs-template-variable,.hljs-type,.hljs-variable.language_{color:#ff7b72}.hljs-title,.hljs-title.class_,.hljs-title.class_.inherited__,.hljs-title.function_{color:#d2a8ff}.hljs-attr,.hljs-attribute,.hljs-literal,.hljs-meta,.hljs-number,.hljs-operator,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-variable{color:#79c0ff}.hljs-meta .hljs-string,.hljs-regexp,.hljs-string{color:#a5d6ff}.hljs-built_in,.hljs-symbol{color:#ffa657}.hljs-code,.hljs-comment,.hljs-formula{color:#8b949e}.hljs-name,.hljs-quote,.hljs-selector-pseudo,.hljs-selector-tag{color:#7ee787}.hljs-subst{color:#c9d1d9}.hljs-section{color:#1f6feb;font-weight:700}.hljs-bullet{color:#f2cc60}.hljs-emphasis{color:#c9d1d9;font-style:italic}.hljs-strong{color:#c9d1d9;font-weight:700}.hljs-addition{color:#aff5b4;background-color:#033a16}.hljs-deletion{color:#ffdcd7;background-color:#67060c}
+    	pre{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;font-weight:400;word-break:break-word;word-wrap:break-word;box-sizing:inherit;border-radius:4px;overflow-x:auto;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}code{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;word-wrap:break-word;word-break:break-word;font-style:normal;line-height:20px;letter-spacing:-.003em;box-sizing:inherit;font-weight:400;font-size:75%;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}
+    </style>
+    <style type="text/css">
+    	.back-to-top{position:fixed;bottom:20px;right:20px;background-color:#a73f3f;color:#fff;padding:8px 10px;border-radius:50%;box-shadow:0 4px 6px rgb(0 0 0 / .2);font-size:10px;font-weight:700;text-decoration:none;text-align:center;transition:opacity 0.3s ease,visibility 0.3s ease;z-index:99999;opacity:1;visibility:visible}.back-to-top:hover{background-color:#0056b3}
+    </style>
+    <style type="text/css">
+        .ad-header {margin: 1rem auto 1rem;background-color: #fdfdfd;text-align: center;display: block;}.ad-header .ad-wrapper {min-height: 90px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #555;font-weight: 500;padding: 3rem;border: 1px dashed #ccc;border-radius: 6px;}@media (max-width: 768px) {.ad-header {padding: 0.75rem;}}.ad-sidebar {margin: 0 0 1rem;background-color: #fefefe;text-align: center;padding: 0px;width: 100%;max-width: 100%;display: block;}.ad-sidebar .ad-wrapper {min-height: 250px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #444;font-weight: 500;border: 1px dashed #aaa;border-radius: 6px;padding: 0rem;}@media (max-width: 1024px) {.ad-sidebar {padding: 0.75rem;}}
+    </style>
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://catatansoal.github.io/blog/java-to-wasm-teavm-in"
+          },
+          "headline": "Java To WASM: TeaVM In React Vite Guide",
+          "description": "Java To WASM: TeaVM In React Vite Guide...",
+          "image": [
+            "https://tse4.mm.bing.net/th?q=How%20to%20Use%20Java%20Backend%20Compiled%20to%20WebAssembly%20(WASM)%20Using%20TeaVM%20in%20React%20Vite"
+          ],
+          "author": {
+            "@type": "Person",
+            "name": "ADMIN",
+            "jobTitle": "Editor web"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "ANABEL",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://tse4.mm.bing.net/th?q=ANABEL%20WEB"
+            }
+          },
+          "datePublished": "2025-08-01T05:50:08+00:00",
+          "dateModified": "2025-08-01T05:50:08+00:00"
+        }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="container nav-container">
+                <div class="nav-left">
+                    <span class="logo">ANABEL</span>
+                    <span class="blog-tag">Article</span>
+                </div>
+                <div class="nav-search">
+                    <form class="search-form" role="search">
+                        <input 
+                            type="search" 
+                            class="search-input"
+                            placeholder="Search articles..."
+                            aria-label="Search articles"
+                        >
+                        <button type="submit" class="search-button" aria-label="Submit search">🔎</button>
+                    </form>
+                </div>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+                <div class="nav-menu">
+                    <ul class="nav-list">
+                    	<li><a href="/" class="nav-link">HOME</a></li>
+                        <li><a href="/pages/About" class="nav-link">About</a></li>
+                        <li><a href="/pages/Contact" class="nav-link">Contact</a></li>
+                        <li><a href="/pages/Disclaimer" class="nav-link">Disclaimer</a></li>
+                        <li><a href="/pages/Privacy" class="nav-link">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="main">
+        <article class="article">
+            <header class="article-header">
+                <div class="container">
+                    <h1>Java To WASM: TeaVM In React Vite Guide</h1>
+                    <div class="meta">
+                        <time datetime="2025-08-01T05:50:08+00:00">Aug 1, 2025</time>
+                        <span class="author">by ADMIN</span>
+                        <span class="view-count">
+                            <span id="viewCount">40</span> views
+                        </span>
+                    </div>
+                </div>
+            </header>
+            <div class="ad-header container">
+                <div class="ad-wrapper">
+    Iklan Headers
+</div>
+            </div>
+            <div class="container">
+                <div class="article-layout">
+                    <div class="content">
+                        <img src="https://tse4.mm.bing.net/th?q=How%20to%20Use%20Java%20Backend%20Compiled%20to%20WebAssembly%20(WASM)%20Using%20TeaVM%20in%20React%20Vite" title="How to Use Java Backend Compiled to WebAssembly (WASM) Using TeaVM in React Vite" width="300" height="200"/><p>Hey guys! Ever thought about using your Java skills in the frontend? Sounds wild, right? But with WebAssembly (WASM) and TeaVM, it’s totally doable! Imagine writing your backend logic in Java and then running it in the browser. Cool, huh? In this article, we’ll dive deep into how you can compile Java code to WASM using TeaVM and integrate it into a React Vite project. Buckle up, because we're about to embark on a coding adventure!</p>
+<h2>What is WebAssembly (WASM)?</h2>
+<p>Let's kick things off by understanding <strong>WebAssembly (WASM)</strong>. Think of WASM as a super-efficient, low-level bytecode format that modern web browsers can execute. Unlike JavaScript, which is interpreted, WASM is closer to machine code, making it incredibly fast. This means you can run performance-critical tasks in the browser without the usual JavaScript overhead. Pretty neat, eh?</p>
+<p>The beauty of WASM is that it’s language-agnostic. This means you’re not limited to JavaScript for your frontend performance needs. You can use languages like C, C++, Rust, and, yes, even Java! This opens up a whole new world of possibilities for web development, allowing you to leverage existing codebases and skills in different languages. For instance, if you have a complex algorithm written in Java, you can compile it to WASM and use it directly in your web app. This avoids the need to rewrite the algorithm in JavaScript, saving you time and ensuring consistent performance.</p>
+<p>Moreover, WASM offers enhanced security features compared to JavaScript. It runs in a sandboxed environment, which means it has limited access to the underlying system and browser APIs. This reduces the risk of malicious code execution and makes your web applications more secure. Additionally, WASM modules are typically smaller in size than equivalent JavaScript code, leading to faster load times and a better user experience. The combination of performance, security, and language flexibility makes WASM a game-changer for web development. It allows developers to push the boundaries of what’s possible in the browser, enabling more complex and performant web applications. So, if you’re looking to boost your web app's performance and explore new development paradigms, WASM is definitely worth checking out!</p>
+<h2>Enter TeaVM: Java to WebAssembly Compiler</h2>
+<p>Now, let's talk about <strong>TeaVM</strong>. What exactly is it? Well, TeaVM is a <em>fantastic</em> AOT (Ahead-Of-Time) compiler that takes Java bytecode and transforms it into WebAssembly. This means you can write your business logic in Java, and TeaVM will handle the heavy lifting of converting it into a format that can run blazingly fast in the browser. How cool is that?</p>
+<p>TeaVM isn't just about compiling Java to WASM; it's about doing it efficiently. It performs various optimizations to ensure the generated WebAssembly code is as small and fast as possible. This includes dead code elimination, inlining, and other advanced techniques. The result is a lean, mean, WebAssembly machine that can handle complex computations with ease. Think of it as your personal Java-to-WASM translator, but one that's also a performance guru.</p>
+<p>One of the key advantages of using TeaVM is that it allows you to reuse your existing Java skills and codebases. If you have a library or algorithm written in Java, you can simply compile it with TeaVM and integrate it into your web application. This saves you the hassle of rewriting the code in JavaScript or another language. Plus, you get the performance benefits of WebAssembly without sacrificing the familiarity and robustness of Java.</p>
+<p>TeaVM also offers excellent support for debugging. It provides source maps, which allow you to debug your Java code directly in the browser's developer tools, even though it's running as WebAssembly. This makes the development process much smoother and more intuitive. You can step through your Java code, set breakpoints, and inspect variables, just like you would with any other Java application. This level of debugging support is crucial for building complex applications and ensuring they work correctly. So, if you're serious about bringing Java to the web, TeaVM is definitely a tool you should have in your arsenal. It bridges the gap between Java's strengths and the web's potential, making it a powerful choice for modern web development.</p>
+<h2>Setting Up Your React Vite Project</h2>
+<p>Okay, let's get our hands dirty and set up a <strong>React Vite project</strong>. First off, make sure you've got Node.js and npm (or yarn) installed. Vite is a <em>super-fast</em> build tool that's perfect for React projects, so we'll be using that. If you haven't used it before, you're in for a treat!</p>
+<p>To create a new React Vite project, open your terminal and run:</p>
+<pre><code class="hljs">npm create vite@latest my-java-wasm-app --template react
+cd my-java-wasm-app
+npm install
+</code></pre>
+<p>This series of commands does a few things. The first command, <code>npm create vite@latest my-java-wasm-app --template react</code>, uses Vite to scaffold a new React project in a directory named <code>my-java-wasm-app</code>. The <code>--template react</code> flag tells Vite to set up a React project specifically. Once the project is created, you <code>cd my-java-wasm-app</code> to navigate into the newly created directory. Finally, <code>npm install</code> installs all the necessary dependencies for the project, including React, Vite, and any other libraries that come with the React template.</p>
+<p>Now that you have your React Vite project set up, you'll want to familiarize yourself with the project structure. You'll find the main application code in the <code>src</code> directory, where components, styles, and other assets reside. The <code>public</code> directory is for static assets, like images and fonts. The <code>package.json</code> file contains metadata about your project, including dependencies and scripts. To start the development server, you can run <code>npm run dev</code> in your terminal. This will spin up a local server and open your app in the browser, usually at <code>http://localhost:3000</code>. Vite's hot module replacement (HMR) ensures that changes you make to your code are instantly reflected in the browser, making the development process incredibly smooth and efficient. So, you can see your updates in real-time without having to manually refresh the page. This setup gives you a solid foundation to start building your Java-WASM-React application. With Vite’s speed and React’s component-based architecture, you’re well-equipped to create a fantastic web app!</p>
+<h2>Creating Your Java Backend</h2>
+<p>Alright, let’s dive into the Java part! We need to create a <strong>Java backend</strong> that we can compile to WASM. For this example, we’ll make a simple class with a method that performs a calculation. Nothing too fancy, but enough to demonstrate the process. You can use any IDE you like – IntelliJ IDEA, Eclipse, or even just a text editor with the command line.</p>
+<p>First, create a new Java project. Let’s call it <code>JavaBackend</code>. Inside, create a class named <code>Calculator</code>. This class will have a method called <code>add</code> that takes two integers as input and returns their sum. Here’s the code:</p>
+<pre><code class="hljs">package com.example;
+
+public class Calculator {
+ public int add(int a, int b) {
+ return a + b;
+ }
+
+ public String greet(String name) {
+ return &quot;Hello, &quot; + name + &quot;!&quot;;
+ }
+}
+</code></pre>
+<p>This <code>Calculator</code> class has two methods: <code>add</code> which performs addition, and <code>greet</code> which returns a greeting string. The <code>add</code> method is straightforward, taking two integers and returning their sum. The <code>greet</code> method takes a name as a string and returns a personalized greeting. These methods are simple, but they serve as a great starting point for demonstrating how Java code can be compiled to WebAssembly and used in a React application. You can imagine expanding this class with more complex methods and logic as needed for your specific use case. The key is that you're writing Java code that can be seamlessly integrated into your web app, thanks to TeaVM.</p>
+<p>Now that you have your Java class, the next step is to compile it to a JAR file. This is a standard process in Java development. You can use your IDE’s build tools or the command line to compile the Java files and package them into a JAR. For example, if you're using the command line, you would first compile the Java files using <code>javac Calculator.java</code>, and then create the JAR file using <code>jar cvf JavaBackend.jar com/example/Calculator.class</code>. This JAR file will be the input for TeaVM, which will then transform the Java bytecode into WebAssembly. So, you're taking your familiar Java code and preparing it for a new life in the browser, all thanks to the power of WebAssembly and TeaVM.</p>
+<h2>Compiling Java to WASM with TeaVM</h2>
+<p>Now for the <em>magic</em>! We're going to <strong>compile our Java code to WASM using TeaVM</strong>. This is where the transformation happens, and our Java code gets ready to run in the browser. There are a couple of ways to do this, but we'll focus on using the TeaVM Maven plugin, as it's a pretty common and convenient method.</p>
+<p>First, you'll need to set up a Maven project if you haven't already. Add the TeaVM Maven plugin to your <code>pom.xml</code> file. Here's a snippet you'll want to include:</p>
+<pre><code class="hljs">&lt;build&gt;
+ &lt;plugins&gt;
+ &lt;plugin&gt;
+ &lt;groupId&gt;org.teavm&lt;/groupId&gt;
+ &lt;artifactId&gt;teavm-maven-plugin&lt;/artifactId&gt;
+ &lt;version&gt;0.7.2&lt;/version&gt;
+ &lt;executions&gt;
+ &lt;execution&gt;
+ &lt;id&gt;compile-wasm&lt;/id&gt;
+ &lt;phase&gt;compile&lt;/phase&gt;
+ &lt;goals&gt;
+ &lt;goal&gt;compile&lt;/goal&gt;
+ &lt;/goals&gt;
+ &lt;configuration&gt;
+ &lt;targetDirectory&gt;${project.basedir}/src/main/resources/static&lt;/targetDirectory&gt;
+ &lt;mainClass&gt;com.example.Calculator&lt;/mainClass&gt;
+ &lt;classesOutputDirectory&gt;${project.build.outputDirectory}&lt;/classesOutputDirectory&gt;
+ &lt;targetFileName&gt;calculator.wasm&lt;/targetFileName&gt;
+ &lt;webFilesDirectory&gt;${project.basedir}/src/main/resources/static&lt;/webFilesDirectory&gt;
+ &lt;relativizeSourceMap&gt;true&lt;/relativizeSourceMap&gt;
+ &lt;optimizationLevel&gt;ADVANCED&lt;/optimizationLevel&gt;
+ &lt;cacheDirectory&gt;${project.basedir}/target/teavm-cache&lt;/cacheDirectory&gt;
+ &lt;incremental&gt;true&lt;/incremental&gt;
+ &lt;mainClassSourceFiles&gt;${project.basedir}/src/main/java&lt;/mainClassSourceFiles&gt;
+ &lt;/configuration&gt;
+ &lt;/execution&gt;
+ &lt;/executions&gt;
+ &lt;/plugin&gt;
+ &lt;/plugins&gt;
+&lt;/build&gt;
+</code></pre>
+<p>Let's break down what's happening in this XML snippet. The <code>&lt;plugin&gt;</code> tag defines the TeaVM Maven plugin, specifying its <code>groupId</code>, <code>artifactId</code>, and <code>version</code>. The <code>&lt;executions&gt;</code> section configures when and how the plugin should run. The <code>&lt;execution&gt;</code> with the <code>id</code> of <code>compile-wasm</code> is set to run during the <code>compile</code> phase of the Maven build lifecycle. The <code>&lt;goals&gt;</code> tag specifies that we want to use the <code>compile</code> goal of the plugin, which is responsible for compiling the Java code to WebAssembly. The <code>&lt;configuration&gt;</code> section is where we provide specific settings for the compilation process.</p>
+<p><code>&lt;targetDirectory&gt;</code> specifies the output directory for the generated WebAssembly files. In this case, it's set to <code>${project.basedir}/src/main/resources/static</code>, which is a common location for static assets in a web application. <code>&lt;mainClass&gt;</code> tells TeaVM which Java class contains the entry point for our application. Here, it's <code>com.example.Calculator</code>, which is the class we created earlier. <code>&lt;classesOutputDirectory&gt;</code> specifies where the compiled Java class files are located, typically the output directory of the Java compiler. <code>&lt;targetFileName&gt;</code> sets the name of the generated WebAssembly file to <code>calculator.wasm</code>. <code>&lt;webFilesDirectory&gt;</code> is another directory for static assets that TeaVM might need. <code>&lt;relativizeSourceMap&gt;</code> is set to <code>true</code> to ensure that source maps are generated correctly, which is crucial for debugging. <code>&lt;optimizationLevel&gt;</code> is set to <code>ADVANCED</code> to enable aggressive optimizations, resulting in smaller and faster WebAssembly code. <code>&lt;cacheDirectory&gt;</code> specifies a directory for caching TeaVM's intermediate results, which can speed up subsequent builds. <code>&lt;incremental&gt;</code> is set to <code>true</code> to enable incremental compilation, meaning TeaVM will only recompile what's changed since the last build. Finally, <code>&lt;mainClassSourceFiles&gt;</code> tells TeaVM where to find the source files for the main class, which is important for generating accurate source maps. This configuration ensures that TeaVM knows exactly how to compile your Java code to WebAssembly, optimizing for both performance and debuggability.</p>
+<p>After adding this to your <code>pom.xml</code>, run <code>mvn clean compile</code> in your terminal. This will trigger the TeaVM plugin to compile your Java code to WASM. You should find the <code>calculator.wasm</code> file in the <code>src/main/resources/static</code> directory.</p>
+<h2>Loading WASM in React</h2>
+<p>Okay, we've got our WASM file! Now, let’s figure out how to <strong>load this WASM in our React</strong> application. This involves fetching the WASM file and then interacting with its functions. We'll use JavaScript's <code>WebAssembly</code> API to do this. It might sound a bit daunting, but trust me, it's not too bad!</p>
+<p>First, let's create a new component in your React app to handle the WASM interaction. Create a file named <code>WasmComponent.jsx</code> in the <code>src</code> directory. Here's a basic structure:</p>
+<pre><code class="hljs">import React, { useState, useEffect } from &#39;react&#39;;
+
+function WasmComponent() {
+ const [result, setResult] = useState(null);
+
+ useEffect(() =&gt; {
+ async function loadWasm() {
+ try {
+ const response = await fetch(&#39;/calculator.wasm&#39;);
+ const buffer = await response.arrayBuffer();
+ const module = await WebAssembly.instantiate(buffer);
+
+ const calculator = module.instance.exports;
+ const sum = calculator.add(5, 3);
+ setResult(sum);
+ } catch (e) {
+ console.error(&#39;Error loading WASM:&#39;, e);
+ }
+ }
+
+ loadWasm();
+ }, []);
+
+ return (
+ &lt;div&gt;
+ &lt;h1&gt;WASM Result: {result}&lt;/h1&gt;
+ &lt;/div&gt;
+ );
+}
+
+export default WasmComponent;
+</code></pre>
+<p>Let's break down what's happening in this component. We're using React's <code>useState</code> hook to manage the <code>result</code> state, which will hold the result of our WASM function call. The <code>useEffect</code> hook is used to run the <code>loadWasm</code> function once the component mounts. This is where we load and instantiate the WebAssembly module.</p>
+<p>Inside <code>loadWasm</code>, we first fetch the <code>calculator.wasm</code> file from the <code>/calculator.wasm</code> path. This assumes that you've placed the WASM file in your <code>public</code> directory, which Vite serves as static assets. We then convert the response to an <code>ArrayBuffer</code>, which is the format WebAssembly expects. The <code>WebAssembly.instantiate</code> function takes this buffer and creates a WebAssembly module and instance. The <code>module.instance.exports</code> object contains the functions exported from the WASM module, which in our case includes the <code>add</code> function.</p>
+<p>We then call the <code>add</code> function with the arguments <code>5</code> and <code>3</code>, and store the result in the <code>sum</code> variable. Finally, we update the <code>result</code> state with this sum, which causes the component to re-render and display the result in the <code>&lt;h1&gt;</code> tag. If anything goes wrong during the loading or instantiation process, we catch the error and log it to the console. This is crucial for debugging and ensuring your application handles errors gracefully. So, this component is responsible for fetching, instantiating, and interacting with your WebAssembly module, making it a key piece in your Java-WASM-React integration.</p>
+<h2>Calling Java Functions from React</h2>
+<p>Now that we've loaded our WASM module, let's talk about <strong>calling those Java functions from React</strong>. This is the moment where the frontend and backend truly meet, and we can start leveraging our Java logic in the browser. In the previous section, we saw how to fetch the WASM file, instantiate it, and access the exported functions. Now, we'll dive deeper into how to use those functions in your React components.</p>
+<p>In the <code>WasmComponent.jsx</code> file we created earlier, we already have a basic example of calling the <code>add</code> function. Let's expand on that and see how we can handle more complex scenarios. Suppose you want to create a user interface where users can input numbers and see the result of the addition in real-time. You can achieve this by creating input fields and binding them to the <code>add</code> function.</p>
+<p>First, let's add some state variables to store the input values. We'll use the <code>useState</code> hook for this:</p>
+<pre><code class="hljs"> const [num1, setNum1] = useState(&#39;&#39;);
+ const [num2, setNum2] = useState(&#39;&#39;);
+</code></pre>
+<p>Here, <code>num1</code> and <code>num2</code> will store the values entered by the user. Next, we'll create input fields and bind their <code>onChange</code> events to functions that update these state variables:</p>
+<pre><code class="hljs"> &lt;input type=&quot;number&quot; value={num1} onChange={(e) =&gt; setNum1(e.target.value)} /&gt;
+ &lt;input type=&quot;number&quot; value={num2} onChange={(e) =&gt; setNum2(e.target.value)} /&gt;
+</code></pre>
+<p>These input fields will allow users to enter numbers. Now, we need to modify the <code>loadWasm</code> function to call the <code>add</code> function with these input values. We'll also add a button that triggers the calculation:</p>
+<pre><code class="hljs"> const [result, setResult] = useState(null);
+
+ useEffect(() =&gt; {
+ async function loadWasm() {
+ try {
+ const response = await fetch(&#39;/calculator.wasm&#39;);
+ const buffer = await response.arrayBuffer();
+ const module = await WebAssembly.instantiate(buffer);
+
+ const calculator = module.instance.exports;
+ window.calculator = calculator;
+ } catch (e) {
+ console.error(&#39;Error loading WASM:&#39;, e);
+ }
+ }
+
+ loadWasm();
+ }, []);
+
+ const calculateSum = () =&gt; {
+ const sum = window.calculator.add(parseInt(num1), parseInt(num2));
+ setResult(sum);
+ };
+
+ return (
+ &lt;div&gt;
+ &lt;input type=&quot;number&quot; value={num1} onChange={(e) =&gt; setNum1(e.target.value)} /&gt;
+ &lt;input type=&quot;number&quot; value={num2} onChange={(e) =&gt; setNum2(e.target.value)} /&gt;
+ &lt;button onClick={calculateSum}&gt;Calculate Sum&lt;/button&gt;
+ &lt;h1&gt;WASM Result: {result}&lt;/h1&gt;
+ &lt;/div&gt;
+ );
+</code></pre>
+<p>In this updated code, we've added a <code>calculateSum</code> function that is called when the button is clicked. This function parses the input values as integers using <code>parseInt</code> and then calls the <code>add</code> function from the WASM module. The result is then stored in the <code>result</code> state. We also assigned the calculator instance to the window object to solve the asynchronous nature of the import, ensuring it's available when <code>calculateSum</code> is called.</p>
+<h2>Optimizing Performance and Debugging</h2>
+<p>Alright, we've got our Java code running in the browser! But let's not stop there. We need to think about <strong>optimizing performance and debugging</strong>. After all, what's the point of using WASM if it's not running efficiently? And how can we fix issues if we can't debug properly? Let's dive into some tips and tricks to make our Java-WASM-React app shine.</p>
+<p>First up, <em>performance</em>. One of the key advantages of WASM is its speed, but we need to make sure we're not leaving any performance on the table. TeaVM does a great job of optimizing the compiled code, but there are still things we can do on our end. One important aspect is minimizing the amount of data transferred between JavaScript and WASM. Every time you pass data between the two, there's a bit of overhead. So, if you can perform more computations within WASM and reduce the number of calls across the boundary, you'll see a performance boost. For example, if you have a complex data structure, try to pass it to WASM once and perform all the necessary operations there, rather than passing individual elements back and forth.</p>
+<p>Another optimization technique is to use typed arrays. WASM has excellent support for typed arrays, which are efficient ways to represent arrays of numbers. If you're dealing with numerical data, using typed arrays can significantly improve performance. When you pass a typed array to a WASM function, it can directly access the underlying memory buffer, avoiding the need for copying and conversion. This is especially useful for tasks like image processing or scientific computations, where you're dealing with large arrays of numbers.</p>
+<p>Now, let's talk about <em>debugging</em>. Debugging WASM can be a bit tricky, but it's definitely manageable with the right tools and techniques. One of the most helpful tools is source maps. TeaVM generates source maps, which allow you to debug your Java code directly in the browser's developer tools, even though it's running as WASM. This means you can set breakpoints in your Java code, step through it, and inspect variables, just like you would with any other Java application. To make sure source maps are working correctly, ensure that you've configured TeaVM to generate them (as we did in the Maven plugin configuration) and that your browser's developer tools are set to load them.</p>
+<p>Another useful debugging technique is logging. You can use <code>console.log</code> statements in your Java code, and they will appear in the browser's console when the code is executed as WASM. This can be helpful for tracking the flow of execution and inspecting the values of variables. However, keep in mind that logging can impact performance, so it's best to remove or disable logging statements in production code. Additionally, TeaVM provides a debugging API that allows you to interact with the WASM module from JavaScript. This API can be used to set breakpoints, inspect memory, and perform other debugging tasks. It's a powerful tool for advanced debugging scenarios, allowing you to get a deep understanding of how your WASM code is behaving. So, by combining source maps, logging, and the TeaVM debugging API, you can effectively debug your Java-WASM applications and ensure they're running smoothly.</p>
+<h2>Conclusion</h2>
+<p>Well, folks, we've reached the end of our journey! We've covered a lot, from understanding WASM and TeaVM to setting up a React Vite project, compiling Java to WASM, loading it in React, and even optimizing performance and debugging. You've now got the tools and knowledge to start building your own Java-powered web applications. Isn't that awesome?</p>
+<p>The combination of Java, WebAssembly, TeaVM, and React opens up a world of possibilities. You can leverage your existing Java skills and codebases to create high-performance web applications that run smoothly in the browser. Whether you're building a complex data visualization tool, a game, or any other type of web application, this stack can help you deliver a fast and efficient user experience. Plus, the ability to reuse Java code means you can save time and ensure consistency across your backend and frontend.</p>
+<p>But remember, this is just the beginning! WebAssembly is a rapidly evolving technology, and there's always more to learn. Keep exploring, experimenting, and pushing the boundaries of what's possible. Try out different optimization techniques, delve deeper into the TeaVM debugging API, and explore other WASM-related tools and libraries. The more you learn, the more powerful and versatile your web applications will become. And don't forget to share your knowledge and experiences with the community. Web development is a collaborative effort, and by sharing our insights, we can all learn and grow together. So, go forth and create amazing things with Java and WebAssembly! The web is waiting for your innovative ideas and solutions. Happy coding, guys!</p>
+
+                    </div>
+                    <aside class="related-posts">
+                        <div class="ad-sidebar container">
+                            <div class="ad-wrapper">
+    <span>Iklan Related</span>
+</div>
+                        </div>
+                        <h2 class="related-posts-title">Related Posts</h2><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/planting-the-three-sisters-a">Planting The Three Sisters: A Simple Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-06T10:18:56+00:00">Aug 6, 2025</time>
+		                        <span class="view-count">
+									42 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/thrive-solo-the-ultimate-guide">Thrive Solo: The Ultimate Guide To Living Alone Well</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-05T14:49:02+00:00">Aug 5, 2025</time>
+		                        <span class="view-count">
+									52 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/mangagezgini-new-website-update-readers">MangaGezgini New Website Update Readers Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-14T05:29:56+00:00">Jul 14, 2025</time>
+		                        <span class="view-count">
+									45 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/rooting-cactus-a-simple-guide">Rooting Cactus: A Simple Guide To Propagate Your Plants</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-04T20:25:00+00:00">Aug 4, 2025</time>
+		                        <span class="view-count">
+									55 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/gradle-demoted-library-version-whats">Gradle Demoted Library Version: What&#39;s The Fix?</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-07T07:12:04+00:00">Aug 7, 2025</time>
+		                        <span class="view-count">
+									47 views
+		                        </span>
+                            </div>
+                        </article>
+                    </aside>
+                    <aside class="related-posts"></aside>
+                </div>
+            </div>
+        </article>
+        <a href="#" class="back-to-top" id="backToTop" title="Back to top">
+        	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-bar-up" viewBox="0 0 16 16">
+			  <path fill-rule="evenodd" d="M3.646 11.854a.5.5 0 0 0 .708 0L8 8.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708M2.4 5.2c0 .22.18.4.4.4h10.4a.4.4 0 0 0 0-.8H2.8a.4.4 0 0 0-.4.4"/>
+			</svg>
+		</a>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 ANABEL</p>
+        </div>
+    </footer>
+    <script>
+    	(() => {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            const toggleMenu = () => {
+                navMenu.classList.toggle('nav-menu-active');
+                navToggle.classList.toggle('nav-toggle-active');
+            };
+            const backToTopHandler = (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            navToggle.addEventListener('click', toggleMenu);
+            document.getElementById('backToTop').addEventListener('click', backToTopHandler);
+            window.addEventListener('pagehide', () => {
+                navToggle.removeEventListener('click', toggleMenu);
+                document.getElementById('backToTop').removeEventListener('click', backToTopHandler);
+            });
+        })();
+		(() => {
+            window.addEventListener("DOMContentLoaded", (event) => {
+                const ellHljs = document.createElement("script");
+                ellHljs.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js");
+                ellHljs.onload = () => {
+                    hljs.highlightAll();
+                };
+                document.querySelector("body").append(ellHljs);
+                const ellFont = document.createElement("link");
+                ellFont.setAttribute("href", "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css");
+                ellFont.setAttribute("rel", "stylesheet");
+                document.querySelector("head").append(ellFont);
+                window.addEventListener('pagehide', () => {
+                    // ellHljs.remove();
+                    ellFont.remove();
+                });
+
+            });
+        })();
+    </script>
+    
+    
+    
+</body>
+</html>

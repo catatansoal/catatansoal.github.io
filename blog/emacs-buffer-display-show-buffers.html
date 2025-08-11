@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Emacs Buffer Display: Show Buffers Without Focus</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Emacs Buffer Display: Show Buffers Without Focus...">
+    <link rel="canonical" href="https://catatansoal.github.io/blog/emacs-buffer-display-show-buffers">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Emacs Buffer Display: Show Buffers Without Focus">
+	<meta property="og:description" content="Emacs Buffer Display: Show Buffers Without Focus...">
+	<meta property="og:url" content="https://catatansoal.github.io/blog/emacs-buffer-display-show-buffers">
+	<meta property="og:site_name" content="ANABEL">
+	<meta property="article:published_time" content="2025-08-06T17:13:20+00:00">
+	<meta property="article:author" content="ADMIN">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+    <link rel="preload" fetchpriority="high" as="image" href="https://tse4.mm.bing.net/th?q=Understanding%20Buffer%20Display%20Commands%20in%20Emacs%3A%20A%20Comprehensive%20Guide">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style type="text/css">
+    	:root{--primary-color:#3740ff;--text-color:#202124;--background-color:#ffffff;--gray-100:#f8f9fa;--gray-200:#e9ecef}*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;line-height:1.6;color:var(--text-color);background-color:var(--background-color)}.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}.header{background-color:var(--background-color);border-bottom:1px solid var(--gray-200);position:sticky;top:0;z-index:100}.nav{padding:.5rem 0}.nav-container{display:flex;justify-content:space-between;align-items:center;gap:1rem}.nav-left{display:flex;align-items:center;flex-shrink:0}.logo{font-weight:700;color:var(--primary-color)}.blog-tag{margin-left:1rem;padding:.25rem .5rem;background-color:var(--gray-100);border-radius:4px;font-size:.875rem}.nav-search{flex-grow:1;max-width:300px}.search-form{position:relative;width:100%}.search-input{width:100%;padding:.5rem 2.5rem .5rem 1rem;border:1px solid var(--gray-200);border-radius:24px;font-size:.875rem;transition:all 0.2s}.search-input:focus{outline:none;border-color:var(--primary-color);box-shadow:0 0 0 2px rgb(55 64 255 / .1)}.search-button{position:absolute;right:.5rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#5f6368;cursor:pointer;padding:.25rem;display:flex;align-items:center;justify-content:center}.search-button:hover{color:var(--primary-color)}.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:.5rem}.hamburger{display:block;position:relative;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before,.hamburger::after{content:'';position:absolute;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before{top:-6px}.hamburger::after{bottom:-6px}.nav-toggle-active .hamburger{background:#fff0}.nav-toggle-active .hamburger::before{transform:rotate(45deg);top:0}.nav-toggle-active .hamburger::after{transform:rotate(-45deg);bottom:0}.nav-list{display:flex;list-style:none;gap:2rem}.nav-link{color:var(--text-color);text-decoration:none;font-size:.9rem;transition:color 0.2s}.nav-link:hover{color:var(--primary-color)}.article-header{padding:2rem 0;background-color:var(--gray-100)}.article-layout{display:grid;grid-template-columns:1fr 350px;gap:3rem;padding:1rem 0;align-items: start}h1,h2,h3,h4,h5,h6{font-family:"Crimson Text","Times New Roman",Times,serif}h1{font-size:2.5rem;line-height:1.2;margin-bottom:1rem}.meta{color:#5f6368;font-size:.875rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}.view-count{display:inline-flex;align-items:center;gap:.25rem}.view-count svg{color:#5f6368}.content{min-width:0;border-bottom:1px solid #dddddd5e;margin-top:1rem;white-space:pre-line !important;overflow-wrap:break-word;overflow-x:auto;word-break:break-word}.lead{font-size:1.25rem;color:#5f6368;margin-bottom:2rem}h2,h3,h4,h5,h6{font-size:1.75rem;margin:1rem 0 1rem}p,pre,ol,ul>li{margin-bottom:1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;font-size:1.3rem;text-align: justify;}p>code{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px}hr{margin:1rem 0 1rem 0}.code-example{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;margin:1.5rem 0;overflow-x:auto}code{font-family:'Roboto Mono',monospace;font-size:.875rem}ul{margin:.2rem 0;padding-left:1.5rem}.related-posts{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;position:sticky;top:5rem}.related-posts-title,.newpost-posts-list{font-size:1.75rem;margin:0 0 1rem}.related-posts-list{display:flex;flex-direction:column;gap:.5rem}.related-post,.newpost-post{border-bottom:1px solid #ddd;padding-bottom:10px;margin-bottom:10px}.related-post:last-child,.newpost-post:last-child{padding-bottom:0;border-bottom:none}.related-post-title,.newpost-post-title{font-size:1.2rem;margin:0 0 .1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;}.related-post-title a,.newpost-post-title a{color:var(--text-color);text-decoration:none;transition:color 0.2s}.related-post-title a:hover,.newpost-post-title a:hover{color:var(--primary-color)}.related-post time{font-size:.875rem;color:#5f6368}.footer{background-color:var(--gray-100);padding:2rem 0;margin-top:4rem;color:#5f6368;font-size:.875rem}.nav-menu>ul>li{margin-bottom:0}@media (max-width:1024px){.container{max-width:800px}.article-layout{grid-template-columns:1fr;gap:2rem}.related-posts{position:static}}@media (max-width:768px){.nav-container{flex-wrap:wrap}.nav-search{order:3;max-width:none;width:100%;margin-top:.1rem}.nav-toggle{display:block}.nav-menu{display:none;position:absolute;top:100%;left:0;right:0;background:var(--background-color);padding:1rem 0;border-bottom:1px solid var(--gray-200)}.nav-menu-active{display:block}.nav-list{flex-direction:column;gap:.1rem;padding:0 1.5rem}.nav-link{display:block;padding:.2rem 0}h1{font-size:2rem}.article-header{padding:2rem 0}.content{padding:.1rem 0}}table{width:100%;border-collapse:collapse;margin:20px 0;font-family:'Arial',sans-serif}th,td{padding:12px 15px;text-align:left;border:1px solid #ddd}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9}tr:nth-child(even) td{background-color:#f2f2f2}@media screen and (max-width:768px){table{border:0;display:block;overflow-x:auto;white-space:nowrap}th,td{padding:10px;text-align:right}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9;border-bottom:1px solid #ddd}tr:nth-child(even) td{background-color:#f2f2f2}}a{text-decoration:none;color:#540707}.katex-html{padding: .2rem;color: #000;font-weight: 700;font-size: 1.3rem;overflow-wrap: break-word;max-width: 100%;white-space: normal !important}.category{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin:1rem 0 1rem 0}.tag{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px;font-family:"Newsreader",serif}.tag>a{text-decoration:none;color:#000}img{margin:auto;display:block;max-width:100%;height:auto;margin-bottom:1rem}.katex{white-space: pre-line !important;display: inline-block;max-width: 100%;overflow-x: auto;overflow-y: hidden;scrollbar-width: thin;overflow-wrap: break-word;word-break: break-word;vertical-align: -7px}.content > p {overflow-wrap: break-word;word-break: break-word}
+    </style>
+    <style type="text/css">
+    	pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}
+		.hljs{color:#c9d1d9;background:#0d1117}.hljs-doctag,.hljs-keyword,.hljs-meta .hljs-keyword,.hljs-template-tag,.hljs-template-variable,.hljs-type,.hljs-variable.language_{color:#ff7b72}.hljs-title,.hljs-title.class_,.hljs-title.class_.inherited__,.hljs-title.function_{color:#d2a8ff}.hljs-attr,.hljs-attribute,.hljs-literal,.hljs-meta,.hljs-number,.hljs-operator,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-variable{color:#79c0ff}.hljs-meta .hljs-string,.hljs-regexp,.hljs-string{color:#a5d6ff}.hljs-built_in,.hljs-symbol{color:#ffa657}.hljs-code,.hljs-comment,.hljs-formula{color:#8b949e}.hljs-name,.hljs-quote,.hljs-selector-pseudo,.hljs-selector-tag{color:#7ee787}.hljs-subst{color:#c9d1d9}.hljs-section{color:#1f6feb;font-weight:700}.hljs-bullet{color:#f2cc60}.hljs-emphasis{color:#c9d1d9;font-style:italic}.hljs-strong{color:#c9d1d9;font-weight:700}.hljs-addition{color:#aff5b4;background-color:#033a16}.hljs-deletion{color:#ffdcd7;background-color:#67060c}
+    	pre{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;font-weight:400;word-break:break-word;word-wrap:break-word;box-sizing:inherit;border-radius:4px;overflow-x:auto;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}code{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;word-wrap:break-word;word-break:break-word;font-style:normal;line-height:20px;letter-spacing:-.003em;box-sizing:inherit;font-weight:400;font-size:75%;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}
+    </style>
+    <style type="text/css">
+    	.back-to-top{position:fixed;bottom:20px;right:20px;background-color:#a73f3f;color:#fff;padding:8px 10px;border-radius:50%;box-shadow:0 4px 6px rgb(0 0 0 / .2);font-size:10px;font-weight:700;text-decoration:none;text-align:center;transition:opacity 0.3s ease,visibility 0.3s ease;z-index:99999;opacity:1;visibility:visible}.back-to-top:hover{background-color:#0056b3}
+    </style>
+    <style type="text/css">
+        .ad-header {margin: 1rem auto 1rem;background-color: #fdfdfd;text-align: center;display: block;}.ad-header .ad-wrapper {min-height: 90px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #555;font-weight: 500;padding: 3rem;border: 1px dashed #ccc;border-radius: 6px;}@media (max-width: 768px) {.ad-header {padding: 0.75rem;}}.ad-sidebar {margin: 0 0 1rem;background-color: #fefefe;text-align: center;padding: 0px;width: 100%;max-width: 100%;display: block;}.ad-sidebar .ad-wrapper {min-height: 250px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #444;font-weight: 500;border: 1px dashed #aaa;border-radius: 6px;padding: 0rem;}@media (max-width: 1024px) {.ad-sidebar {padding: 0.75rem;}}
+    </style>
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://catatansoal.github.io/blog/emacs-buffer-display-show-buffers"
+          },
+          "headline": "Emacs Buffer Display: Show Buffers Without Focus",
+          "description": "Emacs Buffer Display: Show Buffers Without Focus...",
+          "image": [
+            "https://tse4.mm.bing.net/th?q=Understanding%20Buffer%20Display%20Commands%20in%20Emacs%3A%20A%20Comprehensive%20Guide"
+          ],
+          "author": {
+            "@type": "Person",
+            "name": "ADMIN",
+            "jobTitle": "Editor web"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "ANABEL",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://tse4.mm.bing.net/th?q=ANABEL%20WEB"
+            }
+          },
+          "datePublished": "2025-08-06T17:13:20+00:00",
+          "dateModified": "2025-08-06T17:13:20+00:00"
+        }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="container nav-container">
+                <div class="nav-left">
+                    <span class="logo">ANABEL</span>
+                    <span class="blog-tag">Article</span>
+                </div>
+                <div class="nav-search">
+                    <form class="search-form" role="search">
+                        <input 
+                            type="search" 
+                            class="search-input"
+                            placeholder="Search articles..."
+                            aria-label="Search articles"
+                        >
+                        <button type="submit" class="search-button" aria-label="Submit search">🔎</button>
+                    </form>
+                </div>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+                <div class="nav-menu">
+                    <ul class="nav-list">
+                    	<li><a href="/" class="nav-link">HOME</a></li>
+                        <li><a href="/pages/About" class="nav-link">About</a></li>
+                        <li><a href="/pages/Contact" class="nav-link">Contact</a></li>
+                        <li><a href="/pages/Disclaimer" class="nav-link">Disclaimer</a></li>
+                        <li><a href="/pages/Privacy" class="nav-link">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="main">
+        <article class="article">
+            <header class="article-header">
+                <div class="container">
+                    <h1>Emacs Buffer Display: Show Buffers Without Focus</h1>
+                    <div class="meta">
+                        <time datetime="2025-08-06T17:13:20+00:00">Aug 6, 2025</time>
+                        <span class="author">by ADMIN</span>
+                        <span class="view-count">
+                            <span id="viewCount">49</span> views
+                        </span>
+                    </div>
+                </div>
+            </header>
+            <div class="ad-header container">
+                <div class="ad-wrapper">
+    Iklan Headers
+</div>
+            </div>
+            <div class="container">
+                <div class="article-layout">
+                    <div class="content">
+                        <img src="https://tse4.mm.bing.net/th?q=Understanding%20Buffer%20Display%20Commands%20in%20Emacs%3A%20A%20Comprehensive%20Guide" title="Understanding Buffer Display Commands in Emacs: A Comprehensive Guide" width="300" height="200"/>
+<p>Hey guys! Ever feel like navigating buffers in Emacs is like trying to solve a Rubik's Cube blindfolded? You're not alone! Emacs, the powerhouse of text editors, comes packed with features, but sometimes, diving into the details can feel overwhelming. One area that often leaves users scratching their heads is buffer display commands. Commands like <code>display-buffer</code> seem incredibly intricate, and alternatives like <code>pop-to-buffer</code> raise questions about their nuances. In this comprehensive guide, we'll break down these commands, explore their functionalities, and help you master buffer management in Emacs. We'll start with a general overview of buffer display commands, then narrow our focus to specific commands, and finally, address the core question: <strong>Is there a function that brings a buffer into view in a window without selecting it?</strong> Let's dive in and demystify these essential Emacs tools!</p>
+<h2>Delving into Emacs Buffers and Windows</h2>
+<p>Before we get into the nitty-gritty of specific commands, let's lay the groundwork with a quick recap of Emacs's buffer and window concepts. Think of <strong><em>buffers</em></strong> as the files you're working on or the content you're viewing within Emacs's memory. They hold the text, code, or other data you interact with. <strong><em>Windows</em></strong>, on the other hand, are the visual areas on your screen where you actually see and interact with these buffers. It's like the canvas where the painting (the buffer) is displayed. You can have multiple windows open, each displaying a different buffer or even different parts of the same buffer. Emacs intelligently manages the display of buffers across these windows, and this is where buffer display commands come into play. Mastering the art of using these commands will significantly enhance your workflow in Emacs, allowing you to switch between files, view outputs, and manage your workspace with ease. So, with our canvas and paintings analogy in mind, let's begin to understand the specific tools Emacs gives us to arrange our workspace.</p>
+<h2>The Mighty <code>display-buffer</code></h2>
+<p>The command <code>display-buffer</code> is the powerhouse, the granddaddy of all buffer display commands in Emacs. It's incredibly versatile and customizable, giving you fine-grained control over <em>how</em> and <em>where</em> a buffer is displayed. But, with great power comes great complexity, right? <code>display-buffer</code> takes a buffer as its primary argument and then uses a set of rules or actions to determine which window to display the buffer in. These rules are defined through a mechanism called <code>display-buffer-alist</code>, which is essentially a list of conditions and corresponding actions. This allows you to set up specific behaviors for different buffers based on their names, modes, or other characteristics. For example, you might want certain buffers to always open in a dedicated window, while others should reuse existing windows if available. The <code>display-buffer</code> command's flexibility stems from its ability to consult this list and dynamically decide how to handle each buffer. This makes it a core command for sophisticated buffer management strategies. Understanding <code>display-buffer</code> is key to unlocking advanced Emacs workflows, letting you tailor your environment to your specific needs and preferences. It's more than just a command; it's a framework for organizing your work in Emacs.</p>
+<h3>Unpacking the Complexity of <code>display-buffer</code></h3>
+<p>Let's face it, the <code>display-buffer</code> command can seem intimidating at first glance. Its complexity lies in the flexibility it offers, allowing you to define a wide range of behaviors. To truly understand it, you need to grasp the concept of <code>display-buffer-alist</code>. This is where the magic happens. <code>display-buffer-alist</code> is a list of rules, each rule consisting of a condition and an action. When you call <code>display-buffer</code>, Emacs iterates through this list, checking each condition against the buffer you're trying to display. If a condition matches, the corresponding action is executed. This action might involve creating a new window, reusing an existing one, or even displaying the buffer in a specific frame. The conditions can be based on various factors, such as the buffer's name, its mode (e.g., <code>dired-mode</code>, <code>help-mode</code>), or even custom criteria you define yourself. This level of customization allows you to create a highly personalized buffer display behavior. For instance, you could set up a rule to always display help buffers in a dedicated window at the bottom of the screen. Or, you could configure Emacs to reuse a specific window for compilation output. The possibilities are vast, and mastering <code>display-buffer-alist</code> is a crucial step towards becoming an Emacs power user. Don't be discouraged by its initial complexity; take it one step at a time, experiment with different rules, and you'll soon unlock its full potential.</p>
+<h3><code>display-buffer</code> in Action: Practical Examples</h3>
+<p>Okay, enough theory! Let's get practical and explore some concrete examples of how you can use <code>display-buffer</code> and <code>display-buffer-alist</code> to streamline your workflow. Imagine you're a programmer who frequently consults documentation. You might want help buffers to always appear in a separate, dedicated window. You can achieve this by adding a rule to <code>display-buffer-alist</code> that matches buffers in <code>help-mode</code> and specifies an action to create a new window. Another common scenario is wanting to keep your compilation output separate from your code. You could create a rule that matches buffers with names like <code>*compilation*</code> and directs them to a specific window. Let's look at how this might appear in your Emacs configuration:</p>
+<pre><code class="hljs">(setq display-buffer-alist
+      &#39;(((&quot;\\*Help\\*&quot; . t)  ; Condition: Buffer name matches &quot;*Help*&quot;
+         (display-buffer-in-side-window ; Action: Display in a side window
+          (side . bottom)
+          (window-width . 0.5))))
+     (((&quot;\\\\*compilation\\\\*&quot; . t) ; Condition: Buffer name matches &quot;*compilation*&quot;
+         (display-buffer-reuse-window   ; Action: Reuse an existing window or create a new one
+          (inhibit-same-window . t))))) ; But don&#39;t use the current window
+</code></pre>
+<p>In this example, the first rule ensures that help buffers are displayed in a side window at the bottom of the screen, taking up half the screen width. The second rule tells Emacs to reuse a window for compilation buffers, but avoids using the current window. These are just a couple of examples, and you can customize <code>display-buffer-alist</code> to fit your specific needs. By understanding the conditions and actions available, you can create a highly efficient and personalized Emacs environment.</p>
+<h2>The Simpler <code>pop-to-buffer</code></h2>
+<p>Now, let's talk about <code>pop-to-buffer</code>. This command is often seen as a more straightforward alternative to <code>display-buffer</code>. Its primary function is to bring a specified buffer into view, selecting the window it's displayed in. In simpler terms, it makes the buffer the active one on your screen. Unlike <code>display-buffer</code>, <code>pop-to-buffer</code> doesn't consult <code>display-buffer-alist</code>. It's more direct in its approach. If the buffer is already displayed in a window, that window is selected. If the buffer isn't displayed, <code>pop-to-buffer</code> will typically create a new window (or reuse an existing one based on default Emacs behavior) and display the buffer there. This simplicity makes <code>pop-to-buffer</code> a convenient choice for many common buffer-switching tasks. However, this directness also means it lacks the fine-grained control that <code>display-buffer</code> offers. You can't easily customize where the buffer appears based on its name or mode, for example. But for many everyday tasks, the simplicity of <code>pop-to-buffer</code> is a definite advantage. It's a quick and easy way to bring a buffer into focus, making it a valuable tool in your Emacs arsenal. Think of it as the express lane for buffer display – fast and efficient for most situations, but perhaps not the best choice for complex scenarios.</p>
+<h3>When to Use <code>pop-to-buffer</code></h3>
+<p>So, when does <code>pop-to-buffer</code> shine? This command is your go-to choice when you want a buffer to be prominently displayed and immediately selected. Think of scenarios like quickly switching to a specific file, bringing up a log buffer, or viewing the results of a command. <code>pop-to-buffer</code> gets the job done efficiently without the overhead of complex rule evaluation. For instance, if you're working on a project and need to jump to a particular source file, <code>pop-to-buffer</code> is perfect. It will bring that file into the current window (or create a new one if necessary) and make it the active buffer, ready for editing. Similarly, if you've run a command that generates output in a separate buffer, <code>pop-to-buffer</code> can quickly bring that output into view. This makes it ideal for tasks like checking compilation errors or viewing the results of a search. The key takeaway is that <code>pop-to-buffer</code> is best suited for situations where you want a buffer to be front and center, and you don't need to worry about fine-grained placement or conditional display rules. It's a workhorse command for everyday buffer management, providing a fast and reliable way to navigate your Emacs workspace.</p>
+<h2>The Core Question: Displaying a Buffer Without Selecting It</h2>
+<p>Now, let's tackle the central question that sparked this exploration: <strong>Is there a function that brings a buffer into view in a window without selecting it?</strong> The answer, thankfully, is yes! While <code>pop-to-buffer</code> always selects the window it displays the buffer in, and <code>display-buffer</code>'s default behavior often involves selection, there are ways to achieve the desired outcome. The key is to use <code>display-buffer</code> with the right action. Specifically, we want to use an action that displays the buffer in a window but doesn't automatically switch focus to that window. This is particularly useful when you want to view information in a buffer without interrupting your current workflow. For example, you might want to glance at a log file or a documentation buffer without leaving the code you're actively editing. Emacs provides several actions that can accomplish this, giving you the flexibility to display buffers in the background while you continue working in your primary window. Understanding these actions is crucial for creating a non-intrusive buffer display experience, allowing you to access information without disrupting your focus.</p>
+<h3>Achieving Non-Selection with <code>display-buffer</code></h3>
+<p>So, how do we use <code>display-buffer</code> to show a buffer without selecting it? The magic lies in the actions you specify in your <code>display-buffer-alist</code>. Several actions can achieve this, but two of the most common are <code>display-buffer-in-side-window</code> and <code>display-buffer-reuse-window</code> with the <code>inhibit-same-window</code> parameter set to <code>t</code>. Let's break down each of these:</p>
+<ul>
+<li><strong><code>display-buffer-in-side-window</code></strong>: This action displays the buffer in a side window, which can be positioned on the left, right, top, or bottom of the screen. By default, Emacs will not select the side window, allowing you to continue working in your current window. This is ideal for displaying supplementary information, such as documentation or logs, without interrupting your primary task.</li>
+<li><strong><code>display-buffer-reuse-window</code> with <code>inhibit-same-window</code></strong>: This action tries to reuse an existing window to display the buffer. If no suitable window is found, it may create a new one. The crucial part is setting <code>(inhibit-same-window . t)</code>. This tells Emacs <em>not</em> to use the current window for the new buffer. As a result, your current window remains selected. This approach is useful when you want to display a buffer without disturbing your current editing context, ensuring that your focus remains on your primary task.</li>
+</ul>
+<p>By carefully choosing the action in your <code>display-buffer-alist</code>, you can achieve the desired non-selection behavior. This level of control is what makes <code>display-buffer</code> such a powerful tool for managing your Emacs workspace.</p>
+<h3>Practical Example: Non-Intrusive Documentation Display</h3>
+<p>Let's illustrate how to display a buffer without selecting it with a practical example. Imagine you're coding and frequently need to consult documentation. You want the documentation to be readily available, but you don't want it to steal focus from your code. Here's how you can achieve this using <code>display-buffer-in-side-window</code>:</p>
+<pre><code class="hljs">(setq display-buffer-alist
+      &#39;(((help-mode . t) ; Condition: Buffer is in help-mode
+         (display-buffer-in-side-window ; Action: Display in side window
+          (side . right) ; On the right side
+          (window-width . 0.4) ; Taking up 40% of the screen width
+          (inhibit-same-window . t))))) ; Prevent selecting current window
+</code></pre>
+<p>In this configuration, we're adding a rule to <code>display-buffer-alist</code>. The condition <code>(help-mode . t)</code> checks if the buffer is in <code>help-mode</code>, which is the mode Emacs uses for displaying documentation. The action <code>display-buffer-in-side-window</code> tells Emacs to display the buffer in a side window on the right side of the screen, taking up 40% of the screen width. The crucial part is <code>(inhibit-same-window . t)</code>. This ensures that the current window remains selected, even when the documentation buffer is displayed. With this setup, whenever you access documentation (e.g., using <code>C-h f</code> for function help), the documentation will appear in the side window without interrupting your coding flow. This is just one example, but it demonstrates how you can use <code>display-buffer</code> and its actions to create a non-intrusive and efficient workflow in Emacs.</p>
+<h2>Conclusion: Mastering Buffer Display in Emacs</h2>
+<p>So, we've journeyed through the world of buffer display commands in Emacs, from the versatile <code>display-buffer</code> to the straightforward <code>pop-to-buffer</code>, and finally, to the crucial technique of displaying buffers without selecting them. Mastering these commands is a key step towards becoming an Emacs power user. You now understand the power of <code>display-buffer-alist</code>, the simplicity of <code>pop-to-buffer</code>, and the nuances of actions like <code>display-buffer-in-side-window</code> and <code>display-buffer-reuse-window</code>. You can now configure Emacs to display buffers exactly how you want, whether you need a buffer to pop into focus immediately or simply appear in the background for reference. Remember, the flexibility of Emacs lies in its customizability. Experiment with different settings, explore the possibilities, and create a buffer management workflow that perfectly suits your needs. Happy Emacsing, guys! Now go forth and conquer your buffers!</p>
+
+                    </div>
+                    <aside class="related-posts">
+                        <div class="ad-sidebar container">
+                            <div class="ad-wrapper">
+    <span>Iklan Related</span>
+</div>
+                        </div>
+                        <h2 class="related-posts-title">Related Posts</h2><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/cat-communication-how-to-understand">Cat Communication: How To Understand Your Feline</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-10T15:05:13+00:00">Aug 10, 2025</time>
+		                        <span class="view-count">
+									48 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/simplifying-1252-125-4-3">Simplifying (125^2 / 125^(4/3)) A Step-by-Step Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-14T01:44:31+00:00">Jul 14, 2025</time>
+		                        <span class="view-count">
+									52 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/git-bash-path-problems-absolute">Git Bash Path Problems: Absolute Paths &amp; Solutions</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-01T13:09:58+00:00">Aug 1, 2025</time>
+		                        <span class="view-count">
+									50 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/ominous-banner-stuck-crafting-grid">Ominous Banner Stuck? Crafting Grid Bug In Refined Storage 2</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-06T03:36:33+00:00">Aug 6, 2025</time>
+		                        <span class="view-count">
+									60 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/what-is-not-a-required">What Is Not A Required Element For Fire Understanding Combustion</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-14T12:53:55+00:00">Jul 14, 2025</time>
+		                        <span class="view-count">
+									64 views
+		                        </span>
+                            </div>
+                        </article>
+                    </aside>
+                    <aside class="related-posts"></aside>
+                </div>
+            </div>
+        </article>
+        <a href="#" class="back-to-top" id="backToTop" title="Back to top">
+        	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-bar-up" viewBox="0 0 16 16">
+			  <path fill-rule="evenodd" d="M3.646 11.854a.5.5 0 0 0 .708 0L8 8.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708M2.4 5.2c0 .22.18.4.4.4h10.4a.4.4 0 0 0 0-.8H2.8a.4.4 0 0 0-.4.4"/>
+			</svg>
+		</a>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 ANABEL</p>
+        </div>
+    </footer>
+    <script>
+    	(() => {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            const toggleMenu = () => {
+                navMenu.classList.toggle('nav-menu-active');
+                navToggle.classList.toggle('nav-toggle-active');
+            };
+            const backToTopHandler = (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            navToggle.addEventListener('click', toggleMenu);
+            document.getElementById('backToTop').addEventListener('click', backToTopHandler);
+            window.addEventListener('pagehide', () => {
+                navToggle.removeEventListener('click', toggleMenu);
+                document.getElementById('backToTop').removeEventListener('click', backToTopHandler);
+            });
+        })();
+		(() => {
+            window.addEventListener("DOMContentLoaded", (event) => {
+                const ellHljs = document.createElement("script");
+                ellHljs.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js");
+                ellHljs.onload = () => {
+                    hljs.highlightAll();
+                };
+                document.querySelector("body").append(ellHljs);
+                const ellFont = document.createElement("link");
+                ellFont.setAttribute("href", "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css");
+                ellFont.setAttribute("rel", "stylesheet");
+                document.querySelector("head").append(ellFont);
+                window.addEventListener('pagehide', () => {
+                    // ellHljs.remove();
+                    ellFont.remove();
+                });
+
+            });
+        })();
+    </script>
+    
+    
+    
+</body>
+</html>

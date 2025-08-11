@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Scrape EBay Item Numbers With BeautifulSoup: A Detailed Guide</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Scrape EBay Item Numbers With BeautifulSoup: A Detailed Guide...">
+    <link rel="canonical" href="https://catatansoal.github.io/blog/scrape-ebay-item-numbers-with">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Scrape EBay Item Numbers With BeautifulSoup: A Detailed Guide">
+	<meta property="og:description" content="Scrape EBay Item Numbers With BeautifulSoup: A Detailed Guide...">
+	<meta property="og:url" content="https://catatansoal.github.io/blog/scrape-ebay-item-numbers-with">
+	<meta property="og:site_name" content="ANABEL">
+	<meta property="article:published_time" content="2025-08-05T13:56:14+00:00">
+	<meta property="article:author" content="ADMIN">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+    <link rel="preload" fetchpriority="high" as="image" href="https://tse4.mm.bing.net/th?q=How%20to%20Scrape%20eBay%20Item%20Numbers%20with%20BeautifulSoup">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style type="text/css">
+    	:root{--primary-color:#3740ff;--text-color:#202124;--background-color:#ffffff;--gray-100:#f8f9fa;--gray-200:#e9ecef}*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;line-height:1.6;color:var(--text-color);background-color:var(--background-color)}.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}.header{background-color:var(--background-color);border-bottom:1px solid var(--gray-200);position:sticky;top:0;z-index:100}.nav{padding:.5rem 0}.nav-container{display:flex;justify-content:space-between;align-items:center;gap:1rem}.nav-left{display:flex;align-items:center;flex-shrink:0}.logo{font-weight:700;color:var(--primary-color)}.blog-tag{margin-left:1rem;padding:.25rem .5rem;background-color:var(--gray-100);border-radius:4px;font-size:.875rem}.nav-search{flex-grow:1;max-width:300px}.search-form{position:relative;width:100%}.search-input{width:100%;padding:.5rem 2.5rem .5rem 1rem;border:1px solid var(--gray-200);border-radius:24px;font-size:.875rem;transition:all 0.2s}.search-input:focus{outline:none;border-color:var(--primary-color);box-shadow:0 0 0 2px rgb(55 64 255 / .1)}.search-button{position:absolute;right:.5rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#5f6368;cursor:pointer;padding:.25rem;display:flex;align-items:center;justify-content:center}.search-button:hover{color:var(--primary-color)}.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:.5rem}.hamburger{display:block;position:relative;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before,.hamburger::after{content:'';position:absolute;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before{top:-6px}.hamburger::after{bottom:-6px}.nav-toggle-active .hamburger{background:#fff0}.nav-toggle-active .hamburger::before{transform:rotate(45deg);top:0}.nav-toggle-active .hamburger::after{transform:rotate(-45deg);bottom:0}.nav-list{display:flex;list-style:none;gap:2rem}.nav-link{color:var(--text-color);text-decoration:none;font-size:.9rem;transition:color 0.2s}.nav-link:hover{color:var(--primary-color)}.article-header{padding:2rem 0;background-color:var(--gray-100)}.article-layout{display:grid;grid-template-columns:1fr 350px;gap:3rem;padding:1rem 0;align-items: start}h1,h2,h3,h4,h5,h6{font-family:"Crimson Text","Times New Roman",Times,serif}h1{font-size:2.5rem;line-height:1.2;margin-bottom:1rem}.meta{color:#5f6368;font-size:.875rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}.view-count{display:inline-flex;align-items:center;gap:.25rem}.view-count svg{color:#5f6368}.content{min-width:0;border-bottom:1px solid #dddddd5e;margin-top:1rem;white-space:pre-line !important;overflow-wrap:break-word;overflow-x:auto;word-break:break-word}.lead{font-size:1.25rem;color:#5f6368;margin-bottom:2rem}h2,h3,h4,h5,h6{font-size:1.75rem;margin:1rem 0 1rem}p,pre,ol,ul>li{margin-bottom:1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;font-size:1.3rem;text-align: justify;}p>code{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px}hr{margin:1rem 0 1rem 0}.code-example{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;margin:1.5rem 0;overflow-x:auto}code{font-family:'Roboto Mono',monospace;font-size:.875rem}ul{margin:.2rem 0;padding-left:1.5rem}.related-posts{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;position:sticky;top:5rem}.related-posts-title,.newpost-posts-list{font-size:1.75rem;margin:0 0 1rem}.related-posts-list{display:flex;flex-direction:column;gap:.5rem}.related-post,.newpost-post{border-bottom:1px solid #ddd;padding-bottom:10px;margin-bottom:10px}.related-post:last-child,.newpost-post:last-child{padding-bottom:0;border-bottom:none}.related-post-title,.newpost-post-title{font-size:1.2rem;margin:0 0 .1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;}.related-post-title a,.newpost-post-title a{color:var(--text-color);text-decoration:none;transition:color 0.2s}.related-post-title a:hover,.newpost-post-title a:hover{color:var(--primary-color)}.related-post time{font-size:.875rem;color:#5f6368}.footer{background-color:var(--gray-100);padding:2rem 0;margin-top:4rem;color:#5f6368;font-size:.875rem}.nav-menu>ul>li{margin-bottom:0}@media (max-width:1024px){.container{max-width:800px}.article-layout{grid-template-columns:1fr;gap:2rem}.related-posts{position:static}}@media (max-width:768px){.nav-container{flex-wrap:wrap}.nav-search{order:3;max-width:none;width:100%;margin-top:.1rem}.nav-toggle{display:block}.nav-menu{display:none;position:absolute;top:100%;left:0;right:0;background:var(--background-color);padding:1rem 0;border-bottom:1px solid var(--gray-200)}.nav-menu-active{display:block}.nav-list{flex-direction:column;gap:.1rem;padding:0 1.5rem}.nav-link{display:block;padding:.2rem 0}h1{font-size:2rem}.article-header{padding:2rem 0}.content{padding:.1rem 0}}table{width:100%;border-collapse:collapse;margin:20px 0;font-family:'Arial',sans-serif}th,td{padding:12px 15px;text-align:left;border:1px solid #ddd}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9}tr:nth-child(even) td{background-color:#f2f2f2}@media screen and (max-width:768px){table{border:0;display:block;overflow-x:auto;white-space:nowrap}th,td{padding:10px;text-align:right}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9;border-bottom:1px solid #ddd}tr:nth-child(even) td{background-color:#f2f2f2}}a{text-decoration:none;color:#540707}.katex-html{padding: .2rem;color: #000;font-weight: 700;font-size: 1.3rem;overflow-wrap: break-word;max-width: 100%;white-space: normal !important}.category{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin:1rem 0 1rem 0}.tag{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px;font-family:"Newsreader",serif}.tag>a{text-decoration:none;color:#000}img{margin:auto;display:block;max-width:100%;height:auto;margin-bottom:1rem}.katex{white-space: pre-line !important;display: inline-block;max-width: 100%;overflow-x: auto;overflow-y: hidden;scrollbar-width: thin;overflow-wrap: break-word;word-break: break-word;vertical-align: -7px}.content > p {overflow-wrap: break-word;word-break: break-word}
+    </style>
+    <style type="text/css">
+    	pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}
+		.hljs{color:#c9d1d9;background:#0d1117}.hljs-doctag,.hljs-keyword,.hljs-meta .hljs-keyword,.hljs-template-tag,.hljs-template-variable,.hljs-type,.hljs-variable.language_{color:#ff7b72}.hljs-title,.hljs-title.class_,.hljs-title.class_.inherited__,.hljs-title.function_{color:#d2a8ff}.hljs-attr,.hljs-attribute,.hljs-literal,.hljs-meta,.hljs-number,.hljs-operator,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-variable{color:#79c0ff}.hljs-meta .hljs-string,.hljs-regexp,.hljs-string{color:#a5d6ff}.hljs-built_in,.hljs-symbol{color:#ffa657}.hljs-code,.hljs-comment,.hljs-formula{color:#8b949e}.hljs-name,.hljs-quote,.hljs-selector-pseudo,.hljs-selector-tag{color:#7ee787}.hljs-subst{color:#c9d1d9}.hljs-section{color:#1f6feb;font-weight:700}.hljs-bullet{color:#f2cc60}.hljs-emphasis{color:#c9d1d9;font-style:italic}.hljs-strong{color:#c9d1d9;font-weight:700}.hljs-addition{color:#aff5b4;background-color:#033a16}.hljs-deletion{color:#ffdcd7;background-color:#67060c}
+    	pre{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;font-weight:400;word-break:break-word;word-wrap:break-word;box-sizing:inherit;border-radius:4px;overflow-x:auto;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}code{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;word-wrap:break-word;word-break:break-word;font-style:normal;line-height:20px;letter-spacing:-.003em;box-sizing:inherit;font-weight:400;font-size:75%;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}
+    </style>
+    <style type="text/css">
+    	.back-to-top{position:fixed;bottom:20px;right:20px;background-color:#a73f3f;color:#fff;padding:8px 10px;border-radius:50%;box-shadow:0 4px 6px rgb(0 0 0 / .2);font-size:10px;font-weight:700;text-decoration:none;text-align:center;transition:opacity 0.3s ease,visibility 0.3s ease;z-index:99999;opacity:1;visibility:visible}.back-to-top:hover{background-color:#0056b3}
+    </style>
+    <style type="text/css">
+        .ad-header {margin: 1rem auto 1rem;background-color: #fdfdfd;text-align: center;display: block;}.ad-header .ad-wrapper {min-height: 90px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #555;font-weight: 500;padding: 3rem;border: 1px dashed #ccc;border-radius: 6px;}@media (max-width: 768px) {.ad-header {padding: 0.75rem;}}.ad-sidebar {margin: 0 0 1rem;background-color: #fefefe;text-align: center;padding: 0px;width: 100%;max-width: 100%;display: block;}.ad-sidebar .ad-wrapper {min-height: 250px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #444;font-weight: 500;border: 1px dashed #aaa;border-radius: 6px;padding: 0rem;}@media (max-width: 1024px) {.ad-sidebar {padding: 0.75rem;}}
+    </style>
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://catatansoal.github.io/blog/scrape-ebay-item-numbers-with"
+          },
+          "headline": "Scrape EBay Item Numbers With BeautifulSoup: A Detailed Guide",
+          "description": "Scrape EBay Item Numbers With BeautifulSoup: A Detailed Guide...",
+          "image": [
+            "https://tse4.mm.bing.net/th?q=How%20to%20Scrape%20eBay%20Item%20Numbers%20with%20BeautifulSoup"
+          ],
+          "author": {
+            "@type": "Person",
+            "name": "ADMIN",
+            "jobTitle": "Editor web"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "ANABEL",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://tse4.mm.bing.net/th?q=ANABEL%20WEB"
+            }
+          },
+          "datePublished": "2025-08-05T13:56:14+00:00",
+          "dateModified": "2025-08-05T13:56:14+00:00"
+        }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="container nav-container">
+                <div class="nav-left">
+                    <span class="logo">ANABEL</span>
+                    <span class="blog-tag">Article</span>
+                </div>
+                <div class="nav-search">
+                    <form class="search-form" role="search">
+                        <input 
+                            type="search" 
+                            class="search-input"
+                            placeholder="Search articles..."
+                            aria-label="Search articles"
+                        >
+                        <button type="submit" class="search-button" aria-label="Submit search">🔎</button>
+                    </form>
+                </div>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+                <div class="nav-menu">
+                    <ul class="nav-list">
+                    	<li><a href="/" class="nav-link">HOME</a></li>
+                        <li><a href="/pages/About" class="nav-link">About</a></li>
+                        <li><a href="/pages/Contact" class="nav-link">Contact</a></li>
+                        <li><a href="/pages/Disclaimer" class="nav-link">Disclaimer</a></li>
+                        <li><a href="/pages/Privacy" class="nav-link">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="main">
+        <article class="article">
+            <header class="article-header">
+                <div class="container">
+                    <h1>Scrape EBay Item Numbers With BeautifulSoup: A Detailed Guide</h1>
+                    <div class="meta">
+                        <time datetime="2025-08-05T13:56:14+00:00">Aug 5, 2025</time>
+                        <span class="author">by ADMIN</span>
+                        <span class="view-count">
+                            <span id="viewCount">62</span> views
+                        </span>
+                    </div>
+                </div>
+            </header>
+            <div class="ad-header container">
+                <div class="ad-wrapper">
+    Iklan Headers
+</div>
+            </div>
+            <div class="container">
+                <div class="article-layout">
+                    <div class="content">
+                        <img src="https://tse4.mm.bing.net/th?q=How%20to%20Scrape%20eBay%20Item%20Numbers%20with%20BeautifulSoup" title="How to Scrape eBay Item Numbers with BeautifulSoup" width="300" height="200"/><p>Hey guys! So, you're trying to <strong>scrape</strong> those elusive item numbers from an eBay page using <strong>BeautifulSoup</strong>, huh? Awesome! It's a super useful skill, and I'm here to help you break it down. Let's dive into how you can wrangle that HTML with <strong>BeautifulSoup</strong> and get exactly what you need. We'll focus on making sure you not only get the code working but also understand <em>why</em> it works. This way, you can adapt it to all sorts of web scraping adventures in the future.</p>
+<h2>Understanding the Goal: Extracting Item Numbers</h2>
+<p>Before we jump into the code, let's make sure we're all on the same page. The goal here is to automatically grab the item numbers from an eBay listing page. These item numbers are unique identifiers for each product, and they're usually buried within the HTML structure of the page. Now, eBay's structure can be a bit like a treasure hunt – the layout and HTML might change slightly over time. That’s why having a solid understanding of how to use <strong>BeautifulSoup</strong> is crucial, so you can adapt your approach as needed. We need to identify a pattern in the HTML that consistently contains the item numbers. This might be a specific HTML tag, a class, or even a particular text string associated with the item number. This initial detective work is key to a successful scrape. Once we've pinpointed the pattern, we can tell <strong>BeautifulSoup</strong> exactly where to look. Think of it like giving <strong>BeautifulSoup</strong> a treasure map – we're just figuring out where 'X' marks the spot! We will be using the power of <strong>BeautifulSoup</strong> to navigate the HTML structure and pinpoint the elements that contain our precious item numbers. Remember, the key is to be specific in our search so that we're not grabbing a bunch of irrelevant data. So, let's put on our detective hats and start exploring the eBay page's HTML. What tags or attributes might consistently hold those item numbers? Let’s find out!</p>
+<h2>Setting Up Your Scraping Environment</h2>
+<p>Okay, before we get our hands dirty with code, let's set up our environment. Think of this as gathering your tools before you start a big project. First things first, you'll need <strong>Python</strong> installed on your machine. If you haven't already, head over to the official Python website and grab the latest version. Next, we need to install the <strong>requests</strong> and <strong>BeautifulSoup</strong> libraries. These are the workhorses of our operation. The <code>requests</code> library will let us fetch the HTML content of the eBay page, and <strong>BeautifulSoup</strong> will help us parse that content into a nice, navigable structure. To install these libraries, you can use pip, Python's package installer. Open up your terminal or command prompt and type: <code>pip install requests beautifulsoup4</code>. Hit enter, and pip will take care of the rest. You might also want to install <code>lxml</code>, which is a faster XML and HTML parsing library that <strong>BeautifulSoup</strong> can use. It's not strictly necessary, but it can speed things up, especially when dealing with large pages. You can install it with <code>pip install lxml</code>. Now, let's talk about an IDE or text editor. You'll need a place to write and run your Python code. VS Code, PyCharm, and Sublime Text are all popular options. Pick whichever one you feel most comfortable with. Once you've got your environment set up, you're ready to start coding! We've got Python, our libraries, and a place to write code – we're all set to tackle that eBay page. Now, on to the fun part: writing the code to fetch and parse the HTML.</p>
+<h2>Fetching the HTML with Requests</h2>
+<p>Alright, now that our environment is prepped and ready, let's get to the nitty-gritty of fetching the HTML content from the eBay page. We're going to use the <code>requests</code> library for this – it's like our trusty net for catching web pages. First, you need to <code>import requests</code> at the beginning of your Python script. This makes the <code>requests</code> library available for us to use. Next, we'll use the <code>requests.get()</code> function to fetch the HTML content. You'll need to provide the URL of the eBay page you want to scrape. For example, let's say you're scraping this hypothetical URL: <code>https://www.ebay.com/sch/i.html?_nkw=some+item</code>. You'd write code like this:</p>
+<pre><code class="hljs">import requests
+
+url = &#39;https://www.ebay.com/sch/i.html?_nkw=some+item&#39;
+response = requests.get(url)
+</code></pre>
+<p>This code sends a GET request to the specified URL, and the response is stored in the <code>response</code> variable. Now, it's crucial to check the status code of the response. A status code of 200 means everything went smoothly, and we successfully fetched the page. Anything else might indicate an issue. For example, a 404 error means the page wasn't found, and a 503 error might mean the server is temporarily unavailable. You can check the status code using <code>response.status_code</code>. If it's not 200, you'll want to handle the error appropriately. This might involve retrying the request, logging the error, or simply stopping the script. Once we've confirmed that the request was successful, we can access the HTML content using <code>response.content</code>. This gives us the raw HTML as bytes. We'll pass this to <strong>BeautifulSoup</strong> in the next step to parse it. So, to recap, we've used <code>requests</code> to fetch the HTML content, checked the status code to ensure success, and now have the raw HTML ready for parsing. Let's move on to using <strong>BeautifulSoup</strong> to make sense of this HTML soup!</p>
+<h2>Parsing HTML with BeautifulSoup</h2>
+<p>Okay, we've successfully fetched the raw HTML content using <code>requests</code>. Now comes the fun part: making sense of this jumbled mess of tags and text with <strong>BeautifulSoup</strong>! Think of <strong>BeautifulSoup</strong> as our magical HTML decoder. First, we need to <code>import BeautifulSoup</code> from the <code>bs4</code> module. This makes the <strong>BeautifulSoup</strong> class available for us to use. Next, we'll create a <strong>BeautifulSoup</strong> object. This object will represent the parsed HTML document, and we can use it to navigate and search the HTML structure. We'll pass two arguments to the <strong>BeautifulSoup</strong> constructor: the raw HTML content and the parser we want to use. We got the raw HTML content from <code>response.content</code> in the previous step. For the parser, we'll use <code>lxml</code> if you installed it, as it's generally faster. If not, you can use the built-in <code>html.parser</code>. Here's how the code looks:</p>
+<pre><code class="hljs">from bs4 import BeautifulSoup
+
+soup = BeautifulSoup(response.content, &#39;lxml&#39;) # or &#39;html.parser&#39;
+</code></pre>
+<p>Now we have a <strong>BeautifulSoup</strong> object, which we've named <code>soup</code>, that represents the parsed HTML. We can start using its methods to find the elements we're interested in. <strong>BeautifulSoup</strong> provides several methods for searching the HTML tree, such as <code>find()</code> and <code>find_all()</code>. The <code>find()</code> method returns the first element that matches the specified criteria, while <code>find_all()</code> returns a list of all matching elements. We'll use these methods to locate the HTML elements that contain the eBay item numbers. But before we can do that, we need to inspect the HTML structure of the eBay page and identify a pattern or tag that consistently holds the item numbers. This might involve looking for a specific <code>&lt;div&gt;</code> with a particular class, or an <code>&lt;a&gt;</code> tag with a certain attribute. Once we've identified the pattern, we can use <strong>BeautifulSoup</strong> to target those elements and extract the item numbers. So, in this step, we've used <strong>BeautifulSoup</strong> to parse the HTML content into a navigable structure. We're now ready to start searching for those elusive item numbers. Let's move on to the next step and put our detective skills to the test!</p>
+<h2>Identifying Item Number Elements</h2>
+<p>Alright, we've got our HTML parsed and ready to go, but now comes the critical step: figuring out <em>where</em> those item numbers are hiding in the HTML structure. This is where your detective skills come into play! The best way to do this is to open up the eBay page in your web browser and use your browser's developer tools. Most browsers have these built-in – you can usually access them by right-clicking on the page and selecting &quot;Inspect&quot; or &quot;Inspect Element&quot;. Once you've opened the developer tools, you'll see a panel with the HTML source code of the page. Now, go hunting for an item number on the page. Once you've found one, try to locate its corresponding HTML element in the developer tools. Look for a pattern – is the item number within a specific tag? Does it have a unique class or ID? Is it part of a link? This is the key to effectively using <strong>BeautifulSoup</strong>. For example, you might find that item numbers are consistently within <code>&lt;a&gt;</code> tags that have a class like <code>&quot;item-link&quot;</code>. Or, they might be part of the <code>href</code> attribute of a link. Let's say, for the sake of this example, that the item numbers are part of the <code>href</code> attribute of <code>&lt;a&gt;</code> tags that have the class <code>&quot;item-link&quot;</code>. The <code>href</code> might look something like this: <code>&quot;https://www.ebay.com/itm/Some-Item/123456789012&quot;</code>, where <code>123456789012</code> is the item number. Now that we've identified a pattern, we can use <strong>BeautifulSoup</strong> to target these elements specifically. This is where the power of <strong>BeautifulSoup</strong> really shines – we can use its search methods to pinpoint exactly what we need. Remember, eBay's HTML structure might change over time, so it's essential to re-inspect the page if your scraper stops working. Web scraping is a bit of a cat-and-mouse game, and websites often tweak their structure to prevent scraping. So, we've put on our detective hats, explored the HTML structure, and identified a pattern for locating item numbers. We're now ready to use this knowledge to extract those numbers with <strong>BeautifulSoup</strong>.</p>
+<h2>Extracting Item Numbers with BeautifulSoup's find_all()</h2>
+<p>Okay, we've done the detective work and figured out where those item numbers are hiding. Now it's time to put <strong>BeautifulSoup</strong> to work and extract them! We're going to use the <code>find_all()</code> method, which, as we discussed earlier, returns a list of all elements that match our criteria. Remember our example from the previous step, where we found that item numbers are part of the <code>href</code> attribute of <code>&lt;a&gt;</code> tags with the class <code>&quot;item-link&quot;</code>? We can use <code>find_all()</code> to get a list of all those <code>&lt;a&gt;</code> tags. Here's how the code would look:</p>
+<pre><code class="hljs">links = soup.find_all(&#39;a&#39;, class_=&#39;item-link&#39;)
+</code></pre>
+<p>Let's break this down. We're calling <code>find_all()</code> on our <code>soup</code> object. The first argument, <code>'a'</code>, specifies that we're looking for <code>&lt;a&gt;</code> tags. The second argument, <code>class_='item-link'</code>, is a keyword argument that specifies we want <code>&lt;a&gt;</code> tags with the class <code>&quot;item-link&quot;</code>. Notice the <code>class_</code> instead of just <code>class</code>. This is because <code>class</code> is a reserved keyword in Python, so <strong>BeautifulSoup</strong> uses <code>class_</code> to avoid conflicts. The result of this <code>find_all()</code> call is a list of <strong>BeautifulSoup</strong> <code>Tag</code> objects, each representing an <code>&lt;a&gt;</code> tag that matches our criteria. Now, we need to extract the item number from each of these tags. We can do this by accessing the <code>href</code> attribute of each tag. Remember, the <code>href</code> attribute contains the URL, which includes the item number. We can access attributes of a <strong>BeautifulSoup</strong> <code>Tag</code> object like a dictionary. So, to get the <code>href</code> attribute, we'd use <code>link['href']</code>, where <code>link</code> is a <strong>BeautifulSoup</strong> <code>Tag</code> object from our <code>links</code> list. But we don't want the whole URL, just the item number. We'll need to do some string manipulation to extract it. This might involve splitting the URL string or using regular expressions. We'll cover that in the next step. So, we've used <code>find_all()</code> to get a list of <code>&lt;a&gt;</code> tags that likely contain our item numbers. We're now one step closer to our goal! Let's move on to extracting the actual numbers from these tags.</p>
+<h2>Extracting the Item Number from the Href</h2>
+<p>Alright, we've got our list of <code>&lt;a&gt;</code> tags, and we know the item number is hiding in the <code>href</code> attribute. Now it's time to get those numbers out! As we discussed in the previous step, the <code>href</code> attribute contains the full URL, so we need to do some string manipulation to isolate the item number. There are a couple of ways we can do this. One common approach is to split the URL string using the <code>/</code> character as a delimiter. This will give us a list of URL segments, and the item number is likely to be one of those segments. Another approach is to use regular expressions, which are powerful tools for pattern matching in strings. Let's start with the splitting approach. Assuming the <code>href</code> looks something like <code>&quot;https://www.ebay.com/itm/Some-Item/123456789012&quot;</code>, we can split it like this:</p>
+<pre><code class="hljs">for link in links:
+    href = link[&#39;href&#39;]
+    parts = href.split(&#39;/&#39;)
+    item_number = parts[-1] # The last part of the URL is likely the item number
+    print(item_number)
+</code></pre>
+<p>Here, we're looping through our list of <code>&lt;a&gt;</code> tags. For each tag, we get the <code>href</code> attribute, split it into parts using <code>/</code>, and then assume that the last part (<code>parts[-1]</code>) is the item number. This works well if the URL structure is consistent. However, if the URL structure varies, this approach might not be reliable. That's where regular expressions come in handy. Regular expressions allow us to define a pattern and search for it within a string. For example, we could define a pattern that looks for a sequence of digits at the end of the URL. Here's how we can do it using the <code>re</code> module in Python:</p>
+<pre><code class="hljs">import re
+
+for link in links:
+    href = link[&#39;href&#39;]
+    match = re.search(r&#39;(\d+){{content}}#39;, href)
+    if match:
+        item_number = match.group(1)
+        print(item_number)
+</code></pre>
+<p>In this code, we're using <code>re.search()</code> to search for a pattern in the <code>href</code>. The pattern <code>r'(\d+)
+                    </div>
+                    <aside class="related-posts">
+                        <div class="ad-sidebar container">
+                            <div class="ad-wrapper">
+    <span>Iklan Related</span>
+</div>
+                        </div>
+                        <h2 class="related-posts-title">Related Posts</h2><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/dog-in-pain-key-signs">Dog In Pain? Key Signs &amp; What To Do</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-02T01:40:56+00:00">Aug 2, 2025</time>
+		                        <span class="view-count">
+									35 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/rothmans-community-organizing-models-a">Rothman&#39;s Community Organizing Models A Collaborative Approach</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-22T18:12:05+00:00">Jul 22, 2025</time>
+		                        <span class="view-count">
+									62 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/exercise-with-a-broken-leg">Exercise With A Broken Leg: Safe Guide To Recovery</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-09T02:50:03+00:00">Aug 9, 2025</time>
+		                        <span class="view-count">
+									50 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/jetpack-compose-potential-race-conditions">Jetpack Compose Potential Race Conditions In Navigation With ViewModelScope</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-19T13:08:48+00:00">Jul 19, 2025</time>
+		                        <span class="view-count">
+									75 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/how-to-attract-participants-and">How To Attract Participants And Members To Party Minder</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-27T05:57:35+00:00">Jul 27, 2025</time>
+		                        <span class="view-count">
+									55 views
+		                        </span>
+                            </div>
+                        </article>
+                    </aside>
+                    <aside class="related-posts"></aside>
+                </div>
+            </div>
+        </article>
+        <a href="#" class="back-to-top" id="backToTop" title="Back to top">
+        	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-bar-up" viewBox="0 0 16 16">
+			  <path fill-rule="evenodd" d="M3.646 11.854a.5.5 0 0 0 .708 0L8 8.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708M2.4 5.2c0 .22.18.4.4.4h10.4a.4.4 0 0 0 0-.8H2.8a.4.4 0 0 0-.4.4"/>
+			</svg>
+		</a>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 ANABEL</p>
+        </div>
+    </footer>
+    <script>
+    	(() => {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            const toggleMenu = () => {
+                navMenu.classList.toggle('nav-menu-active');
+                navToggle.classList.toggle('nav-toggle-active');
+            };
+            const backToTopHandler = (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            navToggle.addEventListener('click', toggleMenu);
+            document.getElementById('backToTop').addEventListener('click', backToTopHandler);
+            window.addEventListener('pagehide', () => {
+                navToggle.removeEventListener('click', toggleMenu);
+                document.getElementById('backToTop').removeEventListener('click', backToTopHandler);
+            });
+        })();
+		(() => {
+            window.addEventListener("DOMContentLoaded", (event) => {
+                const ellHljs = document.createElement("script");
+                ellHljs.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js");
+                ellHljs.onload = () => {
+                    hljs.highlightAll();
+                };
+                document.querySelector("body").append(ellHljs);
+                const ellFont = document.createElement("link");
+                ellFont.setAttribute("href", "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css");
+                ellFont.setAttribute("rel", "stylesheet");
+                document.querySelector("head").append(ellFont);
+                window.addEventListener('pagehide', () => {
+                    // ellHljs.remove();
+                    ellFont.remove();
+                });
+
+            });
+        })();
+    </script>
+    
+    
+    
+</body>
+</html></code> means &quot;one or more digits (<code>\d+</code>) at the end of the string (<code>$</code>)&quot;. If a match is found, <code>match.group(1)</code> gives us the matched digits, which is our item number. Regular expressions are a powerful tool for string manipulation, and they can be very useful in web scraping. We have successfully extracted the item numbers from the <code>href</code> attributes using both string splitting and regular expressions. Now, we can store these item numbers in a list or do whatever we need with them. We're almost there!</p>
+<h2>Storing and Using the Extracted Item Numbers</h2>
+<p>Great job, guys! We've successfully extracted those item numbers from the eBay page. Now, let's talk about what to do with them. We don't want to just print them out – we want to store them in a way that we can use them later. The most common way to store a collection of items in Python is to use a list. So, let's create an empty list and append each extracted item number to it. Here's how the code would look:</p>
+<pre><code class="hljs">item_numbers = []
+for link in links:
+    href = link[&#39;href&#39;]
+    match = re.search(r&#39;(\d+){{content}}#39;, href)
+    if match:
+        item_number = match.group(1)
+        item_numbers.append(item_number)
+
+print(item_numbers)
+</code></pre>
+<p>Now we have a list called <code>item_numbers</code> that contains all the item numbers we extracted from the page. We can now use this list for all sorts of things. For example, we could loop through the list and fetch more information about each item. We could also save the list to a file, or store it in a database. The possibilities are endless! Let's say we want to fetch more information about each item. We could use the item number to construct the URL for the item's eBay page and then scrape that page for details like the item title, price, and description. This is where web scraping gets really powerful – we can chain together multiple scraping operations to extract a wealth of information. Or, let's say we want to save the item numbers to a file. We could open a file in write mode and write each item number to a new line. This is a great way to store the data for later use. No matter what we want to do with the item numbers, having them stored in a list makes it much easier to work with them. We've successfully extracted the item numbers, stored them in a list, and discussed some ways we can use them. We're now masters of eBay item number scraping!</p>
+<h2>Handling Pagination and Multiple Pages</h2>
+<p>So, you've conquered scraping item numbers from a single eBay page – awesome! But what if you want to scrape item numbers from <em>multiple</em> pages? This is where pagination comes into play. Pagination is the technique websites use to break up large lists of items into smaller, more manageable chunks, spread across multiple pages. eBay, like many e-commerce sites, uses pagination to display search results. To scrape item numbers from multiple pages, we need to figure out how eBay's pagination works and then adapt our scraper to follow the links to the next pages. The first step is to inspect the HTML of the page and identify the pagination links. These are usually links that say things like &quot;Next&quot;, &quot;Previous&quot;, or show page numbers (1, 2, 3, etc.). Use your browser's developer tools to find these links and see if there's a pattern in their URLs. For example, the URL for the next page might be something like <code>&quot;https://www.ebay.com/sch/i.html?_nkw=some+item&amp;_pgn=2&quot;</code>, where <code>_pgn=2</code> indicates the second page. If you see a pattern like this, you can use it to construct the URLs for all the pages you want to scrape. Once you've identified the pagination pattern, you can modify your scraper to loop through the pages. Here's a general outline of how you'd do it:</p>
+<pre><code class="hljs">import requests
+from bs4 import BeautifulSoup
+import re
+
+def scrape_page(url):
+    # (Your existing scraping code here)
+    item_numbers = []
+    # Fetch HTML, parse with BeautifulSoup, extract item numbers...
+    return item_numbers
+
+base_url = &#39;https://www.ebay.com/sch/i.html?_nkw=some+item&#39;
+all_item_numbers = []
+
+for page_num in range(1, 6): # Scrape the first 5 pages
+    url = f&#39;{base_url}&amp;_pgn={page_num}&#39;
+    item_numbers = scrape_page(url)
+    all_item_numbers.extend(item_numbers)
+
+print(all_item_numbers)
+</code></pre>
+<p>In this example, we've defined a function <code>scrape_page()</code> that takes a URL as input and returns a list of item numbers from that page. We then loop through the first 5 pages, construct the URL for each page, call <code>scrape_page()</code> to extract the item numbers, and add them to a master list called <code>all_item_numbers</code>. Handling pagination can make your scraper much more powerful, allowing you to extract data from large datasets that are spread across multiple pages. But remember, scraping multiple pages puts more load on the website's server, so be respectful and avoid making too many requests in a short period. We'll talk more about ethical scraping in the next section. We have successfully expanded our scraping skills to handle pagination and extract item numbers from multiple pages. We're becoming true web scraping pros!</p>
+<h2>Ethical Scraping and Best Practices</h2>
+<p>Okay, guys, we've learned how to build a pretty powerful web scraper. But with great power comes great responsibility! It's super important to scrape ethically and follow best practices so we don't cause problems for the websites we're scraping or get ourselves blocked. First and foremost, <strong>always check the website's <code>robots.txt</code> file</strong>. This file is a set of instructions from the website owner to web robots (like our scraper) about which parts of the site should not be accessed. You can usually find it by adding <code>/robots.txt</code> to the end of the website's base URL (e.g., <code>https://www.ebay.com/robots.txt</code>). Respect the rules outlined in this file – they're there for a reason. Next, <strong>be mindful of the rate at which you're making requests</strong>. Sending too many requests in a short period can overwhelm the website's server and potentially cause it to crash. This is called a Denial-of-Service (DoS) attack, and it's definitely not cool. To avoid this, implement delays in your scraper. Use the <code>time.sleep()</code> function to pause your script for a few seconds between requests. A good starting point is 1-2 seconds, but you might need to increase this depending on the website's policies and your scraping needs. Another best practice is to <strong>set a user-agent</strong> in your requests. The user-agent is a string that identifies your scraper to the website. By default, <code>requests</code> uses a generic user-agent that might be easily identified as a scraper. To avoid this, set a user-agent that resembles a real web browser. You can find a list of user-agent strings online. Here's how to set a user-agent in your code:</p>
+<pre><code class="hljs">headers = {&#39;User-Agent&#39;: &#39;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36&#39;}
+response = requests.get(url, headers=headers)
+</code></pre>
+<p>Finally, <strong>be prepared to handle changes in the website's structure</strong>. As we've discussed, websites often change their HTML structure, which can break your scraper. Be prepared to re-inspect the page and update your code as needed. Ethical scraping is all about being respectful and responsible. By following these best practices, you can scrape the data you need without causing problems for the website or yourself. We've learned the importance of ethical scraping and how to follow best practices to be responsible web scrapers. We're now not only skilled scrapers but also ethical ones!</p>
+<h2>Troubleshooting Common Issues</h2>
+<p>Web scraping can be a bit of a rollercoaster – sometimes things work perfectly, and sometimes you run into unexpected issues. Let's talk about some common problems you might encounter and how to troubleshoot them. One common issue is <strong>getting blocked by the website</strong>. Websites often implement measures to prevent scraping, such as blocking IP addresses that make too many requests or identifying and blocking scrapers based on their user-agent. If you're getting blocked, the first thing to do is slow down your request rate. Implement longer delays between requests using <code>time.sleep()</code>. You can also try rotating user-agents to make your scraper look like different browsers. Another technique is to use proxies. A proxy server acts as an intermediary between your scraper and the website, masking your IP address. There are many free and paid proxy services available. Another common problem is <strong>changes in the website's HTML structure</strong>. As we've discussed, websites often change their layout and HTML, which can break your scraper. If your scraper suddenly stops working, the first thing to do is inspect the website's HTML again and see if anything has changed. You might need to update your <strong>BeautifulSoup</strong> selectors to target the new HTML structure. <strong>Encoding issues</strong> can also be a problem. Sometimes, the HTML content you fetch might be encoded in a way that Python doesn't understand. This can lead to errors when you try to parse the HTML. To fix this, try explicitly specifying the encoding when you create the <strong>BeautifulSoup</strong> object:</p>
+<pre><code class="hljs">soup = BeautifulSoup(response.content.decode(&#39;utf-8&#39;), &#39;lxml&#39;)
+</code></pre>
+<p>If you're still having trouble, <strong>check your code for errors</strong>. Typos, incorrect selectors, and logical errors can all cause your scraper to fail. Use print statements to debug your code and see what's happening at each step. Finally, <strong>don't be afraid to ask for help</strong>. There are many online communities and forums where you can ask questions and get advice from other scrapers. Web scraping can be challenging, but with a little troubleshooting and persistence, you can overcome most issues. We've discussed some common web scraping issues and how to troubleshoot them. We're now equipped to handle the bumps in the road and keep our scrapers running smoothly!</p>
+<h2>Conclusion: You're a BeautifulSoup Scraping Pro!</h2>
+<p>Alright, guys! We've reached the end of our deep dive into scraping eBay item numbers with <strong>BeautifulSoup</strong>. You've learned how to fetch HTML with <code>requests</code>, parse it with <strong>BeautifulSoup</strong>, identify the elements containing item numbers, extract those numbers using string manipulation and regular expressions, handle pagination, scrape ethically, and troubleshoot common issues. That's a lot! You're now well on your way to becoming a <strong>BeautifulSoup</strong> scraping pro. Remember, web scraping is a skill that takes practice. Don't be discouraged if you run into problems – that's part of the learning process. The more you scrape, the better you'll get at it. Keep experimenting, keep learning, and keep building cool scrapers! Now go forth and scrape responsibly! Happy scraping!</p>
+
+                    </div>
+                    <aside class="related-posts">
+                        <div class="ad-sidebar container">
+                            <div class="ad-wrapper">
+    <span>Iklan Related</span>
+</div>
+                        </div>
+                        <h2 class="related-posts-title">Related Posts</h2><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/dog-in-pain-key-signs">Dog In Pain? Key Signs &amp; What To Do</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-02T01:40:56+00:00">Aug 2, 2025</time>
+		                        <span class="view-count">
+									35 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/rothmans-community-organizing-models-a">Rothman&#39;s Community Organizing Models A Collaborative Approach</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-22T18:12:05+00:00">Jul 22, 2025</time>
+		                        <span class="view-count">
+									62 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/exercise-with-a-broken-leg">Exercise With A Broken Leg: Safe Guide To Recovery</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-09T02:50:03+00:00">Aug 9, 2025</time>
+		                        <span class="view-count">
+									50 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/jetpack-compose-potential-race-conditions">Jetpack Compose Potential Race Conditions In Navigation With ViewModelScope</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-19T13:08:48+00:00">Jul 19, 2025</time>
+		                        <span class="view-count">
+									75 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/how-to-attract-participants-and">How To Attract Participants And Members To Party Minder</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-27T05:57:35+00:00">Jul 27, 2025</time>
+		                        <span class="view-count">
+									55 views
+		                        </span>
+                            </div>
+                        </article>
+                    </aside>
+                    <aside class="related-posts"></aside>
+                </div>
+            </div>
+        </article>
+        <a href="#" class="back-to-top" id="backToTop" title="Back to top">
+        	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-bar-up" viewBox="0 0 16 16">
+			  <path fill-rule="evenodd" d="M3.646 11.854a.5.5 0 0 0 .708 0L8 8.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708M2.4 5.2c0 .22.18.4.4.4h10.4a.4.4 0 0 0 0-.8H2.8a.4.4 0 0 0-.4.4"/>
+			</svg>
+		</a>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 ANABEL</p>
+        </div>
+    </footer>
+    <script>
+    	(() => {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            const toggleMenu = () => {
+                navMenu.classList.toggle('nav-menu-active');
+                navToggle.classList.toggle('nav-toggle-active');
+            };
+            const backToTopHandler = (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            navToggle.addEventListener('click', toggleMenu);
+            document.getElementById('backToTop').addEventListener('click', backToTopHandler);
+            window.addEventListener('pagehide', () => {
+                navToggle.removeEventListener('click', toggleMenu);
+                document.getElementById('backToTop').removeEventListener('click', backToTopHandler);
+            });
+        })();
+		(() => {
+            window.addEventListener("DOMContentLoaded", (event) => {
+                const ellHljs = document.createElement("script");
+                ellHljs.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js");
+                ellHljs.onload = () => {
+                    hljs.highlightAll();
+                };
+                document.querySelector("body").append(ellHljs);
+                const ellFont = document.createElement("link");
+                ellFont.setAttribute("href", "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css");
+                ellFont.setAttribute("rel", "stylesheet");
+                document.querySelector("head").append(ellFont);
+                window.addEventListener('pagehide', () => {
+                    // ellHljs.remove();
+                    ellFont.remove();
+                });
+
+            });
+        })();
+    </script>
+    
+    
+    
+</body>
+</html>

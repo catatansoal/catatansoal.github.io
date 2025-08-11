@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Secure ECR: Fix Security Hub&#39;s ECR.1 Finding</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Secure ECR: Fix Security Hubs ECR.1 Finding...">
+    <link rel="canonical" href="https://catatansoal.github.io/blog/secure-ecr-fix-security-hubs">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Secure ECR: Fix Security Hub&#39;s ECR.1 Finding">
+	<meta property="og:description" content="Secure ECR: Fix Security Hubs ECR.1 Finding...">
+	<meta property="og:url" content="https://catatansoal.github.io/blog/secure-ecr-fix-security-hubs">
+	<meta property="og:site_name" content="ANABEL">
+	<meta property="article:published_time" content="2025-08-10T00:01:49+00:00">
+	<meta property="article:author" content="ADMIN">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+    <link rel="preload" fetchpriority="high" as="image" href="https://tse4.mm.bing.net/th?q=Security%20Hub%20Finding%3A%20ECR.1%20ECR%20Private%20Repositories%20Should%20Have%20Image%20Scanning%20Configured">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style type="text/css">
+    	:root{--primary-color:#3740ff;--text-color:#202124;--background-color:#ffffff;--gray-100:#f8f9fa;--gray-200:#e9ecef}*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;line-height:1.6;color:var(--text-color);background-color:var(--background-color)}.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}.header{background-color:var(--background-color);border-bottom:1px solid var(--gray-200);position:sticky;top:0;z-index:100}.nav{padding:.5rem 0}.nav-container{display:flex;justify-content:space-between;align-items:center;gap:1rem}.nav-left{display:flex;align-items:center;flex-shrink:0}.logo{font-weight:700;color:var(--primary-color)}.blog-tag{margin-left:1rem;padding:.25rem .5rem;background-color:var(--gray-100);border-radius:4px;font-size:.875rem}.nav-search{flex-grow:1;max-width:300px}.search-form{position:relative;width:100%}.search-input{width:100%;padding:.5rem 2.5rem .5rem 1rem;border:1px solid var(--gray-200);border-radius:24px;font-size:.875rem;transition:all 0.2s}.search-input:focus{outline:none;border-color:var(--primary-color);box-shadow:0 0 0 2px rgb(55 64 255 / .1)}.search-button{position:absolute;right:.5rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#5f6368;cursor:pointer;padding:.25rem;display:flex;align-items:center;justify-content:center}.search-button:hover{color:var(--primary-color)}.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:.5rem}.hamburger{display:block;position:relative;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before,.hamburger::after{content:'';position:absolute;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before{top:-6px}.hamburger::after{bottom:-6px}.nav-toggle-active .hamburger{background:#fff0}.nav-toggle-active .hamburger::before{transform:rotate(45deg);top:0}.nav-toggle-active .hamburger::after{transform:rotate(-45deg);bottom:0}.nav-list{display:flex;list-style:none;gap:2rem}.nav-link{color:var(--text-color);text-decoration:none;font-size:.9rem;transition:color 0.2s}.nav-link:hover{color:var(--primary-color)}.article-header{padding:2rem 0;background-color:var(--gray-100)}.article-layout{display:grid;grid-template-columns:1fr 350px;gap:3rem;padding:1rem 0;align-items: start}h1,h2,h3,h4,h5,h6{font-family:"Crimson Text","Times New Roman",Times,serif}h1{font-size:2.5rem;line-height:1.2;margin-bottom:1rem}.meta{color:#5f6368;font-size:.875rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}.view-count{display:inline-flex;align-items:center;gap:.25rem}.view-count svg{color:#5f6368}.content{min-width:0;border-bottom:1px solid #dddddd5e;margin-top:1rem;white-space:pre-line !important;overflow-wrap:break-word;overflow-x:auto;word-break:break-word}.lead{font-size:1.25rem;color:#5f6368;margin-bottom:2rem}h2,h3,h4,h5,h6{font-size:1.75rem;margin:1rem 0 1rem}p,pre,ol,ul>li{margin-bottom:1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;font-size:1.3rem;text-align: justify;}p>code{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px}hr{margin:1rem 0 1rem 0}.code-example{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;margin:1.5rem 0;overflow-x:auto}code{font-family:'Roboto Mono',monospace;font-size:.875rem}ul{margin:.2rem 0;padding-left:1.5rem}.related-posts{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;position:sticky;top:5rem}.related-posts-title,.newpost-posts-list{font-size:1.75rem;margin:0 0 1rem}.related-posts-list{display:flex;flex-direction:column;gap:.5rem}.related-post,.newpost-post{border-bottom:1px solid #ddd;padding-bottom:10px;margin-bottom:10px}.related-post:last-child,.newpost-post:last-child{padding-bottom:0;border-bottom:none}.related-post-title,.newpost-post-title{font-size:1.2rem;margin:0 0 .1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;}.related-post-title a,.newpost-post-title a{color:var(--text-color);text-decoration:none;transition:color 0.2s}.related-post-title a:hover,.newpost-post-title a:hover{color:var(--primary-color)}.related-post time{font-size:.875rem;color:#5f6368}.footer{background-color:var(--gray-100);padding:2rem 0;margin-top:4rem;color:#5f6368;font-size:.875rem}.nav-menu>ul>li{margin-bottom:0}@media (max-width:1024px){.container{max-width:800px}.article-layout{grid-template-columns:1fr;gap:2rem}.related-posts{position:static}}@media (max-width:768px){.nav-container{flex-wrap:wrap}.nav-search{order:3;max-width:none;width:100%;margin-top:.1rem}.nav-toggle{display:block}.nav-menu{display:none;position:absolute;top:100%;left:0;right:0;background:var(--background-color);padding:1rem 0;border-bottom:1px solid var(--gray-200)}.nav-menu-active{display:block}.nav-list{flex-direction:column;gap:.1rem;padding:0 1.5rem}.nav-link{display:block;padding:.2rem 0}h1{font-size:2rem}.article-header{padding:2rem 0}.content{padding:.1rem 0}}table{width:100%;border-collapse:collapse;margin:20px 0;font-family:'Arial',sans-serif}th,td{padding:12px 15px;text-align:left;border:1px solid #ddd}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9}tr:nth-child(even) td{background-color:#f2f2f2}@media screen and (max-width:768px){table{border:0;display:block;overflow-x:auto;white-space:nowrap}th,td{padding:10px;text-align:right}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9;border-bottom:1px solid #ddd}tr:nth-child(even) td{background-color:#f2f2f2}}a{text-decoration:none;color:#540707}.katex-html{padding: .2rem;color: #000;font-weight: 700;font-size: 1.3rem;overflow-wrap: break-word;max-width: 100%;white-space: normal !important}.category{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin:1rem 0 1rem 0}.tag{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px;font-family:"Newsreader",serif}.tag>a{text-decoration:none;color:#000}img{margin:auto;display:block;max-width:100%;height:auto;margin-bottom:1rem}.katex{white-space: pre-line !important;display: inline-block;max-width: 100%;overflow-x: auto;overflow-y: hidden;scrollbar-width: thin;overflow-wrap: break-word;word-break: break-word;vertical-align: -7px}.content > p {overflow-wrap: break-word;word-break: break-word}
+    </style>
+    <style type="text/css">
+    	pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}
+		.hljs{color:#c9d1d9;background:#0d1117}.hljs-doctag,.hljs-keyword,.hljs-meta .hljs-keyword,.hljs-template-tag,.hljs-template-variable,.hljs-type,.hljs-variable.language_{color:#ff7b72}.hljs-title,.hljs-title.class_,.hljs-title.class_.inherited__,.hljs-title.function_{color:#d2a8ff}.hljs-attr,.hljs-attribute,.hljs-literal,.hljs-meta,.hljs-number,.hljs-operator,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-variable{color:#79c0ff}.hljs-meta .hljs-string,.hljs-regexp,.hljs-string{color:#a5d6ff}.hljs-built_in,.hljs-symbol{color:#ffa657}.hljs-code,.hljs-comment,.hljs-formula{color:#8b949e}.hljs-name,.hljs-quote,.hljs-selector-pseudo,.hljs-selector-tag{color:#7ee787}.hljs-subst{color:#c9d1d9}.hljs-section{color:#1f6feb;font-weight:700}.hljs-bullet{color:#f2cc60}.hljs-emphasis{color:#c9d1d9;font-style:italic}.hljs-strong{color:#c9d1d9;font-weight:700}.hljs-addition{color:#aff5b4;background-color:#033a16}.hljs-deletion{color:#ffdcd7;background-color:#67060c}
+    	pre{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;font-weight:400;word-break:break-word;word-wrap:break-word;box-sizing:inherit;border-radius:4px;overflow-x:auto;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}code{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;word-wrap:break-word;word-break:break-word;font-style:normal;line-height:20px;letter-spacing:-.003em;box-sizing:inherit;font-weight:400;font-size:75%;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}
+    </style>
+    <style type="text/css">
+    	.back-to-top{position:fixed;bottom:20px;right:20px;background-color:#a73f3f;color:#fff;padding:8px 10px;border-radius:50%;box-shadow:0 4px 6px rgb(0 0 0 / .2);font-size:10px;font-weight:700;text-decoration:none;text-align:center;transition:opacity 0.3s ease,visibility 0.3s ease;z-index:99999;opacity:1;visibility:visible}.back-to-top:hover{background-color:#0056b3}
+    </style>
+    <style type="text/css">
+        .ad-header {margin: 1rem auto 1rem;background-color: #fdfdfd;text-align: center;display: block;}.ad-header .ad-wrapper {min-height: 90px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #555;font-weight: 500;padding: 3rem;border: 1px dashed #ccc;border-radius: 6px;}@media (max-width: 768px) {.ad-header {padding: 0.75rem;}}.ad-sidebar {margin: 0 0 1rem;background-color: #fefefe;text-align: center;padding: 0px;width: 100%;max-width: 100%;display: block;}.ad-sidebar .ad-wrapper {min-height: 250px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #444;font-weight: 500;border: 1px dashed #aaa;border-radius: 6px;padding: 0rem;}@media (max-width: 1024px) {.ad-sidebar {padding: 0.75rem;}}
+    </style>
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://catatansoal.github.io/blog/secure-ecr-fix-security-hubs"
+          },
+          "headline": "Secure ECR: Fix Security Hub&#39;s ECR.1 Finding",
+          "description": "Secure ECR: Fix Security Hubs ECR.1 Finding...",
+          "image": [
+            "https://tse4.mm.bing.net/th?q=Security%20Hub%20Finding%3A%20ECR.1%20ECR%20Private%20Repositories%20Should%20Have%20Image%20Scanning%20Configured"
+          ],
+          "author": {
+            "@type": "Person",
+            "name": "ADMIN",
+            "jobTitle": "Editor web"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "ANABEL",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://tse4.mm.bing.net/th?q=ANABEL%20WEB"
+            }
+          },
+          "datePublished": "2025-08-10T00:01:49+00:00",
+          "dateModified": "2025-08-10T00:01:49+00:00"
+        }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="container nav-container">
+                <div class="nav-left">
+                    <span class="logo">ANABEL</span>
+                    <span class="blog-tag">Article</span>
+                </div>
+                <div class="nav-search">
+                    <form class="search-form" role="search">
+                        <input 
+                            type="search" 
+                            class="search-input"
+                            placeholder="Search articles..."
+                            aria-label="Search articles"
+                        >
+                        <button type="submit" class="search-button" aria-label="Submit search">🔎</button>
+                    </form>
+                </div>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+                <div class="nav-menu">
+                    <ul class="nav-list">
+                    	<li><a href="/" class="nav-link">HOME</a></li>
+                        <li><a href="/pages/About" class="nav-link">About</a></li>
+                        <li><a href="/pages/Contact" class="nav-link">Contact</a></li>
+                        <li><a href="/pages/Disclaimer" class="nav-link">Disclaimer</a></li>
+                        <li><a href="/pages/Privacy" class="nav-link">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="main">
+        <article class="article">
+            <header class="article-header">
+                <div class="container">
+                    <h1>Secure ECR: Fix Security Hub&#39;s ECR.1 Finding</h1>
+                    <div class="meta">
+                        <time datetime="2025-08-10T00:01:49+00:00">Aug 10, 2025</time>
+                        <span class="author">by ADMIN</span>
+                        <span class="view-count">
+                            <span id="viewCount">45</span> views
+                        </span>
+                    </div>
+                </div>
+            </header>
+            <div class="ad-header container">
+                <div class="ad-wrapper">
+    Iklan Headers
+</div>
+            </div>
+            <div class="container">
+                <div class="article-layout">
+                    <div class="content">
+                        <img src="https://tse4.mm.bing.net/th?q=Security%20Hub%20Finding%3A%20ECR.1%20ECR%20Private%20Repositories%20Should%20Have%20Image%20Scanning%20Configured" title="Security Hub Finding: ECR.1 ECR Private Repositories Should Have Image Scanning Configured" width="300" height="200"/><p>Hey guys! Let's dive into a crucial aspect of cloud security: ensuring your ECR (Elastic Container Registry) private repositories have image scanning configured. This is super important for maintaining a robust security posture in your AWS environment. This article will break down a specific Security Hub finding related to this, explain why it matters, and what you can do about it. So, buckle up and let's get started!</p>
+<h2>Understanding the Security Hub Finding: ECR.1</h2>
+<h3>The Basics: What's ECR and Why Image Scanning?</h3>
+<p>First off, let's quickly recap what ECR is. <strong>ECR, or Elastic Container Registry</strong>, is AWS's fully-managed container registry service. It allows you to store, manage, and deploy Docker container images. Think of it as your own private Docker Hub on AWS. Now, why is image scanning so vital? Well, container images can contain vulnerabilities just like any other piece of software. These vulnerabilities could be in the base operating system, libraries, or application code within the image. Without scanning, you're essentially running blind, potentially deploying containers with known security flaws into your environment. <strong>Image scanning</strong> helps you identify these vulnerabilities before they become a problem, allowing you to take proactive steps to mitigate risks.</p>
+<p>This brings us to the <strong>Security Hub finding ECR.1</strong>. This finding specifically checks whether your private ECR repositories have image scanning enabled. If a repository doesn't have scanning configured, Security Hub will flag it, indicating a potential security gap. Ignoring this is like leaving your front door unlocked – you're making it easier for potential threats to slip in. So, paying attention to this finding is a key part of keeping your containerized applications secure.</p>
+<h3>Diving Deeper: The Specifics of the Finding</h3>
+<p>Let's break down the specific details provided in the finding example. The <strong>Finding ID</strong> (arn:aws:securityhub:eu-west-1:002616177731:subscription/nist-800-53/v/5.0.0/ECR.1/finding/27468962-b5ed-4a02-ab6c-505366b79d64) is a unique identifier for this particular finding. It tells you exactly which resource and check triggered the alert. The <strong>Severity</strong> is marked as <strong>INFORMATIONAL</strong>, which means while it's not a critical issue demanding immediate action, it's still something you should definitely address. Think of it as a friendly reminder to tighten things up. A higher severity, like <code>CRITICAL</code> or <code>HIGH</code>, would indicate a more pressing security concern.</p>
+<p><strong>Remediation Type</strong> is listed as <strong>auto-remediation</strong>. This is fantastic news because it means there's a mechanism in place to automatically fix this issue! We'll talk more about auto-remediation later. The <strong>Created</strong> timestamp (2025-08-09T23:25:44.563937+00:00) simply tells you when the finding was generated. The <strong>Description</strong> is the heart of the matter: &quot;This control checks whether a private ECR repository has image scanning configured. This control fails if a private ECR repository doesn’t have image scanning configured.&quot; Pretty straightforward, right? It clearly states the issue being detected. This finding emphasizes the importance of proactive security measures, making sure we're not just building and deploying containers but also continuously monitoring them for potential weaknesses. By understanding these details, you can better prioritize and address security findings within your AWS environment.</p>
+<h3>Why This Matters: The Implications of Not Scanning</h3>
+<p>So, why is this ECR.1 finding such a big deal? Imagine deploying a container image riddled with vulnerabilities. It's like inviting hackers to a party inside your system. These vulnerabilities can be exploited to gain unauthorized access, steal data, or even completely compromise your application. <strong>Not scanning your images</strong> is a gamble you simply can't afford to take in today's threat landscape. Think about it this way: you wouldn't run software on your laptop without antivirus, right? Container images are no different – they need to be scanned for malicious code and vulnerabilities.</p>
+<p>Moreover, in many industries, regulatory compliance requires you to have security measures in place, and image scanning is often a key component of meeting those requirements. Failing to comply can lead to hefty fines and reputational damage. From a practical standpoint, image scanning also helps you maintain a cleaner and more efficient development pipeline. By identifying vulnerabilities early in the development lifecycle, you can address them before they make their way into production, saving you time and effort in the long run. It's like catching a small leak in a pipe before it turns into a flood – much easier to manage and less damaging overall.</p>
+<p>Let's put it this way: think of your container images as ingredients in a recipe. You wouldn't use spoiled ingredients, would you? Image scanning is like checking the expiration date and quality of those ingredients before you start cooking. It ensures that you're building your application with safe and secure components. By prioritizing image scanning, you're not just addressing a Security Hub finding; you're building a more secure and resilient infrastructure for your applications.</p>
+<h2>Auto-Remediation: Your Security Superhero</h2>
+<p>Okay, so we've established that image scanning is crucial, and Security Hub is flagging repositories without it. But what's this talk about <strong>auto-remediation</strong>? Well, this is where things get really cool! Auto-remediation is like having a security superhero that automatically fixes issues for you. In the context of ECR.1, it means that AWS can be configured to automatically enable image scanning on repositories that don't have it. How awesome is that?</p>
+<p>Instead of manually going through each repository and flipping the scanning switch, you can set up a system that does it for you. This saves you a ton of time and reduces the risk of human error. Think of it as setting up a self-healing system – when a security gap is detected, it's automatically patched. Now, how does this magic actually happen? Typically, auto-remediation is implemented using services like AWS Lambda and AWS Systems Manager Automation. A Lambda function is triggered when Security Hub detects a non-compliant repository. This function then uses the AWS SDK to enable image scanning on that repository.</p>
+<p>Setting up auto-remediation does require a bit of initial configuration, but the long-term benefits are immense. It's like investing in a security robot that constantly patrols your environment and fixes issues as they arise. However, it's also important to understand that auto-remediation isn't a silver bullet. It's crucial to monitor the auto-remediation process to ensure it's working correctly and to handle any edge cases that might require manual intervention. For example, you might have a specific repository where you intentionally don't want image scanning enabled due to performance concerns or other reasons. In such cases, you'll need to implement exceptions or alternative mitigation strategies.</p>
+<h3>Setting Up Auto-Remediation: A Practical Guide</h3>
+<p>So, you're sold on the idea of auto-remediation, but how do you actually set it up? While a detailed, step-by-step guide is beyond the scope of this article, let's walk through the general process. First, you'll need to create an <strong>AWS Lambda function</strong>. This function will contain the code that enables image scanning on the ECR repository. The code will typically use the AWS SDK for Python (Boto3) to interact with the ECR service. You'll need to grant the Lambda function the necessary permissions to modify ECR repositories. This is crucial for the function to do its job effectively.</p>
+<p>Next, you'll need to configure a <strong>CloudWatch Events rule</strong> (now part of Amazon EventBridge) to trigger the Lambda function when Security Hub generates the ECR.1 finding. This rule will act as the bridge between Security Hub and your auto-remediation function. You'll define a pattern that matches the ECR.1 finding, ensuring that the Lambda function is only triggered when this specific issue is detected. You might also consider using AWS Systems Manager Automation documents to orchestrate more complex remediation workflows. For example, you could create a workflow that not only enables image scanning but also notifies the security team and updates a tracking system.</p>
+<p>Remember to test your auto-remediation setup thoroughly. You can do this by intentionally creating a non-compliant ECR repository and verifying that the Lambda function is triggered and successfully enables image scanning. Monitoring is also key. Set up CloudWatch metrics and alarms to track the execution of your Lambda function and to alert you if any errors occur. By implementing auto-remediation, you're taking a proactive step towards securing your container infrastructure, freeing up your team to focus on more strategic security initiatives. It's like having a tireless security guard watching over your ECR repositories, ensuring they're always properly scanned.</p>
+<h2>Conclusion: Securing Your Containers is a Must</h2>
+<p>Alright, guys, we've covered a lot of ground! We've explored the importance of image scanning in ECR, dissected the Security Hub finding ECR.1, and dived into the world of auto-remediation. The key takeaway here is that <strong>securing your container images</strong> is not optional – it's a fundamental part of a strong cloud security strategy. By enabling image scanning, you're proactively identifying and mitigating vulnerabilities, reducing the risk of security breaches and compliance violations.</p>
+<p>Ignoring these findings is like hoping for the best while leaving your valuable assets unprotected. It's a risk that simply isn't worth taking in today's threat environment. Auto-remediation is a powerful tool that can help you automate the process of enabling image scanning, but it's not a set-it-and-forget-it solution. It's essential to monitor your auto-remediation setup and ensure it's working as expected.</p>
+<p>Remember, security is a continuous process, not a one-time event. Regularly reviewing your Security Hub findings, implementing appropriate remediation measures, and staying up-to-date on the latest security best practices are crucial for maintaining a secure and resilient cloud environment. So, take action today, enable image scanning on your ECR repositories, and give your containers the security they deserve! By focusing on these proactive measures, you're not just ticking boxes; you're building a robust security foundation for your cloud applications. And that's something we can all feel good about!</p>
+
+                    </div>
+                    <aside class="related-posts">
+                        <div class="ad-sidebar container">
+                            <div class="ad-wrapper">
+    <span>Iklan Related</span>
+</div>
+                        </div>
+                        <h2 class="related-posts-title">Related Posts</h2><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/decoding-joyals-category-of-plane">Decoding Joyal&#39;s Category Of Plane Trees For Higher Category Theory</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-29T09:42:24+00:00">Jul 29, 2025</time>
+		                        <span class="view-count">
+									67 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/probability-density-function-calculating-expected">Probability Density Function Calculating Expected Values Mean Variance And Standard Deviation</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-16T23:28:37+00:00">Jul 16, 2025</time>
+		                        <span class="view-count">
+									93 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/sirian-starseed-signs-traits-and">Sirian Starseed: Signs, Traits, And Mission On Earth</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-10T11:50:47+00:00">Aug 10, 2025</time>
+		                        <span class="view-count">
+									52 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/georeferencer-gdal-plugin-missing-a">Georeferencer GDAL Plugin Missing A Comprehensive Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-19T00:10:05+00:00">Jul 19, 2025</time>
+		                        <span class="view-count">
+									55 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/tone-legs-while-sitting-desk">Tone Legs While Sitting: Desk Exercises</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-05T14:37:43+00:00">Aug 5, 2025</time>
+		                        <span class="view-count">
+									39 views
+		                        </span>
+                            </div>
+                        </article>
+                    </aside>
+                    <aside class="related-posts"></aside>
+                </div>
+            </div>
+        </article>
+        <a href="#" class="back-to-top" id="backToTop" title="Back to top">
+        	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-bar-up" viewBox="0 0 16 16">
+			  <path fill-rule="evenodd" d="M3.646 11.854a.5.5 0 0 0 .708 0L8 8.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708M2.4 5.2c0 .22.18.4.4.4h10.4a.4.4 0 0 0 0-.8H2.8a.4.4 0 0 0-.4.4"/>
+			</svg>
+		</a>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 ANABEL</p>
+        </div>
+    </footer>
+    <script>
+    	(() => {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            const toggleMenu = () => {
+                navMenu.classList.toggle('nav-menu-active');
+                navToggle.classList.toggle('nav-toggle-active');
+            };
+            const backToTopHandler = (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            navToggle.addEventListener('click', toggleMenu);
+            document.getElementById('backToTop').addEventListener('click', backToTopHandler);
+            window.addEventListener('pagehide', () => {
+                navToggle.removeEventListener('click', toggleMenu);
+                document.getElementById('backToTop').removeEventListener('click', backToTopHandler);
+            });
+        })();
+		(() => {
+            window.addEventListener("DOMContentLoaded", (event) => {
+                const ellHljs = document.createElement("script");
+                ellHljs.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js");
+                ellHljs.onload = () => {
+                    hljs.highlightAll();
+                };
+                document.querySelector("body").append(ellHljs);
+                const ellFont = document.createElement("link");
+                ellFont.setAttribute("href", "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css");
+                ellFont.setAttribute("rel", "stylesheet");
+                document.querySelector("head").append(ellFont);
+                window.addEventListener('pagehide', () => {
+                    // ellHljs.remove();
+                    ellFont.remove();
+                });
+
+            });
+        })();
+    </script>
+    
+    
+    
+</body>
+</html>

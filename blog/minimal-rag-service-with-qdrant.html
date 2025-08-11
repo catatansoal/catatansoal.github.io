@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Minimal RAG Service With Qdrant And Ollama: A Deep Dive</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Minimal RAG Service With Qdrant And Ollama: A Deep Dive...">
+    <link rel="canonical" href="https://catatansoal.github.io/blog/minimal-rag-service-with-qdrant">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Minimal RAG Service With Qdrant And Ollama: A Deep Dive">
+	<meta property="og:description" content="Minimal RAG Service With Qdrant And Ollama: A Deep Dive...">
+	<meta property="og:url" content="https://catatansoal.github.io/blog/minimal-rag-service-with-qdrant">
+	<meta property="og:site_name" content="ANABEL">
+	<meta property="article:published_time" content="2025-08-10T00:50:18+00:00">
+	<meta property="article:author" content="ADMIN">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+    <link rel="preload" fetchpriority="high" as="image" href="https://tse4.mm.bing.net/th?q=RAG%20Discussion">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style type="text/css">
+    	:root{--primary-color:#3740ff;--text-color:#202124;--background-color:#ffffff;--gray-100:#f8f9fa;--gray-200:#e9ecef}*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;line-height:1.6;color:var(--text-color);background-color:var(--background-color)}.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}.header{background-color:var(--background-color);border-bottom:1px solid var(--gray-200);position:sticky;top:0;z-index:100}.nav{padding:.5rem 0}.nav-container{display:flex;justify-content:space-between;align-items:center;gap:1rem}.nav-left{display:flex;align-items:center;flex-shrink:0}.logo{font-weight:700;color:var(--primary-color)}.blog-tag{margin-left:1rem;padding:.25rem .5rem;background-color:var(--gray-100);border-radius:4px;font-size:.875rem}.nav-search{flex-grow:1;max-width:300px}.search-form{position:relative;width:100%}.search-input{width:100%;padding:.5rem 2.5rem .5rem 1rem;border:1px solid var(--gray-200);border-radius:24px;font-size:.875rem;transition:all 0.2s}.search-input:focus{outline:none;border-color:var(--primary-color);box-shadow:0 0 0 2px rgb(55 64 255 / .1)}.search-button{position:absolute;right:.5rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#5f6368;cursor:pointer;padding:.25rem;display:flex;align-items:center;justify-content:center}.search-button:hover{color:var(--primary-color)}.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:.5rem}.hamburger{display:block;position:relative;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before,.hamburger::after{content:'';position:absolute;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before{top:-6px}.hamburger::after{bottom:-6px}.nav-toggle-active .hamburger{background:#fff0}.nav-toggle-active .hamburger::before{transform:rotate(45deg);top:0}.nav-toggle-active .hamburger::after{transform:rotate(-45deg);bottom:0}.nav-list{display:flex;list-style:none;gap:2rem}.nav-link{color:var(--text-color);text-decoration:none;font-size:.9rem;transition:color 0.2s}.nav-link:hover{color:var(--primary-color)}.article-header{padding:2rem 0;background-color:var(--gray-100)}.article-layout{display:grid;grid-template-columns:1fr 350px;gap:3rem;padding:1rem 0;align-items: start}h1,h2,h3,h4,h5,h6{font-family:"Crimson Text","Times New Roman",Times,serif}h1{font-size:2.5rem;line-height:1.2;margin-bottom:1rem}.meta{color:#5f6368;font-size:.875rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}.view-count{display:inline-flex;align-items:center;gap:.25rem}.view-count svg{color:#5f6368}.content{min-width:0;border-bottom:1px solid #dddddd5e;margin-top:1rem;white-space:pre-line !important;overflow-wrap:break-word;overflow-x:auto;word-break:break-word}.lead{font-size:1.25rem;color:#5f6368;margin-bottom:2rem}h2,h3,h4,h5,h6{font-size:1.75rem;margin:1rem 0 1rem}p,pre,ol,ul>li{margin-bottom:1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;font-size:1.3rem;text-align: justify;}p>code{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px}hr{margin:1rem 0 1rem 0}.code-example{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;margin:1.5rem 0;overflow-x:auto}code{font-family:'Roboto Mono',monospace;font-size:.875rem}ul{margin:.2rem 0;padding-left:1.5rem}.related-posts{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;position:sticky;top:5rem}.related-posts-title,.newpost-posts-list{font-size:1.75rem;margin:0 0 1rem}.related-posts-list{display:flex;flex-direction:column;gap:.5rem}.related-post,.newpost-post{border-bottom:1px solid #ddd;padding-bottom:10px;margin-bottom:10px}.related-post:last-child,.newpost-post:last-child{padding-bottom:0;border-bottom:none}.related-post-title,.newpost-post-title{font-size:1.2rem;margin:0 0 .1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;}.related-post-title a,.newpost-post-title a{color:var(--text-color);text-decoration:none;transition:color 0.2s}.related-post-title a:hover,.newpost-post-title a:hover{color:var(--primary-color)}.related-post time{font-size:.875rem;color:#5f6368}.footer{background-color:var(--gray-100);padding:2rem 0;margin-top:4rem;color:#5f6368;font-size:.875rem}.nav-menu>ul>li{margin-bottom:0}@media (max-width:1024px){.container{max-width:800px}.article-layout{grid-template-columns:1fr;gap:2rem}.related-posts{position:static}}@media (max-width:768px){.nav-container{flex-wrap:wrap}.nav-search{order:3;max-width:none;width:100%;margin-top:.1rem}.nav-toggle{display:block}.nav-menu{display:none;position:absolute;top:100%;left:0;right:0;background:var(--background-color);padding:1rem 0;border-bottom:1px solid var(--gray-200)}.nav-menu-active{display:block}.nav-list{flex-direction:column;gap:.1rem;padding:0 1.5rem}.nav-link{display:block;padding:.2rem 0}h1{font-size:2rem}.article-header{padding:2rem 0}.content{padding:.1rem 0}}table{width:100%;border-collapse:collapse;margin:20px 0;font-family:'Arial',sans-serif}th,td{padding:12px 15px;text-align:left;border:1px solid #ddd}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9}tr:nth-child(even) td{background-color:#f2f2f2}@media screen and (max-width:768px){table{border:0;display:block;overflow-x:auto;white-space:nowrap}th,td{padding:10px;text-align:right}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9;border-bottom:1px solid #ddd}tr:nth-child(even) td{background-color:#f2f2f2}}a{text-decoration:none;color:#540707}.katex-html{padding: .2rem;color: #000;font-weight: 700;font-size: 1.3rem;overflow-wrap: break-word;max-width: 100%;white-space: normal !important}.category{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin:1rem 0 1rem 0}.tag{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px;font-family:"Newsreader",serif}.tag>a{text-decoration:none;color:#000}img{margin:auto;display:block;max-width:100%;height:auto;margin-bottom:1rem}.katex{white-space: pre-line !important;display: inline-block;max-width: 100%;overflow-x: auto;overflow-y: hidden;scrollbar-width: thin;overflow-wrap: break-word;word-break: break-word;vertical-align: -7px}.content > p {overflow-wrap: break-word;word-break: break-word}
+    </style>
+    <style type="text/css">
+    	pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}
+		.hljs{color:#c9d1d9;background:#0d1117}.hljs-doctag,.hljs-keyword,.hljs-meta .hljs-keyword,.hljs-template-tag,.hljs-template-variable,.hljs-type,.hljs-variable.language_{color:#ff7b72}.hljs-title,.hljs-title.class_,.hljs-title.class_.inherited__,.hljs-title.function_{color:#d2a8ff}.hljs-attr,.hljs-attribute,.hljs-literal,.hljs-meta,.hljs-number,.hljs-operator,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-variable{color:#79c0ff}.hljs-meta .hljs-string,.hljs-regexp,.hljs-string{color:#a5d6ff}.hljs-built_in,.hljs-symbol{color:#ffa657}.hljs-code,.hljs-comment,.hljs-formula{color:#8b949e}.hljs-name,.hljs-quote,.hljs-selector-pseudo,.hljs-selector-tag{color:#7ee787}.hljs-subst{color:#c9d1d9}.hljs-section{color:#1f6feb;font-weight:700}.hljs-bullet{color:#f2cc60}.hljs-emphasis{color:#c9d1d9;font-style:italic}.hljs-strong{color:#c9d1d9;font-weight:700}.hljs-addition{color:#aff5b4;background-color:#033a16}.hljs-deletion{color:#ffdcd7;background-color:#67060c}
+    	pre{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;font-weight:400;word-break:break-word;word-wrap:break-word;box-sizing:inherit;border-radius:4px;overflow-x:auto;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}code{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;word-wrap:break-word;word-break:break-word;font-style:normal;line-height:20px;letter-spacing:-.003em;box-sizing:inherit;font-weight:400;font-size:75%;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}
+    </style>
+    <style type="text/css">
+    	.back-to-top{position:fixed;bottom:20px;right:20px;background-color:#a73f3f;color:#fff;padding:8px 10px;border-radius:50%;box-shadow:0 4px 6px rgb(0 0 0 / .2);font-size:10px;font-weight:700;text-decoration:none;text-align:center;transition:opacity 0.3s ease,visibility 0.3s ease;z-index:99999;opacity:1;visibility:visible}.back-to-top:hover{background-color:#0056b3}
+    </style>
+    <style type="text/css">
+        .ad-header {margin: 1rem auto 1rem;background-color: #fdfdfd;text-align: center;display: block;}.ad-header .ad-wrapper {min-height: 90px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #555;font-weight: 500;padding: 3rem;border: 1px dashed #ccc;border-radius: 6px;}@media (max-width: 768px) {.ad-header {padding: 0.75rem;}}.ad-sidebar {margin: 0 0 1rem;background-color: #fefefe;text-align: center;padding: 0px;width: 100%;max-width: 100%;display: block;}.ad-sidebar .ad-wrapper {min-height: 250px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #444;font-weight: 500;border: 1px dashed #aaa;border-radius: 6px;padding: 0rem;}@media (max-width: 1024px) {.ad-sidebar {padding: 0.75rem;}}
+    </style>
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://catatansoal.github.io/blog/minimal-rag-service-with-qdrant"
+          },
+          "headline": "Minimal RAG Service With Qdrant And Ollama: A Deep Dive",
+          "description": "Minimal RAG Service With Qdrant And Ollama: A Deep Dive...",
+          "image": [
+            "https://tse4.mm.bing.net/th?q=RAG%20Discussion"
+          ],
+          "author": {
+            "@type": "Person",
+            "name": "ADMIN",
+            "jobTitle": "Editor web"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "ANABEL",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://tse4.mm.bing.net/th?q=ANABEL%20WEB"
+            }
+          },
+          "datePublished": "2025-08-10T00:50:18+00:00",
+          "dateModified": "2025-08-10T00:50:18+00:00"
+        }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="container nav-container">
+                <div class="nav-left">
+                    <span class="logo">ANABEL</span>
+                    <span class="blog-tag">Article</span>
+                </div>
+                <div class="nav-search">
+                    <form class="search-form" role="search">
+                        <input 
+                            type="search" 
+                            class="search-input"
+                            placeholder="Search articles..."
+                            aria-label="Search articles"
+                        >
+                        <button type="submit" class="search-button" aria-label="Submit search">🔎</button>
+                    </form>
+                </div>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+                <div class="nav-menu">
+                    <ul class="nav-list">
+                    	<li><a href="/" class="nav-link">HOME</a></li>
+                        <li><a href="/pages/About" class="nav-link">About</a></li>
+                        <li><a href="/pages/Contact" class="nav-link">Contact</a></li>
+                        <li><a href="/pages/Disclaimer" class="nav-link">Disclaimer</a></li>
+                        <li><a href="/pages/Privacy" class="nav-link">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="main">
+        <article class="article">
+            <header class="article-header">
+                <div class="container">
+                    <h1>Minimal RAG Service With Qdrant And Ollama: A Deep Dive</h1>
+                    <div class="meta">
+                        <time datetime="2025-08-10T00:50:18+00:00">Aug 10, 2025</time>
+                        <span class="author">by ADMIN</span>
+                        <span class="view-count">
+                            <span id="viewCount">56</span> views
+                        </span>
+                    </div>
+                </div>
+            </header>
+            <div class="ad-header container">
+                <div class="ad-wrapper">
+    Iklan Headers
+</div>
+            </div>
+            <div class="container">
+                <div class="article-layout">
+                    <div class="content">
+                        <img src="https://tse4.mm.bing.net/th?q=RAG%20Discussion" title="RAG Discussion" width="300" height="200"/><p>This article discusses the implementation of a minimal RAG (Retrieval-Augmented Generation) service using Qdrant and Ollama. It outlines the setup, API endpoints, and functionalities for embedding, indexing, querying, and managing documents. Let's dive into the details!</p>
+<h2>Introduction to RAG</h2>
+<p><strong>RAG</strong>, or <strong><em>Retrieval-Augmented Generation</em></strong>, is a powerful technique that combines the strengths of information retrieval and text generation models. This approach allows us to build systems that can answer questions, generate content, and perform other language-based tasks by leveraging a large corpus of knowledge.</p>
+<p><em>In essence, RAG involves two primary stages:</em> first, <strong>retrieving</strong> relevant information from a knowledge base, and second, <strong>generating</strong> a response based on the retrieved context. This allows language models to overcome their limitations, such as lacking up-to-date information or struggling with specific domains. For us guys, it's like having a super-smart assistant that can both find the right information and explain it to you in a clear way.</p>
+<p>This minimal RAG service utilizes Qdrant for vector storage and similarity search, and Ollama for generating embeddings and answers. The combination of these tools enables efficient retrieval and high-quality text generation, making it a versatile solution for various applications.</p>
+<h2>Core Components</h2>
+<p>Before we delve into the specifics, let's take a quick look at the key components that make up this RAG service:</p>
+<ul>
+<li><strong>Qdrant:</strong> This is a vector database that stores document embeddings, which are numerical representations of text. Qdrant's ability to perform fast similarity searches is crucial for retrieving relevant documents based on a user's query. Qdrant helps in finding the chunks of text that are most similar to your question.</li>
+<li><strong>Ollama:</strong> Ollama is used for two primary tasks: generating embeddings for text and generating answers based on the retrieved context. It acts as the brains behind the operation, transforming text into a format that Qdrant can understand and crafting responses to user queries. It is a cool tool that makes it easy to run language models locally.</li>
+</ul>
+<p>By leveraging these components, we can create a system that can effectively retrieve and generate information, providing users with accurate and contextually relevant responses.</p>
+<h2>Setting Up the Environment</h2>
+<p>Before we can start using the RAG service, we need to configure the environment variables. These variables define the URLs for Ollama and Qdrant, the collection name for storing vectors, and the models to use for embedding and generation. Setting up environment variables is crucial for the smooth operation of the system.</p>
+<p>Here are the environment variables that you need to set:</p>
+<ul>
+<li><code>OLLAMA_URL</code>: The URL for the Ollama service (default: <code>http://ollama:11434</code>). This tells the system where to find Ollama, which handles the language model tasks.</li>
+<li><code>QDRANT_URL</code>: The URL for the Qdrant service (default: <code>http://qdrant:6333</code>). This is the address of the vector database that stores your documents.</li>
+<li><code>COLLECTION</code>: The name of the Qdrant collection to use (default: <code>docs_768</code>). Collections are like folders in a database, helping you organize your data.</li>
+<li><code>EMBED_MODEL</code>: The name of the Ollama model to use for generating embeddings (default: <code>nomic-embed-text</code>). This model transforms text into numerical vectors, which Qdrant uses for similarity search.</li>
+<li><code>GENERATE_MODEL</code>: The name of the Ollama model to use for generating answers (default: <code>llama3.1:8b</code>). This is the language model that crafts responses to user queries.</li>
+<li><code>API_KEY</code>: An optional API key for securing the service. You can set this in your <code>.env</code> file to protect your RAG service.</li>
+</ul>
+<p>You can set these environment variables in your <code>.env</code> file or directly in your system's environment. This configuration ensures that the RAG service can correctly connect to the necessary services and resources.</p>
+<h2>FastAPI Application</h2>
+<p>The RAG service is built using FastAPI, a modern, fast (high-performance), web framework for building APIs with Python. FastAPI makes it easy to define API endpoints, handle requests, and return responses. FastAPI is a great choice for building APIs because it's fast, easy to use, and helps you write clean code.</p>
+<p>The FastAPI application is initialized with the following settings:</p>
+<ul>
+<li><code>title</code>: &quot;Retriever API&quot;</li>
+<li><code>description</code>: &quot;Qdrant + Ollama tabanlı minimal RAG servisi&quot;</li>
+<li><code>version</code>: &quot;1.0.0&quot;</li>
+<li><code>docs_url</code>: <code>None</code> (custom docs will be used)</li>
+<li><code>redoc_url</code>: <code>None</code></li>
+</ul>
+<p>The <code>docs_url</code> and <code>redoc_url</code> are set to <code>None</code> because we'll be using a custom Swagger UI for documentation, which includes a theme button. This allows users to switch between light and dark themes for the API documentation, making it more user-friendly.</p>
+<h3>CORS Middleware</h3>
+<p>CORS (Cross-Origin Resource Sharing) middleware is added to the FastAPI application to allow requests from specific origins. This is important for security, ensuring that only authorized domains can access the API. CORS is like a gatekeeper, making sure that only trusted websites can talk to your API.</p>
+<p>The following origins are allowed:</p>
+<ul>
+<li><code>https://yzeka.kku.edu.tr</code></li>
+<li><code>https://chat.yzeka.kku.edu.tr</code></li>
+</ul>
+<p>These origins are permitted to make requests to the API, while requests from other domains will be blocked. This helps prevent malicious websites from accessing your RAG service.</p>
+<h3>API Key Dependency</h3>
+<p>To secure the API endpoints, an API key dependency is implemented. This requires clients to provide a valid API key in the <code>X-API-KEY</code> header. If an API key is configured and the provided key is incorrect, the request will be rejected with a 401 Unauthorized error. This is like having a password for your API, ensuring that only authorized users can access it.</p>
+<p>The <code>check_key</code> function verifies the API key:</p>
+<pre><code class="hljs">async def check_key(x_api_key: str | None = Header(default=None, alias=&quot;X-API-KEY&quot;)):
+    if API_KEY and x_api_key != API_KEY:
+        raise HTTPException(status_code=401, detail=&quot;unauthorized&quot;)
+</code></pre>
+<p>This function checks if the <code>API_KEY</code> environment variable is set and if the provided <code>x_api_key</code> matches. If they don't match, an <code>HTTPException</code> is raised, preventing unauthorized access.</p>
+<h2>API Endpoints</h2>
+<p>The RAG service exposes several API endpoints for various functionalities, including embedding, indexing, querying, and managing documents. These endpoints are the doors through which you interact with the RAG service.</p>
+<h3>1. <code>/embed-upsert-batch</code></h3>
+<p>This endpoint allows you to upload a batch of documents to the Qdrant collection. It takes a JSON payload containing a list of items, where each item includes an ID, text, and optional metadata. This is your primary way to load content into the RAG system.</p>
+<ul>
+<li><strong>Method:</strong> <code>POST</code></li>
+<li><strong>Tags:</strong> <code>index</code></li>
+<li><strong>Dependencies:</strong> <code>check_key</code> (API key authentication)</li>
+<li><strong>Body:</strong><pre><code class="hljs">{
+  &quot;items&quot;: [
+    {
+      &quot;id&quot;: 1,
+      &quot;text&quot;: &quot;...&quot;,
+      &quot;meta&quot;: { &quot;...&quot; }
+    },
+    ...
+  ]
+}
+</code></pre>
+</li>
+</ul>
+<p>The endpoint processes each item, generates embeddings for the text using Ollama, and upserts the data into Qdrant. This involves converting your text into a format that the system can search through.</p>
+<h3>2. <code>/query-advanced</code></h3>
+<p>This endpoint performs advanced queries against the Qdrant collection. It takes a query string, a limit for the number of results, a minimum score threshold, and an optional filter. This is where you ask questions and get answers from your indexed content.</p>
+<ul>
+<li><strong>Method:</strong> <code>POST</code></li>
+<li><strong>Tags:</strong> <code>search</code></li>
+<li><strong>Dependencies:</strong> <code>check_key</code> (API key authentication)</li>
+<li><strong>Body:</strong><pre><code class="hljs">{
+  &quot;q&quot;: &quot;soru&quot;,
+  &quot;limit&quot;: 5,
+  &quot;min_score&quot;: 0.3,
+  &quot;filter&quot;: {
+    &quot;must&quot;: [
+      {
+        &quot;key&quot;: &quot;source&quot;,
+        &quot;match&quot;: {
+          &quot;value&quot;: &quot;deneme&quot;
+        }
+      }
+    ]
+  }
+}
+</code></pre>
+</li>
+</ul>
+<p>The endpoint generates an embedding for the query, searches Qdrant for similar documents, and uses Ollama to generate an answer based on the retrieved context. This is the core RAG process: finding relevant information and using it to answer your question.</p>
+<h3>3. <code>/delete</code></h3>
+<p>This endpoint allows you to delete points from the Qdrant collection. It takes a list of IDs to delete. This is useful for managing your indexed content, like removing outdated or irrelevant information.</p>
+<ul>
+<li><strong>Method:</strong> <code>POST</code></li>
+<li><strong>Tags:</strong> <code>admin</code></li>
+<li><strong>Dependencies:</strong> <code>check_key</code> (API key authentication)</li>
+<li><strong>Body:</strong><pre><code class="hljs">{
+  &quot;ids&quot;: [1, 2, 3, ...]
+}
+</code></pre>
+</li>
+</ul>
+<h3>4. <code>/collections/recreate</code></h3>
+<p>This endpoint recreates the Qdrant collection, effectively resetting the index. <strong>Warning:</strong> This operation will delete all existing data in the collection. This is a powerful tool for starting fresh with your RAG system.</p>
+<ul>
+<li><strong>Method:</strong> <code>POST</code></li>
+<li><strong>Tags:</strong> <code>admin</code></li>
+<li><strong>Dependencies:</strong> <code>check_key</code> (API key authentication)</li>
+</ul>
+<h3>5. <code>/embed-upsert</code></h3>
+<p>This endpoint embeds and upserts a single document into the Qdrant collection. It takes the document's ID, text, and optional metadata. This is a more direct way to add individual pieces of content to your system.</p>
+<ul>
+<li><strong>Method:</strong> <code>POST</code></li>
+<li><strong>Tags:</strong> <code>index</code></li>
+<li><strong>Body:</strong><pre><code class="hljs">{
+  &quot;id&quot;: 1,
+  &quot;text&quot;: &quot;metin&quot;,
+  &quot;meta&quot;: {
+    &quot;source&quot;: &quot;demo&quot;
+  }
+}
+</code></pre>
+</li>
+</ul>
+<h3>6. <code>/query</code></h3>
+<p>This endpoint performs a simple query against the Qdrant collection. It takes a query string and a limit for the number of results. This is a basic way to ask questions and get answers from your indexed content.</p>
+<ul>
+<li><strong>Method:</strong> <code>POST</code></li>
+<li><strong>Tags:</strong> <code>search</code></li>
+<li><strong>Body:</strong><pre><code class="hljs">{
+  &quot;q&quot;: &quot;soru&quot;,
+  &quot;limit&quot;: 5
+}
+</code></pre>
+</li>
+</ul>
+<h3>7. <code>/upload</code></h3>
+<p>This endpoint allows you to upload files (txt, pdf, docx, xlsx) and index their content. It chunks the text, generates embeddings, and upserts the data into Qdrant. This is a convenient way to add documents to your RAG system directly through a web interface.</p>
+<ul>
+<li><strong>Method:</strong> <code>POST</code></li>
+<li><strong>Tags:</strong> <code>index</code></li>
+<li><strong>Form Data:</strong>
+<ul>
+<li><code>file</code>: The file to upload.</li>
+<li><code>source</code>: An optional source tag for the document.</li>
+<li><code>max_tokens</code>: The maximum number of tokens per chunk (default: 800).</li>
+<li><code>overlap</code>: The number of overlapping tokens between chunks (default: 100).</li>
+</ul>
+</li>
+</ul>
+<h2>Request ID Middleware</h2>
+<p>The application includes a middleware component that adds a unique request ID to each request. This ID is included in the response headers, making it easier to track and debug requests. It is like giving each request a unique fingerprint, making it easier to follow its journey through the system.</p>
+<p>The <code>RequestIDMiddleware</code> generates a UUID (Universally Unique Identifier) if one is not already present in the request headers. This ensures that each request has a distinct identifier, which can be invaluable for logging and troubleshooting.</p>
+<h2>Helper Functions</h2>
+<p>Several helper functions are defined to encapsulate common tasks, such as embedding text, upserting data to Qdrant, searching Qdrant, and generating answers with Ollama. These functions make the code cleaner and easier to maintain.</p>
+<h3>1. <code>embed_text</code></h3>
+<p>This function takes a text string as input and returns its embedding vector using the Ollama embeddings endpoint. This is the workhorse for converting text into a searchable format.</p>
+<pre><code class="hljs">async def embed_text(text: str) -&gt; list[float]:
+    &quot;&quot;&quot;Ollama embeddings endpointi ile gömme vektörü üret.&quot;&quot;&quot;
+    async with httpx.AsyncClient(timeout=60.0) as client:
+        r = await client.post(
+            f&quot;{OLLAMA_URL}/api/embeddings&quot;,
+            json={&quot;model&quot;: EMBED_MODEL, &quot;prompt&quot;: text},
+        )
+        r.raise_for_status()
+        return r.json()[&quot;embedding&quot;]
+</code></pre>
+<h3>2. <code>qdrant_upsert</code></h3>
+<p>This function upserts a point into the Qdrant collection. It takes a point ID, a vector, and a payload (metadata) as input. This is how you add data to your Qdrant vector store.</p>
+<pre><code class="hljs">async def qdrant_upsert(point_id: Any, vector: list[float], payload: Dict[str, Any]) -&gt; None:
+    body = {
+        &quot;points&quot;: [{
+            &quot;id&quot;: point_id,
+            &quot;vector&quot;: vector,
+            &quot;payload&quot;: payload
+        }]
+    }
+    async with httpx.AsyncClient(timeout=60.0) as client:
+        r = await client.put(
+            f&quot;{QDRANT_URL}/collections/{COLLECTION}/points?wait=true&quot;,
+            headers={&quot;Content-Type&quot;: &quot;application/json&quot;},
+            content=json.dumps(body),
+        )
+        r.raise_for_status()
+</code></pre>
+<h3>3. <code>qdrant_search</code></h3>
+<p>This function searches the Qdrant collection for points similar to a given query vector. It takes a query vector and a limit for the number of results. This is how you find relevant information in your vector store.</p>
+<pre><code class="hljs">async def qdrant_search(query_vec: list[float], limit: int = 5) -&gt; list[Dict[str, Any]]:
+    body = {&quot;vector&quot;: query_vec, &quot;limit&quot;: limit}
+    async with httpx.AsyncClient(timeout=60.0) as client:
+        r = await client.post(
+            f&quot;{QDRANT_URL}/collections/{COLLECTION}/points/search&quot;,
+            headers={&quot;Content-Type&quot;: &quot;application/json&quot;},
+            content=json.dumps(body),
+        )
+        r.raise_for_status()
+        return r.json().get(&quot;result&quot;, [])
+</code></pre>
+<h3>4. <code>llm_answer</code></h3>
+<p>This function generates an answer based on a given prompt using the Ollama generate endpoint. It takes a prompt string as input. This is the final step in the RAG process, where you craft a response based on the retrieved context.</p>
+<pre><code class="hljs">async def llm_answer(prompt: str) -&gt; str:
+    async with httpx.AsyncClient(timeout=120.0) as client:
+        r = await client.post(
+            f&quot;{OLLAMA_URL}/api/generate&quot;,
+            json={&quot;model&quot;: GENERATE_MODEL, &quot;prompt&quot;: prompt, &quot;stream&quot;: False},
+        )
+        r.raise_for_status()
+        return r.json().get(&quot;response&quot;, &quot;&quot;)
+</code></pre>
+<h2>Root and Health Endpoints</h2>
+<p>The application defines two special endpoints: the root endpoint (<code>/</code>) and the health endpoint (<code>/health</code>). These are like the front door and the check-up station for your API.</p>
+<h3>1. Root Endpoint</h3>
+<p>The root endpoint redirects users to the Swagger UI documentation. This makes it easy for developers to explore the API and understand how to use it. It's like a welcome mat, guiding users to the API documentation.</p>
+<pre><code class="hljs">@app.get(&quot;/&quot;, include_in_schema=False)
+def root():
+    # Swagger UI&#39;a yönlendir
+    return RedirectResponse(url=&quot;/docs&quot;, status_code=302)
+</code></pre>
+<h3>2. Health Endpoint</h3>
+<p>The health endpoint returns a simple JSON response indicating that the service is running. This is useful for monitoring and ensuring that the API is available. It's like a heartbeat, confirming that the service is alive and well.</p>
+<pre><code class="hljs">@app.get(&quot;/health&quot;, tags=[&quot;meta&quot;], dependencies=[Depends(check_key)])
+def health():
+    return {&quot;ok&quot;: True}
+</code></pre>
+<h2>Custom Swagger UI</h2>
+<p>To provide a better user experience, the application includes a custom Swagger UI with a theme button. This allows users to switch between light and dark themes, making the documentation more accessible and visually appealing. It is like adding a personal touch to your API documentation.</p>
+<p>The custom Swagger UI is implemented using the <code>get_swagger_ui_html</code> function from <code>fastapi.openapi.docs</code>. The HTML is then modified to include custom CSS and JavaScript for the theme button.</p>
+<h2>File Upload and Chunking</h2>
+<p>The application includes functionality for uploading files (txt, pdf, docx, xlsx), chunking their content, and indexing the chunks. This allows users to easily add large documents to the RAG system. It is like having a document shredder and indexer built into your API.</p>
+<h3>Chunking Function</h3>
+<p>The <code>chunk_text</code> function splits the text into smaller chunks with a specified maximum number of tokens and overlap. This is important for handling large documents, as language models have limitations on the input size. Breaking text into smaller pieces helps ensure the language model can process the information effectively.</p>
+<pre><code class="hljs">def chunk_text(text: str, max_tokens: int = 800, overlap: int = 100):
+    # yaklaşık karakter tabanlı basit bölücü (hızlı ve yeterli)
+    size = max_tokens * 4  # ~ 1 token ≈ 4 char kabulü
+    ov   = overlap * 4
+    out = []
+    i = 0
+    n = len(text)
+    while i &lt; n:
+        j = min(i+size, n)
+        chunk = text[i:j]
+        out.append(chunk.strip())
+        i = j - ov
+        if i &lt; 0: i = 0
+    return [c for c in out if c]
+</code></pre>
+<h3>File Extraction</h3>
+<p>The <code>extract_text_from_upload</code> function extracts text from different file types (txt, pdf, docx, xlsx). This makes it easy to ingest content from various sources. It is like having a universal document reader for your API.</p>
+<h3>Upload Form</h3>
+<p>The <code>/upload</code> endpoint serves an HTML form for uploading files. This provides a user-friendly interface for adding documents to the RAG system. It is like giving your users a drag-and-drop interface for their documents.</p>
+<h3>Upload Processing</h3>
+<p>The <code>upload_file</code> function handles the file upload, extracts the text, chunks it, generates embeddings, and upserts the data into Qdrant. This is the complete pipeline for adding a document to your RAG system.</p>
+<h2>Conclusion</h2>
+<p>This article has provided a comprehensive overview of a minimal RAG service implemented using Qdrant and Ollama. We have covered the core components, API endpoints, and functionalities for embedding, indexing, querying, and managing documents. This RAG service provides a solid foundation for building more complex applications that leverage the power of information retrieval and text generation. We hope this has been helpful for you guys, and you're now ready to build your own RAG-powered applications!</p>
+
+                    </div>
+                    <aside class="related-posts">
+                        <div class="ad-sidebar container">
+                            <div class="ad-wrapper">
+    <span>Iklan Related</span>
+</div>
+                        </div>
+                        <h2 class="related-posts-title">Related Posts</h2><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/triangle-similarity-problem-solving-find">Triangle Similarity Problem Solving Find Coordinates L And M For Similar Triangles RST And LMN</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-16T13:44:43+00:00">Jul 16, 2025</time>
+		                        <span class="view-count">
+									94 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/extra-minimal-ocg-api-a">Extra Minimal OCG API A Gateway API Experimentation Discussion</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-23T20:29:05+00:00">Jul 23, 2025</time>
+		                        <span class="view-count">
+									62 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/kuku-fm-se-refund-kaise">कुकू एफएम से रिफंड कैसे पाएं? (Kuku FM Se Refund Kaise Paye)</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-10T04:59:01+00:00">Aug 10, 2025</time>
+		                        <span class="view-count">
+									60 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/improving-keyboard-stability-a-guide">Improving Keyboard Stability A Guide To Upgrading Hot-Swap Sockets</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-17T02:37:17+00:00">Jul 17, 2025</time>
+		                        <span class="view-count">
+									66 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/fixing-the-android-tv-d">Fixing The Android TV D-pad Left Bug A Navigation Analysis And Solution</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-20T01:30:30+00:00">Jul 20, 2025</time>
+		                        <span class="view-count">
+									71 views
+		                        </span>
+                            </div>
+                        </article>
+                    </aside>
+                    <aside class="related-posts"></aside>
+                </div>
+            </div>
+        </article>
+        <a href="#" class="back-to-top" id="backToTop" title="Back to top">
+        	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-bar-up" viewBox="0 0 16 16">
+			  <path fill-rule="evenodd" d="M3.646 11.854a.5.5 0 0 0 .708 0L8 8.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708M2.4 5.2c0 .22.18.4.4.4h10.4a.4.4 0 0 0 0-.8H2.8a.4.4 0 0 0-.4.4"/>
+			</svg>
+		</a>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 ANABEL</p>
+        </div>
+    </footer>
+    <script>
+    	(() => {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            const toggleMenu = () => {
+                navMenu.classList.toggle('nav-menu-active');
+                navToggle.classList.toggle('nav-toggle-active');
+            };
+            const backToTopHandler = (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            navToggle.addEventListener('click', toggleMenu);
+            document.getElementById('backToTop').addEventListener('click', backToTopHandler);
+            window.addEventListener('pagehide', () => {
+                navToggle.removeEventListener('click', toggleMenu);
+                document.getElementById('backToTop').removeEventListener('click', backToTopHandler);
+            });
+        })();
+		(() => {
+            window.addEventListener("DOMContentLoaded", (event) => {
+                const ellHljs = document.createElement("script");
+                ellHljs.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js");
+                ellHljs.onload = () => {
+                    hljs.highlightAll();
+                };
+                document.querySelector("body").append(ellHljs);
+                const ellFont = document.createElement("link");
+                ellFont.setAttribute("href", "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css");
+                ellFont.setAttribute("rel", "stylesheet");
+                document.querySelector("head").append(ellFont);
+                window.addEventListener('pagehide', () => {
+                    // ellHljs.remove();
+                    ellFont.remove();
+                });
+
+            });
+        })();
+    </script>
+    
+    
+    
+</body>
+</html>

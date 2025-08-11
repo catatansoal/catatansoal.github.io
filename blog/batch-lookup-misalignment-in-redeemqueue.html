@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Batch Lookup Misalignment In RedeemQueue.claim() Causes DoS Vulnerability</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Batch Lookup Misalignment In RedeemQueue.claim() Causes DoS Vulnerability...">
+    <link rel="canonical" href="https://catatansoal.github.io/blog/batch-lookup-misalignment-in-redeemqueue">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Batch Lookup Misalignment In RedeemQueue.claim() Causes DoS Vulnerability">
+	<meta property="og:description" content="Batch Lookup Misalignment In RedeemQueue.claim() Causes DoS Vulnerability...">
+	<meta property="og:url" content="https://catatansoal.github.io/blog/batch-lookup-misalignment-in-redeemqueue">
+	<meta property="og:site_name" content="ANABEL">
+	<meta property="article:published_time" content="2025-07-28T16:52:58+00:00">
+	<meta property="article:author" content="ADMIN">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+    <link rel="preload" fetchpriority="high" as="image" href="https://tse4.mm.bing.net/th?q=Rhythmic%20Cotton%20Kestrel%20Batch%20Lookup%20Misalignment%20in%20%60RedeemQueue.claim()%60%20Allows%20Permanent%20Redemption%20DoS">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style type="text/css">
+    	:root{--primary-color:#3740ff;--text-color:#202124;--background-color:#ffffff;--gray-100:#f8f9fa;--gray-200:#e9ecef}*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;line-height:1.6;color:var(--text-color);background-color:var(--background-color)}.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}.header{background-color:var(--background-color);border-bottom:1px solid var(--gray-200);position:sticky;top:0;z-index:100}.nav{padding:.5rem 0}.nav-container{display:flex;justify-content:space-between;align-items:center;gap:1rem}.nav-left{display:flex;align-items:center;flex-shrink:0}.logo{font-weight:700;color:var(--primary-color)}.blog-tag{margin-left:1rem;padding:.25rem .5rem;background-color:var(--gray-100);border-radius:4px;font-size:.875rem}.nav-search{flex-grow:1;max-width:300px}.search-form{position:relative;width:100%}.search-input{width:100%;padding:.5rem 2.5rem .5rem 1rem;border:1px solid var(--gray-200);border-radius:24px;font-size:.875rem;transition:all 0.2s}.search-input:focus{outline:none;border-color:var(--primary-color);box-shadow:0 0 0 2px rgb(55 64 255 / .1)}.search-button{position:absolute;right:.5rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#5f6368;cursor:pointer;padding:.25rem;display:flex;align-items:center;justify-content:center}.search-button:hover{color:var(--primary-color)}.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:.5rem}.hamburger{display:block;position:relative;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before,.hamburger::after{content:'';position:absolute;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before{top:-6px}.hamburger::after{bottom:-6px}.nav-toggle-active .hamburger{background:#fff0}.nav-toggle-active .hamburger::before{transform:rotate(45deg);top:0}.nav-toggle-active .hamburger::after{transform:rotate(-45deg);bottom:0}.nav-list{display:flex;list-style:none;gap:2rem}.nav-link{color:var(--text-color);text-decoration:none;font-size:.9rem;transition:color 0.2s}.nav-link:hover{color:var(--primary-color)}.article-header{padding:2rem 0;background-color:var(--gray-100)}.article-layout{display:grid;grid-template-columns:1fr 350px;gap:3rem;padding:1rem 0;align-items: start}h1,h2,h3,h4,h5,h6{font-family:"Crimson Text","Times New Roman",Times,serif}h1{font-size:2.5rem;line-height:1.2;margin-bottom:1rem}.meta{color:#5f6368;font-size:.875rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}.view-count{display:inline-flex;align-items:center;gap:.25rem}.view-count svg{color:#5f6368}.content{min-width:0;border-bottom:1px solid #dddddd5e;margin-top:1rem;white-space:pre-line !important;overflow-wrap:break-word;overflow-x:auto;word-break:break-word}.lead{font-size:1.25rem;color:#5f6368;margin-bottom:2rem}h2,h3,h4,h5,h6{font-size:1.75rem;margin:1rem 0 1rem}p,pre,ol,ul>li{margin-bottom:1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;font-size:1.3rem;text-align: justify;}p>code{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px}hr{margin:1rem 0 1rem 0}.code-example{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;margin:1.5rem 0;overflow-x:auto}code{font-family:'Roboto Mono',monospace;font-size:.875rem}ul{margin:.2rem 0;padding-left:1.5rem}.related-posts{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;position:sticky;top:5rem}.related-posts-title,.newpost-posts-list{font-size:1.75rem;margin:0 0 1rem}.related-posts-list{display:flex;flex-direction:column;gap:.5rem}.related-post,.newpost-post{border-bottom:1px solid #ddd;padding-bottom:10px;margin-bottom:10px}.related-post:last-child,.newpost-post:last-child{padding-bottom:0;border-bottom:none}.related-post-title,.newpost-post-title{font-size:1.2rem;margin:0 0 .1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;}.related-post-title a,.newpost-post-title a{color:var(--text-color);text-decoration:none;transition:color 0.2s}.related-post-title a:hover,.newpost-post-title a:hover{color:var(--primary-color)}.related-post time{font-size:.875rem;color:#5f6368}.footer{background-color:var(--gray-100);padding:2rem 0;margin-top:4rem;color:#5f6368;font-size:.875rem}.nav-menu>ul>li{margin-bottom:0}@media (max-width:1024px){.container{max-width:800px}.article-layout{grid-template-columns:1fr;gap:2rem}.related-posts{position:static}}@media (max-width:768px){.nav-container{flex-wrap:wrap}.nav-search{order:3;max-width:none;width:100%;margin-top:.1rem}.nav-toggle{display:block}.nav-menu{display:none;position:absolute;top:100%;left:0;right:0;background:var(--background-color);padding:1rem 0;border-bottom:1px solid var(--gray-200)}.nav-menu-active{display:block}.nav-list{flex-direction:column;gap:.1rem;padding:0 1.5rem}.nav-link{display:block;padding:.2rem 0}h1{font-size:2rem}.article-header{padding:2rem 0}.content{padding:.1rem 0}}table{width:100%;border-collapse:collapse;margin:20px 0;font-family:'Arial',sans-serif}th,td{padding:12px 15px;text-align:left;border:1px solid #ddd}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9}tr:nth-child(even) td{background-color:#f2f2f2}@media screen and (max-width:768px){table{border:0;display:block;overflow-x:auto;white-space:nowrap}th,td{padding:10px;text-align:right}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9;border-bottom:1px solid #ddd}tr:nth-child(even) td{background-color:#f2f2f2}}a{text-decoration:none;color:#540707}.katex-html{padding: .2rem;color: #000;font-weight: 700;font-size: 1.3rem;overflow-wrap: break-word;max-width: 100%;white-space: normal !important}.category{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin:1rem 0 1rem 0}.tag{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px;font-family:"Newsreader",serif}.tag>a{text-decoration:none;color:#000}img{margin:auto;display:block;max-width:100%;height:auto;margin-bottom:1rem}.katex{white-space: pre-line !important;display: inline-block;max-width: 100%;overflow-x: auto;overflow-y: hidden;scrollbar-width: thin;overflow-wrap: break-word;word-break: break-word;vertical-align: -7px}.content > p {overflow-wrap: break-word;word-break: break-word}
+    </style>
+    <style type="text/css">
+    	pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}
+		.hljs{color:#c9d1d9;background:#0d1117}.hljs-doctag,.hljs-keyword,.hljs-meta .hljs-keyword,.hljs-template-tag,.hljs-template-variable,.hljs-type,.hljs-variable.language_{color:#ff7b72}.hljs-title,.hljs-title.class_,.hljs-title.class_.inherited__,.hljs-title.function_{color:#d2a8ff}.hljs-attr,.hljs-attribute,.hljs-literal,.hljs-meta,.hljs-number,.hljs-operator,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-variable{color:#79c0ff}.hljs-meta .hljs-string,.hljs-regexp,.hljs-string{color:#a5d6ff}.hljs-built_in,.hljs-symbol{color:#ffa657}.hljs-code,.hljs-comment,.hljs-formula{color:#8b949e}.hljs-name,.hljs-quote,.hljs-selector-pseudo,.hljs-selector-tag{color:#7ee787}.hljs-subst{color:#c9d1d9}.hljs-section{color:#1f6feb;font-weight:700}.hljs-bullet{color:#f2cc60}.hljs-emphasis{color:#c9d1d9;font-style:italic}.hljs-strong{color:#c9d1d9;font-weight:700}.hljs-addition{color:#aff5b4;background-color:#033a16}.hljs-deletion{color:#ffdcd7;background-color:#67060c}
+    	pre{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;font-weight:400;word-break:break-word;word-wrap:break-word;box-sizing:inherit;border-radius:4px;overflow-x:auto;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}code{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;word-wrap:break-word;word-break:break-word;font-style:normal;line-height:20px;letter-spacing:-.003em;box-sizing:inherit;font-weight:400;font-size:75%;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}
+    </style>
+    <style type="text/css">
+    	.back-to-top{position:fixed;bottom:20px;right:20px;background-color:#a73f3f;color:#fff;padding:8px 10px;border-radius:50%;box-shadow:0 4px 6px rgb(0 0 0 / .2);font-size:10px;font-weight:700;text-decoration:none;text-align:center;transition:opacity 0.3s ease,visibility 0.3s ease;z-index:99999;opacity:1;visibility:visible}.back-to-top:hover{background-color:#0056b3}
+    </style>
+    <style type="text/css">
+        .ad-header {margin: 1rem auto 1rem;background-color: #fdfdfd;text-align: center;display: block;}.ad-header .ad-wrapper {min-height: 90px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #555;font-weight: 500;padding: 3rem;border: 1px dashed #ccc;border-radius: 6px;}@media (max-width: 768px) {.ad-header {padding: 0.75rem;}}.ad-sidebar {margin: 0 0 1rem;background-color: #fefefe;text-align: center;padding: 0px;width: 100%;max-width: 100%;display: block;}.ad-sidebar .ad-wrapper {min-height: 250px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #444;font-weight: 500;border: 1px dashed #aaa;border-radius: 6px;padding: 0rem;}@media (max-width: 1024px) {.ad-sidebar {padding: 0.75rem;}}
+    </style>
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://catatansoal.github.io/blog/batch-lookup-misalignment-in-redeemqueue"
+          },
+          "headline": "Batch Lookup Misalignment In RedeemQueue.claim() Causes DoS Vulnerability",
+          "description": "Batch Lookup Misalignment In RedeemQueue.claim() Causes DoS Vulnerability...",
+          "image": [
+            "https://tse4.mm.bing.net/th?q=Rhythmic%20Cotton%20Kestrel%20Batch%20Lookup%20Misalignment%20in%20%60RedeemQueue.claim()%60%20Allows%20Permanent%20Redemption%20DoS"
+          ],
+          "author": {
+            "@type": "Person",
+            "name": "ADMIN",
+            "jobTitle": "Editor web"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "ANABEL",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://tse4.mm.bing.net/th?q=ANABEL%20WEB"
+            }
+          },
+          "datePublished": "2025-07-28T16:52:58+00:00",
+          "dateModified": "2025-07-28T16:52:58+00:00"
+        }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="container nav-container">
+                <div class="nav-left">
+                    <span class="logo">ANABEL</span>
+                    <span class="blog-tag">Article</span>
+                </div>
+                <div class="nav-search">
+                    <form class="search-form" role="search">
+                        <input 
+                            type="search" 
+                            class="search-input"
+                            placeholder="Search articles..."
+                            aria-label="Search articles"
+                        >
+                        <button type="submit" class="search-button" aria-label="Submit search">🔎</button>
+                    </form>
+                </div>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+                <div class="nav-menu">
+                    <ul class="nav-list">
+                    	<li><a href="/" class="nav-link">HOME</a></li>
+                        <li><a href="/pages/About" class="nav-link">About</a></li>
+                        <li><a href="/pages/Contact" class="nav-link">Contact</a></li>
+                        <li><a href="/pages/Disclaimer" class="nav-link">Disclaimer</a></li>
+                        <li><a href="/pages/Privacy" class="nav-link">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="main">
+        <article class="article">
+            <header class="article-header">
+                <div class="container">
+                    <h1>Batch Lookup Misalignment In RedeemQueue.claim() Causes DoS Vulnerability</h1>
+                    <div class="meta">
+                        <time datetime="2025-07-28T16:52:58+00:00">Jul 28, 2025</time>
+                        <span class="author">by ADMIN</span>
+                        <span class="view-count">
+                            <span id="viewCount">74</span> views
+                        </span>
+                    </div>
+                </div>
+            </header>
+            <div class="ad-header container">
+                <div class="ad-wrapper">
+    Iklan Headers
+</div>
+            </div>
+            <div class="container">
+                <div class="article-layout">
+                    <div class="content">
+                        <code></code><img src="https://tse4.mm.bing.net/th?q=Rhythmic%20Cotton%20Kestrel%20Batch%20Lookup%20Misalignment%20in%20%60RedeemQueue.claim()%60%20Allows%20Permanent%20Redemption%20DoS" title="Rhythmic Cotton Kestrel Batch Lookup Misalignment in `RedeemQueue.claim()` Allows Permanent Redemption DoS" width="300" height="200"/><p>Hey guys! Let's dive into a critical vulnerability found in the Mellow Flexible Vaults project. This issue, dubbed &quot;Rhythmic Cotton Kestrel,&quot; can lead to a permanent denial of service (DoS) for users trying to redeem their assets. We're going to break down the problem, explain why it's so severe, and suggest a fix. So, buckle up and let's get started!</p>
+<h2>Summary</h2>
+<p>The <strong>core of the problem</strong> lies in the <code>RedeemQueue.claim()</code> function. This function uses <code>prices.lowerLookup(requestTimestamp)</code> to pinpoint the batch containing a user's redeemed shares. However, the <strong>price checkpoints are keyed</strong> by <code>redeemTimestamp = reportTime – redeemInterval</code>. This mismatch can cause serious issues.</p>
+<p>If a user's redemption request's first eligible report pops up <em>after</em> the request's timestamp, <code>lowerLookup</code> will always return the <em>previous</em> checkpoint (batch 0). This batch, unfortunately, won't include the user's request. The <strong>attempt to subtract the user's shares</strong> from this incorrect batch will then either underflow or revert, effectively locking that request and any subsequent claim attempts. This means users can't get their money out – a major bummer!</p>
+<h2>Vulnerability Description</h2>
+<p>To really understand this, let's look at the code. The problematic function is <code>RedeemQueue.claim()</code>:</p>
+<pre><code class="hljs">    /// @inheritdoc IRedeemQueue
+    function claim(address receiver, uint32[] calldata timestamps) external nonReentrant returns (uint256 assets) {
+        RedeemQueueStorage storage $ = _redeemQueueStorage();
+        address account = _msgSender();
+        EnumerableMap.UintToUintMap storage callerRequests = $.requestsOf[account];
+        (, uint32 latestReportTimestamp,) = $.prices.latestCheckpoint();
+        if (latestReportTimestamp == 0) {
+            return 0;
+        }
+
+        uint256 batchIterator = $.batchIterator;
+        for (uint256 i = 0; i &lt; timestamps.length; i++) {
+            uint32 timestamp = timestamps[i];
+            if (timestamp &gt; latestReportTimestamp) {
+                continue;
+            }
+            (bool hasRequest, uint256 shares) = callerRequests.tryGet(timestamp);
+            if (!hasRequest) {
+                continue;
+            }
+            if (shares != 0) {
+                uint256 index = $.prices.lowerLookup(timestamp);
+                if (index &gt;= batchIterator) {
+                    continue;
+                }
+                Batch storage batch = $.batches[index];
+
+                uint256 assets_ = Math.mulDiv(shares, batch.assets, batch.shares);
+                assets += assets_;
+                batch.assets -= assets_;
+                batch.shares -= shares;
+
+                emit RedeemRequestClaimed(account, receiver, assets_, timestamp);
+            }
+            callerRequests.remove(timestamp);
+        }
+
+        TransferLibrary.sendAssets(asset(), receiver, assets);
+    }
+</code></pre>
+<p>This function is responsible for allowing users to claim their redeemed assets. It iterates through timestamps, checks for existing requests, and attempts to transfer the corresponding assets. The <strong>crucial part is the <code>lowerLookup</code> call</strong>, which aims to find the correct batch for the redemption request.</p>
+<p>Now, let's look at how batches are created in the <code>_handleReport</code> function:</p>
+<pre><code class="hljs">function _handleReport(uint224 priceD18, uint32 timestamp) internal override {
+        RedeemQueueStorage storage $ = _redeemQueueStorage();
+
+        Checkpoints.Trace224 storage timestamps = _timestamps();
+        (, uint32 latestTimestamp, uint224 latestIndex) = timestamps.latestCheckpoint();
+        uint256 latestEligibleIndex;
+        if (latestTimestamp &lt;= timestamp) {
+            latestEligibleIndex = latestIndex;
+        } else {
+            latestEligibleIndex = uint256(timestamps.upperLookupRecent(timestamp));
+            if (latestEligibleIndex == 0) {
+                return;
+            }
+            latestEligibleIndex--;
+        }
+
+        uint256 handledIndices_ = $.handledIndices;
+        if (latestEligibleIndex &lt; handledIndices_) {
+            return;
+        }
+
+        uint256 shares =
+            $.prefixSum[latestEligibleIndex] - (handledIndices_ == 0 ? 0 : $.prefixSum[handledIndices_ - 1]);
+        $.handledIndices = latestEligibleIndex + 1;
+
+        if (shares == 0) {
+            return;
+        }
+
+        uint256 index = $.prices.length();
+        $.prices.push(timestamp, uint224(index));
+        uint256 assets_ = Math.mulDiv(shares, 1 ether, priceD18);
+        $.batches.push(Batch(assets_, shares));
+        $.totalDemandAssets += assets_;
+    }
+</code></pre>
+<p>The <code>_handleReport</code> function is triggered by oracle reports and is responsible for grouping redemption requests into batches. <strong>Here's where the misalignment creeps in</strong>: On the first oracle report <em>within</em> <code>redeemInterval</code>, requests are ignored because <code>redeemTimestamp = block.timestamp – redeemInterval &lt; T_req</code> (where <code>T_req</code> is the request timestamp).</p>
+<p>On the <em>next</em> report at <code>T_report ≥ T_req + redeemInterval</code>, the <code>redeemTimestamp</code> becomes <code>T_report – redeemInterval ≥ T_req</code>. This means the request <em>is</em> now processed and grouped into batch 1.</p>
+<p><strong>In essence, batches are keyed by <code>redeemTimestamp = T_report – redeemInterval</code>, while user requests are keyed by <code>T_req = block.timestamp at redeem()</code> time.</strong> This difference is the root cause of the vulnerability.</p>
+<h3>Vulnerable Flow: A Step-by-Step</h3>
+<p>Let's walk through a scenario to make this crystal clear:</p>
+<ol>
+<li>
+<p>A User redeems at <code>T_req</code>. The request is stored as <code>requestsOf[user].set(T_req, shares)</code>. (<strong>User initiates redemption</strong>)</p>
+</li>
+<li>
+<p>The First oracle report arrives <em>less than</em> <code>redeemInterval</code> after <code>T_req</code>. This means:</p>
+<ul>
+<li><code>redeemTimestamp = T_report1 – redeemInterval &lt; T_req</code>.</li>
+<li>The Request is <em>not</em> included in batch 0. (<strong>First report misses the request</strong>)</li>
+</ul>
+</li>
+<li>
+<p>The Second oracle report arrives at <code>T_report2 ≥ T_req + redeemInterval</code>.</p>
+<ul>
+<li><code>redeemTimestamp = T_report2 – redeemInterval &gt; T_req</code>.</li>
+<li>The Request <em>is</em> processed into batch 1 and its liquidity is recorded in <code>batches[1]</code>. (<strong>Second report includes the request in batch 1</strong>)</li>
+</ul>
+</li>
+<li>
+<p>The User calls <code>claim([T_req])</code>. (<strong>User attempts to claim</strong>)</p>
+<pre><code class="hljs">uint256 index = prices.lowerLookup(tReq);
+// lowerLookup returns the smallest checkpoint value whose key ≤ tReq
+// That is always batchIndex = 0 (the initial checkpoint at queue init)
+Batch storage batch = batches[index]; // batch 0 does NOT include the request
+uint256 assets_ = Math.mulDiv(shares, batch.assets, batch.shares);
+batch.assets  -= assets_;
+batch.shares  -= shares; // shares &gt; batch.shares → underflow or revert
+</code></pre>
+</li>
+</ol>
+<p>Because <code>batch.shares</code> in batch 0 <em>never</em> included the user's shares, <code>batch.shares &lt; shares</code> and the subtraction underflows, leading to a revert. Even if, by some chance, the subtraction <em>did</em> succeed, user funds would be paid from the <em>wrong</em> batch, essentially robbing earlier redeemers!</p>
+<h2>Impact</h2>
+<p>The impact of this vulnerability is <strong>severe</strong>. A single user making a slightly mistimed redemption can lock <em>every</em> user's withdrawals on that queue. This can lead to a direct and <strong>permanent loss of access to funds</strong>. The trigger is simple: any user submitting a redemption request less than <code>redeemInterval</code> before an oracle report will trigger this DoS. No special privileges are needed – any user can accidentally cause this chaos. This is a <strong>High</strong> severity issue because it directly impacts fund accessibility.</p>
+<h2>Severity</h2>
+<p>High</p>
+<h2>Recommendations</h2>
+<p>To fix this mess, we recommend a straightforward solution: <strong>Replace <code>lowerLookup(timestamp)</code> with <code>upperLookup(timestamp)</code> in the <code>claim()</code> function.</strong></p>
+<p><code>upperLookup(timestamp)</code> will return the <em>first</em> checkpoint ≥ <code>T_req</code>, which is the correct batch. This simple swap will align the batch lookup with the actual batch the request is in.</p>
+<pre><code class="hljs">if (shares != 0) {
+-               uint256 index = $.prices.lowerLookup(timestamp);
++               uint256 index = $.prices.upperLookup(timestamp);
+
+                if (index &gt;= batchIterator) {
+                    continue;
+                }
+                Batch storage batch = $.batches[index];
+
+                uint256 assets_ = Math.mulDiv(shares, batch.assets, batch.shares);
+                assets += assets_;
+                batch.assets -= assets_;
+                batch.shares -= shares;
+
+                emit RedeemRequestClaimed(account, receiver, assets_, timestamp);
+            }
+</code></pre>
+<p>For an even more robust solution, we suggest that during <code>_handleReport()</code>, <em>after</em> assigning a request to a batch, the <strong>batch-index should be stored alongside each <code>(user, T_req)</code> key</strong>. The <code>claim()</code> function could then read the index directly, avoiding the binary search altogether and eliminating any off-by-one errors.</p>
+<h2>Conclusion</h2>
+<p>This &quot;Rhythmic Cotton Kestrel&quot; vulnerability highlights the importance of careful consideration of timing and data alignment in smart contracts. The seemingly small mismatch between how batches and requests are keyed can have catastrophic consequences. By implementing the recommended fix, the Mellow Flexible Vaults can prevent this potential DoS and ensure users can always access their funds. Remember guys, security is key, and a little extra vigilance goes a long way!</p>
+
+                    </div>
+                    <aside class="related-posts">
+                        <div class="ad-sidebar container">
+                            <div class="ad-wrapper">
+    <span>Iklan Related</span>
+</div>
+                        </div>
+                        <h2 class="related-posts-title">Related Posts</h2><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/logrotate-daily-rotation-configuration-and">Logrotate Daily Rotation: Configuration And Best Practices</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-05T17:56:16+00:00">Aug 5, 2025</time>
+		                        <span class="view-count">
+									58 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/divergent-series-and-arctangent-sums">Divergent Series And Arctangent Sums How To Get A Correct Result</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-13T20:22:51+00:00">Jul 13, 2025</time>
+		                        <span class="view-count">
+									64 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/upper-bounding-gauss-hypergeometric-function">Upper Bounding Gauss Hypergeometric Function At Z=4</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-08T16:09:45+00:00">Aug 8, 2025</time>
+		                        <span class="view-count">
+									51 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/yaml-ci-quality-gate-code">YAML CI Quality Gate: Code Coverage And Artifacts</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-09T03:45:26+00:00">Aug 9, 2025</time>
+		                        <span class="view-count">
+									49 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/ford-figo-2010-starting-issues">Ford Figo 2010 Starting Issues? Diagnose &amp; Fix It!</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-04T16:13:53+00:00">Aug 4, 2025</time>
+		                        <span class="view-count">
+									50 views
+		                        </span>
+                            </div>
+                        </article>
+                    </aside>
+                    <aside class="related-posts"></aside>
+                </div>
+            </div>
+        </article>
+        <a href="#" class="back-to-top" id="backToTop" title="Back to top">
+        	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-bar-up" viewBox="0 0 16 16">
+			  <path fill-rule="evenodd" d="M3.646 11.854a.5.5 0 0 0 .708 0L8 8.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708M2.4 5.2c0 .22.18.4.4.4h10.4a.4.4 0 0 0 0-.8H2.8a.4.4 0 0 0-.4.4"/>
+			</svg>
+		</a>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 ANABEL</p>
+        </div>
+    </footer>
+    <script>
+    	(() => {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            const toggleMenu = () => {
+                navMenu.classList.toggle('nav-menu-active');
+                navToggle.classList.toggle('nav-toggle-active');
+            };
+            const backToTopHandler = (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            navToggle.addEventListener('click', toggleMenu);
+            document.getElementById('backToTop').addEventListener('click', backToTopHandler);
+            window.addEventListener('pagehide', () => {
+                navToggle.removeEventListener('click', toggleMenu);
+                document.getElementById('backToTop').removeEventListener('click', backToTopHandler);
+            });
+        })();
+		(() => {
+            window.addEventListener("DOMContentLoaded", (event) => {
+                const ellHljs = document.createElement("script");
+                ellHljs.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js");
+                ellHljs.onload = () => {
+                    hljs.highlightAll();
+                };
+                document.querySelector("body").append(ellHljs);
+                const ellFont = document.createElement("link");
+                ellFont.setAttribute("href", "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css");
+                ellFont.setAttribute("rel", "stylesheet");
+                document.querySelector("head").append(ellFont);
+                window.addEventListener('pagehide', () => {
+                    // ellHljs.remove();
+                    ellFont.remove();
+                });
+
+            });
+        })();
+    </script>
+    
+    
+    
+</body>
+</html>

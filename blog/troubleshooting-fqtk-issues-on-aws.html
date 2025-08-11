@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Troubleshooting FQTK Issues On AWS Batch A Detailed Guide</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Troubleshooting FQTK Issues On AWS Batch A Detailed Guide...">
+    <link rel="canonical" href="https://catatansoal.github.io/blog/troubleshooting-fqtk-issues-on-aws">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Troubleshooting FQTK Issues On AWS Batch A Detailed Guide">
+	<meta property="og:description" content="Troubleshooting FQTK Issues On AWS Batch A Detailed Guide...">
+	<meta property="og:url" content="https://catatansoal.github.io/blog/troubleshooting-fqtk-issues-on-aws">
+	<meta property="og:site_name" content="ANABEL">
+	<meta property="article:published_time" content="2025-07-18T06:16:58+00:00">
+	<meta property="article:author" content="ADMIN">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+    <link rel="preload" fetchpriority="high" as="image" href="https://tse4.mm.bing.net/th?q=Resolving%20Fastq%20Issues%20on%20AWS%20Batch%20A%20Comprehensive%20Guide">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style type="text/css">
+    	:root{--primary-color:#3740ff;--text-color:#202124;--background-color:#ffffff;--gray-100:#f8f9fa;--gray-200:#e9ecef}*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;line-height:1.6;color:var(--text-color);background-color:var(--background-color)}.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}.header{background-color:var(--background-color);border-bottom:1px solid var(--gray-200);position:sticky;top:0;z-index:100}.nav{padding:.5rem 0}.nav-container{display:flex;justify-content:space-between;align-items:center;gap:1rem}.nav-left{display:flex;align-items:center;flex-shrink:0}.logo{font-weight:700;color:var(--primary-color)}.blog-tag{margin-left:1rem;padding:.25rem .5rem;background-color:var(--gray-100);border-radius:4px;font-size:.875rem}.nav-search{flex-grow:1;max-width:300px}.search-form{position:relative;width:100%}.search-input{width:100%;padding:.5rem 2.5rem .5rem 1rem;border:1px solid var(--gray-200);border-radius:24px;font-size:.875rem;transition:all 0.2s}.search-input:focus{outline:none;border-color:var(--primary-color);box-shadow:0 0 0 2px rgb(55 64 255 / .1)}.search-button{position:absolute;right:.5rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#5f6368;cursor:pointer;padding:.25rem;display:flex;align-items:center;justify-content:center}.search-button:hover{color:var(--primary-color)}.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:.5rem}.hamburger{display:block;position:relative;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before,.hamburger::after{content:'';position:absolute;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before{top:-6px}.hamburger::after{bottom:-6px}.nav-toggle-active .hamburger{background:#fff0}.nav-toggle-active .hamburger::before{transform:rotate(45deg);top:0}.nav-toggle-active .hamburger::after{transform:rotate(-45deg);bottom:0}.nav-list{display:flex;list-style:none;gap:2rem}.nav-link{color:var(--text-color);text-decoration:none;font-size:.9rem;transition:color 0.2s}.nav-link:hover{color:var(--primary-color)}.article-header{padding:2rem 0;background-color:var(--gray-100)}.article-layout{display:grid;grid-template-columns:1fr 350px;gap:3rem;padding:1rem 0;align-items: start}h1,h2,h3,h4,h5,h6{font-family:"Crimson Text","Times New Roman",Times,serif}h1{font-size:2.5rem;line-height:1.2;margin-bottom:1rem}.meta{color:#5f6368;font-size:.875rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}.view-count{display:inline-flex;align-items:center;gap:.25rem}.view-count svg{color:#5f6368}.content{min-width:0;border-bottom:1px solid #dddddd5e;margin-top:1rem;white-space:pre-line !important;overflow-wrap:break-word;overflow-x:auto;word-break:break-word}.lead{font-size:1.25rem;color:#5f6368;margin-bottom:2rem}h2,h3,h4,h5,h6{font-size:1.75rem;margin:1rem 0 1rem}p,pre,ol,ul>li{margin-bottom:1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;font-size:1.3rem;text-align: justify;}p>code{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px}hr{margin:1rem 0 1rem 0}.code-example{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;margin:1.5rem 0;overflow-x:auto}code{font-family:'Roboto Mono',monospace;font-size:.875rem}ul{margin:.2rem 0;padding-left:1.5rem}.related-posts{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;position:sticky;top:5rem}.related-posts-title,.newpost-posts-list{font-size:1.75rem;margin:0 0 1rem}.related-posts-list{display:flex;flex-direction:column;gap:.5rem}.related-post,.newpost-post{border-bottom:1px solid #ddd;padding-bottom:10px;margin-bottom:10px}.related-post:last-child,.newpost-post:last-child{padding-bottom:0;border-bottom:none}.related-post-title,.newpost-post-title{font-size:1.2rem;margin:0 0 .1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;}.related-post-title a,.newpost-post-title a{color:var(--text-color);text-decoration:none;transition:color 0.2s}.related-post-title a:hover,.newpost-post-title a:hover{color:var(--primary-color)}.related-post time{font-size:.875rem;color:#5f6368}.footer{background-color:var(--gray-100);padding:2rem 0;margin-top:4rem;color:#5f6368;font-size:.875rem}.nav-menu>ul>li{margin-bottom:0}@media (max-width:1024px){.container{max-width:800px}.article-layout{grid-template-columns:1fr;gap:2rem}.related-posts{position:static}}@media (max-width:768px){.nav-container{flex-wrap:wrap}.nav-search{order:3;max-width:none;width:100%;margin-top:.1rem}.nav-toggle{display:block}.nav-menu{display:none;position:absolute;top:100%;left:0;right:0;background:var(--background-color);padding:1rem 0;border-bottom:1px solid var(--gray-200)}.nav-menu-active{display:block}.nav-list{flex-direction:column;gap:.1rem;padding:0 1.5rem}.nav-link{display:block;padding:.2rem 0}h1{font-size:2rem}.article-header{padding:2rem 0}.content{padding:.1rem 0}}table{width:100%;border-collapse:collapse;margin:20px 0;font-family:'Arial',sans-serif}th,td{padding:12px 15px;text-align:left;border:1px solid #ddd}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9}tr:nth-child(even) td{background-color:#f2f2f2}@media screen and (max-width:768px){table{border:0;display:block;overflow-x:auto;white-space:nowrap}th,td{padding:10px;text-align:right}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9;border-bottom:1px solid #ddd}tr:nth-child(even) td{background-color:#f2f2f2}}a{text-decoration:none;color:#540707}.katex-html{padding: .2rem;color: #000;font-weight: 700;font-size: 1.3rem;overflow-wrap: break-word;max-width: 100%;white-space: normal !important}.category{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin:1rem 0 1rem 0}.tag{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px;font-family:"Newsreader",serif}.tag>a{text-decoration:none;color:#000}img{margin:auto;display:block;max-width:100%;height:auto;margin-bottom:1rem}.katex{white-space: pre-line !important;display: inline-block;max-width: 100%;overflow-x: auto;overflow-y: hidden;scrollbar-width: thin;overflow-wrap: break-word;word-break: break-word;vertical-align: -7px}.content > p {overflow-wrap: break-word;word-break: break-word}
+    </style>
+    <style type="text/css">
+    	pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}
+		.hljs{color:#c9d1d9;background:#0d1117}.hljs-doctag,.hljs-keyword,.hljs-meta .hljs-keyword,.hljs-template-tag,.hljs-template-variable,.hljs-type,.hljs-variable.language_{color:#ff7b72}.hljs-title,.hljs-title.class_,.hljs-title.class_.inherited__,.hljs-title.function_{color:#d2a8ff}.hljs-attr,.hljs-attribute,.hljs-literal,.hljs-meta,.hljs-number,.hljs-operator,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-variable{color:#79c0ff}.hljs-meta .hljs-string,.hljs-regexp,.hljs-string{color:#a5d6ff}.hljs-built_in,.hljs-symbol{color:#ffa657}.hljs-code,.hljs-comment,.hljs-formula{color:#8b949e}.hljs-name,.hljs-quote,.hljs-selector-pseudo,.hljs-selector-tag{color:#7ee787}.hljs-subst{color:#c9d1d9}.hljs-section{color:#1f6feb;font-weight:700}.hljs-bullet{color:#f2cc60}.hljs-emphasis{color:#c9d1d9;font-style:italic}.hljs-strong{color:#c9d1d9;font-weight:700}.hljs-addition{color:#aff5b4;background-color:#033a16}.hljs-deletion{color:#ffdcd7;background-color:#67060c}
+    	pre{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;font-weight:400;word-break:break-word;word-wrap:break-word;box-sizing:inherit;border-radius:4px;overflow-x:auto;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}code{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;word-wrap:break-word;word-break:break-word;font-style:normal;line-height:20px;letter-spacing:-.003em;box-sizing:inherit;font-weight:400;font-size:75%;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}
+    </style>
+    <style type="text/css">
+    	.back-to-top{position:fixed;bottom:20px;right:20px;background-color:#a73f3f;color:#fff;padding:8px 10px;border-radius:50%;box-shadow:0 4px 6px rgb(0 0 0 / .2);font-size:10px;font-weight:700;text-decoration:none;text-align:center;transition:opacity 0.3s ease,visibility 0.3s ease;z-index:99999;opacity:1;visibility:visible}.back-to-top:hover{background-color:#0056b3}
+    </style>
+    <style type="text/css">
+        .ad-header {margin: 1rem auto 1rem;background-color: #fdfdfd;text-align: center;display: block;}.ad-header .ad-wrapper {min-height: 90px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #555;font-weight: 500;padding: 3rem;border: 1px dashed #ccc;border-radius: 6px;}@media (max-width: 768px) {.ad-header {padding: 0.75rem;}}.ad-sidebar {margin: 0 0 1rem;background-color: #fefefe;text-align: center;padding: 0px;width: 100%;max-width: 100%;display: block;}.ad-sidebar .ad-wrapper {min-height: 250px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #444;font-weight: 500;border: 1px dashed #aaa;border-radius: 6px;padding: 0rem;}@media (max-width: 1024px) {.ad-sidebar {padding: 0.75rem;}}
+    </style>
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://catatansoal.github.io/blog/troubleshooting-fqtk-issues-on-aws"
+          },
+          "headline": "Troubleshooting FQTK Issues On AWS Batch A Detailed Guide",
+          "description": "Troubleshooting FQTK Issues On AWS Batch A Detailed Guide...",
+          "image": [
+            "https://tse4.mm.bing.net/th?q=Resolving%20Fastq%20Issues%20on%20AWS%20Batch%20A%20Comprehensive%20Guide"
+          ],
+          "author": {
+            "@type": "Person",
+            "name": "ADMIN",
+            "jobTitle": "Editor web"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "ANABEL",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://tse4.mm.bing.net/th?q=ANABEL%20WEB"
+            }
+          },
+          "datePublished": "2025-07-18T06:16:58+00:00",
+          "dateModified": "2025-07-18T06:16:58+00:00"
+        }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="container nav-container">
+                <div class="nav-left">
+                    <span class="logo">ANABEL</span>
+                    <span class="blog-tag">Article</span>
+                </div>
+                <div class="nav-search">
+                    <form class="search-form" role="search">
+                        <input 
+                            type="search" 
+                            class="search-input"
+                            placeholder="Search articles..."
+                            aria-label="Search articles"
+                        >
+                        <button type="submit" class="search-button" aria-label="Submit search">🔎</button>
+                    </form>
+                </div>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+                <div class="nav-menu">
+                    <ul class="nav-list">
+                    	<li><a href="/" class="nav-link">HOME</a></li>
+                        <li><a href="/pages/About" class="nav-link">About</a></li>
+                        <li><a href="/pages/Contact" class="nav-link">Contact</a></li>
+                        <li><a href="/pages/Disclaimer" class="nav-link">Disclaimer</a></li>
+                        <li><a href="/pages/Privacy" class="nav-link">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="main">
+        <article class="article">
+            <header class="article-header">
+                <div class="container">
+                    <h1>Troubleshooting FQTK Issues On AWS Batch A Detailed Guide</h1>
+                    <div class="meta">
+                        <time datetime="2025-07-18T06:16:58+00:00">Jul 18, 2025</time>
+                        <span class="author">by ADMIN</span>
+                        <span class="view-count">
+                            <span id="viewCount">58</span> views
+                        </span>
+                    </div>
+                </div>
+            </header>
+            <div class="ad-header container">
+                <div class="ad-wrapper">
+    Iklan Headers
+</div>
+            </div>
+            <div class="container">
+                <div class="article-layout">
+                    <div class="content">
+                        <img src="https://tse4.mm.bing.net/th?q=Resolving%20Fastq%20Issues%20on%20AWS%20Batch%20A%20Comprehensive%20Guide" title="Resolving Fastq Issues on AWS Batch A Comprehensive Guide" width="300" height="200"/>
+<p>Hey everyone! Running into issues with fqtk on AWS Batch? You're not alone! This guide will walk you through a common problem where fastq files aren't staged correctly, causing your nf-core demultiplex pipelines to fail. We'll break down the issue, explain why it happens, and provide a step-by-step solution to get your pipelines running smoothly. So, let's dive in and conquer those AWS Batch challenges together!</p>
+<h2>Understanding the FQTK and AWS Batch Challenge</h2>
+<p>The <strong>nf-core demultiplex pipeline</strong> is a powerful tool, <em>guys</em>, but it can hit a snag when used with AWS Batch due to how it handles input files with <strong>fqtk</strong>. The core issue revolves around file staging. In a nutshell, the original module design didn't fully stage the fastq files before processing. Instead, it created links to them. This approach works perfectly fine in environments where files are readily accessible, but AWS Batch has a more isolated setup. AWS Batch needs the actual files to be present within the execution environment for the task to run correctly.</p>
+<p>To grasp this better, let's imagine a scenario. You launch an nf-core demultiplex pipeline on AWS Batch, feeding it the locations of your fastq files stored in, say, an S3 bucket. The pipeline kicks off, and the fqtk module springs into action, expecting the fastq files to be right there, ready to roll. However, because the original module only created links, the files weren't physically present in the compute environment where the module was running. This is like giving someone a map to a treasure instead of the treasure itself! The module tries to access the files, gets a &quot;file not found&quot; error, and the pipeline grinds to a halt. This is a classic example of how a seemingly small design choice can have significant consequences in a cloud computing environment.</p>
+<p>The reason this happens is that AWS Batch, by design, provides a clean and isolated environment for each task. This isolation is crucial for reproducibility and preventing interference between jobs. When a job is launched, AWS Batch sets up a container, pulls the necessary software, and then expects all the required input files to be available within that container. If the files are only linked and not physically staged, the container won't have access to them, leading to the dreaded failure. Therefore, ensuring proper file staging is paramount when working with AWS Batch and tools like fqtk that process large data files. You need to make sure the treasure is in the chest, not just on the map!</p>
+<h2>The Root Cause: File Staging in AWS Batch</h2>
+<p>The problem stems from how the original fqtk module in the nf-core demultiplex pipeline handles file inputs. Instead of directly staging the fastq files, it merely creates symbolic links to them. This works well in environments where the files are readily accessible from the compute nodes, but it falls short in the more isolated environment of AWS Batch. <em>Think of it like this:</em> the pipeline is given a shortcut (the symbolic link) instead of the actual file.</p>
+<p>AWS Batch, for security and isolation, requires that all input files be physically present within the execution environment of the job. When the fqtk module tries to access the fastq files via the symbolic links, it finds that the files aren't actually there, resulting in a failure. This is because the compute environment within AWS Batch is a self-contained unit. It doesn't automatically have access to files outside of its designated space unless they are explicitly staged. Staging, in this context, means copying or making the files directly available within the compute environment before the job starts executing. Without this staging step, the module is essentially trying to work with files that don't exist in its world.</p>
+<p>The key takeaway here is the difference between a symbolic link and a physical file copy. A symbolic link is just a pointer to the actual file's location; it's not the file itself. When a program tries to access a file through a symbolic link, it's essentially following a set of directions to find the file. If those directions lead outside the current environment (in this case, the AWS Batch compute environment), the program will hit a dead end. On the other hand, a physical file copy means the entire file is duplicated and placed within the compute environment. This ensures that the program has direct access to the file, regardless of its original location. Therefore, the solution lies in modifying the module to ensure that fastq files are physically staged rather than just linked, bringing the &quot;treasure&quot; directly into the chest.</p>
+<h2>The Solution: Updating the Module for Proper Staging</h2>
+<p>The good news, <em>everybody</em>, is that the nf-core community has recognized this issue and provided a fix! The fqtk module in the modules repository has been updated to correctly stage the fastq files. This means that instead of creating links, the module now ensures that the actual fastq files are copied into the AWS Batch execution environment before processing begins.</p>
+<p>This update is a game-changer for anyone running nf-core demultiplex pipelines on AWS Batch. By staging the files, the module eliminates the problem of file accessibility and ensures that the pipeline can run smoothly from start to finish. The updated module essentially makes a physical copy of the fastq files within the AWS Batch environment. This is akin to physically moving the files into the room where the processing is going to happen. Now, when the fqtk tool needs to access the fastq data, it can do so directly, without relying on external links or network connections. This direct access not only resolves the original issue but also can potentially improve the performance of the pipeline by reducing the overhead associated with accessing files over a network.</p>
+<p>To leverage this fix, you'll need to update your local nf-core modules. This is a straightforward process, and we'll walk you through the steps in the next section. The update ensures that your pipeline uses the latest version of the fqtk module, which includes the crucial file staging functionality. This is a critical step in ensuring the reliability and efficiency of your nf-core pipelines on AWS Batch. By staying up-to-date with the latest module versions, you benefit from not only bug fixes but also performance improvements and new features that the nf-core community continuously develops and integrates.</p>
+<h2>Step-by-Step Guide to Updating nf-core Modules</h2>
+<p>To resolve the fqtk issue, you need to update the nf-core modules in your pipeline. Here's how:</p>
+<ol>
+<li>
+<p><strong>Navigate to your pipeline directory:</strong> Open your terminal and <code>cd</code> into the directory where your nf-core/demultiplex pipeline is located.</p>
+</li>
+<li>
+<p><strong>Run the <code>nf-core modules update</code> command:</strong> This command checks for updates to the modules used in your pipeline. Execute the following command:</p>
+<pre><code class="hljs">nextflow pull nf-core/modules
+nf-core modules update
+</code></pre>
+<p>This command will compare the modules in your pipeline with the latest versions available in the nf-core modules repository. If there are updates, it will list them and prompt you to confirm the update.</p>
+</li>
+<li>
+<p><strong>Confirm the update:</strong> If the fqtk module is listed as an update, confirm the update by typing <code>y</code> and pressing Enter. nf-core will then download and install the latest version of the module.</p>
+<p>The confirmation step is crucial because it gives you control over which modules are updated. Sometimes, you might want to hold off on updating a particular module if you know it could introduce compatibility issues or if you're in the middle of a critical analysis. However, in this case, updating the fqtk module is essential for resolving the file staging issue on AWS Batch.</p>
+</li>
+<li>
+<p><strong>Verify the update:</strong> After the update is complete, you can verify that the fqtk module has been updated by running:</p>
+<pre><code class="hljs">nf-core modules list
+</code></pre>
+<p>This command will list all the modules used in your pipeline along with their versions. Check the version of the fqtk module to ensure it reflects the latest version.</p>
+<p>Verifying the update is a good practice to ensure that the changes have been applied correctly. It helps you avoid any surprises later on when you run the pipeline. By confirming the module version, you can be confident that your pipeline is using the latest code, including the fix for the file staging issue.</p>
+</li>
+<li>
+<p><strong>Run your pipeline:</strong> Now that you've updated the modules, you can run your nf-core/demultiplex pipeline on AWS Batch with the confidence that the fqtk issue is resolved.</p>
+<p>With the updated module in place, your pipeline should now correctly stage the fastq files within the AWS Batch environment. This ensures that the fqtk tool has direct access to the data it needs, eliminating the errors caused by symbolic links and allowing your demultiplexing process to proceed smoothly. This is a significant step towards running robust and reliable nf-core pipelines in the cloud.</p>
+</li>
+</ol>
+<p>By following these steps, you'll ensure that your pipeline uses the updated fqtk module, which correctly stages the fastq files and resolves the issue on AWS Batch. This simple update can save you a lot of headaches and ensure that your demultiplexing pipelines run smoothly and efficiently.</p>
+<h2>Example Command and Explanation</h2>
+<p>The original issue was triggered using a command similar to this:</p>
+<pre><code class="hljs">nextflow run nf-core/demultiplex -r dev -profile test_fqtk,docker --outdir out
+</code></pre>
+<p>Let's break down this command:</p>
+<ul>
+<li><code>nextflow run nf-core/demultiplex</code>: This tells Nextflow to run the <code>demultiplex</code> pipeline from the <code>nf-core</code> repository.</li>
+<li><code>-r dev</code>: This specifies that you want to use the <code>dev</code> branch of the pipeline. The <code>dev</code> branch typically contains the latest development code, which may include bug fixes and new features.</li>
+<li><code>-profile test_fqtk,docker</code>: This tells Nextflow to use the <code>test_fqtk</code> and <code>docker</code> profiles. Profiles are configuration files that specify the execution environment and dependencies for the pipeline. In this case, <code>test_fqtk</code> likely includes settings specific to testing the fqtk module, and <code>docker</code> specifies that the pipeline should be run using Docker containers.</li>
+<li><code>--outdir out</code>: This sets the output directory for the pipeline results to a folder named <code>out</code>.</li>
+</ul>
+<p>This command highlights a typical scenario where the issue might arise. By using the <code>dev</code> branch, the user is likely trying out the latest features or bug fixes. The <code>test_fqtk</code> profile suggests that the user is specifically testing the fqtk module, making them more likely to encounter the file staging issue if it's present. The <code>--outdir</code> option simply specifies where the pipeline's output files should be stored. However, the core of the problem lies in the interaction between the fqtk module's file handling and the AWS Batch environment, which this command, in its original form, would trigger.</p>
+<p>After updating the modules as described in the previous section, running this same command should now work correctly on AWS Batch. The updated fqtk module will handle the file staging properly, ensuring that the fastq files are accessible within the AWS Batch execution environment. This allows the pipeline to proceed without errors, delivering the expected demultiplexing results. This example command serves as a practical illustration of how the update resolves the issue and enables users to run their nf-core demultiplex pipelines reliably on AWS Batch.</p>
+<h2>Key Takeaways and Best Practices</h2>
+<ul>
+<li><strong>Stay updated:</strong> Regularly update your nf-core modules to benefit from bug fixes and improvements. This is a general best practice for any software project, and it's especially crucial in bioinformatics, where tools and pipelines are constantly evolving.</li>
+<li><strong>Understand your execution environment:</strong> Be aware of the specific requirements and limitations of your execution environment, such as AWS Batch. Different environments may have different ways of handling file access, resource allocation, and security. Understanding these nuances is essential for configuring your pipelines correctly and avoiding unexpected issues.</li>
+<li><strong>Test your pipelines:</strong> Thoroughly test your pipelines in your target environment before running them on large datasets. This includes testing with representative data and verifying that all components are working as expected. Testing can help you identify and resolve issues early on, saving you time and resources in the long run.</li>
+</ul>
+<p>In conclusion, resolving the fqtk issue on AWS Batch involves understanding the nuances of file staging in cloud environments and keeping your nf-core modules up-to-date. By following the steps outlined in this guide, you can ensure that your demultiplexing pipelines run smoothly and efficiently. Remember, the nf-core community is a valuable resource, so don't hesitate to seek help and share your experiences with others. By working together, we can overcome these challenges and make bioinformatics research more accessible and reproducible.</p>
+<p>This specific issue highlights a common challenge in cloud computing: managing data access and dependencies in isolated environments. AWS Batch provides a robust and scalable platform for running bioinformatics pipelines, but it also introduces certain constraints, such as the need for explicit file staging. By understanding these constraints and adopting best practices, you can leverage the power of AWS Batch while avoiding common pitfalls. This includes not only keeping your modules updated but also carefully considering how your data is stored, accessed, and processed within the cloud environment. Best of luck running your pipelines, and feel free to reach out if you have any further questions!</p>
+<h2>Conclusion</h2>
+<p>Alright <em>folks</em>, tackling fqtk issues on AWS Batch might seem daunting, but with the updated module and a clear understanding of file staging, you're well-equipped to conquer this challenge. Keep those modules updated, understand your environment, and happy pipelining!</p>
+
+                    </div>
+                    <aside class="related-posts">
+                        <div class="ad-sidebar container">
+                            <div class="ad-wrapper">
+    <span>Iklan Related</span>
+</div>
+                        </div>
+                        <h2 class="related-posts-title">Related Posts</h2><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/110-jumma-mubarak-wishes-blessings">110+ Jumma Mubarak Wishes: Blessings &amp; Messages</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-11T02:21:05+00:00">Aug 11, 2025</time>
+		                        <span class="view-count">
+									47 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/verifying-healthcare-information-sources-ensuring">Verifying Healthcare Information Sources Ensuring Authenticity And Reliability</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-14T07:07:52+00:00">Jul 14, 2025</time>
+		                        <span class="view-count">
+									78 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/creating-and-printing-split-normals">Creating And Printing Split Normals In Blender Using Python</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-17T03:00:46+00:00">Jul 17, 2025</time>
+		                        <span class="view-count">
+									59 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/why-hurricanes-weaken-over-land">Why Hurricanes Weaken Over Land: The Science Behind It</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-06T01:05:36+00:00">Aug 6, 2025</time>
+		                        <span class="view-count">
+									54 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/diagram-in-readme-azure-ai">Diagram In README: Azure AI Foundry Pattern Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-04T09:52:57+00:00">Aug 4, 2025</time>
+		                        <span class="view-count">
+									49 views
+		                        </span>
+                            </div>
+                        </article>
+                    </aside>
+                    <aside class="related-posts"></aside>
+                </div>
+            </div>
+        </article>
+        <a href="#" class="back-to-top" id="backToTop" title="Back to top">
+        	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-bar-up" viewBox="0 0 16 16">
+			  <path fill-rule="evenodd" d="M3.646 11.854a.5.5 0 0 0 .708 0L8 8.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708M2.4 5.2c0 .22.18.4.4.4h10.4a.4.4 0 0 0 0-.8H2.8a.4.4 0 0 0-.4.4"/>
+			</svg>
+		</a>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 ANABEL</p>
+        </div>
+    </footer>
+    <script>
+    	(() => {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            const toggleMenu = () => {
+                navMenu.classList.toggle('nav-menu-active');
+                navToggle.classList.toggle('nav-toggle-active');
+            };
+            const backToTopHandler = (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            navToggle.addEventListener('click', toggleMenu);
+            document.getElementById('backToTop').addEventListener('click', backToTopHandler);
+            window.addEventListener('pagehide', () => {
+                navToggle.removeEventListener('click', toggleMenu);
+                document.getElementById('backToTop').removeEventListener('click', backToTopHandler);
+            });
+        })();
+		(() => {
+            window.addEventListener("DOMContentLoaded", (event) => {
+                const ellHljs = document.createElement("script");
+                ellHljs.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js");
+                ellHljs.onload = () => {
+                    hljs.highlightAll();
+                };
+                document.querySelector("body").append(ellHljs);
+                const ellFont = document.createElement("link");
+                ellFont.setAttribute("href", "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css");
+                ellFont.setAttribute("rel", "stylesheet");
+                document.querySelector("head").append(ellFont);
+                window.addEventListener('pagehide', () => {
+                    // ellHljs.remove();
+                    ellFont.remove();
+                });
+
+            });
+        })();
+    </script>
+    
+    
+    
+</body>
+</html>

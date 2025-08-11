@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Fix SAPUI5 Ui.table Checkbox Freezing On Scroll</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Fix SAPUI5 Ui.table Checkbox Freezing On Scroll...">
+    <link rel="canonical" href="https://catatansoal.github.io/blog/fix-sapui5-ui-table-checkbox">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Fix SAPUI5 Ui.table Checkbox Freezing On Scroll">
+	<meta property="og:description" content="Fix SAPUI5 Ui.table Checkbox Freezing On Scroll...">
+	<meta property="og:url" content="https://catatansoal.github.io/blog/fix-sapui5-ui-table-checkbox">
+	<meta property="og:site_name" content="ANABEL">
+	<meta property="article:published_time" content="2025-08-10T07:32:53+00:00">
+	<meta property="article:author" content="ADMIN">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+    <link rel="preload" fetchpriority="high" as="image" href="https://tse4.mm.bing.net/th?q=SAPUI5%20ui.table%20Checkbox%20Column%20Scrolling%20Issue%3A%20A%20Comprehensive%20Guide">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style type="text/css">
+    	:root{--primary-color:#3740ff;--text-color:#202124;--background-color:#ffffff;--gray-100:#f8f9fa;--gray-200:#e9ecef}*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;line-height:1.6;color:var(--text-color);background-color:var(--background-color)}.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}.header{background-color:var(--background-color);border-bottom:1px solid var(--gray-200);position:sticky;top:0;z-index:100}.nav{padding:.5rem 0}.nav-container{display:flex;justify-content:space-between;align-items:center;gap:1rem}.nav-left{display:flex;align-items:center;flex-shrink:0}.logo{font-weight:700;color:var(--primary-color)}.blog-tag{margin-left:1rem;padding:.25rem .5rem;background-color:var(--gray-100);border-radius:4px;font-size:.875rem}.nav-search{flex-grow:1;max-width:300px}.search-form{position:relative;width:100%}.search-input{width:100%;padding:.5rem 2.5rem .5rem 1rem;border:1px solid var(--gray-200);border-radius:24px;font-size:.875rem;transition:all 0.2s}.search-input:focus{outline:none;border-color:var(--primary-color);box-shadow:0 0 0 2px rgb(55 64 255 / .1)}.search-button{position:absolute;right:.5rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#5f6368;cursor:pointer;padding:.25rem;display:flex;align-items:center;justify-content:center}.search-button:hover{color:var(--primary-color)}.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:.5rem}.hamburger{display:block;position:relative;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before,.hamburger::after{content:'';position:absolute;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before{top:-6px}.hamburger::after{bottom:-6px}.nav-toggle-active .hamburger{background:#fff0}.nav-toggle-active .hamburger::before{transform:rotate(45deg);top:0}.nav-toggle-active .hamburger::after{transform:rotate(-45deg);bottom:0}.nav-list{display:flex;list-style:none;gap:2rem}.nav-link{color:var(--text-color);text-decoration:none;font-size:.9rem;transition:color 0.2s}.nav-link:hover{color:var(--primary-color)}.article-header{padding:2rem 0;background-color:var(--gray-100)}.article-layout{display:grid;grid-template-columns:1fr 350px;gap:3rem;padding:1rem 0;align-items: start}h1,h2,h3,h4,h5,h6{font-family:"Crimson Text","Times New Roman",Times,serif}h1{font-size:2.5rem;line-height:1.2;margin-bottom:1rem}.meta{color:#5f6368;font-size:.875rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}.view-count{display:inline-flex;align-items:center;gap:.25rem}.view-count svg{color:#5f6368}.content{min-width:0;border-bottom:1px solid #dddddd5e;margin-top:1rem;white-space:pre-line !important;overflow-wrap:break-word;overflow-x:auto;word-break:break-word}.lead{font-size:1.25rem;color:#5f6368;margin-bottom:2rem}h2,h3,h4,h5,h6{font-size:1.75rem;margin:1rem 0 1rem}p,pre,ol,ul>li{margin-bottom:1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;font-size:1.3rem;text-align: justify;}p>code{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px}hr{margin:1rem 0 1rem 0}.code-example{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;margin:1.5rem 0;overflow-x:auto}code{font-family:'Roboto Mono',monospace;font-size:.875rem}ul{margin:.2rem 0;padding-left:1.5rem}.related-posts{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;position:sticky;top:5rem}.related-posts-title,.newpost-posts-list{font-size:1.75rem;margin:0 0 1rem}.related-posts-list{display:flex;flex-direction:column;gap:.5rem}.related-post,.newpost-post{border-bottom:1px solid #ddd;padding-bottom:10px;margin-bottom:10px}.related-post:last-child,.newpost-post:last-child{padding-bottom:0;border-bottom:none}.related-post-title,.newpost-post-title{font-size:1.2rem;margin:0 0 .1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;}.related-post-title a,.newpost-post-title a{color:var(--text-color);text-decoration:none;transition:color 0.2s}.related-post-title a:hover,.newpost-post-title a:hover{color:var(--primary-color)}.related-post time{font-size:.875rem;color:#5f6368}.footer{background-color:var(--gray-100);padding:2rem 0;margin-top:4rem;color:#5f6368;font-size:.875rem}.nav-menu>ul>li{margin-bottom:0}@media (max-width:1024px){.container{max-width:800px}.article-layout{grid-template-columns:1fr;gap:2rem}.related-posts{position:static}}@media (max-width:768px){.nav-container{flex-wrap:wrap}.nav-search{order:3;max-width:none;width:100%;margin-top:.1rem}.nav-toggle{display:block}.nav-menu{display:none;position:absolute;top:100%;left:0;right:0;background:var(--background-color);padding:1rem 0;border-bottom:1px solid var(--gray-200)}.nav-menu-active{display:block}.nav-list{flex-direction:column;gap:.1rem;padding:0 1.5rem}.nav-link{display:block;padding:.2rem 0}h1{font-size:2rem}.article-header{padding:2rem 0}.content{padding:.1rem 0}}table{width:100%;border-collapse:collapse;margin:20px 0;font-family:'Arial',sans-serif}th,td{padding:12px 15px;text-align:left;border:1px solid #ddd}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9}tr:nth-child(even) td{background-color:#f2f2f2}@media screen and (max-width:768px){table{border:0;display:block;overflow-x:auto;white-space:nowrap}th,td{padding:10px;text-align:right}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9;border-bottom:1px solid #ddd}tr:nth-child(even) td{background-color:#f2f2f2}}a{text-decoration:none;color:#540707}.katex-html{padding: .2rem;color: #000;font-weight: 700;font-size: 1.3rem;overflow-wrap: break-word;max-width: 100%;white-space: normal !important}.category{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin:1rem 0 1rem 0}.tag{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px;font-family:"Newsreader",serif}.tag>a{text-decoration:none;color:#000}img{margin:auto;display:block;max-width:100%;height:auto;margin-bottom:1rem}.katex{white-space: pre-line !important;display: inline-block;max-width: 100%;overflow-x: auto;overflow-y: hidden;scrollbar-width: thin;overflow-wrap: break-word;word-break: break-word;vertical-align: -7px}.content > p {overflow-wrap: break-word;word-break: break-word}
+    </style>
+    <style type="text/css">
+    	pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}
+		.hljs{color:#c9d1d9;background:#0d1117}.hljs-doctag,.hljs-keyword,.hljs-meta .hljs-keyword,.hljs-template-tag,.hljs-template-variable,.hljs-type,.hljs-variable.language_{color:#ff7b72}.hljs-title,.hljs-title.class_,.hljs-title.class_.inherited__,.hljs-title.function_{color:#d2a8ff}.hljs-attr,.hljs-attribute,.hljs-literal,.hljs-meta,.hljs-number,.hljs-operator,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-variable{color:#79c0ff}.hljs-meta .hljs-string,.hljs-regexp,.hljs-string{color:#a5d6ff}.hljs-built_in,.hljs-symbol{color:#ffa657}.hljs-code,.hljs-comment,.hljs-formula{color:#8b949e}.hljs-name,.hljs-quote,.hljs-selector-pseudo,.hljs-selector-tag{color:#7ee787}.hljs-subst{color:#c9d1d9}.hljs-section{color:#1f6feb;font-weight:700}.hljs-bullet{color:#f2cc60}.hljs-emphasis{color:#c9d1d9;font-style:italic}.hljs-strong{color:#c9d1d9;font-weight:700}.hljs-addition{color:#aff5b4;background-color:#033a16}.hljs-deletion{color:#ffdcd7;background-color:#67060c}
+    	pre{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;font-weight:400;word-break:break-word;word-wrap:break-word;box-sizing:inherit;border-radius:4px;overflow-x:auto;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}code{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;word-wrap:break-word;word-break:break-word;font-style:normal;line-height:20px;letter-spacing:-.003em;box-sizing:inherit;font-weight:400;font-size:75%;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}
+    </style>
+    <style type="text/css">
+    	.back-to-top{position:fixed;bottom:20px;right:20px;background-color:#a73f3f;color:#fff;padding:8px 10px;border-radius:50%;box-shadow:0 4px 6px rgb(0 0 0 / .2);font-size:10px;font-weight:700;text-decoration:none;text-align:center;transition:opacity 0.3s ease,visibility 0.3s ease;z-index:99999;opacity:1;visibility:visible}.back-to-top:hover{background-color:#0056b3}
+    </style>
+    <style type="text/css">
+        .ad-header {margin: 1rem auto 1rem;background-color: #fdfdfd;text-align: center;display: block;}.ad-header .ad-wrapper {min-height: 90px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #555;font-weight: 500;padding: 3rem;border: 1px dashed #ccc;border-radius: 6px;}@media (max-width: 768px) {.ad-header {padding: 0.75rem;}}.ad-sidebar {margin: 0 0 1rem;background-color: #fefefe;text-align: center;padding: 0px;width: 100%;max-width: 100%;display: block;}.ad-sidebar .ad-wrapper {min-height: 250px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #444;font-weight: 500;border: 1px dashed #aaa;border-radius: 6px;padding: 0rem;}@media (max-width: 1024px) {.ad-sidebar {padding: 0.75rem;}}
+    </style>
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://catatansoal.github.io/blog/fix-sapui5-ui-table-checkbox"
+          },
+          "headline": "Fix SAPUI5 Ui.table Checkbox Freezing On Scroll",
+          "description": "Fix SAPUI5 Ui.table Checkbox Freezing On Scroll...",
+          "image": [
+            "https://tse4.mm.bing.net/th?q=SAPUI5%20ui.table%20Checkbox%20Column%20Scrolling%20Issue%3A%20A%20Comprehensive%20Guide"
+          ],
+          "author": {
+            "@type": "Person",
+            "name": "ADMIN",
+            "jobTitle": "Editor web"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "ANABEL",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://tse4.mm.bing.net/th?q=ANABEL%20WEB"
+            }
+          },
+          "datePublished": "2025-08-10T07:32:53+00:00",
+          "dateModified": "2025-08-10T07:32:53+00:00"
+        }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="container nav-container">
+                <div class="nav-left">
+                    <span class="logo">ANABEL</span>
+                    <span class="blog-tag">Article</span>
+                </div>
+                <div class="nav-search">
+                    <form class="search-form" role="search">
+                        <input 
+                            type="search" 
+                            class="search-input"
+                            placeholder="Search articles..."
+                            aria-label="Search articles"
+                        >
+                        <button type="submit" class="search-button" aria-label="Submit search">🔎</button>
+                    </form>
+                </div>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+                <div class="nav-menu">
+                    <ul class="nav-list">
+                    	<li><a href="/" class="nav-link">HOME</a></li>
+                        <li><a href="/pages/About" class="nav-link">About</a></li>
+                        <li><a href="/pages/Contact" class="nav-link">Contact</a></li>
+                        <li><a href="/pages/Disclaimer" class="nav-link">Disclaimer</a></li>
+                        <li><a href="/pages/Privacy" class="nav-link">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="main">
+        <article class="article">
+            <header class="article-header">
+                <div class="container">
+                    <h1>Fix SAPUI5 Ui.table Checkbox Freezing On Scroll</h1>
+                    <div class="meta">
+                        <time datetime="2025-08-10T07:32:53+00:00">Aug 10, 2025</time>
+                        <span class="author">by ADMIN</span>
+                        <span class="view-count">
+                            <span id="viewCount">48</span> views
+                        </span>
+                    </div>
+                </div>
+            </header>
+            <div class="ad-header container">
+                <div class="ad-wrapper">
+    Iklan Headers
+</div>
+            </div>
+            <div class="container">
+                <div class="article-layout">
+                    <div class="content">
+                        <img src="https://tse4.mm.bing.net/th?q=SAPUI5%20ui.table%20Checkbox%20Column%20Scrolling%20Issue%3A%20A%20Comprehensive%20Guide" title="SAPUI5 ui.table Checkbox Column Scrolling Issue: A Comprehensive Guide" width="300" height="200"/>
+<p>Hey guys! Ever faced the frustrating issue of checkboxes freezing in your SAPUI5 ui.table when scrolling? It's a common problem, and trust me, you're not alone! When you are working with SAPUI5 and utilizing the <code>ui.table</code> control, you might encounter a peculiar problem where checkboxes within a column template appear to freeze or become misaligned as you scroll through the table. This can be a major headache for users, making data selection and interaction a real pain. In this article, we'll dive deep into the reasons behind this issue and provide you with a step-by-step guide to effectively solve it. We'll explore various techniques, code examples, and best practices to ensure your checkboxes scroll smoothly and your users have a seamless experience. So, let's get started and tackle this scrolling checkbox challenge together! Understanding the root cause is crucial for implementing the correct solution. This issue generally arises due to the way SAPUI5's <code>ui.table</code> re-renders and manages its rows. When you scroll, the table doesn't re-render the entire content; instead, it reuses existing DOM elements for performance reasons. This can lead to the checkboxes losing their association with the correct data context, causing them to appear frozen or misaligned. This article aims to provide a comprehensive guide to resolving this issue, ensuring your SAPUI5 tables behave as expected, with checkboxes scrolling smoothly alongside the data. We’ll cover common causes, step-by-step solutions, code examples, and best practices to help you deliver a seamless user experience.</p>
+<h2>Understanding the Problem: Why Checkboxes Freeze in SAPUI5 Tables</h2>
+<p>So, why exactly do these checkboxes decide to go rogue and freeze up? Let's break down the common culprits behind this behavior. The freezing or misalignment of checkboxes in SAPUI5 <code>ui.table</code> controls during scrolling is a common issue that can significantly impact user experience. To effectively address this problem, it’s crucial to understand the underlying reasons why it occurs. This section delves into the common causes of this behavior, providing a clear understanding of the technical challenges involved. One of the primary reasons for this issue is the way SAPUI5 optimizes performance in large tables. When a user scrolls through a <code>ui.table</code>, the framework doesn’t re-render the entire table content. Instead, it reuses existing DOM elements and updates their content to display the new data. This process, known as <strong>virtualization</strong>, significantly improves scrolling performance, especially when dealing with large datasets. However, this optimization can sometimes lead to problems with data binding and control state management. Specifically, the checkboxes within the table rows might lose their correct data context, causing them to display incorrect values or appear frozen. Another contributing factor is the <strong>incorrect handling of data binding</strong>. In SAPUI5, controls are bound to data using a binding mechanism. When the data context changes during scrolling, the checkboxes need to be correctly updated to reflect the new data. If the binding is not properly managed, the checkboxes might retain their previous state, leading to inconsistencies. For instance, if a checkbox was checked in a row that is no longer visible, it might still appear checked when the row is re-rendered with new data. Moreover, the <strong>asynchronous nature of data loading</strong> can also exacerbate this issue. If the data for the table is loaded asynchronously, the checkboxes might be rendered before the data is fully available. This can result in the checkboxes initially displaying incorrect values, which are not updated correctly as the user scrolls. To further complicate matters, <strong>custom rendering logic</strong> within the table can also introduce issues. If the rendering logic for the checkboxes or the table rows is not correctly implemented, it can interfere with the default behavior of the <code>ui.table</code> control. For example, if the event handlers for the checkboxes are not properly attached or detached during scrolling, it can lead to memory leaks and performance issues, as well as the freezing checkbox problem. Understanding these underlying causes is the first step towards implementing effective solutions. In the following sections, we will explore various techniques and best practices to address these issues and ensure that your checkboxes in SAPUI5 tables scroll smoothly and maintain their correct state.</p>
+<ul>
+<li><strong>DOM Element Recycling:</strong> SAPUI5 cleverly reuses DOM elements to boost performance when you scroll. But sometimes, this can cause checkboxes to lose their connection to the right data.</li>
+<li><strong>Data Binding Mishaps:</strong> If the data binding isn't set up perfectly, checkboxes might not update correctly as you scroll, leading to confusion.</li>
+<li><strong>Asynchronous Data Loading:</strong> Loading data in the background can sometimes cause checkboxes to render before the data is fully ready, leading to initial display errors.</li>
+<li><strong>Custom Rendering Quirks:</strong> Custom rendering logic, if not handled carefully, can mess with the default behavior of the table and cause checkbox issues.</li>
+</ul>
+<h2>Step-by-Step Solutions to Fix the Checkbox Scrolling Issue</h2>
+<p>Okay, let's get our hands dirty and fix this thing! Here’s a step-by-step guide to tackle the checkbox freezing issue in your SAPUI5 ui.table. Addressing the checkbox scrolling issue in SAPUI5 <code>ui.table</code> controls requires a systematic approach. This section provides a step-by-step guide to help you diagnose and resolve the problem effectively. Each step includes detailed explanations, code examples, and best practices to ensure a smooth and consistent scrolling experience for your users. By following these steps, you can identify the root cause of the issue and implement the appropriate solution. The first step in resolving the checkbox scrolling issue is to <strong>ensure proper data binding</strong>. As mentioned earlier, incorrect data binding is a common cause of this problem. To address this, you need to verify that the checkboxes are correctly bound to the data model and that the binding context is updated appropriately during scrolling. Here’s how you can do it:</p>
+<ol>
+<li><strong>Verify Data Binding:</strong>
+<ul>
+<li><strong>Check Binding Path:</strong> Ensure that the <code>selected</code> property of the checkbox is correctly bound to a corresponding field in your data model. For example, if you have a field named <code>isSelected</code> in your data, the binding path should be <code>{isSelected}</code>.</li>
+<li><strong>Use Binding Context:</strong> Make sure that the binding context is correctly set for each row in the table. The binding context provides the specific data for the row, allowing the checkbox to access the correct <code>isSelected</code> value.</li>
+</ul>
+</li>
+<li><strong>Implement a Custom Cell Template:</strong>
+<ul>
+<li><strong>Create a Checkbox Instance:</strong> Instead of using a simple checkbox binding, create an instance of the <code>sap.m.CheckBox</code> control in your column template. This gives you more control over the checkbox behavior.</li>
+<li><strong>Set Binding with Mode:</strong> Use the <code>bindProperty</code> method to bind the <code>selected</code> property of the checkbox to the corresponding data field. Ensure that you specify the binding mode as <code>sap.ui.model.BindingMode.TwoWay</code> to allow changes in the checkbox state to update the data model.</li>
+</ul>
+</li>
+<li><strong>Handle Checkbox Selection Changes:</strong>
+<ul>
+<li><strong>Attach a Select Event:</strong> Attach a <code>select</code> event handler to the checkbox to capture changes in its selection state. This event is triggered when the checkbox is checked or unchecked.</li>
+<li><strong>Update the Data Model:</strong> In the event handler, update the corresponding data field in your data model to reflect the new checkbox state. This ensures that the data model remains synchronized with the UI.</li>
+</ul>
+</li>
+<li><strong>Optimize Table Updates:</strong>
+<ul>
+<li><strong>Use <code>refreshRows</code> Method:</strong> Instead of refreshing the entire table, use the <code>refreshRows</code> method to update only the visible rows. This improves performance and reduces the likelihood of the checkbox issue.</li>
+<li><strong>Implement Data Model Listeners:</strong> Attach listeners to the data model to detect changes in the underlying data. When changes occur, update the affected rows in the table using the <code>refreshRows</code> method.</li>
+</ul>
+</li>
+<li><strong>Handle Asynchronous Data Loading:</strong>
+<ul>
+<li><strong>Set Initial Values:</strong> If your data is loaded asynchronously, set initial values for the <code>isSelected</code> field in your data model. This prevents the checkboxes from rendering with incorrect states before the data is fully loaded.</li>
+<li><strong>Update Checkboxes on Data Load:</strong> After the data is loaded, update the checkboxes in the table to reflect the correct values. You can use the <code>refreshRows</code> method to achieve this.</li>
+</ul>
+</li>
+</ol>
+<p>By following these steps, you can effectively address the checkbox scrolling issue in your SAPUI5 <code>ui.table</code> controls. Each step is designed to tackle a specific aspect of the problem, ensuring a comprehensive solution. In the next sections, we will provide more detailed code examples and discuss additional techniques to further optimize your table implementation.</p>
+<ul>
+<li><strong>Step 1: Double-Check Your Data Binding:</strong>
+<ul>
+<li>Make sure the <code>selected</code> property of your checkbox is correctly linked to the right data field.</li>
+<li>Ensure the binding context is set up correctly for each row.</li>
+</ul>
+</li>
+<li><strong>Step 2: Craft a Custom Cell Template:</strong>
+<ul>
+<li>Instead of just binding, create a <code>sap.m.CheckBox</code> instance in your column template for more control.</li>
+<li>Use <code>bindProperty</code> with <code>sap.ui.model.BindingMode.TwoWay</code> to keep the data model in sync.</li>
+</ul>
+</li>
+<li><strong>Step 3: Handle Checkbox Selection Changes:</strong>
+<ul>
+<li>Attach a <code>select</code> event handler to your checkbox.</li>
+<li>Update the data model in the event handler to reflect the new checkbox state.</li>
+</ul>
+</li>
+<li><strong>Step 4: Optimize Table Updates:</strong>
+<ul>
+<li>Use <code>refreshRows</code> instead of refreshing the entire table for better performance.</li>
+<li>Implement data model listeners to update rows when the data changes.</li>
+</ul>
+</li>
+<li><strong>Step 5: Taming Asynchronous Data Loading:</strong>
+<ul>
+<li>Set initial values for the <code>isSelected</code> field in your data model to avoid initial display glitches.</li>
+<li>Update checkboxes after data loads using <code>refreshRows</code>.</li>
+</ul>
+</li>
+</ul>
+<h2>Code Examples: Implementing Solutions in SAPUI5</h2>
+<p>Let's solidify our understanding with some code! Here are examples demonstrating how to implement the solutions we've discussed. To illustrate the solutions discussed in the previous section, this section provides detailed code examples in SAPUI5. These examples cover various aspects of the problem, including data binding, custom cell templates, event handling, and table updates. By examining these code snippets, you can gain a practical understanding of how to implement the solutions in your own SAPUI5 applications. The first example demonstrates how to <strong>create a custom cell template</strong> with a checkbox and bind its <code>selected</code> property to a data field. This approach provides more control over the checkbox behavior and ensures that the checkbox state is correctly synchronized with the data model. This code snippet creates a <code>sap.m.CheckBox</code> instance in the column template and binds its <code>selected</code> property to the <code>isSelected</code> field in the data model. The binding mode is set to <code>sap.ui.model.BindingMode.TwoWay</code> to allow changes in the checkbox state to update the data model. The <code>select</code> event handler is attached to capture changes in the checkbox selection state. Next, let’s look at how to <strong>handle checkbox selection changes</strong>. This involves attaching a <code>select</code> event handler to the checkbox and updating the corresponding data field in the data model when the checkbox is checked or unchecked. This example demonstrates how to attach a <code>select</code> event handler to the checkbox and update the <code>isSelected</code> field in the data model. The <code>sPath</code> parameter of the event object provides the binding path of the selected row, allowing you to access the correct data object. The <code>bSelected</code> parameter indicates whether the checkbox is checked or unchecked. Another important aspect of resolving the checkbox scrolling issue is <strong>optimizing table updates</strong>. Instead of refreshing the entire table, you can use the <code>refreshRows</code> method to update only the visible rows. This improves performance and reduces the likelihood of the checkbox issue. This code snippet shows how to use the <code>refreshRows</code> method to update only the visible rows in the table. This method is particularly useful when dealing with large datasets, as it avoids unnecessary re-rendering of the entire table. Finally, let’s consider how to <strong>handle asynchronous data loading</strong>. If your data is loaded asynchronously, you need to set initial values for the <code>isSelected</code> field in your data model and update the checkboxes after the data is loaded. This prevents the checkboxes from rendering with incorrect states before the data is fully available. This example demonstrates how to set initial values for the <code>isSelected</code> field and update the checkboxes after the data is loaded. The <code>oModel.attachRequestCompleted</code> method is used to listen for the data loading completion event. By examining these code examples, you can gain a practical understanding of how to implement the solutions discussed in this article. Each example is designed to address a specific aspect of the checkbox scrolling issue, ensuring a comprehensive solution for your SAPUI5 applications. In the next section, we will discuss best practices and additional tips to further optimize your table implementation.</p>
+<pre><code class="hljs">// Example: Custom Cell Template with Checkbox
+var oTemplate = new sap.m.CheckBox({
+ selected: {
+ path: &#39;isSelected&#39;,
+ mode: sap.ui.model.BindingMode.TwoWay
+ },
+ select: function(oEvent) {
+ var bSelected = oEvent.getParameter(&#39;selected&#39;);
+ var oContext = this.getBindingContext();
+ var sPath = oContext.getPath();
+ var oModel = oContext.getModel();
+ oModel.setProperty(sPath + &#39;/isSelected&#39;, bSelected);
+ }
+});
+
+// Example: Handling Checkbox Selection Changes
+select: function(oEvent) {
+ var bSelected = oEvent.getParameter(&#39;selected&#39;);
+ var oContext = oEvent.getSource().getBindingContext();
+ var sPath = oContext.getPath();
+ var oModel = oContext.getModel();
+ oModel.setProperty(sPath + &#39;/isSelected&#39;, bSelected);
+}
+
+// Example: Optimizing Table Updates
+oTable.refreshRows(); // Refresh only visible rows
+
+// Example: Handling Asynchronous Data Loading
+oModel.attachRequestCompleted(function() {
+ // Update checkboxes after data is loaded
+ oTable.refreshRows();
+});
+</code></pre>
+<ul>
+<li><strong>Custom Cell Template:</strong></li>
+</ul>
+<pre><code class="hljs">var oTemplate = new sap.m.CheckBox({
+ selected: {
+ path: &#39;isSelected&#39;,
+ mode: sap.ui.model.BindingMode.TwoWay
+ },
+ select: function(oEvent) { ... }
+});
+</code></pre>
+<ul>
+<li><strong>Handling Selection Changes:</strong></li>
+</ul>
+<pre><code class="hljs">select: function(oEvent) {
+ var bSelected = oEvent.getParameter(&#39;selected&#39;);
+ var oContext = oEvent.getSource().getBindingContext();
+ var sPath = oContext.getPath();
+ var oModel = oContext.getModel();
+ oModel.setProperty(sPath + &#39;/isSelected&#39;, bSelected);
+}
+</code></pre>
+<ul>
+<li><strong>Optimizing Table Updates:</strong></li>
+</ul>
+<pre><code class="hljs">oTable.refreshRows();
+</code></pre>
+<ul>
+<li><strong>Asynchronous Data Loading:</strong></li>
+</ul>
+<pre><code class="hljs">oModel.attachRequestCompleted(function() {
+ oTable.refreshRows();
+});
+</code></pre>
+<h2>Best Practices and Additional Tips for Smooth Scrolling</h2>
+<p>Alright, let's talk about some best practices to ensure your tables are scrolling like a dream! Beyond the solutions, let's dive into some best practices and extra tips for a super smooth scrolling experience. In addition to the solutions discussed in the previous sections, there are several best practices and additional tips that can help you ensure smooth scrolling and optimal performance in your SAPUI5 <code>ui.table</code> controls. This section provides a comprehensive overview of these practices, covering aspects such as data model optimization, UI rendering, and event handling. By implementing these best practices, you can further enhance the user experience and prevent potential issues. One of the key factors influencing table performance is the <strong>optimization of the data model</strong>. A well-structured and efficiently managed data model can significantly improve scrolling performance and reduce the likelihood of the checkbox issue. Here are some tips for optimizing your data model:</p>
+<ol>
+<li><strong>Use a JSON Model:</strong>
+<ul>
+<li>The <code>sap.ui.model.json.JSONModel</code> is generally more efficient for client-side data handling compared to other model types. It provides better performance for large datasets and complex data structures.</li>
+</ul>
+</li>
+<li><strong>Limit Data Transfer:</strong>
+<ul>
+<li>Only load the data that is necessary for the table. Avoid loading unnecessary fields or records, as this can increase the data transfer time and impact performance.</li>
+</ul>
+</li>
+<li><strong>Implement Server-Side Pagination:</strong>
+<ul>
+<li>If you are dealing with a very large dataset, consider implementing server-side pagination. This allows you to load data in smaller chunks, improving the initial loading time and scrolling performance.</li>
+</ul>
+</li>
+<li><strong>Optimize Data Structure:</strong>
+<ul>
+<li>Structure your data in a way that is easy to access and update. Avoid deeply nested data structures, as they can be more difficult to bind and manage.</li>
+</ul>
+</li>
+<li><strong>Use Data Caching:</strong>
+<ul>
+<li>Implement data caching to store frequently accessed data in the client-side cache. This reduces the need to repeatedly fetch data from the server, improving performance.</li>
+</ul>
+</li>
+</ol>
+<p>Another important aspect of achieving smooth scrolling is <strong>optimizing UI rendering</strong>. The way the UI is rendered can significantly impact the scrolling performance and the behavior of the checkboxes. Here are some tips for optimizing UI rendering:</p>
+<ol>
+<li><strong>Use Column Templates Efficiently:</strong>
+<ul>
+<li>Use column templates to define the structure and content of your table columns. This allows SAPUI5 to efficiently render the table rows and cells.</li>
+</ul>
+</li>
+<li><strong>Avoid Complex Rendering Logic:</strong>
+<ul>
+<li>Keep the rendering logic in your column templates as simple as possible. Avoid complex calculations or operations that can slow down the rendering process.</li>
+</ul>
+</li>
+<li><strong>Use Lazy Loading:</strong>
+<ul>
+<li>If you have columns with complex content, consider using lazy loading to render the content only when it is visible. This can improve the initial loading time and scrolling performance.</li>
+</ul>
+</li>
+<li><strong>Minimize DOM Manipulations:</strong>
+<ul>
+<li>Minimize direct DOM manipulations, as they can be performance-intensive. Use SAPUI5’s binding mechanism to update the UI, as it is optimized for performance.</li>
+</ul>
+</li>
+<li><strong>Use CSS for Styling:</strong>
+<ul>
+<li>Use CSS for styling your table and its components. Avoid inline styles, as they can make the rendering process slower.</li>
+</ul>
+</li>
+</ol>
+<p>In addition to data model and UI rendering optimization, <strong>efficient event handling</strong> is crucial for smooth scrolling and checkbox behavior. Here are some tips for optimizing event handling:</p>
+<ol>
+<li><strong>Attach Event Handlers Efficiently:</strong>
+<ul>
+<li>Attach event handlers only when necessary and detach them when they are no longer needed. This prevents memory leaks and improves performance.</li>
+</ul>
+</li>
+<li><strong>Use Event Delegation:</strong>
+<ul>
+<li>Use event delegation to handle events at a higher level in the DOM tree. This reduces the number of event listeners and improves performance.</li>
+</ul>
+</li>
+<li><strong>Throttle Event Handlers:</strong>
+<ul>
+<li>If you have event handlers that are triggered frequently, consider throttling them to limit the number of times they are executed. This can improve performance and prevent UI lag.</li>
+</ul>
+</li>
+<li><strong>Handle Events Asynchronously:</strong>
+<ul>
+<li>If possible, handle events asynchronously to avoid blocking the UI thread. This can improve responsiveness and prevent the UI from freezing.</li>
+</ul>
+</li>
+</ol>
+<p>By implementing these best practices and additional tips, you can ensure smooth scrolling and optimal performance in your SAPUI5 <code>ui.table</code> controls. Each practice is designed to address a specific aspect of the problem, ensuring a comprehensive solution for your applications. In the next section, we will conclude this article and provide a summary of the key takeaways.</p>
+<ul>
+<li><strong>Optimize Your Data Model:</strong>
+<ul>
+<li>Stick to <code>sap.ui.model.json.JSONModel</code> for efficiency.</li>
+<li>Load only the necessary data to avoid performance hits.</li>
+<li>Implement server-side pagination for huge datasets.</li>
+</ul>
+</li>
+<li><strong>Optimize UI Rendering:</strong>
+<ul>
+<li>Use column templates effectively.</li>
+<li>Keep rendering logic simple.</li>
+<li>Consider lazy loading for complex content.</li>
+</ul>
+</li>
+<li><strong>Efficient Event Handling:</strong>
+<ul>
+<li>Attach and detach event handlers wisely.</li>
+<li>Use event delegation to minimize listeners.</li>
+<li>Throttle event handlers if needed.</li>
+</ul>
+</li>
+</ul>
+<h2>Conclusion</h2>
+<p>And there you have it! We've journeyed through the checkbox freezing issue in SAPUI5 ui.table and armed ourselves with solutions and best practices. To summarize, we've tackled the pesky problem of checkboxes freezing in SAPUI5 <code>ui.table</code> controls during scrolling. By understanding the underlying causes, implementing step-by-step solutions, and adhering to best practices, you can ensure a smooth and consistent user experience in your applications. In this article, we’ve covered a range of topics, from data binding and custom cell templates to table updates and asynchronous data loading. We’ve also provided detailed code examples to help you implement these solutions in your own projects. Remember, the key to resolving this issue lies in properly managing data binding, optimizing table updates, and handling asynchronous data loading effectively. By following the steps outlined in this article, you can prevent checkboxes from freezing or becoming misaligned during scrolling. In addition to the solutions, we’ve also discussed several best practices for optimizing the performance of your SAPUI5 tables. These include optimizing the data model, streamlining UI rendering, and handling events efficiently. By implementing these practices, you can further enhance the user experience and prevent potential issues. In conclusion, the checkbox scrolling issue in SAPUI5 <code>ui.table</code> controls can be effectively addressed by understanding the underlying causes and implementing the appropriate solutions. By following the guidelines and best practices outlined in this article, you can ensure that your tables behave as expected, providing a seamless and intuitive user experience. We hope this article has provided you with the knowledge and tools you need to tackle this issue and create high-quality SAPUI5 applications. If you have any further questions or need additional assistance, feel free to reach out to the SAPUI5 community or consult the official documentation. Happy coding!</p>
+<p>Remember, a smooth scrolling experience is key to happy users! So go forth and conquer those freezing checkboxes!</p>
+<ul>
+<li>We explored the common causes of the checkbox freezing issue in SAPUI5 tables.</li>
+<li>We provided a step-by-step guide to diagnose and resolve the problem.</li>
+<li>We shared code examples for implementing the solutions.</li>
+<li>We discussed best practices for optimizing table performance.</li>
+</ul>
+
+                    </div>
+                    <aside class="related-posts">
+                        <div class="ad-sidebar container">
+                            <div class="ad-wrapper">
+    <span>Iklan Related</span>
+</div>
+                        </div>
+                        <h2 class="related-posts-title">Related Posts</h2><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/cool-hover-effects-for-navbar">Cool Hover Effects For Navbar Links: A Quick Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-04T17:52:46+00:00">Aug 4, 2025</time>
+		                        <span class="view-count">
+									50 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/ominous-banner-stuck-crafting-grid">Ominous Banner Stuck? Crafting Grid Bug In Refined Storage 2</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-06T03:36:33+00:00">Aug 6, 2025</time>
+		                        <span class="view-count">
+									60 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/hypoxia-in-space-survival-scenarios">Hypoxia In Space: Survival Scenarios For Astronauts</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-03T00:37:05+00:00">Aug 3, 2025</time>
+		                        <span class="view-count">
+									51 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/chat-updates-revamped-replies-filters">Chat Updates: Revamped Replies, Filters &amp; More!</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-08T17:27:53+00:00">Aug 8, 2025</time>
+		                        <span class="view-count">
+									47 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/hugo-search-with-pagefind-a">Hugo Search With Pagefind: A Quick Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-09T06:13:06+00:00">Aug 9, 2025</time>
+		                        <span class="view-count">
+									40 views
+		                        </span>
+                            </div>
+                        </article>
+                    </aside>
+                    <aside class="related-posts"></aside>
+                </div>
+            </div>
+        </article>
+        <a href="#" class="back-to-top" id="backToTop" title="Back to top">
+        	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-bar-up" viewBox="0 0 16 16">
+			  <path fill-rule="evenodd" d="M3.646 11.854a.5.5 0 0 0 .708 0L8 8.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708M2.4 5.2c0 .22.18.4.4.4h10.4a.4.4 0 0 0 0-.8H2.8a.4.4 0 0 0-.4.4"/>
+			</svg>
+		</a>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 ANABEL</p>
+        </div>
+    </footer>
+    <script>
+    	(() => {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            const toggleMenu = () => {
+                navMenu.classList.toggle('nav-menu-active');
+                navToggle.classList.toggle('nav-toggle-active');
+            };
+            const backToTopHandler = (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            navToggle.addEventListener('click', toggleMenu);
+            document.getElementById('backToTop').addEventListener('click', backToTopHandler);
+            window.addEventListener('pagehide', () => {
+                navToggle.removeEventListener('click', toggleMenu);
+                document.getElementById('backToTop').removeEventListener('click', backToTopHandler);
+            });
+        })();
+		(() => {
+            window.addEventListener("DOMContentLoaded", (event) => {
+                const ellHljs = document.createElement("script");
+                ellHljs.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js");
+                ellHljs.onload = () => {
+                    hljs.highlightAll();
+                };
+                document.querySelector("body").append(ellHljs);
+                const ellFont = document.createElement("link");
+                ellFont.setAttribute("href", "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css");
+                ellFont.setAttribute("rel", "stylesheet");
+                document.querySelector("head").append(ellFont);
+                window.addEventListener('pagehide', () => {
+                    // ellHljs.remove();
+                    ellFont.remove();
+                });
+
+            });
+        })();
+    </script>
+    
+    
+    
+</body>
+</html>

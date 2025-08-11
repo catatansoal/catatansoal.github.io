@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>PrestaShop + Nginx: The Ultimate Reverse Proxy Guide</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="PrestaShop + Nginx: The Ultimate Reverse Proxy Guide...">
+    <link rel="canonical" href="https://catatansoal.github.io/blog/prestashop-nginx-the-ultimate-reverse">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="PrestaShop + Nginx: The Ultimate Reverse Proxy Guide">
+	<meta property="og:description" content="PrestaShop + Nginx: The Ultimate Reverse Proxy Guide...">
+	<meta property="og:url" content="https://catatansoal.github.io/blog/prestashop-nginx-the-ultimate-reverse">
+	<meta property="og:site_name" content="ANABEL">
+	<meta property="article:published_time" content="2025-08-09T18:42:57+00:00">
+	<meta property="article:author" content="ADMIN">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+    <link rel="preload" fetchpriority="high" as="image" href="https://tse4.mm.bing.net/th?q=PrestaShop%20Behind%20an%20Nginx%20Reverse%20Proxy%3A%20A%20Comprehensive%20Guide">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style type="text/css">
+    	:root{--primary-color:#3740ff;--text-color:#202124;--background-color:#ffffff;--gray-100:#f8f9fa;--gray-200:#e9ecef}*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;line-height:1.6;color:var(--text-color);background-color:var(--background-color)}.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}.header{background-color:var(--background-color);border-bottom:1px solid var(--gray-200);position:sticky;top:0;z-index:100}.nav{padding:.5rem 0}.nav-container{display:flex;justify-content:space-between;align-items:center;gap:1rem}.nav-left{display:flex;align-items:center;flex-shrink:0}.logo{font-weight:700;color:var(--primary-color)}.blog-tag{margin-left:1rem;padding:.25rem .5rem;background-color:var(--gray-100);border-radius:4px;font-size:.875rem}.nav-search{flex-grow:1;max-width:300px}.search-form{position:relative;width:100%}.search-input{width:100%;padding:.5rem 2.5rem .5rem 1rem;border:1px solid var(--gray-200);border-radius:24px;font-size:.875rem;transition:all 0.2s}.search-input:focus{outline:none;border-color:var(--primary-color);box-shadow:0 0 0 2px rgb(55 64 255 / .1)}.search-button{position:absolute;right:.5rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#5f6368;cursor:pointer;padding:.25rem;display:flex;align-items:center;justify-content:center}.search-button:hover{color:var(--primary-color)}.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:.5rem}.hamburger{display:block;position:relative;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before,.hamburger::after{content:'';position:absolute;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before{top:-6px}.hamburger::after{bottom:-6px}.nav-toggle-active .hamburger{background:#fff0}.nav-toggle-active .hamburger::before{transform:rotate(45deg);top:0}.nav-toggle-active .hamburger::after{transform:rotate(-45deg);bottom:0}.nav-list{display:flex;list-style:none;gap:2rem}.nav-link{color:var(--text-color);text-decoration:none;font-size:.9rem;transition:color 0.2s}.nav-link:hover{color:var(--primary-color)}.article-header{padding:2rem 0;background-color:var(--gray-100)}.article-layout{display:grid;grid-template-columns:1fr 350px;gap:3rem;padding:1rem 0;align-items: start}h1,h2,h3,h4,h5,h6{font-family:"Crimson Text","Times New Roman",Times,serif}h1{font-size:2.5rem;line-height:1.2;margin-bottom:1rem}.meta{color:#5f6368;font-size:.875rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}.view-count{display:inline-flex;align-items:center;gap:.25rem}.view-count svg{color:#5f6368}.content{min-width:0;border-bottom:1px solid #dddddd5e;margin-top:1rem;white-space:pre-line !important;overflow-wrap:break-word;overflow-x:auto;word-break:break-word}.lead{font-size:1.25rem;color:#5f6368;margin-bottom:2rem}h2,h3,h4,h5,h6{font-size:1.75rem;margin:1rem 0 1rem}p,pre,ol,ul>li{margin-bottom:1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;font-size:1.3rem;text-align: justify;}p>code{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px}hr{margin:1rem 0 1rem 0}.code-example{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;margin:1.5rem 0;overflow-x:auto}code{font-family:'Roboto Mono',monospace;font-size:.875rem}ul{margin:.2rem 0;padding-left:1.5rem}.related-posts{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;position:sticky;top:5rem}.related-posts-title,.newpost-posts-list{font-size:1.75rem;margin:0 0 1rem}.related-posts-list{display:flex;flex-direction:column;gap:.5rem}.related-post,.newpost-post{border-bottom:1px solid #ddd;padding-bottom:10px;margin-bottom:10px}.related-post:last-child,.newpost-post:last-child{padding-bottom:0;border-bottom:none}.related-post-title,.newpost-post-title{font-size:1.2rem;margin:0 0 .1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;}.related-post-title a,.newpost-post-title a{color:var(--text-color);text-decoration:none;transition:color 0.2s}.related-post-title a:hover,.newpost-post-title a:hover{color:var(--primary-color)}.related-post time{font-size:.875rem;color:#5f6368}.footer{background-color:var(--gray-100);padding:2rem 0;margin-top:4rem;color:#5f6368;font-size:.875rem}.nav-menu>ul>li{margin-bottom:0}@media (max-width:1024px){.container{max-width:800px}.article-layout{grid-template-columns:1fr;gap:2rem}.related-posts{position:static}}@media (max-width:768px){.nav-container{flex-wrap:wrap}.nav-search{order:3;max-width:none;width:100%;margin-top:.1rem}.nav-toggle{display:block}.nav-menu{display:none;position:absolute;top:100%;left:0;right:0;background:var(--background-color);padding:1rem 0;border-bottom:1px solid var(--gray-200)}.nav-menu-active{display:block}.nav-list{flex-direction:column;gap:.1rem;padding:0 1.5rem}.nav-link{display:block;padding:.2rem 0}h1{font-size:2rem}.article-header{padding:2rem 0}.content{padding:.1rem 0}}table{width:100%;border-collapse:collapse;margin:20px 0;font-family:'Arial',sans-serif}th,td{padding:12px 15px;text-align:left;border:1px solid #ddd}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9}tr:nth-child(even) td{background-color:#f2f2f2}@media screen and (max-width:768px){table{border:0;display:block;overflow-x:auto;white-space:nowrap}th,td{padding:10px;text-align:right}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9;border-bottom:1px solid #ddd}tr:nth-child(even) td{background-color:#f2f2f2}}a{text-decoration:none;color:#540707}.katex-html{padding: .2rem;color: #000;font-weight: 700;font-size: 1.3rem;overflow-wrap: break-word;max-width: 100%;white-space: normal !important}.category{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin:1rem 0 1rem 0}.tag{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px;font-family:"Newsreader",serif}.tag>a{text-decoration:none;color:#000}img{margin:auto;display:block;max-width:100%;height:auto;margin-bottom:1rem}.katex{white-space: pre-line !important;display: inline-block;max-width: 100%;overflow-x: auto;overflow-y: hidden;scrollbar-width: thin;overflow-wrap: break-word;word-break: break-word;vertical-align: -7px}.content > p {overflow-wrap: break-word;word-break: break-word}
+    </style>
+    <style type="text/css">
+    	pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}
+		.hljs{color:#c9d1d9;background:#0d1117}.hljs-doctag,.hljs-keyword,.hljs-meta .hljs-keyword,.hljs-template-tag,.hljs-template-variable,.hljs-type,.hljs-variable.language_{color:#ff7b72}.hljs-title,.hljs-title.class_,.hljs-title.class_.inherited__,.hljs-title.function_{color:#d2a8ff}.hljs-attr,.hljs-attribute,.hljs-literal,.hljs-meta,.hljs-number,.hljs-operator,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-variable{color:#79c0ff}.hljs-meta .hljs-string,.hljs-regexp,.hljs-string{color:#a5d6ff}.hljs-built_in,.hljs-symbol{color:#ffa657}.hljs-code,.hljs-comment,.hljs-formula{color:#8b949e}.hljs-name,.hljs-quote,.hljs-selector-pseudo,.hljs-selector-tag{color:#7ee787}.hljs-subst{color:#c9d1d9}.hljs-section{color:#1f6feb;font-weight:700}.hljs-bullet{color:#f2cc60}.hljs-emphasis{color:#c9d1d9;font-style:italic}.hljs-strong{color:#c9d1d9;font-weight:700}.hljs-addition{color:#aff5b4;background-color:#033a16}.hljs-deletion{color:#ffdcd7;background-color:#67060c}
+    	pre{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;font-weight:400;word-break:break-word;word-wrap:break-word;box-sizing:inherit;border-radius:4px;overflow-x:auto;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}code{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;word-wrap:break-word;word-break:break-word;font-style:normal;line-height:20px;letter-spacing:-.003em;box-sizing:inherit;font-weight:400;font-size:75%;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}
+    </style>
+    <style type="text/css">
+    	.back-to-top{position:fixed;bottom:20px;right:20px;background-color:#a73f3f;color:#fff;padding:8px 10px;border-radius:50%;box-shadow:0 4px 6px rgb(0 0 0 / .2);font-size:10px;font-weight:700;text-decoration:none;text-align:center;transition:opacity 0.3s ease,visibility 0.3s ease;z-index:99999;opacity:1;visibility:visible}.back-to-top:hover{background-color:#0056b3}
+    </style>
+    <style type="text/css">
+        .ad-header {margin: 1rem auto 1rem;background-color: #fdfdfd;text-align: center;display: block;}.ad-header .ad-wrapper {min-height: 90px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #555;font-weight: 500;padding: 3rem;border: 1px dashed #ccc;border-radius: 6px;}@media (max-width: 768px) {.ad-header {padding: 0.75rem;}}.ad-sidebar {margin: 0 0 1rem;background-color: #fefefe;text-align: center;padding: 0px;width: 100%;max-width: 100%;display: block;}.ad-sidebar .ad-wrapper {min-height: 250px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #444;font-weight: 500;border: 1px dashed #aaa;border-radius: 6px;padding: 0rem;}@media (max-width: 1024px) {.ad-sidebar {padding: 0.75rem;}}
+    </style>
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://catatansoal.github.io/blog/prestashop-nginx-the-ultimate-reverse"
+          },
+          "headline": "PrestaShop + Nginx: The Ultimate Reverse Proxy Guide",
+          "description": "PrestaShop + Nginx: The Ultimate Reverse Proxy Guide...",
+          "image": [
+            "https://tse4.mm.bing.net/th?q=PrestaShop%20Behind%20an%20Nginx%20Reverse%20Proxy%3A%20A%20Comprehensive%20Guide"
+          ],
+          "author": {
+            "@type": "Person",
+            "name": "ADMIN",
+            "jobTitle": "Editor web"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "ANABEL",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://tse4.mm.bing.net/th?q=ANABEL%20WEB"
+            }
+          },
+          "datePublished": "2025-08-09T18:42:57+00:00",
+          "dateModified": "2025-08-09T18:42:57+00:00"
+        }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="container nav-container">
+                <div class="nav-left">
+                    <span class="logo">ANABEL</span>
+                    <span class="blog-tag">Article</span>
+                </div>
+                <div class="nav-search">
+                    <form class="search-form" role="search">
+                        <input 
+                            type="search" 
+                            class="search-input"
+                            placeholder="Search articles..."
+                            aria-label="Search articles"
+                        >
+                        <button type="submit" class="search-button" aria-label="Submit search">🔎</button>
+                    </form>
+                </div>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+                <div class="nav-menu">
+                    <ul class="nav-list">
+                    	<li><a href="/" class="nav-link">HOME</a></li>
+                        <li><a href="/pages/About" class="nav-link">About</a></li>
+                        <li><a href="/pages/Contact" class="nav-link">Contact</a></li>
+                        <li><a href="/pages/Disclaimer" class="nav-link">Disclaimer</a></li>
+                        <li><a href="/pages/Privacy" class="nav-link">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="main">
+        <article class="article">
+            <header class="article-header">
+                <div class="container">
+                    <h1>PrestaShop + Nginx: The Ultimate Reverse Proxy Guide</h1>
+                    <div class="meta">
+                        <time datetime="2025-08-09T18:42:57+00:00">Aug 9, 2025</time>
+                        <span class="author">by ADMIN</span>
+                        <span class="view-count">
+                            <span id="viewCount">53</span> views
+                        </span>
+                    </div>
+                </div>
+            </header>
+            <div class="ad-header container">
+                <div class="ad-wrapper">
+    Iklan Headers
+</div>
+            </div>
+            <div class="container">
+                <div class="article-layout">
+                    <div class="content">
+                        <img src="https://tse4.mm.bing.net/th?q=PrestaShop%20Behind%20an%20Nginx%20Reverse%20Proxy%3A%20A%20Comprehensive%20Guide" title="PrestaShop Behind an Nginx Reverse Proxy: A Comprehensive Guide" width="300" height="200"/><p>Hey guys! Running PrestaShop behind an Nginx reverse proxy can seriously boost your online store's performance, security, and SEO. In this article, we'll walk you through the process, covering everything from setup to troubleshooting. Let's dive in!</p>
+<h2>Understanding the Power of an Nginx Reverse Proxy</h2>
+<p>First off, what exactly is a reverse proxy, and why should you care? Think of it as a middleman between your customers and your PrestaShop backend. Instead of your visitors directly hitting your PrestaShop server, they interact with Nginx. Nginx then forwards the requests to your PrestaShop server, gets the response, and sends it back to the user. This setup offers a ton of advantages, including:</p>
+<ul>
+<li><em><strong>Enhanced Security</strong></em>: Nginx can act as a shield, protecting your PrestaShop server from direct attacks. It can filter malicious traffic, handle SSL/TLS encryption, and hide the internal IP address of your PrestaShop server. This is super important because, let's face it, online security is no joke.</li>
+<li><em><strong>Improved Performance</strong></em>: Nginx is incredibly efficient at handling web traffic. It can cache static content (like images, CSS, and JavaScript files), reducing the load on your PrestaShop server and speeding up page load times. Faster load times mean happier customers and better SEO!</li>
+<li><em><strong>Load Balancing</strong></em>: If you have multiple PrestaShop servers, Nginx can distribute the incoming traffic among them, ensuring no single server gets overloaded. This results in better uptime and a smoother user experience, especially during peak traffic periods. It is a smart way to keep everything running smoothly, even when things get busy.</li>
+<li><em><strong>SSL/TLS Termination</strong></em>: Nginx can handle SSL/TLS encryption and decryption, offloading this task from your PrestaShop server. This frees up server resources and improves overall performance. Setting up SSL/TLS correctly is vital for encrypting the data transferred between your website and visitors' browsers, protecting sensitive information like login details and credit card numbers.</li>
+<li><em><strong>SEO Benefits</strong></em>: While not a direct SEO factor, a fast-loading, secure website is crucial for search engine rankings. Nginx helps achieve this by optimizing content delivery and improving site performance. Search engines love fast websites, and so will your customers.</li>
+</ul>
+<p>So, basically, using an Nginx reverse proxy is like giving your PrestaShop store a performance and security upgrade. It's a win-win!</p>
+<h2>Setting Up Your Nginx Reverse Proxy for PrestaShop</h2>
+<p>Alright, let's get down to the nitty-gritty and set up your Nginx reverse proxy. Before you start, make sure you have Nginx installed on a separate server (or the same server if you're feeling adventurous but make sure you know what you're doing!). You'll also need your PrestaShop instance up and running. We'll assume you have PrestaShop 8.2.1 running on Nginx 1.26.3 for this example. If you want to run PrestaShop, you must have it already. Now, let's configure Nginx.</p>
+<p>Here's a basic example of an Nginx configuration file (<code>/etc/nginx/sites-available/yourdomain.com</code>). Replace <code>yourdomain.com</code> with your actual domain name and adjust the PrestaShop server's IP address and port accordingly. For the example, we will use the configuration file that you have submitted.</p>
+<pre><code class="hljs">server {
+    listen 80;
+    listen [::]:80;
+    server_name yourdomain.com www.yourdomain.com;
+
+    # Redirect HTTP to HTTPS (optional but recommended)
+    return 301 https://$host$request_uri;
+}
+
+server {
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+    server_name yourdomain.com www.yourdomain.com;
+
+    # SSL configuration (replace with your actual SSL certificates)
+    ssl_certificate /etc/ssl/certs/yourdomain.crt;
+    ssl_certificate_key /etc/ssl/private/yourdomain.key;
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_ciphers &#39;TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-CHACHA20-POLY1305&#39;;
+    ssl_prefer_server_ciphers on;
+    ssl_stapling on;
+    ssl_stapling_verify on;
+    resolver 8.8.8.8 8.8.4.4 valid=300s;
+    resolver_timeout 10s;
+
+    # Root directory (you can adjust this if your PrestaShop files are elsewhere)
+    root /var/www/yourdomain.com/public_html;
+    index index.php index.html index.htm;
+
+    # PrestaShop-specific configurations
+    location / {
+        try_files $uri $uri/ /index.php?$args;
+    }
+
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/run/php/php8.2-fpm.sock;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        include fastcgi_params;
+    }
+
+    # Cache static files (optional but highly recommended)
+    location ~* \.(jpg|jpeg|png|gif|css|js|ico)$ {
+        expires 30d;
+        add_header Pragma public;
+        add_header Cache-Control &quot;public&quot;;
+    }
+
+    # Security headers (optional but highly recommended)
+    add_header X-Frame-Options &quot;SAMEORIGIN&quot;;
+    add_header X-Content-Type-Options &quot;nosniff&quot;;
+    add_header X-XSS-Protection &quot;1; mode=block&quot;;
+}
+</code></pre>
+<p>Here's a breakdown of the important parts:</p>
+<ul>
+<li><em><strong><code>listen 80</code> and <code>listen 443 ssl</code></strong></em>: These lines tell Nginx to listen for incoming traffic on ports 80 (HTTP) and 443 (HTTPS). The HTTPS block is crucial for secure connections.</li>
+<li><em><strong><code>server_name</code></strong></em>: This specifies the domain names that this configuration applies to. Make sure to include both <code>yourdomain.com</code> and <code>www.yourdomain.com</code>.</li>
+<li><em><strong><code>ssl_certificate</code> and <code>ssl_certificate_key</code></strong></em>: These lines point to your SSL certificate and private key. You'll need to replace the placeholders with the actual paths to your files. This is how Nginx handles the encryption of your traffic.</li>
+<li><em><strong><code>root</code></strong></em>: This defines the root directory for your website. Make sure this points to the correct location of your PrestaShop files. If your PrestaShop files are located in a different directory, you'll need to adjust this line.</li>
+<li><em><strong><code>location /</code></strong></em>: This block handles requests to your website. The <code>try_files</code> directive is crucial for routing requests to the correct files. This is the key to making sure PrestaShop works with pretty URLs.</li>
+<li><em><strong><code>location ~ \.php$</code></strong></em>: This block handles PHP files. It tells Nginx to pass PHP requests to the PHP-FPM process, which will execute the PHP code. PHP-FPM is responsible for processing your PrestaShop files and generating the content that your users see. The <code>fastcgi_pass</code> directive specifies the socket for PHP-FPM. You may need to check your PHP-FPM configuration to make sure this is correct. The <code>fastcgi_param</code> directive sets various parameters for PHP-FPM, such as the script filename.</li>
+<li><em><strong>Caching static files</strong></em>: This section adds headers to improve the performance of your site by telling the browser to cache static files. Setting up caching is very important.</li>
+<li><em><strong>Security headers</strong></em>: This section adds a few HTTP headers that help protect your website from various attacks. Setting up these security headers is very important.</li>
+</ul>
+<p>Once you've configured the file, save it and create a symbolic link to the <code>sites-enabled</code> directory, like so: <code>sudo ln -s /etc/nginx/sites-available/yourdomain.com /etc/nginx/sites-enabled/</code>. Don't forget to test your configuration with <code>sudo nginx -t</code> and restart Nginx with <code>sudo systemctl restart nginx</code>.</p>
+<p>Remember to replace placeholders with your actual information (domain name, SSL certificates, PrestaShop file locations, and your actual IP address and port). The PrestaShop backend configuration doesn't require significant changes; it primarily needs to be aware of the public URL.</p>
+<h2>Configuring PrestaShop for the Reverse Proxy</h2>
+<p>Now that your Nginx reverse proxy is set up, let's configure PrestaShop to work seamlessly with it. This involves a few key steps to ensure everything runs smoothly. You'll need to log in to your PrestaShop back office and access the configuration settings. Let's get started!</p>
+<h3>Step 1: Setting the Shop URL</h3>
+<p>First, you'll need to set the correct shop URL in your PrestaShop configuration. This tells PrestaShop what URL visitors will use to access your store. Go to <strong>Shop Parameters &gt; General</strong> in your PrestaShop back office. Make sure your <strong>Shop URL</strong> and <strong>SSL URL</strong> (if you're using HTTPS) are set to your domain name (e.g., <code>https://yourdomain.com</code>). This is very important because it tells PrestaShop where it's located.</p>
+<h3>Step 2: Enabling SSL (if using HTTPS)</h3>
+<p>If you're using HTTPS (and you should!), ensure that SSL is enabled. Go to <strong>Shop Parameters &gt; General</strong> and check the <strong>Enable SSL</strong> and <strong>Enable SSL on all pages</strong> options. This setting tells PrestaShop to use HTTPS for all connections, ensuring that data transmitted between the server and your customers is encrypted.</p>
+<h3>Step 3: Configure the .htaccess file.</h3>
+<p>This is probably the step where you may have the most issues. Go to your PrestaShop install's root directory, the file located in <code>.htaccess</code>. Look for the lines with <code>RewriteBase</code>. The <code>RewriteBase</code> directive specifies the base URL for your website's rewrite rules. The rewrite rules in the .htaccess file are crucial for creating user-friendly URLs and managing website traffic. Make sure the value is correct. If you run PrestaShop in the root directory of your domain, this value should be <code>/</code>. If PrestaShop is in a subdirectory (e.g., <code>/shop/</code>), then the value should be <code>/shop/</code>. This will help you fix potential redirection errors.</p>
+<h3>Step 4: Clearing the Cache.</h3>
+<p>After making any changes to your PrestaShop configuration, it's always a good idea to clear the cache. Go to <strong>Advanced Parameters &gt; Performance</strong> and click the <strong>Clear cache</strong> button. This ensures that the changes you made are reflected on your website.</p>
+<h3>Step 5: Check the server's IP address.</h3>
+<p>Another thing that can affect the proper function of your website is the IP address. Check the following setting. Go to <strong>Shop Parameters &gt; General</strong> and check the <strong>Detect the IP address of the server</strong>. Make sure it's set correctly.</p>
+<p>By following these steps, you'll ensure that your PrestaShop store is configured correctly to work with your Nginx reverse proxy. This is a critical step in the process, allowing your store to function correctly and take advantage of the security and performance benefits that the reverse proxy provides. These steps are essential for ensuring that PrestaShop correctly handles URLs, SSL, and other configurations when running behind an Nginx reverse proxy, guaranteeing that your online store is set up for success.</p>
+<h2>Troubleshooting Common Issues</h2>
+<p>Even with careful setup, you might run into a few snags. Let's troubleshoot some common issues you may encounter when using PrestaShop behind an Nginx reverse proxy. Being prepared to troubleshoot common issues is essential for maintaining a stable and functional online store. Here are some things to look out for:</p>
+<ul>
+<li><em><strong>Incorrect URLs and Redirects</strong></em>: This is one of the most common problems. If your PrestaShop is redirecting to the wrong URLs, check your <code>.htaccess</code> file (as mentioned before) and the Shop URL settings in your PrestaShop back office. Make sure everything is pointing to the correct domain and subdirectory. This ensures that the URLs generated by PrestaShop match the actual URLs accessed by visitors.</li>
+<li><em><strong>SSL/HTTPS Issues</strong></em>: If you're having problems with SSL, double-check your SSL certificate configuration in Nginx. Also, ensure that SSL is enabled in your PrestaShop settings. Verify that the certificate is correctly installed and that the site is accessible over HTTPS. This will ensure that your site is secure and that visitors can trust it.</li>
+<li><em><strong>404 Errors</strong></em>: If you're seeing 404 errors, particularly on product or category pages, check your rewrite rules in Nginx and the <code>.htaccess</code> file. Ensure that the rules are correctly configured to handle the PrestaShop URLs. These are often caused by incorrect rewrite rules or missing files.</li>
+<li><em><strong>Cache Problems</strong></em>: Sometimes, cached content can cause issues. Clear your PrestaShop cache (as mentioned before) and your browser cache to make sure you're seeing the latest version of your site. Clearing the cache helps ensure that changes are reflected promptly and that users see the most up-to-date version of the site.</li>
+<li><em><strong>Image and Asset Loading Problems</strong></em>: If images or other assets (CSS, JavaScript) aren't loading correctly, check your Nginx configuration for any caching directives or file path issues. Make sure the file paths in your Nginx configuration match the file locations on your server. Double-check that the assets are accessible via the correct URLs. Often, these are due to incorrect file paths or caching issues.</li>
+<li><em><strong>Cookies Issues</strong></em>: Verify the cookie domain settings in the PrestaShop back office. Incorrect cookie settings can cause problems with user logins and sessions. Be sure to clear any old browser cookies to eliminate any problems. Sometimes these are tricky to track down.</li>
+</ul>
+<h2>Conclusion: Optimize Your PrestaShop with Nginx</h2>
+<p>Well, there you have it! Setting up PrestaShop behind an Nginx reverse proxy can significantly improve your store's security, performance, and SEO. By following these steps and troubleshooting any issues, you can create a faster, more secure, and more user-friendly online shopping experience. So, go ahead, set up that reverse proxy, and watch your PrestaShop store thrive. Happy selling!</p>
+
+                    </div>
+                    <aside class="related-posts">
+                        <div class="ad-sidebar container">
+                            <div class="ad-wrapper">
+    <span>Iklan Related</span>
+</div>
+                        </div>
+                        <h2 class="related-posts-title">Related Posts</h2><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/medical-treatment-failure-possible-causes">Medical Treatment Failure: Possible Causes</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-06T02:25:46+00:00">Aug 6, 2025</time>
+		                        <span class="view-count">
+									42 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/real-roots-specifying-exceptions-in">Real Roots: Specifying Exceptions In Equations?</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-11T00:46:46+00:00">Aug 11, 2025</time>
+		                        <span class="view-count">
+									47 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/foreign-press-access-to-war">Foreign Press Access To War Zones A Comprehensive Analysis</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-21T18:43:27+00:00">Jul 21, 2025</time>
+		                        <span class="view-count">
+									58 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/straighten-hair-flat-iron-guide">Straighten Hair: Flat Iron Guide For Silky, Damage-Free Hair</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-02T04:42:57+00:00">Aug 2, 2025</time>
+		                        <span class="view-count">
+									60 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/medgar-evers-contributions-to-the">Medgar Evers Contributions To The Civil Rights Movement</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-13T18:26:37+00:00">Jul 13, 2025</time>
+		                        <span class="view-count">
+									55 views
+		                        </span>
+                            </div>
+                        </article>
+                    </aside>
+                    <aside class="related-posts"></aside>
+                </div>
+            </div>
+        </article>
+        <a href="#" class="back-to-top" id="backToTop" title="Back to top">
+        	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-bar-up" viewBox="0 0 16 16">
+			  <path fill-rule="evenodd" d="M3.646 11.854a.5.5 0 0 0 .708 0L8 8.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708M2.4 5.2c0 .22.18.4.4.4h10.4a.4.4 0 0 0 0-.8H2.8a.4.4 0 0 0-.4.4"/>
+			</svg>
+		</a>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 ANABEL</p>
+        </div>
+    </footer>
+    <script>
+    	(() => {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            const toggleMenu = () => {
+                navMenu.classList.toggle('nav-menu-active');
+                navToggle.classList.toggle('nav-toggle-active');
+            };
+            const backToTopHandler = (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            navToggle.addEventListener('click', toggleMenu);
+            document.getElementById('backToTop').addEventListener('click', backToTopHandler);
+            window.addEventListener('pagehide', () => {
+                navToggle.removeEventListener('click', toggleMenu);
+                document.getElementById('backToTop').removeEventListener('click', backToTopHandler);
+            });
+        })();
+		(() => {
+            window.addEventListener("DOMContentLoaded", (event) => {
+                const ellHljs = document.createElement("script");
+                ellHljs.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js");
+                ellHljs.onload = () => {
+                    hljs.highlightAll();
+                };
+                document.querySelector("body").append(ellHljs);
+                const ellFont = document.createElement("link");
+                ellFont.setAttribute("href", "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css");
+                ellFont.setAttribute("rel", "stylesheet");
+                document.querySelector("head").append(ellFont);
+                window.addEventListener('pagehide', () => {
+                    // ellHljs.remove();
+                    ellFont.remove();
+                });
+
+            });
+        })();
+    </script>
+    
+    
+    
+</body>
+</html>

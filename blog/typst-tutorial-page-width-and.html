@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Typst Tutorial Page Width And Alignment Bug Investigation</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Typst Tutorial Page Width And Alignment Bug Investigation...">
+    <link rel="canonical" href="https://catatansoal.github.io/blog/typst-tutorial-page-width-and">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Typst Tutorial Page Width And Alignment Bug Investigation">
+	<meta property="og:description" content="Typst Tutorial Page Width And Alignment Bug Investigation...">
+	<meta property="og:url" content="https://catatansoal.github.io/blog/typst-tutorial-page-width-and">
+	<meta property="og:site_name" content="ANABEL">
+	<meta property="article:published_time" content="2025-07-17T10:57:00+00:00">
+	<meta property="article:author" content="ADMIN">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+    <link rel="preload" fetchpriority="high" as="image" href="https://tse4.mm.bing.net/th?q=Typst%20Tutorial%20Page%20Width%20and%20Alignment%20Bug%3A%20A%20Comprehensive%20Analysis">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style type="text/css">
+    	:root{--primary-color:#3740ff;--text-color:#202124;--background-color:#ffffff;--gray-100:#f8f9fa;--gray-200:#e9ecef}*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;line-height:1.6;color:var(--text-color);background-color:var(--background-color)}.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}.header{background-color:var(--background-color);border-bottom:1px solid var(--gray-200);position:sticky;top:0;z-index:100}.nav{padding:.5rem 0}.nav-container{display:flex;justify-content:space-between;align-items:center;gap:1rem}.nav-left{display:flex;align-items:center;flex-shrink:0}.logo{font-weight:700;color:var(--primary-color)}.blog-tag{margin-left:1rem;padding:.25rem .5rem;background-color:var(--gray-100);border-radius:4px;font-size:.875rem}.nav-search{flex-grow:1;max-width:300px}.search-form{position:relative;width:100%}.search-input{width:100%;padding:.5rem 2.5rem .5rem 1rem;border:1px solid var(--gray-200);border-radius:24px;font-size:.875rem;transition:all 0.2s}.search-input:focus{outline:none;border-color:var(--primary-color);box-shadow:0 0 0 2px rgb(55 64 255 / .1)}.search-button{position:absolute;right:.5rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#5f6368;cursor:pointer;padding:.25rem;display:flex;align-items:center;justify-content:center}.search-button:hover{color:var(--primary-color)}.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:.5rem}.hamburger{display:block;position:relative;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before,.hamburger::after{content:'';position:absolute;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before{top:-6px}.hamburger::after{bottom:-6px}.nav-toggle-active .hamburger{background:#fff0}.nav-toggle-active .hamburger::before{transform:rotate(45deg);top:0}.nav-toggle-active .hamburger::after{transform:rotate(-45deg);bottom:0}.nav-list{display:flex;list-style:none;gap:2rem}.nav-link{color:var(--text-color);text-decoration:none;font-size:.9rem;transition:color 0.2s}.nav-link:hover{color:var(--primary-color)}.article-header{padding:2rem 0;background-color:var(--gray-100)}.article-layout{display:grid;grid-template-columns:1fr 350px;gap:3rem;padding:1rem 0;align-items: start}h1,h2,h3,h4,h5,h6{font-family:"Crimson Text","Times New Roman",Times,serif}h1{font-size:2.5rem;line-height:1.2;margin-bottom:1rem}.meta{color:#5f6368;font-size:.875rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}.view-count{display:inline-flex;align-items:center;gap:.25rem}.view-count svg{color:#5f6368}.content{min-width:0;border-bottom:1px solid #dddddd5e;margin-top:1rem;white-space:pre-line !important;overflow-wrap:break-word;overflow-x:auto;word-break:break-word}.lead{font-size:1.25rem;color:#5f6368;margin-bottom:2rem}h2,h3,h4,h5,h6{font-size:1.75rem;margin:1rem 0 1rem}p,pre,ol,ul>li{margin-bottom:1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;font-size:1.3rem;text-align: justify;}p>code{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px}hr{margin:1rem 0 1rem 0}.code-example{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;margin:1.5rem 0;overflow-x:auto}code{font-family:'Roboto Mono',monospace;font-size:.875rem}ul{margin:.2rem 0;padding-left:1.5rem}.related-posts{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;position:sticky;top:5rem}.related-posts-title,.newpost-posts-list{font-size:1.75rem;margin:0 0 1rem}.related-posts-list{display:flex;flex-direction:column;gap:.5rem}.related-post,.newpost-post{border-bottom:1px solid #ddd;padding-bottom:10px;margin-bottom:10px}.related-post:last-child,.newpost-post:last-child{padding-bottom:0;border-bottom:none}.related-post-title,.newpost-post-title{font-size:1.2rem;margin:0 0 .1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;}.related-post-title a,.newpost-post-title a{color:var(--text-color);text-decoration:none;transition:color 0.2s}.related-post-title a:hover,.newpost-post-title a:hover{color:var(--primary-color)}.related-post time{font-size:.875rem;color:#5f6368}.footer{background-color:var(--gray-100);padding:2rem 0;margin-top:4rem;color:#5f6368;font-size:.875rem}.nav-menu>ul>li{margin-bottom:0}@media (max-width:1024px){.container{max-width:800px}.article-layout{grid-template-columns:1fr;gap:2rem}.related-posts{position:static}}@media (max-width:768px){.nav-container{flex-wrap:wrap}.nav-search{order:3;max-width:none;width:100%;margin-top:.1rem}.nav-toggle{display:block}.nav-menu{display:none;position:absolute;top:100%;left:0;right:0;background:var(--background-color);padding:1rem 0;border-bottom:1px solid var(--gray-200)}.nav-menu-active{display:block}.nav-list{flex-direction:column;gap:.1rem;padding:0 1.5rem}.nav-link{display:block;padding:.2rem 0}h1{font-size:2rem}.article-header{padding:2rem 0}.content{padding:.1rem 0}}table{width:100%;border-collapse:collapse;margin:20px 0;font-family:'Arial',sans-serif}th,td{padding:12px 15px;text-align:left;border:1px solid #ddd}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9}tr:nth-child(even) td{background-color:#f2f2f2}@media screen and (max-width:768px){table{border:0;display:block;overflow-x:auto;white-space:nowrap}th,td{padding:10px;text-align:right}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9;border-bottom:1px solid #ddd}tr:nth-child(even) td{background-color:#f2f2f2}}a{text-decoration:none;color:#540707}.katex-html{padding: .2rem;color: #000;font-weight: 700;font-size: 1.3rem;overflow-wrap: break-word;max-width: 100%;white-space: normal !important}.category{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin:1rem 0 1rem 0}.tag{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px;font-family:"Newsreader",serif}.tag>a{text-decoration:none;color:#000}img{margin:auto;display:block;max-width:100%;height:auto;margin-bottom:1rem}.katex{white-space: pre-line !important;display: inline-block;max-width: 100%;overflow-x: auto;overflow-y: hidden;scrollbar-width: thin;overflow-wrap: break-word;word-break: break-word;vertical-align: -7px}.content > p {overflow-wrap: break-word;word-break: break-word}
+    </style>
+    <style type="text/css">
+    	pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}
+		.hljs{color:#c9d1d9;background:#0d1117}.hljs-doctag,.hljs-keyword,.hljs-meta .hljs-keyword,.hljs-template-tag,.hljs-template-variable,.hljs-type,.hljs-variable.language_{color:#ff7b72}.hljs-title,.hljs-title.class_,.hljs-title.class_.inherited__,.hljs-title.function_{color:#d2a8ff}.hljs-attr,.hljs-attribute,.hljs-literal,.hljs-meta,.hljs-number,.hljs-operator,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-variable{color:#79c0ff}.hljs-meta .hljs-string,.hljs-regexp,.hljs-string{color:#a5d6ff}.hljs-built_in,.hljs-symbol{color:#ffa657}.hljs-code,.hljs-comment,.hljs-formula{color:#8b949e}.hljs-name,.hljs-quote,.hljs-selector-pseudo,.hljs-selector-tag{color:#7ee787}.hljs-subst{color:#c9d1d9}.hljs-section{color:#1f6feb;font-weight:700}.hljs-bullet{color:#f2cc60}.hljs-emphasis{color:#c9d1d9;font-style:italic}.hljs-strong{color:#c9d1d9;font-weight:700}.hljs-addition{color:#aff5b4;background-color:#033a16}.hljs-deletion{color:#ffdcd7;background-color:#67060c}
+    	pre{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;font-weight:400;word-break:break-word;word-wrap:break-word;box-sizing:inherit;border-radius:4px;overflow-x:auto;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}code{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;word-wrap:break-word;word-break:break-word;font-style:normal;line-height:20px;letter-spacing:-.003em;box-sizing:inherit;font-weight:400;font-size:75%;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}
+    </style>
+    <style type="text/css">
+    	.back-to-top{position:fixed;bottom:20px;right:20px;background-color:#a73f3f;color:#fff;padding:8px 10px;border-radius:50%;box-shadow:0 4px 6px rgb(0 0 0 / .2);font-size:10px;font-weight:700;text-decoration:none;text-align:center;transition:opacity 0.3s ease,visibility 0.3s ease;z-index:99999;opacity:1;visibility:visible}.back-to-top:hover{background-color:#0056b3}
+    </style>
+    <style type="text/css">
+        .ad-header {margin: 1rem auto 1rem;background-color: #fdfdfd;text-align: center;display: block;}.ad-header .ad-wrapper {min-height: 90px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #555;font-weight: 500;padding: 3rem;border: 1px dashed #ccc;border-radius: 6px;}@media (max-width: 768px) {.ad-header {padding: 0.75rem;}}.ad-sidebar {margin: 0 0 1rem;background-color: #fefefe;text-align: center;padding: 0px;width: 100%;max-width: 100%;display: block;}.ad-sidebar .ad-wrapper {min-height: 250px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #444;font-weight: 500;border: 1px dashed #aaa;border-radius: 6px;padding: 0rem;}@media (max-width: 1024px) {.ad-sidebar {padding: 0.75rem;}}
+    </style>
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://catatansoal.github.io/blog/typst-tutorial-page-width-and"
+          },
+          "headline": "Typst Tutorial Page Width And Alignment Bug Investigation",
+          "description": "Typst Tutorial Page Width And Alignment Bug Investigation...",
+          "image": [
+            "https://tse4.mm.bing.net/th?q=Typst%20Tutorial%20Page%20Width%20and%20Alignment%20Bug%3A%20A%20Comprehensive%20Analysis"
+          ],
+          "author": {
+            "@type": "Person",
+            "name": "ADMIN",
+            "jobTitle": "Editor web"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "ANABEL",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://tse4.mm.bing.net/th?q=ANABEL%20WEB"
+            }
+          },
+          "datePublished": "2025-07-17T10:57:00+00:00",
+          "dateModified": "2025-07-17T10:57:00+00:00"
+        }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="container nav-container">
+                <div class="nav-left">
+                    <span class="logo">ANABEL</span>
+                    <span class="blog-tag">Article</span>
+                </div>
+                <div class="nav-search">
+                    <form class="search-form" role="search">
+                        <input 
+                            type="search" 
+                            class="search-input"
+                            placeholder="Search articles..."
+                            aria-label="Search articles"
+                        >
+                        <button type="submit" class="search-button" aria-label="Submit search">🔎</button>
+                    </form>
+                </div>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+                <div class="nav-menu">
+                    <ul class="nav-list">
+                    	<li><a href="/" class="nav-link">HOME</a></li>
+                        <li><a href="/pages/About" class="nav-link">About</a></li>
+                        <li><a href="/pages/Contact" class="nav-link">Contact</a></li>
+                        <li><a href="/pages/Disclaimer" class="nav-link">Disclaimer</a></li>
+                        <li><a href="/pages/Privacy" class="nav-link">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="main">
+        <article class="article">
+            <header class="article-header">
+                <div class="container">
+                    <h1>Typst Tutorial Page Width And Alignment Bug Investigation</h1>
+                    <div class="meta">
+                        <time datetime="2025-07-17T10:57:00+00:00">Jul 17, 2025</time>
+                        <span class="author">by ADMIN</span>
+                        <span class="view-count">
+                            <span id="viewCount">58</span> views
+                        </span>
+                    </div>
+                </div>
+            </header>
+            <div class="ad-header container">
+                <div class="ad-wrapper">
+    Iklan Headers
+</div>
+            </div>
+            <div class="container">
+                <div class="article-layout">
+                    <div class="content">
+                        <img src="https://tse4.mm.bing.net/th?q=Typst%20Tutorial%20Page%20Width%20and%20Alignment%20Bug%3A%20A%20Comprehensive%20Analysis" title="Typst Tutorial Page Width and Alignment Bug: A Comprehensive Analysis" width="300" height="200"/>
+<h2>Introduction</h2>
+<p>Hey guys! Let's dive into a peculiar issue spotted on the Typst tutorial page. We're going to break down a width and alignment bug that's been causing some visual hiccups for users, specifically on the &quot;Making a Template&quot; section. This isn't just a minor visual annoyance; it's the kind of thing that can make a tutorial look less polished and potentially confuse new users. So, buckle up as we dissect the problem, explore the technical details, and discuss potential solutions. Our goal here is to not only identify the root cause but also to highlight the importance of responsive design and consistent layout in web development. After all, a well-structured tutorial is key to a smooth learning experience, and every pixel matters when it comes to user engagement.</p>
+<p>The essence of the problem resides in how elements are rendered on the page, particularly within the context of varying screen sizes and browser configurations. The observed misalignment and width discrepancies can stem from a multitude of factors, including CSS rules, HTML structure, and even browser-specific rendering quirks. By meticulously examining these facets, we can pinpoint the origin of the bug and formulate effective remedies. So, let's put on our detective hats and get to the bottom of this Typst tutorial layout glitch!</p>
+<h3>Understanding the Importance of Layout in Tutorials</h3>
+<p>Before we delve into the nitty-gritty details of the bug itself, it’s crucial to understand why layout is so important, especially in educational content like tutorials. A clear, consistent, and visually appealing layout can significantly impact a user’s ability to grasp the material. Think of it this way: a well-organized tutorial is like a well-organized classroom – it creates a conducive environment for learning. When elements are misaligned or the width is off, it can be distracting and even confusing. Users might struggle to follow the flow of information, and the overall learning experience suffers. This is particularly true for coding tutorials, where precision and clarity are paramount.</p>
+<p>Moreover, a professional-looking layout enhances the credibility of the tutorial. It shows that the creators care about the details and have invested time and effort in presenting the information in the best possible way. This, in turn, builds trust with the users and encourages them to engage more deeply with the content. On the flip side, a buggy layout can give the impression of a rushed or unprofessional effort, which can deter users from fully utilizing the tutorial. So, addressing layout issues isn’t just about aesthetics; it’s about creating a positive and effective learning environment.</p>
+<h2>Problem: Width and Alignment Issues on Typst Tutorial</h2>
+<p>So, what's the fuss all about? We've got a user who spotted some <strong>alignment</strong> and <strong>width</strong> wonkiness on the Typst tutorial page, specifically the &quot;Making a Template&quot; section. The provided image clearly showcases that some elements are not lining up correctly, and the width of certain sections seems off. This isn't just a minor visual glitch; it's the kind of thing that can throw off the user experience, especially for folks new to Typst. Imagine trying to learn a new programming language or tool, and the tutorial itself looks a bit jumbled – not the best first impression, right?</p>
+<p>The screenshot gives us a visual cue, but to really nail down the issue, we need to dig deeper. We're talking about looking at the HTML structure, the CSS styling, and how different browsers might be interpreting the code. It's like being a detective, but instead of solving a crime, we're solving a web development mystery! The user has helpfully provided their browser information (Brave 1.80.120 on an arm64 architecture), which is a good starting point. Browser-specific rendering can sometimes be the culprit, so knowing this helps us narrow down the possibilities.</p>
+<h3>Diving Deeper into the Visual Discrepancies</h3>
+<p>Let's dissect the visual discrepancies a bit further. From the screenshot, we can observe that the misalignment likely affects text elements and potentially other content blocks within the tutorial. The width issue might manifest as elements overflowing their containers, creating unwanted horizontal scrolling, or simply looking disproportionate within the overall layout. These kinds of problems can be caused by a variety of factors, such as incorrect CSS rules, conflicting styles, or even browser rendering bugs. It's also possible that the layout wasn't designed to be fully responsive, meaning it doesn't adapt well to different screen sizes and resolutions. This is a common pitfall in web development, and it's something we need to consider as we investigate.</p>
+<p>To truly understand the scope of the problem, we might also want to test the tutorial page on different browsers and devices. This will help us determine if the issue is isolated to a specific browser (like Brave in this case) or if it's a more widespread problem. Gathering this kind of data is crucial for prioritizing and addressing the bug effectively. The more information we have, the better equipped we are to find a solution that works for all users, regardless of their browsing environment.</p>
+<h2>Website and Browser Information</h2>
+<p>Alright, so the issue is popping up on the Typst tutorial page, specifically this URL: <a href="https://typst.app/docs/tutorial/making-a-template/">https://typst.app/docs/tutorial/making-a-template/</a>. This is crucial because it gives us a specific location to focus our investigation. We're not just hunting for a generic layout bug; we know exactly where to look. The user is encountering this problem while using Brave browser, version 1.80.120 (Official Build) on an arm64 architecture. This is super helpful information because different browsers and operating systems can sometimes render web pages in slightly different ways. A bug that shows up in Brave might not be present in Chrome or Firefox, for example. Knowing the browser and version allows us to try and replicate the issue in the same environment, which is a key step in debugging.</p>
+<h3>The Importance of Browser-Specific Testing</h3>
+<p>The fact that the user has provided their browser details underscores the importance of browser-specific testing in web development. While we strive for cross-browser compatibility, the reality is that browsers can sometimes interpret CSS and JavaScript in slightly different ways. This can lead to layout inconsistencies, rendering glitches, and even broken functionality. Therefore, it's essential to test websites and web applications on a variety of browsers and devices to ensure a consistent user experience. This often involves using tools like BrowserStack or Sauce Labs, which allow developers to test their code on a wide range of virtual machines and devices. By identifying browser-specific issues early on, we can prevent them from affecting real users and maintain a high level of quality.</p>
+<p>In this case, the fact that the bug was reported in Brave doesn't necessarily mean that it's a Brave-specific issue. It could still be a problem with the website's code that Brave is simply exposing. However, knowing the browser allows us to prioritize our testing and debugging efforts. We might start by trying to reproduce the bug in Brave and then expand our testing to other browsers if necessary. This targeted approach can save us time and resources in the long run.</p>
+<h2>Console Output Analysis</h2>
+<p>The user also shared some console output, which is like getting a sneak peek into the inner workings of the webpage. Here's the juicy bit:</p>
+<pre><code class="hljs">notes.js:765 Text selected: losure (that&#39;s a function without a name that is used right away) to the everything show rule. We did that because the conf function expects two positional ar
+notes.js:780 Note button displayed at position: 4203.88px 32px
+</code></pre>
+<p>This might seem like gibberish at first, but it's actually valuable information. The <code>notes.js</code> file seems to be involved, and the messages suggest some interaction related to text selection and the positioning of a &quot;Note button.&quot; While it's not immediately obvious how this ties into the <strong>width</strong> and <strong>alignment</strong> bug, it gives us a clue about the JavaScript functionality on the page. It's possible that the JavaScript is manipulating the layout in some way, and that's where the issue is stemming from. Or, it could be a red herring – a completely unrelated piece of code that just happens to be logging messages to the console.</p>
+<h3>Deciphering the Console Messages</h3>
+<p>Let's try to decipher these console messages a bit more. The first message, &quot;Text selected: losure (that's a function without a name that is used right away) to the everything show rule. We did that because the conf function expects two positional ar,&quot; suggests that there's some JavaScript code that's tracking text selections on the page. The mention of &quot;closure&quot; and &quot;conf function&quot; hints at the internal logic of the application. It's possible that this text selection tracking is related to a feature like highlighting or annotation within the tutorial.</p>
+<p>The second message, &quot;Note button displayed at position: 4203.88px 32px,&quot; indicates that a note button is being displayed on the page, and its position is being logged in pixels. This suggests that the button's placement is being dynamically controlled by JavaScript. The specific pixel coordinates might be relevant if the button's position is somehow interfering with the layout or if the positioning logic is flawed. For instance, if the button is being positioned based on the viewport width or height, a miscalculation could lead to alignment issues.</p>
+<p>To fully understand the connection between these console messages and the <strong>width</strong> and <strong>alignment</strong> bug, we'd need to examine the <code>notes.js</code> file and see how it interacts with the rest of the webpage. We'd also want to look for any other console messages or errors that might provide additional clues. The console is a treasure trove of information for debugging, and it's often the first place developers turn when trying to track down a bug.</p>
+<h2>Potential Causes and Solutions</h2>
+<p>Okay, so we've got a good handle on the problem. Now, let's brainstorm some potential causes and, more importantly, solutions! Given the <strong>width</strong> and <strong>alignment</strong> issues, here are a few suspects:</p>
+<ol>
+<li><strong>CSS Conflicts:</strong> This is a classic. Styles from different parts of the stylesheet might be clashing, leading to unexpected behavior. Think of it like two chefs trying to make a dish in the same kitchen – things can get messy!</li>
+<li><strong>Responsive Design Issues:</strong> The tutorial might not be fully responsive, meaning it doesn't adapt well to different screen sizes. This is especially important in today's world where people are browsing on everything from giant monitors to tiny phones.</li>
+<li><strong>Box Model Problems:</strong> The CSS box model (content, padding, border, margin) can be tricky. Incorrectly sized padding or margins can throw off the entire layout.</li>
+<li><strong>JavaScript Interference:</strong> As the console output suggests, JavaScript might be playing a role. Maybe some script is dynamically changing the layout in a way that's causing problems.</li>
+<li><strong>Browser-Specific Rendering:</strong> Different browsers render things slightly differently. What looks perfect in Chrome might be a bit wonky in Firefox or Safari.</li>
+</ol>
+<h3>Exploring Solutions: A Multi-Faceted Approach</h3>
+<p>To tackle these potential causes, we need a multi-faceted approach. Here are some strategies we can employ:</p>
+<ul>
+<li><strong>Inspect Element:</strong> The browser's &quot;Inspect Element&quot; tool is our best friend. It allows us to dive into the HTML and CSS, see which styles are being applied, and even tweak them in real-time to see the effect.</li>
+<li><strong>CSS Reset/Normalize:</strong> Using a CSS reset or normalize stylesheet can help create a consistent base across different browsers. This minimizes browser-specific rendering differences.</li>
+<li><strong>Media Queries:</strong> Media queries are the cornerstone of responsive design. They allow us to apply different styles based on screen size, orientation, and other factors.</li>
+<li><strong>Flexbox and Grid:</strong> These are powerful CSS layout tools that make it much easier to create complex and responsive layouts.</li>
+<li><strong>Debugging JavaScript:</strong> If JavaScript is suspected, we'll need to use the browser's debugger to step through the code, set breakpoints, and see what's happening behind the scenes.</li>
+<li><strong>Cross-Browser Testing:</strong> Testing the tutorial on different browsers is crucial to ensure a consistent experience for all users.</li>
+</ul>
+<p>Ultimately, fixing this <strong>width</strong> and <strong>alignment</strong> bug will likely involve a combination of these techniques. It's a process of investigation, experimentation, and careful attention to detail. But the end result – a polished and user-friendly tutorial – is well worth the effort!</p>
+<h2>Conclusion</h2>
+<p>So, there you have it, guys! We've taken a deep dive into the <strong>width</strong> and <strong>alignment</strong> bug on the Typst tutorial page. We've analyzed the problem, examined the website and browser information, scrutinized the console output, and brainstormed potential causes and solutions. This might seem like a lot of work for a seemingly small visual glitch, but it highlights the importance of meticulousness in web development. Every pixel matters, especially when it comes to creating a positive and effective learning experience for users.</p>
+<h3>The Broader Implications of Layout Bugs</h3>
+<p>While this specific bug might seem isolated, it's a reminder that layout issues can have a significant impact on user perception and engagement. A poorly aligned or inconsistently sized element can be distracting, confusing, and even frustrating for users. This is particularly true for tutorials and other educational content, where clarity and ease of use are paramount. A well-designed layout not only looks professional but also enhances the user's ability to grasp the material and stay focused on the task at hand.</p>
+<p>Furthermore, layout bugs can be indicative of deeper issues in the codebase. They might point to problems with CSS architecture, responsive design implementation, or even JavaScript interactions. Addressing these bugs isn't just about fixing the immediate visual problem; it's about improving the overall quality and maintainability of the website. By taking a proactive approach to layout issues, we can prevent them from recurring in the future and ensure a consistent and polished user experience across the board.</p>
+<p>In the end, fixing this bug is a win-win situation. It improves the tutorial for Typst users, and it provides valuable insights into web development best practices. It's a reminder that even the smallest details can make a big difference in the overall user experience. Keep an eye out for these kinds of issues, and let's make the web a more visually appealing and user-friendly place, one pixel at a time!</p>
+
+                    </div>
+                    <aside class="related-posts">
+                        <div class="ad-sidebar container">
+                            <div class="ad-wrapper">
+    <span>Iklan Related</span>
+</div>
+                        </div>
+                        <h2 class="related-posts-title">Related Posts</h2><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/solving-mathematical-expressions-decoding-if">Solving Mathematical Expressions Decoding If A=4, B=3, C=1, And D=2</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-14T15:34:31+00:00">Jul 14, 2025</time>
+		                        <span class="view-count">
+									67 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/how-to-connect-a-ring">How To Connect A Ring Camera To A Junction Box Using LED Driver And USB Connector</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-28T21:46:08+00:00">Jul 28, 2025</time>
+		                        <span class="view-count">
+									81 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/shoot-a-handgun-accurately-pro">Shoot A Handgun Accurately: Pro Tips &amp; Techniques</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-03T21:13:40+00:00">Aug 3, 2025</time>
+		                        <span class="view-count">
+									49 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/analyzing-gdp-growth-in-ghana">Analyzing GDP Growth In Ghana A Calculus Example</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-14T04:22:24+00:00">Jul 14, 2025</time>
+		                        <span class="view-count">
+									48 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/how-to-win-a-fight">How To Win A Fight: Self-Defense Techniques</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-11T06:59:30+00:00">Aug 11, 2025</time>
+		                        <span class="view-count">
+									43 views
+		                        </span>
+                            </div>
+                        </article>
+                    </aside>
+                    <aside class="related-posts"></aside>
+                </div>
+            </div>
+        </article>
+        <a href="#" class="back-to-top" id="backToTop" title="Back to top">
+        	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-bar-up" viewBox="0 0 16 16">
+			  <path fill-rule="evenodd" d="M3.646 11.854a.5.5 0 0 0 .708 0L8 8.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708M2.4 5.2c0 .22.18.4.4.4h10.4a.4.4 0 0 0 0-.8H2.8a.4.4 0 0 0-.4.4"/>
+			</svg>
+		</a>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 ANABEL</p>
+        </div>
+    </footer>
+    <script>
+    	(() => {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            const toggleMenu = () => {
+                navMenu.classList.toggle('nav-menu-active');
+                navToggle.classList.toggle('nav-toggle-active');
+            };
+            const backToTopHandler = (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            navToggle.addEventListener('click', toggleMenu);
+            document.getElementById('backToTop').addEventListener('click', backToTopHandler);
+            window.addEventListener('pagehide', () => {
+                navToggle.removeEventListener('click', toggleMenu);
+                document.getElementById('backToTop').removeEventListener('click', backToTopHandler);
+            });
+        })();
+		(() => {
+            window.addEventListener("DOMContentLoaded", (event) => {
+                const ellHljs = document.createElement("script");
+                ellHljs.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js");
+                ellHljs.onload = () => {
+                    hljs.highlightAll();
+                };
+                document.querySelector("body").append(ellHljs);
+                const ellFont = document.createElement("link");
+                ellFont.setAttribute("href", "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css");
+                ellFont.setAttribute("rel", "stylesheet");
+                document.querySelector("head").append(ellFont);
+                window.addEventListener('pagehide', () => {
+                    // ellHljs.remove();
+                    ellFont.remove();
+                });
+
+            });
+        })();
+    </script>
+    
+    
+    
+</body>
+</html>

@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Arduino Code Resetting A Counter For Function Arrays</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Arduino Code Resetting A Counter For Function Arrays...">
+    <link rel="canonical" href="https://catatansoal.github.io/blog/arduino-code-resetting-a-counter">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Arduino Code Resetting A Counter For Function Arrays">
+	<meta property="og:description" content="Arduino Code Resetting A Counter For Function Arrays...">
+	<meta property="og:url" content="https://catatansoal.github.io/blog/arduino-code-resetting-a-counter">
+	<meta property="og:site_name" content="ANABEL">
+	<meta property="article:published_time" content="2025-07-16T11:35:43+00:00">
+	<meta property="article:author" content="ADMIN">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+    <link rel="preload" fetchpriority="high" as="image" href="https://tse4.mm.bing.net/th?q=Arduino%20Code%3A%20Resetting%20a%20Counter%20%22i%22%20Iterating%20Over%20an%20Array%20of%20Functions%20Made%20Through%20Pointers">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style type="text/css">
+    	:root{--primary-color:#3740ff;--text-color:#202124;--background-color:#ffffff;--gray-100:#f8f9fa;--gray-200:#e9ecef}*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;line-height:1.6;color:var(--text-color);background-color:var(--background-color)}.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}.header{background-color:var(--background-color);border-bottom:1px solid var(--gray-200);position:sticky;top:0;z-index:100}.nav{padding:.5rem 0}.nav-container{display:flex;justify-content:space-between;align-items:center;gap:1rem}.nav-left{display:flex;align-items:center;flex-shrink:0}.logo{font-weight:700;color:var(--primary-color)}.blog-tag{margin-left:1rem;padding:.25rem .5rem;background-color:var(--gray-100);border-radius:4px;font-size:.875rem}.nav-search{flex-grow:1;max-width:300px}.search-form{position:relative;width:100%}.search-input{width:100%;padding:.5rem 2.5rem .5rem 1rem;border:1px solid var(--gray-200);border-radius:24px;font-size:.875rem;transition:all 0.2s}.search-input:focus{outline:none;border-color:var(--primary-color);box-shadow:0 0 0 2px rgb(55 64 255 / .1)}.search-button{position:absolute;right:.5rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#5f6368;cursor:pointer;padding:.25rem;display:flex;align-items:center;justify-content:center}.search-button:hover{color:var(--primary-color)}.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:.5rem}.hamburger{display:block;position:relative;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before,.hamburger::after{content:'';position:absolute;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before{top:-6px}.hamburger::after{bottom:-6px}.nav-toggle-active .hamburger{background:#fff0}.nav-toggle-active .hamburger::before{transform:rotate(45deg);top:0}.nav-toggle-active .hamburger::after{transform:rotate(-45deg);bottom:0}.nav-list{display:flex;list-style:none;gap:2rem}.nav-link{color:var(--text-color);text-decoration:none;font-size:.9rem;transition:color 0.2s}.nav-link:hover{color:var(--primary-color)}.article-header{padding:2rem 0;background-color:var(--gray-100)}.article-layout{display:grid;grid-template-columns:1fr 350px;gap:3rem;padding:1rem 0;align-items: start}h1,h2,h3,h4,h5,h6{font-family:"Crimson Text","Times New Roman",Times,serif}h1{font-size:2.5rem;line-height:1.2;margin-bottom:1rem}.meta{color:#5f6368;font-size:.875rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}.view-count{display:inline-flex;align-items:center;gap:.25rem}.view-count svg{color:#5f6368}.content{min-width:0;border-bottom:1px solid #dddddd5e;margin-top:1rem;white-space:pre-line !important;overflow-wrap:break-word;overflow-x:auto;word-break:break-word}.lead{font-size:1.25rem;color:#5f6368;margin-bottom:2rem}h2,h3,h4,h5,h6{font-size:1.75rem;margin:1rem 0 1rem}p,pre,ol,ul>li{margin-bottom:1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;font-size:1.3rem;text-align: justify;}p>code{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px}hr{margin:1rem 0 1rem 0}.code-example{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;margin:1.5rem 0;overflow-x:auto}code{font-family:'Roboto Mono',monospace;font-size:.875rem}ul{margin:.2rem 0;padding-left:1.5rem}.related-posts{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;position:sticky;top:5rem}.related-posts-title,.newpost-posts-list{font-size:1.75rem;margin:0 0 1rem}.related-posts-list{display:flex;flex-direction:column;gap:.5rem}.related-post,.newpost-post{border-bottom:1px solid #ddd;padding-bottom:10px;margin-bottom:10px}.related-post:last-child,.newpost-post:last-child{padding-bottom:0;border-bottom:none}.related-post-title,.newpost-post-title{font-size:1.2rem;margin:0 0 .1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;}.related-post-title a,.newpost-post-title a{color:var(--text-color);text-decoration:none;transition:color 0.2s}.related-post-title a:hover,.newpost-post-title a:hover{color:var(--primary-color)}.related-post time{font-size:.875rem;color:#5f6368}.footer{background-color:var(--gray-100);padding:2rem 0;margin-top:4rem;color:#5f6368;font-size:.875rem}.nav-menu>ul>li{margin-bottom:0}@media (max-width:1024px){.container{max-width:800px}.article-layout{grid-template-columns:1fr;gap:2rem}.related-posts{position:static}}@media (max-width:768px){.nav-container{flex-wrap:wrap}.nav-search{order:3;max-width:none;width:100%;margin-top:.1rem}.nav-toggle{display:block}.nav-menu{display:none;position:absolute;top:100%;left:0;right:0;background:var(--background-color);padding:1rem 0;border-bottom:1px solid var(--gray-200)}.nav-menu-active{display:block}.nav-list{flex-direction:column;gap:.1rem;padding:0 1.5rem}.nav-link{display:block;padding:.2rem 0}h1{font-size:2rem}.article-header{padding:2rem 0}.content{padding:.1rem 0}}table{width:100%;border-collapse:collapse;margin:20px 0;font-family:'Arial',sans-serif}th,td{padding:12px 15px;text-align:left;border:1px solid #ddd}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9}tr:nth-child(even) td{background-color:#f2f2f2}@media screen and (max-width:768px){table{border:0;display:block;overflow-x:auto;white-space:nowrap}th,td{padding:10px;text-align:right}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9;border-bottom:1px solid #ddd}tr:nth-child(even) td{background-color:#f2f2f2}}a{text-decoration:none;color:#540707}.katex-html{padding: .2rem;color: #000;font-weight: 700;font-size: 1.3rem;overflow-wrap: break-word;max-width: 100%;white-space: normal !important}.category{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin:1rem 0 1rem 0}.tag{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px;font-family:"Newsreader",serif}.tag>a{text-decoration:none;color:#000}img{margin:auto;display:block;max-width:100%;height:auto;margin-bottom:1rem}.katex{white-space: pre-line !important;display: inline-block;max-width: 100%;overflow-x: auto;overflow-y: hidden;scrollbar-width: thin;overflow-wrap: break-word;word-break: break-word;vertical-align: -7px}.content > p {overflow-wrap: break-word;word-break: break-word}
+    </style>
+    <style type="text/css">
+    	pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}
+		.hljs{color:#c9d1d9;background:#0d1117}.hljs-doctag,.hljs-keyword,.hljs-meta .hljs-keyword,.hljs-template-tag,.hljs-template-variable,.hljs-type,.hljs-variable.language_{color:#ff7b72}.hljs-title,.hljs-title.class_,.hljs-title.class_.inherited__,.hljs-title.function_{color:#d2a8ff}.hljs-attr,.hljs-attribute,.hljs-literal,.hljs-meta,.hljs-number,.hljs-operator,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-variable{color:#79c0ff}.hljs-meta .hljs-string,.hljs-regexp,.hljs-string{color:#a5d6ff}.hljs-built_in,.hljs-symbol{color:#ffa657}.hljs-code,.hljs-comment,.hljs-formula{color:#8b949e}.hljs-name,.hljs-quote,.hljs-selector-pseudo,.hljs-selector-tag{color:#7ee787}.hljs-subst{color:#c9d1d9}.hljs-section{color:#1f6feb;font-weight:700}.hljs-bullet{color:#f2cc60}.hljs-emphasis{color:#c9d1d9;font-style:italic}.hljs-strong{color:#c9d1d9;font-weight:700}.hljs-addition{color:#aff5b4;background-color:#033a16}.hljs-deletion{color:#ffdcd7;background-color:#67060c}
+    	pre{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;font-weight:400;word-break:break-word;word-wrap:break-word;box-sizing:inherit;border-radius:4px;overflow-x:auto;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}code{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;word-wrap:break-word;word-break:break-word;font-style:normal;line-height:20px;letter-spacing:-.003em;box-sizing:inherit;font-weight:400;font-size:75%;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}
+    </style>
+    <style type="text/css">
+    	.back-to-top{position:fixed;bottom:20px;right:20px;background-color:#a73f3f;color:#fff;padding:8px 10px;border-radius:50%;box-shadow:0 4px 6px rgb(0 0 0 / .2);font-size:10px;font-weight:700;text-decoration:none;text-align:center;transition:opacity 0.3s ease,visibility 0.3s ease;z-index:99999;opacity:1;visibility:visible}.back-to-top:hover{background-color:#0056b3}
+    </style>
+    <style type="text/css">
+        .ad-header {margin: 1rem auto 1rem;background-color: #fdfdfd;text-align: center;display: block;}.ad-header .ad-wrapper {min-height: 90px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #555;font-weight: 500;padding: 3rem;border: 1px dashed #ccc;border-radius: 6px;}@media (max-width: 768px) {.ad-header {padding: 0.75rem;}}.ad-sidebar {margin: 0 0 1rem;background-color: #fefefe;text-align: center;padding: 0px;width: 100%;max-width: 100%;display: block;}.ad-sidebar .ad-wrapper {min-height: 250px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #444;font-weight: 500;border: 1px dashed #aaa;border-radius: 6px;padding: 0rem;}@media (max-width: 1024px) {.ad-sidebar {padding: 0.75rem;}}
+    </style>
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://catatansoal.github.io/blog/arduino-code-resetting-a-counter"
+          },
+          "headline": "Arduino Code Resetting A Counter For Function Arrays",
+          "description": "Arduino Code Resetting A Counter For Function Arrays...",
+          "image": [
+            "https://tse4.mm.bing.net/th?q=Arduino%20Code%3A%20Resetting%20a%20Counter%20%22i%22%20Iterating%20Over%20an%20Array%20of%20Functions%20Made%20Through%20Pointers"
+          ],
+          "author": {
+            "@type": "Person",
+            "name": "ADMIN",
+            "jobTitle": "Editor web"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "ANABEL",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://tse4.mm.bing.net/th?q=ANABEL%20WEB"
+            }
+          },
+          "datePublished": "2025-07-16T11:35:43+00:00",
+          "dateModified": "2025-07-16T11:35:43+00:00"
+        }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="container nav-container">
+                <div class="nav-left">
+                    <span class="logo">ANABEL</span>
+                    <span class="blog-tag">Article</span>
+                </div>
+                <div class="nav-search">
+                    <form class="search-form" role="search">
+                        <input 
+                            type="search" 
+                            class="search-input"
+                            placeholder="Search articles..."
+                            aria-label="Search articles"
+                        >
+                        <button type="submit" class="search-button" aria-label="Submit search">🔎</button>
+                    </form>
+                </div>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+                <div class="nav-menu">
+                    <ul class="nav-list">
+                    	<li><a href="/" class="nav-link">HOME</a></li>
+                        <li><a href="/pages/About" class="nav-link">About</a></li>
+                        <li><a href="/pages/Contact" class="nav-link">Contact</a></li>
+                        <li><a href="/pages/Disclaimer" class="nav-link">Disclaimer</a></li>
+                        <li><a href="/pages/Privacy" class="nav-link">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="main">
+        <article class="article">
+            <header class="article-header">
+                <div class="container">
+                    <h1>Arduino Code Resetting A Counter For Function Arrays</h1>
+                    <div class="meta">
+                        <time datetime="2025-07-16T11:35:43+00:00">Jul 16, 2025</time>
+                        <span class="author">by ADMIN</span>
+                        <span class="view-count">
+                            <span id="viewCount">53</span> views
+                        </span>
+                    </div>
+                </div>
+            </header>
+            <div class="ad-header container">
+                <div class="ad-wrapper">
+    Iklan Headers
+</div>
+            </div>
+            <div class="container">
+                <div class="article-layout">
+                    <div class="content">
+                        <img src="https://tse4.mm.bing.net/th?q=Arduino%20Code%3A%20Resetting%20a%20Counter%20%22i%22%20Iterating%20Over%20an%20Array%20of%20Functions%20Made%20Through%20Pointers" title="Arduino Code: Resetting a Counter &quot;i&quot; Iterating Over an Array of Functions Made Through Pointers" width="300" height="200"/><p>Hey guys! Today, we're diving into a common challenge in Arduino programming: resetting a counter within an array of functions accessed through pointers. This is a super useful technique for creating interactive sketches, especially when you want to cycle through a series of actions using a single button. Let's break down the problem, explore the solution, and see how you can implement it in your own projects.</p>
+<h2>The Challenge: Cycling Through Functions with a Counter</h2>
+<p>Imagine you're building a musical instrument or a light sequencer with your Arduino. You want a single button to trigger different actions – maybe play a different musical chord or activate a different lighting pattern – each time it's pressed. A natural way to approach this is to use an array of function pointers. Each element in the array points to a specific function, and you use a counter (<code>i</code>) to index into the array and call the desired function.</p>
+<p>However, here's the catch: what happens when the counter reaches the end of the array? You need a way to reset it back to the beginning, creating a loop that cycles through the functions. This is where the magic of resetting the counter <code>i</code> comes into play. Without properly resetting the counter, your program will likely crash or behave unpredictably when it tries to access memory outside the bounds of the array.</p>
+<p><strong>Why Use Function Pointers?</strong></p>
+<p>Before we jump into the code, let's quickly recap why function pointers are so powerful in scenarios like this.</p>
+<ul>
+<li><strong>Flexibility:</strong> Function pointers allow you to treat functions like variables. You can pass them as arguments to other functions, store them in arrays, and even create dynamic function calls based on user input or sensor readings.</li>
+<li><strong>Code Organization:</strong> Using an array of function pointers can make your code cleaner and more organized, especially when you have a series of related actions to perform. Instead of a long chain of <code>if-else</code> statements, you can simply index into the array and call the appropriate function.</li>
+<li><strong>Dynamic Behavior:</strong> Function pointers enable you to change the behavior of your program at runtime. You can swap out functions in the array based on different conditions, creating a more responsive and adaptable system.</li>
+</ul>
+<p><strong>The Core Problem: Resetting the Counter</strong></p>
+<p>The key challenge we're tackling is how to reset the counter <code>i</code> when it reaches the end of our array of functions. We need to ensure that <code>i</code> loops back to 0, allowing us to cycle through the functions repeatedly. The most common approach involves using the modulo operator (<code>%</code>). Let's dive into the code and see how it works.</p>
+<h2>The Solution: Resetting the Counter with the Modulo Operator</h2>
+<p>The modulo operator (<code>%</code>) gives you the remainder of a division. For example, <code>5 % 3</code> equals 2 because 5 divided by 3 is 1 with a remainder of 2. We can leverage this to reset our counter <code>i</code>. Here's the basic idea:</p>
+<ol>
+<li>Increment the counter <code>i</code> after each button press.</li>
+<li>Use the modulo operator to calculate the new index: <code>i = i % numberOfFunctions;</code> where <code>numberOfFunctions</code> is the total number of functions in your array.</li>
+</ol>
+<p>This ensures that <code>i</code> always stays within the valid range of indices for your array. Let's look at an example:</p>
+<ul>
+<li>If <code>numberOfFunctions</code> is 3 and <code>i</code> is 0, 1, or 2, then <code>i % 3</code> will be 0, 1, or 2, respectively.</li>
+<li>If <code>i</code> increments to 3, then <code>3 % 3</code> will be 0, resetting the counter back to the beginning.</li>
+<li>If <code>i</code> increments to 4, then <code>4 % 3</code> will be 1, and so on.</li>
+</ul>
+<p><strong>Example Code Snippet</strong></p>
+<p>Here's a snippet of Arduino code that demonstrates this technique:</p>
+<pre><code class="hljs">// Define function prototypes
+void function1();
+void function2();
+void function3();
+
+// Create an array of function pointers
+void (*functionArray[])() = {function1, function2, function3};
+
+const int numberOfFunctions = sizeof(functionArray) / sizeof(functionArray[0]); // Calculate the number of functions
+int i = 0; // Counter variable
+const int buttonPin = 2; // Button pin
+int buttonState = 0; // Current state of the button
+int lastButtonState = 0; // Previous state of the button
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(buttonPin, INPUT_PULLUP); // Use internal pull-up resistor
+}
+
+void loop() {
+  buttonState = digitalRead(buttonPin);
+
+  // Check if the button is pressed (LOW signal when pressed)
+  if (buttonState != lastButtonState &amp;&amp; buttonState == LOW) {
+    // Call the function at index i
+    functionArray[i]();
+
+    // Increment the counter and reset using modulo
+    i = (i + 1) % numberOfFunctions;
+    Serial.print(&quot;Current function index: &quot;);
+    Serial.println(i);
+  }
+
+  lastButtonState = buttonState;
+}
+
+void function1() {
+  Serial.println(&quot;Function 1 called&quot;);
+  // Add your code for function 1 here
+}
+
+void function2() {
+  Serial.println(&quot;Function 2 called&quot;);
+  // Add your code for function 2 here
+}
+
+void function3() {
+  Serial.println(&quot;Function 3 called&quot;);
+  // Add your code for function 3 here
+}
+</code></pre>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>We define three simple functions: <code>function1</code>, <code>function2</code>, and <code>function3</code>. These are just placeholders; you'd replace them with your actual musical chord functions or lighting patterns.</li>
+<li>We create an array of function pointers called <code>functionArray</code>. This array holds the addresses of our functions.</li>
+<li>We calculate <code>numberOfFunctions</code> by dividing the total size of the array by the size of a single element. This is a neat trick that makes your code more robust – if you add or remove functions from the array, you don't need to manually update the <code>numberOfFunctions</code> variable.</li>
+<li>We initialize our counter <code>i</code> to 0.</li>
+<li>In the <code>loop()</code> function, we read the state of the button. We're using the internal pull-up resistor, so the button is HIGH when not pressed and LOW when pressed.</li>
+<li>We check for a button press using a simple state change detection. This ensures that we only trigger a function call once per button press, not continuously while the button is held down.</li>
+<li>Inside the <code>if</code> block, we call the function at index <code>i</code> using <code>functionArray[i]()</code>. This is where the magic happens – we're dereferencing the function pointer and executing the corresponding function.</li>
+<li>We then increment <code>i</code> and use the modulo operator to reset it: <code>i = (i + 1) % numberOfFunctions;</code>. This is the core of our solution.</li>
+<li>Finally, we print the current function index to the Serial Monitor for debugging purposes.</li>
+</ul>
+<h2>Diving Deeper: Applying This to Musical Chords</h2>
+<p>Now, let's make this more concrete by imagining you're using this to play musical chords. Instead of <code>function1</code>, <code>function2</code>, and <code>function3</code>, you might have functions like <code>playCmajorChord</code>, <code>playDminorChord</code>, and <code>playEmajorChord</code>. Each of these functions would contain the code necessary to activate the appropriate pins on your Arduino to produce the desired chord.</p>
+<p><strong>Example: Musical Chord Functions</strong></p>
+<p>Here's a simplified example of what these functions might look like:</p>
+<pre><code class="hljs">const int note1Pin = 8;
+const int note2Pin = 9;
+const int note3Pin = 10;
+
+void playCmajorChord() {
+  digitalWrite(note1Pin, HIGH); // Activate C note
+  digitalWrite(note2Pin, HIGH); // Activate E note
+  digitalWrite(note3Pin, HIGH); // Activate G note
+  delay(500); // Play for 500 milliseconds
+  digitalWrite(note1Pin, LOW);
+  digitalWrite(note2Pin, LOW);
+  digitalWrite(note3Pin, LOW);
+}
+
+void playDminorChord() {
+  digitalWrite(note1Pin, HIGH); // Activate D note
+  digitalWrite(note2Pin, HIGH); // Activate F note
+  digitalWrite(note3Pin, HIGH); // Activate A note
+  delay(500); // Play for 500 milliseconds
+  digitalWrite(note1Pin, LOW);
+  digitalWrite(note2Pin, LOW);
+  digitalWrite(note3Pin, LOW);
+}
+
+void playEmajorChord() {
+  digitalWrite(note1Pin, HIGH); // Activate E note
+  digitalWrite(note2Pin, HIGH); // Activate G# note
+  digitalWrite(note3Pin, HIGH); // Activate B note
+  delay(500); // Play for 500 milliseconds
+  digitalWrite(note1Pin, LOW);
+  digitalWrite(note2Pin, LOW);
+  digitalWrite(note3Pin, LOW);
+}
+</code></pre>
+<p><strong>Integrating with the Main Code</strong></p>
+<p>You'd then integrate these functions into your main code, replacing the placeholder functions:</p>
+<pre><code class="hljs">// Function prototypes
+void playCmajorChord();
+void playDminorChord();
+void playEmajorChord();
+
+// Array of function pointers
+void (*functionArray[])() = {playCmajorChord, playDminorChord, playEmajorChord};
+</code></pre>
+<p>Now, each button press will cycle through the different chords, creating a simple musical sequencer!</p>
+<h2>Troubleshooting and Common Mistakes</h2>
+<p>Let's talk about some common pitfalls and how to avoid them.</p>
+<ul>
+<li><strong>Incorrect Function Prototypes:</strong> Make sure your function prototypes match the functions you're defining. The return type and parameters must be the same. If you're working with functions that take arguments, you'll need to adjust the function pointer array accordingly.</li>
+<li><strong>Array Index Out of Bounds:</strong> This is the big one we're trying to avoid! If your counter <code>i</code> goes beyond the valid indices of the array, your program will crash. Double-check your modulo operation and make sure <code>numberOfFunctions</code> is calculated correctly.</li>
+<li><strong>Button Debouncing:</strong> If your button presses are triggering multiple function calls, you might need to implement button debouncing. This involves adding a small delay or using a more sophisticated debouncing technique to filter out spurious button presses.</li>
+<li><strong>Memory Management:</strong> If you're working with a large number of functions or complex data structures, be mindful of memory usage. Arduino boards have limited memory, and you can run into issues if you're not careful.</li>
+</ul>
+<h2>Beyond the Basics: Expanding Your Project</h2>
+<p>Once you've mastered the basics of resetting the counter, you can start exploring more advanced features.</p>
+<ul>
+<li><strong>Adding More Functions:</strong> Easily add more functions to your array and your program will automatically cycle through them.</li>
+<li><strong>Using Different Input Methods:</strong> Instead of a button, you could use a potentiometer, a sensor, or even serial input to control the function selection.</li>
+<li><strong>Creating More Complex Sequences:</strong> You could create multiple arrays of function pointers and switch between them based on different conditions, creating more intricate sequences of actions.</li>
+<li><strong>Implementing a Menu System:</strong> You could use this technique to create a simple menu system for your Arduino project, allowing users to select different options using a button or other input method.</li>
+</ul>
+<h2>Conclusion</h2>
+<p>So there you have it! Resetting a counter <code>i</code> within an array of functions made through pointers is a powerful technique for creating interactive and dynamic Arduino sketches. By using the modulo operator, you can easily cycle through a series of actions, making your code more organized and flexible. Whether you're building a musical instrument, a lighting controller, or any other interactive project, this technique will come in handy. Remember to double-check your code, handle button debouncing, and be mindful of memory usage. Now go forth and create awesome things with your Arduino!</p>
+<p>This approach provides a clean and efficient way to manage function calls, making your Arduino projects more interactive and dynamic. By understanding the core concepts and applying them creatively, you can unlock a whole new level of possibilities in your embedded programming journey. Keep experimenting, keep learning, and most importantly, keep having fun!</p>
+
+                    </div>
+                    <aside class="related-posts">
+                        <div class="ad-sidebar container">
+                            <div class="ad-wrapper">
+    <span>Iklan Related</span>
+</div>
+                        </div>
+                        <h2 class="related-posts-title">Related Posts</h2><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/baking-soda-for-foot-odor">Baking Soda For Foot Odor: Easy Home Remedies</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-06T09:55:22+00:00">Aug 6, 2025</time>
+		                        <span class="view-count">
+									45 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/conquering-latex-spacing-mastering-toc">Conquering LaTeX Spacing: Mastering ToC And Title Formatting</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-08T19:34:46+00:00">Aug 8, 2025</time>
+		                        <span class="view-count">
+									60 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/prove-supremum-trigonometric-sum-15">Prove Supremum Trigonometric Sum = √15/8? A Deep Dive</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-05T21:53:17+00:00">Aug 5, 2025</time>
+		                        <span class="view-count">
+									53 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/erdos-straus-conjecture-uncovering-hidden">Erdős–Straus Conjecture: Uncovering Hidden Patterns In Unit Fractions</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-11T08:08:50+00:00">Aug 11, 2025</time>
+		                        <span class="view-count">
+									69 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/global-ethic-origins-parliament-of">Global Ethic Origins: Parliament Of The World&#39;s Religions</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-03T23:58:31+00:00">Aug 3, 2025</time>
+		                        <span class="view-count">
+									57 views
+		                        </span>
+                            </div>
+                        </article>
+                    </aside>
+                    <aside class="related-posts"></aside>
+                </div>
+            </div>
+        </article>
+        <a href="#" class="back-to-top" id="backToTop" title="Back to top">
+        	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-bar-up" viewBox="0 0 16 16">
+			  <path fill-rule="evenodd" d="M3.646 11.854a.5.5 0 0 0 .708 0L8 8.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708M2.4 5.2c0 .22.18.4.4.4h10.4a.4.4 0 0 0 0-.8H2.8a.4.4 0 0 0-.4.4"/>
+			</svg>
+		</a>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 ANABEL</p>
+        </div>
+    </footer>
+    <script>
+    	(() => {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            const toggleMenu = () => {
+                navMenu.classList.toggle('nav-menu-active');
+                navToggle.classList.toggle('nav-toggle-active');
+            };
+            const backToTopHandler = (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            navToggle.addEventListener('click', toggleMenu);
+            document.getElementById('backToTop').addEventListener('click', backToTopHandler);
+            window.addEventListener('pagehide', () => {
+                navToggle.removeEventListener('click', toggleMenu);
+                document.getElementById('backToTop').removeEventListener('click', backToTopHandler);
+            });
+        })();
+		(() => {
+            window.addEventListener("DOMContentLoaded", (event) => {
+                const ellHljs = document.createElement("script");
+                ellHljs.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js");
+                ellHljs.onload = () => {
+                    hljs.highlightAll();
+                };
+                document.querySelector("body").append(ellHljs);
+                const ellFont = document.createElement("link");
+                ellFont.setAttribute("href", "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css");
+                ellFont.setAttribute("rel", "stylesheet");
+                document.querySelector("head").append(ellFont);
+                window.addEventListener('pagehide', () => {
+                    // ellHljs.remove();
+                    ellFont.remove();
+                });
+
+            });
+        })();
+    </script>
+    
+    
+    
+</body>
+</html>

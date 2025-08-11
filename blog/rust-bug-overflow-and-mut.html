@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Rust Bug: Overflow `&amp;mut Type: Trait` Or ICE With `-Znext-solver`</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Rust Bug: Overflow &mut Type: Trait Or ICE With -Znext-solver...">
+    <link rel="canonical" href="https://catatansoal.github.io/blog/rust-bug-overflow-and-mut">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Rust Bug: Overflow `&amp;mut Type: Trait` Or ICE With `-Znext-solver`">
+	<meta property="og:description" content="Rust Bug: Overflow &mut Type: Trait Or ICE With -Znext-solver...">
+	<meta property="og:url" content="https://catatansoal.github.io/blog/rust-bug-overflow-and-mut">
+	<meta property="og:site_name" content="ANABEL">
+	<meta property="article:published_time" content="2025-08-09T20:32:33+00:00">
+	<meta property="article:author" content="ADMIN">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+    <link rel="preload" fetchpriority="high" as="image" href="https://tse4.mm.bing.net/th?q=Rust%20Compiler%20Bug%3A%20Overflow%20Evaluating%20%60%26mut%20Type%3A%20Trait%60%20or%20ICE%20with%20%60-Znext-solver%60">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style type="text/css">
+    	:root{--primary-color:#3740ff;--text-color:#202124;--background-color:#ffffff;--gray-100:#f8f9fa;--gray-200:#e9ecef}*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;line-height:1.6;color:var(--text-color);background-color:var(--background-color)}.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}.header{background-color:var(--background-color);border-bottom:1px solid var(--gray-200);position:sticky;top:0;z-index:100}.nav{padding:.5rem 0}.nav-container{display:flex;justify-content:space-between;align-items:center;gap:1rem}.nav-left{display:flex;align-items:center;flex-shrink:0}.logo{font-weight:700;color:var(--primary-color)}.blog-tag{margin-left:1rem;padding:.25rem .5rem;background-color:var(--gray-100);border-radius:4px;font-size:.875rem}.nav-search{flex-grow:1;max-width:300px}.search-form{position:relative;width:100%}.search-input{width:100%;padding:.5rem 2.5rem .5rem 1rem;border:1px solid var(--gray-200);border-radius:24px;font-size:.875rem;transition:all 0.2s}.search-input:focus{outline:none;border-color:var(--primary-color);box-shadow:0 0 0 2px rgb(55 64 255 / .1)}.search-button{position:absolute;right:.5rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#5f6368;cursor:pointer;padding:.25rem;display:flex;align-items:center;justify-content:center}.search-button:hover{color:var(--primary-color)}.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:.5rem}.hamburger{display:block;position:relative;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before,.hamburger::after{content:'';position:absolute;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before{top:-6px}.hamburger::after{bottom:-6px}.nav-toggle-active .hamburger{background:#fff0}.nav-toggle-active .hamburger::before{transform:rotate(45deg);top:0}.nav-toggle-active .hamburger::after{transform:rotate(-45deg);bottom:0}.nav-list{display:flex;list-style:none;gap:2rem}.nav-link{color:var(--text-color);text-decoration:none;font-size:.9rem;transition:color 0.2s}.nav-link:hover{color:var(--primary-color)}.article-header{padding:2rem 0;background-color:var(--gray-100)}.article-layout{display:grid;grid-template-columns:1fr 350px;gap:3rem;padding:1rem 0;align-items: start}h1,h2,h3,h4,h5,h6{font-family:"Crimson Text","Times New Roman",Times,serif}h1{font-size:2.5rem;line-height:1.2;margin-bottom:1rem}.meta{color:#5f6368;font-size:.875rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}.view-count{display:inline-flex;align-items:center;gap:.25rem}.view-count svg{color:#5f6368}.content{min-width:0;border-bottom:1px solid #dddddd5e;margin-top:1rem;white-space:pre-line !important;overflow-wrap:break-word;overflow-x:auto;word-break:break-word}.lead{font-size:1.25rem;color:#5f6368;margin-bottom:2rem}h2,h3,h4,h5,h6{font-size:1.75rem;margin:1rem 0 1rem}p,pre,ol,ul>li{margin-bottom:1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;font-size:1.3rem;text-align: justify;}p>code{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px}hr{margin:1rem 0 1rem 0}.code-example{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;margin:1.5rem 0;overflow-x:auto}code{font-family:'Roboto Mono',monospace;font-size:.875rem}ul{margin:.2rem 0;padding-left:1.5rem}.related-posts{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;position:sticky;top:5rem}.related-posts-title,.newpost-posts-list{font-size:1.75rem;margin:0 0 1rem}.related-posts-list{display:flex;flex-direction:column;gap:.5rem}.related-post,.newpost-post{border-bottom:1px solid #ddd;padding-bottom:10px;margin-bottom:10px}.related-post:last-child,.newpost-post:last-child{padding-bottom:0;border-bottom:none}.related-post-title,.newpost-post-title{font-size:1.2rem;margin:0 0 .1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;}.related-post-title a,.newpost-post-title a{color:var(--text-color);text-decoration:none;transition:color 0.2s}.related-post-title a:hover,.newpost-post-title a:hover{color:var(--primary-color)}.related-post time{font-size:.875rem;color:#5f6368}.footer{background-color:var(--gray-100);padding:2rem 0;margin-top:4rem;color:#5f6368;font-size:.875rem}.nav-menu>ul>li{margin-bottom:0}@media (max-width:1024px){.container{max-width:800px}.article-layout{grid-template-columns:1fr;gap:2rem}.related-posts{position:static}}@media (max-width:768px){.nav-container{flex-wrap:wrap}.nav-search{order:3;max-width:none;width:100%;margin-top:.1rem}.nav-toggle{display:block}.nav-menu{display:none;position:absolute;top:100%;left:0;right:0;background:var(--background-color);padding:1rem 0;border-bottom:1px solid var(--gray-200)}.nav-menu-active{display:block}.nav-list{flex-direction:column;gap:.1rem;padding:0 1.5rem}.nav-link{display:block;padding:.2rem 0}h1{font-size:2rem}.article-header{padding:2rem 0}.content{padding:.1rem 0}}table{width:100%;border-collapse:collapse;margin:20px 0;font-family:'Arial',sans-serif}th,td{padding:12px 15px;text-align:left;border:1px solid #ddd}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9}tr:nth-child(even) td{background-color:#f2f2f2}@media screen and (max-width:768px){table{border:0;display:block;overflow-x:auto;white-space:nowrap}th,td{padding:10px;text-align:right}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9;border-bottom:1px solid #ddd}tr:nth-child(even) td{background-color:#f2f2f2}}a{text-decoration:none;color:#540707}.katex-html{padding: .2rem;color: #000;font-weight: 700;font-size: 1.3rem;overflow-wrap: break-word;max-width: 100%;white-space: normal !important}.category{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin:1rem 0 1rem 0}.tag{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px;font-family:"Newsreader",serif}.tag>a{text-decoration:none;color:#000}img{margin:auto;display:block;max-width:100%;height:auto;margin-bottom:1rem}.katex{white-space: pre-line !important;display: inline-block;max-width: 100%;overflow-x: auto;overflow-y: hidden;scrollbar-width: thin;overflow-wrap: break-word;word-break: break-word;vertical-align: -7px}.content > p {overflow-wrap: break-word;word-break: break-word}
+    </style>
+    <style type="text/css">
+    	pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}
+		.hljs{color:#c9d1d9;background:#0d1117}.hljs-doctag,.hljs-keyword,.hljs-meta .hljs-keyword,.hljs-template-tag,.hljs-template-variable,.hljs-type,.hljs-variable.language_{color:#ff7b72}.hljs-title,.hljs-title.class_,.hljs-title.class_.inherited__,.hljs-title.function_{color:#d2a8ff}.hljs-attr,.hljs-attribute,.hljs-literal,.hljs-meta,.hljs-number,.hljs-operator,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-variable{color:#79c0ff}.hljs-meta .hljs-string,.hljs-regexp,.hljs-string{color:#a5d6ff}.hljs-built_in,.hljs-symbol{color:#ffa657}.hljs-code,.hljs-comment,.hljs-formula{color:#8b949e}.hljs-name,.hljs-quote,.hljs-selector-pseudo,.hljs-selector-tag{color:#7ee787}.hljs-subst{color:#c9d1d9}.hljs-section{color:#1f6feb;font-weight:700}.hljs-bullet{color:#f2cc60}.hljs-emphasis{color:#c9d1d9;font-style:italic}.hljs-strong{color:#c9d1d9;font-weight:700}.hljs-addition{color:#aff5b4;background-color:#033a16}.hljs-deletion{color:#ffdcd7;background-color:#67060c}
+    	pre{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;font-weight:400;word-break:break-word;word-wrap:break-word;box-sizing:inherit;border-radius:4px;overflow-x:auto;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}code{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;word-wrap:break-word;word-break:break-word;font-style:normal;line-height:20px;letter-spacing:-.003em;box-sizing:inherit;font-weight:400;font-size:75%;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}
+    </style>
+    <style type="text/css">
+    	.back-to-top{position:fixed;bottom:20px;right:20px;background-color:#a73f3f;color:#fff;padding:8px 10px;border-radius:50%;box-shadow:0 4px 6px rgb(0 0 0 / .2);font-size:10px;font-weight:700;text-decoration:none;text-align:center;transition:opacity 0.3s ease,visibility 0.3s ease;z-index:99999;opacity:1;visibility:visible}.back-to-top:hover{background-color:#0056b3}
+    </style>
+    <style type="text/css">
+        .ad-header {margin: 1rem auto 1rem;background-color: #fdfdfd;text-align: center;display: block;}.ad-header .ad-wrapper {min-height: 90px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #555;font-weight: 500;padding: 3rem;border: 1px dashed #ccc;border-radius: 6px;}@media (max-width: 768px) {.ad-header {padding: 0.75rem;}}.ad-sidebar {margin: 0 0 1rem;background-color: #fefefe;text-align: center;padding: 0px;width: 100%;max-width: 100%;display: block;}.ad-sidebar .ad-wrapper {min-height: 250px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #444;font-weight: 500;border: 1px dashed #aaa;border-radius: 6px;padding: 0rem;}@media (max-width: 1024px) {.ad-sidebar {padding: 0.75rem;}}
+    </style>
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://catatansoal.github.io/blog/rust-bug-overflow-and-mut"
+          },
+          "headline": "Rust Bug: Overflow `&amp;mut Type: Trait` Or ICE With `-Znext-solver`",
+          "description": "Rust Bug: Overflow &mut Type: Trait Or ICE With -Znext-solver...",
+          "image": [
+            "https://tse4.mm.bing.net/th?q=Rust%20Compiler%20Bug%3A%20Overflow%20Evaluating%20%60%26mut%20Type%3A%20Trait%60%20or%20ICE%20with%20%60-Znext-solver%60"
+          ],
+          "author": {
+            "@type": "Person",
+            "name": "ADMIN",
+            "jobTitle": "Editor web"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "ANABEL",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://tse4.mm.bing.net/th?q=ANABEL%20WEB"
+            }
+          },
+          "datePublished": "2025-08-09T20:32:33+00:00",
+          "dateModified": "2025-08-09T20:32:33+00:00"
+        }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="container nav-container">
+                <div class="nav-left">
+                    <span class="logo">ANABEL</span>
+                    <span class="blog-tag">Article</span>
+                </div>
+                <div class="nav-search">
+                    <form class="search-form" role="search">
+                        <input 
+                            type="search" 
+                            class="search-input"
+                            placeholder="Search articles..."
+                            aria-label="Search articles"
+                        >
+                        <button type="submit" class="search-button" aria-label="Submit search">🔎</button>
+                    </form>
+                </div>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+                <div class="nav-menu">
+                    <ul class="nav-list">
+                    	<li><a href="/" class="nav-link">HOME</a></li>
+                        <li><a href="/pages/About" class="nav-link">About</a></li>
+                        <li><a href="/pages/Contact" class="nav-link">Contact</a></li>
+                        <li><a href="/pages/Disclaimer" class="nav-link">Disclaimer</a></li>
+                        <li><a href="/pages/Privacy" class="nav-link">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="main">
+        <article class="article">
+            <header class="article-header">
+                <div class="container">
+                    <h1>Rust Bug: Overflow `&amp;mut Type: Trait` Or ICE With `-Znext-solver`</h1>
+                    <div class="meta">
+                        <time datetime="2025-08-09T20:32:33+00:00">Aug 9, 2025</time>
+                        <span class="author">by ADMIN</span>
+                        <span class="view-count">
+                            <span id="viewCount">66</span> views
+                        </span>
+                    </div>
+                </div>
+            </header>
+            <div class="ad-header container">
+                <div class="ad-wrapper">
+    Iklan Headers
+</div>
+            </div>
+            <div class="container">
+                <div class="article-layout">
+                    <div class="content">
+                        <code></code><code></code><img src="https://tse4.mm.bing.net/th?q=Rust%20Compiler%20Bug%3A%20Overflow%20Evaluating%20%60%26mut%20Type%3A%20Trait%60%20or%20ICE%20with%20%60-Znext-solver%60" title="Rust Compiler Bug: Overflow Evaluating `&amp;mut Type: Trait` or ICE with `-Znext-solver`" width="300" height="200"/><h2>Introduction</h2>
+<p>Hey guys! Today, we're diving deep into a fascinating and somewhat frustrating bug in the Rust compiler. This issue involves an <strong>overflow</strong> when the compiler tries to evaluate the requirement <code>&amp;mut Type: Trait</code>, and it can even lead to an Internal Compiler Error (<strong>ICE</strong>) when using the <code>-Znext-solver</code> flag. This means that the compiler, the tool we rely on to turn our code into executable programs, essentially throws its hands up in the air and gives up. Understanding this bug is crucial for Rust developers, especially those working on complex serialization tasks or library development.</p>
+<p>In this comprehensive article, we'll break down the bug, explore the code that triggers it, discuss the implications, and hopefully, shed some light on how to avoid it. So, buckle up, and let's get started!</p>
+<h2>The Bug: A Deep Dive</h2>
+<p>The core issue arises when the Rust compiler gets stuck in an infinite recursion loop while trying to figure out if a certain type (<code>&amp;mut Type</code>) implements a trait. In this specific case, the trait is <code>std::fmt::Write</code>, which is fundamental for writing formatted output in Rust. The problem is exacerbated when dealing with nested mutable references, like <code>&amp;mut &amp;mut &amp;mut ...</code>, which can quickly lead to a stack overflow during compilation. This <strong>overflow</strong> is the first sign that something's gone wrong. The compiler will often suggest increasing the recursion limit, but that's just a band-aid on a much deeper problem.</p>
+<p>When the <code>-Znext-solver</code> flag is enabled, things can get even worse. This flag tells the Rust compiler to use a new constraint solver, which is designed to be more powerful and efficient. However, in this case, it triggers an <strong>ICE</strong>, a situation where the compiler itself crashes. ICEs are serious because they indicate a flaw in the compiler's logic, not necessarily in the user's code. This makes debugging significantly harder, as the error message might not directly point to the root cause in your program.</p>
+<p>To put it simply, this bug highlights a scenario where Rust's powerful type system, specifically its handling of traits and mutable references, hits a snag. It's a reminder that even the most robust systems can have edge cases that lead to unexpected behavior.</p>
+<h2>Code That Triggers the Bug</h2>
+<p>To truly understand this bug, let's look at the code snippet that triggers it. This code, extracted from a minimized example based on the <code>quick-xml</code> crate's serde serializer, demonstrates the issue beautifully.</p>
+<pre><code class="hljs">struct ElementSerializer&lt;W: Write&gt; {
+    writer: W, // &lt;&lt;&lt; NOT ref
+}
+
+impl&lt;W: Write&gt; serde::ser::SerializeMap for ElementSerializer&lt;W&gt; {
+    type Ok = ();
+    type Error = SeError;
+
+    fn serialize_value&lt;T&gt;(&amp;mut self, value: &amp;T) -&gt; Result&lt;(), Self::Error&gt;
+    where
+        T: ?Sized + Serialize,
+    {
+        value.serialize(ElementSerializer {
+            writer: &amp;mut self.writer, // &lt;&lt;&lt; taking ref
+        })
+    }
+    // ... other methods
+}
+
+fn main() {
+    let mut state = ElementSerializer {
+        writer: String::new(),
+    };
+
+    // All lines are important; the error doesn&#39;t happen if you use another serialization approach
+    let ser = serde::__private::ser::FlatMapSerializer(&amp;mut state); // Using FlatMapSerializer is important
+    let state = ser.serialize_struct_variant(&quot;Enum&quot;, 0u32, &quot;Variant&quot;, 0).unwrap();
+    state.end().unwrap(); // If you remove this line, the error doesn&#39;t happen
+}
+</code></pre>
+<p>Let's break this down:</p>
+<ol>
+<li><strong><code>ElementSerializer&lt;W: Write&gt;</code>:</strong> We define a struct <code>ElementSerializer</code> that takes a generic writer <code>W</code>, which must implement the <code>std::fmt::Write</code> trait. This means <code>W</code> can be anything that can write formatted output, like a <code>String</code> or a file.</li>
+<li><strong><code>serde::ser::SerializeMap</code> Implementation:</strong> The <code>ElementSerializer</code> implements <code>serde::ser::SerializeMap</code>, a trait from the popular <code>serde</code> crate that allows serializing maps. The <code>serialize_value</code> method is where things get interesting.</li>
+<li><strong><code>serialize_value</code>:</strong> Inside <code>serialize_value</code>, we recursively create a new <code>ElementSerializer</code>. The crucial part is that we're passing <code>&amp;mut self.writer</code> as the writer for the new serializer. This is where we introduce the nested mutable reference.</li>
+<li><strong><code>main</code> Function:</strong> In <code>main</code>, we create an instance of <code>ElementSerializer</code> with a <code>String</code> as the writer. We then use <code>serde::__private::ser::FlatMapSerializer</code>, which seems to be a key ingredient in triggering the bug. The call to <code>serialize_struct_variant</code> and <code>state.end()</code> are also essential; removing them makes the error disappear.</li>
+</ol>
+<p>The heart of the problem lies in the recursive creation of <code>ElementSerializer</code> with a mutable reference to the writer. This nesting, combined with the specific serializer being used, pushes the compiler into a corner where it can't figure out the trait bounds, leading to the overflow or ICE.</p>
+<h3>Why Does This Happen?</h3>
+<p>The compiler struggles because it's trying to prove that <code>&amp;mut W</code> implements <code>Write</code>. However, within the <code>serialize_value</code> function, it recursively encounters <code>&amp;mut &amp;mut W</code>, <code>&amp;mut &amp;mut &amp;mut W</code>, and so on. The compiler is essentially trying to solve an infinite series of trait implementations, resulting in the <strong>overflow</strong>.</p>
+<h3>The Importance of <code>FlatMapSerializer</code></h3>
+<p>The use of <code>serde::__private::ser::FlatMapSerializer</code> is also critical. This serializer likely has specific internal logic that exacerbates the issue, possibly by triggering more complex trait resolution scenarios than other serializers. Without it, the bug doesn't manifest, highlighting the subtle interplay between different parts of the code.</p>
+<h3>The Role of <code>state.end()</code></h3>
+<p>The <code>state.end()</code> call is another trigger. It seems this method forces the compiler to fully evaluate the types and trait implementations, which then uncovers the <strong>overflow</strong> issue. If you comment out this line, the compilation succeeds, indicating that the problem is triggered during the cleanup or finalization phase of serialization.</p>
+<h2>Implications and Workarounds</h2>
+<p>This bug has significant implications, especially for library developers who aim to provide generic and flexible serialization solutions. The original reporter of this bug encountered it while working on the <code>quick-xml</code> crate, a popular Rust library for working with XML data. The need to use <code>&amp;mut W</code> instead of <code>W</code> as a workaround highlights the challenges this bug poses.</p>
+<h3>Workarounds</h3>
+<ol>
+<li><strong>Using <code>&amp;mut W</code>:</strong> The most direct workaround is to change the <code>writer</code> field in <code>ElementSerializer</code> to <code>writer: &amp;mut W</code> and modify the code accordingly. This avoids the nested mutable references and prevents the <strong>overflow</strong>.</li>
+<li><strong>Adjusting the Code Structure:</strong> In some cases, restructuring the code to avoid the recursive serializer creation can also help. This might involve using a different serialization strategy or managing the writer state in a different way.</li>
+<li><strong>Avoiding <code>FlatMapSerializer</code>:</strong> If possible, using an alternative serializer can sidestep the issue. However, this might not always be feasible, especially if <code>FlatMapSerializer</code> is required for specific serialization scenarios.</li>
+</ol>
+<h3>The Broader Impact</h3>
+<p>This bug underscores the importance of rigorous testing and careful design when working with advanced Rust features like generics, traits, and mutable references. It also highlights the challenges in ensuring that the Rust compiler, despite its sophistication, can handle all possible code patterns without running into issues like <strong>overflows</strong> or ICEs.</p>
+<h2>The Fix and Future Directions</h2>
+<p>As with any compiler bug, the ultimate solution lies in fixing the Rust compiler itself. The Rust team is actively working on improving the compiler's constraint solving and type inference capabilities. The <code>-Znext-solver</code> flag, while triggering the ICE in this case, represents an ongoing effort to make the compiler more robust and efficient.</p>
+<h3>Monitoring the Issue</h3>
+<p>If you're affected by this bug, it's a good idea to follow the relevant issue on the Rust GitHub repository. This will allow you to stay updated on the progress of the fix and any potential workarounds or recommendations from the Rust team.</p>
+<h3>Contributing to the Solution</h3>
+<p>If you're feeling adventurous, you could even try to contribute to the fix yourself! The Rust compiler is an open-source project, and contributions from the community are always welcome. However, fixing a bug like this typically requires a deep understanding of the compiler's internals.</p>
+<h2>Conclusion</h2>
+<p>The <strong>overflow</strong> evaluating <code>&amp;mut Type: Trait</code> bug, and its more severe cousin, the ICE with <code>-Znext-solver</code>, is a fascinating example of how complex interactions in a type system can lead to unexpected behavior. While it can be frustrating to encounter, understanding the root cause and available workarounds can help you navigate the issue.</p>
+<p>This bug serves as a reminder that even in a language as carefully designed as Rust, there are always edge cases to consider. By staying informed and sharing our experiences, we can help make Rust an even more robust and reliable language for everyone.</p>
+<p>So, guys, keep coding, keep exploring, and don't be afraid to dive deep into the intricacies of Rust! You never know what you might discover.</p>
+<h2>Appendix: The Full ICE Backtrace</h2>
+<p>For those interested in the gory details, here's the full backtrace of the ICE when using <code>RUSTFLAGS=&quot;-Znext-solver&quot; cargo +nightly build</code>:</p>
+<pre><code class="hljs">thread &#39;rustc&#39; panicked at compiler\rustc_middle\src\ty\normalize_erasing_regions.rs:171:13:
+Box&lt;dyn Any&gt;
+stack backtrace:
+   0:     0x7ffbae5ce13e - std::backtrace_rs::backtrace::win64::trace
+                               at /rustc/de3efa79f95852c7427587f1d535bfea7c0d6779/library\std\src\..\..\backtrace\src\backtrace\win64.rs:85
+   1:     0x7ffbae5ce13e - std::backtrace_rs::backtrace::trace_unsynchronized
+                               at /rustc/de3efa79f95852c7427587f1d535bfea7c0d6779/library\std\src\..\..\backtrace\src\backtrace\mod.rs:66
+   2:     0x7ffbae5ce13e - std::backtrace::Backtrace::create
+                               at /rustc/de3efa79f95852c7427587f1d535bfea7c0d6779/library\std\src\backtrace.rs:331
+   3:     0x7ffbae5ce07a - std::backtrace::Backtrace::force_capture
+                               at /rustc/de3efa79f95852c7427587f1d535bfea7c0d6779/library\std\src\backtrace.rs:312
+   4:     0x7ffbafdbdbf1 - core[308fd5da220cbda0]::slice::sort::unstable::heapsort::heapsort::&lt;((rustc_lint_defs[7735fd7ef52282c8]::Level, &amp;str), usize), &lt;((rustc_lint_defs[7735fd7ef52282c8]::Level, &amp;str), usize) as core[308fd5da220cbda0]::cmp::PartialOrd&gt;::lt&gt;
+   5:     0x7ffbae5ed1da - std::panicking::panic_with_hook
+                               at /rustc/de3efa79f95852c7427587f1d535bfea7c0d6779/library\std\src\panicking.rs:842
+   6:     0x7ffbb162d4b3 - RINvNtNtNtNtCs4auBuzsMBK6_4core5slice4sort6stable9quicksort9quicksortTjRNtNtCsfxg4X3VBQGy_12rustc_errors7snippet10AnnotationENCINvMNtCs3R19SsYomuP_5alloc5sliceSB15_11sort_by_keyTINtNtBa_3cmp7ReversejEbENCNCNvMs4_NtB1c_7emitterNtB3o_12HumanEmitter18render_s
+   7:     0x7ffbb1622269 - std[b028560bea50fc7d]::sys::backtrace::__rust_end_short_backtrace::&lt;std[b028560bea50fc7d]::panicking::begin_panic&lt;rustc_errors[b4f66901acd1a2e8]::ExplicitBug&gt;::{closure#0}, !&gt;
+   8:     0x7ffbb1622248 - std[b028560bea50fc7d]::panicking::begin_panic::&lt;rustc_errors[b4f66901acd1a2e8]::ExplicitBug&gt;
+   9:     0x7ffbb1639d65 - &lt;rustc_errors[b4f66901acd1a2e8]::diagnostic::BugAbort as rustc_errors[b4f66901acd1a2e8]::diagnostic::EmissionGuarantee&gt;::emit_producing_guarantee
+  10:     0x7ffbb15870b9 - rustc_middle[4d2ab591be2d6cb7]::util::bug::span_bug_fmt::&lt;rustc_span[13b5939d1f839a47]::span_encoding::Span&gt;
+  11:     0x7ffbb155d32d - &lt;rustc_middle[4d2ab591be2d6cb7]::ty::consts::Const&gt;::walk
+  12:     0x7ffbb155d0f6 - &lt;rustc_middle[4d2ab591be2d6cb7]::ty::consts::Const&gt;::walk
+  13:     0x7ffbb1586fb2 - rustc_middle[4d2ab591be2d6cb7]::util::bug::bug_fmt
+  14:     0x7ffbafc182b9 - &lt;rustc_middle[4d2ab591be2d6cb7]::ty::normalize_erasing_regions::NormalizeAfterErasingRegionsFolder as rustc_type_ir[896ecbb9bf80b18d]::fold::TypeFolder&lt;rustc_middle[4d2ab591be2d6cb7]::ty::context::TyCtxt&gt;&gt;::fold_ty
+  15:     0x7ffbaea78258 - rustc_monomorphize[8799e712d668ce6e]::mono_checks::check_mono_item
+  16:     0x7ffbaf553ea3 - rustc_query_impl[dd24cba0b59fe983]::plumbing::query_key_hash_verify_all
+  17:     0x7ffbaf46aa35 - RINvNtNtCs7JHiGDUvQrx_18rustc_query_system5query8plumbing17try_execute_queryINtCsiZ8RikB5PkR_16rustc_query_impl13DynamicConfigINtNtB4_6caches12DefaultCacheNtNtNtCs6CKWPQDzIa1_12rustc_middle2ty8instance8InstanceINtNtNtB2z_5query5erase6ErasedAhj0_EEKb0_KB3Y_
+  18:     0x7ffbaf565ec6 - rustc_query_impl[dd24cba0b59fe983]::plumbing::query_key_hash_verify_all
+  19:     0x7ffbaea71ada - rustc_monomorphize[8799e712d668ce6e]::collector::items_of_instance
+  20:     0x7ffbaf554687 - rustc_query_impl[dd24cba0b59fe983]::plumbing::query_key_hash_verify_all
+  21:     0x7ffbaf484e1a - RINvNtNtCs7JHiGDUvQrx_18rustc_query_system5query8plumbing17try_execute_queryINtCsiZ8RikB5PkR_16rustc_query_impl13DynamicConfigINtNtB4_6caches12DefaultCacheTNtNtNtCs6CKWPQDzIa1_12rustc_middle2ty8instance8InstanceNtNtNtB2A_3mir4mono14CollectionModeEINtNtNtB2
+  22:     0x7ffbaf566135 - rustc_query_impl[dd24cba0b59fe983]::plumbing::query_key_hash_verify_all
+  23:     0x7ffbaea915a9 - rustc_monomorphize[8799e712d668ce6e]::partitioning::collect_and_partition_mono_items
+(repeated many times)
+ 395:     0x7ffbaea938c5 - rustc_monomorphize[8799e712d668ce6e]::partitioning::collect_and_partition_mono_items
+ 396:     0x7ffbade5738f - RINvNtNtNtNtCs4auBuzsMBK6_4core5slice4sort6stable9quicksort9quicksortNtNtNtCs6CKWPQDzIa1_12rustc_middle3mir4mono11CodegenUnitNCINvMNtCs3R19SsYomuP_5alloc5sliceSB15_7sort_byNCNvNtCsbDNIxMdcH4o_18rustc_monomorphize12partitioning19merge_codegen_unitss4_0E0EB2
+ 397:     0x7ffbaea841db - rustc_monomorphize[8799e712d668ce6e]::partitioning::collect_and_partition_mono_items
+ 398:     0x7ffbae187757 - &lt;alloc[2ce738592d37a551]::sync::Arc&lt;rustc_session[e1a36a7c714f07f1]::config::OutputFilenames&gt;&gt;::drop_slow
+ 399:     0x7ffbae16868d - &lt;alloc[2ce738592d37a551]::sync::Arc&lt;rustc_session[e1a36a7c714f07f1]::config::OutputFilenames&gt;&gt;::drop_slow
+ 400:     0x7ffbae0861c1 - RINvNtNtCs7JHiGDUvQrx_18rustc_query_system5query8plumbing17try_execute_queryINtCsiZ8RikB5PkR_16rustc_query_impl13DynamicConfigINtNtB4_6caches11SingleCacheINtNtNtCs6CKWPQDzIa1_12rustc_middle5query5erase6ErasedAhj28_EEKb0_KB3t_KB3t_ENtNtB1f_8plumbing9QueryCt
+ 401:     0x7ffbb0dfeac0 - &lt;rustc_span[13b5939d1f839a47]::def_id::DefIndex as rustc_query_impl[dd24cba0b59fe983]::profiling_support::SpecIntoSelfProfilingString&gt;::spec_to_self_profile_string
+ 402:     0x7ffbaaa881ac - std::vector&lt;std::basic_string&lt;char,std::char_traits&lt;char&gt;,std::allocator&lt;char&gt; &gt;,std::allocator&lt;std::basic_string&lt;char,std::char_traits&lt;char&gt;,std::allocator&lt;char&gt; &gt; &gt; &gt;::_Construct_n&lt;std::basic_string&lt;char,std::char_traits&lt;char&gt;,std::allocator&lt;char&gt; &gt; * __
+ 403:     0x7ffbaaaed8b3 - &lt;rustc_codegen_llvm[f861d3fc921da346]::LlvmCodegenBackend as rustc_codegen_ssa[77247dce9a7752a6]::traits::backend::CodegenBackend&gt;::codegen_crate
+ 404:     0x7ffbaaa70a17 - &lt;rustc_interface[6fd35e3621401be0]::queries::Linker&gt;::codegen_and_build_linker
+ 405:     0x7ffbaa9f7ea1 - std[b028560bea50fc7d]::sys::backtrace::__rust_begin_short_backtrace::&lt;&lt;std[b028560bea50fc7d]::thread::Builder&gt;::spawn_unchecked_&lt;ctrlc[51cec7ca00d482d9]::set_handler_inner&lt;rustc_driver_impl[4363688e7eded069]::install_ctrlc_handler::{closure#0}&gt;::{closure#0}, ()&gt;::{closure#1}::{closure#0}::{closure#0}, ()&gt;
+ 406:     0x7ffbaa9f253d - std[b028560bea50fc7d]::sys::backtrace::__rust_begin_short_backtrace::&lt;&lt;std[b028560bea50fc7d]::thread::Builder&gt;::spawn_unchecked_&lt;ctrlc[51cec7ca00d482d9]::set_handler_inner&lt;rustc_driver_impl[4363688e7eded069]::install_ctrlc_handler::{closure#0}&gt;::{closure#0}, ()&gt;::{closure#1}::{closure#0}::{closure#0}, ()&gt;
+ 407:     0x7ffbaa9ee70f - RINvNtNtCsf7GjOwGFsjp_3std3sys9backtrace28___rust_begin_short_backtraceNCNCINvNtCs9Bfd6sTAGXs_15rustc_interface4util26run_in_thread_with_globalsNCINvB1e_31run_in_thread_pool_with_globalsNCINvNtB1g_9interface12run_compileruNCNvCs5MHNsti0jgX_17rustc_driver_i
+ 408:     0x7ffbaa9fc0fd - std[b028560bea50fc7d]::sys::backtrace::__rust_begin_short_backtrace::&lt;&lt;std[b028560bea50fc7d]::thread::Builder&gt;::spawn_unchecked_&lt;ctrlc[51cec7ca00d482d9]::set_handler_inner&lt;rustc_driver_impl[4363688e7eded069]::install_ctrlc_handler::{closure#0}&gt;::{closure#0}, ()&gt;::{closure#1}::{closure#0}::{closure#0}, ()&gt;
+ 409:     0x7ffbae5f0d2d - alloc::boxed::impl$28::call_once
+                               at /rustc/de3efa79f95852c7427587f1d535bfea7c0d6779/library\alloc\src\boxed.rs:1971
+ 410:     0x7ffbae5f0d2d - alloc::boxed::impl$28::call_once
+                               at /rustc/de3efa79f95852c7427587f1d535bfea7c0d6779/library\alloc\src\boxed.rs:1971
+ 411:     0x7ffbae5f0d2d - std::sys::pal::windows::thread::impl$0::new::thread_start
+                               at /rustc/de3efa79f95852c7427587f1d535bfea7c0d6779/library\std\src\sys\pal\windows\thread.rs:60
+ 412:     0x7ffc1ace7374 - BaseThreadInitThunk
+ 413:     0x7ffc1ccfcc91 - RtlUserThreadStart
+</code></pre>
+<p>This backtrace provides a detailed view of the call stack leading to the panic, which can be helpful for compiler developers in pinpointing the exact location of the bug.</p>
+
+                    </div>
+                    <aside class="related-posts">
+                        <div class="ad-sidebar container">
+                            <div class="ad-wrapper">
+    <span>Iklan Related</span>
+</div>
+                        </div>
+                        <h2 class="related-posts-title">Related Posts</h2><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/classroom-interventions-for-eating-disorders">Classroom Interventions For Eating Disorders: A Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-06T00:30:49+00:00">Aug 6, 2025</time>
+		                        <span class="view-count">
+									53 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/pillow-image-format-dilemma-a">Pillow Image Format Dilemma A Plugin-Based Future</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-19T19:37:54+00:00">Jul 19, 2025</time>
+		                        <span class="view-count">
+									49 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/disable-enum-bitmask-autodetect-code">Disable Enum Bitmask Autodetect: Code Clarity Matters</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-08T10:22:12+00:00">Aug 8, 2025</time>
+		                        <span class="view-count">
+									53 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/matching-characteristics-to-salon-spa">Matching Characteristics To Salon, Spa, And Barbershop Types</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-17T09:25:06+00:00">Jul 17, 2025</time>
+		                        <span class="view-count">
+									60 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/simplify-2y-8-10-a">Simplify -(2y-8)+10: A Step-by-Step Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-03T17:14:10+00:00">Aug 3, 2025</time>
+		                        <span class="view-count">
+									41 views
+		                        </span>
+                            </div>
+                        </article>
+                    </aside>
+                    <aside class="related-posts"></aside>
+                </div>
+            </div>
+        </article>
+        <a href="#" class="back-to-top" id="backToTop" title="Back to top">
+        	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-bar-up" viewBox="0 0 16 16">
+			  <path fill-rule="evenodd" d="M3.646 11.854a.5.5 0 0 0 .708 0L8 8.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708M2.4 5.2c0 .22.18.4.4.4h10.4a.4.4 0 0 0 0-.8H2.8a.4.4 0 0 0-.4.4"/>
+			</svg>
+		</a>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 ANABEL</p>
+        </div>
+    </footer>
+    <script>
+    	(() => {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            const toggleMenu = () => {
+                navMenu.classList.toggle('nav-menu-active');
+                navToggle.classList.toggle('nav-toggle-active');
+            };
+            const backToTopHandler = (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            navToggle.addEventListener('click', toggleMenu);
+            document.getElementById('backToTop').addEventListener('click', backToTopHandler);
+            window.addEventListener('pagehide', () => {
+                navToggle.removeEventListener('click', toggleMenu);
+                document.getElementById('backToTop').removeEventListener('click', backToTopHandler);
+            });
+        })();
+		(() => {
+            window.addEventListener("DOMContentLoaded", (event) => {
+                const ellHljs = document.createElement("script");
+                ellHljs.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js");
+                ellHljs.onload = () => {
+                    hljs.highlightAll();
+                };
+                document.querySelector("body").append(ellHljs);
+                const ellFont = document.createElement("link");
+                ellFont.setAttribute("href", "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css");
+                ellFont.setAttribute("rel", "stylesheet");
+                document.querySelector("head").append(ellFont);
+                window.addEventListener('pagehide', () => {
+                    // ellHljs.remove();
+                    ellFont.remove();
+                });
+
+            });
+        })();
+    </script>
+    
+    
+    
+</body>
+</html>

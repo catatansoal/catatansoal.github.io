@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Fix: Shell Script Sending Only 1 Of 2 Files Via Expect</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Fix: Shell Script Sending Only 1 Of 2 Files Via Expect...">
+    <link rel="canonical" href="https://catatansoal.github.io/blog/fix-shell-script-sending-only">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Fix: Shell Script Sending Only 1 Of 2 Files Via Expect">
+	<meta property="og:description" content="Fix: Shell Script Sending Only 1 Of 2 Files Via Expect...">
+	<meta property="og:url" content="https://catatansoal.github.io/blog/fix-shell-script-sending-only">
+	<meta property="og:site_name" content="Question Notes">
+	<meta property="article:published_time" content="2025-08-11T18:41:09+00:00">
+	<meta property="article:author" content="ADMIN">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+    <link rel="preload" fetchpriority="high" as="image" href="https://tse4.mm.bing.net/th?q=Shell%20Script%20Troubleshooting%3A%20Fix%20for%20Sending%20Only%201%20of%202%20Files%20via%20Expect%20Script">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style type="text/css">
+    	:root{--primary-color:#3740ff;--text-color:#202124;--background-color:#ffffff;--gray-100:#f8f9fa;--gray-200:#e9ecef}*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;line-height:1.6;color:var(--text-color);background-color:var(--background-color)}.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}.header{background-color:var(--background-color);border-bottom:1px solid var(--gray-200);position:sticky;top:0;z-index:100}.nav{padding:.5rem 0}.nav-container{display:flex;justify-content:space-between;align-items:center;gap:1rem}.nav-left{display:flex;align-items:center;flex-shrink:0}.logo{font-weight:700;color:var(--primary-color)}.blog-tag{margin-left:1rem;padding:.25rem .5rem;background-color:var(--gray-100);border-radius:4px;font-size:.875rem}.nav-search{flex-grow:1;max-width:300px}.search-form{position:relative;width:100%}.search-input{width:100%;padding:.5rem 2.5rem .5rem 1rem;border:1px solid var(--gray-200);border-radius:24px;font-size:.875rem;transition:all 0.2s}.search-input:focus{outline:none;border-color:var(--primary-color);box-shadow:0 0 0 2px rgb(55 64 255 / .1)}.search-button{position:absolute;right:.5rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#5f6368;cursor:pointer;padding:.25rem;display:flex;align-items:center;justify-content:center}.search-button:hover{color:var(--primary-color)}.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:.5rem}.hamburger{display:block;position:relative;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before,.hamburger::after{content:'';position:absolute;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before{top:-6px}.hamburger::after{bottom:-6px}.nav-toggle-active .hamburger{background:#fff0}.nav-toggle-active .hamburger::before{transform:rotate(45deg);top:0}.nav-toggle-active .hamburger::after{transform:rotate(-45deg);bottom:0}.nav-list{display:flex;list-style:none;gap:2rem}.nav-link{color:var(--text-color);text-decoration:none;font-size:.9rem;transition:color 0.2s}.nav-link:hover{color:var(--primary-color)}.article-header{padding:2rem 0;background-color:var(--gray-100)}.article-layout{display:grid;grid-template-columns:1fr 350px;gap:3rem;padding:1rem 0;align-items: start}h1,h2,h3,h4,h5,h6{font-family:"Crimson Text","Times New Roman",Times,serif}h1{font-size:2.5rem;line-height:1.2;margin-bottom:1rem}.meta{color:#5f6368;font-size:.875rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}.view-count{display:inline-flex;align-items:center;gap:.25rem}.view-count svg{color:#5f6368}.content{min-width:0;border-bottom:1px solid #dddddd5e;margin-top:1rem;white-space:pre-line !important;overflow-wrap:break-word;overflow-x:auto;word-break:break-word}.lead{font-size:1.25rem;color:#5f6368;margin-bottom:2rem}h2,h3,h4,h5,h6{font-size:1.75rem;margin:1rem 0 1rem}p,pre,ol,ul>li{margin-bottom:1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;font-size:1.3rem;text-align: justify;}p>code{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px}hr{margin:1rem 0 1rem 0}.code-example{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;margin:1.5rem 0;overflow-x:auto}code{font-family:'Roboto Mono',monospace;font-size:.875rem}ul{margin:.2rem 0;padding-left:1.5rem}.related-posts{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;position:sticky;top:5rem}.related-posts-title,.newpost-posts-list{font-size:1.75rem;margin:0 0 1rem}.related-posts-list{display:flex;flex-direction:column;gap:.5rem}.related-post,.newpost-post{border-bottom:1px solid #ddd;padding-bottom:10px;margin-bottom:10px}.related-post:last-child,.newpost-post:last-child{padding-bottom:0;border-bottom:none}.related-post-title,.newpost-post-title{font-size:1.2rem;margin:0 0 .1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;}.related-post-title a,.newpost-post-title a{color:var(--text-color);text-decoration:none;transition:color 0.2s}.related-post-title a:hover,.newpost-post-title a:hover{color:var(--primary-color)}.related-post time{font-size:.875rem;color:#5f6368}.footer{background-color:var(--gray-100);padding:2rem 0;margin-top:4rem;color:#5f6368;font-size:.875rem}.nav-menu>ul>li{margin-bottom:0}@media (max-width:1024px){.container{max-width:800px}.article-layout{grid-template-columns:1fr;gap:2rem}.related-posts{position:static}}@media (max-width:768px){.nav-container{flex-wrap:wrap}.nav-search{order:3;max-width:none;width:100%;margin-top:.1rem}.nav-toggle{display:block}.nav-menu{display:none;position:absolute;top:100%;left:0;right:0;background:var(--background-color);padding:1rem 0;border-bottom:1px solid var(--gray-200)}.nav-menu-active{display:block}.nav-list{flex-direction:column;gap:.1rem;padding:0 1.5rem}.nav-link{display:block;padding:.2rem 0}h1{font-size:2rem}.article-header{padding:2rem 0}.content{padding:.1rem 0}}table{width:100%;border-collapse:collapse;margin:20px 0;font-family:'Arial',sans-serif}th,td{padding:12px 15px;text-align:left;border:1px solid #ddd}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9}tr:nth-child(even) td{background-color:#f2f2f2}@media screen and (max-width:768px){table{border:0;display:block;overflow-x:auto;white-space:nowrap}th,td{padding:10px;text-align:right}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9;border-bottom:1px solid #ddd}tr:nth-child(even) td{background-color:#f2f2f2}}a{text-decoration:none;color:#540707}.katex-html{padding: .2rem;color: #000;font-weight: 700;font-size: 1.3rem;overflow-wrap: break-word;max-width: 100%;white-space: normal !important}.category{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin:1rem 0 1rem 0}.tag{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px;font-family:"Newsreader",serif}.tag>a{text-decoration:none;color:#000}img{margin:auto;display:block;max-width:100%;height:auto;margin-bottom:1rem}.katex{white-space: pre-line !important;display: inline-block;max-width: 100%;overflow-x: auto;overflow-y: hidden;scrollbar-width: thin;overflow-wrap: break-word;word-break: break-word;vertical-align: -7px}.content > p {overflow-wrap: break-word;word-break: break-word}
+    </style>
+    <style type="text/css">
+    	pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}
+		.hljs{color:#c9d1d9;background:#0d1117}.hljs-doctag,.hljs-keyword,.hljs-meta .hljs-keyword,.hljs-template-tag,.hljs-template-variable,.hljs-type,.hljs-variable.language_{color:#ff7b72}.hljs-title,.hljs-title.class_,.hljs-title.class_.inherited__,.hljs-title.function_{color:#d2a8ff}.hljs-attr,.hljs-attribute,.hljs-literal,.hljs-meta,.hljs-number,.hljs-operator,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-variable{color:#79c0ff}.hljs-meta .hljs-string,.hljs-regexp,.hljs-string{color:#a5d6ff}.hljs-built_in,.hljs-symbol{color:#ffa657}.hljs-code,.hljs-comment,.hljs-formula{color:#8b949e}.hljs-name,.hljs-quote,.hljs-selector-pseudo,.hljs-selector-tag{color:#7ee787}.hljs-subst{color:#c9d1d9}.hljs-section{color:#1f6feb;font-weight:700}.hljs-bullet{color:#f2cc60}.hljs-emphasis{color:#c9d1d9;font-style:italic}.hljs-strong{color:#c9d1d9;font-weight:700}.hljs-addition{color:#aff5b4;background-color:#033a16}.hljs-deletion{color:#ffdcd7;background-color:#67060c}
+    	pre{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;font-weight:400;word-break:break-word;word-wrap:break-word;box-sizing:inherit;border-radius:4px;overflow-x:auto;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}code{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;word-wrap:break-word;word-break:break-word;font-style:normal;line-height:20px;letter-spacing:-.003em;box-sizing:inherit;font-weight:400;font-size:75%;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}
+    </style>
+    <style type="text/css">
+    	.back-to-top{position:fixed;bottom:20px;right:20px;background-color:#a73f3f;color:#fff;padding:8px 10px;border-radius:50%;box-shadow:0 4px 6px rgb(0 0 0 / .2);font-size:10px;font-weight:700;text-decoration:none;text-align:center;transition:opacity 0.3s ease,visibility 0.3s ease;z-index:99999;opacity:1;visibility:visible}.back-to-top:hover{background-color:#0056b3}
+    </style>
+    <style type="text/css">
+        .ad-header {margin: 1rem auto 1rem;background-color: #fdfdfd;text-align: center;display: block;}.ad-header .ad-wrapper {min-height: 90px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #555;font-weight: 500;padding: 3rem;border: 1px dashed #ccc;border-radius: 6px;}@media (max-width: 768px) {.ad-header {padding: 0.75rem;}}.ad-sidebar {margin: 0 0 1rem;background-color: #fefefe;text-align: center;padding: 0px;width: 100%;max-width: 100%;display: block;}.ad-sidebar .ad-wrapper {min-height: 250px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #444;font-weight: 500;border: 1px dashed #aaa;border-radius: 6px;padding: 0rem;}@media (max-width: 1024px) {.ad-sidebar {padding: 0.75rem;}}
+    </style>
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://catatansoal.github.io/blog/fix-shell-script-sending-only"
+          },
+          "headline": "Fix: Shell Script Sending Only 1 Of 2 Files Via Expect",
+          "description": "Fix: Shell Script Sending Only 1 Of 2 Files Via Expect...",
+          "image": [
+            "https://tse4.mm.bing.net/th?q=Shell%20Script%20Troubleshooting%3A%20Fix%20for%20Sending%20Only%201%20of%202%20Files%20via%20Expect%20Script"
+          ],
+          "author": {
+            "@type": "Person",
+            "name": "ADMIN",
+            "jobTitle": "Editor web"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Question Notes",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://tse4.mm.bing.net/th?q=Question%20Notes"
+            }
+          },
+          "datePublished": "2025-08-11T18:41:09+00:00",
+          "dateModified": "2025-08-11T18:41:09+00:00"
+        }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="container nav-container">
+                <div class="nav-left">
+                    <span class="logo">Question Notes</span>
+                    <span class="blog-tag">Article</span>
+                </div>
+                <div class="nav-search">
+                    <form class="search-form" role="search">
+                        <input 
+                            type="search" 
+                            class="search-input"
+                            placeholder="Search articles..."
+                            aria-label="Search articles"
+                        >
+                        <button type="submit" class="search-button" aria-label="Submit search">🔎</button>
+                    </form>
+                </div>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+                <div class="nav-menu">
+                    <ul class="nav-list">
+                    	<li><a href="/" class="nav-link">HOME</a></li>
+                        <li><a href="/pages/About" class="nav-link">About</a></li>
+                        <li><a href="/pages/Contact" class="nav-link">Contact</a></li>
+                        <li><a href="/pages/Disclaimer" class="nav-link">Disclaimer</a></li>
+                        <li><a href="/pages/Privacy" class="nav-link">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="main">
+        <article class="article">
+            <header class="article-header">
+                <div class="container">
+                    <h1>Fix: Shell Script Sending Only 1 Of 2 Files Via Expect</h1>
+                    <div class="meta">
+                        <time datetime="2025-08-11T18:41:09+00:00">Aug 11, 2025</time>
+                        <span class="author">by ADMIN</span>
+                        <span class="view-count">
+                            <span id="viewCount">55</span> views
+                        </span>
+                    </div>
+                </div>
+            </header>
+            <div class="ad-header container">
+                <!-- <div class="ad-wrapper">
+    Iklan Headers
+</div> -->
+            </div>
+            <div class="container">
+                <div class="article-layout">
+                    <div class="content">
+                        <img src="https://tse4.mm.bing.net/th?q=Shell%20Script%20Troubleshooting%3A%20Fix%20for%20Sending%20Only%201%20of%202%20Files%20via%20Expect%20Script" title="Shell Script Troubleshooting: Fix for Sending Only 1 of 2 Files via Expect Script" width="300" height="200"/>
+<p>Hey guys! Ever wrestled with a shell script that's supposed to send multiple files but stubbornly sends only one? It's a common head-scratcher, especially when dealing with automation and file transfers. In this article, we're diving deep into a scenario where a shell script, using <code>expect</code> to handle SFTP, only sends one file out of a potential two. We'll break down the problem, explore the common pitfalls, and provide a step-by-step solution to ensure all your files make it to their destination. Let’s get this file transfer puzzle sorted out together! The importance of reliable file transfer scripts cannot be overstated in today's data-driven world. Businesses rely on automated processes to move data between systems, ensuring timely updates and efficient workflows. When a script fails to transfer all intended files, it can lead to data inconsistencies, delayed operations, and potentially significant business disruptions. Understanding the intricacies of shell scripting, especially when combined with tools like <code>expect</code> for handling interactive sessions, is crucial for system administrators and developers. <strong>Mastering these skills</strong> not only ensures smooth file transfers but also builds a solid foundation for automating other complex tasks. This article aims to provide not just a quick fix but a comprehensive understanding of the underlying issues, empowering you to troubleshoot similar problems independently in the future.</p>
+
+<p>So, picture this: You've got a bash shell script, running like clockwork via cron, diligently searching for data files in a directory. <strong>This script</strong> is designed to handle up to six different data files. When it finds one or more, it creates a corresponding control file for each. So far, so good, right? But here's the kicker: the script uses an <code>expect</code> script to SFTP these files, and for some mysterious reason, it only sends one of them. Frustrating, isn't it? You're left scratching your head, wondering why the script is being so selective. It’s like ordering a pizza with all your favorite toppings and only getting a slice with pepperoni. The goal here is to figure out why this selective sending is happening and how to make sure all the files are transferred. The issue likely stems from the way the <code>expect</code> script is interacting with the SFTP process. <code>Expect</code> is a powerful tool for automating interactive applications, but it requires careful handling of the prompts and responses. A common mistake is to assume that the SFTP process will behave exactly the same way every time, which isn't always the case. Network latency, server load, and other factors can influence the timing of prompts and responses. If the <code>expect</code> script isn't robust enough to handle these variations, it might get stuck waiting for a prompt that never comes, or it might misinterpret a prompt, leading to unexpected behavior. This is why a thorough understanding of the <code>expect</code> script and the SFTP process is essential for troubleshooting this kind of problem. By examining the script's logic and the SFTP logs, we can pinpoint the exact point of failure and devise a solution.</p>
+
+<p>Alright, let's get our hands dirty and dig into the code. We need to understand exactly what the shell script and the <code>expect</code> script are doing. First, we have the bash shell script. This script is the orchestrator, the one that sets the stage for the file transfer. It starts by searching for those six possible data files in a specific directory. Think of it as a detective, sniffing around for clues. If it finds one or more files, it creates a corresponding control file for each. These control files are like the marching orders, telling the system which data files need to be transferred. Now, here's where things get interesting: for the actual file transfer, the script calls on an <code>expect</code> script. The <code>expect</code> script is the specialist, the one who knows how to talk to the SFTP server. It automates the SFTP process, handling the login, file transfer, and logout. It's like having a robot assistant who can navigate the complexities of the SFTP protocol. The key to understanding why only one file is being sent lies in how the <code>expect</code> script handles the loop for transferring multiple files. <strong>A common mistake</strong> is to have a flaw in the loop's logic, causing it to exit prematurely after sending the first file. For example, the script might be expecting a specific prompt from the SFTP server after each file transfer, but if that prompt doesn't arrive as expected, the script might get stuck or exit the loop. Another possibility is that the script isn't correctly handling the file names or paths, causing it to try to transfer the same file multiple times or to skip some files altogether. To solve this puzzle, we need to carefully examine the <code>expect</code> script's loop, paying close attention to how it handles the SFTP prompts, file names, and error conditions. By understanding the script's inner workings, we can identify the weak link and strengthen it.</p>
+
+<p>So, what are the usual suspects when an <code>expect</code> script goes rogue and starts sending only one file? Let's talk about some common pitfalls that can trip up even the most experienced scripters. One of the most frequent culprits is incorrect prompt handling. <code>Expect</code> scripts rely on matching prompts from the remote server to know when to send commands. If the script is expecting a specific prompt that never arrives (maybe due to network latency or server issues), it can get stuck in a waiting loop. Think of it like waiting for a bus that's running late – you're stuck at the stop, going nowhere. Another common issue is incorrect loop implementation. If the loop that's supposed to transfer multiple files has a flaw, it might exit prematurely after sending only one file. This could be due to an incorrect loop condition, a missing increment, or an unexpected break statement. It's like trying to bake a batch of cookies but accidentally setting the timer for only one cookie. File path and name handling can also be a source of trouble. If the script isn't correctly constructing the file paths or names, it might try to transfer the same file multiple times or skip some files altogether. This is especially common when dealing with variables and loops. Imagine trying to find a specific book in a library but having the wrong call number – you'll be wandering around aimlessly. <strong>Error handling</strong> is another critical area. If the script doesn't properly handle errors, it might silently fail without giving you any clue about what went wrong. This can make debugging a nightmare. It's like driving a car without a dashboard – you have no idea if the engine is overheating or if you're running out of gas. Finally, timing issues can also cause problems. Network latency or server load can affect the timing of prompts and responses, causing the <code>expect</code> script to misinterpret the interaction. This is like trying to have a conversation with someone on a bad phone connection – the timing is off, and you end up talking over each other.</p>
+
+<p>Alright, let's roll up our sleeves and get this file transfer issue fixed! Here’s a step-by-step approach to help you diagnose and resolve the problem. First, <strong>enable verbose logging in your <code>expect</code> script</strong>. This is like turning on the lights in a dark room – it will illuminate what's happening behind the scenes. Add the <code>-d</code> flag to the <code>expect</code> command, or use the <code>exp_internal 1</code> command within the script. This will print out all the interactions between the script and the SFTP server, including the prompts, responses, and commands. Next, carefully examine the log output. Look for any discrepancies or errors. Are the prompts what you expect them to be? Is the script sending the correct commands? Are there any error messages from the SFTP server? This is like reading a detective novel – you're looking for clues to solve the mystery. Pay close attention to the loop that's supposed to transfer multiple files. Is the loop iterating correctly? Is it exiting prematurely? Are the file names and paths being constructed correctly? This is like checking the recipe for your cookies – you want to make sure you have the right ingredients and measurements. Add error handling to your <code>expect</code> script. Use the <code>expect_out(result)</code> variable to check the result of each <code>expect</code> command. If there's an error, log it or take appropriate action. This is like having a fire alarm in your house – it will alert you to potential problems. Implement retries for failed transfers. If a file transfer fails, try it again after a short delay. This can help to overcome transient network issues. It's like giving your car a second try if it stalls – sometimes it just needs a little nudge. Finally, test your script thoroughly. Try transferring different numbers of files, and try transferring files with different names and sizes. This is like test-driving a car before you buy it – you want to make sure it can handle all kinds of conditions.</p>
+
+<p>To give you a concrete example, let's look at a robust <code>expect</code> script designed to handle multiple file transfers. This script incorporates many of the best practices we've discussed, including verbose logging, error handling, and retries. This script is designed to be a template that you can adapt to your specific needs. Remember to replace the placeholder values (like the server address, username, password, and file paths) with your actual values. Also, consider adding more sophisticated error handling and logging, depending on the requirements of your environment. <strong>This script</strong> is just a starting point, but it should give you a good foundation for building reliable file transfer automation. One of the key features of this script is its robust error handling. The <code>expect_out(result)</code> variable is used to check the result of each <code>expect</code> command, and if an error is detected, a message is logged, and the script can take appropriate action. This helps to prevent silent failures and makes it easier to diagnose problems. Another important feature is the retry mechanism. If a file transfer fails, the script will try it again after a short delay. This can help to overcome transient network issues or server hiccups. The script also includes verbose logging, which can be invaluable for debugging. By enabling verbose logging, you can see exactly what's happening during the file transfer process, including the prompts, responses, and commands. This can help you to identify the root cause of any problems. Finally, the script is designed to be modular and reusable. The file transfer logic is encapsulated in a loop, which makes it easy to transfer multiple files. The script can also be easily adapted to different environments and requirements.</p>
+
+<p>Now that we've got the basics covered, let's talk about optimizing your shell and <code>expect</code> scripts for maximum reliability and efficiency. Think of this as fine-tuning your engine for a smooth and powerful ride. First up, let's talk about error handling. <strong>Robust error handling</strong> is the cornerstone of any reliable script. Make sure your scripts are equipped to handle unexpected situations gracefully. In shell scripts, use constructs like <code>set -e</code> to exit immediately if a command fails, and use conditional statements (<code>if</code>, <code>elif</code>, <code>else</code>) to handle different outcomes. In <code>expect</code> scripts, use the <code>expect_out(result)</code> variable to check the result of each <code>expect</code> command, and log any errors. Next, let's talk about logging. Good logging is essential for debugging and monitoring your scripts. Log important events, such as the start and end of the script, any errors that occur, and any significant actions taken. Use a consistent logging format, and include timestamps and other relevant information. This will make it easier to analyze your logs and identify patterns. Modularity is another key principle. Break your scripts down into smaller, reusable functions or procedures. This will make your scripts easier to understand, maintain, and test. It will also allow you to reuse code in different scripts, saving you time and effort. Commenting your code is also crucial. Add comments to explain what your code does and why you made certain decisions. This will make it easier for you and others to understand your code, especially when you come back to it later. Testing is essential. Test your scripts thoroughly before deploying them to production. Try different inputs, and test edge cases. Use a test environment that closely resembles your production environment. This will help you to catch any bugs before they cause problems. Security is paramount. Be careful about storing sensitive information, such as passwords, in your scripts. Use environment variables or other secure mechanisms to store this information. Also, be careful about running scripts with elevated privileges. Version control is a must. Use a version control system, such as Git, to track changes to your scripts. This will allow you to easily revert to previous versions if something goes wrong, and it will make it easier to collaborate with others. Finally, stay up-to-date. Keep your shell and <code>expect</code> versions up-to-date, and keep an eye out for new features and best practices. This will help you to write more efficient and reliable scripts.</p>
+
+<p>So, there you have it, folks! We've taken a deep dive into the world of shell and <code>expect</code> scripting, tackled the tricky issue of sending only one file when you meant to send many, and emerged victorious. Remember, the key to success in scripting, like in many things, is a combination of understanding the fundamentals, paying attention to detail, and a healthy dose of troubleshooting skills. We started by understanding the problem, dissecting the shell and <code>expect</code> scripts to pinpoint the cause of the selective file sending. We explored common pitfalls, such as incorrect prompt handling, flawed loop implementation, and inadequate error handling. Then, we laid out a step-by-step solution, emphasizing the importance of verbose logging, careful log analysis, and robust error handling. We even shared an example <code>expect</code> script, a template for building reliable multiple file transfer automation. But we didn't stop there. We went on to discuss best practices for optimizing your scripts, covering everything from error handling and logging to modularity, commenting, testing, security, and version control. <strong>By following these practices</strong>, you'll not only solve the immediate problem but also build a solid foundation for future scripting endeavors. The world of shell scripting is vast and ever-evolving, but with the right knowledge and tools, you can conquer any challenge. So, keep exploring, keep learning, and keep scripting! And remember, if you ever find yourself scratching your head over a stubborn script, come back to this article – we've got your back. Happy scripting, guys!</p>
+
+                    </div>
+                    <aside class="related-posts">
+                        <div class="ad-sidebar container">
+                            <!-- <div class="ad-wrapper">
+    <span>Iklan Related</span>
+</div> -->
+                        </div>
+                        <h2 class="related-posts-title">Related Posts</h2><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/pamper-her-14-ways-to">Pamper Her: 14 Ways To Make Her Feel Loved</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-04T13:36:38+00:00">Aug 4, 2025</time>
+		                        <span class="view-count">
+									42 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/fix-problem-parsing-error-sideloading">Fix &quot;Problem Parsing&quot; Error Sideloading WhatsApp</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-06T03:13:18+00:00">Aug 6, 2025</time>
+		                        <span class="view-count">
+									48 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/pytesseract-ocr-no-output-fix">Pytesseract OCR: No Output? Fix It Now!</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-02T00:59:16+00:00">Aug 2, 2025</time>
+		                        <span class="view-count">
+									39 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/fix-roblox-error-code-279">Fix Roblox Error Code 279 On Android: 2024 Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-11T15:35:11+00:00">Aug 11, 2025</time>
+		                        <span class="view-count">
+									48 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/tcl-tv-repair-faisalabad-royal">TCL TV Repair Faisalabad: Royal Electronics Service Center</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-11T22:13:36+00:00">Aug 11, 2025</time>
+		                        <span class="view-count">
+									58 views
+		                        </span>
+                            </div>
+                        </article>
+                    </aside>
+                    <aside class="related-posts"></aside>
+                </div>
+            </div>
+        </article>
+        <a href="#" class="back-to-top" id="backToTop" title="Back to top">
+        	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-bar-up" viewBox="0 0 16 16">
+			  <path fill-rule="evenodd" d="M3.646 11.854a.5.5 0 0 0 .708 0L8 8.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708M2.4 5.2c0 .22.18.4.4.4h10.4a.4.4 0 0 0 0-.8H2.8a.4.4 0 0 0-.4.4"/>
+			</svg>
+		</a>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 Question Notes</p>
+        </div>
+    </footer>
+    <script>
+    	(() => {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            const toggleMenu = () => {
+                navMenu.classList.toggle('nav-menu-active');
+                navToggle.classList.toggle('nav-toggle-active');
+            };
+            const backToTopHandler = (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            navToggle.addEventListener('click', toggleMenu);
+            document.getElementById('backToTop').addEventListener('click', backToTopHandler);
+            window.addEventListener('pagehide', () => {
+                navToggle.removeEventListener('click', toggleMenu);
+                document.getElementById('backToTop').removeEventListener('click', backToTopHandler);
+            });
+        })();
+		(() => {
+            window.addEventListener("DOMContentLoaded", (event) => {
+                const ellHljs = document.createElement("script");
+                ellHljs.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js");
+                ellHljs.onload = () => {
+                    hljs.highlightAll();
+                };
+                document.querySelector("body").append(ellHljs);
+                const ellFont = document.createElement("link");
+                ellFont.setAttribute("href", "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css");
+                ellFont.setAttribute("rel", "stylesheet");
+                document.querySelector("head").append(ellFont);
+                window.addEventListener('pagehide', () => {
+                    // ellHljs.remove();
+                    ellFont.remove();
+                });
+
+            });
+        })();
+    </script>
+    <!-- Histats.com  START  (aync)-->
+<script type="text/javascript">var _Hasync= _Hasync|| [];
+_Hasync.push(['Histats.start', '1,4957095,4,0,0,0,00010000']);
+_Hasync.push(['Histats.fasi', '1']);
+_Hasync.push(['Histats.track_hits', '']);
+(function() {
+var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
+hs.src = ('//s10.histats.com/js15_as.js');
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
+})();</script>
+<!-- Histats.com  END  -->
+    
+    
+</body>
+</html>

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Install Console App As Windows Service: A Simple Guide</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Install Console App As Windows Service: A Simple Guide...">
+    <link rel="canonical" href="https://catatansoal.github.io/blog/install-console-app-as-windows">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Install Console App As Windows Service: A Simple Guide">
+	<meta property="og:description" content="Install Console App As Windows Service: A Simple Guide...">
+	<meta property="og:url" content="https://catatansoal.github.io/blog/install-console-app-as-windows">
+	<meta property="og:site_name" content="Question Notes">
+	<meta property="article:published_time" content="2025-08-12T07:07:49+00:00">
+	<meta property="article:author" content="ADMIN">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+    <link rel="preload" fetchpriority="high" as="image" href="https://tse4.mm.bing.net/th?q=How%20to%20Install%20a%20Console%20Application%20as%20a%20Windows%20Service">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style type="text/css">
+    	:root{--primary-color:#3740ff;--text-color:#202124;--background-color:#ffffff;--gray-100:#f8f9fa;--gray-200:#e9ecef}*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;line-height:1.6;color:var(--text-color);background-color:var(--background-color)}.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}.header{background-color:var(--background-color);border-bottom:1px solid var(--gray-200);position:sticky;top:0;z-index:100}.nav{padding:.5rem 0}.nav-container{display:flex;justify-content:space-between;align-items:center;gap:1rem}.nav-left{display:flex;align-items:center;flex-shrink:0}.logo{font-weight:700;color:var(--primary-color)}.blog-tag{margin-left:1rem;padding:.25rem .5rem;background-color:var(--gray-100);border-radius:4px;font-size:.875rem}.nav-search{flex-grow:1;max-width:300px}.search-form{position:relative;width:100%}.search-input{width:100%;padding:.5rem 2.5rem .5rem 1rem;border:1px solid var(--gray-200);border-radius:24px;font-size:.875rem;transition:all 0.2s}.search-input:focus{outline:none;border-color:var(--primary-color);box-shadow:0 0 0 2px rgb(55 64 255 / .1)}.search-button{position:absolute;right:.5rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#5f6368;cursor:pointer;padding:.25rem;display:flex;align-items:center;justify-content:center}.search-button:hover{color:var(--primary-color)}.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:.5rem}.hamburger{display:block;position:relative;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before,.hamburger::after{content:'';position:absolute;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before{top:-6px}.hamburger::after{bottom:-6px}.nav-toggle-active .hamburger{background:#fff0}.nav-toggle-active .hamburger::before{transform:rotate(45deg);top:0}.nav-toggle-active .hamburger::after{transform:rotate(-45deg);bottom:0}.nav-list{display:flex;list-style:none;gap:2rem}.nav-link{color:var(--text-color);text-decoration:none;font-size:.9rem;transition:color 0.2s}.nav-link:hover{color:var(--primary-color)}.article-header{padding:2rem 0;background-color:var(--gray-100)}.article-layout{display:grid;grid-template-columns:1fr 350px;gap:3rem;padding:1rem 0;align-items: start}h1,h2,h3,h4,h5,h6{font-family:"Crimson Text","Times New Roman",Times,serif}h1{font-size:2.5rem;line-height:1.2;margin-bottom:1rem}.meta{color:#5f6368;font-size:.875rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}.view-count{display:inline-flex;align-items:center;gap:.25rem}.view-count svg{color:#5f6368}.content{min-width:0;border-bottom:1px solid #dddddd5e;margin-top:1rem;white-space:pre-line !important;overflow-wrap:break-word;overflow-x:auto;word-break:break-word}.lead{font-size:1.25rem;color:#5f6368;margin-bottom:2rem}h2,h3,h4,h5,h6{font-size:1.75rem;margin:1rem 0 1rem}p,pre,ol,ul>li{margin-bottom:1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;font-size:1.3rem;text-align: justify;}p>code{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px}hr{margin:1rem 0 1rem 0}.code-example{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;margin:1.5rem 0;overflow-x:auto}code{font-family:'Roboto Mono',monospace;font-size:.875rem}ul{margin:.2rem 0;padding-left:1.5rem}.related-posts{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;position:sticky;top:5rem}.related-posts-title,.newpost-posts-list{font-size:1.75rem;margin:0 0 1rem}.related-posts-list{display:flex;flex-direction:column;gap:.5rem}.related-post,.newpost-post{border-bottom:1px solid #ddd;padding-bottom:10px;margin-bottom:10px}.related-post:last-child,.newpost-post:last-child{padding-bottom:0;border-bottom:none}.related-post-title,.newpost-post-title{font-size:1.2rem;margin:0 0 .1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;}.related-post-title a,.newpost-post-title a{color:var(--text-color);text-decoration:none;transition:color 0.2s}.related-post-title a:hover,.newpost-post-title a:hover{color:var(--primary-color)}.related-post time{font-size:.875rem;color:#5f6368}.footer{background-color:var(--gray-100);padding:2rem 0;margin-top:4rem;color:#5f6368;font-size:.875rem}.nav-menu>ul>li{margin-bottom:0}@media (max-width:1024px){.container{max-width:800px}.article-layout{grid-template-columns:1fr;gap:2rem}.related-posts{position:static}}@media (max-width:768px){.nav-container{flex-wrap:wrap}.nav-search{order:3;max-width:none;width:100%;margin-top:.1rem}.nav-toggle{display:block}.nav-menu{display:none;position:absolute;top:100%;left:0;right:0;background:var(--background-color);padding:1rem 0;border-bottom:1px solid var(--gray-200)}.nav-menu-active{display:block}.nav-list{flex-direction:column;gap:.1rem;padding:0 1.5rem}.nav-link{display:block;padding:.2rem 0}h1{font-size:2rem}.article-header{padding:2rem 0}.content{padding:.1rem 0}}table{width:100%;border-collapse:collapse;margin:20px 0;font-family:'Arial',sans-serif}th,td{padding:12px 15px;text-align:left;border:1px solid #ddd}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9}tr:nth-child(even) td{background-color:#f2f2f2}@media screen and (max-width:768px){table{border:0;display:block;overflow-x:auto;white-space:nowrap}th,td{padding:10px;text-align:right}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9;border-bottom:1px solid #ddd}tr:nth-child(even) td{background-color:#f2f2f2}}a{text-decoration:none;color:#540707}.katex-html{padding: .2rem;color: #000;font-weight: 700;font-size: 1.3rem;overflow-wrap: break-word;max-width: 100%;white-space: normal !important}.category{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin:1rem 0 1rem 0}.tag{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px;font-family:"Newsreader",serif}.tag>a{text-decoration:none;color:#000}img{margin:auto;display:block;max-width:100%;height:auto;margin-bottom:1rem}.katex{white-space: pre-line !important;display: inline-block;max-width: 100%;overflow-x: auto;overflow-y: hidden;scrollbar-width: thin;overflow-wrap: break-word;word-break: break-word;vertical-align: -7px}.content > p {overflow-wrap: break-word;word-break: break-word}
+    </style>
+    <style type="text/css">
+    	pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}
+		.hljs{color:#c9d1d9;background:#0d1117}.hljs-doctag,.hljs-keyword,.hljs-meta .hljs-keyword,.hljs-template-tag,.hljs-template-variable,.hljs-type,.hljs-variable.language_{color:#ff7b72}.hljs-title,.hljs-title.class_,.hljs-title.class_.inherited__,.hljs-title.function_{color:#d2a8ff}.hljs-attr,.hljs-attribute,.hljs-literal,.hljs-meta,.hljs-number,.hljs-operator,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-variable{color:#79c0ff}.hljs-meta .hljs-string,.hljs-regexp,.hljs-string{color:#a5d6ff}.hljs-built_in,.hljs-symbol{color:#ffa657}.hljs-code,.hljs-comment,.hljs-formula{color:#8b949e}.hljs-name,.hljs-quote,.hljs-selector-pseudo,.hljs-selector-tag{color:#7ee787}.hljs-subst{color:#c9d1d9}.hljs-section{color:#1f6feb;font-weight:700}.hljs-bullet{color:#f2cc60}.hljs-emphasis{color:#c9d1d9;font-style:italic}.hljs-strong{color:#c9d1d9;font-weight:700}.hljs-addition{color:#aff5b4;background-color:#033a16}.hljs-deletion{color:#ffdcd7;background-color:#67060c}
+    	pre{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;font-weight:400;word-break:break-word;word-wrap:break-word;box-sizing:inherit;border-radius:4px;overflow-x:auto;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}code{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;word-wrap:break-word;word-break:break-word;font-style:normal;line-height:20px;letter-spacing:-.003em;box-sizing:inherit;font-weight:400;font-size:75%;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}
+    </style>
+    <style type="text/css">
+    	.back-to-top{position:fixed;bottom:20px;right:20px;background-color:#a73f3f;color:#fff;padding:8px 10px;border-radius:50%;box-shadow:0 4px 6px rgb(0 0 0 / .2);font-size:10px;font-weight:700;text-decoration:none;text-align:center;transition:opacity 0.3s ease,visibility 0.3s ease;z-index:99999;opacity:1;visibility:visible}.back-to-top:hover{background-color:#0056b3}
+    </style>
+    <style type="text/css">
+        .ad-header {margin: 1rem auto 1rem;background-color: #fdfdfd;text-align: center;display: block;}.ad-header .ad-wrapper {min-height: 90px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #555;font-weight: 500;padding: 3rem;border: 1px dashed #ccc;border-radius: 6px;}@media (max-width: 768px) {.ad-header {padding: 0.75rem;}}.ad-sidebar {margin: 0 0 1rem;background-color: #fefefe;text-align: center;padding: 0px;width: 100%;max-width: 100%;display: block;}.ad-sidebar .ad-wrapper {min-height: 250px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #444;font-weight: 500;border: 1px dashed #aaa;border-radius: 6px;padding: 0rem;}@media (max-width: 1024px) {.ad-sidebar {padding: 0.75rem;}}
+    </style>
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://catatansoal.github.io/blog/install-console-app-as-windows"
+          },
+          "headline": "Install Console App As Windows Service: A Simple Guide",
+          "description": "Install Console App As Windows Service: A Simple Guide...",
+          "image": [
+            "https://tse4.mm.bing.net/th?q=How%20to%20Install%20a%20Console%20Application%20as%20a%20Windows%20Service"
+          ],
+          "author": {
+            "@type": "Person",
+            "name": "ADMIN",
+            "jobTitle": "Editor web"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Question Notes",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://tse4.mm.bing.net/th?q=Question%20Notes"
+            }
+          },
+          "datePublished": "2025-08-12T07:07:49+00:00",
+          "dateModified": "2025-08-12T07:07:49+00:00"
+        }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="container nav-container">
+                <div class="nav-left">
+                    <span class="logo">Question Notes</span>
+                    <span class="blog-tag">Article</span>
+                </div>
+                <div class="nav-search">
+                    <form class="search-form" role="search">
+                        <input 
+                            type="search" 
+                            class="search-input"
+                            placeholder="Search articles..."
+                            aria-label="Search articles"
+                        >
+                        <button type="submit" class="search-button" aria-label="Submit search">🔎</button>
+                    </form>
+                </div>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+                <div class="nav-menu">
+                    <ul class="nav-list">
+                    	<li><a href="/" class="nav-link">HOME</a></li>
+                        <li><a href="/pages/About" class="nav-link">About</a></li>
+                        <li><a href="/pages/Contact" class="nav-link">Contact</a></li>
+                        <li><a href="/pages/Disclaimer" class="nav-link">Disclaimer</a></li>
+                        <li><a href="/pages/Privacy" class="nav-link">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="main">
+        <article class="article">
+            <header class="article-header">
+                <div class="container">
+                    <h1>Install Console App As Windows Service: A Simple Guide</h1>
+                    <div class="meta">
+                        <time datetime="2025-08-12T07:07:49+00:00">Aug 12, 2025</time>
+                        <span class="author">by ADMIN</span>
+                        <span class="view-count">
+                            <span id="viewCount">55</span> views
+                        </span>
+                    </div>
+                </div>
+            </header>
+            <div class="ad-header container">
+                <!-- <div class="ad-wrapper">
+    Iklan Headers
+</div> -->
+            </div>
+            <div class="container">
+                <div class="article-layout">
+                    <div class="content">
+                        <img src="https://tse4.mm.bing.net/th?q=How%20to%20Install%20a%20Console%20Application%20as%20a%20Windows%20Service" title="How to Install a Console Application as a Windows Service" width="300" height="200"/><h2>Introduction</h2>
+<p>Hey guys! Ever wondered how to keep your console application running smoothly in the background, even after you close the command window? Well, you're in the right place! In this guide, we're going to dive deep into the awesome world of <strong>installing console applications as Windows services</strong>. This is super useful for applications that need to run continuously, like background processes, scheduled tasks, or even simple servers. We'll walk you through everything step-by-step, making it a piece of cake, even if you're not a tech whiz. So, buckle up and let's get started!</p>
+<p>Think of a console application like a worker bee that needs a hive to thrive. By turning it into a Windows service, you're essentially giving it that hive – a stable, reliable environment where it can run without you having to babysit it. This means no more manually starting the application every time your computer restarts, or worrying about it crashing if you accidentally close the command window. We're talking <strong>seamless, automated operation</strong>, which is a game-changer for any application that needs to be always-on. We'll explore why this is beneficial, what tools you can use, and how to implement it effectively. By the end of this article, you’ll have a clear understanding of how to make your console applications run like true professional services.</p>
+<p>We'll break down the whole process into manageable chunks, starting with the basics of what Windows services are and why they're so darn useful. Then, we’ll move on to the nitty-gritty: how to actually transform your console application into a service. We'll cover different methods and tools, from using the built-in <code>sc.exe</code> command-line utility to leveraging powerful frameworks like <strong>.NET's <code>ServiceBase</code> class</strong> and third-party tools like <strong>NSSM (Non-Sucking Service Manager)</strong>. Each method has its own set of pros and cons, and we'll make sure you understand them so you can choose the one that best fits your needs. Along the way, we’ll also tackle common issues and troubleshooting tips to ensure you don't get stuck in the mud. So, whether you're a seasoned developer or just starting out, you'll find valuable insights here to level up your application deployment game.</p>
+<h2>Understanding Windows Services</h2>
+<p>Alright, let's kick things off by getting a solid grip on what Windows services actually are. Simply put, <strong>Windows services are applications that run in the background without needing a user interface</strong>. They're like the unsung heroes of your operating system, quietly working away to keep everything running smoothly. Think about your antivirus software, your print spooler, or even your network services – these are all examples of Windows services humming away in the background. These services start automatically when your computer boots up, and they continue running until you explicitly stop them, or your system shuts down. This makes them perfect for applications that need to be available 24/7, without requiring constant user interaction.</p>
+<p>The beauty of Windows services lies in their ability to run independently of any user session. This means they can perform tasks even when no one is logged into the computer. Imagine you have a console application that processes data overnight, or one that monitors system performance and logs errors. By turning it into a Windows service, you ensure it runs reliably, regardless of whether you're logged in or not. Plus, services have access to system resources and can be configured with different security contexts, allowing them to perform privileged operations without compromising system security. This makes them an essential part of many enterprise-level applications and server environments. We'll go over the specifics of how to set these up and configure them so they behave exactly as you need them to. This foundational understanding is key to successfully deploying your own applications as services.</p>
+<p>Now, why should you bother converting your console application into a Windows service? Well, there are a ton of <strong>compelling reasons</strong>. First and foremost, it's about <strong>reliability</strong>. As we've touched on, services run automatically and continuously, ensuring your application is always available. No more worrying about accidental closures or manual restarts. This is especially crucial for applications that perform critical tasks or provide essential functionality. Next up is <strong>security</strong>. Services can be configured to run under specific user accounts, giving you fine-grained control over their access permissions. This helps protect your system from potential vulnerabilities and unauthorized access. Plus, services can automatically recover from failures, restarting themselves if they crash or encounter errors. This self-healing capability is a huge win for maintaining uptime and stability. In short, turning your console application into a Windows service gives it a level of robustness and reliability that you just can't achieve with a standard desktop application. It's about elevating your application from a simple program to a true system-level component.</p>
+<h2>Prerequisites</h2>
+<p>Before we jump into the actual installation process, let's make sure we have all our ducks in a row. There are a few <strong>prerequisites</strong> you'll need to take care of to ensure a smooth and successful transformation of your console application into a Windows service. First off, you'll need a <strong>console application</strong> ready to go. This is the core of our operation, so make sure it's fully functional and tested. It should be able to perform its intended tasks flawlessly when run from the command line. This might seem obvious, but it's worth emphasizing: a buggy or incomplete application won't magically become stable just by being installed as a service. So, get that code polished and ready for prime time! This includes handling any potential exceptions or errors gracefully, as services often run unattended and need to be robust.</p>
+<p>Next up, you'll need the <strong>necessary development tools</strong>. If your application is written in <strong>.NET</strong>, you'll need the <strong>.NET SDK</strong> installed on your machine. This provides the compilers, libraries, and other tools needed to build and deploy your application. Make sure you have the correct version of the SDK installed, as compatibility issues can be a real headache. If you're using a different language or framework, you'll need the corresponding development tools. The key here is to ensure that you can build your application successfully. Without the right tools in place, you'll be dead in the water before you even start. This also means having a good understanding of your development environment and how to use it effectively. So, if you're not familiar with the command-line tools or build processes, now's the time to brush up on those skills.</p>
+<p>Finally, you'll need <strong>administrative privileges</strong> on the Windows machine where you plan to install the service. This is a crucial requirement, as installing services involves making changes to the system's configuration. Without administrative rights, you simply won't be able to create, modify, or delete services. This is a security measure designed to prevent unauthorized changes to the system. If you're working on a corporate network, you might need to contact your IT administrator to get the necessary permissions. It's always a good idea to double-check your privileges before you start, to avoid any frustrating roadblocks down the line. So, make sure you're logged in as an administrator or have the ability to run commands with elevated privileges. With these prerequisites in place, you're well on your way to successfully installing your console application as a Windows service!</p>
+<h2>Methods to Install Console Application as Windows Service</h2>
+<p>Alright guys, let's dive into the juicy part – the actual methods you can use to <strong>install your console application as a Windows service</strong>. There are several ways to skin this cat, each with its own set of advantages and disadvantages. We'll cover three main approaches: using the <code>sc.exe</code> command-line utility, leveraging the .NET <code>ServiceBase</code> class, and employing third-party tools like NSSM (Non-Sucking Service Manager). Each of these methods offers a different level of complexity and control, so you can choose the one that best fits your technical skills and project requirements. Let's break them down one by one.</p>
+<p>First up, we have the <strong><code>sc.exe</code> command-line utility</strong>. This is a built-in tool in Windows that allows you to manage services from the command line. It's a powerful and versatile tool, but it can be a bit intimidating at first glance. The <code>sc.exe</code> utility lets you create, delete, start, stop, and configure services, all through simple command-line commands. To install a console application as a service using <code>sc.exe</code>, you'll need to use the <code>sc create</code> command, specifying the service name, display name, binary path, and other relevant parameters. The syntax can be a bit tricky, and you'll need to get it exactly right, or you'll end up with an error. For example, you might use a command like `sc create MyService binPath=</p>
+
+                    </div>
+                    <aside class="related-posts">
+                        <div class="ad-sidebar container">
+                            <!-- <div class="ad-wrapper">
+    <span>Iklan Related</span>
+</div> -->
+                        </div>
+                        <h2 class="related-posts-title">Related Posts</h2><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/degree-of-4a-b-2ab">Degree Of 4a⁵b² + 2ab³: A Polynomial Puzzle Solved</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-07T15:16:03+00:00">Aug 7, 2025</time>
+		                        <span class="view-count">
+									50 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/tmto-resistance-kdf-lut-strategy">TMTO Resistance: KDF LUT Strategy Assessment</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-03T05:50:11+00:00">Aug 3, 2025</time>
+		                        <span class="view-count">
+									44 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/fixing-misaligned-error-messages-in">Fixing Misaligned Error Messages In Your React.js Food Ordering App</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-08T11:37:28+00:00">Aug 8, 2025</time>
+		                        <span class="view-count">
+									67 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/cara-mengatasi-services-msc-tidak">Cara Mengatasi Services.msc Tidak Bisa Dibuka: Panduan Lengkap</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-11T11:57:16+00:00">Aug 11, 2025</time>
+		                        <span class="view-count">
+									62 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/upper-bounding-gauss-hypergeometric-function">Upper Bounding Gauss Hypergeometric Function At Z=4</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-08T16:09:45+00:00">Aug 8, 2025</time>
+		                        <span class="view-count">
+									51 views
+		                        </span>
+                            </div>
+                        </article>
+                    </aside>
+                    <aside class="related-posts"></aside>
+                </div>
+            </div>
+        </article>
+        <a href="#" class="back-to-top" id="backToTop" title="Back to top">
+        	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-bar-up" viewBox="0 0 16 16">
+			  <path fill-rule="evenodd" d="M3.646 11.854a.5.5 0 0 0 .708 0L8 8.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708M2.4 5.2c0 .22.18.4.4.4h10.4a.4.4 0 0 0 0-.8H2.8a.4.4 0 0 0-.4.4"/>
+			</svg>
+		</a>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 Question Notes</p>
+        </div>
+    </footer>
+    <script>
+    	(() => {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            const toggleMenu = () => {
+                navMenu.classList.toggle('nav-menu-active');
+                navToggle.classList.toggle('nav-toggle-active');
+            };
+            const backToTopHandler = (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            navToggle.addEventListener('click', toggleMenu);
+            document.getElementById('backToTop').addEventListener('click', backToTopHandler);
+            window.addEventListener('pagehide', () => {
+                navToggle.removeEventListener('click', toggleMenu);
+                document.getElementById('backToTop').removeEventListener('click', backToTopHandler);
+            });
+        })();
+		(() => {
+            window.addEventListener("DOMContentLoaded", (event) => {
+                const ellHljs = document.createElement("script");
+                ellHljs.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js");
+                ellHljs.onload = () => {
+                    hljs.highlightAll();
+                };
+                document.querySelector("body").append(ellHljs);
+                const ellFont = document.createElement("link");
+                ellFont.setAttribute("href", "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css");
+                ellFont.setAttribute("rel", "stylesheet");
+                document.querySelector("head").append(ellFont);
+                window.addEventListener('pagehide', () => {
+                    // ellHljs.remove();
+                    ellFont.remove();
+                });
+
+            });
+        })();
+    </script>
+    <!-- Histats.com  START  (aync)-->
+<script type="text/javascript">var _Hasync= _Hasync|| [];
+_Hasync.push(['Histats.start', '1,4957095,4,0,0,0,00010000']);
+_Hasync.push(['Histats.fasi', '1']);
+_Hasync.push(['Histats.track_hits', '']);
+(function() {
+var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
+hs.src = ('//s10.histats.com/js15_as.js');
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
+})();</script>
+<!-- Histats.com  END  -->
+    
+    
+</body>
+</html>

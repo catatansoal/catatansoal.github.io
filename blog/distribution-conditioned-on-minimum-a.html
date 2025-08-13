@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Distribution Conditioned On Minimum: A Deep Dive</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Distribution Conditioned On Minimum: A Deep Dive...">
+    <link rel="canonical" href="https://catatansoal.github.io/blog/distribution-conditioned-on-minimum-a">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Distribution Conditioned On Minimum: A Deep Dive">
+	<meta property="og:description" content="Distribution Conditioned On Minimum: A Deep Dive...">
+	<meta property="og:url" content="https://catatansoal.github.io/blog/distribution-conditioned-on-minimum-a">
+	<meta property="og:site_name" content="Question Notes">
+	<meta property="article:published_time" content="2025-08-12T16:51:24+00:00">
+	<meta property="article:author" content="ADMIN">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+    <link rel="preload" fetchpriority="high" as="image" href="https://tse4.mm.bing.net/th?q=Understanding%20Distribution%20Conditioned%20on%20the%20Minimum%3A%20A%20Comprehensive%20Guide">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style type="text/css">
+    	:root{--primary-color:#3740ff;--text-color:#202124;--background-color:#ffffff;--gray-100:#f8f9fa;--gray-200:#e9ecef}*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;line-height:1.6;color:var(--text-color);background-color:var(--background-color)}.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}.header{background-color:var(--background-color);border-bottom:1px solid var(--gray-200);position:sticky;top:0;z-index:100}.nav{padding:.5rem 0}.nav-container{display:flex;justify-content:space-between;align-items:center;gap:1rem}.nav-left{display:flex;align-items:center;flex-shrink:0}.logo{font-weight:700;color:var(--primary-color)}.blog-tag{margin-left:1rem;padding:.25rem .5rem;background-color:var(--gray-100);border-radius:4px;font-size:.875rem}.nav-search{flex-grow:1;max-width:300px}.search-form{position:relative;width:100%}.search-input{width:100%;padding:.5rem 2.5rem .5rem 1rem;border:1px solid var(--gray-200);border-radius:24px;font-size:.875rem;transition:all 0.2s}.search-input:focus{outline:none;border-color:var(--primary-color);box-shadow:0 0 0 2px rgb(55 64 255 / .1)}.search-button{position:absolute;right:.5rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#5f6368;cursor:pointer;padding:.25rem;display:flex;align-items:center;justify-content:center}.search-button:hover{color:var(--primary-color)}.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:.5rem}.hamburger{display:block;position:relative;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before,.hamburger::after{content:'';position:absolute;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before{top:-6px}.hamburger::after{bottom:-6px}.nav-toggle-active .hamburger{background:#fff0}.nav-toggle-active .hamburger::before{transform:rotate(45deg);top:0}.nav-toggle-active .hamburger::after{transform:rotate(-45deg);bottom:0}.nav-list{display:flex;list-style:none;gap:2rem}.nav-link{color:var(--text-color);text-decoration:none;font-size:.9rem;transition:color 0.2s}.nav-link:hover{color:var(--primary-color)}.article-header{padding:2rem 0;background-color:var(--gray-100)}.article-layout{display:grid;grid-template-columns:1fr 350px;gap:3rem;padding:1rem 0;align-items: start}h1,h2,h3,h4,h5,h6{font-family:"Crimson Text","Times New Roman",Times,serif}h1{font-size:2.5rem;line-height:1.2;margin-bottom:1rem}.meta{color:#5f6368;font-size:.875rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}.view-count{display:inline-flex;align-items:center;gap:.25rem}.view-count svg{color:#5f6368}.content{min-width:0;border-bottom:1px solid #dddddd5e;margin-top:1rem;white-space:pre-line !important;overflow-wrap:break-word;overflow-x:auto;word-break:break-word}.lead{font-size:1.25rem;color:#5f6368;margin-bottom:2rem}h2,h3,h4,h5,h6{font-size:1.75rem;margin:1rem 0 1rem}p,pre,ol,ul>li{margin-bottom:1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;font-size:1.3rem;text-align: justify;}p>code{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px}hr{margin:1rem 0 1rem 0}.code-example{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;margin:1.5rem 0;overflow-x:auto}code{font-family:'Roboto Mono',monospace;font-size:.875rem}ul{margin:.2rem 0;padding-left:1.5rem}.related-posts{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;position:sticky;top:5rem}.related-posts-title,.newpost-posts-list{font-size:1.75rem;margin:0 0 1rem}.related-posts-list{display:flex;flex-direction:column;gap:.5rem}.related-post,.newpost-post{border-bottom:1px solid #ddd;padding-bottom:10px;margin-bottom:10px}.related-post:last-child,.newpost-post:last-child{padding-bottom:0;border-bottom:none}.related-post-title,.newpost-post-title{font-size:1.2rem;margin:0 0 .1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;}.related-post-title a,.newpost-post-title a{color:var(--text-color);text-decoration:none;transition:color 0.2s}.related-post-title a:hover,.newpost-post-title a:hover{color:var(--primary-color)}.related-post time{font-size:.875rem;color:#5f6368}.footer{background-color:var(--gray-100);padding:2rem 0;margin-top:4rem;color:#5f6368;font-size:.875rem}.nav-menu>ul>li{margin-bottom:0}@media (max-width:1024px){.container{max-width:800px}.article-layout{grid-template-columns:1fr;gap:2rem}.related-posts{position:static}}@media (max-width:768px){.nav-container{flex-wrap:wrap}.nav-search{order:3;max-width:none;width:100%;margin-top:.1rem}.nav-toggle{display:block}.nav-menu{display:none;position:absolute;top:100%;left:0;right:0;background:var(--background-color);padding:1rem 0;border-bottom:1px solid var(--gray-200)}.nav-menu-active{display:block}.nav-list{flex-direction:column;gap:.1rem;padding:0 1.5rem}.nav-link{display:block;padding:.2rem 0}h1{font-size:2rem}.article-header{padding:2rem 0}.content{padding:.1rem 0}}table{width:100%;border-collapse:collapse;margin:20px 0;font-family:'Arial',sans-serif}th,td{padding:12px 15px;text-align:left;border:1px solid #ddd}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9}tr:nth-child(even) td{background-color:#f2f2f2}@media screen and (max-width:768px){table{border:0;display:block;overflow-x:auto;white-space:nowrap}th,td{padding:10px;text-align:right}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9;border-bottom:1px solid #ddd}tr:nth-child(even) td{background-color:#f2f2f2}}a{text-decoration:none;color:#540707}.katex-html{padding: .2rem;color: #000;font-weight: 700;font-size: 1.3rem;overflow-wrap: break-word;max-width: 100%;white-space: normal !important}.category{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin:1rem 0 1rem 0}.tag{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px;font-family:"Newsreader",serif}.tag>a{text-decoration:none;color:#000}img{margin:auto;display:block;max-width:100%;height:auto;margin-bottom:1rem}.katex{white-space: pre-line !important;display: inline-block;max-width: 100%;overflow-x: auto;overflow-y: hidden;scrollbar-width: thin;overflow-wrap: break-word;word-break: break-word;vertical-align: -7px}.content > p {overflow-wrap: break-word;word-break: break-word}
+    </style>
+    <style type="text/css">
+    	pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}
+		.hljs{color:#c9d1d9;background:#0d1117}.hljs-doctag,.hljs-keyword,.hljs-meta .hljs-keyword,.hljs-template-tag,.hljs-template-variable,.hljs-type,.hljs-variable.language_{color:#ff7b72}.hljs-title,.hljs-title.class_,.hljs-title.class_.inherited__,.hljs-title.function_{color:#d2a8ff}.hljs-attr,.hljs-attribute,.hljs-literal,.hljs-meta,.hljs-number,.hljs-operator,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-variable{color:#79c0ff}.hljs-meta .hljs-string,.hljs-regexp,.hljs-string{color:#a5d6ff}.hljs-built_in,.hljs-symbol{color:#ffa657}.hljs-code,.hljs-comment,.hljs-formula{color:#8b949e}.hljs-name,.hljs-quote,.hljs-selector-pseudo,.hljs-selector-tag{color:#7ee787}.hljs-subst{color:#c9d1d9}.hljs-section{color:#1f6feb;font-weight:700}.hljs-bullet{color:#f2cc60}.hljs-emphasis{color:#c9d1d9;font-style:italic}.hljs-strong{color:#c9d1d9;font-weight:700}.hljs-addition{color:#aff5b4;background-color:#033a16}.hljs-deletion{color:#ffdcd7;background-color:#67060c}
+    	pre{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;font-weight:400;word-break:break-word;word-wrap:break-word;box-sizing:inherit;border-radius:4px;overflow-x:auto;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}code{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;word-wrap:break-word;word-break:break-word;font-style:normal;line-height:20px;letter-spacing:-.003em;box-sizing:inherit;font-weight:400;font-size:75%;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}
+    </style>
+    <style type="text/css">
+    	.back-to-top{position:fixed;bottom:20px;right:20px;background-color:#a73f3f;color:#fff;padding:8px 10px;border-radius:50%;box-shadow:0 4px 6px rgb(0 0 0 / .2);font-size:10px;font-weight:700;text-decoration:none;text-align:center;transition:opacity 0.3s ease,visibility 0.3s ease;z-index:99999;opacity:1;visibility:visible}.back-to-top:hover{background-color:#0056b3}
+    </style>
+    <style type="text/css">
+        .ad-header {margin: 1rem auto 1rem;background-color: #fdfdfd;text-align: center;display: block;}.ad-header .ad-wrapper {min-height: 90px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #555;font-weight: 500;padding: 3rem;border: 1px dashed #ccc;border-radius: 6px;}@media (max-width: 768px) {.ad-header {padding: 0.75rem;}}.ad-sidebar {margin: 0 0 1rem;background-color: #fefefe;text-align: center;padding: 0px;width: 100%;max-width: 100%;display: block;}.ad-sidebar .ad-wrapper {min-height: 250px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #444;font-weight: 500;border: 1px dashed #aaa;border-radius: 6px;padding: 0rem;}@media (max-width: 1024px) {.ad-sidebar {padding: 0.75rem;}}
+    </style>
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://catatansoal.github.io/blog/distribution-conditioned-on-minimum-a"
+          },
+          "headline": "Distribution Conditioned On Minimum: A Deep Dive",
+          "description": "Distribution Conditioned On Minimum: A Deep Dive...",
+          "image": [
+            "https://tse4.mm.bing.net/th?q=Understanding%20Distribution%20Conditioned%20on%20the%20Minimum%3A%20A%20Comprehensive%20Guide"
+          ],
+          "author": {
+            "@type": "Person",
+            "name": "ADMIN",
+            "jobTitle": "Editor web"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Question Notes",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://tse4.mm.bing.net/th?q=Question%20Notes"
+            }
+          },
+          "datePublished": "2025-08-12T16:51:24+00:00",
+          "dateModified": "2025-08-12T16:51:24+00:00"
+        }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="container nav-container">
+                <div class="nav-left">
+                    <span class="logo">Question Notes</span>
+                    <span class="blog-tag">Article</span>
+                </div>
+                <div class="nav-search">
+                    <form class="search-form" role="search">
+                        <input 
+                            type="search" 
+                            class="search-input"
+                            placeholder="Search articles..."
+                            aria-label="Search articles"
+                        >
+                        <button type="submit" class="search-button" aria-label="Submit search">🔎</button>
+                    </form>
+                </div>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+                <div class="nav-menu">
+                    <ul class="nav-list">
+                    	<li><a href="/" class="nav-link">HOME</a></li>
+                        <li><a href="/pages/About" class="nav-link">About</a></li>
+                        <li><a href="/pages/Contact" class="nav-link">Contact</a></li>
+                        <li><a href="/pages/Disclaimer" class="nav-link">Disclaimer</a></li>
+                        <li><a href="/pages/Privacy" class="nav-link">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="main">
+        <article class="article">
+            <header class="article-header">
+                <div class="container">
+                    <h1>Distribution Conditioned On Minimum: A Deep Dive</h1>
+                    <div class="meta">
+                        <time datetime="2025-08-12T16:51:24+00:00">Aug 12, 2025</time>
+                        <span class="author">by ADMIN</span>
+                        <span class="view-count">
+                            <span id="viewCount">49</span> views
+                        </span>
+                    </div>
+                </div>
+            </header>
+            <div class="ad-header container">
+                <!-- <div class="ad-wrapper">
+    Iklan Headers
+</div> -->
+            </div>
+            <div class="container">
+                <div class="article-layout">
+                    <div class="content">
+                        <img src="https://tse4.mm.bing.net/th?q=Understanding%20Distribution%20Conditioned%20on%20the%20Minimum%3A%20A%20Comprehensive%20Guide" title="Understanding Distribution Conditioned on the Minimum: A Comprehensive Guide" width="300" height="200"/><p>Hey guys! Today, we're diving deep into a fascinating concept in probability and statistics: <strong>distribution conditioned on the minimum</strong>. This topic, while sounding complex, is incredibly useful in various fields, from risk management to extreme value theory. We'll break it down in a way that's easy to understand, even if you're not a math whiz. So, grab your favorite beverage, settle in, and let's unravel this together!</p>
+<h2>Introduction to Distribution Conditioned on the Minimum</h2>
+<p>In the realm of probability and statistics, understanding how random variables interact is crucial. We often encounter scenarios where the value of one random variable influences the distribution of another. This is where the concept of <strong>conditional distribution</strong> comes into play. Imagine you have two random variables, let's call them <em>y</em> and <em>x</em>. The conditional distribution <em>p(y | x)</em> tells us the probability distribution of <em>y</em> given that we know the value of <em>x</em>. It's like saying, &quot;Okay, we know <em>x</em> is this value; now, what's the likelihood of <em>y</em> being something else?&quot;</p>
+<p>But what happens when we're not just interested in any old value of <em>x</em>, but specifically the <em>minimum</em> value observed in a set of independent and identically distributed (i.i.d.) samples? That's where things get interesting! We're essentially conditioning the distribution of <em>y</em> on the event that we've observed the smallest <em>x</em> from a collection of <em>x</em> values. This is particularly relevant when dealing with extreme events, like the lowest temperature recorded over a period or the smallest claim amount in an insurance portfolio. To truly grasp the concept of <strong>distribution conditioned on the minimum</strong>, we must first understand the basic building blocks: random variables, conditional distributions, and marginal distributions. Let's start with <strong>random variables</strong>. A random variable is essentially a variable whose value is a numerical outcome of a random phenomenon. Think of it as a way to quantify uncertainty. For example, the height of a randomly selected person, the number of heads in a series of coin flips, or the daily stock price of a company can all be considered random variables. These variables can be discrete (taking on specific, separate values, like the number of coin flips) or continuous (taking on any value within a range, like height or stock price).</p>
+<p>Next, we need to understand <strong>marginal distributions</strong>. If we have multiple random variables, the marginal distribution of one variable describes its probability distribution irrespective of the values of the other variables. It's like looking at the distribution of <em>y</em> on its own, without considering <em>x</em> at all. We denote the marginal distributions of <em>y</em> and <em>x</em> as <em>p_y(y)</em> and <em>p_x(x)</em>, respectively. Finally, let's circle back to <strong>conditional distributions</strong>. As we discussed earlier, <em>p(y | x)</em> represents the probability distribution of <em>y</em> given the value of <em>x</em>. This is a fundamental concept that allows us to understand the relationship between variables and how they influence each other. Imagine you're analyzing customer purchase data. The marginal distribution might tell you how many customers buy a particular product, while the conditional distribution might tell you how many customers buy that product <em>given</em> they've already purchased another product.</p>
+<h3>Why is this important?</h3>
+<p>The concept of distribution conditioned on the minimum is crucial in various fields. In <strong>risk management</strong>, it helps us understand the distribution of losses given the worst-case scenario. In <strong>extreme value theory</strong>, it allows us to model and predict rare events, like floods or market crashes. And in <strong>reliability engineering</strong>, it helps us assess the lifespan of components based on the weakest link in a system. To put this into a more concrete example, let's consider an i.i.d. sample <em>D_x = {x_i}_{i = 1}^n</em>. This represents a set of observations of the random variable <em>x</em>, where each observation is independent of the others and drawn from the same distribution. The “i.i.d.” part is important because it simplifies our analysis and allows us to apply certain statistical tools. Now, imagine we want to find the minimum value in this sample. This minimum value, which we can denote as <em>x_min</em>, is itself a random variable. Its distribution will depend on the distribution of <em>x</em> and the sample size <em>n</em>. And this is where things connect back to our main topic. The distribution of <em>y</em> conditioned on <em>x_min</em> will tell us how <em>y</em> behaves when we know the smallest value of <em>x</em> in our sample. This is a powerful tool for understanding how different variables interact under extreme conditions. In the following sections, we'll explore this concept in more detail, looking at specific examples and mathematical formulations. We'll see how the normal distribution and extreme value distributions play a role, and we'll discuss the practical applications of this knowledge. So, stick around, and let's delve deeper into the fascinating world of distribution conditioned on the minimum!</p>
+<h2>Normal Distribution and the Minimum</h2>
+<p>The <strong>normal distribution</strong>, often called the bell curve, is a cornerstone of statistics. It pops up everywhere, from heights and weights to test scores and measurement errors. Its symmetrical shape and well-defined properties make it a favorite for modeling many real-world phenomena. But what happens when we consider the minimum of a set of normally distributed random variables? How does the distribution conditioned on this minimum behave? This is a crucial question, especially in applications where we're concerned with extreme values or worst-case scenarios. Let's start by recapping the key features of the normal distribution. A normal distribution is fully characterized by two parameters: its mean (μ), which represents the average value, and its standard deviation (σ), which measures the spread or variability of the data. The probability density function (PDF) of a normal distribution is a bell-shaped curve, with the peak at the mean and the spread determined by the standard deviation. Mathematically, the PDF is given by a specific formula, but the key takeaway is that it describes the likelihood of observing different values for the random variable.</p>
+<p>Now, imagine we have a set of <em>n</em> independent random variables, each drawn from the same normal distribution. Let's denote these variables as <em>x_1, x_2, ..., x_n</em>. What is the distribution of the minimum of these variables? Intuitively, we know that the minimum will tend to be smaller than the average value, especially as the number of variables <em>n</em> increases. But can we describe this distribution precisely? The answer is yes, and it involves some interesting mathematical concepts. The cumulative distribution function (CDF) of the minimum, denoted as <em>F_min(x)</em>, gives the probability that the minimum value is less than or equal to <em>x</em>. This can be derived using the properties of independent random variables and the CDF of the normal distribution. The key idea is that the minimum is less than or equal to <em>x</em> if and only if at least one of the variables is less than or equal to <em>x</em>. Using this logic, we can express <em>F_min(x)</em> in terms of the CDF of the individual normal distributions. Once we have the CDF of the minimum, we can differentiate it to obtain the PDF, which gives us a complete description of the distribution of the minimum. This distribution will no longer be normal; it will be skewed to the left, reflecting the fact that the minimum is more likely to be smaller than the average value. Now, let's bring in the concept of conditional distribution. Suppose we have another random variable <em>y</em>, and we're interested in the distribution of <em>y</em> given that we know the minimum of the <em>x</em> variables. This is the distribution conditioned on the minimum that we've been discussing. To find this conditional distribution, we need to use Bayes' theorem, which provides a framework for updating probabilities based on new evidence. Bayes' theorem tells us that the conditional probability of <em>y</em> given the minimum is proportional to the joint probability of <em>y</em> and the minimum, divided by the marginal probability of the minimum. This sounds complicated, but the key is to break it down into manageable steps.</p>
+<p>First, we need to determine the joint distribution of <em>y</em> and the minimum. This depends on the relationship between <em>y</em> and the <em>x</em> variables. If <em>y</em> is independent of the <em>x</em> variables, then the joint distribution is simply the product of the marginal distributions. But if <em>y</em> is related to the <em>x</em> variables in some way, we need to model this dependence explicitly. For example, <em>y</em> might represent the cost associated with the smallest <em>x</em> value, or it might represent a related measurement taken at the same time. Once we have the joint distribution, we can use Bayes' theorem to calculate the conditional distribution. This will give us a precise understanding of how the distribution of <em>y</em> is affected by the minimum of the <em>x</em> variables. This analysis is incredibly useful in practical situations. For instance, imagine you're designing a system with multiple components, and the system's performance depends on the weakest component. The <em>x</em> variables could represent the strengths of the components, and <em>y</em> could represent the overall system performance. By understanding the distribution of <em>y</em> conditioned on the minimum component strength, you can assess the system's reliability and identify potential vulnerabilities. Or, consider a financial risk management scenario. The <em>x</em> variables could represent potential losses from different investments, and <em>y</em> could represent the total portfolio loss. By analyzing the distribution of <em>y</em> conditioned on the minimum loss, you can estimate the risk of extreme losses and make informed investment decisions. In summary, understanding the interplay between the normal distribution and the minimum of a set of normal variables is crucial for modeling and predicting extreme events. The conditional distribution provides a powerful tool for analyzing how other variables are affected by these extreme values. In the next section, we'll explore another class of distributions specifically designed for modeling extreme values: extreme value distributions.</p>
+<h2>Extreme Value Distributions</h2>
+<p>When dealing with the <strong>minimum</strong> (or maximum) of a large number of independent random variables, especially when those variables come from the same distribution, we often encounter a special class of distributions known as <strong>extreme value distributions</strong> (EVDs). These distributions are tailor-made for modeling the tails of distributions, which is where the extreme values reside. Think of them as the specialists for the outliers, the rare events, the black swans. Unlike the normal distribution, which is symmetric and focuses on the average behavior, EVDs are designed to capture the behavior of the most extreme observations. They are essential tools in fields like finance, insurance, and environmental science, where understanding extreme risks is paramount. There are three main types of extreme value distributions:</p>
+<ul>
+<li><strong>Gumbel:</strong> This distribution is often used to model the maximum of variables with light tails, such as exponential or normal distributions. It's characterized by a long tail extending towards extreme values. In the context of the minimum, we can use a reflected Gumbel distribution, which models the minimum of variables with light tails.</li>
+<li><strong>Fréchet:</strong> This distribution is used to model the maximum of variables with heavy tails, such as Pareto distributions. Heavy-tailed distributions have a higher probability of extreme values compared to light-tailed distributions. The Fréchet distribution also has a long tail, but it's heavier than the Gumbel.</li>
+<li><strong>Weibull:</strong> This distribution can model both maxima and minima and is often used in reliability engineering to describe the time to failure of a system. It's more flexible than the Gumbel and Fréchet distributions and can take on a variety of shapes depending on its parameters.</li>
+</ul>
+<p>The choice of which EVD to use depends on the tail behavior of the original distribution. If the original distribution has light tails, the Gumbel distribution is often a good choice. If it has heavy tails, the Fréchet distribution might be more appropriate. And the Weibull distribution can be a versatile option in many cases. Now, let's consider how EVDs relate to the concept of distribution conditioned on the minimum. Imagine we have a set of <em>n</em> i.i.d. random variables, and we're interested in the distribution of another variable <em>y</em> given the minimum of these variables. If the minimum follows an EVD, then the conditional distribution of <em>y</em> can take on some interesting forms. For example, if the minimum follows a Gumbel distribution and <em>y</em> is independent of the other variables, then the conditional distribution of <em>y</em> might also be a Gumbel distribution, possibly with different parameters. This is a powerful result because it allows us to model the behavior of <em>y</em> in extreme scenarios, where the minimum takes on very low values. The key to understanding these conditional distributions lies in the properties of EVDs and their relationship to the original distribution of the variables. The Fisher-Tippett-Gnedenko theorem, a fundamental result in extreme value theory, tells us that under certain conditions, the maximum (or minimum) of a large number of i.i.d. random variables will converge to one of the three EVDs, regardless of the original distribution. This is a remarkable result because it provides a unifying framework for modeling extreme events. But how do we apply these concepts in practice? Let's consider a few examples. In <strong>finance</strong>, we might use EVDs to model the distribution of extreme losses in a portfolio. The minimum of a set of asset returns could follow an EVD, and we could then use this distribution to estimate the probability of large losses and set appropriate risk management strategies. In <strong>insurance</strong>, EVDs are used to model the distribution of large claims. The minimum claim amount could be modeled using an EVD, and this could be used to set premiums and reinsurance levels. In <strong>environmental science</strong>, EVDs are used to model extreme weather events, such as floods or droughts. The minimum rainfall over a period could follow an EVD, and this could be used to assess the risk of water shortages. These are just a few examples, but they illustrate the wide range of applications of EVDs and their importance in understanding and managing extreme risks. In conclusion, extreme value distributions are essential tools for modeling the tails of distributions and understanding extreme events. When combined with the concept of distribution conditioned on the minimum, they provide a powerful framework for analyzing how other variables behave in extreme scenarios. By understanding EVDs and their properties, we can make better decisions in the face of uncertainty and manage risks more effectively.</p>
+<h2>Practical Applications and Examples</h2>
+<p>Now that we've covered the theoretical aspects of distribution conditioned on the minimum, let's dive into the real world and see how this concept is applied in various fields. Understanding the practical applications not only solidifies our knowledge but also highlights the importance of this statistical tool in decision-making and problem-solving. One of the most prominent areas where this concept shines is <strong>risk management</strong>. Whether it's financial risk, operational risk, or even environmental risk, understanding the potential for extreme events is crucial. For instance, consider a portfolio of investments. We might be interested in the distribution of the portfolio's return conditioned on the worst-performing asset in the portfolio. This allows us to assess the potential downside risk and make informed decisions about diversification and hedging strategies. In the context of operational risk, imagine a manufacturing plant with multiple critical components. The overall reliability of the plant depends on the weakest link, the component with the shortest lifespan. By understanding the distribution of the plant's uptime conditioned on the minimum lifespan of a component, we can identify potential bottlenecks and implement preventive maintenance strategies to minimize downtime. Environmental risk provides another compelling example. Consider the risk of flooding in a coastal area. The severity of a flood depends on various factors, including the minimum elevation of the land, the maximum rainfall, and the storm surge. By analyzing the distribution of flood levels conditioned on the minimum elevation, we can assess the vulnerability of different areas and implement appropriate mitigation measures, such as building seawalls or elevating structures.</p>
+<p>Another field where distribution conditioned on the minimum is invaluable is <strong>reliability engineering</strong>. In this field, we're concerned with the lifespan and performance of systems and components. Often, a system's overall reliability is determined by its weakest link. For example, consider a complex electronic system with numerous components. The system will fail if any one of these components fails. By understanding the distribution of the system's time to failure conditioned on the minimum lifespan of a component, we can identify critical components that are most likely to cause system failure and focus our efforts on improving their reliability. This could involve selecting higher-quality components, implementing redundancy, or developing more robust testing procedures. In the context of structural engineering, consider a bridge or a building. The overall strength of the structure depends on the weakest point, such as a single beam or a connection. By analyzing the distribution of the structure's load-bearing capacity conditioned on the minimum strength of a structural element, we can ensure that the structure can withstand extreme loads and prevent catastrophic failures. The concept also finds application in <strong>supply chain management</strong>. Consider a company that relies on multiple suppliers for a critical raw material. The company's ability to meet its production targets depends on the reliability of its suppliers. By understanding the distribution of the company's production output conditioned on the minimum delivery time from a supplier, we can identify potential vulnerabilities in the supply chain and implement strategies to mitigate disruptions, such as diversifying suppliers or holding buffer inventory.</p>
+<p>Let's delve into a more specific example to illustrate how this works in practice. Imagine a car manufacturer that sources tires from multiple suppliers. The safety of the cars depends on the quality of the tires, and the manufacturer wants to ensure that the tires meet certain performance standards. The manufacturer tests tires from each supplier and records the minimum tread depth after a certain mileage. This minimum tread depth is a critical measure of tire performance and safety. By analyzing the distribution of the tire's lifespan (measured by mileage) conditioned on the minimum tread depth, the manufacturer can assess the risk of tire failure and identify suppliers that consistently provide high-quality tires. If the distribution shows a high probability of tire failure at a relatively low mileage given a low minimum tread depth, the manufacturer might decide to switch to a different supplier or implement more stringent quality control measures. This example highlights the power of distribution conditioned on the minimum in making informed decisions based on extreme value scenarios. By focusing on the worst-case outcomes, we can identify potential risks and take proactive steps to mitigate them. In conclusion, the concept of distribution conditioned on the minimum is a versatile tool with applications across a wide range of fields. From risk management to reliability engineering to supply chain management, understanding how variables behave in extreme scenarios is crucial for making informed decisions and preventing adverse outcomes. By focusing on the minimum values and their impact on other variables, we can gain valuable insights and develop effective strategies for managing risks and ensuring reliability.</p>
+<h2>Conclusion</h2>
+<p>Alright, guys, we've reached the end of our journey into the fascinating world of <strong>distribution conditioned on the minimum</strong>! We've explored the fundamental concepts, delved into the role of normal distributions and extreme value distributions, and examined numerous practical applications. Hopefully, you now have a solid understanding of this powerful statistical tool and its importance in various fields. Let's recap the key takeaways. We started by understanding the basic building blocks: random variables, conditional distributions, and marginal distributions. We learned that the distribution conditioned on the minimum allows us to analyze the behavior of a variable <em>y</em> given that we know the smallest value of another variable <em>x</em> in a set of observations. This is particularly relevant when dealing with extreme events or worst-case scenarios. We then explored the role of the normal distribution and how the minimum of a set of normal variables behaves. We saw that the distribution of the minimum is not normal but is skewed to the left, reflecting the fact that the minimum is more likely to be smaller than the average value. We also discussed how Bayes' theorem can be used to calculate the conditional distribution of <em>y</em> given the minimum of <em>x</em>.</p>
+<p>Next, we dived into extreme value distributions (EVDs), which are specifically designed for modeling the tails of distributions and capturing the behavior of extreme observations. We learned about the three main types of EVDs: Gumbel, Fréchet, and Weibull, and how their use depends on the tail behavior of the original distribution. We saw how EVDs, combined with the concept of distribution conditioned on the minimum, provide a powerful framework for analyzing how other variables behave in extreme scenarios. Finally, we explored numerous practical applications of this concept, ranging from risk management to reliability engineering to supply chain management. We saw how understanding the distribution conditioned on the minimum can help us make informed decisions, manage risks, and ensure reliability in various contexts. So, what's the big picture? The concept of distribution conditioned on the minimum is a valuable tool for understanding and predicting extreme events. It allows us to move beyond average behavior and focus on the tails of distributions, where the most significant risks and opportunities often lie. By understanding how variables interact under extreme conditions, we can make better decisions, design more robust systems, and manage risks more effectively. But like any statistical tool, distribution conditioned on the minimum has its limitations. It's important to remember that the accuracy of our analysis depends on the quality of our data and the appropriateness of our models. We need to be careful about making assumptions and ensure that our models accurately reflect the real-world phenomena we're trying to understand. Furthermore, the interpretation of results requires careful consideration of the context. Statistical significance doesn't always translate to practical significance, and we need to consider the implications of our findings in the real world.</p>
+<p>In conclusion, the journey through understanding distribution conditioned on the minimum has equipped us with a powerful tool for analyzing extreme events and making informed decisions. By grasping the theoretical foundations and exploring practical applications, we can confidently apply this concept to various real-world scenarios. So, go forth and explore the world of extreme values – you might be surprised by what you discover! Keep learning, keep questioning, and keep applying these concepts to solve real-world problems. The world of statistics is vast and fascinating, and there's always something new to learn. And who knows, maybe you'll be the one to discover the next groundbreaking application of distribution conditioned on the minimum. Thanks for joining me on this adventure, guys! I hope you found this guide helpful and informative. Until next time, keep exploring the world of statistics and probability!</p>
+
+                    </div>
+                    <aside class="related-posts">
+                        <div class="ad-sidebar container">
+                            <!-- <div class="ad-wrapper">
+    <span>Iklan Related</span>
+</div> -->
+                        </div>
+                        <h2 class="related-posts-title">Related Posts</h2><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/troubleshooting-lightdm-default-user-session">Troubleshooting LightDM Default User Session Issues</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-03T20:06:34+00:00">Aug 3, 2025</time>
+		                        <span class="view-count">
+									51 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/solving-28-7-2-3">Solving 28 ÷ 7 + 2 × 3 A Step By Step Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-13T16:42:46+00:00">Jul 13, 2025</time>
+		                        <span class="view-count">
+									43 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/optimizing-ls-performance-reducing-excessive">Optimizing Ls Performance Reducing Excessive System Calls</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-18T13:58:42+00:00">Jul 18, 2025</time>
+		                        <span class="view-count">
+									57 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/concord-service-ontario-your-go">Concord Service Ontario: Your Go-To Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-12T01:00:36+00:00">Aug 12, 2025</time>
+		                        <span class="view-count">
+									41 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/deferred-compensation-an-accounting-guide">Deferred Compensation: An Accounting Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-02T08:43:33+00:00">Aug 2, 2025</time>
+		                        <span class="view-count">
+									42 views
+		                        </span>
+                            </div>
+                        </article>
+                    </aside>
+                    <aside class="related-posts"></aside>
+                </div>
+            </div>
+        </article>
+        <a href="#" class="back-to-top" id="backToTop" title="Back to top">
+        	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-bar-up" viewBox="0 0 16 16">
+			  <path fill-rule="evenodd" d="M3.646 11.854a.5.5 0 0 0 .708 0L8 8.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708M2.4 5.2c0 .22.18.4.4.4h10.4a.4.4 0 0 0 0-.8H2.8a.4.4 0 0 0-.4.4"/>
+			</svg>
+		</a>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 Question Notes</p>
+        </div>
+    </footer>
+    <script>
+    	(() => {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            const toggleMenu = () => {
+                navMenu.classList.toggle('nav-menu-active');
+                navToggle.classList.toggle('nav-toggle-active');
+            };
+            const backToTopHandler = (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            navToggle.addEventListener('click', toggleMenu);
+            document.getElementById('backToTop').addEventListener('click', backToTopHandler);
+            window.addEventListener('pagehide', () => {
+                navToggle.removeEventListener('click', toggleMenu);
+                document.getElementById('backToTop').removeEventListener('click', backToTopHandler);
+            });
+        })();
+		(() => {
+            window.addEventListener("DOMContentLoaded", (event) => {
+                const ellHljs = document.createElement("script");
+                ellHljs.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js");
+                ellHljs.onload = () => {
+                    hljs.highlightAll();
+                };
+                document.querySelector("body").append(ellHljs);
+                const ellFont = document.createElement("link");
+                ellFont.setAttribute("href", "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css");
+                ellFont.setAttribute("rel", "stylesheet");
+                document.querySelector("head").append(ellFont);
+                window.addEventListener('pagehide', () => {
+                    // ellHljs.remove();
+                    ellFont.remove();
+                });
+
+            });
+        })();
+    </script>
+    <!-- Histats.com  START  (aync)-->
+<script type="text/javascript">var _Hasync= _Hasync|| [];
+_Hasync.push(['Histats.start', '1,4957095,4,0,0,0,00010000']);
+_Hasync.push(['Histats.fasi', '1']);
+_Hasync.push(['Histats.track_hits', '']);
+(function() {
+var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
+hs.src = ('//s10.histats.com/js15_as.js');
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
+})();</script>
+<!-- Histats.com  END  -->
+    
+    
+</body>
+</html>

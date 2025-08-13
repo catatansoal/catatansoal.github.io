@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Reveal SDK 1.7.6 Pivot Column Sorting Bug: How To Fix</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Reveal SDK 1.7.6 Pivot Column Sorting Bug: How To Fix...">
+    <link rel="canonical" href="https://catatansoal.github.io/blog/reveal-sdk-1-7-6">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Reveal SDK 1.7.6 Pivot Column Sorting Bug: How To Fix">
+	<meta property="og:description" content="Reveal SDK 1.7.6 Pivot Column Sorting Bug: How To Fix...">
+	<meta property="og:url" content="https://catatansoal.github.io/blog/reveal-sdk-1-7-6">
+	<meta property="og:site_name" content="Question Notes">
+	<meta property="article:published_time" content="2025-08-12T07:33:44+00:00">
+	<meta property="article:author" content="ADMIN">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+    <link rel="preload" fetchpriority="high" as="image" href="https://tse4.mm.bing.net/th?q=%5BBUG%5D%20Pivot%20Column%20Sorting%20Script%20Error%20in%20Reveal%20SDK%201.7.6">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style type="text/css">
+    	:root{--primary-color:#3740ff;--text-color:#202124;--background-color:#ffffff;--gray-100:#f8f9fa;--gray-200:#e9ecef}*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;line-height:1.6;color:var(--text-color);background-color:var(--background-color)}.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}.header{background-color:var(--background-color);border-bottom:1px solid var(--gray-200);position:sticky;top:0;z-index:100}.nav{padding:.5rem 0}.nav-container{display:flex;justify-content:space-between;align-items:center;gap:1rem}.nav-left{display:flex;align-items:center;flex-shrink:0}.logo{font-weight:700;color:var(--primary-color)}.blog-tag{margin-left:1rem;padding:.25rem .5rem;background-color:var(--gray-100);border-radius:4px;font-size:.875rem}.nav-search{flex-grow:1;max-width:300px}.search-form{position:relative;width:100%}.search-input{width:100%;padding:.5rem 2.5rem .5rem 1rem;border:1px solid var(--gray-200);border-radius:24px;font-size:.875rem;transition:all 0.2s}.search-input:focus{outline:none;border-color:var(--primary-color);box-shadow:0 0 0 2px rgb(55 64 255 / .1)}.search-button{position:absolute;right:.5rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#5f6368;cursor:pointer;padding:.25rem;display:flex;align-items:center;justify-content:center}.search-button:hover{color:var(--primary-color)}.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:.5rem}.hamburger{display:block;position:relative;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before,.hamburger::after{content:'';position:absolute;width:24px;height:2px;background:var(--text-color);transition:all 0.3s}.hamburger::before{top:-6px}.hamburger::after{bottom:-6px}.nav-toggle-active .hamburger{background:#fff0}.nav-toggle-active .hamburger::before{transform:rotate(45deg);top:0}.nav-toggle-active .hamburger::after{transform:rotate(-45deg);bottom:0}.nav-list{display:flex;list-style:none;gap:2rem}.nav-link{color:var(--text-color);text-decoration:none;font-size:.9rem;transition:color 0.2s}.nav-link:hover{color:var(--primary-color)}.article-header{padding:2rem 0;background-color:var(--gray-100)}.article-layout{display:grid;grid-template-columns:1fr 350px;gap:3rem;padding:1rem 0;align-items: start}h1,h2,h3,h4,h5,h6{font-family:"Crimson Text","Times New Roman",Times,serif}h1{font-size:2.5rem;line-height:1.2;margin-bottom:1rem}.meta{color:#5f6368;font-size:.875rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}.view-count{display:inline-flex;align-items:center;gap:.25rem}.view-count svg{color:#5f6368}.content{min-width:0;border-bottom:1px solid #dddddd5e;margin-top:1rem;white-space:pre-line !important;overflow-wrap:break-word;overflow-x:auto;word-break:break-word}.lead{font-size:1.25rem;color:#5f6368;margin-bottom:2rem}h2,h3,h4,h5,h6{font-size:1.75rem;margin:1rem 0 1rem}p,pre,ol,ul>li{margin-bottom:1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;font-size:1.3rem;text-align: justify;}p>code{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px}hr{margin:1rem 0 1rem 0}.code-example{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;margin:1.5rem 0;overflow-x:auto}code{font-family:'Roboto Mono',monospace;font-size:.875rem}ul{margin:.2rem 0;padding-left:1.5rem}.related-posts{background-color:var(--gray-100);padding:1.5rem;border-radius:8px;position:sticky;top:5rem}.related-posts-title,.newpost-posts-list{font-size:1.75rem;margin:0 0 1rem}.related-posts-list{display:flex;flex-direction:column;gap:.5rem}.related-post,.newpost-post{border-bottom:1px solid #ddd;padding-bottom:10px;margin-bottom:10px}.related-post:last-child,.newpost-post:last-child{padding-bottom:0;border-bottom:none}.related-post-title,.newpost-post-title{font-size:1.2rem;margin:0 0 .1rem;font-family:"Newsreader",serif;font-optical-sizing:auto;font-style:normal;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;}.related-post-title a,.newpost-post-title a{color:var(--text-color);text-decoration:none;transition:color 0.2s}.related-post-title a:hover,.newpost-post-title a:hover{color:var(--primary-color)}.related-post time{font-size:.875rem;color:#5f6368}.footer{background-color:var(--gray-100);padding:2rem 0;margin-top:4rem;color:#5f6368;font-size:.875rem}.nav-menu>ul>li{margin-bottom:0}@media (max-width:1024px){.container{max-width:800px}.article-layout{grid-template-columns:1fr;gap:2rem}.related-posts{position:static}}@media (max-width:768px){.nav-container{flex-wrap:wrap}.nav-search{order:3;max-width:none;width:100%;margin-top:.1rem}.nav-toggle{display:block}.nav-menu{display:none;position:absolute;top:100%;left:0;right:0;background:var(--background-color);padding:1rem 0;border-bottom:1px solid var(--gray-200)}.nav-menu-active{display:block}.nav-list{flex-direction:column;gap:.1rem;padding:0 1.5rem}.nav-link{display:block;padding:.2rem 0}h1{font-size:2rem}.article-header{padding:2rem 0}.content{padding:.1rem 0}}table{width:100%;border-collapse:collapse;margin:20px 0;font-family:'Arial',sans-serif}th,td{padding:12px 15px;text-align:left;border:1px solid #ddd}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9}tr:nth-child(even) td{background-color:#f2f2f2}@media screen and (max-width:768px){table{border:0;display:block;overflow-x:auto;white-space:nowrap}th,td{padding:10px;text-align:right}th{background-color:#0F7F0B;color:#FFF}td{background-color:#f9f9f9;border-bottom:1px solid #ddd}tr:nth-child(even) td{background-color:#f2f2f2}}a{text-decoration:none;color:#540707}.katex-html{padding: .2rem;color: #000;font-weight: 700;font-size: 1.3rem;overflow-wrap: break-word;max-width: 100%;white-space: normal !important}.category{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin:1rem 0 1rem 0}.tag{font-size:1rem;font-weight:700;padding:.1rem .3rem .1rem .3rem;background:#0000000f;color:#000;border-radius:5px;font-family:"Newsreader",serif}.tag>a{text-decoration:none;color:#000}img{margin:auto;display:block;max-width:100%;height:auto;margin-bottom:1rem}.katex{white-space: pre-line !important;display: inline-block;max-width: 100%;overflow-x: auto;overflow-y: hidden;scrollbar-width: thin;overflow-wrap: break-word;word-break: break-word;vertical-align: -7px}.content > p {overflow-wrap: break-word;word-break: break-word}
+    </style>
+    <style type="text/css">
+    	pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}
+		.hljs{color:#c9d1d9;background:#0d1117}.hljs-doctag,.hljs-keyword,.hljs-meta .hljs-keyword,.hljs-template-tag,.hljs-template-variable,.hljs-type,.hljs-variable.language_{color:#ff7b72}.hljs-title,.hljs-title.class_,.hljs-title.class_.inherited__,.hljs-title.function_{color:#d2a8ff}.hljs-attr,.hljs-attribute,.hljs-literal,.hljs-meta,.hljs-number,.hljs-operator,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-variable{color:#79c0ff}.hljs-meta .hljs-string,.hljs-regexp,.hljs-string{color:#a5d6ff}.hljs-built_in,.hljs-symbol{color:#ffa657}.hljs-code,.hljs-comment,.hljs-formula{color:#8b949e}.hljs-name,.hljs-quote,.hljs-selector-pseudo,.hljs-selector-tag{color:#7ee787}.hljs-subst{color:#c9d1d9}.hljs-section{color:#1f6feb;font-weight:700}.hljs-bullet{color:#f2cc60}.hljs-emphasis{color:#c9d1d9;font-style:italic}.hljs-strong{color:#c9d1d9;font-weight:700}.hljs-addition{color:#aff5b4;background-color:#033a16}.hljs-deletion{color:#ffdcd7;background-color:#67060c}
+    	pre{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;font-weight:400;word-break:break-word;word-wrap:break-word;box-sizing:inherit;border-radius:4px;overflow-x:auto;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}code{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;word-wrap:break-word;word-break:break-word;font-style:normal;line-height:20px;letter-spacing:-.003em;box-sizing:inherit;font-weight:400;font-size:75%;font-family:source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace}
+    </style>
+    <style type="text/css">
+    	.back-to-top{position:fixed;bottom:20px;right:20px;background-color:#a73f3f;color:#fff;padding:8px 10px;border-radius:50%;box-shadow:0 4px 6px rgb(0 0 0 / .2);font-size:10px;font-weight:700;text-decoration:none;text-align:center;transition:opacity 0.3s ease,visibility 0.3s ease;z-index:99999;opacity:1;visibility:visible}.back-to-top:hover{background-color:#0056b3}
+    </style>
+    <style type="text/css">
+        .ad-header {margin: 1rem auto 1rem;background-color: #fdfdfd;text-align: center;display: block;}.ad-header .ad-wrapper {min-height: 90px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #555;font-weight: 500;padding: 3rem;border: 1px dashed #ccc;border-radius: 6px;}@media (max-width: 768px) {.ad-header {padding: 0.75rem;}}.ad-sidebar {margin: 0 0 1rem;background-color: #fefefe;text-align: center;padding: 0px;width: 100%;max-width: 100%;display: block;}.ad-sidebar .ad-wrapper {min-height: 250px;display: flex;align-items: center;justify-content: center;font-size: 1rem;color: #444;font-weight: 500;border: 1px dashed #aaa;border-radius: 6px;padding: 0rem;}@media (max-width: 1024px) {.ad-sidebar {padding: 0.75rem;}}
+    </style>
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://catatansoal.github.io/blog/reveal-sdk-1-7-6"
+          },
+          "headline": "Reveal SDK 1.7.6 Pivot Column Sorting Bug: How To Fix",
+          "description": "Reveal SDK 1.7.6 Pivot Column Sorting Bug: How To Fix...",
+          "image": [
+            "https://tse4.mm.bing.net/th?q=%5BBUG%5D%20Pivot%20Column%20Sorting%20Script%20Error%20in%20Reveal%20SDK%201.7.6"
+          ],
+          "author": {
+            "@type": "Person",
+            "name": "ADMIN",
+            "jobTitle": "Editor web"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Question Notes",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://tse4.mm.bing.net/th?q=Question%20Notes"
+            }
+          },
+          "datePublished": "2025-08-12T07:33:44+00:00",
+          "dateModified": "2025-08-12T07:33:44+00:00"
+        }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="container nav-container">
+                <div class="nav-left">
+                    <span class="logo">Question Notes</span>
+                    <span class="blog-tag">Article</span>
+                </div>
+                <div class="nav-search">
+                    <form class="search-form" role="search">
+                        <input 
+                            type="search" 
+                            class="search-input"
+                            placeholder="Search articles..."
+                            aria-label="Search articles"
+                        >
+                        <button type="submit" class="search-button" aria-label="Submit search">🔎</button>
+                    </form>
+                </div>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+                <div class="nav-menu">
+                    <ul class="nav-list">
+                    	<li><a href="/" class="nav-link">HOME</a></li>
+                        <li><a href="/pages/About" class="nav-link">About</a></li>
+                        <li><a href="/pages/Contact" class="nav-link">Contact</a></li>
+                        <li><a href="/pages/Disclaimer" class="nav-link">Disclaimer</a></li>
+                        <li><a href="/pages/Privacy" class="nav-link">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="main">
+        <article class="article">
+            <header class="article-header">
+                <div class="container">
+                    <h1>Reveal SDK 1.7.6 Pivot Column Sorting Bug: How To Fix</h1>
+                    <div class="meta">
+                        <time datetime="2025-08-12T07:33:44+00:00">Aug 12, 2025</time>
+                        <span class="author">by ADMIN</span>
+                        <span class="view-count">
+                            <span id="viewCount">54</span> views
+                        </span>
+                    </div>
+                </div>
+            </header>
+            <div class="ad-header container">
+                <!-- <div class="ad-wrapper">
+    Iklan Headers
+</div> -->
+            </div>
+            <div class="container">
+                <div class="article-layout">
+                    <div class="content">
+                        <img src="https://tse4.mm.bing.net/th?q=%5BBUG%5D%20Pivot%20Column%20Sorting%20Script%20Error%20in%20Reveal%20SDK%201.7.6" title="[BUG] Pivot Column Sorting Script Error in Reveal SDK 1.7.6" width="300" height="200"/><p>Hey everyone,</p>
+<p>We've got a critical issue to discuss today regarding the Reveal SDK 1.7.6. It seems there's a bug causing a script error when sorting pivot columns, and we need to get this sorted out ASAP. This article dives deep into the problem, provides a detailed explanation, and offers potential workarounds. So, let's get started and figure out what's going on!</p>
+<h2>Understanding the Pivot Column Sorting Bug</h2>
+<p><strong>The Main Issue</strong>: In Reveal SDK 1.7.6, a script error pops up when you try to sort a pivot column. The error message is quite specific: “Cannot read properties of null.” This suggests that the sorting functionality is trying to access a property of something that doesn’t exist (i.e., it's null), leading to the crash. It's super frustrating when your tools don't work as expected, especially when you're trying to analyze crucial data. Imagine setting up your pivot table perfectly, only to have it throw an error when you try to sort it – not cool, right? This bug can seriously disrupt your workflow and make it tough to get the insights you need. Let's dive into the specifics to figure out why this is happening. We're using Reveal SDK version 1.7.6, so if you're on this version, pay close attention. <strong>This issue particularly affects those using Angular for their client framework and <a href="http://ASP.NET">ASP.NET</a> for their server platform.</strong> It seems the problem is triggered under very specific conditions, which we'll break down in the next section. Getting to the bottom of this means understanding exactly when and why the error occurs, so you can avoid it and get back to smooth data analysis. Stick with us as we go through the steps to reproduce this bug and look at the broader implications for your projects. We’ll also touch on some temporary fixes while the Reveal team works on a permanent solution. Knowing the specifics will help you navigate this issue and keep your projects on track. So, let's dive in and get this sorted out!</p>
+<h3>Reproduction Steps: How to Trigger the Error</h3>
+<p>So, how do you make this bug appear? It's all about the specific setup of your pivot table. <strong>This script error, the “Cannot read properties of null” error, rears its ugly head under very specific circumstances.</strong> Here's the breakdown:</p>
+<ol>
+<li>
+<p><strong>Numeric Field in Rows:</strong> First, you need to add a numeric field to the rows placeholder in your pivot table. Think of fields like <em>'Quantity'</em> or <em>'Sales Amount'</em>. This is the first key ingredient in our bug recipe. It’s important that the field you’re using contains numerical data because the bug seems to be triggered by how the SDK handles sorting in this specific scenario. If you're experimenting with different types of data, you'll notice that using non-numeric fields doesn't trigger the error. This narrows down the issue and gives us a clearer understanding of what's going on under the hood.</p>
+</li>
+<li>
+<p><strong>Post-Calculated Field in Values:</strong> Next up, you need to add a post-calculated field to the values placeholder. These are the fields that are calculated after the initial data aggregation. For example, you might have a field that calculates the <em>'Percentage of Total Sales'</em>. Post-calculated fields are super useful for getting deeper insights, but in this case, they're also part of the problem. The combination of a numeric field in the rows and a post-calculated field in the values seems to be the trigger point. The SDK might be struggling with how it handles the sorting logic when these two types of fields are combined. Understanding this interaction is crucial for pinpointing the exact cause of the bug and figuring out a fix. Without this combination, the bug doesn’t surface, making it a classic case of a perfect storm scenario in your pivot table setup. So, when you're using Reveal SDK 1.7.6, be extra cautious about combining these field types.</p>
+</li>
+</ol>
+<p>By following these steps, you should be able to reproduce the error consistently. This is incredibly helpful for troubleshooting because it means we can reliably test potential solutions. Think of it like this: if you can make the bug happen on purpose, you can also test if a fix actually works. Now, let's look at the visuals and the attached files to get even more clarity.</p>
+<h3>Visual Evidence and Sample Files</h3>
+<p>Visual aids can be super helpful in understanding complex issues, right? So, let's take a look at the provided images and sample files. <strong>The screenshots included in the original post give us a clear picture of the error in action.</strong> You can see the pivot table setup and the exact error message that pops up, which is “Cannot read properties of null.” This visual confirmation is invaluable because it shows us exactly what users are experiencing. It’s one thing to describe the error, but seeing it in black and white (or rather, in a screenshot) makes it much more tangible. Plus, it helps ensure that everyone is on the same page about what the problem looks like.</p>
+<p>Beyond the screenshots, there are also attached files: <em>'RevealServer.zip'</em> and <em>'reveal-angular.zip'</em>. These files are gold because they provide a real-world example of the issue. The <em>'RevealServer.zip'</em> file likely contains the server-side components of the Reveal application, while <em>'reveal-angular.zip'</em> probably includes the Angular client-side code. Having access to these files means developers can dive deep into the code, replicate the environment, and debug the issue firsthand. It's like having the patient's medical history – it gives you the context you need to make an accurate diagnosis. For the Reveal SDK team, these files are crucial for identifying the root cause of the bug and developing a fix. They can step through the code, see where the error occurs, and understand why it's happening.</p>
+<p>For anyone experiencing this issue, these files can also serve as a reference. You can compare your setup and code with the provided examples to see if you're running into the same problem. It's a practical way to ensure you've correctly identified the bug and that any potential solutions are relevant to your situation. So, don't underestimate the power of these attachments – they're a treasure trove of information for troubleshooting and resolving this pivot column sorting issue.</p>
+<h2>Diving Deeper: Technical Details and Impact</h2>
+<p>Alright, let's get a bit more technical, guys. Understanding the nitty-gritty details can help us figure out why this bug is happening and what we can do about it. <strong>At its core, the “Cannot read properties of null” error tells us that the code is trying to access something that doesn't exist.</strong> It's like trying to open a door that isn't there – you're going to run into a problem. In this case, the sorting function in Reveal SDK 1.7.6 is likely expecting a value or object, but it's encountering a null instead. This typically happens when a variable hasn't been initialized, or a property is being accessed on an object that is null.</p>
+<p>So, why is this happening specifically with pivot columns, numeric fields in rows, and post-calculated fields in values? Well, pivot tables involve complex data aggregation and manipulation. When you add a numeric field to the rows, the sorting algorithm needs to handle numerical comparisons. When you add a post-calculated field, the sorting needs to consider these dynamically computed values. The combination of these two factors might be exposing a flaw in the sorting logic. For example, the sorting function might be trying to access a property of a row or cell that hasn't been fully computed yet, leading to the null value. Or, there might be an issue with how the SDK is handling the data types or formats in this specific scenario. It's also possible that the post-calculated field is returning null under certain conditions, and the sorting function isn't properly handling these cases. Whatever the exact cause, it's clear that there's an interaction between these elements that's triggering the error. The SDK might need to include additional checks or error handling to prevent this from happening. It might also require a deeper dive into the sorting algorithm to ensure it can handle all possible scenarios. Identifying the root cause is essential for a permanent fix, but in the meantime, understanding the technical details can help you avoid the issue and find temporary solutions.</p>
+<h3>Impact on Users and Projects</h3>
+<p>Now, let's talk about how this bug actually affects you, the users. <strong>This pivot column sorting script error can be a major headache, especially when you're working on critical projects.</strong> Imagine you're putting together a crucial report for your boss or a key analysis for your team. You've spent hours setting up your pivot table, getting all the data in the right place, and then BAM! You hit the sort button, and you get this frustrating error message. Suddenly, your workflow grinds to a halt. You can't sort your data, which means you can't easily find the insights you need. It's like trying to drive a car with a flat tire – you're not going to get very far. This bug can lead to wasted time, frustration, and even missed deadlines. If you're relying on Reveal SDK 1.7.6 for your data analysis, this issue can seriously disrupt your process. You might have to resort to workarounds, like exporting the data and sorting it in another tool, which adds extra steps and increases the risk of errors. Or, you might have to avoid using pivot tables altogether, which limits your ability to explore your data effectively. The impact isn't just on individual users either. If this bug is affecting multiple people in your organization, it can impact team productivity and overall efficiency. It's the kind of issue that can make people lose confidence in the tool, which is never a good thing. That's why it's so important to understand the scope of the problem and to find a solution as quickly as possible. So, what can we do about it? Let's look at some potential workarounds and solutions.</p>
+<h2>Potential Workarounds and Solutions</h2>
+<p>Okay, so we know the bug is a pain, but what can we do about it <em>right now</em>? <strong>While the Reveal SDK team works on a permanent fix, there are a few potential workarounds you can try.</strong> These aren't perfect, but they might help you get your work done without pulling your hair out.</p>
+<ol>
+<li>
+<p><strong>Avoid the Trigger Combination:</strong> The simplest workaround is to avoid the specific combination of fields that triggers the error. Remember, the bug seems to occur when you have a numeric field in the rows and a post-calculated field in the values. So, if possible, try rearranging your pivot table. Maybe you can move the numeric field to the columns or find a different way to calculate the values. It's not always ideal, but sometimes a small change in your setup can make all the difference. This approach is like avoiding a pothole on the road – you know it's there, so you steer clear of it. It might mean taking a slightly different route, but you'll still reach your destination.</p>
+</li>
+<li>
+<p><strong>Pre-calculate the Fields:</strong> Another option is to pre-calculate the post-calculated fields in your data source. Instead of relying on the pivot table to calculate these values dynamically, you can add a new column to your data that contains the pre-calculated results. This way, you can use this pre-calculated field in your pivot table without triggering the bug. This workaround is similar to preparing your ingredients before you start cooking – it takes some extra effort upfront, but it can save you time and headaches later on. It might require some changes to your data source or ETL process, but it can be a reliable way to avoid the error.</p>
+</li>
+<li>
+<p><strong>Export and Sort:</strong> If you absolutely need to sort the pivot column and can't avoid the trigger combination, you can try exporting the data to another tool, like Excel, and sorting it there. It's an extra step, but it can be a quick way to get the results you need. This is like using a backup generator when the power goes out – it's not the ideal solution, but it keeps the lights on. Exporting and sorting might not be as seamless as sorting within the Reveal SDK, but it can be a practical alternative in a pinch.</p>
+</li>
+</ol>
+<p>These workarounds are temporary solutions, of course. <strong>The best solution is a permanent fix from the Reveal SDK team.</strong> They'll need to dive into the code, identify the root cause of the bug, and release a new version of the SDK that resolves the issue. In the meantime, these workarounds can help you stay productive and keep your projects on track.</p>
+<h3>Reporting and Tracking the Bug</h3>
+<p>Reporting and tracking the bug is super important to ensure it gets fixed quickly and efficiently. <strong>The more information the Reveal SDK team has, the better they can understand the problem and develop a solution.</strong> That's why detailed bug reports like the one we're discussing are so valuable. They provide the steps to reproduce the error, visual evidence, and even sample files. This kind of thoroughness makes it much easier for developers to pinpoint the issue. Think of it like a detective solving a mystery – the more clues they have, the better their chances of cracking the case.</p>
+<p>If you're experiencing this bug, or any other issues with the Reveal SDK, make sure to report it to the Reveal team. You can typically do this through their support channels, forums, or bug tracking system. When you report a bug, be as specific as possible. Include the SDK version, client framework, server platform, operating system, and detailed steps to reproduce the error. Screenshots and sample files can also be incredibly helpful. The more context you provide, the easier it will be for the team to understand and address the problem. Tracking the bug is also essential. Once you've reported the issue, keep an eye on its status. The Reveal team might provide updates on their progress, ask for more information, or even release a fix. By staying engaged and following the issue, you can help ensure it gets resolved and that you're among the first to know when a solution is available. It's a collaborative process – the more users report and track bugs, the more robust and reliable the Reveal SDK will become. So, don't hesitate to speak up and share your experiences. Your feedback can make a real difference.</p>
+<h2>Conclusion: Staying Informed and Proactive</h2>
+<p>So, guys, we've covered a lot today about this pivot column sorting script error in Reveal SDK 1.7.6. <strong>We've dug into the specifics of the bug, how to reproduce it, its impact on users, and potential workarounds.</strong> We've also emphasized the importance of reporting and tracking the bug to ensure a permanent fix. The key takeaway here is to stay informed and proactive. Bugs happen, it's a part of the software development process. But by understanding the issues and taking steps to address them, we can minimize their impact and keep our projects moving forward.</p>
+<p>If you're using Reveal SDK 1.7.6, be aware of this bug and the specific conditions that trigger it. Try the workarounds we've discussed if you run into the error. And most importantly, make sure to report any issues you encounter to the Reveal team. Your feedback is crucial for making the SDK better. In the meantime, keep an eye on the Reveal SDK release notes and announcements for updates on this bug and other fixes. The team is likely working hard to resolve this issue, and they'll want to get a fix out as soon as possible. By staying informed and proactive, you can navigate this challenge and continue to leverage the power of the Reveal SDK for your data analysis needs. Remember, we're all in this together, and by sharing our experiences and working collaboratively, we can help make the Reveal SDK the best it can be. So, keep reporting, keep tracking, and keep analyzing!</p>
+
+                    </div>
+                    <aside class="related-posts">
+                        <div class="ad-sidebar container">
+                            <!-- <div class="ad-wrapper">
+    <span>Iklan Related</span>
+</div> -->
+                        </div>
+                        <h2 class="related-posts-title">Related Posts</h2><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/opentitan-kdi-access-secure-key">OpenTitan KDI Access: Secure Key Derivation &amp; OTP Secrets</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-09T01:42:22+00:00">Aug 9, 2025</time>
+		                        <span class="view-count">
+									57 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/sql-injection-vulnerability-in-mobile">SQL Injection Vulnerability In Mobile Shop Project V1.0 Login.php And Remediation</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-07-13T17:17:32+00:00">Jul 13, 2025</time>
+		                        <span class="view-count">
+									81 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/servicenow-database-views-a-complete">ServiceNow Database Views: A Complete Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-11T15:04:45+00:00">Aug 11, 2025</time>
+		                        <span class="view-count">
+									43 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/self-tie-spreadeagle-a-comprehensive">Self-Tie Spreadeagle: A Comprehensive Guide</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-06T01:41:21+00:00">Aug 6, 2025</time>
+		                        <span class="view-count">
+									43 views
+		                        </span>
+                            </div>
+                        </article><article class="related-post">
+                            <h3 class="related-post-title">
+                                <a href="https://catatansoal.github.io/blog/overcome-laziness-a-practical-guide">Overcome Laziness: A Practical Guide To Productivity</a>
+                            </h3>
+                            <div class="meta">
+                            	<time datetime="2025-08-01T15:01:30+00:00">Aug 1, 2025</time>
+		                        <span class="view-count">
+									52 views
+		                        </span>
+                            </div>
+                        </article>
+                    </aside>
+                    <aside class="related-posts"></aside>
+                </div>
+            </div>
+        </article>
+        <a href="#" class="back-to-top" id="backToTop" title="Back to top">
+        	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-bar-up" viewBox="0 0 16 16">
+			  <path fill-rule="evenodd" d="M3.646 11.854a.5.5 0 0 0 .708 0L8 8.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708M2.4 5.2c0 .22.18.4.4.4h10.4a.4.4 0 0 0 0-.8H2.8a.4.4 0 0 0-.4.4"/>
+			</svg>
+		</a>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 Question Notes</p>
+        </div>
+    </footer>
+    <script>
+    	(() => {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            const toggleMenu = () => {
+                navMenu.classList.toggle('nav-menu-active');
+                navToggle.classList.toggle('nav-toggle-active');
+            };
+            const backToTopHandler = (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            navToggle.addEventListener('click', toggleMenu);
+            document.getElementById('backToTop').addEventListener('click', backToTopHandler);
+            window.addEventListener('pagehide', () => {
+                navToggle.removeEventListener('click', toggleMenu);
+                document.getElementById('backToTop').removeEventListener('click', backToTopHandler);
+            });
+        })();
+		(() => {
+            window.addEventListener("DOMContentLoaded", (event) => {
+                const ellHljs = document.createElement("script");
+                ellHljs.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js");
+                ellHljs.onload = () => {
+                    hljs.highlightAll();
+                };
+                document.querySelector("body").append(ellHljs);
+                const ellFont = document.createElement("link");
+                ellFont.setAttribute("href", "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css");
+                ellFont.setAttribute("rel", "stylesheet");
+                document.querySelector("head").append(ellFont);
+                window.addEventListener('pagehide', () => {
+                    // ellHljs.remove();
+                    ellFont.remove();
+                });
+
+            });
+        })();
+    </script>
+    <!-- Histats.com  START  (aync)-->
+<script type="text/javascript">var _Hasync= _Hasync|| [];
+_Hasync.push(['Histats.start', '1,4957095,4,0,0,0,00010000']);
+_Hasync.push(['Histats.fasi', '1']);
+_Hasync.push(['Histats.track_hits', '']);
+(function() {
+var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
+hs.src = ('//s10.histats.com/js15_as.js');
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
+})();</script>
+<!-- Histats.com  END  -->
+    
+    
+</body>
+</html>
